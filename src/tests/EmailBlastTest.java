@@ -27,7 +27,8 @@ public class EmailBlastTest {
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfSupporters")), 1);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfSupporters")), 1).
+		openEmails(emailSubject, Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")));
 		
 		CommonUtils.setProperty("emailBlastName", emailBlastName);
 		CommonUtils.setProperty("emailSubject", emailSubject);	
