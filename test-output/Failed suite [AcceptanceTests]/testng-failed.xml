@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Failed suite [AcceptanceTests]]">
+  <parameter name="cm.email" value="vavramchuk+CM@salsalabs.com"/>
+  <parameter name="createOrg.domainType" value="Custom Domain"/>
+  <parameter name="cm.lastName" value="CMLastNameAuto"/>
+  <parameter name="addIncludeRule" value="Organize:Email:CONTAINS:vavramchuk:1"/>
+  <parameter name="criteriaForExcludeSupporterManually" value="vavramchuk+sup"/>
+  <parameter name="createOrg.firstName" value="AutoTester"/>
+  <parameter name="fail.password" value=":!QAZ2wsx:test"/>
+  <parameter name="fail.login" value=":test@ttt.tt:test"/>
+  <parameter name="sendEmail.splitsAmount" value="2"/>
+  <parameter name="createOrg.orgName" value="AutoTestV2 Org"/>
+  <parameter name="cm.dataAndAnalyticsTable.role1" value="Metrics and reports:Create &amp; Edit"/>
+  <parameter name="cm.dataAndAnalyticsTable.role2" value="Supporters and segments:Create &amp; Edit"/>
+  <parameter name="cm.contentAndMessagingTable.role4" value="Emails and social messages:Publish"/>
+  <parameter name="createOrg.featureList" value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"/>
+  <parameter name="sendEmail.percentageOfTestGroup" value="50"/>
+  <parameter name="email.password" value="AVitalik3124"/>
+  <parameter name="createOrg.lastName" value="AutoTesterov"/>
+  <parameter name="cm.contentAndMessagingTable.role1" value="Sign-up forms:Publish"/>
+  <parameter name="admin.password" value="AVitalik3124"/>
+  <parameter name="cm.contentAndMessagingTable.role2" value="Donation forms:Publish"/>
+  <parameter name="cm.contentAndMessagingTable.role3" value="Petitions and Targeted:Publish"/>
+  <parameter name="email.login" value="vavramchuk@salsalabs.com"/>
+  <parameter name="segmentTag" value="AutoTag"/>
+  <parameter name="bpath" value="*firefox"/>
+  <parameter name="createOrg.orgAdminUserId" value="vavramchuk+auto1@salsalabs.com"/>
+  <parameter name="admin.login" value="vavramchuk"/>
+  <parameter name="addExcludeRule" value="Organize:City:IS NOT:test:1"/>
+  <parameter name="sendEmail.From" value="info@salsalabs.com"/>
+  <parameter name="cm.firstName" value="CMFirstNameAuto"/>
+  <parameter name="cm.assetManagementTable.role1" value="Layouts, Templates, Images:Create &amp; Edit"/>
+  <parameter name="createSupporter.amount" value="1"/>
+  <parameter name="segmentName" value="SegmentName"/>
+  <parameter name="criteriaForAddSupporterManually" value="vavramchuk+sup"/>
+  <parameter name="createOrg.orgDescrption" value="AutoTestV descr"/>
+  <parameter name="newuser.password" value="!QAZ2wsx"/>
+  <parameter name="USED_ENVIRONMENT" value="DEV"/>
+  <parameter name="createOrg.status" value="Active"/>
+  <listeners>
+    <listener class-name="selenium.MyTestListener"/>
+  </listeners>
+  <test name="AcceptanceTests(failed)(failed)">
+    <parameter name="cm.email" value="vavramchuk+CM@salsalabs.com"/>
+    <parameter name="createOrg.domainType" value="Custom Domain"/>
+    <parameter name="cm.lastName" value="CMLastNameAuto"/>
+    <parameter name="addIncludeRule" value="Organize:Email:CONTAINS:vavramchuk:1"/>
+    <parameter name="criteriaForExcludeSupporterManually" value="vavramchuk+sup"/>
+    <parameter name="createOrg.firstName" value="AutoTester"/>
+    <parameter name="fail.password" value=":!QAZ2wsx:test"/>
+    <parameter name="fail.login" value=":test@ttt.tt:test"/>
+    <parameter name="sendEmail.splitsAmount" value="2"/>
+    <parameter name="createOrg.orgName" value="AutoTestV2 Org"/>
+    <parameter name="cm.dataAndAnalyticsTable.role1" value="Metrics and reports:Create &amp; Edit"/>
+    <parameter name="cm.dataAndAnalyticsTable.role2" value="Supporters and segments:Create &amp; Edit"/>
+    <parameter name="cm.contentAndMessagingTable.role4" value="Emails and social messages:Publish"/>
+    <parameter name="createOrg.featureList" value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"/>
+    <parameter name="sendEmail.percentageOfTestGroup" value="50"/>
+    <parameter name="email.password" value="AVitalik3124"/>
+    <parameter name="createOrg.lastName" value="AutoTesterov"/>
+    <parameter name="cm.contentAndMessagingTable.role1" value="Sign-up forms:Publish"/>
+    <parameter name="admin.password" value="AVitalik3124"/>
+    <parameter name="cm.contentAndMessagingTable.role2" value="Donation forms:Publish"/>
+    <parameter name="cm.contentAndMessagingTable.role3" value="Petitions and Targeted:Publish"/>
+    <parameter name="email.login" value="vavramchuk@salsalabs.com"/>
+    <parameter name="segmentTag" value="AutoTag"/>
+    <parameter name="createOrg.orgAdminUserId" value="vavramchuk+auto1@salsalabs.com"/>
+    <parameter name="admin.login" value="vavramchuk"/>
+    <parameter name="addExcludeRule" value="Organize:City:IS NOT:test:1"/>
+    <parameter name="sendEmail.From" value="info@salsalabs.com"/>
+    <parameter name="cm.firstName" value="CMFirstNameAuto"/>
+    <parameter name="cm.assetManagementTable.role1" value="Layouts, Templates, Images:Create &amp; Edit"/>
+    <parameter name="createSupporter.amount" value="1"/>
+    <parameter name="segmentName" value="SegmentName"/>
+    <parameter name="criteriaForAddSupporterManually" value="vavramchuk+sup"/>
+    <parameter name="createOrg.orgDescrption" value="AutoTestV descr"/>
+    <parameter name="newuser.password" value="!QAZ2wsx"/>
+    <parameter name="createOrg.status" value="Active"/>
+    <groups>
+      <run>
+        <include name="dev"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="tests.BuildAcceptanceTests">
+        <methods>
+          <include name="stopTestOnDriver"/>
+          <include name="confirmEmailsWereSentTest"/>
+          <include name="sendEmailsTest"/>
+          <include name="confirmAdminAccountTest" invocation-numbers="0"/>
+          <include name="confirmTestEmailsWereSentTest"/>
+          <include name="createOrgTest"/>
+          <include name="confirmCMAccountTest"/>
+          <include name="loginAsNewCMTest"/>
+          <include name="beforeSuite"/>
+          <include name="loginAsNewSuperAdminTest"/>
+          <include name="createCMManually"/>
+          <include name="sendTestEmailsTest"/>
+        </methods>
+      </class> <!-- tests.BuildAcceptanceTests -->
+    </classes>
+  </test> <!-- AcceptanceTests(failed)(failed) -->
+</suite> <!-- Failed suite [Failed suite [AcceptanceTests]] -->

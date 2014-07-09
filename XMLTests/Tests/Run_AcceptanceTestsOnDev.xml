@@ -1,0 +1,65 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="AcceptanceTests" parallel="false" thread-count="1">
+  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+  	
+  	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+  	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+   	<listeners>
+    	<listener class-name="selenium.MyTestListener" />
+  	</listeners>
+  	<test verbose="2" name="AcceptanceTests" annotations="JDK" >
+    	<parameter name="admin.login" value="vavramchuk"></parameter>
+     	<parameter name="admin.password" value="AVitalik3124"></parameter>
+     	
+     	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
+     	<parameter name="email.password" value="AVitalik3124"></parameter>
+     	
+     	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
+		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>
+		<parameter name="createOrg.orgDescrption"  value="AutoTestV descr"></parameter>
+
+		<parameter name="createOrg.firstName"  value="AutoTester"></parameter>
+		<parameter name="createOrg.lastName"  value="AutoTesterov"></parameter>		
+		<parameter name="createOrg.status"  value="Active"></parameter>
+		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
+		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
+		
+		<parameter name="createSupporter.amount"  value="5"></parameter>
+		
+
+		<parameter name="cm.firstName"  value="CMFirstNameAuto"></parameter>
+		<parameter name="cm.lastName"  value="CMLastNameAuto"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role1"  value="Sign-up forms:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role2"  value="Donation forms:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role3"  value="Emails and social messages:Publish"></parameter>
+		
+		<parameter name="cm.contentAndMessagingTable.role3333"  value="Petitions and Targeted:Publish"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role1"  value="Metrics and reports:Create &#38; Edit"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporters and segments:Create &#38; Edit"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Records of all supporter donations:Create &#38; Edit"></parameter>
+		<parameter name="cm.assetManagementTable.role1"  value="Layouts, templates, images and files:Create &#38; Edit"></parameter>
+				
+		<parameter name="fail.login"  value=":test@ttt.tt:test"></parameter>
+		<parameter name="fail.password"  value=":!QAZ2wsx:test"></parameter>
+		
+		<parameter name="segmentName"  value="SegmentName"></parameter>
+		<parameter name="segmentTag"  value="AutoTag"></parameter>
+		<parameter name="addIncludeRule"  value="Organize:Email:CONTAINS:mailosaur.in:1"></parameter>
+		<parameter name="addExcludeRule"  value="Organize:City:IS NOT:test:1"></parameter>
+		<parameter name="criteriaForExcludeSupporterManually"  value="sup"></parameter>
+		<parameter name="criteriaForAddSupporterManually"  value="sup"></parameter> 	
+		
+		<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
+		<parameter name="sendEmail.percentageOfTestGroup"  value="50"></parameter>
+		<parameter name="sendEmail.splitsAmount"  value="2"></parameter>
+		
+     	<groups>
+    		<run>
+     			 <include name="dev"/>
+    		</run>
+  		</groups>
+     	<classes>
+      		<class name="tests.BuildAcceptanceTests"/>
+    	</classes>
+  	</test>   
+ </suite>

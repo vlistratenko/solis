@@ -1,0 +1,25 @@
+#AUTOMATICALLY GENERATED
+#Fri Jul 04 14:03:56 EEST 2014
+current.firstName=AutoTester
+emailSplitsSubject=TestVAuto20140627161324
+amountOfSupporters=6
+CM.firstName=CMFirstNameAuto
+current.lastName=AutoTesterov
+emailSubject=TestVAuto20140704140303
+emailBlastName=TestV20140704140303
+CM.Password=\!QAZ2wsx
+Admin.lastName=AutoTesterov
+Environment=DEV
+CM.email=0
+Admin.email=20140704135421.b7b87c85@mailosaur.in
+updateTC=false
+segmentName=SegmentName20140627161229
+Admin.orgName=AutoTestV2 Org20140704135421
+current.Password=\!QAZ2wsx
+CM.Login=cm20140627160849.b7b87c85@mailosaur.in
+emailFrom=info@salsalabs.com
+current.Login=20140704135421.b7b87c85@mailosaur.in
+Admin.firstName=AutoTester
+percentageOfTestGroup=50
+CM.lastName=CMLastNameAuto
+Admin.Password=\!QAZ2wsx
