@@ -21,7 +21,7 @@ public class Test6 {
 		 }
 		 
 		 for (int i = 0; i < 3; i++) {
-			 new EmailClient().clickLinkByTest(e.get(i), "Link");
+			 new EmailClient().clickLinkByText(e.get(i), "Link");
 		 }
 		 
 		 

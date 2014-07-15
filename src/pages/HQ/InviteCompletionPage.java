@@ -10,7 +10,7 @@ public class InviteCompletionPage extends Browser {
 	TextBox confirmPasswordField = new TextBox("//form[@id='loginInvite']/descendant::input[@name='loginInviteConfirmPassword']", "Confirm password");
 	TextBox recoveryQuestionField = new TextBox("//form[@id='loginInvite']/descendant::input[@name='challengeQuestion']", "Recovery question");
 	TextBox recoveryAnswerField = new TextBox("//form[@id='loginInvite']/descendant::input[@name='challengeAnswer']", "Recovery answerd");
-	Button createAccountButton = new Button("//button[@processing-state='createAccount']", "Create account");
+	Button createAccountButton = new Button("//button[.='Create Account']", "Create account");
 	
 	public void completeInvite(String password) {
 		sleep(3000);

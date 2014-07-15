@@ -10,9 +10,9 @@ public class CreateInvitePage {
 	TextBox emailField = new TextBox("//input[@id='invite_email']", "Email");
 	TextBox firstNameField = new TextBox("//input[@id='invite_firstName']", "First name");
 	TextBox lastNameField = new TextBox("//input[@id='invite_lastName']", "Last name");
-	Table contentAndMessagingTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Content and Messaging']/following-sibling::table[1]", "Content and Messaging permissions grid");
-	Table dataAndAnalyticsTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Data and Analytics']/following-sibling::table[1]", "Data And Analytics permissions grid");
-	Table assetManagementTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Assets']/following-sibling::table[1]", "Asset Management permissions grid");
+	Table contentAndMessagingTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Campaign Communications']/following-sibling::table[1]", "Content and Messaging permissions grid");
+	Table dataAndAnalyticsTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Data and Insight']/following-sibling::table[1]", "Data And Analytics permissions grid");
+	Table assetManagementTable = new Table("//form[@id='inviteForm']/descendant::*[text()='Asset Management']/following-sibling::table[1]", "Asset Management permissions grid");
 	Button saveInviteButton = new Button("//button[@id='btnSendInvite']", "Save invite");
 	
 	public AccountsPage inviteNewUser(String cmEmail,

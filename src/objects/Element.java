@@ -109,6 +109,12 @@ abstract class Element {
 
 	}
 	
+	protected void sendKeys(String locator, String key){		
+		logger.debug("Click on < " + locator + " >.");
+		findElementByXpath(locator).sendKeys(key);	
+
+	}
+	
 	protected void clickAt(String locator, String coordString){		
 		waitObject(locator, cTimeOut*60);
 		try {
@@ -595,7 +601,9 @@ abstract class Element {
 		return false;
 	}
 	
-
+	public void changePath(String old, String newPath) {
+		this.path.replace(old, newPath);
+	}
 
 	
 	protected Actions getActionBuilder() {

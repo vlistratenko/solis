@@ -129,14 +129,13 @@ public class EmailClient {
 		}
 	}
 	
-	public void clickLinkByTest(Email email, String text){		
+	public void clickLinkByText(Email email, String text){		
 		Link[] l = email.html.links;
 		for (int j = 0; j < 2; j++) {
 			 if (l[j].text.equalsIgnoreCase(text)) {
 				 try {
 					l[j].Click();
-					System.err.println("Link was clicked");
-				} catch (IOException | MailosaurException e) {
+					} catch (IOException | MailosaurException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}				 
@@ -147,7 +146,6 @@ public class EmailClient {
 	public void openEmail(Email email){		
 		try {
 			email.open();
-			System.err.println("Email was opened");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

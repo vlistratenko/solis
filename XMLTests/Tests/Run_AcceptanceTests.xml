@@ -23,19 +23,19 @@
 		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
 		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
 		
-		<parameter name="createSupporter.amount"  value="10"></parameter>
+		<parameter name="createSupporter.amount"  value="6"></parameter>
 		
 		<parameter name="cm.firstName"  value="CMFirstNameAuto"></parameter>
 		<parameter name="cm.lastName"  value="CMLastNameAuto"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role1"  value="Sign-up forms:Publish"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role2"  value="Donation forms:Publish"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role3"  value="Emails and social messages:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role1"  value="Website forms and supporter management:Publish &#38; Send"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role2"  value="Donation forms:Publish &#38; Send"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role3"  value="Emails and social messages:Publish &#38; Send"></parameter>
 		
-		<parameter name="cm.contentAndMessagingTable.role3333"  value="Petitions and Targeted:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role3333"  value="Petitions and Targeted:Publish &#38; Send"></parameter>
 		<parameter name="cm.dataAndAnalyticsTable.role1"  value="Metrics and reports:Create &#38; Edit"></parameter>
-		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporters and segments:Create &#38; Edit"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporter records and audience segments:Create &#38; Edit"></parameter>
 		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Records of all supporter donations:Create &#38; Edit"></parameter>
-		<parameter name="cm.assetManagementTable.role1"  value="Layouts, templates, images and files:Create &#38; Edit"></parameter>
+		<parameter name="cm.assetManagementTable.role1"  value="Asset Editor:Create &#38; Edit"></parameter>
 				
 		<parameter name="fail.login"  value=":test@ttt.tt:test"></parameter>
 		<parameter name="fail.password"  value=":!QAZ2wsx:test"></parameter>

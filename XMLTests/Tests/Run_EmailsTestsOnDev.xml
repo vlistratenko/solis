@@ -9,6 +9,8 @@
   	</listeners>
   	<test verbose="2" name="Send emails" annotations="JDK" >		
 		<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
+		<parameter name="sendEmail.OpenAmount"  value="4"></parameter>
+		<parameter name="sendEmail.ClickAmount"  value="2"></parameter>
      	<groups>
     		<run>
      			 <include name="email.*"/>

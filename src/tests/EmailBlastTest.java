@@ -5,14 +5,18 @@ import org.testng.annotations.Test;
 
 import pages.HQ.LoginPage;
 import selenium.CommonUtils;
+import selenium.SeleneseTestCase;
 
-public class EmailBlastTest {
+public class EmailBlastTest extends SeleneseTestCase{
 	
-	@Parameters({"sendEmail.From"})
+	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount"})
 	@Test( priority=10, groups = {"email.sendEmails", ""}, description = "")
-	public void sendEmailsTest(String emailFrom) {
+	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
+		CommonUtils.setProperty("emailBlastName", emailBlastName);
+		CommonUtils.setProperty("emailSubject", emailSubject);	
+		CommonUtils.setProperty("emailFrom", emailFrom);
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
@@ -27,12 +31,17 @@ public class EmailBlastTest {
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfSupporters")), 1).
-		openEmails(emailSubject, Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")));
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1);
 		
-		CommonUtils.setProperty("emailBlastName", emailBlastName);
-		CommonUtils.setProperty("emailSubject", emailSubject);	
-		CommonUtils.setProperty("emailFrom", emailFrom);
-	
+		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+		
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		openActivitiesPage().
+		openEmailBlastsPage().
+		openEmailBlastDetailsPage(CommonUtils.getProperty("emailBlastName")).
+		verifyOpenRateStat(openAmount).
+		verifyClickRateStat(clickAmount);
 	}
 }

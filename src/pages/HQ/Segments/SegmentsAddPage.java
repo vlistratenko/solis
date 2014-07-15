@@ -83,7 +83,7 @@ public class SegmentsAddPage extends SegmentsPage{
 	
 	private void selectChooseMetric(String metric, int ruleSetNumber) {
 		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
-		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose metric']", ruleSetNumber);
+		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose metric...']", ruleSetNumber);
 		new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(metric);
 	}
 	
@@ -95,7 +95,7 @@ public class SegmentsAddPage extends SegmentsPage{
 	
 	private void selectOperator(String operator, int ruleSetNumber) {
 		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
-		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose operator']", ruleSetNumber);
+		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose operator...']", ruleSetNumber);
 		new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(operator);
 	}
 	

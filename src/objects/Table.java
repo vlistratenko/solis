@@ -2,9 +2,7 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.openqa.selenium.WebElement;
-
 import interfaces.iTable;
 
 public class Table extends Element implements iTable {
@@ -23,9 +21,17 @@ public class Table extends Element implements iTable {
 		super.click(pathEl.replace("[0]", ""));
 	}
 	
+	public void sendKeysInCell(int row, int col, String tag, String key) {
+		logger.info(elementName + " was clicked in cell, row " + row + " and column " +  col);
+		String pathEl = path + "/descendant::tr[" + row + "]/td[" + col + "]/" + tag;
+		super.sendKeys(pathEl.replace("[0]", ""), key);
+	}
+	
 	public void clickInCell(String rowHeader, String colHeader) {
 		logger.info(elementName + " was clicked in cell, row " + rowHeader + " and column " +  colHeader);
-		clickInCell(getRowsNumberByValue(rowHeader), getColumnNumberByHeader(colHeader));
+		Integer rowNumber = getRowsNumberByValue(rowHeader);
+		Integer colNumber = getColumnNumberByHeader(colHeader);
+		clickInCell(rowNumber, colNumber);
 	}
 	
 	public String getCallValue(int row, int col) {

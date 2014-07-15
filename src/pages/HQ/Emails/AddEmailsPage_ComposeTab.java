@@ -1,10 +1,13 @@
 package pages.HQ.Emails;
 
+import org.openqa.selenium.Keys;
+
 import objects.Button;
 import objects.ContentEditableTextBox;
 import objects.DropDown;
 import objects.Table;
 import objects.TextBox;
+import selenium.CommonUtils;
 
 public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
@@ -31,7 +34,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			selectScheme.selectByLabelJS("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			addLink("http://www.salsalabs.com");
+			addLink("salsalabs.com");
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
@@ -55,6 +58,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		switchToFrame("//iframe[@id='veframe']");
 		try {
 			EmailTemplate.clickInCell(1, 1, "h3[contains(text(),'Hi')]");
+			//EmailTemplate.sendKeysInCell(1, 1, "h3[contains(text(),'Hi')]", Keys.CONTROL + Keys.chord("A"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			switchDefaultContent();

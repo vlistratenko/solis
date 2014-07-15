@@ -233,12 +233,34 @@ public abstract class Browser{
 	
 	public void openEmails(String subj, Integer amount) {
 		EmailClient client = new EmailClient();
-		ArrayList<Email> emails = client.getEmailsBySubject(subj);
-		if (emails.size() < amount) amount = emails.size();
-		for (int i = 0; i < array.length; i++) {
-			
+		ArrayList<Email> emails = null;
+		try {
+			emails = client.getEmailsBySubject(subj);
+		} catch (MailosaurException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		new EmailClient().openEmailBySubj(emailSubj)
-		
+		if (emails.size() < amount) amount = emails.size();
+		for (int i = 0; i < amount; i++) {
+			client.openEmail(emails.get(i));
+			logger.info("Email for " + emails.get(i).to[0].address  + " was opened");
+		}		
+	}
+	
+	public void clickLinkInEmail(String subj, String linkText, Integer amountOfEmails) {
+		EmailClient client = new EmailClient();
+		ArrayList<Email> emails = null;
+		try {
+			emails = client.getEmailsBySubject(subj);
+		} catch (MailosaurException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (emails.size() < amountOfEmails) amountOfEmails = emails.size();
+		for (int i = 0; i < amountOfEmails; i++) {
+			client.clickLinkByText(emails.get(i), linkText);
+			logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+		}		
 	}
 }
+

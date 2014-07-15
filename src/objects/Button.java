@@ -1,14 +1,8 @@
 package objects;
 
 import java.util.List;
-
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebElement;
-
 import selenium.SeleneseTestCase;
-
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-
 import interfaces.iButton;
 
 

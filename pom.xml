@@ -25,7 +25,7 @@
 			<USED_SERVER>${server}</USED_SERVER>
                 </systemPropertyVariables>
           	<suiteXmlFiles>
-            		<suiteXmlFile>C:\workspace\Ignite\XMLTests\Tests\Run_AcceptanceTests.xml</suiteXmlFile>
+            		<suiteXmlFile>XMLTests\Tests\Run_AcceptanceTests.xml</suiteXmlFile>
           	</suiteXmlFiles>
         </configuration>
       </plugin>
@@ -38,22 +38,11 @@
             <version>[1.0.0,)</version>
             <scope>test</scope>
     </dependency>    
-    <!--dependency>
+    <dependency>
 	  <groupId>com.mailosaur</groupId>
       <artifactId>mailosaur-java</artifactId>
       <version>1.0.10</version>
-	</dependency>  -->
-	<dependency>
-            <groupId>com.google.http-client</groupId>
-            <artifactId>google-http-client</artifactId>
-            <version>1.18.0-rc</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.http-client</groupId>
-            <artifactId>google-http-client-gson</artifactId>
-            <version>1.18.0-rc</version>
-        </dependency>
-	
+	</dependency>
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>

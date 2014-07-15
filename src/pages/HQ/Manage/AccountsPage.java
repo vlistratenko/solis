@@ -7,7 +7,7 @@ import selenium.CommonUtils;
 
 public class AccountsPage extends HomePage{
 
-	Button inviteNewUserButton =  new Button("//button[text()='+ invite']", "Invite new user");
+	Button inviteNewUserButton =  new Button("//button[text()='+ Invite my team member']", "Invite new user");
 	Table invitationsTable = new Table("//div[@header='PENDING_INVITATIONS']/descendant::table", "Invitations");
 
 	public CreateInvitePage openInviteNewUserPage() {
