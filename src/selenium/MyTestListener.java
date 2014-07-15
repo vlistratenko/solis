@@ -144,9 +144,8 @@ public class MyTestListener extends SeleneseTestCase implements ITestListener,II
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NullPointerException e) {
-				
+				e.printStackTrace();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

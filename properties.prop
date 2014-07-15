@@ -1,28 +1,28 @@
 #AUTOMATICALLY GENERATED
-#Tue Jul 15 13:21:45 EEST 2014
+#Tue Jul 15 15:32:17 EEST 2014
 current.firstName=AutoTester
 emailSplitsSubject=TestVAuto20140715131913
 amountOfSupporters=12
 CM.firstName=CMFirstNameAuto
 current.lastName=AutoTesterov
 emailSubject=TestVAuto20140715132040
+planName=BuildAcceptanceTest
 emailBlastName=TestV20140715132040
 CM.Password=\!QAZ2wsx
 Admin.lastName=AutoTesterov
 Environment=TEST
 CM.email=0
-Admin.email=20140715130059.b7b87c85@mailosaur.in
-updateTC=false
-buildVersion=Ignite 0.16
-planName=BuildAcceptanceTest;
+Admin.email=20140715153126.b7b87c85@mailosaur.in
+updateTC=true
 segmentName=SegmentName20140715131816
-Admin.orgName=AutoTestV2 Org20140715130059
+Admin.orgName=AutoTestV2 Org20140715153126
 current.Password=\!QAZ2wsx
 CM.Login=cm20140715130923.b7b87c85@mailosaur.in
 emailFrom=info@salsalabs.com
 current.Login=20140715130059.b7b87c85@mailosaur.in
-amountOfPablishedEmails=10
 Admin.firstName=AutoTester
-percentageOfTestGroup=50
-CM.lastName=CMLastNameAuto
+amountOfPablishedEmails=10
+buildVersion=Ignite 0.16
 Admin.Password=\!QAZ2wsx
+CM.lastName=CMLastNameAuto
+percentageOfTestGroup=50
