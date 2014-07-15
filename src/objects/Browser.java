@@ -134,7 +134,7 @@ public abstract class Browser{
 	
 	protected void verify (Object actual, Object expected, String message) {
 		logger.info("Check equality of two objects. ");
-		SeleneseTestCase.bug.add("Error" + message);
+		SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]");
 		verify(actual, expected, message, true);		
 	}
 	

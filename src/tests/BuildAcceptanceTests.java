@@ -97,7 +97,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	@Test(priority=50, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "510:57:One of link was NOT correct in the Side bar.")
+	@Test(priority=50, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "510:57:Links are NOT correct in the Side bar.")
 	public void verifyLinksInSideBarTest(){
 		HomePage homePage = new HomePage();
 		homePage.
@@ -107,7 +107,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyURL();
 	}
 	
-	@Test(priority=60, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "513:58:One of link was NOT correct in the Tool set.")
+	@Test(priority=60, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "513:58:Links are NOT correct in the Tool set.")
 	public void verifyLinksInToolSetTest(){
 		HomePage homePage = new HomePage();
 		homePage.
@@ -203,7 +203,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	@Test(priority=100, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendTestEmailsTest", description = "528:62:Split emails were NOT delivered")
+	@Test(priority=100, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendTestEmailsTest", description = "536:63:Split emails were NOT delivered")
 	@Parameters({"sendEmail.splitsAmount"})
 	public void confirmTestEmailsWereSentTest(int SplitsAmount){
 		
@@ -218,7 +218,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	@Test(priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "536:63:Emails were NOT delivered")
+	@Test(priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "528:62:Emails were NOT delivered")
 	@Parameters({ "email.login",
      	"email.password"})
 	public void confirmEmailsWereSentTest(String login,
