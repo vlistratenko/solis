@@ -20,8 +20,8 @@ public class MyTestListener extends SeleneseTestCase implements ITestListener,II
 	Properties props = new Properties();
 	static String propFileName = "properties.prop";
 	boolean updateTC = Boolean.valueOf(CommonUtils.getProperty("updateTC", "false"));
-	String planName = "BuildAcceptanceTest";
-    String buildName = "Ignite 0.15";
+	String planName = CommonUtils.getProperty("planName", "false");
+    String buildName = CommonUtils.getProperty("buildVersion", "false");
 	//Run when class ends
 	@Override
 	public void onFinish(ITestContext arg0) {
