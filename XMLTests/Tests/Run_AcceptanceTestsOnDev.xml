@@ -36,7 +36,7 @@
 		<parameter name="cm.contentAndMessagingTable.role3333"  value="Petitions and Targeted:Publish"></parameter>
 		<parameter name="cm.dataAndAnalyticsTable.role1"  value="Metrics and reports:Create &#38; Edit"></parameter>
 		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporters and segments:Create &#38; Edit"></parameter>
-		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Records of all supporter donations:Create &#38; Edit"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Supporter donation records:Create &#38; Edit"></parameter>
 		<parameter name="cm.assetManagementTable.role1"  value="Layouts, templates, images and files:Create &#38; Edit"></parameter>
 				
 		<parameter name="fail.login"  value=":test@ttt.tt:test"></parameter>

@@ -12,7 +12,7 @@ import selenium.SeleneseTestCase;
 
 public class BuildAcceptanceTests extends SeleneseTestCase {
 
-	@Test(priority=10, enabled = true, groups = {"acceptanceTests.admin", "dev", "test"}, description = "484:51:New org was NOT created")
+	@Test(priority=10, enabled = true, groups = {"acceptanceTests.admin", "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({ "admin.login",
      	"admin.password",     	
      	"createOrg.domainType",
@@ -48,7 +48,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty("Admin.orgName", orgName);
 	}
 	
-    @Test(priority=20, enabled = true, groups = {"acceptanceTests.admin", "dev", "test"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
+    @Test(priority=20, enabled = true, groups = {"acceptanceTests.admin", "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
 	@Parameters({ "email.login",
      	"email.password",
      	"newuser.password"})
@@ -65,7 +65,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));
 	}
 	
-	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test"}, ignoreMissingDependencies = true, dependsOnMethods="confirmAdminAccountTest", description = "489:52:New admin can NOT login")
+	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, ignoreMissingDependencies = true, dependsOnMethods="confirmAdminAccountTest", description = "489:52:New admin can NOT login")
 	public void loginAsNewSuperAdminTest(){
 		
 		LoginPage loginPage = new LoginPage();

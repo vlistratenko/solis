@@ -3,8 +3,10 @@ package selenium;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,7 @@ import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
+
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
@@ -83,7 +86,47 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 		}		
 	}
 	
-	public void startRemouteTestOnDriver(String browser, String version, String os) throws MalformedURLException {
+	public void startRemouteTestOnDriver(String browser, String build, String os) throws MalformedURLException {
+		String login = "kvooturi@salsalabs.com";
+		try {
+			login = URLEncoder.encode(login, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DesiredCapabilities caps = new DesiredCapabilities();
+		
+		switch (browser) {
+        case "FF30":
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.setAssumeUntrustedCertificateIssuer(false);
+            caps = DesiredCapabilities.firefox();
+            caps.setCapability(FirefoxDriver.PROFILE, profile);
+            break;
+        case "Chrome34":
+        	caps = DesiredCapabilities.chrome();
+        	caps.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
+            break;
+        case "IE10":
+        	caps = DesiredCapabilities.internetExplorer();
+        	caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+            break;
+    }
+		
+		caps.setCapability("browser_api_name", browser);
+        if (build != null) {
+        	caps.setCapability("build", build);
+        }
+        caps.setCapability("os_api_name", os);
+		caps.setCapability("name", "Selenium Test Example");
+	    caps.setCapability("screen_resolution", "1024x768");
+	    caps.setCapability("record_video", "true");
+	    caps.setCapability("record_network", "true");
+	    caps.setCapability("record_snapshot", "false");
+        SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
+	}
+	
+	public void startRemouteTestOnDriverOld(String browser, String version, String os) throws MalformedURLException {
 		DesiredCapabilities caps = new DesiredCapabilities();
 		switch (browser) {
         case "firefox":
@@ -141,7 +184,7 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 		if (USED_ENVIRONMENT.server.equals(USED_ENVIRONMENT.server.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		}else{
-			startRemouteTestOnDriver("firefox","30.0", "Windows XP");
+			startRemouteTestOnDriver("FF30","0.16", "Win7x64-C1");
 		}
 	}
 	
@@ -226,7 +269,7 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 	
 	public static File makeScreenshot(String filename){
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        filename = filename + "_" + CommonUtils.getUnicName();
+        /*filename = filename + "_" + CommonUtils.getUnicName();*/
         File file = new File("test-output\\" + filename + ".png");
         logger.info("Screnshot was saved to " +  file.getAbsoluteFile());
         try {
