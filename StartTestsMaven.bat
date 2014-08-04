@@ -1,3 +1,6 @@
+REM  Updating project
+git reset --hard
+git pull origin HEAD
 REM create variable that stores the project folder path. This variable will used in the subsequent statements.
 set javaTestProjectPath=%~dp0
 set TESTNGFILE=RunTests.xml
