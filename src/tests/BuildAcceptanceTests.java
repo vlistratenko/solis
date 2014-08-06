@@ -218,7 +218,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	@Test(priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "528:62:Emails were NOT delivered")
+	@Test(expectedExceptions = AssertionError.class, priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "528:62:Emails were NOT delivered")
 	@Parameters({ "email.login",
      	"email.password"})
 	public void confirmEmailsWereSentTest(String login,
@@ -354,7 +354,7 @@ public void createCMManually(String cmFirstName,
 		
 	}
 	
-	@Test(priority=210, groups = {"acceptanceTests.user"}, dependsOnMethods="sendTestEmailsTestAsCM")
+	@Test(expectedExceptions = AssertionError.class, priority=210, groups = {"acceptanceTests.user"}, dependsOnMethods="sendTestEmailsTestAsCM")
 	@Parameters({"sendEmail.splitsAmount"})
 	public void confirmTestEmailsWereSentTestAsCM(int SplitsAmount){
 		
@@ -368,7 +368,7 @@ public void createCMManually(String cmFirstName,
 		
 	}
 	
-	@Test(priority=230, groups = {"acceptanceTests.user"}, dependsOnMethods="sendEmailsTestAsCM")
+	@Test(expectedExceptions = AssertionError.class, priority=230, groups = {"acceptanceTests.user"}, dependsOnMethods="sendEmailsTestAsCM")
 	public void confirmEmailsWereSentTestAsCM(){
 		
 		confirmTestEmailsWereSentTest(1);
