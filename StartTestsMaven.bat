@@ -10,4 +10,4 @@ REM set path to dir that contains javac.exe and java.exe
 @echo off
 set /p n= What server do you want to test? DEV or TEST:
 set /p s= Where do you want run test? LOCAL or REMOTE:
-mvn -f pom.xml test -Denvironment=%n% -Dserver=%s%
+mvn -f pom.xml install -Denvironment=%n% -Dserver=%s%
