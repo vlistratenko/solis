@@ -394,7 +394,6 @@ abstract class Element {
 	}
 	
 	protected WebElement findElementByXpath(String locator){		
-		setImplicity(30);
 		logger.debug("Try to find element " + locator);
 		List<WebElement> elem = findElementsByXpath(locator);
 		if (elem.size() == 0) {
@@ -427,7 +426,7 @@ abstract class Element {
 	}
 	
 	protected List<WebElement> findElementsByXpath(String xpath){		
-		setImplicity(5);
+		setImplicity(30);
 		xpath.replace("[0]", "");
 		logger.debug("Try to find elements " + xpath);
 		List<WebElement> elem = driver.findElements(By.xpath(xpath));
