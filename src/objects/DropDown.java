@@ -1,5 +1,6 @@
 package objects;
 
+
 import org.openqa.selenium.Keys;
 
 import interfaces.iDropDown;
@@ -37,8 +38,8 @@ public class DropDown extends Element implements iDropDown {
 	public void selectByLabelJS(String value) {
 		logger.info("Select value by label " + value + " in the " + elementName);
 		findElementByXpath(extendButtonPath);
-		jsClick(extendButtonPath);
-		this.getChildItemByLabel(value).click();
+		clickByTABKey(extendButtonPath);
+		this.getChildItemByLabel(value).onClick();
 		
 	}
 	
@@ -47,8 +48,7 @@ public class DropDown extends Element implements iDropDown {
 		//sleep(3000);
 		sendKeys(extendButtonPath, Keys.TAB);
 		waitObject(path + "[" + id + "]", 10*cTimeOut);
-		//sleep(3000);
-		click(path + "[" + id + "]");
+		onClick(findElementByXpath(path + "[" + id + "]"));
 		
 	}
 	

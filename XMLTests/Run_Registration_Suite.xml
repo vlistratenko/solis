@@ -1,11 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
-<suite name="Test" parallel="false" thread-count="2">
-  <parameter name="testURL" value="http://"></parameter>
+<suite name="Acceptance Tests" parallel="false" thread-count="2">
+  <parameter name="USED_ENVIRONMENT" value="PROD"></parameter>
+  	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+   	<listeners>
+    	<listener class-name="selenium.MyTestListener" />
+  	</listeners>>
   <suite-files>
- 	<suite-file path="/Test/Run_Login_Using_Google_And_Delete_Account.xml" /> 
- 	<suite-file path="/Test/Run_Register_New_User.xml" />
-	<suite-file path="/Test/Run_Register_New_User_Using_MailRU.xml" />
-	<suite-file path="/Test/Run_Register_New_User_Using_Yandex.xml" />   
-	<suite-file path="/Test/Run_Register_New_User_Using_Vkontakte.xml" />        
+ 	<suite-file path="/Tests/Run_CreateAdmin.xml" />
+ 	
+ 	<suite-file path="/Tests/Run_FailedLoginTest.xml" />      
   </suite-files>
 </suite>

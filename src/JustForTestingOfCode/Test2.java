@@ -1,5 +1,6 @@
-package tests;
+package JustForTestingOfCode;
 
+import java.io.File;
 import java.sql.SQLException;
 
 import org.dbunit.DatabaseUnitException;
@@ -24,15 +25,6 @@ public class Test2 extends SeleneseTestCase{
 	
 	@Test(skipFailedInvocations=false)
 	public void login() {
-		LoginPage lp = new LoginPage();
-		
-		lp.
-		openPage().
-		doSuccessLogin("vavramchuk+adminv1@salsalabs.com", "Avitalik3124").
-		openActivitiesPage().
-		openEmailBlastsPage().
-		openAddEmailPage().
-		openAudiencePage().
-		openSupportersPage();
+		System.err.println(new File("test-output\\verifyMessagesInNewsTestAsCM.png").getAbsolutePath());
 	}
 }

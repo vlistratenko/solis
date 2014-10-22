@@ -9,7 +9,7 @@ import selenium.EmailClient;
 
 public class SupportersAddPage extends HomePage{
 
-	TextBox supporterEmailField = new TextBox("//input[@name='emailAddress']", "Supporter email");
+	TextBox supporterEmailField = new TextBox("//input[@name='MessagingEmail']", "Supporter email");
 	TextBox supporterFirstNameField = new TextBox("//input[@name='first_name']", "Supporter first name");
 	TextBox supporterLastNameField = new TextBox("//input[@name='last_name']","Supporter last name");
 	TextBox supporterPhoneField = new TextBox  ("//input[@name='phone']", "Phone");
@@ -17,14 +17,14 @@ public class SupportersAddPage extends HomePage{
 	TextBox supporterCityField = new TextBox("//input[@name='city']", "City");
 	DropDown supporterStatesField = new DropDown("//custom-select2[@data='states']/div/ul/li", "//custom-select2[@data='states']/div/a", "States");
 	TextBox supporterZipField = new TextBox("//input[@name='zip']", "Zip");
-	TextBox supporterFaceBookField = new TextBox("//input[@name='facebook']", "FaceBook");
-	TextBox supporterTwitterField = new TextBox("//input[@name='twitter']", "Twitter");
-	TextBox supporterGooglePlusField  = new TextBox("//input[@name='googlePlus']", "GooglePlus");
-	Button saveButton = new Button("//button/descendant-or-self::*[text()='Save']", "Save button");
+	TextBox supporterFaceBookField = new TextBox("//input[@id='SocialFacebook']", "FaceBook");
+	TextBox supporterTwitterField = new TextBox("//input[@id='SocialTwitter']", "Twitter");
+	TextBox supporterGooglePlusField  = new TextBox("//input[@id='SocialGooglePlus']", "GooglePlus");
+	Button saveButton = new Button("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
 	
 	public SupportersPage createNewSupporter() {
 		String unicID = CommonUtils.getRandomValue(100000, 0);
-		CommonUtils.SetParam("supporterEmail", new EmailClient().getEmailBox("sup" + unicID));
+		CommonUtils.SetParam("supporterEmail", EmailClient.getEmailBox("supMan" + unicID));
 		supporterEmailField.type(CommonUtils.getParam("supporterEmail"));
 		supporterFirstNameField.type("Tester" + unicID);
 		supporterLastNameField.type("Testerov" + unicID);

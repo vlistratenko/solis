@@ -19,8 +19,8 @@ import com.mailosaur.model.Email;
 import com.mailosaur.model.Link;
 
 public class EmailClient {
-	public String mbox = "b7b87c85";
-	public String apikey = "c77bc63aaa61cfe";
+	public static String mbox = "4441b2bf";
+	public String apikey = "b4e4d2b193b5eb2";
 	MailboxApi mBoxAPI;
 	
 	public EmailClient(){
@@ -73,7 +73,7 @@ public class EmailClient {
 	public Email getEmailBySubject(String subj) throws MailosaurException{
 		Email[] e = mBoxAPI.getEmails(); 
 		for (int i = 0; i < e.length; i++) {
-			if (e[i].subject.equalsIgnoreCase(subj)) {
+			if (e[i].subject.contains(subj)) {
 				return e[i];
 			}
 		}
@@ -109,7 +109,7 @@ public class EmailClient {
 		return null;
 	}
 	
-	public String getEmailBox(String name){
+	public static String getEmailBox(String name){
 		return name + "." + mbox + "@mailosaur.in";
 	}
 	
@@ -155,11 +155,11 @@ public class EmailClient {
 		}		 
 	}
 	
-	public EmailClient waitForEmails(Integer emailsAmount){		
-		for (int i = 0; i < 30; i++) {
+	public EmailClient waitForEmails(Integer emailsAmount, Integer timeMin){		
+		for (int i = 0; i < timeMin; i++) {
 			if (getEmailsAmount() < emailsAmount) {
 				try {
-					Thread.sleep(30000);
+					Thread.sleep(3600);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -170,4 +170,26 @@ public class EmailClient {
 		}
 		return this;
 	}
+	
+	public EmailClient waitForEmails(String subj, Integer emailsAmount, Integer timeMin){		
+		for (int i = 0; i < timeMin; i++) {
+			try {
+				if (getEmailsBySubject(subj).size() < emailsAmount) {
+					try {
+						Thread.sleep(3600);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					break;
+				}
+			} catch (MailosaurException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return this;
+	}
+	
 }

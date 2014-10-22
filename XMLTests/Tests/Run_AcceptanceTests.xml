@@ -2,16 +2,17 @@
 <suite name="AcceptanceTests" parallel="false" thread-count="1">
   	<parameter name="bpath" value="*firefox"></parameter><!-- *iexplore*firefox -->
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+  	<parameter name="USED_ENVIRONMENT" value="PROD"></parameter>
   	<!-- parameter name="TestLink" value="https://admin.test.ignite.net"></parameter> -->
    	<listeners>
     	<listener class-name="selenium.MyTestListener" />
   	</listeners>
   	<test verbose="2" name="AcceptanceTests" annotations="JDK" >
     	<parameter name="admin.login" value="vavramchuk"></parameter>
-     	<parameter name="admin.password" value="AVitalik3124"></parameter>
+     	<parameter name="admin.password" value="aVitalik3124"></parameter>
      	
      	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
-     	<parameter name="email.password" value="AVitalik3124"></parameter>
+     	<parameter name="email.password" value="aVitalik3124"></parameter>
      	
      	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
 		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>
@@ -19,7 +20,7 @@
 		<parameter name="createOrg.orgAdminUserId"  value="vavramchuk+auto1@salsalabs.com"></parameter>
 		<parameter name="createOrg.firstName"  value="AutoTester"></parameter>
 		<parameter name="createOrg.lastName"  value="AutoTesterov"></parameter>		
-		<parameter name="createOrg.status"  value="Active"></parameter>
+		<parameter name="createOrg.status"  value="Standard"></parameter>
 		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
 		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
 		
@@ -36,9 +37,6 @@
 		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporter records and audience segments:Create &#38; Edit"></parameter>
 		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Supporter donation records:Create &#38; Edit"></parameter>
 		<parameter name="cm.assetManagementTable.role1"  value="Asset Editor:Create &#38; Edit"></parameter>
-				
-		<parameter name="fail.login"  value=":test12321@ttt.tt:test"></parameter>
-		<parameter name="fail.password"  value=":!QAZ2wsx:test"></parameter>
 		
 		<parameter name="segmentName"  value="SegmentName"></parameter>
 		<parameter name="segmentTag"  value="AutoTag"></parameter>

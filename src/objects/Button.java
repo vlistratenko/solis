@@ -12,6 +12,10 @@ public class Button extends Element implements iButton {
 	public Button(String elementPath, String elementName) {
 		super(elementPath, elementName);
 	}
+	
+	public Button(String elementPath, String elementName, Boolean isRequired) {
+		super(elementPath, elementName, isRequired);
+	}
 
 	public Button setLastElementPath() {
 		logger.info(elementName + " was clicked.");
@@ -32,6 +36,20 @@ public class Button extends Element implements iButton {
 		SeleneseTestCase.bug.add("Click on " + elementName);
 		super.click(path);
 		logger.info(elementName + " was clicked.");
+		
+	}
+	
+	public void onClick() {
+		SeleneseTestCase.bug.add("Click on " + elementName);
+		super.onClick(findElementByXpath(path));
+		logger.info(elementName + " was clicked.");
+		
+	}
+		
+	
+	public void moveAndClick() {
+		//new Actions(driver).moveToElement(findElementByXpath(path)).perform();
+		click();
 		
 	}
 	

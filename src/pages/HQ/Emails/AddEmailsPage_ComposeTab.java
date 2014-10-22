@@ -54,7 +54,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
 		TextBox inputLinkField = new TextBox("//input[@name='url']", "Input Link");
-		Button addLinkButton = new Button("//a[.='Add Link']", "Add link on the popup");
+		Button addLinkButton = new Button("//a[.='Add it!']", "Add link on the popup");
 		switchToFrame("//iframe[@id='veframe']");
 		try {
 			EmailTemplate.clickInCell(1, 1, "h3[contains(text(),'Hi')]");

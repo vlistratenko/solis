@@ -1,6 +1,7 @@
 package pages.Admin;
 
 import objects.Button;
+import objects.CheckBox;
 import objects.DropDown;
 import objects.List;
 import objects.TextBox;
@@ -10,13 +11,14 @@ import selenium.SeleneseTestCase;
 public class AddNewOrgPage extends HomePageAdmin{
 
 	TextBox orgName = new TextBox("//input[@id='mainform:name']", "Organization name");
-	TextBox orgDescrption = new TextBox("//input[@id='mainform:desc']", "Organization Descrption");
-	TextBox orgAdminUserId = new TextBox("//input[@id='mainform:user']", "Admin UserId (Email)");
-	TextBox firstName = new TextBox("//input[@id='mainform:pw1']", "First Name");
-	TextBox lastName = new TextBox("//input[@id='mainform:chal']", "Last Name");
+	TextBox orgDescrption = new TextBox("//input[@id='mainform:description']", "Organization Descrption");
+	TextBox orgAdminUserId = new TextBox("//input[@id='mainform:userName']", "Admin UserId (Email)");
+	TextBox firstName = new TextBox("//input[@id='mainform:firstName']", "First Name");
+	TextBox lastName = new TextBox("//input[@id='mainform:lastName']", "Last Name");
 	TextBox PhoneNumber = new TextBox("//input[@id='mainform:phone']", "Phone Number");
 	DropDown domainType = new DropDown("//div[@id='mainform:domainType_panel']", "//label[@id='mainform:domainType_label']", "Domain type");
-	DropDown status = new DropDown("//div[@id='mainform:status_panel']", "//label[@id='mainform:status_label']", "Status");
+	Button standardStatus = new Button("//input[@id='mainform:status:0']", "Status");
+	Button trialStatus = new Button("//input[@id='mainform:status:1']", "Status");
 	TextBox vanityDomain = new TextBox("//input[@id='mainform:vanityDomain']", "Vanity Domain");
 	TextBox customDomain = new TextBox("//input[@id='mainform:customDomain']", "Custom Domain");
 	Button createButton = new Button("//button[@id='mainform:createOrg']", "Create button");
@@ -44,7 +46,11 @@ public class AddNewOrgPage extends HomePageAdmin{
 		firstName.type(firstNameValue);
 		lastName.type(lastNameValue);
 		PhoneNumber.type("23" + CommonUtils.getRandomNumericValueFixedLength(9));
-		//status.selectByLabel(statusValue);
+		if (statusValue.equalsIgnoreCase("Standard")) {
+			standardStatus.click();
+		}else if (statusValue.equalsIgnoreCase("Trial")) {
+			trialStatus.click();
+		}
 		//featureList.selectByLabel(featureListValue);
 		createButton.click();
 		sleep(30000);

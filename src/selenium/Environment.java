@@ -1,7 +1,7 @@
 package selenium;
 
 public class Environment{
-	  public enum NameOfEnvironment {DEV, TEST}
+	  public enum NameOfEnvironment {DEV, TEST, PROD, UAT}
 	  public enum LocationOfServer {LOCAL, REMOTE}
 	  private NameOfEnvironment environment;
 	  public LocationOfServer server;
@@ -31,6 +31,20 @@ public class Environment{
 	        	 }
 	         }
 	         break;
+	         case PROD: {
+	        	 switch (server){ 
+	        	 	case LOCAL: 	TESTURLADMIN = "https://admin.prod.salsalabs.org";break;
+	        	 	case REMOTE: 	TESTURLADMIN = "https://admin.prod.salsalabs.org";break;
+	        	 }
+	         }
+	         break;	         
+	         case UAT: {
+	        	 switch (server){ 
+	        	 	case LOCAL: 	TESTURLADMIN = "https://admin.uat.ignite.net";break;
+	        	 	case REMOTE: 	TESTURLADMIN = "https://admin.uat.ignite.net";break;
+	        	 }
+	         }
+	         break;
 	      }
 	    return TESTURLADMIN;
 	  }
@@ -48,6 +62,20 @@ public class Environment{
 	        	 switch (server){ 
 	        	 	case LOCAL: 	TESTURL = "https://hq.test.ignite.net";break;
 	        	 	case REMOTE: 	TESTURL = "https://10.16.0.69";break;
+	        	 }
+	         }
+	         break;
+	         case PROD: {
+	        	 switch (server){ 
+	        	 	case LOCAL: 	TESTURL = "https://HQ.salsalabs.org";break;
+	        	 	case REMOTE: 	TESTURL = "https://HQ.salsalabs.org";break;
+	        	 }
+	         }
+	         break;
+	         case UAT: {
+	        	 switch (server){ 
+	        	 	case LOCAL: 	TESTURL = "https://HQ.uat.ignite.net";break;
+	        	 	case REMOTE: 	TESTURL = "https://HQ.uat.ignite.net";break;
 	        	 }
 	         }
 	         break;

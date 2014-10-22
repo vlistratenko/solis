@@ -1,6 +1,7 @@
-package selenium;
+package JustForTestingOfCode;
 
 import pages.HQ.LoginPage;
+import selenium.SeleneseTestCase;
 
 public class Demo2 extends SeleneseTestCase
 {

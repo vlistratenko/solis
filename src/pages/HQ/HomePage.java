@@ -52,10 +52,11 @@ public class HomePage extends Browser{
 	}
 	
 	public HomePage verifyHomePageIsOpened() {
+		sleep(5000);
 		if (SeleneseTestCase.USED_ENVIRONMENT.server.equals(Environment.LocationOfServer.REMOTE)) {
 			sleep(20000);
 		}
-		verify(getLocation().contains("new-organization") || getLocation().contains("dashboard") , true, "Wrong url " + getLocation());
+		verify(getLocation().contains("dashboard") , true, "Wrong url " + getLocation());
 		return this;
 	}
 	

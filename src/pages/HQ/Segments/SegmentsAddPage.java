@@ -12,13 +12,13 @@ public class SegmentsAddPage extends SegmentsPage{
 	TextBox segmentNameField = new TextBox("//input[@name='name']", "Segment name");
 	TextBox segmentTagField = new TextBox("//input[@name='segment.tags']", "Segment tags");
 	Button saveButton = new Button("//button/span[text()='Save Segment']", "Save button");
-	Button addRuleSet = new Button("//button[contains(text(), 'Add') and contains(text(), 'rule set')]", "Add rule set");
+	Button addRuleSet = new Button("//button[contains(text(), 'Who should we add?')]", "Add rule set");
 	Panel ruleSet = new Panel("//div[@class='ruleSet']/descendant::div[@class='row rule ng-scope']", "Rule set");
 	Button addRule = new Button("a[@title='Add another rule']", "Add rule set");
-	TextBox serachAddSupporterManuallyField = new TextBox("//h2[.='Manually add']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::input", "Manually add supporter search field");
-	Button searchAddSupporterManuallyButton = new Button("//h2[.='Manually add']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::a[@ng-click='searchSupporters()']", "Add manually search button");
-	TextBox serachExcludeSupporterManuallyField = new TextBox("//h2[.='Manually remove']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::input", "Manually add supporter search field");
-	Button searchExcludeSupporterManuallyButton = new Button("//h2[.='Manually remove']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::a[@ng-click='searchSupporters()']", "Add manually search button");
+	TextBox serachAddSupporterManuallyField = new TextBox("//h2[.='I also want to add a few specific folks.']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::input", "Manually add supporter search field");
+	Button searchAddSupporterManuallyButton = new Button("//h2[.='I also want to add a few specific folks.']/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::a[@ng-click='doSearch()']", "Add manually search button");
+	TextBox serachExcludeSupporterManuallyField = new TextBox("//h2[.=\"I'd like to leave out a few individuals, too.\"]/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::input", "Manually add supporter search field");
+	Button searchExcludeSupporterManuallyButton = new Button("//h2[.=\"I'd like to leave out a few individuals, too.\"]/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::a[@ng-click='doSearch()']", "Add manually search button");
 	
 	public SegmentsPage createNewSegment(String segmentName,
 										String segmentTag,
@@ -27,7 +27,7 @@ public class SegmentsAddPage extends SegmentsPage{
 										String criteriaForExcludeSupporterManually,
 										String criteriaForAddSupporterManually) {
 		segmentNameField.type(segmentName);
-		segmentTagField.type(segmentTag);
+		//segmentTagField.type(segmentTag);
 		addRule(addIncludeRule);
 		addRule(addExcludeRule);
 		excludeSupporterManually(criteriaForExcludeSupporterManually);
@@ -72,7 +72,7 @@ public class SegmentsAddPage extends SegmentsPage{
 
 	
 	private void verifyAmountOfSupporters(int ruleSetNumber, Integer amountOfSupporters) {
-		String checkRuleButtonPath = ruleSet.getChildElementPath("button[text()='check']", ruleSetNumber);
+		String checkRuleButtonPath = ruleSet.getChildElementPath("button[contains(text(),'check')]", ruleSetNumber);
 		String amountSupportersLabel = ruleSet.getChildElementPath("span[contains(@class,'ruleCalc')]", ruleSetNumber);
 		new Button(checkRuleButtonPath, "Check rule").click();
 		sleep(8000);
@@ -104,7 +104,7 @@ public class SegmentsAddPage extends SegmentsPage{
 	}
 	
 	private void selectSupporterFromList(String supEmail) {
-		new Button("//ul[@class='no-bullet results']/descendant::div/descendant::*[contains(text(),'" + supEmail + "')]", "Supporter in the list").click();
+		new Button("//ul[@class='f-dropdown right']/descendant::div/descendant::*[contains(text(),'" + supEmail + "')]", "Supporter in the list").click();
 	}
 	
 	

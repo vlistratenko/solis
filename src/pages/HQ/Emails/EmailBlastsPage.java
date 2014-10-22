@@ -9,7 +9,7 @@ import selenium.CommonUtils;
 public class EmailBlastsPage extends HomePage{
 	Button addEmailButton = new Button("//button[@ng-click='createEmail()']", "Create email");
 	Table emailsTable = new Table("//table/descendant::a[text()='Reference Name']/ancestor::table", "Table with emails");
-	Button emailNameLink = new Button("//a[text()='" + CommonUtils.getProperty("emailBlastName") + "']", "Email blast link");
+	Button emailNameLink = new Button("//span[text()='" + CommonUtils.getProperty("emailBlastName") + "']", "Email blast link");
 	
 	public AddEmailsPage_SetupTab openAddEmailPage() {
 		addEmailButton.click();
@@ -24,6 +24,7 @@ public class EmailBlastsPage extends HomePage{
 	
 	public EmailBlastDetailsPage openEmailBlastDetailsPage(String emailName) {
 		emailNameLink.changePath(CommonUtils.getProperty("emailBlastName"), emailName);
+		sleep(3000);
 		emailNameLink.click();
 		return new EmailBlastDetailsPage();
 		

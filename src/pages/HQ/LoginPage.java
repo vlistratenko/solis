@@ -15,11 +15,11 @@ public class LoginPage extends Browser{
 
 	Button		LoginButton = new Button("//descendant-or-self::button", "Login button");
 	TextBox 	LoginField = new TextBox("//input[@name='email']", "Login field");
-	TextBox 	PasswordField = new TextBox("//input[@name='password']", "Password field");
+	TextBox 	PasswordField = new TextBox("//input[@id='password']", "Password field");
 	CheckBox 	RemebmerMe = new CheckBox("//label[contains(text(), 'Remember')]/input", "Remember my email address checkbox");
 	Button 		LearnMoreLink = new Button("//a[contains(text(), 'Learn more')]", "Learn more link");
-	Label 		InvalidEmailAddressOrPasswordValidationLabel = new Label("//*[text()='Invalid email address or password, please try again.']", "Invalid email address or password, please try again message");
-	Label 		EmailAddressandPasswordIsRequiredValidationLabel = new Label("//*[text()='An email address and password is required to sign in.']", "An email address and password is required to sign in message");
+	Label 		InvalidEmailAddressOrPasswordValidationLabel = new Label("//*[text()=\"We can't find the email address and password combo you entered. Please try again.\"]", "Invalid email address or password, please try again message");
+	Label 		EmailAddressandPasswordIsRequiredValidationLabel = new Label("//*[contains(text(),'An email address and password is required to sign in.')]", "An email address and password is required to sign in message");
 	
 	public LoginPage(){
 		logOut();
@@ -28,6 +28,7 @@ public class LoginPage extends Browser{
 	public HomePage doSuccessLogin(String userName, String password) {
 		open();
 		LoginField.type(userName);
+		PasswordField.removeAttribute("readonly");
 		PasswordField.type(password);
 		LoginButton.click();
 		CommonUtils.setProperty("current.Login", userName);
@@ -45,6 +46,7 @@ public class LoginPage extends Browser{
 	public LoginPage doFailLogin(String userName, String password) {
 		open();
 		LoginField.type(userName);
+		PasswordField.focus();
 		PasswordField.type(password);
 		LoginButton.click();
 		return this;
@@ -74,8 +76,8 @@ public class LoginPage extends Browser{
 	
 	public InviteCompletionPage openConfirmationPage() {
 		try {
-			open("mail.ru");
-			open(new EmailClient().getURLByEndWord("Welcome to Ignite HQ", "completion"));
+			//open("mail.ru");
+			open(new EmailClient().getURLByEndWord("Welcome to the Salsa Community,", "completion"));
 		} catch (MailosaurException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

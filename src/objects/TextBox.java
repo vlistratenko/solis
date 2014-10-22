@@ -1,5 +1,7 @@
 package objects;
 
+import org.openqa.selenium.interactions.Actions;
+
 import selenium.SeleneseTestCase;
 import interfaces.iTextBox;
 
@@ -18,6 +20,18 @@ public class TextBox extends Element implements iTextBox {
 	public void click() {
 		logger.info("Click on " + elementName);
 		super.click(path);
+
+	}
+	
+	public void clickByTABKey() {
+		logger.info("Click on " + elementName);
+		super.clickByTABKey(path);
+
+	}
+	
+	public void focus() {
+		logger.info("Focus on " + elementName);
+		new Actions(driver).click(findElementByXpath(path)).build().perform();
 
 	}
 

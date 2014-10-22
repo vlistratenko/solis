@@ -2,22 +2,16 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Set;
-
 import junit.framework.AssertionFailedError;
-
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
 import pages.HQ.LoginPage;
-
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
-import com.thoughtworks.selenium.Selenium;
-
 import selenium.CommonUtils;
 import selenium.Driver;
 import selenium.EmailClient;
@@ -26,7 +20,6 @@ import selenium.SeleneseTestCase;
 public abstract class Browser{
 	static WebDriver driver;
 	static Logger logger;
-	Selenium selenium;
 	int cTimeOut;
 	String elementName;
 	Integer defaultTimeOut;
@@ -35,7 +28,7 @@ public abstract class Browser{
 	public Browser() {
 		driver = SeleneseTestCase.driver;
 		logger = SeleneseTestCase.logger;
-		selenium = SeleneseTestCase.selenium;
+		//selenium = SeleneseTestCase.selenium;
 		cTimeOut = SeleneseTestCase.cTimeOut;
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 	}
@@ -198,7 +191,7 @@ public abstract class Browser{
 		return driver.getCurrentUrl();
 	}
 	
-	public LoginPage verifyAmountOfEmails(int amountOfEmails, int amountOfSplits) {
+	public LoginPage verifyAmountOfEmails(int amountOfEmails, int amountOfSplits, int amountOfMinutes, Boolean doFail) {
 		Integer amountEmailsInSplit = amountOfEmails;
 		if (amountOfSplits > 1) {
 			Integer testGroup = Integer.valueOf(CommonUtils.getProperty("percentageOfTestGroup"));
@@ -216,15 +209,14 @@ public abstract class Browser{
 			Integer amountEmails = null;
 			try {
 				
-				amountEmails = new EmailClient().waitForEmails(amountEmailsInSplit).getEmailsBySubject(subj).size();
+				amountEmails = new EmailClient().waitForEmails(subj, amountEmailsInSplit, amountOfMinutes).getEmailsBySubject(subj).size();
 			} catch (MailosaurException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if ( ! CommonUtils.getProperty("Environment").equalsIgnoreCase("dev")) {
-				verify(amountEmails, amountEmailsInSplit, "Not all emails " + subj + " were delivered");
+				verify(amountEmails, amountEmailsInSplit, "Not all emails " + subj + " were delivered", doFail);
 			}else{
-				verify(amountEmails > 0, true, "O emails were delivered");	
+				verify(amountEmails > 0, true, "O emails were delivered", doFail);	
 			}
 		}
 		

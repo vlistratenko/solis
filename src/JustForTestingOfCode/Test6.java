@@ -1,4 +1,4 @@
-package tests;
+package JustForTestingOfCode;
 
 import java.io.IOException;
 import java.security.KeyManagementException;

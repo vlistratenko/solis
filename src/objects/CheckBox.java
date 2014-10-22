@@ -70,4 +70,5 @@ public class CheckBox extends Element implements iCheckBox {
 		return false;
 	}
 
+
 }

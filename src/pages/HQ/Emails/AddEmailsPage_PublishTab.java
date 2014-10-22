@@ -15,9 +15,10 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 		if (splitsAmount > 1) {
 			TestPercentageList.selectByLabelJS(percentageOfTestGroup.toString() + "%");
 		}
+		sleep(5000);
 		CommonUtils.setProperty("amountOfPablishedEmails", amountOfEmails.getText());
 		SendNowButton.click();
-		sleep(30000);
+		sleep(3000);
 		return new AddEmailsPage_PublishTab();
 	}
 	

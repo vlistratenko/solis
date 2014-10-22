@@ -2,7 +2,10 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
+
 import interfaces.iTable;
 
 public class Table extends Element implements iTable {
@@ -89,12 +92,20 @@ public class Table extends Element implements iTable {
 		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();		
 	}
 	
+	public String getPathToChildElement(Integer row, Integer col, String elementType) {
+		
+		return path + "/tbody/tr[" + row + "]/td[" + col + "]/descendant::" + elementType;		
+	}
+	
 	public ArrayList<String> getHeaders() {
-		Iterator<WebElement> columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::*").iterator(); 
+		List<WebElement> l = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::a");
+		Iterator<WebElement> columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::a").iterator(); 
 		ArrayList<String> headers = new ArrayList<String>();
 		while(columns.hasNext()) { 
 	        WebElement column = columns.next();
-	        headers.add(column.getText());
+	        if (!column.getText().equals("")) {
+	        	headers.add(column.getText());
+			}
 		}
 		return headers;
 	}

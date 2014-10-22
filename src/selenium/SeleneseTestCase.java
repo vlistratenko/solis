@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -156,10 +156,10 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 	}
 	
 	protected static void getLogger() {				
-		File propertiesFile = new File("lib\\apache-log4j-1.2.16\\log4j.properties")
-		.getAbsoluteFile();	 	
-		PropertyConfigurator.configure(propertiesFile.toString());	 	
-		logger = Logger.getLogger(SeleneseTestCase.class);
+		//File propertiesFile = new File("lib\\apache-log4j-1.2.16\\log4j.properties").getAbsoluteFile();	 	
+		System.setProperty("log4j.configurationFile", "log4j2.xml");
+		logger = LogManager.getLogger(SeleneseTestCase.class);
+		//Object s = logger.getAllAppenders().nextElement();
 	}
 	
 	

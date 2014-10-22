@@ -3,8 +3,8 @@ package objects;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -69,7 +69,43 @@ abstract class Element {
 	public void setImplicity(Integer cTimeOut){
 		driver.manage().timeouts().implicitlyWait(cTimeOut, TimeUnit.SECONDS);
 	}
+	
+	protected void clickACtion(String locator) {
+		logger.debug("Click on < " + locator + " >.");
+		//getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
+		getActionBuilder().click(findElementByXpath(locator)).perform();
+	}
+	
+	protected void moveToElement(String locator) {
+		logger.debug("Move to element < " + locator + " >.");
+		getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
+	}
+	
+	public String setAttribute(String attName, String attValue) {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", 
+                element, attName, attValue);
+		return attValue;
+    }
+	
+	public void removeAttribute(String attName) {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].removeAttribute(arguments[1]);", 
+                element, attName);
+    }
 		
+	public void onClick(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", element);
+    }
+	
+	public void onBlur(WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].onblur();", 
+                element);
+    }
 	/*redefined methods*/	
 	
 	protected void click(String locator){		
@@ -87,7 +123,13 @@ abstract class Element {
 
 	}
 	
-	protected void jsClick(String locator){		
+	protected void clickJS(String mPath) {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+	
+	protected void clickByTABKey(String locator){		
 		logger.debug("Click on < " + locator + " >.");
 		waitObject( locator, 10*cTimeOut);
 		try {
@@ -115,7 +157,7 @@ abstract class Element {
 
 	}
 	
-	protected void clickAt(String locator, String coordString){		
+/*	protected void clickAt(String locator, String coordString){		
 		waitObject(locator, cTimeOut*60);
 		try {
 			selenium.clickAt(locator, coordString);
@@ -142,7 +184,7 @@ abstract class Element {
 			}
 		}
 		logger.debug("Click on < " + locator + " >.");
-	}
+	}*/
 	
 	protected void submit(String locator){		
 		waitObject(locator, cTimeOut*30);
@@ -159,11 +201,11 @@ abstract class Element {
 		logger.debug("Submit on < " + locator + " >.");
 	}
 	
-	protected void fireEvent(String locator, String event){		
+/*	protected void fireEvent(String locator, String event){		
 		waitObject(locator, cTimeOut*30);
 		selenium.fireEvent(locator, event);
 		logger.debug("Generate event < " + event + " > for < " + locator + " >.");
-	}
+	}*/
 	
 	protected void highlight(String locator){		
 		waitObject(locator, cTimeOut*30);
@@ -181,8 +223,16 @@ abstract class Element {
 	}
 	
 	protected void clearTextField(String locator){
+		Boolean isFile = false;
 		try {
-			findElementByXpath(locator).clear();
+			try{
+				isFile = getAttributeValue(locator, "type").equalsIgnoreCase("file");
+			}catch (Exception e) {
+				
+			}
+			if (!isFile) {
+				findElementByXpath(locator).clear();
+			}
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -327,7 +377,7 @@ abstract class Element {
 		logger.debug("Get text from - <" + locator+">. ");
 		logger.debug("Returned text is - <" + selenium.getText(locator)+">. ");
 		try {
-			return selenium.getText(locator);	
+			return findElementByXpath(locator).getText();	
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -382,10 +432,12 @@ abstract class Element {
 		switchToFrame(elem);				
 	}
 	
-	protected void seFocus(String id){		
-		logger.debug("Try to set focus into frame " + id);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("document.getElementById('elementid').focus();");				
+	public void setFocus(){		
+		logger.debug("Try to set focus into element " + path);		
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].focus();", 
+                element);			
 	}
 	
 	protected void switchToDefaultContent(){		
@@ -394,6 +446,7 @@ abstract class Element {
 	}
 	
 	protected WebElement findElementByXpath(String locator){		
+		locator.replace("[0]", "");
 		logger.debug("Try to find element " + locator);
 		List<WebElement> elem = findElementsByXpath(locator);
 		if (elem.size() == 0) {
