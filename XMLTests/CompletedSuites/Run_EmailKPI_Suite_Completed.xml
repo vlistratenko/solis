@@ -1,0 +1,48 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Email KPI Tests" parallel="false" thread-count="2">
+  <parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+  	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+  	<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
+   	<listeners>
+    	<listener class-name="selenium.MyTestListener" />
+  	</listeners>>
+	<test verbose="2" name="Email KPI Test" annotations="JDK" >
+    	<parameter name="admin.login" value="vavramchuk"></parameter>
+     	<parameter name="admin.password" value="aVitalik3124"></parameter>     	
+     	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
+     	<parameter name="email.password" value="aVitalik3124"></parameter>     	
+     	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
+		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>
+		<parameter name="createOrg.orgDescrption"  value="AutoTestV descr"></parameter>
+
+		<parameter name="createOrg.firstName"  value="AutoTester"></parameter>
+		<parameter name="createOrg.lastName"  value="AutoTesterov"></parameter>		
+		<parameter name="createOrg.status"  value="Standard"></parameter>
+		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
+		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
+		
+		
+		<parameter name="createSupporter.amount"  value="10"></parameter>
+		
+		<parameter name="sendEmailManuall.OpenAmount"  value="8"></parameter>
+		<parameter name="sendEmailManuall.ClickAmount"  value="4"></parameter>
+		<parameter name="sendEmailManuall.emailOfSupporter"  value="supMan"></parameter>
+		<parameter name="sendEmailManuall.amountOfSupporter"  value="10"></parameter>
+		
+		<parameter name="sendEmailImport.OpenAmount"  value="16"></parameter>
+		<parameter name="sendEmailImport.ClickAmount"  value="9"></parameter>
+		<parameter name="sendEmailImport.emailOfSupporter"  value=""></parameter>
+		<parameter name="sendEmailImport.amountOfSupporter"  value="20"></parameter>
+     	<groups>
+    		<run>
+     			 <include name="createAdmin"/>
+     			  <include name="settings.import"/>
+     			  <include name="createSupporter.manually"/>
+     			  <include name="email.*"/>
+    		</run>
+  		</groups>
+     	<classes>
+      		<class name="suites.EmailKPI_Suite"/>
+    	</classes>
+  	</test>   
+</suite>
