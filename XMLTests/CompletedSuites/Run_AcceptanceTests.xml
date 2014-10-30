@@ -56,7 +56,7 @@
     		</run>
   		</groups>
      	<classes>
-      		<class name="tests.BuildAcceptanceTests"/>
+      		<class name="suites.BuildAcceptanceTests"/>
     	</classes>
   	</test>   
  </suite>

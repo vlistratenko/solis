@@ -24,7 +24,7 @@ public class SupportersAddPage extends HomePage{
 	
 	public SupportersPage createNewSupporter() {
 		String unicID = CommonUtils.getRandomValue(100000, 0);
-		CommonUtils.SetParam("supporterEmail", EmailClient.getEmailBox("supMan" + unicID));
+		CommonUtils.setParam("supporterEmail", EmailClient.getEmailBox("supMan" + unicID));
 		supporterEmailField.type(CommonUtils.getParam("supporterEmail"));
 		supporterFirstNameField.type("Tester" + unicID);
 		supporterLastNameField.type("Testerov" + unicID);

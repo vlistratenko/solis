@@ -42,7 +42,7 @@ public class CommonUtils{
 		try {
 			Assert.assertEquals(Actual, Expected);
 		} catch (AssertionError e) {
-			SetParam("testResult", "fail");
+			setParam("testResult", "fail");
 			if (Fail){
 				throw new AssertionFailedError(Message + " - " + e.getMessage());
 			}else{
@@ -76,7 +76,7 @@ public class CommonUtils{
 		StanParam.clear();
 	}
 	
-	public static void SetParam(String key, String aValue){
+	public static void setParam(String key, String aValue){
 
           strMap.put(key, aValue);
     }
@@ -371,7 +371,7 @@ public class CommonUtils{
     public static String ChangeEditTextBoxValueEndGetNewValue(String aElement, String aParamName, String addValue, Selenium selenium) {
 
     	if (!aParamName.equals("")) {
-    		CommonUtils.SetParam(aParamName, selenium.getValue(aElement));	
+    		CommonUtils.setParam(aParamName, selenium.getValue(aElement));	
 		} 
 		String newValue = CommonUtils.getParam(aParamName) + addValue;
     	selenium.type(aElement, newValue);
@@ -384,17 +384,17 @@ public class CommonUtils{
     public static void ChangeYesNoRadioButtonValueEndGetNewValue(String aElementY, String aElementN, String aParamName, Selenium selenium) {
     	if (selenium.isChecked(aElementY)) {
 			selenium.click(aElementN);
-			SetParam(aParamName, "1");
+			setParam(aParamName, "1");
 		}else {
 			selenium.click(aElementY);
-			SetParam(aParamName, "0");
+			setParam(aParamName, "0");
 		}   	
     }
     
     public static void ChangeCheckBoxValueEndGetNewValue(String aElement, String aParamName, Selenium selenium) {
 
     	selenium.click(aElement);
-    	CommonUtils.SetParam(aParamName, new Boolean(selenium.isChecked(aElement)).toString());
+    	CommonUtils.setParam(aParamName, new Boolean(selenium.isChecked(aElement)).toString());
     }
 
     public static void ChangeSelectBoxValueEndSaveNewValue(String aElement, String aParamName, Selenium selenium) throws InterruptedException {
@@ -402,7 +402,7 @@ public class CommonUtils{
     	selenium.select(aElement, "index=" + CommonUtils.getOtherIndex(aElement, selenium));
     	
     	selenium.fireEvent(aElement, "blur");
-		CommonUtils.SetParam(aParamName, selenium.getSelectedLabel(aElement));
+		CommonUtils.setParam(aParamName, selenium.getSelectedLabel(aElement));
     }
     
 	public static Boolean LoadImage (String aTextElementName, String aFullPathPictureWithName, String aBrowser, Selenium selenium) throws IOException {		
@@ -729,6 +729,10 @@ System.err.println(script);
 			e.printStackTrace();
 		}
     }
+	public static String anonimizeCreditCardNumber(String cardNumber) {
+		
+		return "**************" + cardNumber.substring(12);
+	}
  	
 }
 	

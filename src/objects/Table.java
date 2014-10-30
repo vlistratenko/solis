@@ -2,8 +2,6 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
 
 import interfaces.iTable;
@@ -20,7 +18,7 @@ public class Table extends Element implements iTable {
 	
 	public void clickInCell(int row, int col, String tag) {
 		logger.info(elementName + " was clicked in cell, row " + row + " and column " +  col);
-		String pathEl = path + "/descendant::tr[" + row + "]/td[" + col + "]/" + tag;
+		String pathEl = path + "/tbody/descendant::tr[" + row + "]/td[" + col + "]/" + tag;
 		super.click(pathEl.replace("[0]", ""));
 	}
 	
@@ -79,7 +77,7 @@ public class Table extends Element implements iTable {
 		}
 		Integer rowsCount = getRowsCount()+1;
 		for (int i = 1; i <= rowsCount; i++) {
-			String elementPath = path + "/descendant::tr[" + i + "]/descendant::*[contains(text(), '" + value + "')]";
+			String elementPath = path + "/tbody/descendant::tr[" + i + "]/descendant::*[contains(text(), '" + value + "')]";
 			if (findElementsByXpath(elementPath.replace("[0]", "")).size() > 0) { 
 				return i;
 			}
@@ -87,19 +85,25 @@ public class Table extends Element implements iTable {
 		return -1;
 	}
 	
-	public Integer isValueExists(String value) {
-	
-		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();		
-	}
+
 	
 	public String getPathToChildElement(Integer row, Integer col, String elementType) {
 		
 		return path + "/tbody/tr[" + row + "]/td[" + col + "]/descendant::" + elementType;		
 	}
-	
+
+	/**
+	 * If true, it searches <a> in the header tag
+	 * @param isClickable
+	 * @return
+	 */
 	public ArrayList<String> getHeaders() {
-		List<WebElement> l = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::a");
+
 		Iterator<WebElement> columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::a").iterator(); 
+		if (!columns.hasNext()) {
+			columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::*").iterator(); 
+		}
+		
 		ArrayList<String> headers = new ArrayList<String>();
 		while(columns.hasNext()) { 
 	        WebElement column = columns.next();
@@ -138,8 +142,8 @@ public class Table extends Element implements iTable {
 	
 	@Override
 	public boolean isNotDisplayed() {
-		super.isNotDisplayed(path);
-		return false;
+		logger.info("Check that " + elementName + " is not displayed.");
+		return super.isNotDisplayed(path);
 	}
 
 }

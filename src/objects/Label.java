@@ -34,25 +34,25 @@ public class Label extends Element implements iLabel {
 
 	@Override
 	public boolean isVisible() {
-		logger.info("Check is " + elementName + " is visible.");
+		logger.info("Check that " + elementName + " is visible.");
 		return super.isVisible(path);
 	}
 
 	@Override
 	public boolean isEnabled() {
-		logger.info("Check is " + elementName + " is enabled.");
+		logger.info("Check that " + elementName + " is enabled.");
 		return super.isEnabled(path);
 	}
 
 	@Override
 	public boolean isDisplayed() {
-		logger.info("Check is " + elementName + " is displayed.");
+		logger.info("Check that " + elementName + " is displayed.");
 		return super.isDisplayed(path);
 	}
 	
 	@Override
 	public boolean isNotDisplayed() {
-		logger.info("Check is " + elementName + " is not displayed.");
+		logger.info("Check that " + elementName + " is not displayed.");
 		return super.isNotDisplayed(path);
 	}
 }

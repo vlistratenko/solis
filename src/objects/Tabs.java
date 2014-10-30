@@ -48,8 +48,8 @@ public class Tabs extends Element implements iElement, iTabs {
 	
 	@Override
 	public boolean isNotDisplayed() {
-		super.isNotDisplayed(path);
-		return false;
+		logger.info("Check that " + elementName + " is not displayed.");
+		return super.isNotDisplayed(path);
 	}
 
 }

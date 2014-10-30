@@ -15,6 +15,11 @@ public class CheckBox extends Element implements iCheckBox {
 		super.check(path, true);
 
 	}
+	
+	public void check(Boolean isCheck) {
+		logger.info(elementName + " was checked.");
+		super.check(path, isCheck);	
+	}
 
 	@Override
 	public void unCheck() {
@@ -66,8 +71,8 @@ public class CheckBox extends Element implements iCheckBox {
 	
 	@Override
 	public boolean isNotDisplayed() {
-		super.isNotDisplayed(path);
-		return false;
+		logger.info("Check that " + elementName + " is not displayed.");
+		return super.isNotDisplayed(path);
 	}
 
 

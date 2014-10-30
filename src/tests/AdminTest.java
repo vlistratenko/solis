@@ -46,21 +46,23 @@ public class AdminTest extends SeleneseTestCase{
 		CommonUtils.setProperty("Admin.orgName", orgName);
 	}
 	
-    @Test(priority=20, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
+    @Test(priority=20, enabled = true, groups = {"dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
 	@Parameters({ "email.login",
      	"email.password",
      	"newuser.password"})
 	public void confirmAdminAccountTest(String login,
 	     	String password,	     	
 			String userPassword){
-		
+    	
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		openConfirmationPage().
-		completeInvite(userPassword);
+		completeInvite(userPassword).
+		verifyHomePageIsOpened();
 		
-		CommonUtils.setProperty("Admin.Password", userPassword);
-		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));
+    	CommonUtils.setProperty("Admin.Password", userPassword);
+		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));		
+		
 	}
 	
 	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
@@ -69,8 +71,6 @@ public class AdminTest extends SeleneseTestCase{
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
-		//configureNewOrg(CommonUtils.getProperty("Admin.email"), "11111", "TestCity").
-		verifyHomePageIsOpened();//.
-		//verifyOrgNameDisplayed();
+		verifyHomePageIsOpened();
 	}
 }

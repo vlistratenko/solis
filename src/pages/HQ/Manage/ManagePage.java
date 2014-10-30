@@ -29,9 +29,9 @@ public class ManagePage  extends HomePage{
 		return this;
 	}
 	
-	public WePayPage switchToWePayPage() {
+	public PaymentGatewaysPage switchToPaymentGatewaysPage() {
 		switchToDropDown.selectByLabelJS("Payment Gateways");
-		return new WePayPage();
+		return new PaymentGatewaysPage();
 	}
 
 }

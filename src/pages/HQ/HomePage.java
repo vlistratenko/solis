@@ -6,6 +6,8 @@ import objects.Button;
 import objects.DropDown;
 import objects.Label;
 import objects.TextBox;
+import pages.Donation.DonationsPage;
+import pages.HQ.Activities.ActivitiesPage;
 import pages.HQ.Manage.ManagePage;
 import selenium.CommonUtils;
 import selenium.Environment;
@@ -22,6 +24,7 @@ public class HomePage extends Browser{
 	//left navigation bar
 	Button audienceTab = new Button("//a[@title='Audience']", "Audience tab");
 	Button activitiesTab = new Button("//a[@title='Activities']", "Activities tab");
+	Button donationTab = new Button("//a[@title='Donation records']", "Donations tab");
 	
 	//Top navigation bar
 	Button settingsTab = new Button("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");
@@ -52,7 +55,7 @@ public class HomePage extends Browser{
 	}
 	
 	public HomePage verifyHomePageIsOpened() {
-		sleep(5000);
+		sleep(10000);
 		if (SeleneseTestCase.USED_ENVIRONMENT.server.equals(Environment.LocationOfServer.REMOTE)) {
 			sleep(20000);
 		}
@@ -69,6 +72,12 @@ public class HomePage extends Browser{
 	public ActivitiesPage openActivitiesPage() {
 		activitiesTab.click();
 		return new ActivitiesPage();
+		
+	}
+	
+	public DonationsPage openDonationsPage() {
+		donationTab.click();
+		return new DonationsPage();
 		
 	}
 	

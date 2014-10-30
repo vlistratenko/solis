@@ -34,6 +34,11 @@ public class TextBox extends Element implements iTextBox {
 		new Actions(driver).click(findElementByXpath(path)).build().perform();
 
 	}
+	
+	public void waitElement() {
+		super.waitObject(path, 30000);
+
+	}
 
 	@Override
 	public String getText() {
@@ -81,8 +86,8 @@ public class TextBox extends Element implements iTextBox {
 	
 	@Override
 	public boolean isNotDisplayed() {
-		super.isNotDisplayed(path);
-		return false;
+		logger.info("Check that " + elementName + " is not displayed.");
+		return super.isNotDisplayed(path);
 	}
 
 }

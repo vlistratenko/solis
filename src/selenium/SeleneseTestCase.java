@@ -258,6 +258,11 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 		driver.quit();	
 	}
 	
+	public static void closeWindow(){
+		logger.info("Try to close window");
+		driver.close();	
+	}
+	
 	/**
 	 * @param timeOut in seconds
 	 */

@@ -58,8 +58,8 @@ public class MenuBar extends Element implements iDropDown {
 	
 	@Override
 	public boolean isNotDisplayed() {
-		super.isNotDisplayed(path);
-		return false;
+		logger.info("Check that " + elementName + " is not displayed.");
+		return super.isNotDisplayed(path);
 	}
 
 

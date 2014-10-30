@@ -17,7 +17,7 @@ public class SegmentsTests extends SeleneseTestCase{
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
 		openSettingsPage().
-		switchToWePayPage();
+		switchToPaymentGatewaysPage();
 		
 
 	}

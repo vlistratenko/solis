@@ -1,7 +1,7 @@
 package selenium;
 
 public class Environment{
-	  public enum NameOfEnvironment {DEV, TEST, PROD, UAT}
+	  public enum NameOfEnvironment {DEV, TEST, /*PROD,*/ UAT}
 	  public enum LocationOfServer {LOCAL, REMOTE}
 	  private NameOfEnvironment environment;
 	  public LocationOfServer server;
@@ -31,13 +31,13 @@ public class Environment{
 	        	 }
 	         }
 	         break;
-	         case PROD: {
+	         /*case PROD: {
 	        	 switch (server){ 
 	        	 	case LOCAL: 	TESTURLADMIN = "https://admin.prod.salsalabs.org";break;
 	        	 	case REMOTE: 	TESTURLADMIN = "https://admin.prod.salsalabs.org";break;
 	        	 }
 	         }
-	         break;	         
+	         break;*/	         
 	         case UAT: {
 	        	 switch (server){ 
 	        	 	case LOCAL: 	TESTURLADMIN = "https://admin.uat.ignite.net";break;
@@ -65,13 +65,13 @@ public class Environment{
 	        	 }
 	         }
 	         break;
-	         case PROD: {
+	         /*case PROD: {
 	        	 switch (server){ 
 	        	 	case LOCAL: 	TESTURL = "https://HQ.salsalabs.org";break;
 	        	 	case REMOTE: 	TESTURL = "https://HQ.salsalabs.org";break;
 	        	 }
 	         }
-	         break;
+	         break;*/
 	         case UAT: {
 	        	 switch (server){ 
 	        	 	case LOCAL: 	TESTURL = "https://HQ.uat.ignite.net";break;

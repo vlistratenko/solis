@@ -48,14 +48,14 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 		new AdminTest().loginAsNewSuperAdminTest();
 	}
 	
-	@Test( priority=10, groups = {"settings.import"}, description = "", dependsOnGroups={"createAdmin"})
+	@Test( priority=40, groups = {"settings.import"}, description = "", dependsOnGroups={"createAdmin"})
 	public void importSupportersTest() {
 		
 		new SettingsTests().importSupportersTest();
 	}
 	
 	@Parameters({ "createSupporter.amount"})
-	@Test(priority=40, groups = {"acceptanceTests.user", "createSupporter.manually"}, description = "494:53:Supporter was NOT created",
+	@Test(priority=50, groups = {"acceptanceTests.user", "createSupporter.manually"}, description = "494:53:Supporter was NOT created",
 			dependsOnGroups={"createAdmin"})
 	public void createSupporerManually(Integer amount){
 		
@@ -63,14 +63,14 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 	}
 	
 	@Parameters({"sendEmail.From", "sendEmailImport.OpenAmount", "sendEmailImport.ClickAmount", "sendEmailImport.emailOfSupporter", "sendEmailImport.amountOfSupporter"})
-	@Test( priority=50, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"settings.import"})
+	@Test( priority=60, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"settings.import"})
 	public void sendEmailsTestForImported(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
 		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters);
 	}
 	
 	@Parameters({"sendEmail.From", "sendEmailManuall.OpenAmount", "sendEmailManuall.ClickAmount", "sendEmailManuall.emailOfSupporter", "sendEmailManuall.amountOfSupporter"})
-	@Test( priority=50, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"createSupporter.manually"})
+	@Test( priority=70, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"createSupporter.manually"})
 	public void sendEmailsTestForManual(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
 		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters);

@@ -102,10 +102,18 @@ public class EmailClient {
 	}
 	
 	public String getURLByEndWord(String emailSubj, String word) throws MailosaurException {
-		Email e = getEmailBySubject(emailSubj);
+		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
 		Pattern pattern = Pattern.compile("http(.*?)" + word);
         Matcher matcher = pattern.matcher(e.html.body);
         if (matcher.find()) return matcher.group(0);
+		return null;
+	}
+	
+	public String getURLByDomain(String emailSubj, String domain) throws MailosaurException {
+		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
+		Pattern pattern = Pattern.compile("https://" + domain + "(.*?)" + "confirm(.*?)\" ");
+        Matcher matcher = pattern.matcher(e.html.body);
+        if (matcher.find()) return matcher.group(0).replace("\" ", "");
 		return null;
 	}
 	
@@ -176,7 +184,7 @@ public class EmailClient {
 			try {
 				if (getEmailsBySubject(subj).size() < emailsAmount) {
 					try {
-						Thread.sleep(3600);
+						Thread.sleep(60000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

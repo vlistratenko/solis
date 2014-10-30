@@ -1,17 +1,25 @@
 package objects;
 
+import interfaces.iTextBox;
+
 import java.util.ArrayList;
 import java.util.Set;
+
 import junit.framework.AssertionFailedError;
+
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
+
 import pages.HQ.LoginPage;
+
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
+
 import selenium.CommonUtils;
 import selenium.Driver;
 import selenium.EmailClient;
@@ -58,11 +66,16 @@ public abstract class Browser{
 	}
 	
 	protected void refresh(){		
-		logger.info("Try to open refresh the page");		
+		logger.info("Try to refresh the page");		
 		driver.navigate().refresh();		
 	}
+	
 	protected void close(){
 		SeleneseTestCase.close();
+	}
+	
+	protected void closeWindow(){
+		SeleneseTestCase.closeWindow();
 	}
 	
 	protected void deletecoockies(){
@@ -77,9 +90,13 @@ public abstract class Browser{
 		SeleneseTestCase.implicityWait(timeOut);				
 	}
 	
+	protected String getWindowHandle() {
+		return driver.getWindowHandle();
+	}
+	
 	protected void openURLInOtherBrowserAndVerifyByTitle() {
 		WebDriver driverT = null;
-		String windHandle = driver.getWindowHandle();
+		String windHandle = getWindowHandle();
 		if (/*browser*/getBrowser().contains("firefox")) {
 			driverT = new Driver().get_driver("*iexplore");
 		}else{
@@ -136,17 +153,32 @@ public abstract class Browser{
 		verifyNotEquals(actual, expected, message, true);		
 	}
 	
-	private void verify(Object actual, Object expected, String message, Boolean Fail){
+	protected void verify(Object actual, Object expected, String message, Boolean fail){
 		try {
 			Assert.assertEquals(actual, expected);
 		} catch (AssertionError e) {
-			CommonUtils.SetParam("testResult", "fail");
 			//bug.add(message + " - " + e.getMessage());
-			if (Fail){
+			if (fail){
+				
 				throw new AssertionFailedError(message + " - " + e.getMessage());
 			}else{
 				logger.error("Verification error: " + message + " - " + e.getMessage());
-			}
+				CommonUtils.setParam("testResult", "fail");
+			};
+		}		
+	}
+	
+	protected void verifyIgnoreCase(Object actual, Object expected, String message, Boolean fail){
+		try {
+			Assert.assertEquals(actual, expected);
+		} catch (AssertionError e) {
+			//bug.add(message + " - " + e.getMessage());
+			if (fail){
+				throw new AssertionFailedError(message + " - " + e.getMessage());
+			}else{
+				logger.error("Verification error: " + message + " - " + e.getMessage());
+				CommonUtils.setParam("testResult", "fail");
+			};
 		}		
 	}
 	
@@ -154,7 +186,7 @@ public abstract class Browser{
 		try {
 			Assert.assertNotEquals(actual, expected);
 		} catch (AssertionError e) {
-			CommonUtils.SetParam("testResult", "fail");
+			CommonUtils.setParam("testResult", "fail");
 			//bug.add(message + " - " + e.getMessage());
 			if (Fail){
 				throw new AssertionFailedError(message + " - " + e.getMessage());
@@ -175,6 +207,28 @@ public abstract class Browser{
 		SeleneseTestCase.driver.navigate().to("https://mail.google.com/mail/?logout&hl=ru");	
 		sleep(3000);
 							
+	}
+	
+	public Boolean waitConditionBecomesTrue(Boolean condition, Integer waitSec) {
+		for (int i = 0; i < waitSec; i++) {
+			if (!condition) {
+				sleep(1000);
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public Boolean waitConditionBecomesTrueWithRefersh(Boolean condition, Integer timeOut) {
+		if (!condition) {			
+			sleep(timeOut);	
+			refresh();
+			sleep(3000);	
+			return false;
+		}else{
+			return true;
+		}
+		
 	}
 	
 	protected void sleep(int t) {

@@ -39,7 +39,7 @@ public class InviteCompletionPage extends Browser {
 	TextBox replyToEmailField = new TextBox("//input[@ng-model='settings.communication.emailDefaultReplyto']", "Reply To email", true);
 	Button finishButton = new Button("//button/*[.=\"Let's go!\"]", "Save account");
 	
-	public void completeInvite(String password) {
+	public HomePage completeInvite(String password) {
 		sleep(3000);
 		passwordField.type(password);
 		confirmPasswordField.type(password);
@@ -48,8 +48,9 @@ public class InviteCompletionPage extends Browser {
 		recoveryQuestionField2.selectByLabelJS("What school did you attend for sixth grade?");
 		recoveryAnswerField2.type("Auto answer");
 		createAccountButton.click();
-		sleep(15000);		
+		//sleep(15000);		
 		//Tell Us About Your Organization!
+		emailField.waitElement();
 		emailField.type(CommonUtils.getProperty("Admin.email"));
 		address1Field.type("Address line 1");
 		address2Field.type("Address line 2");
@@ -57,9 +58,10 @@ public class InviteCompletionPage extends Browser {
 		zipField.type("20147");
 		statesField.selectByID(CommonUtils.getRandomValueFromTo(1, 5, 0));
 		saveButton.click();
-		sleep(10000);
+		//sleep(10000);
 		
 		//Design form
+		primaryColorField.waitElement();
 		fileField.setAttribute("class", "ng-pristine ng-valid");
 		fileField.type(new File("images\\YM.jpg").getAbsolutePath());
 		primaryColorField.type("#BD1335");
@@ -70,5 +72,6 @@ public class InviteCompletionPage extends Browser {
 		replyToEmailField.type(CommonUtils.getProperty("Admin.email"));
 		finishButton.click();
 		sleep(3000);
+		return new HomePage();
 	}
 }

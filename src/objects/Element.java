@@ -108,6 +108,12 @@ abstract class Element {
     }
 	/*redefined methods*/	
 	
+	public void scrollIntoView() {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].scrollIntoView();", element);
+	}
+	
 	protected void click(String locator){		
 		logger.debug("Click on < " + locator + " >.");
 		try {
@@ -123,7 +129,7 @@ abstract class Element {
 
 	}
 	
-	protected void clickJS(String mPath) {
+	protected void clickJS() {
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -375,7 +381,7 @@ abstract class Element {
 	
 	protected String getText(String locator){
 		logger.debug("Get text from - <" + locator+">. ");
-		logger.debug("Returned text is - <" + selenium.getText(locator)+">. ");
+		//logger.debug("Returned text is - <" + selenium.getText(locator)+">. ");
 		try {
 			return findElementByXpath(locator).getText();	
 		} catch (Exception e) {
@@ -446,7 +452,7 @@ abstract class Element {
 	}
 	
 	protected WebElement findElementByXpath(String locator){		
-		locator.replace("[0]", "");
+		locator = locator.replace("[0]", "");
 		logger.debug("Try to find element " + locator);
 		List<WebElement> elem = findElementsByXpath(locator);
 		if (elem.size() == 0) {
@@ -636,8 +642,8 @@ abstract class Element {
 	throws Exception {
 		
 		for (int i = 0; i < aTime/1000; i++) {
-			if (selenium.isElementPresent(aIdLocator) && selenium.isTextPresent(aText)) {
-				if (selenium.getText(aIdLocator).indexOf(aText)!=-1){
+			if (isElementPresent(aIdLocator) && selenium.isTextPresent(aText)) {
+				if (getText(aIdLocator).indexOf(aText)!=-1){
 					return true;
 				}else if(i==aTime/1000-1){
 					throw new Exception("Exception: Wrong text. Text '" 
@@ -654,7 +660,7 @@ abstract class Element {
 	}
 	
 	public void changePath(String old, String newPath) {
-		this.path.replace(old, newPath);
+		this.path = this.path.replace(old, newPath);
 	}
 
 	
@@ -672,6 +678,11 @@ abstract class Element {
 	
 	protected boolean isNotDisplayed(String path) {
 		return findElementsByXpath(path).size() == 0;
+	}
+	
+	public Integer isValueExists(String value) {
+		
+		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();		
 	}
 
 }

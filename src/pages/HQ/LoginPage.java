@@ -40,13 +40,14 @@ public class LoginPage extends Browser{
 			CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("CM.firstName"));
 			CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("CM.lastName"));
 		}
+		sleep(3000);
 		return new HomePage();
 	}
 	
 	public LoginPage doFailLogin(String userName, String password) {
 		open();
 		LoginField.type(userName);
-		PasswordField.focus();
+		PasswordField.removeAttribute("readonly");
 		PasswordField.type(password);
 		LoginButton.click();
 		return this;
@@ -77,7 +78,7 @@ public class LoginPage extends Browser{
 	public InviteCompletionPage openConfirmationPage() {
 		try {
 			//open("mail.ru");
-			open(new EmailClient().getURLByEndWord("Welcome to the Salsa Community,", "completion"));
+			open(new EmailClient().getURLByEndWord("Welcome to the Salsa Community, " + CommonUtils.getProperty("Admin.firstName") + "!", "completion"));
 		} catch (MailosaurException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
