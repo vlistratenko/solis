@@ -1,11 +1,7 @@
 package suites;
 
-import org.testng.ITestContext;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.xml.XmlTest;
-
 import selenium.SeleneseTestCase;
 import tests.ActivitiesTests;
 import tests.AdminTest;
@@ -58,8 +54,25 @@ public class Donations_Suite extends SeleneseTestCase{
 		new SettingsTests().createWePayAcountTest(wePayNickName, wePayDescr, wePayOrgType);
 	}
 	
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
+		"donation.personEmail",
+		"donation.personFName",
+		"donation.personLName",
+		"donation.personAddressLine1",
+		"donation.personAddressLine2",
+		"donation.personCity",
+		"donation.personZip",
+		"donation.donationAmount",
+		"donation.nameOnCard",
+		"donation.cardNumber",
+		"donation.cvv",
+		"donation.expiryMonth",
+		"donation.expiryYear",			
+		"donation.isFundraising",
+		"donation.isNewsletter",
+		"donation.isEmail"})
 	@Test(priority=50, groups = {"activities.createDonationForm"}, description = "",
-			dependsOnGroups={"settings.wepay"}, dataProvider = "donationData")
+			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
 	public void makeDonationTest(String widgetName, String widgetDescription,
 			String personEmail,
 			String personFName,
@@ -68,7 +81,6 @@ public class Donations_Suite extends SeleneseTestCase{
 			String personAddressLine2,
 			String personCity,
 			String personZip,
-			Boolean recurringDonation,
 			String donationAmount,
 			String nameOnCard,
 			String cardNumber,
@@ -77,8 +89,9 @@ public class Donations_Suite extends SeleneseTestCase{
 			String expiryYear,			
 			Boolean isFundraising,
 			Boolean isNewsletter,
-			Boolean isEmail){
-		
+			Boolean isEmail)
+	{	
+		Boolean recurringDonation = false;
 		new ActivitiesTests().makeDonationTest(widgetName,
 				widgetDescription,
 				personEmail,
@@ -100,7 +113,17 @@ public class Donations_Suite extends SeleneseTestCase{
 				isEmail);;		
 	}
 	
-	@Test( priority=60, groups = {"activities.refundDonation"}, description = "", dependsOnGroups={"activities.createDonationForm"}, dataProvider = "donationDataForRefund")
+	@Parameters({"donation.donationAmount",
+		"donation.cardNumber",
+		"donation.expiryMonth",
+		"donation.expiryYear",	
+		"donation.personFName",
+		"donation.personLName",
+		"donation.personAddressLine1",
+		"donation.personAddressLine2",		
+		"donation.personCity",
+		"donation.personZip"})
+	@Test( priority=60, groups = {"activities.refundDonation"}, description = "", dependsOnGroups={"activities.createDonationForm"}/*, dataProvider = "donationDataForRefund"*/)
 	public void refundDonation(String donationAmount,
 			String cardNumber,
 			String expiryMonth,
@@ -110,9 +133,104 @@ public class Donations_Suite extends SeleneseTestCase{
 			String personAddressLine1,
 			String personAddressLine2,
 			String personCity,
+			String personZip) 
+	{	
+		Boolean recurringDonation = false;
+		new ActivitiesTests().refundDonation(donationAmount,
+				cardNumber,
+				expiryMonth,
+				expiryYear,
+				personFName,
+				personLName,
+				personAddressLine1,
+				personAddressLine2,
+				personCity,
+				personZip,
+				recurringDonation);
+	}
+	
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
+		"donation.personEmail",
+		"donation.personFName",
+		"donation.personLName",
+		"donation.personAddressLine1",
+		"donation.personAddressLine2",
+		"donation.personCity",
+		"donation.personZip",
+		"donation.donationAmount",
+		"donation.nameOnCard",
+		"donation.cardNumber",
+		"donation.cvv",
+		"donation.expiryMonth",
+		"donation.expiryYear",			
+		"donation.isFundraising",
+		"donation.isNewsletter",
+		"donation.isEmail"})
+	@Test(priority=50, groups = {"activities.createRecuringDonationForm"}, description = "",
+			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
+	public void makeDonationRecuringTest(String widgetName, String widgetDescription,
+			String personEmail,
+			String personFName,
+			String personLName,
+			String personAddressLine1,
+			String personAddressLine2,
+			String personCity,
 			String personZip,
-			Boolean recurringDonation) 
-	{		
+			String donationAmount,
+			String nameOnCard,
+			String cardNumber,
+			String cvv,
+			String expiryMonth,
+			String expiryYear,			
+			Boolean isFundraising,
+			Boolean isNewsletter,
+			Boolean isEmail)
+	{
+		Boolean recurringDonation = true;
+		new ActivitiesTests().makeDonationTest(widgetName,
+				widgetDescription,
+				personEmail,
+				personFName,
+				personLName,
+				personAddressLine1,
+				personAddressLine2,
+				personCity,
+				personZip,
+				recurringDonation,
+				donationAmount,
+				nameOnCard,
+				cardNumber,
+				cvv,
+				expiryMonth,
+				expiryYear,
+				isFundraising,
+				isNewsletter,
+				isEmail);;		
+	}
+	
+	@Parameters({"donation.donationAmount",
+		"donation.cardNumber",
+		"donation.expiryMonth",
+		"donation.expiryYear",	
+		"donation.personFName",
+		"donation.personLName",
+		"donation.personAddressLine1",
+		"donation.personAddressLine2",		
+		"donation.personCity",
+		"donation.personZip"})
+	@Test( priority=60, groups = {"activities.refundRecuringDonation"}, description = "", dependsOnGroups={"activities.createRecuringDonationForm"}/*, dataProvider = "donationDataForRefund"*/)
+	public void refundRecuringDonation(String donationAmount,
+			String cardNumber,
+			String expiryMonth,
+			String expiryYear,
+			String personFName,
+			String personLName,
+			String personAddressLine1,
+			String personAddressLine2,
+			String personCity,
+			String personZip) 
+	{	
+		Boolean recurringDonation = true;
 		new ActivitiesTests().refundDonation(donationAmount,
 				cardNumber,
 				expiryMonth,
@@ -126,7 +244,7 @@ public class Donations_Suite extends SeleneseTestCase{
 				recurringDonation);
 	}
 
-	
+/*	
 	@DataProvider(name = "donationData")
 	public Object[][] donationData(ITestContext context) 
 	{
@@ -201,5 +319,5 @@ public class Donations_Suite extends SeleneseTestCase{
 			   xTest.getParameter("donation.personZip"),
 			   new Boolean("true")},
 		 };
-	}
+	}*/
 }

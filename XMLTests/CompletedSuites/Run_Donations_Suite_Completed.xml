@@ -51,6 +51,8 @@
      			  <include name="settings.wepay"/>
      			  <include name="activities.createDonationForm"/>
      			  <include name="activities.refundDonation"/>
+     			  <include name="activities.createRecuringDonationForm"/>
+     			  <include name="activities.refundRecuringDonation"/>
     		</run>
   		</groups>
      	<classes>
