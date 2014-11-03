@@ -34,5 +34,10 @@ public class SupportersPage extends AudiencePage{
 		doSearchButton.click();
 		return new SupportersPage();
 	}
+
+	public SupportersAddPage openSupporterDetailsPage() {
+		supportersTable.clickInCell(1, 2, "span[@ng-click='editItem(item)']");
+		return new SupportersAddPage();
+	}
 	
 }

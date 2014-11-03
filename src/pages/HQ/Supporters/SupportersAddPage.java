@@ -2,6 +2,7 @@ package pages.HQ.Supporters;
 
 import objects.Button;
 import objects.DropDown;
+import objects.Supporter;
 import objects.TextBox;
 import pages.HQ.HomePage;
 import selenium.CommonUtils;
@@ -37,6 +38,19 @@ public class SupportersAddPage extends HomePage{
 		supporterTwitterField.type("twitter" + unicID);
 		supporterGooglePlusField.type("googlePlus" + unicID);
 		saveButton.click();
+		return new SupportersPage();
+	}
+	
+	public SupportersPage verifySupporterData() {
+		verify(supporterEmailField.getText().contains(new Supporter().Email), true, "Wrong email", false);
+		verify(supporterFirstNameField.getText().contains(new Supporter().First_Name), true, "Wrong firstname", false);
+		verify(supporterLastNameField.getText().contains(new Supporter().Last_Name), true, "Wrong last name", false);
+		verify(supporterPhoneField.getText(), new Supporter().cPhone, "Wrong Phone", false);
+		verify(supporterStreetField.getText().contains(new Supporter().AddressLine1), true, "Wrong Street", false);
+		verify(supporterCityField.getText(), new Supporter().City, "Wrong City", false);
+		verify(supporterZipField.getText(), new Supporter().Zip_Code, "Wrong zip", false);
+		verify(supporterFaceBookField.getText(), new Supporter().Facebook, "Wrong FaceBook", false);
+		verify(supporterTwitterField.getText(), new Supporter().Twitter, "Wrong Twitter", false);
 		return new SupportersPage();
 	}
 	

@@ -22,25 +22,31 @@ public class LoginPage extends Browser{
 	Label 		EmailAddressandPasswordIsRequiredValidationLabel = new Label("//*[contains(text(),'An email address and password is required to sign in.')]", "An email address and password is required to sign in message");
 	
 	public LoginPage(){
-		logOut();
+		//logOut();
 	}
 	
 	public HomePage doSuccessLogin(String userName, String password) {
 		open();
-		LoginField.type(userName);
-		PasswordField.removeAttribute("readonly");
-		PasswordField.type(password);
-		LoginButton.click();
-		CommonUtils.setProperty("current.Login", userName);
-		CommonUtils.setProperty("current.Password", password);
-		if (userName.equalsIgnoreCase(CommonUtils.getProperty("Admin.email"))) {
-			CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("Admin.firstName"));
-			CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("Admin.lastName"));
+		sleep(2000);
+		if(new HomePage().dashboardTab.isNotDisplayed()) {
+			logOut();
+			LoginField.type(userName);
+			PasswordField.removeAttribute("readonly");
+			PasswordField.type(password);
+			LoginButton.click();
+			CommonUtils.setProperty("current.Login", userName);
+			CommonUtils.setProperty("current.Password", password);
+			if (userName.equalsIgnoreCase(CommonUtils.getProperty("Admin.email"))) {
+				CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("Admin.firstName"));
+				CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("Admin.lastName"));
+			}else{
+				CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("CM.firstName"));
+				CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("CM.lastName"));
+			}
+			sleep(3000);
 		}else{
-			CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("CM.firstName"));
-			CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("CM.lastName"));
+			new HomePage().dashboardTab.click();
 		}
-		sleep(3000);
 		return new HomePage();
 	}
 	

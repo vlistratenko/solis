@@ -81,7 +81,9 @@ public class DonationWidget extends Browser{
 	}
 	
 	public DonationWidget verifyDonationIsSuccesses() {
-		waitConditionBecomesTrue(donationIsSccessMessage.isDisplayed(), 30);
+		for (int i = 0; i < 10; i++) {
+			waitConditionBecomesTrue(donationIsSccessMessage.isDisplayed(), 10000);
+		}
 		verify(donationIsSccessMessage.isDisplayed(), true, "Message that donation success, is not displayed");
 		return new DonationWidget();
 	}

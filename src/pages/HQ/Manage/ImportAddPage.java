@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import objects.Button;
 import objects.DropDown;
+import objects.Supporter;
 import objects.Table;
 import objects.TextBox;
 import selenium.CommonUtils;
@@ -75,7 +76,7 @@ public class ImportAddPage extends ManagePage{
 	
 	
 	
-	private String generateSupporters(Integer amount, Integer amountOfRealSupporters) throws FileNotFoundException {
+	public String generateSupporters(Integer amount, Integer amountOfRealSupporters) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter("supporters.csv");
 		out.println("Cell Phone,"
 				+ "City,"
@@ -83,62 +84,53 @@ public class ImportAddPage extends ManagePage{
 				+ "Facebook,"
 				+ "First Name,"
 				+ "Home Phone,"
-				//+ "ID,"
 				+ "Last Name,"
 				+ "Preferred Language,"
 				+ "State,"
-				//+ "Time Zone,"
 				+ "Twitter,"
-				//+ "Username,"
 				+ "Zip Code," 
 				+ "\"Address, line 1\","
 				+ "\"Address, line 2\","
 				+ "Middle Name"
-
 				);
+		Boolean unexistedDomain = false;
+		Boolean unexistedEmail = false;
+		Supporter supporter = new Supporter();
+		
 		for (int i = 1; i <= amount; i++) {
-			String cPhone = "32165498765";
-			String City = "CityT";
-			String emailDomain="";
 			if (i<=amountOfRealSupporters) {
-				emailDomain = "." + EmailClient.mbox + "@mailosaur.in";
+				supporter.emailDomain = "." + EmailClient.mbox + "@mailosaur.in";
 			}else{
-				emailDomain = "@devnull.test.ignite.net";
+				supporter.emailDomain = "@devnull.test.ignite.net";
 			}
-			String Email = "vsuporter2" + i + emailDomain;//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
-			String Facebook = "FBV";
-			String First_Name = "Tester" + i;
-			String Home_Phone = "98765432112";
-			//String ID = Integer.toString(i*1321212);
-			String Last_Name = "Testerov" + i;
-			String PreferredLanguage = "English (United States)";
-			String State = "NY";
-			//String Time_Zone = "(GMT-05:00) Eastern Time";
-			String Twitter = "TWV";
-			//String Username = "Vitaliy" + i;
-			String Zip_Code = "65498";
-			String AddressLine1 = "Street " + i;
-			String AddressLine2 = "Street line2 " + i;
-			String MiddleName = "MName" + i;
+			supporter.Email = supporter.Email + i + supporter.emailDomain;//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
+			supporter.First_Name = supporter.First_Name + i;
+			supporter.Last_Name = supporter.Last_Name + i;
+			supporter.AddressLine1 = supporter.AddressLine1 + i;
+			supporter.AddressLine2 = supporter.AddressLine2 + i;
+			supporter.MiddleName = supporter.MiddleName + i;
 			
-			
-			out.println(cPhone + "," +
-					City + "," +
-					Email + "," +
-					Facebook + "," +
-					First_Name + "," +
-					Home_Phone + "," +
-					//ID + "," +
-					Last_Name + "," +
-					PreferredLanguage + "," +
-					State + "," +
-					//Time_Zone + "," +
-					Twitter + "," +
-					//Username + "," +
-					Zip_Code + "," +
-					AddressLine1 + "," +
-					AddressLine2 + "," +
-					MiddleName
+			if (!unexistedDomain && i >= amountOfRealSupporters) {
+				supporter.Email = "unexisting@unexisting.dom";
+				unexistedDomain = true;
+			}else if (!unexistedEmail && i >= amountOfRealSupporters) {
+				supporter.Email = "unexisting@igniteaction.net";
+				unexistedEmail = true;
+			}
+			out.println(supporter.cPhone + "," +
+					supporter.City + "," +
+					supporter.Email + "," +
+					supporter.Facebook + "," +
+					supporter.First_Name + "," +
+					supporter.Home_Phone + "," +
+					supporter.Last_Name + "," +
+					supporter.PreferredLanguage + "," +
+					supporter.State + "," +
+					supporter.Twitter + "," +
+					supporter.Zip_Code + "," +
+					supporter.AddressLine1 + "," +
+					supporter.AddressLine2 + "," +
+					supporter.MiddleName
 					);
 		}
 		out.close();

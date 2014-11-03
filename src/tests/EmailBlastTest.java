@@ -12,7 +12,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	
 	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
 	@Test( priority=10, groups = {"email.sendEmails", ""}, description = "")
-	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
+	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
 		CommonUtils.setProperty("emailBlastName", emailBlastName);
@@ -32,6 +32,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndGoForward(emailBlastName).
 		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSupporters(emailOfSupporter, amountOfSupporters).
+		addSupporters("unex", hardBounceAmount).
 		SelectEmailType().
 		openComposePage().
 		selectLayout("Basic").
@@ -50,6 +51,9 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openEmailBlastsPage().
 		openEmailBlastDetailsPage(CommonUtils.getProperty("emailBlastName")).
 		verifyOpenRateStat(openAmount).
-		verifyClickRateStat(clickAmount);
+		verifyClickRateStat(clickAmount).
+		verifyHardBouncesStat(hardBounceAmount);
+		
+		makeScreenshot("Email KPI Success");
 	}
 }

@@ -40,6 +40,11 @@ public class SettingsTests extends SeleneseTestCase{
 		fillSecondStep("2").
 		fillThirdStep().
 		openImportPage().
-		verifyStatusOfImport(CommonUtils.getProperty("ImportName") , "COMPLETED");
+		verifyStatusOfImport(CommonUtils.getProperty("ImportName") , "COMPLETED").
+		openAudiencePage().
+		openSupportersPage().
+		searchSupporter("importedSup").
+		openSupporterDetailsPage().
+		verifySupporterData();
 	}
 }

@@ -66,14 +66,14 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 	@Test( priority=60, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"settings.import"})
 	public void sendEmailsTestForImported(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
-		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters);
+		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters, 2);
 	}
 	
 	@Parameters({"sendEmail.From", "sendEmailManuall.OpenAmount", "sendEmailManuall.ClickAmount", "sendEmailManuall.emailOfSupporter", "sendEmailManuall.amountOfSupporter"})
 	@Test( priority=70, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"createSupporter.manually"})
 	public void sendEmailsTestForManual(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
-		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters);
+		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters, 0);
 	}
 
 }

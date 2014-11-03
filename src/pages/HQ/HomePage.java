@@ -25,6 +25,7 @@ public class HomePage extends Browser{
 	Button audienceTab = new Button("//a[@title='Audience']", "Audience tab");
 	Button activitiesTab = new Button("//a[@title='Activities']", "Activities tab");
 	Button donationTab = new Button("//a[@title='Donation records']", "Donations tab");
+	Button dashboardTab = new Button("//a[@title='Dashboard']", "Dashboard tab");
 	
 	//Top navigation bar
 	Button settingsTab = new Button("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");

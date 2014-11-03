@@ -1,6 +1,7 @@
 package JustForTestingOfCode;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -13,12 +14,23 @@ import org.testng.annotations.Test;
 import org.testng.xml.XmlTest;
 
 import pages.HQ.LoginPage;
+import pages.HQ.Manage.ImportAddPage;
 import selenium.CommonUtils;
 import selenium.ConnectDatabase;
 import selenium.SeleneseTestCase;
 
 public class Test2 extends SeleneseTestCase{
 
+	@Test		
+	public void loginTest() {
+		try {
+			new ImportAddPage().generateSupporters(100, 20);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	//@Test
 	@Parameters({ "login", "password", "createOrg.featureList" })
 	public void loginTest(String userName, String password, String s) throws DataSetException, ClassNotFoundException, SQLException, DatabaseUnitException{
@@ -28,7 +40,7 @@ public class Test2 extends SeleneseTestCase{
 	}
 	
 	//@Parameters({"login"})
-	@Test(skipFailedInvocations=false, dataProvider = "donationData")
+	//@Test(skipFailedInvocations=false, dataProvider = "donationData")
 	public void login(String l, String l2) {
 		System.err.println(l);
 		System.err.println(l2);

@@ -21,8 +21,10 @@
           <inherited>true</inherited>
             <configuration>
 		<systemPropertyVariables>
-                    	<USED_ENVIRONMENT>${environment}</USED_ENVIRONMENT>
+            <USED_ENVIRONMENT>${environment}</USED_ENVIRONMENT>
 			<USED_SERVER>${server}</USED_SERVER>
+			<USED_ADMIN_USER>${adminLogin}</USED_ADMIN_USER>
+			<USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
                 </systemPropertyVariables>
           	<suiteXmlFiles>
             		<suiteXmlFile>XMLTests\CompletedSuites\${testSuite}</suiteXmlFile>

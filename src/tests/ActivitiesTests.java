@@ -55,12 +55,6 @@ public class ActivitiesTests extends SeleneseTestCase{
 		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
 		
 		String status = "CHARGE";		
-		/*if (recurringDonation) {
-			status = "AUTHORIZE";
-		}else{
-			status = "CHARGE";
-		}
-		*/
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
 		openActivitiesPage().
@@ -88,7 +82,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 				isNewsletter,
 				isEmail).
 		clickDonationButton().
-		verifyDonationIsSuccesses().
+		verifyDonationIsSuccesses().//if fail rerun for other value
 		backToFundraisingWidgetPage().
 		openDonationsPage().
 		verifyDonationRecordInTable(donationAmount+".00", status, recurringDonation, widgetName, personFName + " " + personLName).

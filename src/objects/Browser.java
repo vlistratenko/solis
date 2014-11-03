@@ -1,25 +1,17 @@
 package objects;
 
-import interfaces.iTextBox;
-
 import java.util.ArrayList;
 import java.util.Set;
-
 import junit.framework.AssertionFailedError;
-
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
-
 import pages.HQ.LoginPage;
-
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
-
 import selenium.CommonUtils;
 import selenium.Driver;
 import selenium.EmailClient;
@@ -48,8 +40,7 @@ public abstract class Browser{
 		return browserName;
 	}
 	
-	protected void open(){		
-	
+	protected void open(){	
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl());
 	}
 	
@@ -158,8 +149,7 @@ public abstract class Browser{
 			Assert.assertEquals(actual, expected);
 		} catch (AssertionError e) {
 			//bug.add(message + " - " + e.getMessage());
-			if (fail){
-				
+			if (fail){				
 				throw new AssertionFailedError(message + " - " + e.getMessage());
 			}else{
 				logger.error("Verification error: " + message + " - " + e.getMessage());
@@ -209,14 +199,14 @@ public abstract class Browser{
 							
 	}
 	
-	public Boolean waitConditionBecomesTrue(Boolean condition, Integer waitSec) {
-		for (int i = 0; i < waitSec; i++) {
-			if (!condition) {
-				sleep(1000);
-				return false;
-			}
+	public Boolean waitConditionBecomesTrue(Boolean condition, Integer timeOut) {
+		if (!condition) {
+			sleep(timeOut);
+			return false;
+		}else{
+			return true;
 		}
-		return true;
+		
 	}
 	
 	public Boolean waitConditionBecomesTrueWithRefersh(Boolean condition, Integer timeOut) {

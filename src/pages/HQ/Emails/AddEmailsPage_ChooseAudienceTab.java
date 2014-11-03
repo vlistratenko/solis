@@ -27,6 +27,9 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	}
 	
 	public AddEmailsPage_ChooseAudienceTab addSupporters(String searchString, Integer amount) {
+		if (amount==0) {
+			return this;
+		}
 		sleep(5000);
 		addSupportersField.type(searchString);
 		sleep(5000);

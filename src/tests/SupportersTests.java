@@ -24,7 +24,7 @@ public class SupportersTests extends SeleneseTestCase{
 			openAddSupporterPage().
 			createNewSupporter().
 			checkSupporterExists(CommonUtils.getParam("supporterEmail"));
-			logger.info("Supporter ¹" + i + " was added");
+			logger.info("Supporter #" + i + " was added");
 		}
 		amount = amount + Integer.parseInt(CommonUtils.getProperty("amountOfSupporters")); 
 		CommonUtils.setProperty("amountOfSupporters", amount.toString());

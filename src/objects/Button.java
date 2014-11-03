@@ -74,10 +74,8 @@ public class Button extends Element implements iButton {
 	@Override
 	public void highlight() {
 		logger.info(elementName + " was highlighted.");
-		super.highlight(path);
-		
-	}
-	
+		super.highlight(path);		
+	}	
 
 	@Override
 	public boolean isVisible() {

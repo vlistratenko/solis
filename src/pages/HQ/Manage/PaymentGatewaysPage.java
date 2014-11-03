@@ -27,7 +27,7 @@ public class PaymentGatewaysPage extends ManagePage {
 	public PaymentGatewaysPage verifyWePayEmail() {
 		Integer amounOfEmails = 0;
 		try {
-			amounOfEmails = new EmailClient().getEmailsBySubject("Please confirm your ignite account").size();
+			amounOfEmails = new EmailClient().waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
 		} catch (MailosaurException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
