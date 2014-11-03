@@ -95,21 +95,15 @@ public class ImportAddPage extends ManagePage{
 				);
 		Boolean unexistedDomain = false;
 		Boolean unexistedEmail = false;
-		Supporter supporter = new Supporter();
 		
 		for (int i = 1; i <= amount; i++) {
+			Supporter supporter = new Supporter();
 			if (i<=amountOfRealSupporters) {
 				supporter.emailDomain = "." + EmailClient.mbox + "@mailosaur.in";
 			}else{
 				supporter.emailDomain = "@devnull.test.ignite.net";
 			}
 			supporter.Email = supporter.Email + i + supporter.emailDomain;//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
-			supporter.First_Name = supporter.First_Name + i;
-			supporter.Last_Name = supporter.Last_Name + i;
-			supporter.AddressLine1 = supporter.AddressLine1 + i;
-			supporter.AddressLine2 = supporter.AddressLine2 + i;
-			supporter.MiddleName = supporter.MiddleName + i;
-			
 			if (!unexistedDomain && i >= amountOfRealSupporters) {
 				supporter.Email = "unexisting@unexisting.dom";
 				unexistedDomain = true;
@@ -118,19 +112,19 @@ public class ImportAddPage extends ManagePage{
 				unexistedEmail = true;
 			}
 			out.println(supporter.cPhone + "," +
-					supporter.City + "," +
-					supporter.Email + "," +
+					supporter.City + i + "," +
+					supporter.Email + i + "," +
 					supporter.Facebook + "," +
-					supporter.First_Name + "," +
+					supporter.First_Name + i + "," +
 					supporter.Home_Phone + "," +
-					supporter.Last_Name + "," +
+					supporter.Last_Name + i + "," +
 					supporter.PreferredLanguage + "," +
 					supporter.State + "," +
 					supporter.Twitter + "," +
 					supporter.Zip_Code + "," +
-					supporter.AddressLine1 + "," +
-					supporter.AddressLine2 + "," +
-					supporter.MiddleName
+					supporter.AddressLine1 + i + "," +
+					supporter.AddressLine2 + i + "," +
+					supporter.MiddleName + i
 					);
 		}
 		out.close();
