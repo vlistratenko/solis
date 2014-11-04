@@ -9,7 +9,7 @@ import pages.HQ.AudiencePage;
 public class SupportersPage extends AudiencePage{
 
 	Button AddSupporterButton = new Button("//button[text()='Add a New Supporter']", "Add supporter");
-	Table supportersTable = new Table("//table/descendant::a[text()='Email Address']/ancestor::table", "Table with supporters");
+	Table supportersTable = new Table("//table/descendant::a[text()='Email address']/ancestor::table", "Table with supporters");
 	Panel feedBackDialogPanel = new Panel("//feedback-dialog/div[contains(@class, 'feedback alert-box')]", "Feedback dialog");
 	Button closeFeedbackDialog = new Button(feedBackDialogPanel.path + "/descendant::a[@class='close']", "Close feedback dialog");
 	TextBox searchField = new TextBox("//input[@name='query']", "Search");
@@ -36,8 +36,9 @@ public class SupportersPage extends AudiencePage{
 	}
 
 	public SupportersAddPage openSupporterDetailsPage() {
-		supportersTable.clickInCell(1, 2, "span[@ng-click='editItem(item)']");
+		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
 		return new SupportersAddPage();
 	}
+
 	
 }
