@@ -11,9 +11,10 @@ IF ERRORLEVEL 2 GOTO TWO
 set /p uName=Enter login:
 set /p uPass=Enter password:
 :TWO
-CHOICE /C 12 /T 15 /D 1 /M "Select server. 1-TEST or 2-DEV"
+CHOICE /C 12 /T 15 /D 1 /M "Select server. 1-TEST, 2-DEV or 3-UAT"
 IF ERRORLEVEL 1 set n="TEST"
 IF ERRORLEVEL 2 set n="DEV"
+IF ERRORLEVEL 3 set n="UAT"
 CHOICE /C 12 /T 15 /D 1 /M "Select server. 1-LOCAL or 2-REMOTE"
 IF ERRORLEVEL 1 set s="LOCAL"
 IF ERRORLEVEL 2 set s="REMOTE"
