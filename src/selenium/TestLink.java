@@ -79,6 +79,7 @@ public class TestLink{
  			}
  		};
  		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+ 		//HttpsURLConnection.
  		api = new TestLinkAPI(testlinkURL, devKey);
  		project = getProjectByName();
  		plan = getTestPlanByName();

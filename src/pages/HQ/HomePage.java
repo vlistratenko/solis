@@ -5,6 +5,7 @@ import objects.Browser;
 import objects.Button;
 import objects.DropDown;
 import objects.Label;
+import objects.Panel;
 import objects.TextBox;
 import pages.Donation.DonationsPage;
 import pages.HQ.Activities.ActivitiesPage;
@@ -14,7 +15,9 @@ import selenium.Environment;
 import selenium.SeleneseTestCase;
 
 public class HomePage extends Browser{
-
+	
+	public Panel feedBackDialogPanel = new Panel("//feedback-dialog/div[contains(@class, 'feedback alert-box')]", "Feedback dialog");
+	public Button closeFeedbackDialog = new Button(feedBackDialogPanel.path + "/descendant::a[@class='close']", "Close feedback dialog");
 	Label userlabel = new Label("//div[@id='account-info-drop']/a[text()='" + 
 			CommonUtils.getProperty("current.firstName") + " " + 
 			CommonUtils.getProperty("current.lastName") +"']"

@@ -12,6 +12,9 @@ public class EmailBlastsPage extends HomePage{
 	Button emailNameLink = new Button("//span[text()='" + CommonUtils.getProperty("emailBlastName") + "']", "Email blast link");
 	
 	public AddEmailsPage_SetupTab openAddEmailPage() {
+		if (feedBackDialogPanel.isDisplayed()) {
+			closeFeedbackDialog.click();
+		}
 		addEmailButton.click();
 		return new AddEmailsPage_SetupTab();
 	}

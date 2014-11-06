@@ -1,7 +1,6 @@
 package pages.HQ.Supporters;
 
 import objects.Button;
-import objects.Panel;
 import objects.Table;
 import objects.TextBox;
 import pages.HQ.AudiencePage;
@@ -10,8 +9,6 @@ public class SupportersPage extends AudiencePage{
 
 	Button AddSupporterButton = new Button("//button[text()='Add a New Supporter']", "Add supporter");
 	Table supportersTable = new Table("//table/descendant::a[text()='Email address']/ancestor::table", "Table with supporters");
-	Panel feedBackDialogPanel = new Panel("//feedback-dialog/div[contains(@class, 'feedback alert-box')]", "Feedback dialog");
-	Button closeFeedbackDialog = new Button(feedBackDialogPanel.path + "/descendant::a[@class='close']", "Close feedback dialog");
 	TextBox searchField = new TextBox("//input[@name='query']", "Search");
 	Button doSearchButton = new Button("//a[contains(@ng-click,'processing.search')]", "Do search");
 	
