@@ -27,7 +27,7 @@
 		
 		<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
 		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
-		<parameter name="donation.personEmail"  value="supByDonate"></parameter>
+		<parameter name="donation.personEmail"  value="supbydonate"></parameter>
 		<parameter name="donation.personFName"  value="supByDonateF"></parameter>
 		<parameter name="donation.personLName"  value="supByDonateL"></parameter>
 		<parameter name="donation.personAddressLine1"  value="Auto test address line 1"></parameter>

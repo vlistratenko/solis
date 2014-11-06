@@ -61,33 +61,35 @@ public class SettingsTests extends SeleneseTestCase{
 	
 	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
 	public void unsubscribeSupporterTest() {
+		String introductoryText = "Message edited by Auto script";
+		Supporter supporter = new Supporter();
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
 		openSettingsPage().
-		switchToUnsubscribeSettingsPage();
-		/*openImportPage().
-		startNewImport().
-		fillFirstStep("AutoTestImport", "Test description").
-		fillSecondStep("2").
-		fillThirdStep().
-		openImportPage().
-		verifyStatusOfImport(CommonUtils.getProperty("ImportName") , "COMPLETED").
+		switchToUnsubscribeSettingsPage().
+		editIntroductionaryText(introductoryText).
+		openUnsubscribePage().
+		fillUnsubscribeForm(CommonUtils.getProperty("subscribedSupporter")).
+		clickUnsubscribeButton().
+		verifyInroductoryText(introductoryText).
+		verifyUnsubscribeIsSuccesses().
+		backToUnsubscribeSettingsPage().
 		openAudiencePage().
 		openSupportersPage().
-		searchSupporter("importedSup").
+		searchSupporter(CommonUtils.getProperty("subscribedSupporter")).
 		openSupporterDetailsPage().
-		verifySupporterData(new Supporter().Email,
-		new Supporter().firstName,
-		new Supporter().lastName,
-		new Supporter().cPhone,
-		new Supporter().AddressLine1,
-		new Supporter().City,
-		new Supporter().zipCode,
-		new Supporter().Facebook,
-		new Supporter().Twitter,
-		"Subscribed");*/
+		verifySupporterData(supporter.subscribedEmail,
+				supporter.firstName,
+				supporter.lastName,
+				"",
+				"",
+				supporter.City,
+				supporter.zipCode,
+				"",
+				"",
+		"Unsubscribed");
 	}
 	
 	

@@ -43,7 +43,7 @@ public class LoginPage extends Browser{
 				CommonUtils.setProperty("current.firstName", CommonUtils.getProperty("CM.firstName"));
 				CommonUtils.setProperty("current.lastName", CommonUtils.getProperty("CM.lastName"));
 			}
-			sleep(3000);
+			sleep(5000);
 		}else{
 			new HomePage().dashboardTab.click();
 		}
