@@ -113,15 +113,15 @@ public class ImportAddPage extends ManagePage{
 			}
 			out.println(supporter.cPhone + "," +
 					supporter.City + i + "," +
-					supporter.Email + i + "," +
+					supporter.Email + "," +
 					supporter.Facebook + "," +
-					supporter.First_Name + i + "," +
+					supporter.firstName + i + "," +
 					supporter.Home_Phone + "," +
-					supporter.Last_Name + i + "," +
+					supporter.lastName + i + "," +
 					supporter.PreferredLanguage + "," +
 					supporter.State + "," +
 					supporter.Twitter + "," +
-					supporter.Zip_Code + "," +
+					supporter.zipCode + "," +
 					supporter.AddressLine1 + i + "," +
 					supporter.AddressLine2 + i + "," +
 					supporter.MiddleName + i

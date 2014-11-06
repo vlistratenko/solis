@@ -16,7 +16,7 @@ public class SegmentsPage extends HomePage{
 	}
 
 	public SegmentsPage checkSegmentsExists(String param) {
-		verify(SegmentTable.isValueExists(param)>=0, true, "Segment " + param + " was not found."); 
+		verify(SegmentTable.isValueExists(param)>0, true, "Segment " + param + " was not found."); 
 		return this;
 		
 	}

@@ -38,9 +38,9 @@ public class EmailBlastTest extends SeleneseTestCase{
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1, 15, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1, 5, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1, 5, true);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 15, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 5, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 5, true);
 		
 		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
 		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);

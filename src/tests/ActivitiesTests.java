@@ -1,6 +1,8 @@
 package tests;
 
 
+import objects.Supporter;
+
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -155,7 +157,49 @@ public class ActivitiesTests extends SeleneseTestCase{
 		verifyDonationAfterRefund("Refund", recurringDonation);
 	}
 
-	
+	@Parameters({"createwidget.widgetName"})
+	@Test( priority=10, groups = {"activities.createSubscribeForm"}, description = "")
+	public void subscribeSupporterTest(String widgetName) 
+	{	
+		Supporter supporter = new Supporter();
+		widgetName = widgetName + CommonUtils.getUnicName();
+		String widgetTitle = "Title " + CommonUtils.getUnicName();
+		LoginPage loginPage = new LoginPage();
+		String supporterEmail = EmailClient.getEmailBox(new Supporter().subscribedEmail + CommonUtils.getUnicName());
+
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		openActivitiesPage().
+		openSubscribeWidgetsPage().
+		openAddSubscribeWidgetPage().
+		fillFieldsSubscribeWidgetStepOne(widgetName, "TestWDescription").
+		fillFieldsSubscribeWidgetStepTwo().
+		hosteWidgetOnLocalPage(widgetTitle, true).
+		openSubscribeWidget().
+		fillSubscribeWidget(supporterEmail, supporter.firstName, supporter.lastName, supporter.City, supporter.zipCode).
+		verifySubscriptionIsSuccesses().
+		backToSubscribegWidgetPage().
+		openAudiencePage().
+		openSupportersPage().
+		searchSupporter(supporterEmail).
+		checkSupporterExists(supporterEmail).
+		openSupporterDetailsPage().
+		verifySupporterData(
+				supporter.subscribedEmail,
+				supporter.firstName,
+				supporter.lastName,
+				"",
+				"",
+				supporter.City,
+				supporter.zipCode,
+				"",
+				"",
+				"Subscribed");
+		
+		CommonUtils.setProperty("subscribeWidget", widgetName);
+		CommonUtils.setProperty("subscribedSupporter", supporterEmail);
+		CommonUtils.checkAndFail("subscribeSupporterTest");
+	}
 
 
 }

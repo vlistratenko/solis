@@ -17,7 +17,7 @@ public class EmailBlastsPage extends HomePage{
 	}
 
 	public EmailBlastsPage checkEmailExists(String param) {
-		verify(emailsTable.isValueExists(param)>=0, true, "Email " + param + " was not found."); 
+		verify(emailsTable.isValueExists(param)>0, true, "Email " + param + " was not found."); 
 		return this;
 		
 	}

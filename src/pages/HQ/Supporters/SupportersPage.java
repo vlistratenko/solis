@@ -24,14 +24,19 @@ public class SupportersPage extends AudiencePage{
 	}
 
 	public SupportersPage checkSupporterExists(String param) {
-		verify(supportersTable.isValueExists(param)>=0, true, "Supprter " + param + " was not found."); 
+		verify(supportersTable.isValueExists(param)>0, true, "Supprter " + param + " was not found."); 
 		return this;
 		
 	}
 
 	public SupportersPage searchSupporter(String personEmail) {
 		searchField.type(personEmail);
-		doSearchButton.click();
+		for (int i = 0; i < 20; i++) {
+			doSearchButton.click();
+			if (waitConditionBecomesTrue(supportersTable.isValueExists(personEmail)>0, 15000)) {
+				break;
+			}
+		}
 		return new SupportersPage();
 	}
 

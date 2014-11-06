@@ -2,7 +2,7 @@ package pages.HQ.Supporters;
 
 import objects.Button;
 import objects.DropDown;
-import objects.Supporter;
+import objects.Label;
 import objects.TextBox;
 import pages.HQ.HomePage;
 import selenium.CommonUtils;
@@ -21,6 +21,7 @@ public class SupportersAddPage extends HomePage{
 	TextBox supporterFaceBookField = new TextBox("//input[@id='SocialFacebook']", "FaceBook");
 	TextBox supporterTwitterField = new TextBox("//input[@id='SocialTwitter']", "Twitter");
 	TextBox supporterGooglePlusField  = new TextBox("//input[@id='SocialGooglePlus']", "GooglePlus");
+	Label supporterStatusLabel = new Label("//p[contains(text(), 'ubscribed')]", "Status");
 	Button saveButton = new Button("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
 	
 	public SupportersPage createNewSupporter() {
@@ -41,16 +42,18 @@ public class SupportersAddPage extends HomePage{
 		return new SupportersPage();
 	}
 	
-	public SupportersPage verifySupporterData() {
-		verify(supporterEmailField.getText().contains(new Supporter().Email), true, "Wrong email", false);
-		verify(supporterFirstNameField.getText().contains(new Supporter().First_Name), true, "Wrong firstname", false);
-		verify(supporterLastNameField.getText().contains(new Supporter().Last_Name), true, "Wrong last name", false);
-		verify(supporterPhoneField.getText(), new Supporter().cPhone, "Wrong Phone", false);
-		verify(supporterStreetField.getText().contains(new Supporter().AddressLine1), true, "Wrong Street", false);
-		verify(supporterCityField.getText(), new Supporter().City, "Wrong City", false);
-		verify(supporterZipField.getText(), new Supporter().Zip_Code, "Wrong zip", false);
-		verify(supporterFaceBookField.getText(), new Supporter().Facebook, "Wrong FaceBook", false);
-		verify(supporterTwitterField.getText(), new Supporter().Twitter, "Wrong Twitter", false);
+	public SupportersPage verifySupporterData(String email, String fName, String lName, String phone, String addressLine1,
+			String city, String zipCode, String faceBook, String twitter, String status) {
+		verify(supporterEmailField.getValue().contains(email), true, "Wrong email", false);
+		verify(supporterFirstNameField.getValue().contains(fName), true, "Wrong firstname", false);
+		verify(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
+		verify(supporterPhoneField.getValue(), phone, "Wrong Phone", false);
+		verify(supporterStreetField.getValue().contains(addressLine1), true, "Wrong Street", false);
+		verify(supporterCityField.getValue(), city, "Wrong City", false);
+		verify(supporterZipField.getValue(), zipCode, "Wrong zip", false);
+		verify(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
+		verify(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
+		verify(supporterStatusLabel.getText(), status, "Wrong status", false);
 		return new SupportersPage();
 	}
 	

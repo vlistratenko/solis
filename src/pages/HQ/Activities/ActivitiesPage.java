@@ -9,6 +9,7 @@ public class ActivitiesPage extends HomePage{
 	
 	Button emailBlastsLink = new Button("//a[.='Email Blasts']", "Email blast"); 
 	Button fundraisingWidgetLink = new Button("//a[.='Fundraising Widgets']", "Fundraising Widget");
+	Button subscribeWidgetLink = new Button("//a[.='Supporter Signup Widgets']", "Fundraising Widget");
 
 	public ActivitiesPage verifyURL() {
 		
@@ -24,5 +25,10 @@ public class ActivitiesPage extends HomePage{
 	public FundraisingWidgetPage openFundraisingWidgetPage() {
 		fundraisingWidgetLink.click();
 		return new FundraisingWidgetPage();
+	}
+
+	public SubscribeWidgetPage openSubscribeWidgetsPage() {
+		subscribeWidgetLink.click();
+		return new SubscribeWidgetPage();
 	}
 }

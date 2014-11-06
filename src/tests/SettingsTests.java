@@ -1,6 +1,8 @@
 package tests;
 
 
+import objects.Supporter;
+
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -45,6 +47,48 @@ public class SettingsTests extends SeleneseTestCase{
 		openSupportersPage().
 		searchSupporter("importedSup").
 		openSupporterDetailsPage().
-		verifySupporterData();
+		verifySupporterData(new Supporter().Email,
+		new Supporter().firstName,
+		new Supporter().lastName,
+		new Supporter().cPhone,
+		new Supporter().AddressLine1,
+		new Supporter().City,
+		new Supporter().zipCode,
+		new Supporter().Facebook,
+		new Supporter().Twitter,
+		"Subscribed");
 	}
+	
+	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
+	public void unsubscribeSupporterTest() {
+		
+		LoginPage loginPage = new LoginPage();
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		openSettingsPage().
+		switchToUnsubscribeSettingsPage();
+		/*openImportPage().
+		startNewImport().
+		fillFirstStep("AutoTestImport", "Test description").
+		fillSecondStep("2").
+		fillThirdStep().
+		openImportPage().
+		verifyStatusOfImport(CommonUtils.getProperty("ImportName") , "COMPLETED").
+		openAudiencePage().
+		openSupportersPage().
+		searchSupporter("importedSup").
+		openSupporterDetailsPage().
+		verifySupporterData(new Supporter().Email,
+		new Supporter().firstName,
+		new Supporter().lastName,
+		new Supporter().cPhone,
+		new Supporter().AddressLine1,
+		new Supporter().City,
+		new Supporter().zipCode,
+		new Supporter().Facebook,
+		new Supporter().Twitter,
+		"Subscribed");*/
+	}
+	
+	
 }

@@ -33,6 +33,7 @@ public class AdminTest extends SeleneseTestCase{
 		
 		orgName = orgName + CommonUtils.getUnicName();
 		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
+		
 		new LoginPageAdmin().
 			doSuccessLogin(login, password).
 			openAddNewOrganizationPage().

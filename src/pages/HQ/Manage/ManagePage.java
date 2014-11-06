@@ -33,5 +33,10 @@ public class ManagePage  extends HomePage{
 		switchToDropDown.selectByLabelJS("Payment Gateways");
 		return new PaymentGatewaysPage();
 	}
+	
+	public UnsubscribeSettingsPage switchToUnsubscribeSettingsPage() {
+		switchToDropDown.selectByLabelJS("Standard Unsub Message");
+		return new UnsubscribeSettingsPage();
+	}
 
 }

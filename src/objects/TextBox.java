@@ -45,6 +45,11 @@ public class TextBox extends Element implements iTextBox {
 		logger.info("Get text from " + elementName);
 		return super.getText(path);
 	}
+	
+	public String getValue() {
+		logger.info("Get value from " + elementName);
+		return super.getValue(path);
+	}
 
 	@Override
 	public void type(String value) {
