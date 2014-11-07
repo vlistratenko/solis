@@ -114,7 +114,8 @@ public class MyTestListener extends SeleneseTestCase implements ITestListener,II
 	public void onTestStart(ITestResult test) {
 		SeleneseTestCase.logger.info("Run " + test.getName() + " test");
 		bug.clear();
-/*		CommonUtils.SetParam("testResult", "true");
+		CommonUtils.setParam("testResult", "true");
+/*		
 		String issueKey = CommonUtils.getIssueKey(test.getName());
 		if (!issueKey.equals("")) {
 			Issue issue = new JiraAPI2().getIssueByKey(issueKey);

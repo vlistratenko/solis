@@ -119,11 +119,11 @@ public class ImportAddPage extends ManagePage{
 					supporter.Home_Phone + "," +
 					supporter.lastName + i + "," +
 					supporter.PreferredLanguage + "," +
-					supporter.State + "," +
-					supporter.Twitter + "," +
+					supporter.state + "," +
+					supporter.twitter + "," +
 					supporter.zipCode + "," +
-					supporter.AddressLine1 + i + "," +
-					supporter.AddressLine2 + i + "," +
+					supporter.addressLine1 + i + "," +
+					supporter.addressLine2 + i + "," +
 					supporter.MiddleName + i
 					);
 		}

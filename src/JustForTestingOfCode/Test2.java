@@ -2,9 +2,15 @@ package JustForTestingOfCode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.apache.http.client.ClientProtocolException;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.dataset.DataSetException;
 import org.testng.ITestContext;
@@ -17,6 +23,7 @@ import pages.HQ.LoginPage;
 import pages.HQ.Manage.ImportAddPage;
 import selenium.CommonUtils;
 import selenium.ConnectDatabase;
+import selenium.HttpClient;
 import selenium.SeleneseTestCase;
 
 public class Test2 extends SeleneseTestCase{
@@ -24,38 +31,25 @@ public class Test2 extends SeleneseTestCase{
 	@Test		
 	public void loginTest() {
 		try {
-			new ImportAddPage().generateSupporters(100, 20);
-		} catch (FileNotFoundException e) {
+			System.err.println(new HttpClient().login("20141106123247.4441b2bf@mailosaur.in", "!QAZ2wsx"));
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	//@Test
-	@Parameters({ "login", "password", "createOrg.featureList" })
-	public void loginTest(String userName, String password, String s) throws DataSetException, ClassNotFoundException, SQLException, DatabaseUnitException{
-		new ConnectDatabase().
-		getConnection().
-		createQueryTable("select  * from person_census where hex(person_census.organization_uuid) =  REPLACE('8c  bc  26  a7  c0  9a  4d  5b  b2  30  b0  2e  2e  d3  91  0d  ', ' ', '')", "Test");
-	}
-	
-	//@Parameters({"login"})
-	//@Test(skipFailedInvocations=false, dataProvider = "donationData")
-	public void login(String l, String l2) {
-		System.err.println(l);
-		System.err.println(l2);
-	}
-	
-	//@Parameters({"login"})
-	@DataProvider(name = "donationData")
-	public Object[][] donationData(ITestContext context) 
-	{
-		 Map<String, String> s = context.getCurrentXmlTest().getAllParameters();
-		 XmlTest xTest = context.getCurrentXmlTest();
-		 
-		 return new Object[][] {
-		   {xTest.getParameter("login"), xTest.getParameter("password")},
-		   { "widgetName", "widgetName"},
-		 };
 	}
 }

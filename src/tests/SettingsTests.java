@@ -51,11 +51,11 @@ public class SettingsTests extends SeleneseTestCase{
 		new Supporter().firstName,
 		new Supporter().lastName,
 		new Supporter().cPhone,
-		new Supporter().AddressLine1,
+		new Supporter().addressLine1,
 		new Supporter().City,
 		new Supporter().zipCode,
 		new Supporter().Facebook,
-		new Supporter().Twitter,
+		new Supporter().twitter,
 		"Subscribed");
 	}
 	

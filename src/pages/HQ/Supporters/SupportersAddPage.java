@@ -49,7 +49,7 @@ public class SupportersAddPage extends HomePage{
 		verify(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
 		verify(supporterPhoneField.getValue(), phone, "Wrong Phone", false);
 		verify(supporterStreetField.getValue().contains(addressLine1), true, "Wrong Street", false);
-		verify(supporterCityField.getValue(), city, "Wrong City", false);
+		verify(supporterCityField.getValue().contains(city), true, "Wrong City", false);
 		verify(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verify(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verify(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
