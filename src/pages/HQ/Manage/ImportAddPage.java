@@ -103,17 +103,17 @@ public class ImportAddPage extends ManagePage{
 			}else{
 				supporter.emailDomain = "@devnull.test.ignite.net";
 			}
-			supporter.Email = supporter.Email + i + supporter.emailDomain;//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
+			supporter.importedEmail = supporter.importedEmail + i + supporter.emailDomain;//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
 			if (!unexistedDomain && i >= amountOfRealSupporters) {
-				supporter.Email = "unexisting@unexisting.dom";
+				supporter.importedEmail = "unexisting@unexisting.dom";
 				unexistedDomain = true;
 			}else if (!unexistedEmail && i >= amountOfRealSupporters) {
-				supporter.Email = "unexisting@igniteaction.net";
+				supporter.importedEmail = "unexisting@igniteaction.net";
 				unexistedEmail = true;
 			}
 			out.println(supporter.cPhone + "," +
 					supporter.City + i + "," +
-					supporter.Email + "," +
+					supporter.importedEmail + "," +
 					supporter.Facebook + "," +
 					supporter.firstName + i + "," +
 					supporter.Home_Phone + "," +

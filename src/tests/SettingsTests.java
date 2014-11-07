@@ -45,9 +45,9 @@ public class SettingsTests extends SeleneseTestCase{
 		verifyStatusOfImport(CommonUtils.getProperty("ImportName") , "COMPLETED").
 		openAudiencePage().
 		openSupportersPage().
-		searchSupporter("importedSup").
+		searchSupporter(new Supporter().importedEmail).
 		openSupporterDetailsPage().
-		verifySupporterData(new Supporter().Email,
+		verifySupporterData(new Supporter().importedEmail,
 		new Supporter().firstName,
 		new Supporter().lastName,
 		new Supporter().cPhone,

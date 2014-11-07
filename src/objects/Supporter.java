@@ -9,7 +9,7 @@ public class Supporter {
 	public String cPhone = "32165498765";
 	public String City = "CityT";
 	public String emailDomain="@devnull.test.ignite.net";
-	public String Email = "importedsup";
+	public String importedEmail = "importedsup";
 	public String subscribedEmail = "subscribedsup";
 	public String manuallEmail = "subscribedsup";
 	public String Facebook = "fbv";
