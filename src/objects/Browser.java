@@ -2,16 +2,22 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Set;
+
 import junit.framework.AssertionFailedError;
+
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.apache.commons.collections.functors.IfClosure;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+
 import pages.HQ.LoginPage;
+
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
+
 import selenium.CommonUtils;
 import selenium.Driver;
 import selenium.EmailClient;
@@ -135,7 +141,6 @@ public abstract class Browser{
 	
 	protected void verify (Object actual, Object expected, String message) {
 		logger.info("Check equality of two objects. ");
-		SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]");
 		verify(actual, expected, message, true);		
 	}
 	
@@ -147,11 +152,13 @@ public abstract class Browser{
 	protected void verify(Object actual, Object expected, String message, Boolean fail){
 		try {
 			Assert.assertEquals(actual, expected);
+			SeleneseTestCase.bug.add("Success " + message.replace(" not", "") + ". Expected [" + expected + "] but was [" + actual + "]");
 		} catch (AssertionError e) {
 			//bug.add(message + " - " + e.getMessage());
 			if (fail){				
 				throw new AssertionFailedError(message + " - " + e.getMessage());
 			}else{
+				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]");
 				logger.error("Verification error: " + message + " - " + e.getMessage());
 				CommonUtils.setParam("testResult", "fail");
 			};

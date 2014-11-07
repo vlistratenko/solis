@@ -50,7 +50,7 @@ public class EmailBlastDetailsPage extends HomePage {
 				break;
 			}
 		}
-		verify(hardBounceLabel.getText(), hardBounceAmount.toString(), "Wrong amount of hard bounces", false);
+		verify(hardBounceLabel.getText(), hardBounceAmount.toString(), "Wrong amount of hard bounces", true);
 		return this;		
 	}
 

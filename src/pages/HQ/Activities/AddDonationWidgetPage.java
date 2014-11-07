@@ -48,6 +48,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	}
 	
 	public DonationWidget openDonationWidget() {
+		sleep(5000);
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();			
 		switchToPopupWindow(currentWindowHandle);
