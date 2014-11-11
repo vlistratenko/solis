@@ -112,6 +112,7 @@ public class MyTestListener extends SeleneseTestCase implements ITestListener,II
 
 	@Override
 	public void onTestStart(ITestResult test) {
+		SeleneseTestCase.logger.info("------------------------------------------------------------------------------------------------------------");
 		SeleneseTestCase.logger.info("Run " + test.getName() + " test");
 		bug.clear();
 		CommonUtils.setParam("testResult", "true");

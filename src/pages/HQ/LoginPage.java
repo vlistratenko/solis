@@ -7,6 +7,8 @@ import objects.Button;
 import objects.CheckBox;
 import objects.Label;
 import objects.TextBox;
+import pages.HQ.Activities.SubscribeWidget;
+import pages.HQ.Manage.UnsubscribePage;
 import selenium.CommonUtils;
 //import selenium.EmailClient;
 import selenium.EmailClient;
@@ -23,6 +25,12 @@ public class LoginPage extends Browser{
 	
 	public LoginPage(){
 		//logOut();
+	}
+	
+	public LoginPage(Boolean doLogOut){
+		if (doLogOut) {
+			logOut();
+		}
 	}
 	
 	public HomePage doSuccessLogin(String userName, String password) {
@@ -69,6 +77,13 @@ public class LoginPage extends Browser{
 		return this;
 	}
 	
+	public SubscribeWidget openSubscribeWidgetByLink() {
+		String currentWindowHandle = super.openInNewWindow(CommonUtils.getProperty("subscribeWidgetLink"));		
+		sleep(5000);
+		CommonUtils.setProperty("currentWindowHandle", currentWindowHandle);		
+		return new SubscribeWidget();
+	}
+	
 	public LoginPage verifyValidationForFailLogin(String userName) {
 		sleep(5000);
 		if (userName.equals("") || !userName.contains("@")) {
@@ -90,6 +105,15 @@ public class LoginPage extends Browser{
 			e.printStackTrace();
 		}
 		return new InviteCompletionPage();
+	}
+	
+	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {
+		try {
+			open(new EmailClient().getUnsubscribeLink(emailSubj));
+		} catch (MailosaurException e) {
+			e.printStackTrace();
+		}
+		return new UnsubscribePage();
 	}
 	
 }

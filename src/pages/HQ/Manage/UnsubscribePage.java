@@ -16,6 +16,7 @@ public class UnsubscribePage extends Browser{
 	public UnsubscribePage fillUnsubscribeForm(String personEmail) 
 	{
 		emailField.type(personEmail);
+		sleep(2000);
 		return this;
 	}
 	
@@ -43,5 +44,16 @@ public class UnsubscribePage extends Browser{
 		closeWindow();
 		switchToWindow(CommonUtils.getProperty("currentWindowHandle"));
 		return new UnsubscribeSettingsPage();
+	}
+	
+	public UnsubscribePage refreshPage() {
+		super.refresh();
+		return this;
+	}
+
+
+	public UnsubscribePage clearCache() {
+		super.deletecoockies();
+		return this;
 	}
 }

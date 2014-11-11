@@ -10,6 +10,7 @@ import org.apache.commons.collections.functors.IfClosure;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -60,6 +61,15 @@ public abstract class Browser{
 		logger.info("Try to open URL - " + url);	
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);		
+	}
+	
+	protected String openInNewWindow(String url){		
+		String currentWindowHandle = getWindowHandle();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open()");
+		switchToPopupWindow(currentWindowHandle);
+		open(url);
+		return currentWindowHandle;
 	}
 	
 	protected void refresh(){		
@@ -160,6 +170,7 @@ public abstract class Browser{
 			}else{
 				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]");
 				logger.error("Verification error: " + message + " - " + e.getMessage());
+				SeleneseTestCase.makeScreenshot(message);
 				CommonUtils.setParam("testResult", "fail");
 			};
 		}		

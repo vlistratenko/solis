@@ -29,4 +29,9 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 	public void selectTimeToSend(String timeToSend) {
 		new Button("//label[contains(text(), '" + timeToSend + "')]", "Select time to send").click();
 	}
+	
+	public AddEmailsPage_PublishTab verifyAmountOfEmailsForPublishing(String expectedAmount) {
+		verify(CommonUtils.getProperty("amountOfPablishedEmails"), expectedAmount, "Wrong amount of emails for publishing", true);
+		return this;
+	}
 }

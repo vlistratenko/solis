@@ -90,7 +90,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 			openAddSupporterPage().
 			createNewSupporter().
 			checkSupporterExists(CommonUtils.getParam("supporterEmail"));
-			logger.info("Supporter ¹" + i + " was added");
+			logger.info("Supporter ï¿½" + i + " was added");
 		}
 		amount = amount + Integer.parseInt(CommonUtils.getProperty("amountOfSupporters")); 
 		CommonUtils.setProperty("amountOfSupporters", amount.toString());
@@ -250,7 +250,8 @@ public void createCMManually(String cmFirstName,
 						String cmDataAndAnalyticsRole3,
 						String cmAssetManagementRole1){
 		
-		String cmEmail =  new EmailClient().getEmailBox("cm" + CommonUtils.getUnicName());
+		new EmailClient();
+		String cmEmail =  EmailClient.getEmailBox("cm" + CommonUtils.getUnicName());
 		HomePage homePage = new HomePage();
 		homePage.
 		openSettingsPage().

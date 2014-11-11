@@ -1,22 +1,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
-<suite name="Subscribe" parallel="false" thread-count="1">
+<suite name="Send emails to unsubscribed supporters" parallel="false" thread-count="1">
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
-
+  	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+  	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
    	<listeners>
     	<listener class-name="selenium.MyTestListener" />
   	</listeners>
-  	<test verbose="2" name="Create and Publish subscribe form" annotations="JDK" >
-    	<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
-		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
+  	<test verbose="2" name="Send emails to unsubscribed supporters" annotations="JDK" >
      	<groups>
     		<run>
-     			 <include name="activities.createSubscribeForm"/>
-     			 <include name="activities.subscribeSupporter"/>
+     			 <include name="email.sendEmailsToUnsubscribedSupporters"/>
     		</run>
   		</groups>
      	<classes>
-      		<class name="tests.ActivitiesTests"/>
+      		<class name="tests.EmailBlastTest"/>
     	</classes>
   	</test>   
  </suite>

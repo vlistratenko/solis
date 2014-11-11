@@ -5,6 +5,7 @@ import objects.Button;
 import objects.Label;
 import objects.SelectBox;
 import objects.TextBox;
+import pages.HQ.LoginPage;
 import selenium.CommonUtils;
 
 public class SubscribeWidget extends Browser{
@@ -24,6 +25,12 @@ public class SubscribeWidget extends Browser{
 		closeWindow();
 		switchToWindow(CommonUtils.getProperty("currentWindowHandle"));
 		return new AddSubscribeWidgetPage();
+	}
+	
+	public LoginPage backToLoginPage() {
+		closeWindow();
+		switchToWindow(CommonUtils.getProperty("currentWindowHandle"));
+		return new LoginPage();
 	}
 
 	public SubscribeWidget fillSubscribeWidget(String personEmail,

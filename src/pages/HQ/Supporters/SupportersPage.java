@@ -38,6 +38,7 @@ public class SupportersPage extends AudiencePage{
 	}
 
 	public SupportersAddPage openSupporterDetailsPage() {
+		sleep(3000);
 		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
 		return new SupportersAddPage();
 	}

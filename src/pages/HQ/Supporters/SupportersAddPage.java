@@ -53,6 +53,22 @@ public class SupportersAddPage extends HomePage{
 		verify(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verify(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verify(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
+		for (int i = 0; i < 10; i++) {
+			if (waitConditionBecomesTrueWithRefersh(supporterStatusLabel.getText().equalsIgnoreCase(status), 30000)) {
+				break;
+			}
+		}
+		verify(supporterStatusLabel.getText(), status, "Wrong status", false);
+		return new SupportersPage();
+	}
+	
+	public SupportersPage verifySupporterStatus(String status) {
+		
+		for (int i = 0; i < 10; i++) {
+			if (waitConditionBecomesTrueWithRefersh(supporterStatusLabel.getText().equalsIgnoreCase(status), 30000)) {
+				break;
+			}
+		}
 		verify(supporterStatusLabel.getText(), status, "Wrong status", false);
 		return new SupportersPage();
 	}

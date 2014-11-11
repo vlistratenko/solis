@@ -3,6 +3,7 @@ package tests;
 
 import objects.Supporter;
 
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -157,28 +158,47 @@ public class ActivitiesTests extends SeleneseTestCase{
 		verifyDonationAfterRefund("Refund", recurringDonation);
 	}
 
-	@Parameters({"createwidget.widgetName"})
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription"})
 	@Test( priority=10, groups = {"activities.createSubscribeForm"}, description = "")
-	public void subscribeSupporterTest(String widgetName) 
+	public void createSubscribeWidget(String widgetName, String widgetDescription) 
 	{	
-		Supporter supporter = new Supporter();
 		widgetName = widgetName + CommonUtils.getUnicName();
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
-		String supporterEmail = EmailClient.getEmailBox(new Supporter().subscribedEmail + CommonUtils.getUnicName());
-
+		
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
 		openActivitiesPage().
 		openSubscribeWidgetsPage().
 		openAddSubscribeWidgetPage().
-		fillFieldsSubscribeWidgetStepOne(widgetName, "TestWDescription").
+		fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription).
 		fillFieldsSubscribeWidgetStepTwo().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		openSubscribeWidget().
+		backToSubscribegWidgetPage();
+		
+		CommonUtils.setProperty("subscribeWidget", widgetName);
+		CommonUtils.checkAndFail("subscribeSupporterTest");
+	}
+	
+	@Test( priority=10, groups = {"activities.subscribeSupporter"}, description = "", dependsOnMethods = {"createSubscribeWidget"})
+	public void subscribeSupporterTest(String supporterEmail) 
+	{	
+		Supporter supporter = new Supporter();
+		LoginPage loginPage = new LoginPage(true);
+		if (!supporterEmail.contains("@")) {
+			supporterEmail = EmailClient.getEmailBox(new Supporter().subscribedEmail + CommonUtils.getUnicName());
+			supporter.cPhone = "";
+			supporter.addressLine1 = "";
+			supporter.facebook = "";
+			supporter.twitter = "";
+		}
+		loginPage.
+		openSubscribeWidgetByLink().
 		fillSubscribeWidget(supporterEmail, supporter.firstName, supporter.lastName, supporter.City, supporter.zipCode).
 		verifySubscriptionIsSuccesses().
-		backToSubscribegWidgetPage().
+		backToLoginPage().
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
 		openAudiencePage().
 		openSupportersPage().
 		searchSupporter(supporterEmail).
@@ -188,15 +208,14 @@ public class ActivitiesTests extends SeleneseTestCase{
 				supporter.subscribedEmail,
 				supporter.firstName,
 				supporter.lastName,
-				"",
-				"",
+				supporter.cPhone,
+				supporter.addressLine1,
 				supporter.City,
 				supporter.zipCode,
-				"",
-				"",
+				supporter.facebook,
+				supporter.twitter,
 				"Subscribed");
 		
-		CommonUtils.setProperty("subscribeWidget", widgetName);
 		CommonUtils.setProperty("subscribedSupporter", supporterEmail);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}

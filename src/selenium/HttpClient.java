@@ -96,6 +96,22 @@ public class HttpClient {
 		 return this;
 	}
 	
+	public HttpClient login() {
+		try {
+			return login(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password"));
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * 
 	 * 
@@ -121,6 +137,10 @@ public class HttpClient {
 		return "";
 	}
 	
+	
+	/*public String unsubscribeSupporter(String supEmail) {
+		//"{"header":{},"payload":{"pid":"75004f53-9bf1-4a79-9228-bd9f36dd1bea","oid":"a9866e25-e0c0-4369-be68-e2cbd5f6842b","aid":"00000000-0000-0000-0000-000000000000","cid":"null","eid":"8338a3cb-b2dd-4d9e-95ec-744ca7170628","eType":"EmailBlastContent","data":{"PersonContact@Email@Value":{"value":"teswt.dsf@gsdg.vcdv","label":"Email Address","required":true}},"contentChannels":[],"contactMethods":[]}}"
+	}*/
 	
 	////////////////////////////////////////////////////////////////////
 	private CloseableHttpResponse sendRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {

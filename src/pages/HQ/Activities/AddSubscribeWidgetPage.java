@@ -46,6 +46,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	}
 	
 	public SubscribeWidget openSubscribeWidget() {
+		CommonUtils.setProperty("subscribeWidgetLink", widgetLink.getAttribute("href"));
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();	
 		sleep(5000);

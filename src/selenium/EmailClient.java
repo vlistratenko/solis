@@ -117,6 +117,13 @@ public class EmailClient {
 		return null;
 	}
 	
+	public String getUnsubscribeLink(String emailSubj) throws MailosaurException {
+		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
+		return getLinkByText(e, "unsubscribe");
+	}
+	
+	
+	
 	public static String getEmailBox(String name){
 		return name + "." + mbox + "@mailosaur.in";
 	}
@@ -149,6 +156,16 @@ public class EmailClient {
 				}				 
 			}			 
 		}		 
+	}
+	
+	public String getLinkByText(Email email, String text){		
+		Link[] l = email.html.links;
+		for (int j = 0; j < l.length; j++) {
+			 if (l[j].text.toLowerCase().contains(text.toLowerCase())) {
+				 return l[j].href;				 
+			}			 
+		}
+		return null;
 	}
 	
 	public void openEmail(Email email){		

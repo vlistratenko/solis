@@ -114,7 +114,7 @@ public class ImportAddPage extends ManagePage{
 			out.println(supporter.cPhone + "," +
 					supporter.City + i + "," +
 					supporter.importedEmail + "," +
-					supporter.Facebook + "," +
+					supporter.facebook + "," +
 					supporter.firstName + i + "," +
 					supporter.Home_Phone + "," +
 					supporter.lastName + i + "," +

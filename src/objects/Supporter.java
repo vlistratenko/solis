@@ -6,13 +6,14 @@ import org.json.JSONObject;
 
 
 public class Supporter {
+	public String finalEMAIL = "";
 	public String cPhone = "32165498765";
 	public String City = "CityT";
 	public String emailDomain="@devnull.test.ignite.net";
 	public String importedEmail = "importedsup";
 	public String subscribedEmail = "subscribedsup";
-	public String manuallEmail = "subscribedsup";
-	public String Facebook = "fbv";
+	public String manuallEmail = "munuallysup";
+	public String facebook = "fbv";
 	public String firstName = "Tester";
 	public String Home_Phone = "98765432112";
 	public String lastName = "Testerov";
@@ -38,7 +39,7 @@ public class Supporter {
 		"\",\"lastName\":\"" + lastName +
 		"\",\"language\":\"en-US\",\"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone +
 		"\"},{\"type\":\"MessagingEmail\",\"value\":\"" + email +
-		"\",\"status\":\"OptedIn\"},{\"type\":\"SocialFacebook\",\"value\":\"" + Facebook +
+		"\",\"status\":\"OptedIn\"},{\"type\":\"SocialFacebook\",\"value\":\"" + facebook +
 		"\"},{\"type\":\"SocialTwitter\",\"value\":\"" + twitter +
 		"\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\"" + addressLine1 +
 		"\",\"line2\":\""+ addressLine2 + "\",\"city\":\"" + City + "\",\"state\":\"" + state + 
