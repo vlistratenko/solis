@@ -8,5 +8,6 @@
   <suite-files>
  	<suite-file path="/CompletedSuites/Run_EmailKPI_Suite_Completed.xml" /> 	
  	<suite-file path="/CompletedSuites/Run_Donations_Suite_Completed.xml" />      
+ 	<suite-file path="/CompletedSuites/Run_SubscribeAndUnsubscribe_Suite_Completed.xml" />  
   </suite-files>
 </suite>
