@@ -21,9 +21,7 @@ public class AdminTest extends SeleneseTestCase{
 		"createOrg.status",
 		"createOrg.featureList" })
 	
-	public void createOrgTest(String login,
-				     	String password,	     	
-				     	String domainType,
+	public void createOrgTest(String domainType,
 						String orgName,
 						String orgDescrption,
 						String firstName,
@@ -35,7 +33,7 @@ public class AdminTest extends SeleneseTestCase{
 		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
 		
 		new LoginPageAdmin().
-			doSuccessLogin(login, password).
+			doSuccessLogin().
 			openAddNewOrganizationPage().
 			createNewOrg(domainType, orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, featureList).
 			checkOrganizationExists(orgName).

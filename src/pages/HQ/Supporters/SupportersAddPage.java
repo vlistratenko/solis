@@ -44,7 +44,7 @@ public class SupportersAddPage extends HomePage{
 	
 	public SupportersPage verifySupporterData(String email, String fName, String lName, String phone, String addressLine1,
 			String city, String zipCode, String faceBook, String twitter, String status) {
-		verify(supporterEmailField.getValue().contains(email), true, "Wrong email", false);
+		verify(supporterEmailField.getValue(), email, "Wrong email", false);
 		verify(supporterFirstNameField.getValue().contains(fName), true, "Wrong firstname", false);
 		verify(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
 		verify(supporterPhoneField.getValue(), phone, "Wrong Phone", false);

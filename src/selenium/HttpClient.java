@@ -1,5 +1,6 @@
 package selenium;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-
+import java.util.ArrayList;
 import org.apache.http.Header;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -35,12 +36,13 @@ import org.json.JSONObject;
 public class HttpClient {
 
 	String authToken = "";
-	String orgID;
-	String orgName;
+	String orgID = "";
+	String orgName = "";
 	String host = "hq.test.ignite.net";
 	CloseableHttpClient httpClient = null;
     HttpPost httpost = null;
     CloseableHttpResponse response = null;
+    ArrayList<String> JSONResponse = new ArrayList<String>();
 	
 	public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
   	
@@ -76,13 +78,10 @@ public class HttpClient {
 		Header h = response.getHeaders("authToken")[0];
 		authToken = h.getValue();  
 		updateHeaders();
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-         (response.getEntity().getContent())));
-		String output;
-		 while ((output = br.readLine()) != null) {
+		for (String temp : JSONResponse) {
 		    	 try {
-					orgID = jsonParser(output, "payload.organization.0.id").toString();
-					orgName = jsonParser(output, "payload.organization.0.name").toString();
+					orgID = jsonParser(temp, "payload.organization.0.id").toString();
+					orgName = jsonParser(temp, "payload.organization.0.name").toString();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -119,14 +118,12 @@ public class HttpClient {
 	public String createSupporter(JSONObject supp) {
 		try {
 			sendRequest("https://" + host + "/api/person/supporter", supp.toString());
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-	                 (response.getEntity().getContent())));
-	         String output;
-	         while ((output = br.readLine()) != null) {
+	         for (String temp : JSONResponse) {
 	            	 try {
-						return jsonParser(output, "payload.id").toString();
+						return jsonParser(temp, "payload.id").toString();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
+						System.err.println(temp);
 						e.printStackTrace();
 					}
 	         } 
@@ -144,6 +141,9 @@ public class HttpClient {
 	
 	////////////////////////////////////////////////////////////////////
 	private CloseableHttpResponse sendRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
+		SeleneseTestCase.logger.info("Try to send request to " + url);
+		SeleneseTestCase.logger.info("Data to send " + json);
+		JSONResponse.clear();
 		httpost.setURI(new URI(url)); 
 		 StringEntity input = new StringEntity(json);
         input.setContentType("application/json");
@@ -152,6 +152,13 @@ public class HttpClient {
         if (response.getStatusLine().getStatusCode() != 200) {
             throw new RuntimeException("Failed : HTTP error code : "
                     + response.getStatusLine().getStatusCode());
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(
+                (response.getEntity().getContent())));
+        String output;
+        while ((output = br.readLine()) != null) {
+        	SeleneseTestCase.logger.info("Response: " + output);
+        	JSONResponse.add(output);
         }
         return 	response;	 
 	}

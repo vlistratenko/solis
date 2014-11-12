@@ -5,11 +5,16 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+
 import objects.Supporter;
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import selenium.CommonUtils;
 import selenium.EmailClient;
 import selenium.HttpClient;
@@ -22,17 +27,14 @@ import tests.SettingsTests;
 public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 
 	@Test(enabled = true, groups = {"createAdmin"}, description = "484:51:New org was NOT created")
-	@Parameters({ "admin.login",
-     	"admin.password",     	
-     	"createOrg.domainType",
+	@Parameters({"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
 		"createOrg.firstName",
 		"createOrg.lastName",		
 		"createOrg.status",
 		"createOrg.featureList" })
-	public void createOrgTest(String login,
-		     	String password,	     	
+	public void createOrgTest(	     	
 		     	String domainType,
 				String orgName,
 				String orgDescrption,
@@ -41,7 +43,7 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 				String status,
 				String featureList){
 		
-		new AdminTest().createOrgTest(login, password, domainType, orgName, orgDescrption, firstName, lastName, status, featureList);	
+		new AdminTest().createOrgTest(domainType, orgName, orgDescrption, firstName, lastName, status, featureList);	
 	}
 	
 	@Test(enabled = true, groups = {"createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
@@ -115,5 +117,5 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	 };
 	}*/
 
-	
+
 }

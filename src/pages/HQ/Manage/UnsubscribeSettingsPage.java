@@ -11,6 +11,7 @@ public class UnsubscribeSettingsPage extends ManagePage {
 	Button saveButton = new Button("//button[@id='btnSave']", "Save", true);
 	
 	public UnsubscribeSettingsPage editIntroductionaryText(String text) {
+		sleep(3000);
 		introductoryTextField.type(text);
 		saveButton.click();
 		sleep(5000);		

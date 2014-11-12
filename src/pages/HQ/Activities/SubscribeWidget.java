@@ -20,6 +20,10 @@ public class SubscribeWidget extends Browser{
 	
 	Label subscriptionIsSccessMessage = new Label("//div[.='Thanks for signing up!']", "Subscription is success");
 
+	public SubscribeWidget() {
+		deletecoockies();
+		refresh();
+	}
 	
 	public AddSubscribeWidgetPage backToSubscribegWidgetPage() {
 		closeWindow();

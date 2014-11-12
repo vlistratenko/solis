@@ -21,7 +21,7 @@ public class Supporter {
 	public String state = "NY";
 	public String twitter = "twv";
 	public String zipCode = "20147";
-	public String addressLine1 = "Street ";
+	public String addressLine1 = "Street line1";
 	public String addressLine2 = "Street line2 ";
 	public String MiddleName = "MName";
 	

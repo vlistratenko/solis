@@ -181,8 +181,9 @@ public class ActivitiesTests extends SeleneseTestCase{
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}
 	
+	@Parameters({"supporter.email"})
 	@Test( priority=10, groups = {"activities.subscribeSupporter"}, description = "", dependsOnMethods = {"createSubscribeWidget"})
-	public void subscribeSupporterTest(String supporterEmail) 
+	public void subscribeSupporterTest(@Optional("") String supporterEmail) 
 	{	
 		Supporter supporter = new Supporter();
 		LoginPage loginPage = new LoginPage(true);
@@ -205,18 +206,17 @@ public class ActivitiesTests extends SeleneseTestCase{
 		checkSupporterExists(supporterEmail).
 		openSupporterDetailsPage().
 		verifySupporterData(
-				supporter.subscribedEmail,
+				supporterEmail,
 				supporter.firstName,
 				supporter.lastName,
 				supporter.cPhone,
 				supporter.addressLine1,
-				supporter.City,
+				supporter.City,				
 				supporter.zipCode,
 				supporter.facebook,
 				supporter.twitter,
 				"Subscribed");
-		
-		CommonUtils.setProperty("subscribedSupporter", supporterEmail);
+				CommonUtils.setProperty("subscribedSupporter", supporterEmail);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}
 

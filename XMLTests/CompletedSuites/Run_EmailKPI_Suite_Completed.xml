@@ -6,8 +6,6 @@
     	<listener class-name="selenium.MyTestListener" />
   	</listeners>>
 	<test verbose="2" name="Email KPI Test" annotations="JDK" >
-    	<parameter name="admin.login" value="vavramchuk"></parameter>
-     	<parameter name="admin.password" value="aVitalik3124"></parameter>     	
      	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
      	<parameter name="email.password" value="aVitalik3124"></parameter>     	
      	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>

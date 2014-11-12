@@ -7,11 +7,6 @@
     	<listener class-name="selenium.MyTestListener" />
   	</listeners>
   	<test verbose="2" name="AcceptanceTests" annotations="JDK" >
-    	<parameter name="admin.login" value="vavramchuk"></parameter>
-     	<parameter name="admin.password" value="AVitalik3124"></parameter>
-     	
-     	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
-     	<parameter name="email.password" value="AVitalik3124"></parameter>
      	
      	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
 		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>

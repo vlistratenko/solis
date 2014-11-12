@@ -3,6 +3,7 @@ package pages.Admin;
 import objects.Browser;
 import objects.Button;
 import objects.TextBox;
+import selenium.CommonUtils;
 import selenium.SeleneseTestCase;
 
 
@@ -16,14 +17,19 @@ public class LoginPageAdmin extends Browser {
 		//SeleneseTestCase.bug.add("Open login page for admin");
 	}
 	
-	public HomePageAdmin doSuccessLogin(String userName, String password) {
+	public HomePageAdmin doSuccessLogin() {
 		//SeleneseTestCase.bug.add("Do success login. " + userName + "/" + password);
+		String userName, password;
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseAdminUrl());
 		if (System.getProperty("USED_ADMIN_USER") != null) {
 			userName = System.getProperty("USED_ADMIN_USER");
-		}		
+		}else{
+			userName = CommonUtils.getProperty("ldap.login");
+		}
 		if (System.getProperty("USED_ADMIN_PASS") != null) {
 			password = System.getProperty("USED_ADMIN_PASS");
+		}else{
+			password = CommonUtils.getProperty("ldap.password");
 		}
 		LoginField.type(userName);
 		PasswordField.type(password);

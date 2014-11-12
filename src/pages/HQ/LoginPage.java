@@ -78,6 +78,8 @@ public class LoginPage extends Browser{
 	}
 	
 	public SubscribeWidget openSubscribeWidgetByLink() {
+		//super.dri
+		
 		String currentWindowHandle = super.openInNewWindow(CommonUtils.getProperty("subscribeWidgetLink"));		
 		sleep(5000);
 		CommonUtils.setProperty("currentWindowHandle", currentWindowHandle);		

@@ -9,14 +9,15 @@
   	<test verbose="2" name="Create and Publish subscribe form" annotations="JDK" >
     	<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
 		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
+		<parameter name="supporter.email"  value=""></parameter>
      	<groups>
     		<run>
-     			 <include name="activities.createSubscribeForm"/>
+     			 <exclude name="activities.createSubscribeForm"/>
      			 <include name="activities.subscribeSupporter"/>
     		</run>
   		</groups>
      	<classes>
       		<class name="tests.ActivitiesTests"/>
     	</classes>
-  	</test>   
+  	</test>  
  </suite>

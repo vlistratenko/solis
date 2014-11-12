@@ -9,11 +9,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -30,6 +32,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
 
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
@@ -195,7 +198,7 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 	
 	//@BeforeMethod
 	protected void beforeMethod() {
-
+		System.err.println("Test");
 	}
 
 
@@ -251,6 +254,11 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 	public static void deletecoockies(){
 		logger.info("Try to delete coockies");
 		driver.manage().deleteAllCookies();
+	}
+	
+	public static Set<Cookie> getCoockies(){
+		logger.info("Try to get coockies");
+		return driver.manage().getCookies();
 	}
 	
 	public static void close(){

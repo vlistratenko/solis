@@ -13,9 +13,7 @@ import selenium.SeleneseTestCase;
 public class BuildAcceptanceTests extends SeleneseTestCase {
 
 	@Test(priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
-	@Parameters({ "admin.login",
-     	"admin.password",     	
-     	"createOrg.domainType",
+	@Parameters({"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
 		"createOrg.firstName",
@@ -36,7 +34,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		orgName = orgName + CommonUtils.getUnicName();
 		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
 		new LoginPageAdmin().
-			doSuccessLogin(login, password).
+			doSuccessLogin().
 			openAddNewOrganizationPage().
 			createNewOrg(domainType, orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, featureList).
 			checkOrganizationExists(orgName).

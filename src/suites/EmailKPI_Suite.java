@@ -11,8 +11,7 @@ import tests.SupportersTests;
 public class EmailKPI_Suite extends SeleneseTestCase{
 
 	@Test(enabled = true, groups = {"createAdmin"}, description = "484:51:New org was NOT created")
-	@Parameters({ "admin.login",
-     	"admin.password",     	
+	@Parameters({     	
      	"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
@@ -20,8 +19,7 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 		"createOrg.lastName",		
 		"createOrg.status",
 		"createOrg.featureList" })
-	public void createOrgTest(String login,
-		     	String password,	     	
+	public void createOrgTest(	     	
 		     	String domainType,
 				String orgName,
 				String orgDescrption,
@@ -30,7 +28,7 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 				String status,
 				String featureList){
 		
-		new AdminTest().createOrgTest(login, password, domainType, orgName, orgDescrption, firstName, lastName, status, featureList);	
+		new AdminTest().createOrgTest(domainType, orgName, orgDescrption, firstName, lastName, status, featureList);	
 	}
 	
 	@Test(enabled = true, groups = {"createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")

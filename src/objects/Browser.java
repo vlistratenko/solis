@@ -10,6 +10,7 @@ import org.apache.commons.collections.functors.IfClosure;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -40,6 +41,10 @@ public abstract class Browser{
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 	}
 	
+	/*protected void createNewDriver(WebDriver driver) {
+		this.driver = driver;
+	}*/
+	
 	
 	protected String getBrowser() {
 		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
@@ -52,9 +57,8 @@ public abstract class Browser{
 	}
 	
 	protected void logOut(){		
-		deletecoockies();		
-		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
-		sleep(5000);
+		deletecoockies();	
+		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");		
 	}
 	
 	protected void open(String url){		
@@ -88,6 +92,10 @@ public abstract class Browser{
 	protected void deletecoockies(){
 		SeleneseTestCase.deletecoockies();
 		sleep(5000);
+	}
+	
+	protected Set<Cookie> getCoockies(){
+		return SeleneseTestCase.getCoockies();
 	}
 
 	/**
@@ -241,6 +249,7 @@ public abstract class Browser{
 	
 	protected void sleep(int t) {
 		try {
+			logger.info("Wait for " + t/1000 + " seconds");
 			Thread.sleep(t);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
