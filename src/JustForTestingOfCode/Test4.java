@@ -7,29 +7,11 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-
-
-
-
-
-
 import objects.Supporter;
-
 import org.apache.http.client.ClientProtocolException;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import selenium.HttpClient;
-
-
-
-
-
 
 public class Test4 {
 

@@ -108,8 +108,13 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillUnsubscribeForm(supporter1.finalEMAIL).
 		clickUnsubscribeButton().
 		verifyUnsubscribeIsSuccesses();
+		
 		unsPage.clearCache().refreshPage();
-		unsPage.fillUnsubscribeForm(supporter2.finalEMAIL).clickUnsubscribeButton().verifyUnsubscribeIsSuccesses();
+		
+		unsPage.
+		fillUnsubscribeForm(supporter2.finalEMAIL).
+		clickUnsubscribeButton().
+		verifyUnsubscribeIsSuccesses();
 		
 		unsPage.
 		backToUnsubscribeSettingsPage().		
