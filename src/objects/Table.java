@@ -107,7 +107,7 @@ public class Table extends Element implements iTable {
 		ArrayList<String> headers = new ArrayList<String>();
 		while(columns.hasNext()) { 
 	        WebElement column = columns.next();
-	        if (!column.getText().equals("")) {
+	        if (!column.getText().equals("") && !headers.contains(column.getText())) {
 	        	headers.add(column.getText());
 			}
 		}

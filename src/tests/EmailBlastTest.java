@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import pages.HQ.LoginPage;
 import pages.HQ.Manage.UnsubscribePage;
+import pages.Other.Dispatcher;
 import selenium.CommonUtils;
 import selenium.EmailClient;
 import selenium.HttpClient;
@@ -75,6 +76,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	public void sendEmailsToUnsubscribedSupporters() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		
 		String emailSubj = "SendEmailsToUnsubscribed" + CommonUtils.getUnicName();
+		String emailBlastName = CommonUtils.getUnicName();
 		CommonUtils.setProperty("emailSubject", emailSubj);
 		
 		Supporter supporter1 = new Supporter();
@@ -121,7 +123,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openActivitiesPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
-		fillAllFieldsAndGoForward(CommonUtils.getUnicName()).
+		fillAllFieldsAndGoForward(emailBlastName).
 		selectAudienceType(" Selected segments of your list, or specific supporters").
 		addSupporters("emailforunsub", 4).
 		SelectEmailType().
@@ -131,5 +133,11 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndPublish(100, 1).
 		verifyAmountOfEmailsForPublishing("2").
 		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1, 15, true);
+		
+		new Dispatcher().
+				openDispatcher().
+				selectJob("Email Blast - Sender").
+				verifyValue("Throughput", "Email Blast: " + emailBlastName, "2 / 2 (2 ps)", "Wrong value in the dispatcher", true);
+
 	}
 }

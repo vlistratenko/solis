@@ -21,6 +21,7 @@ import org.testng.xml.XmlTest;
 
 import pages.HQ.LoginPage;
 import pages.HQ.Manage.ImportAddPage;
+import pages.Other.Dispatcher;
 import selenium.CommonUtils;
 import selenium.ConnectDatabase;
 import selenium.HttpClient;
@@ -30,26 +31,6 @@ public class Test2 extends SeleneseTestCase{
 
 	@Test		
 	public void loginTest() {
-		try {
-			System.err.println(new HttpClient().login("20141106123247.4441b2bf@mailosaur.in", "!QAZ2wsx"));
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (KeyManagementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (KeyStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 }
