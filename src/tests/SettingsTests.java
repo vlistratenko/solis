@@ -107,6 +107,27 @@ public class SettingsTests extends SeleneseTestCase{
 		
 	}
 	
+	@Test( priority=13, groups = {"settings.unsubscribeUnexistedSupporterTest", ""}, description = "")
+	public void unsubscribeUnexistedSupporterTest(){
+		Supporter supporter = new Supporter();
+		supporter.finalEMAIL = EmailClient.getEmailBox(CommonUtils.getUnicName());
+		LoginPage loginPage = new LoginPage();
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		openSettingsPage().
+		switchToUnsubscribeSettingsPage().
+		openUnsubscribePage().
+		fillUnsubscribeForm(supporter.finalEMAIL).
+		clickUnsubscribeButton().
+		verifyUnsubscribeIsSuccesses().
+		backToUnsubscribeSettingsPage().
+		openAudiencePage().
+		openSupportersPage().
+		searchSupporter(supporter.finalEMAIL).
+		checkSupporterNotExists(supporter.finalEMAIL);
+		CommonUtils.checkAndFail("unsubscribeSupporterTest");		
+	}
+	
 	@Test( priority=10, groups = {"settings.unsubscribeSupporterViaEMAIL", ""}, description = "")
 	public void unsubscribeSupporterByEmailTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 

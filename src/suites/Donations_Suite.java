@@ -30,13 +30,9 @@ public class Donations_Suite extends SeleneseTestCase{
 	}
 	
 	@Test(enabled = true, groups = {"createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
-	@Parameters({ "email.login",
-     	"email.password",
-     	"newuser.password"})
-	public void confirmAdminAccountTest(String login,
-	     	String password,	     	
-			String userPassword){
-		new AdminTest().confirmAdminAccountTest(login, password, userPassword);
+	@Parameters({"newuser.password"})
+	public void confirmAdminAccountTest(String userPassword){
+		new AdminTest().confirmAdminAccountTest(userPassword);
 	}
 	
 	@Test(priority=30, groups = {"createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")

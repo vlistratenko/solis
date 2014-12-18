@@ -20,7 +20,9 @@ public class LoginPageAdmin extends Browser {
 	public HomePageAdmin doSuccessLogin() {
 		//SeleneseTestCase.bug.add("Do success login. " + userName + "/" + password);
 		String userName, password;
+		sleep(3000);
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseAdminUrl());
+		sleep(5000);
 		if (System.getProperty("USED_ADMIN_USER") != null) {
 			userName = System.getProperty("USED_ADMIN_USER");
 		}else{

@@ -6,7 +6,7 @@ import objects.TextBox;
 import selenium.CommonUtils;
 
 public class AddSubscribeWidgetPage extends ActivitiesPage{
-	
+	String widgetName;
 	String currentWindowHandle;
 	TextBox widgetNameField = new TextBox("//input[@name='name']", "Widget name");
 	TextBox widgetDescriptionField = new TextBox("//textarea[@name='description']", "Widget Description");
@@ -16,10 +16,12 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	CheckBox iNeedWidgetCodeCheckBox = new CheckBox("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
 	TextBox titleField = new TextBox("//input[@ng-model='widget.page.title']", "Title");
 	Button saveAndPublish = new Button("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
+	Button widgetLink;
 	
-	Button widgetLink = new Button("//a[contains(text(), '" + CommonUtils.getProperty("Admin.orgName").toLowerCase().replaceAll(" ", "") + "')]", "Widget link");
 	
+
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepOne(String widgetName, String widgetDescription) {
+		this.widgetName = widgetName;
 		widgetNameField.type(widgetName); 
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
@@ -46,6 +48,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	}
 	
 	public SubscribeWidget openSubscribeWidget() {
+		widgetLink = new Button("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		CommonUtils.setProperty("subscribeWidgetLink", widgetLink.getAttribute("href"));
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();	

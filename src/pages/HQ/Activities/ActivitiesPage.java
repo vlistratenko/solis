@@ -7,9 +7,9 @@ import pages.HQ.Emails.EmailBlastsPage;
 
 public class ActivitiesPage extends HomePage{
 	
-	Button emailBlastsLink = new Button("//a[.='Email Blasts']", "Email blast"); 
-	Button fundraisingWidgetLink = new Button("//a[.='Fundraising Widgets']", "Fundraising Widget");
-	Button subscribeWidgetLink = new Button("//a[.='Supporter Signup Widgets']", "Fundraising Widget");
+	Button emailBlastsLink = new Button("//a[.='Manage Emails']", "Email blast"); 
+	Button fundraisingWidgetLink = new Button("//a[.='Raise Money']", "Fundraising Widget");
+	Button subscribeWidgetLink = new Button("//a[.='Grow Your List']", "Grow Your List");
 
 	public ActivitiesPage verifyURL() {
 		

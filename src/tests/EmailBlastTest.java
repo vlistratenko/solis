@@ -5,14 +5,11 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-
 import objects.Supporter;
-
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import pages.HQ.LoginPage;
 import pages.HQ.Manage.UnsubscribePage;
 import pages.Other.Dispatcher;
@@ -23,7 +20,7 @@ import selenium.SeleneseTestCase;
 
 public class EmailBlastTest extends SeleneseTestCase{
 	
-	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
+	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
 	@Test( priority=10, groups = {"email.sendEmails", ""}, description = "")
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
@@ -70,6 +67,70 @@ public class EmailBlastTest extends SeleneseTestCase{
 		makeScreenshot("Email KPI Success");
 	}
 	
+	@Parameters({"sendEmail.From",
+		"sendEmail.OpenAmount",
+		"sendEmail.ClickAmount",
+		"sendEmail.emailOfSupporter",
+		"sendEmail.amountOfSupporter",
+		"sendEmail.hardBounceAmount",
+		"sendEmail.percentageOfTestGroup",
+		"sendEmail.splitsAmount"})
+	@Test( priority=20, groups = {"email.sendSplitEmails"}, description = "528:62:Split emails were NOT sent")
+	public void sendSplitEmailsTest(String emailFrom,
+			Integer openAmount,
+			Integer clickAmount,
+			String emailOfSupporter,
+			Integer amountOfSupporters,
+			Integer hardBounceAmount,
+			Integer percentageOfTestGroup,
+			int splitsAmount) {
+		String emailBlastName = "TestV" + CommonUtils.getUnicName();
+		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
+		CommonUtils.setProperty("emailBlastName", emailBlastName);
+		CommonUtils.setProperty("emailSplitsSubject", emailSubject);
+		CommonUtils.setProperty("emailFrom", emailFrom);
+		CommonUtils.setProperty("percentageOfTestGroup", percentageOfTestGroup.toString());
+		
+		if(emailOfSupporter.equals("")){
+			emailOfSupporter = EmailClient.getEmailBox("");
+		}
+		
+		LoginPage loginPage = new LoginPage();
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		openActivitiesPage().
+		openEmailBlastsPage().
+		openAddEmailPage().
+		fillAllFieldsAndGoForward(emailBlastName).
+		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
+		addSupporters(emailOfSupporter, amountOfSupporters).
+		//addSupporters("unex", hardBounceAmount).
+		SelectEmailType().
+		openComposePage().
+		selectLayout("Basic").
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
+		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 15, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 5, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 5, true);
+		
+		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+
+
+		
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		openActivitiesPage().
+		openEmailBlastsPage().
+		openEmailBlastDetailsPage(CommonUtils.getProperty("emailBlastName")).
+		verifyOpenRateStat(openAmount).
+		verifyClickRateStat(clickAmount).
+		verifyHardBouncesStat(hardBounceAmount);
+		
+		makeScreenshot("Email KPI Success");
+		
+	}
 
 	//@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
 	@Test( priority=10, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "")

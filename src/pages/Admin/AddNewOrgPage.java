@@ -1,7 +1,6 @@
 package pages.Admin;
 
 import objects.Button;
-import objects.CheckBox;
 import objects.DropDown;
 import objects.List;
 import objects.TextBox;
@@ -10,19 +9,19 @@ import selenium.SeleneseTestCase;
 
 public class AddNewOrgPage extends HomePageAdmin{
 
-	TextBox orgName = new TextBox("//input[@id='mainform:name']", "Organization name");
-	TextBox orgDescrption = new TextBox("//input[@id='mainform:description']", "Organization Descrption");
-	TextBox orgAdminUserId = new TextBox("//input[@id='mainform:userName']", "Admin UserId (Email)");
-	TextBox firstName = new TextBox("//input[@id='mainform:firstName']", "First Name");
-	TextBox lastName = new TextBox("//input[@id='mainform:lastName']", "Last Name");
-	TextBox PhoneNumber = new TextBox("//input[@id='mainform:phone']", "Phone Number");
-	DropDown domainType = new DropDown("//div[@id='mainform:domainType_panel']", "//label[@id='mainform:domainType_label']", "Domain type");
-	Button standardStatus = new Button("//input[@id='mainform:status:0']", "Status");
-	Button trialStatus = new Button("//input[@id='mainform:status:1']", "Status");
-	TextBox vanityDomain = new TextBox("//input[@id='mainform:vanityDomain']", "Vanity Domain");
-	TextBox customDomain = new TextBox("//input[@id='mainform:customDomain']", "Custom Domain");
-	Button createButton = new Button("//button[@id='mainform:createOrg']", "Create button");
-	List featureList = new List("//div[@id='mainform:feature']", "Features list");
+	TextBox orgName = new TextBox("//input[@id='name']", "Organization name");
+	TextBox orgDescrption = new TextBox("//input[@id='description']", "Organization Descrption");
+	TextBox orgAdminUserId = new TextBox("//input[@id='userName']", "Admin UserId (Email)");
+	TextBox firstName = new TextBox("//input[@id='firstName']", "First Name");
+	TextBox lastName = new TextBox("//input[@id='lastName']", "Last Name");
+	TextBox PhoneNumber = new TextBox("//input[@id='phone']", "Phone Number");
+	DropDown domainType = new DropDown("//div[@id='domainType_panel']", "//label[@id='domainType_label']", "Domain type");
+	Button standardStatus = new Button("//input[@id='status:0']", "Status");
+	Button trialStatus = new Button("//input[@id='status:1']", "Status");
+	TextBox crmID = new TextBox("//input[@id='crm']", "CRM id");
+	TextBox customDomain = new TextBox("//input[@id='customDomain']", "Custom Domain");
+	Button createButton = new Button("//button[@id='createOrg']", "Create button");
+	List featureList = new List("//div[@id='feature']", "Features list");
 	
 	
 	public OrganizationsListPage createNewOrg(String domainTypeValue,
@@ -52,6 +51,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 			trialStatus.click();
 		}
 		//featureList.selectByLabel(featureListValue);
+		crmID.type(CommonUtils.getUnicName());
 		createButton.click();
 		sleep(30000);
 		return new OrganizationsListPage();

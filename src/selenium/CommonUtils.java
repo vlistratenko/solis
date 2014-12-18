@@ -11,10 +11,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -732,6 +734,75 @@ System.err.println(script);
 	public static String anonimizeCreditCardNumber(String cardNumber) {
 		
 		return "**************" + cardNumber.substring(12);
+	}
+	
+	public static void saveDataToCSV(String fileName, String data, Boolean isAdd) {
+		try
+		{
+			FileWriter writer = new FileWriter(fileName, isAdd);
+			String[] s = data.split(":");
+			for (int i = 0; i < s.length; i++) {
+				writer.append(s[i]);
+			    writer.append(',');
+			}
+		    writer.append('\n');	 
+		    writer.flush();
+		    writer.close();
+		}
+		catch(IOException e)
+		{
+		     e.printStackTrace();
+		} 
+	}
+	
+	public static void deleteFile(String fileName) {
+		File file = new File(fileName);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+	
+	public static void addDataToCSV(String fileName, String data, String whereAdd) throws IOException {
+       
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+        String line; 
+        String whereChange="";
+        String cvsSplitBy = ",";
+        List<String> oldData = new ArrayList<String>();
+        while ((line = br.readLine()) != null) {
+        	if (line.contains(whereAdd)) {
+        		whereChange = line.replace(cvsSplitBy, ":");
+			}else{
+				oldData.add(line);
+			}        	
+        }
+		
+		try
+		{
+			FileWriter writer = new FileWriter(fileName, false);
+			data = whereChange + data;
+			String[] s = data.split(":");
+			for (int i = 0; i < s.length; i++) {
+				writer.append(s[i]);
+			    writer.append(',');
+			}
+			writer.append('\n');
+			for (int i = 0; i < oldData.size(); i++) {
+				writer.append(oldData.get(i));
+				writer.append('\n');
+			}		    	 
+		    writer.flush();
+		    writer.close();
+		}
+		catch(IOException e)
+		{
+		     e.printStackTrace();
+		} 
+	}
+	
+	public static void removeDataFromCSV(String string) {
+		// TODO Auto-generated method stub
+		
 	}
  	
 }

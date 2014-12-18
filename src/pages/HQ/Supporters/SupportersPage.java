@@ -25,6 +25,12 @@ public class SupportersPage extends AudiencePage{
 		return this;
 		
 	}
+	
+	public SupportersPage checkSupporterNotExists(String param) {
+		verify(supportersTable.isValueExists(param)>0, false, "Supprter " + param + " was found."); 
+		return this;
+		
+	}
 
 	public SupportersPage searchSupporter(String personEmail) {
 		searchField.type(personEmail);

@@ -21,7 +21,7 @@ public class AdminTest extends SeleneseTestCase{
 		"createOrg.status",
 		"createOrg.featureList" })
 	
-	public void createOrgTest(String domainType,
+	public AdminTest createOrgTest(String domainType,
 						String orgName,
 						String orgDescrption,
 						String firstName,
@@ -43,15 +43,12 @@ public class AdminTest extends SeleneseTestCase{
 		CommonUtils.setProperty("Admin.firstName", firstName);
 		CommonUtils.setProperty("Admin.lastName", lastName);
 		CommonUtils.setProperty("Admin.orgName", orgName);
+		return this;
 	}
 	
     @Test(priority=20, enabled = true, groups = {"dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
-	@Parameters({ "email.login",
-     	"email.password",
-     	"newuser.password"})
-	public void confirmAdminAccountTest(String login,
-	     	String password,	     	
-			String userPassword){
+	@Parameters({"newuser.password"})
+	public AdminTest confirmAdminAccountTest(String userPassword){
     	
 		LoginPage loginPage = new LoginPage();
 		loginPage.
@@ -61,7 +58,7 @@ public class AdminTest extends SeleneseTestCase{
 		
     	CommonUtils.setProperty("Admin.Password", userPassword);
 		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));		
-		
+		return this;
 	}
 	
 	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")

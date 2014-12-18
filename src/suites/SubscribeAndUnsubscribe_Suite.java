@@ -5,16 +5,11 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-
 import objects.Supporter;
-
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import selenium.CommonUtils;
 import selenium.EmailClient;
 import selenium.HttpClient;
@@ -47,13 +42,9 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	}
 	
 	@Test(enabled = true, groups = {"createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
-	@Parameters({ "email.login",
-     	"email.password",
-     	"newuser.password"})
-	public void confirmAdminAccountTest(String login,
-	     	String password,	     	
-			String userPassword){
-		new AdminTest().confirmAdminAccountTest(login, password, userPassword);
+	@Parameters({"newuser.password"})
+	public void confirmAdminAccountTest(String userPassword){
+		new AdminTest().confirmAdminAccountTest(userPassword);
 	}
 	
 	@Test(priority=30, groups = {"createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
@@ -88,6 +79,11 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
 	public void unsubscribeSupporterTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		new SettingsTests().unsubscribeSupporterTest();
+	}
+	
+	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
+	public void unsubscribeUnexistedSupporterTest() {
+		new SettingsTests().unsubscribeUnexistedSupporterTest();
 	}
 	
 	@Test( priority=10, groups = {"settings.unsubscribeSupporterViaEMAIL", ""}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")

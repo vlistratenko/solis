@@ -33,6 +33,15 @@ public class DonationWidget extends Browser{
 	
 	Label donationIsSccessMessage = new Label("//div[.='Thank you for your donation!']", "Donation is success");
 	
+	public DonationWidget openDonationWidgetLink() {
+		String currentWindowHandle = getWindowHandle();
+		open(CommonUtils.getProperty("donationWidgetLink"));	
+		switchToPopupWindow(currentWindowHandle);
+		CommonUtils.setProperty("currentWindowHandle", currentWindowHandle);
+		return this;
+	}
+	
+	
 	public DonationWidget fillDonationForm(String personEmail,
 			String personFName,
 			String personLName,

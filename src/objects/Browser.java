@@ -2,11 +2,8 @@ package objects;
 
 import java.util.ArrayList;
 import java.util.Set;
-
 import junit.framework.AssertionFailedError;
-
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.apache.commons.collections.functors.IfClosure;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -14,12 +11,9 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
 import pages.HQ.LoginPage;
-
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
-
 import selenium.CommonUtils;
 import selenium.Driver;
 import selenium.EmailClient;
@@ -59,6 +53,7 @@ public abstract class Browser{
 	protected void logOut(){		
 		deletecoockies();	
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");		
+		sleep(5000);
 	}
 	
 	protected void open(String url){		

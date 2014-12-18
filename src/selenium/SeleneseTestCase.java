@@ -33,14 +33,11 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
 
 import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import com.thoughtworks.selenium.Selenium;
 
 
 //@Listeners({SauceOnDemandTestListener.class})
-public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider { 
+public class SeleneseTestCase{ 
 	
 	protected static Driver Driver = new Driver();
 	
@@ -62,12 +59,6 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
 	
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
-	
-	 /**
-     * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
-     * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
-     */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("vavramchuk", "70fef8a9-3f9e-418c-abaa-0b588f9b17dc");
 
     /**
      * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.
@@ -129,7 +120,7 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
         SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
 	}
 	
-	public void startRemouteTestOnDriverOld(String browser, String version, String os) throws MalformedURLException {
+/*	public void startRemouteTestOnDriverOld(String browser, String version, String os) throws MalformedURLException {
 		DesiredCapabilities caps = new DesiredCapabilities();
 		switch (browser) {
         case "firefox":
@@ -156,7 +147,7 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
         SeleneseTestCase.driver = new RemoteWebDriver(
                 new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 caps);
-	}
+	}*/
 	
 	protected static void getLogger() {				
 		//File propertiesFile = new File("lib\\apache-log4j-1.2.16\\log4j.properties").getAbsoluteFile();	 	
@@ -300,16 +291,6 @@ public class SeleneseTestCase implements SauceOnDemandSessionIdProvider, SauceOn
    public String getSessionId() {
        return sessionId.get();
    }
-
-   /**
-    *
-    * @return the {@link SauceOnDemandAuthentication} instance containing the Sauce username/access key
-    */
-   @Override
-   public SauceOnDemandAuthentication getAuthentication() {
-       return authentication;
-   }
-
    //public @Rule
    //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
 

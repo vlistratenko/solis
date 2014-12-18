@@ -8,7 +8,7 @@ import selenium.CommonUtils;
 public class AddDonationWidgetPage extends ActivitiesPage {
 
 	String currentWindowHandle;
-	
+	String widgetName;
 	TextBox widgetNameField = new TextBox("//input[@name='name']", "Widget Name", true);
 	TextBox widgetDescriptionField = new TextBox("//textarea[@name='description']", "Widget description", false);
 	Button nextButton = new Button("//a[@id='btnCompose2']", "Design My Widget button", true);
@@ -19,9 +19,10 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	TextBox titleField = new TextBox("//input[@ng-model='widget.page.title']", "Title");
 	Button saveAndPublish = new Button("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
 	
-	Button widgetLink = new Button("//a[contains(text(), '" + CommonUtils.getProperty("Admin.orgName").toLowerCase().replaceAll(" ", "") + "')]", "Widget link");
+	Button widgetLink;
 	
 	public AddDonationWidgetPage createDonationWidgetSetupStep(String widgetName, String widgetDescription) {
+		this.widgetName = widgetName;
 		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
 		nextButton.click();
@@ -49,11 +50,20 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	
 	public DonationWidget openDonationWidget() {
 		sleep(5000);
+		widgetLink = new Button("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();			
 		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty("currentWindowHandle", currentWindowHandle);
 		return new DonationWidget();
+	}
+	
+	public AddDonationWidgetPage saveDonationWidgetLink() {
+		sleep(5000);
+		widgetLink = new Button("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
+		currentWindowHandle = getWindowHandle();
+		CommonUtils.setProperty("donationWidgetLink", widgetLink.getAttribute("href"));
+		return new AddDonationWidgetPage();
 	}
 
 }

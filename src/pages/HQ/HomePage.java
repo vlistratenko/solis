@@ -25,10 +25,10 @@ public class HomePage extends Browser{
 	Label orglabel = new Label(userlabel.path + "/span[text()='" + CommonUtils.getProperty("Admin.orgName") + "']", "Drop with organization name");
 	
 	//left navigation bar
-	Button audienceTab = new Button("//a[@title='Audience']", "Audience tab");
-	Button activitiesTab = new Button("//a[@title='Activities']", "Activities tab");
-	Button donationTab = new Button("//a[@title='Donation records']", "Donations tab");
-	Button dashboardTab = new Button("//a[@title='Dashboard']", "Dashboard tab");
+	Button audienceTab = new Button("//a[@href='/#/audience']", "Audience tab");
+	Button activitiesTab = new Button("//a[@href='/#/activities']", "Activities tab");
+	Button donationTab = new Button("//a[@href='/#/insight/donations']", "Donations tab");
+	Button dashboardTab = new Button("//a[@href='/#/dashboard']", "Dashboard tab");
 	
 	//Top navigation bar
 	Button settingsTab = new Button("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");

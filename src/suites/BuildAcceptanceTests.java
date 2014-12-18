@@ -21,9 +21,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		"createOrg.status",
 		"createOrg.featureList" })
 	
-	public void createOrgTest(String login,
-				     	String password,	     	
-				     	String domainType,
+	public void createOrgTest(String domainType,
 						String orgName,
 						String orgDescrption,
 						String firstName,

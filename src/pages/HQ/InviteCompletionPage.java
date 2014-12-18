@@ -63,7 +63,7 @@ public class InviteCompletionPage extends Browser {
 		//Design form
 		primaryColorField.waitElement();
 		fileField.setAttribute("class", "ng-pristine ng-valid");
-		fileField.type(new File("images\\YM.jpg").getAbsolutePath());
+		fileField.type(new File("images\\image.jpg").getAbsolutePath());
 		primaryColorField.type("#BD1335");
 		secondaryColorField.type("#16B816");
 		tertiaryColorField.type("#343BB0");

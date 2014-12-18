@@ -8,11 +8,40 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import pages.HQ.LoginPage;
+import pages.HQ.Activities.DonationWidget;
 import selenium.CommonUtils;
 import selenium.EmailClient;
 import selenium.SeleneseTestCase;
 
 public class ActivitiesTests extends SeleneseTestCase{
+	
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "donation.recurringDonation"})
+	//@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
+	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, Boolean recurringDonation) 
+	{		
+		widgetName = widgetName + CommonUtils.getUnicName();
+		String widgetTitle = "Title " + CommonUtils.getUnicName();
+		LoginPage loginPage = new LoginPage();
+			
+		DonationWidget widget = loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		openActivitiesPage().
+		openFundraisingWidgetPage().
+		openAddDonationWidgetPage().
+		createDonationWidgetSetupStep(widgetName, widgetDescription).
+		createDonationWidgetDesignWidgetStep().
+		hosteWidgetOnLocalPage(widgetTitle, true).
+		saveDonationWidgetLink().
+		openDonationWidget();
+		
+		if (recurringDonation) {
+			CommonUtils.setProperty("recurringWidgetName", widgetName);
+		}else{
+			CommonUtils.setProperty("oneTimeWidgetName", widgetName);
+		}
+		CommonUtils.checkAndFail("makeDonationTest");
+		return widget;
+	}
 	
 	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
 		"donation.personEmail",
@@ -53,20 +82,10 @@ public class ActivitiesTests extends SeleneseTestCase{
 			Boolean isEmail) 
 	{		
 		widgetName = widgetName + CommonUtils.getUnicName();
-		String widgetTitle = "Title " + CommonUtils.getUnicName();
-		LoginPage loginPage = new LoginPage();
 		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
 		
 		String status = "CHARGE";		
-		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
-		openActivitiesPage().
-		openFundraisingWidgetPage().
-		openAddDonationWidgetPage().
-		createDonationWidgetSetupStep(widgetName, widgetDescription).
-		createDonationWidgetDesignWidgetStep().
-		hosteWidgetOnLocalPage(widgetTitle, true).
-		openDonationWidget().
+		createDonationWidgetTest(widgetName, widgetDescription, recurringDonation).
 		fillDonationForm(personEmail,
 				personFName,
 				personLName,
