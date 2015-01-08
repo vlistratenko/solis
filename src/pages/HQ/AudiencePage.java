@@ -6,8 +6,8 @@ import pages.HQ.Supporters.SupportersPage;
 
 public class AudiencePage extends HomePage{
 
-	Button supportersButton = new Button("//a[text()='supporters']", "Supporters");
-	Button segmentsButton = new Button("//a[text()='segments']", "Segments");
+	Button supportersButton = new Button("//a[text()='Supporters']", "Supporters");
+	Button segmentsButton = new Button("//a[text()='Segments']", "Segments");
 	
 	public SupportersPage openSupportersPage() {
 		

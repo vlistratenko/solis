@@ -4,7 +4,7 @@ import objects.Button;
 
 public class SubscribeWidgetPage extends ActivitiesPage{
 	
-	Button createSubscribeWidgetButton = new Button("//a[contains(text(), 'Create a Signup Widget')]", "Create a Signup Widget");
+	Button createSubscribeWidgetButton = new Button("//a[contains(text(), 'Create a Sign-up Form')]", "Create a Signup Form");
 
 	public AddSubscribeWidgetPage openAddSubscribeWidgetPage() {
 		createSubscribeWidgetButton.click();

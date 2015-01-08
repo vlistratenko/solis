@@ -11,7 +11,7 @@ public class UnsubscribePage extends Browser{
 	TextBox emailField = new TextBox("//input[@name='PersonContact@Email@Value']", "Email");
 	Button unsubscribeButton = new Button("//input[@value='Unsubscribe']", "Unsubscribe");
 	Label unsubscribeIsSuccesLabel = new Label("//div[@class='result']", "Unsubscribe is success message");
-	Label introductoryTextLabel = new Label("//form/p", "Introductory text");
+	Label introductoryTextLabel = new Label("//form/p[2]", "Introductory text");
 	
 	public UnsubscribePage fillUnsubscribeForm(String personEmail) 
 	{

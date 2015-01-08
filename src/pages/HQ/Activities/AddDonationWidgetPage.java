@@ -11,8 +11,8 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	String widgetName;
 	TextBox widgetNameField = new TextBox("//input[@name='name']", "Widget Name", true);
 	TextBox widgetDescriptionField = new TextBox("//textarea[@name='description']", "Widget description", false);
-	Button nextButton = new Button("//a[@id='btnCompose2']", "Design My Widget button", true);
-	Button publishButton = new Button("//a[@id='btnPublish']", "Publish button", true);
+	Button nextButton = new Button("//button[@id='btnCompose2']", "Design My Widget button", true);
+	Button publishButton = new Button("//button[@id='btnPublish']", "Publish button", true);
 	CheckBox iNeedHostedPageCheckBox = new CheckBox("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	CheckBox iNeedWidgetCodeCheckBox = new CheckBox("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
 	
@@ -63,7 +63,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 		widgetLink = new Button("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		currentWindowHandle = getWindowHandle();
 		CommonUtils.setProperty("donationWidgetLink", widgetLink.getAttribute("href"));
-		return new AddDonationWidgetPage();
+		return this;
 	}
 
 }

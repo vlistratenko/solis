@@ -21,7 +21,8 @@ public class SupportersAddPage extends HomePage{
 	TextBox supporterFaceBookField = new TextBox("//input[@id='SocialFacebook']", "FaceBook");
 	TextBox supporterTwitterField = new TextBox("//input[@id='SocialTwitter']", "Twitter");
 	TextBox supporterGooglePlusField  = new TextBox("//input[@id='SocialGooglePlus']", "GooglePlus");
-	Label supporterStatusLabel = new Label("//p[contains(text(), 'ubscribed')]", "Status");
+	Label supporterStatusRadio = new Label("//span[@class='subscription custom radio checked']/ancestor::label", "Status");
+	Label supporterStatusLabel = new Label("//p[.='Unsubscribed']", "Status");
 	Button saveButton = new Button("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
 	
 	public SupportersPage createNewSupporter() {
@@ -53,23 +54,23 @@ public class SupportersAddPage extends HomePage{
 		verify(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verify(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verify(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
-		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrueWithRefersh(supporterStatusLabel.getText().equalsIgnoreCase(status), 30000)) {
-				break;
-			}
-		}
-		verify(supporterStatusLabel.getText(), status, "Wrong status", false);
+		verifySupporterStatus(status);
 		return new SupportersPage();
 	}
 	
 	public SupportersPage verifySupporterStatus(String status) {
-		
+		Label tempElement;
+		if (status.equalsIgnoreCase("Unsubscribed")) {
+			tempElement = supporterStatusLabel;
+		}else{
+			tempElement = supporterStatusRadio;
+		}
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrueWithRefersh(supporterStatusLabel.getText().equalsIgnoreCase(status), 30000)) {
+			if (waitConditionBecomesTrueWithRefersh(tempElement.getText().equalsIgnoreCase(status), 30000)) {
 				break;
 			}
 		}
-		verify(supporterStatusLabel.getText(), status, "Wrong status", false);
+		verify(tempElement.getText(), status, "Wrong status", false);
 		return new SupportersPage();
 	}
 	

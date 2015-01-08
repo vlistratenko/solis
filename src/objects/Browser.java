@@ -165,15 +165,14 @@ public abstract class Browser{
 	protected void verify(Object actual, Object expected, String message, Boolean fail){
 		try {
 			Assert.assertEquals(actual, expected);
-			SeleneseTestCase.bug.add("Success " + message.replace(" not", "") + ". Expected [" + expected + "] but was [" + actual + "]");
+			SeleneseTestCase.bug.add("Success " + ". Expected [" + expected + "] was [" + actual + "]");
 		} catch (AssertionError e) {
 			//bug.add(message + " - " + e.getMessage());
 			if (fail){				
 				throw new AssertionFailedError(message + " - " + e.getMessage());
 			}else{
-				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]");
+				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]" + " <a href='file:///" + SeleneseTestCase.makeScreenshot(message).getAbsolutePath() + "'> Screenshot </a>");
 				logger.error("Verification error: " + message + " - " + e.getMessage());
-				SeleneseTestCase.makeScreenshot(message);
 				CommonUtils.setParam("testResult", "fail");
 			};
 		}		

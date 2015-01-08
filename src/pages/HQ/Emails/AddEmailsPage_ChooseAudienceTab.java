@@ -13,7 +13,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button SelectedSegmentsOrSupporters  = new Button("//span[contains(@ng-class, '!blast.sendToAllSelected')]", " Selected segments of your list, or specific supporters");
 	Button ComposeButton = new Button("//button[@id='btnCompose']", "Next: Compose Your Email");
 	
-	TextBox addSupportersField = new TextBox("//input[contains(@placeholder,'Find supporters')]", "Manually add supporters");
+	TextBox addSupportersField = new TextBox("//p[contains(text(), 'Want to add some additional folks to this blast?')]/following-sibling::div/descendant::input", "Manually add supporters");
 	Button suppirtersItemInTheSearchButton = new Button("//div[@class='row result fade-out ng-scope']", "Supporters item in the search result", false);
 	
 	public AddEmailsPage_ChooseAudienceTab selectAudienceType(String type) {

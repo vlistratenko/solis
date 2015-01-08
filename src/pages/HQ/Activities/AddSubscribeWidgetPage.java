@@ -10,8 +10,8 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	String currentWindowHandle;
 	TextBox widgetNameField = new TextBox("//input[@name='name']", "Widget name");
 	TextBox widgetDescriptionField = new TextBox("//textarea[@name='description']", "Widget Description");
-	Button openComposeStepButton = new Button("//a[@id='btnCompose']", "Compose");
-	Button openPublishStepButton = new Button("//a[@id='btnPublish']", "Publish");
+	Button openComposeStepButton = new Button("//button[@id='btnCompose']", "Compose");
+	Button openPublishStepButton = new Button("//button[@id='btnPublish']", "Publish");
 	CheckBox iNeedHostedPageCheckBox = new CheckBox("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	CheckBox iNeedWidgetCodeCheckBox = new CheckBox("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
 	TextBox titleField = new TextBox("//input[@ng-model='widget.page.title']", "Title");
