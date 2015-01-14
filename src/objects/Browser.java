@@ -50,10 +50,11 @@ public abstract class Browser{
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl());
 	}
 	
-	protected void logOut(){		
+	protected LoginPage logOut(){		
 		deletecoockies();	
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");		
 		sleep(5000);
+		return new LoginPage();
 	}
 	
 	protected void open(String url){		
@@ -230,7 +231,8 @@ public abstract class Browser{
 	}
 	
 	public Boolean waitConditionBecomesTrueWithRefersh(Boolean condition, Integer timeOut) {
-		if (!condition) {			
+		if (!condition) {	
+			
 			sleep(timeOut);	
 			refresh();
 			sleep(3000);	
@@ -238,6 +240,12 @@ public abstract class Browser{
 		}else{
 			return true;
 		}
+		
+	}
+	
+	public Boolean waitConditionBecomesTrueWithRefersh(Boolean condition, Integer timeOut, String message) {
+		logger.info(message);
+		return waitConditionBecomesTrueWithRefersh(condition, timeOut);
 		
 	}
 	

@@ -1,8 +1,8 @@
 package tests;
 
+import junit.framework.AssertionFailedError;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import pages.Admin.LoginPageAdmin;
 import pages.HQ.LoginPage;
 import selenium.CommonUtils;
@@ -10,7 +10,7 @@ import selenium.EmailClient;
 import selenium.SeleneseTestCase;
 
 public class AdminTest extends SeleneseTestCase{
-	@Test(priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
+	@Test( priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({ "admin.login",
      	"admin.password",     	
      	"createOrg.domainType",
@@ -20,7 +20,6 @@ public class AdminTest extends SeleneseTestCase{
 		"createOrg.lastName",		
 		"createOrg.status",
 		"createOrg.featureList" })
-	
 	public AdminTest createOrgTest(String domainType,
 						String orgName,
 						String orgDescrption,

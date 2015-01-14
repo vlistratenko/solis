@@ -102,5 +102,10 @@ public class Button extends Element implements iButton {
 		logger.info("Check that " + elementName + " is not displayed.");
 		return super.isNotDisplayed(path);
 	}
+	
+	public boolean isNotExists() {
+		logger.info("Check that " + elementName + " is not exists.");
+		return super.isNotElementPresent(path);
+	}
 
 }

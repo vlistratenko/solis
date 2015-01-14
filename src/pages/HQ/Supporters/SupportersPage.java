@@ -34,7 +34,7 @@ public class SupportersPage extends AudiencePage{
 
 	public SupportersPage searchSupporter(String personEmail) {
 		searchField.type(personEmail);
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			doSearchButton.click();
 			if (waitConditionBecomesTrue(supportersTable.isValueExists(personEmail)>0, 15000)) {
 				break;

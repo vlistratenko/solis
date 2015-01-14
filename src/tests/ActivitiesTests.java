@@ -19,7 +19,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 	//@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
 	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, Boolean recurringDonation) 
 	{		
-		widgetName = widgetName + CommonUtils.getUnicName();
+		//widgetName = widgetName + CommonUtils.getUnicName();
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
 			
@@ -39,7 +39,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		}else{
 			CommonUtils.setProperty("oneTimeWidgetName", widgetName);
 		}
-		CommonUtils.checkAndFail("makeDonationTest");
+		
 		return widget;
 	}
 	
@@ -84,7 +84,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		widgetName = widgetName + CommonUtils.getUnicName();
 		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
 		
-		String status = "CHARGE";		
+		String status = "COMPLETE";		
 		createDonationWidgetTest(widgetName, widgetDescription, recurringDonation).
 		fillDonationForm(personEmail,
 				personFName,

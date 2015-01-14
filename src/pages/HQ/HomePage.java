@@ -47,6 +47,7 @@ public class HomePage extends Browser{
 	TextBox fromNameConfigNewOrgPage = new TextBox("//input[@name='fromName']", "From Name", true); 
 	TextBox fromAddressConfigNewOrgPage = new TextBox("//input[@name='fromAddress']", "From Address", true);
 	TextBox replyAddressConfigNewOrgPage = new TextBox("//input[@name='replyAddress']", "Reply Address", true);
+	Button buyButton = new Button("//a[@href='/#/purchase']", "Buy");
 	
 	public HomePage verifyUserNameDisplayed() {
 		verify(userlabel.isDisplayed(), true, "Drop with user name is not visible");
@@ -104,6 +105,13 @@ public class HomePage extends Browser{
 		
 	}
 
+	public PurchasePage clickBuyButton() {
+		sleep(5000);
+		buyButton.click();
+		sleep(5000);
+		return new PurchasePage();
+		
+	}
 	public HomePage configureNewOrg(String email, String zip, String city) {
 		sleep(10000);
 		if (getLocation().contains("/configure/new-organization")) {

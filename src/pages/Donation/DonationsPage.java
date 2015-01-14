@@ -29,7 +29,7 @@ public class DonationsPage extends HomePage{
 		}
 		verify(donationsTable.getCallValue(1, "Status"), status, "Wrong status", false);
 		verify(donationsTable.getCallValue(1, "Type"), dType, "Wrong type", false);
-		verify(donationsTable.getCallValue(1, "Source"), source, "Wrong source", false);
+		verify(source.contains(donationsTable.getCallValue(1, "Source")), true, "Wrong source " + donationsTable.getCallValue(1, "Source"), false);
 		verify(donationsTable.getCallValue(1, "Supporter"), supporter, "Wrong supporter", false);
 		return new DonationsPage();
 	}

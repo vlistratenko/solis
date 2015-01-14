@@ -15,9 +15,9 @@ public class AddNewOrgPage extends HomePageAdmin{
 	TextBox firstName = new TextBox("//input[@id='firstName']", "First Name");
 	TextBox lastName = new TextBox("//input[@id='lastName']", "Last Name");
 	TextBox PhoneNumber = new TextBox("//input[@id='phone']", "Phone Number");
-	DropDown domainType = new DropDown("//div[@id='domainType_panel']", "//label[@id='domainType_label']", "Domain type");
-	Button standardStatus = new Button("//input[@id='status:0']", "Status");
-	Button trialStatus = new Button("//input[@id='status:1']", "Status");
+	DropDown statusType = new DropDown("//div[@id='status_panel']", "//label[@id='status_label']", "Status type");
+	/*Button standardStatus = new Button("//input[@id='status:0']", "Status");
+	Button trialStatus = new Button("//input[@id='status:1']", "Status");*/
 	TextBox crmID = new TextBox("//input[@id='crm']", "CRM id");
 	TextBox customDomain = new TextBox("//input[@id='customDomain']", "Custom Domain");
 	Button createButton = new Button("//button[@id='createOrg']", "Create button");
@@ -45,11 +45,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 		firstName.type(firstNameValue);
 		lastName.type(lastNameValue);
 		PhoneNumber.type("23" + CommonUtils.getRandomNumericValueFixedLength(9));
-		if (statusValue.equalsIgnoreCase("Standard")) {
-			standardStatus.click();
-		}else if (statusValue.equalsIgnoreCase("Trial")) {
-			trialStatus.click();
-		}
+		statusType.selectByLabel(statusValue);
 		//featureList.selectByLabel(featureListValue);
 		crmID.type(CommonUtils.getUnicName());
 		createButton.click();

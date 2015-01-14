@@ -2,7 +2,7 @@
 <suite name="AcceptanceTests" parallel="false" thread-count="1">
   	<parameter name="bpath" value="*firefox"></parameter><!-- *iexplore*firefox -->
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
-  	<parameter name="USED_ENVIRONMENT" value="PROD"></parameter>
+  	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<!-- parameter name="TestLink" value="https://admin.test.ignite.net"></parameter> -->
    	<listeners>
     	<listener class-name="selenium.MyTestListener" />

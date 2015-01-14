@@ -22,6 +22,7 @@ public class Label extends Element implements iLabel {
 	@Override
 	public String getText() {
 		logger.info("Get text from " + elementName);
+		logger.info("Text is " + super.getText(path));
 		return super.getText(path);
 	}
 
@@ -54,5 +55,15 @@ public class Label extends Element implements iLabel {
 	public boolean isNotDisplayed() {
 		logger.info("Check that " + elementName + " is not displayed.");
 		return super.isNotDisplayed(path);
+	}
+	
+	public boolean isExists() {
+		logger.info("Check that " + elementName + " is not exists.");
+		return super.isElementPresent(path);
+	}
+	
+	public boolean isNotExists() {
+		logger.info("Check that " + elementName + " is not exists.");
+		return super.isNotElementPresent(path);
 	}
 }

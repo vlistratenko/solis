@@ -1,22 +1,43 @@
 package selenium;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
 import com.mailosaur.MailboxApi;
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
 import com.mailosaur.model.Link;
+import com.sun.mail.smtp.SMTPTransport;
 
 public class EmailClient {
 	public static String mbox = "4441b2bf";
@@ -60,6 +81,12 @@ public class EmailClient {
 		HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 		mBoxAPI = getClient();
 	}
+	
+	
+	public EmailClient(Boolean isForSend){
+
+	}
+	
 	
 	public MailboxApi getClient() {
 		
@@ -216,5 +243,75 @@ public class EmailClient {
 		}
 		return this;
 	}
+	
+	public void sendEmail(String subj, String mailMessage, File attach) throws AddressException, MessagingException
+	   {   
+			
+		 Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+	        final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+	        // Get a Properties object
+	        Properties props = System.getProperties();
+	        props.setProperty("mail.smtps.host", "smtp.gmail.com");
+	        props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+	        props.setProperty("mail.smtp.socketFactory.fallback", "false");
+	        props.setProperty("mail.smtp.port", "465");
+	        props.setProperty("mail.smtp.socketFactory.port", "465");
+	        props.setProperty("mail.smtps.auth", "true");
+
+	        /*
+	        If set to false, the QUIT command is sent and the connection is immediately closed. If set 
+	        to true (the default), causes the transport to wait for the response to the QUIT command.
+
+	        ref :   http://java.sun.com/products/javamail/javadocs/com/sun/mail/smtp/package-summary.html
+	                http://forum.java.sun.com/thread.jspa?threadID=5205249
+	                smtpsend.java - demo program from javamail
+	        */
+	        props.put("mail.smtps.quitwait", "false");
+
+	        Session session = Session.getInstance(props, null);
+
+	        // -- Create a new message --
+	        final MimeMessage msg = new MimeMessage(session);
+
+	        // -- Set the FROM and TO fields --
+	        msg.setFrom(new InternetAddress("autoBot@salsalabs.com"));
+	        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("qa@salsalabs.com", false));
+	        /*if (ccEmail.length() > 0) {
+	            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
+	        }*/
+
+	        msg.setSubject(subj);
+//	        msg.setText(mailMessage, "utf-8");
+	        msg.setSentDate(new Date());
+	     // Create the message part 
+	         BodyPart messageBodyPart = new MimeBodyPart();
+
+	         // Fill the message
+	         messageBodyPart.setText(mailMessage);
+	         
+	         // Create a multipar message
+	         Multipart multipart = new MimeMultipart();
+
+	         // Set text message part
+	         multipart.addBodyPart(messageBodyPart);
+
+	         // Part two is attachment
+	         messageBodyPart = new MimeBodyPart();
+	         DataSource source = new FileDataSource(attach.getAbsolutePath());
+	         messageBodyPart.setDataHandler(new DataHandler(source));
+	         messageBodyPart.setFileName(attach.getName());
+	         multipart.addBodyPart(messageBodyPart);
+
+	         // Send the complete message parts
+	         msg.setContent(multipart );
+	        
+	        SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
+
+	        t.connect("smtp.gmail.com", "vavramchuk@salsalabs.com", "Vitalik3124");
+	        t.sendMessage(msg, msg.getAllRecipients());      
+	        t.close();
+	    }
+	   
 	
 }

@@ -36,7 +36,7 @@ public class LoginPage extends Browser{
 	public HomePage doSuccessLogin(String userName, String password) {
 		open();
 		sleep(3000);
-		if(new HomePage().dashboardTab.isNotDisplayed()) {
+		if(new HomePage().dashboardTab.isNotExists()) {
 			logOut();
 			LoginField.type(userName);
 			PasswordField.removeAttribute("readonly");

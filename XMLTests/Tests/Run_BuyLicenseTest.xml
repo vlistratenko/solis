@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Post" parallel="false" thread-count="1">
+  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+  	<parameter name="USED_ENVIRONMENT" value="UAT"></parameter>
+  	<parameter name="trial.login" value="141.3e41c646@mailosaur.in"></parameter>
+    <parameter name="trial.password" value="!QAZ2wsx"></parameter>
+  	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
+   	<listeners>
+    	<listener class-name="selenium.MyTestListener" />
+  	</listeners>
+  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
+  	</test>  
+ </suite>

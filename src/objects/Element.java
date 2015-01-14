@@ -414,12 +414,22 @@ abstract class Element {
 	
 
 		
-	protected Boolean isElementPresent(String locator){		
+	public Boolean isElementPresent(String path){		
 		Browser.implicityWait(1);
-		logger.debug("Check is element " + locator + " present on the page");
+		logger.debug("Check is element " + path + " present on the page");
 		Boolean is;
-		is = findElementsByXpath(locator).size() != 0;
-		if(is) is = findElementByXpath(locator).isDisplayed();
+		is = findElementsByXpathWithOutWait(path).size() != 0;
+		if(is) is = isDisplayed(path);
+		logger.debug("isElementPresent returns " + is);
+		Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
+		return is;				
+	}
+	
+	public Boolean isNotElementPresent(String path){		
+		Browser.implicityWait(1);
+		logger.debug("Check is element " + path + " present on the page");
+		Boolean is;
+		is = findElementsByXpathWithOutWait(path).size() == 0;
 		logger.debug("isElementPresent returns " + is);
 		Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
 		return is;				
@@ -486,11 +496,18 @@ abstract class Element {
 	
 	protected List<WebElement> findElementsByXpath(String xpath){		
 		setImplicity(30);
+		List<WebElement> l = findElementsByXpathWithOutWait(xpath);
+		setImplicity(defaultTimeOut);
+		return l;
+						
+	}
+	
+	protected List<WebElement> findElementsByXpathWithOutWait(String xpath){		
 		xpath.replace("[0]", "");
 		logger.debug("Try to find elements " + xpath);
 		List<WebElement> elem = driver.findElements(By.xpath(xpath));
 		logger.debug(elem.size() + " elements were found");
-		setImplicity(defaultTimeOut);
+
 		return elem;
 						
 	}
