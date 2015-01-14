@@ -13,5 +13,35 @@
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
+  	</test>
+	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
   	</test>  
+  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
+  	</test>  
+  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
+  	</test>  
+  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
+  	</test>  
+  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+     	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
+     	<classes>
+      		<class name="tests.BuyLicenseTest"/>
+    	</classes>
+  	</test>   
  </suite>
