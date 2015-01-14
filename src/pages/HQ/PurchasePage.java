@@ -25,8 +25,8 @@ public class PurchasePage extends Browser {
 				e.printStackTrace();
 			}
 		}
-		verify(priceLabel.getText().equalsIgnoreCase("$undefined"), false, "Price is not correct. " + priceLabel.getText(), false);
-		verify(processingIconLabel.isNotExists(), true, "Processing icon is not hiden", false);
+		verify(priceLabel.getText().equalsIgnoreCase("$undefined"), false, "Price is not correct. " + priceLabel.getText());
+		verify(processingIconLabel.isNotExists(), true, "Processing icon is not hiden");
 		return this;
 	}
 	
