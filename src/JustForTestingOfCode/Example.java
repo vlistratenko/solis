@@ -40,12 +40,8 @@ import java.util.regex.Pattern;
 public class Example {
 	public static void main(String[] args) throws Exception {
 		// Start the BrowserMob proxy
-		ProxyServer server = new ProxyServer(9101);
-		try {
-			server.start();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		ProxyServer server = new ProxyServer(8888);
+		server.start();
 
 		server.addResponseInterceptor(new HttpResponseInterceptor()
 		{
@@ -60,7 +56,7 @@ public class Example {
 
 		// Get selenium proxy
 		Proxy proxy = server.seleniumProxy();
-		proxy.setHttpProxy("localhost:9101");
+		proxy.setHttpProxy("localhost:8888");
 		// Configure desired capability for using proxy server with WebDriver
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability(CapabilityType.PROXY, proxy);
