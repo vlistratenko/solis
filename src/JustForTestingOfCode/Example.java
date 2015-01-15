@@ -13,15 +13,13 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import net.lightbody.bmp.proxy.ProxyServer;
+import net.lightbody.bmp.proxy.http.BrowserMobHttpResponse;
+import net.lightbody.bmp.proxy.http.ResponseInterceptor;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.protocol.HttpContext;
-import org.browsermob.proxy.ProxyServer;
-import org.browsermob.proxy.jetty.http.HttpException;
-
-
-
-
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -47,14 +45,13 @@ public class Example {
 			// TODO: handle exception
 		}
 
-		server.addResponseInterceptor(new HttpResponseInterceptor()
+		server.addResponseInterceptor(new ResponseInterceptor()
 		{
-		    @Override
-		    public void process(HttpResponse response, HttpContext context)
-		        throws HttpException, IOException
-		    {
-		        System.out.println(response.getStatusLine());
-		    }
+			@Override
+			public void process(BrowserMobHttpResponse arg0) {
+				System.out.println(arg0.getBody());
+				
+			}
 
 		});
 
@@ -68,7 +65,8 @@ public class Example {
 		// Set up driver
 		try {
 			WebDriver driver = new FirefoxDriver(capabilities);
-
+			//server.newHar("mail.ru"); 
+			//server.whitelistRequests("https://mail.ru,https://hq.test.ignite.net,http://jenkins.salsalabs.net/".split(","), 200);
 			driver.get("https://hq.test.ignite.net");
 
 			// Close the browser

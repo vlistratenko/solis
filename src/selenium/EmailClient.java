@@ -277,9 +277,7 @@ public class EmailClient {
 	        // -- Set the FROM and TO fields --
 	        msg.setFrom(new InternetAddress("autoBot@salsalabs.com"));
 	        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("qa@salsalabs.com", false));
-	        /*if (ccEmail.length() > 0) {
-	            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
-	        }*/
+            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("vavramchuk@salsalabs.com", false));
 
 	        msg.setSubject(subj);
 //	        msg.setText(mailMessage, "utf-8");

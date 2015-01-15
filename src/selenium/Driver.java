@@ -6,8 +6,6 @@ import java.io.IOException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.protocol.HttpContext;
-import org.browsermob.proxy.ProxyServer;
-import org.browsermob.proxy.jetty.http.HttpException;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 //import org.openqa.selenium.WebDriverBackedSelenium;

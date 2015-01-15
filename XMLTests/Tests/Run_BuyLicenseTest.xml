@@ -8,37 +8,37 @@
    	<listeners>
     	<listener class-name="selenium.MyTestListener" />
   	</listeners>
-  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+  	<test verbose="2" name="BuyLicenseAnnualTest1" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
   	</test>
-	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+	<test verbose="2" name="BuyLicenseAnnualTest2" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
   	</test>  
-  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+  	<test verbose="2" name="BuyLicenseAnnualTest3" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
   	</test>  
-  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+  	<test verbose="2" name="BuyLicenseAnnualTest4" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
   	</test>  
-  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+  	<test verbose="2" name="BuyLicenseAnnualTest5" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>
     	</classes>
   	</test>  
-  	<test verbose="2" name="BuyLicenseAnnualTest" annotations="JDK" >    	
+  	<test verbose="2" name="BuyLicenseAnnualTest6" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
       		<class name="tests.BuyLicenseTest"/>

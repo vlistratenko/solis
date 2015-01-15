@@ -66,4 +66,15 @@ public class Label extends Element implements iLabel {
 		logger.info("Check that " + elementName + " is not exists.");
 		return super.isNotElementPresent(path);
 	}
+	
+	public boolean waitForNotExists(Integer timeOut) {
+		for (int i = 0; i < timeOut; i++) {
+			if (isNotExists()) {
+				break;
+			}else{
+				sleep(1000);
+			}
+		}
+		return isNotExists();
+	}
 }
