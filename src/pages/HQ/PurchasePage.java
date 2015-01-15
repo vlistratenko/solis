@@ -22,7 +22,7 @@ public class PurchasePage extends Browser {
 	public PurchasePage verifyPriceExist(Boolean sendEmails) {
 		priceLabel.highlight();
 		String price = priceLabel.getText();
-		String[] prices = {"$160.00", "$314.00", "$1,188.00"};
+		String[] prices = {"$160", "$314", "$1188","$160.00", "$314.00", "$1,188.00"};
 		if (!Arrays.asList(prices).contains(price) && sendEmails) {
 			try {
 				new EmailClient().sendEmail("Wrong price", "Wrong price " + price, SeleneseTestCase.makeScreenshot("WrongPrice" + CommonUtils.getUnicName()));
