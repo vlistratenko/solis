@@ -81,7 +81,7 @@ public class Driver {
 	}
 	
 	private static WebDriver getChromeDiver(){		
-		//System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
 		return new ChromeDriver();
 	}
 	
