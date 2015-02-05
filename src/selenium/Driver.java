@@ -8,6 +8,7 @@ import org.apache.http.HttpResponseInterceptor;
 import org.apache.http.protocol.HttpContext;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -29,24 +30,28 @@ public class Driver {
 		return  new WebDriverBackedSelenium(driver, baseUrl);
 	}
 	
-	public WebDriver get_driver(String driver) {
+	public WebDriver getDriver(String driver) {
 		if (driver.equals("*firefox")) {
 			
 			try {
-				return get_firefox_driver();
+				return getFirefoxDriver();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-		if (driver.equals("*iexplore")) {
-			return get_iedriver_driver();
+		if (driver.equals("*iexplorer")) {
+			return getIEDriver();
+		}
+		
+		if (driver.equals("*chrome")) {
+			return getChromeDiver();
 		}
 		return null;
 	}
 	
-	private static WebDriver get_firefox_driver() throws IOException {		
+	private static WebDriver getFirefoxDriver() throws IOException {		
 		/*ProxyServer server = new ProxyServer(9978);
 		try {
 			server.start();
@@ -75,7 +80,13 @@ public class Driver {
 		return new FirefoxDriver(/*capabilities*/);
 	}
 	
-	private static WebDriver get_iedriver_driver() {		
+	private static WebDriver getChromeDiver(){		
+		//System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
+		return new ChromeDriver();
+	}
+	
+	private static WebDriver getIEDriver() {
+		System.setProperty("webdriver.ie.driver", "lib/IEDriverServer.exe");
 		return new InternetExplorerDriver();
 	}
 	
