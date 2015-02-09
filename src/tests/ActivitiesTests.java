@@ -15,9 +15,9 @@ import selenium.SeleneseTestCase;
 
 public class ActivitiesTests extends SeleneseTestCase{
 	
-	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "donation.recurringDonation"})
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName", "donation.recurringDonation"})
 	//@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
-	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, Boolean recurringDonation) 
+	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, String widgetLayoutName, Boolean recurringDonation) 
 	{		
 		//widgetName = widgetName + CommonUtils.getUnicName();
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
@@ -29,6 +29,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openFundraisingWidgetPage().
 		openAddDonationWidgetPage().
 		createDonationWidgetSetupStep(widgetName, widgetDescription).
+		selectLayoutForDanationWidgetStep(widgetLayoutName).
 		createDonationWidgetDesignWidgetStep().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		saveDonationWidgetLink().
@@ -43,7 +44,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		return widget;
 	}
 	
-	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName",
 		"donation.personEmail",
 		"donation.personFName",
 		"donation.personLName",
@@ -62,7 +63,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		"donation.isNewsletter",
 		"donation.isEmail"})
 	@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
-	public void makeDonationTest(String widgetName, String widgetDescription,
+	public void makeDonationTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
 			String personLName,
@@ -83,9 +84,11 @@ public class ActivitiesTests extends SeleneseTestCase{
 	{		
 		widgetName = widgetName + CommonUtils.getUnicName();
 		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
-		
-		String status = "COMPLETE";		
-		createDonationWidgetTest(widgetName, widgetDescription, recurringDonation).
+		String status = "COMPLETE";
+		if (!recurringDonation) {
+			status = "CHARGE";
+		}		
+		createDonationWidgetTest(widgetName, widgetDescription, widgetLayoutName, recurringDonation).
 		fillDonationForm(personEmail,
 				personFName,
 				personLName,
@@ -146,14 +149,14 @@ public class ActivitiesTests extends SeleneseTestCase{
 			Boolean recurringDonation) 
 	{
 		LoginPage loginPage = new LoginPage();
-		String status= "CHARGE";		
+		String status= "";		
 		String widgetName;		
 		if (recurringDonation) {
 			widgetName = CommonUtils.getProperty("recurringWidgetName");
-			//status = "AUTHORIZE";
+			status = "COMPLETE";
 		}else{
 			widgetName = CommonUtils.getProperty("oneTimeWidgetName");
-			//status = "CHARGE";
+			status = "CHARGE";
 		}
 		
 		loginPage.
@@ -177,9 +180,9 @@ public class ActivitiesTests extends SeleneseTestCase{
 		verifyDonationAfterRefund("Refund", recurringDonation);
 	}
 
-	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription"})
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName"})
 	@Test( priority=10, groups = {"activities.createSubscribeForm"}, description = "")
-	public void createSubscribeWidget(String widgetName, String widgetDescription) 
+	public void createSubscribeWidget(String widgetName, String widgetDescription, String widgetLayoutName) 
 	{	
 		widgetName = widgetName + CommonUtils.getUnicName();
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
@@ -191,6 +194,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openSubscribeWidgetsPage().
 		openAddSubscribeWidgetPage().
 		fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription).
+		selectLayoutForSubscribeWidgetStep(widgetLayoutName).
 		fillFieldsSubscribeWidgetStepTwo().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		openSubscribeWidget().

@@ -17,6 +17,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	TextBox titleField = new TextBox("//input[@ng-model='widget.page.title']", "Title");
 	Button saveAndPublish = new Button("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
 	Button widgetLink;
+	Button layoutButton = new Button("//*[.='layoutName']", "Layout label");
 	
 	
 
@@ -28,9 +29,17 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		sleep(10000);
 		return this;		
 	}
+	
+	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep(String layoutName) {
+		layoutButton.changePath("layoutName", layoutName);
+		layoutButton.click();
+		sleep(5000);
+		return this;
+	}
 
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {		
 		openPublishStepButton.click();
+		sleep(10000);
 		return this;		
 	}
 	

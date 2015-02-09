@@ -32,7 +32,7 @@ public class DonationsDetailsPage extends DonationsPage{
 		verify(mainPanel.isValueExists(zip)>0, true, "Element with zip does not exist", false);
 		verify(donationsTable.getCallValue(1, "Amount"), donationAmountInTable, "Wrong amount", false);
 		verify(donationsTable.getCallValue(1, "Type"), dType, "Wrong type", false);
-		verify(donationsTable.getCallValue(1, "Status").toLowerCase(), status.toLowerCase(), "Wrong", false);
+		verify(donationsTable.getCallValue(1, "Status").toLowerCase(), "CHARGE".toLowerCase(), "Wrong", false);
 		verify(statusLabel.getText().toLowerCase(), status.toLowerCase(), "Wrong status", false);
 		if (recurringDonation) {
 			verify(cancelAllLink.isDisplayed(), true, "Cancel All  does not exist");
@@ -54,10 +54,10 @@ public class DonationsDetailsPage extends DonationsPage{
 	public void verifyDonationAfterRefund(String status, Boolean recurringDonation) {
 		
 		if (recurringDonation) {
-			verify(donationsTable.getCallValue(1, "Status").toLowerCase(), status.toLowerCase(), "Wrong status", false);
+			verify(donationsTable.getCallValue(2, "Status").toLowerCase(), status.toLowerCase(), "Wrong status", false);
 			verify(statusLabel.getText().toLowerCase(), status.toLowerCase(), "Wrong status", false);
 			verify(refundLink.isNotDisplayed(), true, "Refund link still exists");
-			verify(cancelAllLink.isNotDisplayed(), true, "Cancel All  link still exists");
+			verify(cancelAllLink.isVisible(), false, "Cancel All  link still exists");
 		}else{
 			verify(donationsTable.getCallValue(1, "Status").toLowerCase(), status.toLowerCase(), "Wrong status", false);
 			verify(statusLabel.getText().toLowerCase(), status.toLowerCase(), "Wrong status", false);

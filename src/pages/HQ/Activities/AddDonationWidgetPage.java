@@ -18,6 +18,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	
 	TextBox titleField = new TextBox("//input[@ng-model='widget.page.title']", "Title");
 	Button saveAndPublish = new Button("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
+	Button layoutButton = new Button("//*[.='layoutName']", "Layout label");
 	
 	Button widgetLink;
 	
@@ -30,9 +31,17 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 		return this;
 	}
 	
+	public AddDonationWidgetPage selectLayoutForDanationWidgetStep(String layoutName) {
+		sleep(10000);
+		layoutButton.changePath("layoutName", layoutName);
+		layoutButton.click();
+		sleep(10000);
+		return this;
+	}
 	
 	public AddDonationWidgetPage createDonationWidgetDesignWidgetStep() {
 		publishButton.click();
+		sleep(10000);
 		return this;
 	}
 	

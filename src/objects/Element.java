@@ -215,17 +215,11 @@ abstract class Element {
 	
 	protected void highlight(String locator){		
 		waitObject(locator, cTimeOut*30);
-		try {
-			selenium.highlight(locator);
-		} catch (Exception e) {
-			if (isRequeired) { e.printStackTrace();
-				throw new ElementNotFoundException(elementName, "xpath", locator);
-			}else{
-				logger.error(e.getMessage());
-				e.printStackTrace();
-			}
-		}
-		logger.debug("Element < " + locator + " > was highlighted.");
+		WebElement elem = findElementByXpath(locator);
+	    if (driver instanceof JavascriptExecutor) {
+	        ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red'", elem);
+	    }
+	    logger.debug("Element < " + locator + " > was highlighted.");
 	}
 	
 	protected void clearTextField(String locator){
@@ -340,7 +334,10 @@ abstract class Element {
 	protected void check(String locator){		
 		logger.debug("Check checkbox - < " + locator+" >.");
 		try {
-			selenium.check(locator);
+			WebElement el = findElementByXpath(locator);
+			if (!el.isSelected()) {
+				el.click();
+			}
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -354,7 +351,10 @@ abstract class Element {
 	protected void uncheck(String locator){		
 		logger.debug("Uncheck checkbox - < " + locator+" >.");		
 		try {
-			selenium.uncheck(locator);	
+			WebElement el = findElementByXpath(locator);
+			if (el.isSelected()) {
+				el.click();
+			}	
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -465,9 +465,15 @@ abstract class Element {
 		locator = locator.replace("[0]", "");
 		logger.debug("Try to find element " + locator);
 		List<WebElement> elem = findElementsByXpath(locator);
-		if (elem.size() == 0) {
-			throw new ElementNotFoundException("Element was not found", "xpath", locator);
+
+		while(elem.size() < 1) {
+			if (SeleneseTestCase.isDebugMode) {					
+				elem = findElementsByXpath(locator);
+			}else{
+				throw new ElementNotFoundException("Element was not found", "xpath", locator);
+			}
 		}
+		
 		if (elem.size() == 1) {
 			return driver.findElement(By.xpath(locator));
 		}else{

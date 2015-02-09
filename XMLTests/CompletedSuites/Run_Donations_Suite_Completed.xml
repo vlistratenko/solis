@@ -24,6 +24,7 @@
 		
 		<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
 		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
+		<parameter name="createwidget.widgetLayoutName"  value="Basic"></parameter>
 		<parameter name="donation.personEmail"  value="supbydonate"></parameter>
 		<parameter name="donation.personFName"  value="supByDonateF"></parameter>
 		<parameter name="donation.personLName"  value="supByDonateL"></parameter>

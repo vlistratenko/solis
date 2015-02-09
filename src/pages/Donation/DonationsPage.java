@@ -14,7 +14,7 @@ public class DonationsPage extends HomePage{
 				break;
 			}
 		}
-		verify(donationsTable.isValueExists(source)>0, true, "Donation item is not found");
+		verify(donationsTable.isValueExists(source)>0, true, "Donation item with source " + source + "is not found");
 		
 		String dType;
 		if (!type) {
@@ -25,7 +25,9 @@ public class DonationsPage extends HomePage{
 		verify(donationsTable.getCallValue(1, "Amount"), amount, "Wrong amount", false);
 		//verify(donationsTable.getCallValue(1, "Transaction Date"), expected, message, false);
 		for (int i = 0; i < 15; i++) {
-			waitConditionBecomesTrueWithRefersh(donationsTable.getCallValue(1, "Status").equalsIgnoreCase(status) , 30000);
+			if (waitConditionBecomesTrueWithRefersh(donationsTable.getCallValue(1, "Status").equalsIgnoreCase(status) , 30000)) {
+				break;
+			}
 		}
 		verify(donationsTable.getCallValue(1, "Status"), status, "Wrong status", false);
 		verify(donationsTable.getCallValue(1, "Type"), dType, "Wrong type", false);

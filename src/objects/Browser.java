@@ -109,9 +109,9 @@ public abstract class Browser{
 		WebDriver driverT = null;
 		String windHandle = getWindowHandle();
 		if (/*browser*/getBrowser().contains("firefox")) {
-			driverT = new Driver().get_driver("*iexplore");
+			driverT = new Driver().getDriver("*iexplore");
 		}else{
-			driverT = new Driver().get_driver("*firefox");
+			driverT = new Driver().getDriver("*firefox");
 		}
 		driverT.navigate().to(SeleneseTestCase.driver.getCurrentUrl());
 		//String title2 = driverT.getTitle();
@@ -232,7 +232,7 @@ public abstract class Browser{
 	
 	public Boolean waitConditionBecomesTrueWithRefersh(Boolean condition, Integer timeOut) {
 		if (!condition) {	
-			
+			logger.info("Wait for condition");
 			sleep(timeOut);	
 			refresh();
 			sleep(3000);	

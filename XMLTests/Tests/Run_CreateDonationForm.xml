@@ -9,6 +9,7 @@
   	<test verbose="2" name="Create and Publish donation form" annotations="JDK" >
     	<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
 		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
+		<parameter name="createwidget.widgetLayoutName"  value="Basic"></parameter>
 		<parameter name="donation.personEmail"  value="supByDonate"></parameter>
 		<parameter name="donation.personFName"  value="supByDonateF"></parameter>
 		<parameter name="donation.personLName"  value="supByDonateL"></parameter>

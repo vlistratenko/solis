@@ -2,8 +2,10 @@ package pages.HQ;
 
 
 import java.io.File;
+
 import objects.Browser;
 import objects.Button;
+import objects.CheckBox;
 import objects.DropDown;
 import objects.TextBox;
 import selenium.CommonUtils;
@@ -26,6 +28,7 @@ public class InviteCompletionPage extends Browser {
 	TextBox cityField = new TextBox("//input[@id='city']", "City", true);
 	TextBox zipField = new TextBox("//input[@id='zip']", "Zip", true);
 	DropDown statesField = new DropDown("//custom-select2[@data='states']/div/ul/li", "//custom-select2[@data='states']/div/a", "States");
+	CheckBox acceptTermsOfService = new CheckBox("//input[@id='tosVersion']", "Terms");
 	Button saveButton = new Button("//button/*[contains(text(),'Save')]", "Save org account");
 	
 	
@@ -57,6 +60,7 @@ public class InviteCompletionPage extends Browser {
 		cityField.type("TestCity");
 		zipField.type("20147");
 		statesField.selectByID(CommonUtils.getRandomValueFromTo(1, 5, 0));
+		acceptTermsOfService.check(true);
 		saveButton.click();
 		//sleep(10000);
 		
@@ -69,9 +73,9 @@ public class InviteCompletionPage extends Browser {
 		tertiaryColorField.type("#343BB0");
 		fromNameField.type(CommonUtils.getProperty("Admin.firstName") + " " + CommonUtils.getProperty("Admin.lastName"));
 		fromEmailField.type(CommonUtils.getProperty("Admin.email"));
-		replyToEmailField.type(CommonUtils.getProperty("Admin.email"));
-		finishButton.click();
-		sleep(3000);
+		replyToEmailField.type(CommonUtils.getProperty("Admin.email"));		
+		sleep(15000);
+		finishButton.click();		
 		return new HomePage();
 	}
 }

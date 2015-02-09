@@ -64,7 +64,7 @@ public class Table extends Element implements iTable {
 		}
 		Integer colsCount = getColsCount();
 		for (int i = 0; i < colsCount; i++) {
-			if (findElementsByXpath(path + "/descendant::tr/td[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
+			if (findElementsByXpathWithOutWait(path + "/descendant::tr/td[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
 				return i;
 			}
 		}
@@ -78,7 +78,7 @@ public class Table extends Element implements iTable {
 		Integer rowsCount = getRowsCount()+1;
 		for (int i = 1; i <= rowsCount; i++) {
 			String elementPath = path + "/tbody/descendant::tr[" + i + "]/descendant::*[contains(text(), '" + value + "')]";
-			if (findElementsByXpath(elementPath.replace("[0]", "")).size() > 0) { 
+			if (findElementsByXpathWithOutWait(elementPath.replace("[0]", "")).size() > 0) { 
 				return i;
 			}
 		}

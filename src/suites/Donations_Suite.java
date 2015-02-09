@@ -47,7 +47,7 @@ public class Donations_Suite extends SeleneseTestCase{
 		new SettingsTests().createWePayAcountTest(wePayNickName, wePayDescr, wePayOrgType);
 	}
 	
-	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName",
 		"donation.personEmail",
 		"donation.personFName",
 		"donation.personLName",
@@ -66,7 +66,7 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.isEmail"})
 	@Test(priority=50, groups = {"activities.createDonationForm"}, description = "",
 			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
-	public void makeDonationTest(String widgetName, String widgetDescription,
+	public void makeDonationTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
 			String personLName,
@@ -87,6 +87,7 @@ public class Donations_Suite extends SeleneseTestCase{
 		Boolean recurringDonation = false;
 		new ActivitiesTests().makeDonationTest(widgetName,
 				widgetDescription,
+				widgetLayoutName,
 				personEmail,
 				personFName,
 				personLName,
@@ -142,7 +143,7 @@ public class Donations_Suite extends SeleneseTestCase{
 				recurringDonation);
 	}
 	
-	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", 
+	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName",
 		"donation.personEmail",
 		"donation.personFName",
 		"donation.personLName",
@@ -161,7 +162,7 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.isEmail"})
 	@Test(priority=50, groups = {"activities.createRecuringDonationForm"}, description = "",
 			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
-	public void makeDonationRecuringTest(String widgetName, String widgetDescription,
+	public void makeDonationRecuringTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
 			String personLName,
@@ -182,6 +183,7 @@ public class Donations_Suite extends SeleneseTestCase{
 		Boolean recurringDonation = true;
 		new ActivitiesTests().makeDonationTest(widgetName,
 				widgetDescription,
+				widgetLayoutName,
 				personEmail,
 				personFName,
 				personLName,

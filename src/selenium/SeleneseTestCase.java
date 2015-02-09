@@ -56,7 +56,7 @@ public class SeleneseTestCase{
 	public static WebDriver driver;
 	public static Logger logger;
 	protected String Browser;
-	
+	public static boolean isDebugMode = false;
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
 
@@ -71,7 +71,7 @@ public class SeleneseTestCase{
     private ThreadLocal<String> sessionId = new ThreadLocal<String>();
 	
 	public void startTestOnDriver(String bpath, String testURL) throws Exception {		
-		driver = Driver.get_driver(bpath);		
+		driver = Driver.getDriver(bpath);		
 		browser = bpath;
 		logger.info("Open home page - " + testURL);			
 		selenium = Driver.getSeleniumFromDriver(driver, testURL);

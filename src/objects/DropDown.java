@@ -1,7 +1,10 @@
 package objects;
 
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import interfaces.iDropDown;
 
@@ -29,7 +32,9 @@ public class DropDown extends Element implements iDropDown {
 	@Override
 	public void selectByLabel(String value) {
 		logger.info("Select value by label " + value + " in the " + elementName);
-		findElementByXpath(extendButtonPath);
+		WebElement el = findElementByXpath(extendButtonPath);
+		//new Actions(driver).moveToElement(el).build().perform();
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
 		click(extendButtonPath);
 		this.getChildItemByLabel(value).click();
 		

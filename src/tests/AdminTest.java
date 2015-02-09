@@ -34,7 +34,7 @@ public class AdminTest extends SeleneseTestCase{
 		new LoginPageAdmin().
 			doSuccessLogin().
 			openAddNewOrganizationPage().
-			createNewOrg(domainType, orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, featureList).
+			createNewOrg(domainType, orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, featureList, true, "Internal-Test").
 			checkOrganizationExists(orgName).
 			clickLogOut();
 		

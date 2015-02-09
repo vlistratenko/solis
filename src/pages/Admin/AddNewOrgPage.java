@@ -22,6 +22,9 @@ public class AddNewOrgPage extends HomePageAdmin{
 	TextBox customDomain = new TextBox("//input[@id='customDomain']", "Custom Domain");
 	Button createButton = new Button("//button[@id='createOrg']", "Create button");
 	List featureList = new List("//div[@id='feature']", "Features list");
+	DropDown classificationType = new DropDown("//div[@id='class_panel']", "//label[@id='class_label']", "Classification type");
+	Button sendEmailsTrue = new Button("//input[@id='email:1']/ancestor::div[@class='ui-radiobutton ui-widget']//descendant::span", "Send emails");
+	Button sendEmailsFalse = new Button("//input[@id='email:0']/ancestor::div[@class='ui-radiobutton ui-widget']//descendant::span", "Do not send emails");
 	
 	
 	public OrganizationsListPage createNewOrg(String domainTypeValue,
@@ -31,14 +34,17 @@ public class AddNewOrgPage extends HomePageAdmin{
 			String firstNameValue,
 			String lastNameValue,		
 			String statusValue,
-			String featureListValue) {
+			String featureListValue,
+			Boolean isSendEmails,
+			String classificationValue) {
 		SeleneseTestCase.bug.add("Create new org.");
-		/*domainType.selectByLabel(domainTypeValue);
-		if (domainTypeValue.equalsIgnoreCase("Custom Domain")) {
-			customDomain.type(CommonUtils.getUnicName() + ".com");
-		}else if (domainTypeValue.equalsIgnoreCase("Vantiy Domain")) {
-			vanityDomain.type("vanityDomain.com");
-		}*/
+		/*domainType.selectByLabel(domainTypeValue);*/
+		if (isSendEmails) {
+			//sendEmailsTrue.highlight();
+			sendEmailsTrue.click();
+		}else{
+			sendEmailsFalse.click();
+		}
 		orgName.type(orgNameValue);
 		orgDescrption.type(orgDescrptionValue);
 		orgAdminUserId.type(orgAdminUserIdValue);
@@ -46,6 +52,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 		lastName.type(lastNameValue);
 		PhoneNumber.type("23" + CommonUtils.getRandomNumericValueFixedLength(9));
 		statusType.selectByLabel(statusValue);
+		classificationType.selectByLabel(classificationValue);
 		//featureList.selectByLabel(featureListValue);
 		crmID.type(CommonUtils.getUnicName());
 		createButton.click();

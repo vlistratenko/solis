@@ -55,7 +55,7 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription"})
 	@Test( priority=40, groups = {"activities.createSubscribeFormAndSubscribeSupporter"}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
 	public void createSubscribeFormAndSubscribeSupporter(String widgetName, String widgetDescription){
-		new ActivitiesTests().createSubscribeWidget(widgetName, widgetDescription);
+		new ActivitiesTests().createSubscribeWidget(widgetName, widgetDescription, "Basic");
 		new ActivitiesTests().subscribeSupporterTest("");
 	}
 	

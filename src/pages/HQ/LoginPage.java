@@ -100,8 +100,8 @@ public class LoginPage extends Browser{
 	
 	public InviteCompletionPage openConfirmationPage() {
 		try {
-			//open("mail.ru");
-			open(new EmailClient().getURLByEndWord("Welcome to the Salsa Community, " + CommonUtils.getProperty("Admin.firstName") + "!", "completion"));
+			//open("mail.ru");CommonUtils.getProperty("Admin.orgName")
+			open(new EmailClient().getURLByEndWord(CommonUtils.getProperty("Admin.orgName") + " has invited you to Salsa Solis. Let's get started.", "completion"));
 		} catch (MailosaurException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

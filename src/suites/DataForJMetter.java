@@ -67,7 +67,7 @@ public class DataForJMetter extends SeleneseTestCase{
 		CommonUtils.setProperty("Admin.email", login); 
 		CommonUtils.setProperty("Admin.Password", pass);
 		String widgetName = CommonUtils.getUnicName();
-		new ActivitiesTests().createDonationWidgetTest(widgetName, "JM descr for widget", false);
+		new ActivitiesTests().createDonationWidgetTest(widgetName, "JM descr for widget", "Basic", false);
 		new LoginPage(true);
 		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty("donationWidgetLink").replace("https://", ""), login);
 	}
@@ -78,7 +78,7 @@ public class DataForJMetter extends SeleneseTestCase{
 		CommonUtils.setProperty("Admin.email", login); 
 		CommonUtils.setProperty("Admin.Password", pass);
 		String widgetName = CommonUtils.getUnicName();
-		new ActivitiesTests().createSubscribeWidget(widgetName, "JM descr for widget");
+		new ActivitiesTests().createSubscribeWidget(widgetName, "JM descr for widget", "Basic");
 		new LoginPage(true);
 		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty("subscribeWidgetLink").replace("https://", ""), login);
 	}

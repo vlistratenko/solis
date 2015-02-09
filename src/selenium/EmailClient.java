@@ -129,6 +129,7 @@ public class EmailClient {
 	}
 	
 	public String getURLByEndWord(String emailSubj, String word) throws MailosaurException {
+		SeleneseTestCase.logger.info("Try to find email with subject - " + emailSubj);
 		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
 		Pattern pattern = Pattern.compile("http(.*?)" + word);
         Matcher matcher = pattern.matcher(e.html.body);

@@ -13,6 +13,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.ProxyServer;
 import net.lightbody.bmp.proxy.http.BrowserMobHttpResponse;
 import net.lightbody.bmp.proxy.http.ResponseInterceptor;
@@ -23,6 +24,7 @@ import org.apache.http.protocol.HttpContext;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -47,9 +49,11 @@ public class Example {
 
 		server.addResponseInterceptor(new ResponseInterceptor()
 		{
-			@Override
-			public void process(BrowserMobHttpResponse arg0) {
+						@Override
+			public void process(BrowserMobHttpResponse arg0, Har arg1) {
 				System.out.println(arg0.getBody());
+				//System.out.println(arg0.getHeader(name));
+				//System.out.println(arg0.getBody());
 				
 			}
 
@@ -59,7 +63,22 @@ public class Example {
 		Proxy proxy = server.seleniumProxy();
 		proxy.setHttpProxy("localhost:9101");
 		// Configure desired capability for using proxy server with WebDriver
+		 FirefoxProfile profile = new FirefoxProfile();
+	        profile.setAcceptUntrustedCertificates(true);
+	        profile.setAssumeUntrustedCertificateIssuer(true);
+	        profile.setPreference("network.proxy.http", "localhost");
+	        profile.setPreference("network.proxy.http_port", 9101);
+	        profile.setPreference("network.proxy.ssl", "localhost");
+	        profile.setPreference("network.proxy.ssl_port", 9101);
+	        profile.setPreference("network.proxy.type", 1);
+	        profile.setPreference("network.proxy.no_proxies_on", "");
+
+	        
+	        //capabilities.setCapability(CapabilityType.PROXY, server.seleniumProxy());
+
 		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 		capabilities.setCapability(CapabilityType.PROXY, proxy);
 
 		// Set up driver

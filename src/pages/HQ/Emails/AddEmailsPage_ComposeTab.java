@@ -30,7 +30,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 				subj = subj + " Split " + i;				
 				sleep(8000);
 			}
-			selectScheme.selectByLabelJS("Arial, Helvetica, sans-serif");
+			selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
 			addLink("salsalabs.com");
@@ -46,8 +46,9 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 * @return
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
-		
-		new Button("//p[.='" + layout + "']/preceding-sibling::img", layout + "layout").click();;
+		sleep(10000);
+		new Button("//p[.='" + layout + "']/preceding-sibling::img", layout + "layout").click();
+		sleep(10000);
 		return this;
 	}
 	

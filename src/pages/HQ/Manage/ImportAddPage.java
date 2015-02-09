@@ -56,10 +56,11 @@ public class ImportAddPage extends ManagePage{
 			String fieldName = mapTable.getCallValue(i, 1);
 			String pathToDropDown = mapTable.getPathToChildElement(i, 2, "div[contains(@class, 'custom dropdown')]");
 			DropDown mapToField = new DropDown(pathToDropDown, pathToDropDown + "/a", "MapToField");
-			mapToField.selectByLabelJS(fieldName);
+			mapToField.selectByLabel(fieldName);
 			
 		}
 		dedupeButton.click();
+		sleep(5000);
 		return this;
 	}
 	
@@ -80,14 +81,14 @@ public class ImportAddPage extends ManagePage{
 		PrintWriter out = new PrintWriter("supporters.csv");
 		out.println("Cell Phone,"
 				+ "City,"
-				+ "Email,"
-				+ "Facebook,"
+				+ "Email Address,"
+				+ "Facebook Id,"
 				+ "First Name,"
 				+ "Home Phone,"
 				+ "Last Name,"
 				+ "Preferred Language,"
 				+ "State,"
-				+ "Twitter,"
+				+ "Twitter Id,"
 				+ "Zip Code," 
 				+ "\"Address, line 1\","
 				+ "\"Address, line 2\","
