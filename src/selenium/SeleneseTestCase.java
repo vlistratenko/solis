@@ -23,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterSuite;
@@ -32,8 +31,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
 
-import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
-import com.thoughtworks.selenium.Selenium;
+import selenium.Environment.LocationOfServer;
+
 
 
 //@Listeners({SauceOnDemandTestListener.class})
@@ -45,7 +44,7 @@ public class SeleneseTestCase{
 	
 	//protected static IDatabaseConnection connect;
 	
-	public static Selenium selenium = null;
+
 	
 	public static Integer defaultTimeOut = 30;
 	
@@ -59,22 +58,11 @@ public class SeleneseTestCase{
 	public static boolean isDebugMode = false;
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
-
-    /**
-     * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.
-     */
-    private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
-
-    /**
-     * ThreadLocal variable which contains the Sauce Job Id.
-     */
-    private ThreadLocal<String> sessionId = new ThreadLocal<String>();
 	
 	public void startTestOnDriver(String bpath, String testURL) throws Exception {		
 		driver = Driver.getDriver(bpath);		
 		browser = bpath;
 		logger.info("Open home page - " + testURL);			
-		selenium = Driver.getSeleniumFromDriver(driver, testURL);
 		if (!(bpath.equalsIgnoreCase("*android") || bpath.equalsIgnoreCase("*html"))) {
 			driver.manage().window().setSize(getScreenSize());
 		}		
@@ -175,7 +163,7 @@ public class SeleneseTestCase{
 		}else if (bpath.equalsIgnoreCase("")) {
 			bpath = CommonUtils.getProperty("bpath");
 		}
-		if (USED_ENVIRONMENT.server.equals(USED_ENVIRONMENT.server.LOCAL)) {
+		if (USED_ENVIRONMENT.server.equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		}else{
 			startRemouteTestOnDriver("FF30","0.16", "Win7x64-C1");
@@ -284,14 +272,5 @@ public class SeleneseTestCase{
 		}
         return file;
     }
-    /**
-    *
-    * @return the Sauce Job id for the current thread
-    */
-   public String getSessionId() {
-       return sessionId.get();
-   }
-   //public @Rule
-   //SauceOnDemandTestWatcher resultReportingTestWatcher = new SauceOnDemandTestWatcher(this, authentication);
 
 }

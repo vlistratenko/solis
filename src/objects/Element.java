@@ -2,7 +2,6 @@ package objects;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -12,10 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.thoughtworks.selenium.Selenium;
-
 import selenium.CommonUtils;
 import selenium.SeleneseTestCase;
 
@@ -23,7 +19,6 @@ abstract class Element {
 	public String path;
 	WebDriver driver;
 	Logger logger;
-	Selenium selenium;
 	int cTimeOut;
 	String elementName;
 	Integer defaultTimeOut;
@@ -33,7 +28,6 @@ abstract class Element {
 		this.path = elementPath;
 		driver = SeleneseTestCase.driver;
 		logger = SeleneseTestCase.logger;
-		selenium = SeleneseTestCase.selenium;
 		cTimeOut = SeleneseTestCase.cTimeOut;
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 		elementName = name;
@@ -43,7 +37,6 @@ abstract class Element {
 		this.path = elementPath;
 		driver = SeleneseTestCase.driver;
 		logger = SeleneseTestCase.logger;
-		selenium = SeleneseTestCase.selenium;
 		cTimeOut = SeleneseTestCase.cTimeOut;
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 		elementName = name;
@@ -265,11 +258,6 @@ abstract class Element {
 		}
 	}
 	
-	protected void closePopupWindow(){
-		logger.debug("Try to close popup window");
-		selenium.close();
-	}
-	
 	protected Integer getXPathCount(String xpath) {
 		logger.debug("Try to count xpathes " + xpath);
 		return findElementsByXpath(xpath).size();//selenium.getXpathCount(xpath).intValue();
@@ -307,7 +295,7 @@ abstract class Element {
 
 	protected void selectAndWait(String locator, String value) throws InterruptedException{		
 		select(locator, value);
-		waitForPageToLoad();
+		//waitForPageToLoad();
 	}
 	
 	protected String getSelectedValue(String locator){		
@@ -370,20 +358,16 @@ abstract class Element {
 	 * @return String URL
 	 */
 	protected String getLocation(){
-		logger.debug("Get current URL location < "+ selenium.getLocation()+" >.");
-		return selenium.getLocation();
-	}
-	
-	protected void waitForPageToLoad(){
-		logger.debug("Waiting for page loads.");
-		selenium.waitForPageToLoad(cTimeOut*20+"");
+		String res = driver.getCurrentUrl();
+		logger.debug("Get current URL location < " + res + " >.");
+		return res;
 	}
 	
 	protected String getText(String locator){
 		logger.debug("Get text from - <" + locator+">. ");
-		//logger.debug("Returned text is - <" + selenium.getText(locator)+">. ");
+		String  res = null;
 		try {
-			return findElementByXpath(locator).getText();	
+			res = findElementByXpath(locator).getText();	
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -392,14 +376,14 @@ abstract class Element {
 				e.printStackTrace();
 			}
 		}
-		return selenium.getText(locator);
+		return res;
 	}
 	
 	protected String getValue(String locator){
 		logger.debug("Get value from - <" + locator+">. ");
-		logger.debug("Returned text is - <" + selenium.getValue(locator)+">. ");
+		String  res = null;
 		try {
-			return selenium.getValue(locator);	
+			 res = getAttributeValue(locator, "value");	
 		} catch (Exception e) {
 			if (isRequeired) { e.printStackTrace();
 				throw new ElementNotFoundException(elementName, "xpath", locator);
@@ -408,7 +392,8 @@ abstract class Element {
 				e.printStackTrace();
 			}
 		}
-		return selenium.getValue(locator);
+		logger.debug("Returned text is - <" +  res	+">. ");
+		return res;
 	}
 	
 	
@@ -518,24 +503,6 @@ abstract class Element {
 						
 	}
 	
-	protected void waitForPopUp(String locator){		
-		selenium.waitForPopUp(locator, "60000");		
-	}
-	
-	protected void deselectPopUp(){		
-		selenium.deselectPopUp();		
-	}
-	
-	protected void selectWindow(String locator){		
-		selenium.selectWindow(locator);				
-	}
-	
-	
-	protected void windowFocus(String locator){		
-		selenium.windowFocus();				
-	}
-	
-	
 	protected void switchToFrame(Integer index){		
 		logger.debug("Try to switch focus to frame with index = " + index);
 		driver.switchTo().frame(index);				
@@ -629,43 +596,12 @@ abstract class Element {
 		}
 			
    }
-	
-	protected boolean waitOption (String aIdLocator, String option, int aTime) throws InterruptedException{
-		Browser.implicityWait(0);
-		if (waitObject(aIdLocator, aTime)) {
-			for (int i = 0; i < aTime/1000; i++) {
-				String[] options = {};
-				try {
-					options = selenium.getSelectOptions(aIdLocator);
-				} catch (Exception e) {
-					// TODO: handle exception
-				} 
-				if (options.length > 0) {
-					Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
-					return true;
-				}else{
-					
-						logger.debug("Waiting for options in the " + aIdLocator + ". " + 
-								(aTime/1000 - i) + " seconds left.");			
-					
-					Thread.sleep(1000);
-					if (i ==  aTime/1000 -1){
-						if (logger.getLevel().equals(Level.INFO)) {
-							SeleneseTestCase.makeScreenshot(CommonUtils.getUnicName());
-						}
-					}
-				}
-			}
-		}
-		Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
-		return false;
-   }
-	
+
 	protected boolean waitTextInObject (String aIdLocator, String aText, int aTime)
 	throws Exception {
 		
 		for (int i = 0; i < aTime/1000; i++) {
-			if (isElementPresent(aIdLocator) && selenium.isTextPresent(aText)) {
+			if (isElementPresent(aIdLocator) && getText(aIdLocator).contains(aText)) {
 				if (getText(aIdLocator).indexOf(aText)!=-1){
 					return true;
 				}else if(i==aTime/1000-1){

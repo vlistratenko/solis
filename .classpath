@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="lib/postgresql-9.3-1101.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="lib" path="lib/mailosaur-java-1.0.10.jar" sourcepath="lib/mailosaur-java-1.0.10-sources.jar"/>
+	<classpathentry kind="lib" path="lib/httpcomponents-client-4.3.5/lib/httpclient-4.3.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
