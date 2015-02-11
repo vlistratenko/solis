@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="AcceptanceTests" parallel="false" thread-count="1">
-  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox  	
-  	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+  	<parameter name="bpath" value="*chrome"></parameter>//*iexplore*firefox  	
+  	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
    	<listeners>
     	<listener class-name="selenium.MyTestListener" />
@@ -23,15 +23,15 @@
 
 		<parameter name="cm.firstName"  value="CMFirstNameAuto"></parameter>
 		<parameter name="cm.lastName"  value="CMLastNameAuto"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role1"  value="Sign-up forms:Publish"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role2"  value="Donation forms:Publish"></parameter>
-		<parameter name="cm.contentAndMessagingTable.role3"  value="Emails and social messages:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role1" value="Supporter Sign Ups:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role2"  value="Fundraising:Publish"></parameter>
+		<parameter name="cm.contentAndMessagingTable.role3"  value="Communication:Publish"></parameter>
 		
-		<parameter name="cm.contentAndMessagingTable.role3333"  value="Petitions and Targeted:Publish"></parameter>
-		<parameter name="cm.dataAndAnalyticsTable.role1"  value="Metrics and reports:Create &#38; Edit"></parameter>
-		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporters and segments:Create &#38; Edit"></parameter>
-		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Supporter donation records:Create &#38; Edit"></parameter>
-		<parameter name="cm.assetManagementTable.role1"  value="Layouts, templates, images and files:Create &#38; Edit"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role1"  value="Insight:Create"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role2"  value="Supporter Data:Create"></parameter>
+		<parameter name="cm.dataAndAnalyticsTable.role3"  value="Donations:Create"></parameter>
+		<parameter name="cm.assetManagementTable.role1"  value="Asset:Create"></parameter>
+		<parameter name="cm.assetManagementTable.role1EXTRA"  value="Layouts, templates, images and files:Create &#38; Edit"></parameter>
 				
 		<parameter name="fail.login"  value=":test@ttt.tt:test"></parameter>
 		<parameter name="fail.password"  value=":!QAZ2wsx:test"></parameter>
@@ -49,7 +49,7 @@
 		
      	<groups>
     		<run>
-     			 <include name="dev"/>
+     			 <include name="qa"/>
     		</run>
   		</groups>
      	<classes>

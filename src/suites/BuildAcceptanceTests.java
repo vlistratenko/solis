@@ -227,25 +227,26 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	/*****************************************/
 	
 	@Parameters({"cm.firstName",
-		"cm.lastName",
-		"cm.contentAndMessagingTable.role1",
-		"cm.contentAndMessagingTable.role2",
-		"cm.contentAndMessagingTable.role3",
-		"cm.dataAndAnalyticsTable.role1",
-		"cm.dataAndAnalyticsTable.role2",
-		"cm.dataAndAnalyticsTable.role3",
-		"cm.assetManagementTable.role1"})
-@Test(priority=130, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "506:56:New CM account was NOT created")
-public void createCMManually(String cmFirstName,
-						String cmLastName,
-						String cmContentAndMessagingRole1,
-						String cmContentAndMessagingRole2,
-						String cmContentAndMessagingRole3,
-						String cmDataAndAnalyticsRole1,
-						String cmDataAndAnalyticsRole2,
-						String cmDataAndAnalyticsRole3,
-						String cmAssetManagementRole1){
-		
+				 "cm.lastName",
+				 "cm.contentAndMessagingTable.role1",
+				 "cm.contentAndMessagingTable.role2",
+				 "cm.contentAndMessagingTable.role3",
+				 "cm.dataAndAnalyticsTable.role1",
+				 "cm.dataAndAnalyticsTable.role2",
+				 "cm.dataAndAnalyticsTable.role3",
+				 "cm.assetManagementTable.role1"})
+	
+	@Test (priority=130, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "506:56:New CM account was NOT created")
+	public void createCMManually(String cmFirstName,
+								 String cmLastName,
+								 String cmContentAndMessagingRole1,
+								 String cmContentAndMessagingRole2,
+								 String cmContentAndMessagingRole3,
+								 String cmDataAndAnalyticsRole1,
+								 String cmDataAndAnalyticsRole2,
+								 String cmDataAndAnalyticsRole3,
+								 String cmAssetManagementRole1) {
+				
 		new EmailClient();
 		String cmEmail =  EmailClient.getEmailBox("cm" + CommonUtils.getUnicName());
 		HomePage homePage = new HomePage();
@@ -254,20 +255,21 @@ public void createCMManually(String cmFirstName,
 		openAccountsPage().
 		openInviteNewUserPage().
 		inviteNewUser(cmEmail,
-				cmFirstName,
-				cmLastName,
-				cmContentAndMessagingRole1,
-				cmContentAndMessagingRole2,
-				cmContentAndMessagingRole3,
-				cmDataAndAnalyticsRole1,
-				cmDataAndAnalyticsRole2,
-				cmDataAndAnalyticsRole3,
-				cmAssetManagementRole1).
+					  cmFirstName,
+					  cmLastName,
+					  cmContentAndMessagingRole1,
+					  cmContentAndMessagingRole2,
+					  cmContentAndMessagingRole3,
+					  cmDataAndAnalyticsRole1,
+					  cmDataAndAnalyticsRole2,
+					  cmDataAndAnalyticsRole3,
+					  cmAssetManagementRole1).
 		verifyInvitationSent();	
 		
 		CommonUtils.setProperty("CM.Login", cmEmail);
 		CommonUtils.setProperty("CM.firstName", cmFirstName);
 		CommonUtils.setProperty("CM.lastName", cmLastName);
+		CommonUtils.setProperty("CM.email", cmEmail);
 	}
 	
 	@Test(priority=140, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="createCMManually", description = "506:56:New CM account was NOT confirmed.")

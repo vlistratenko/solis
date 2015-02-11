@@ -31,7 +31,7 @@ public class Table extends Element implements iTable {
 	public void clickInCell(String rowHeader, String colHeader) {
 		logger.info(elementName + " was clicked in cell, row " + rowHeader + " and column " +  colHeader);
 		Integer rowNumber = getRowsNumberByValue(rowHeader);
-		Integer colNumber = getColumnNumberByHeader(colHeader);
+		Integer colNumber = getColNumberByValue(colHeader);
 		clickInCell(rowNumber, colNumber);
 	}
 	
@@ -63,8 +63,8 @@ public class Table extends Element implements iTable {
 			return -1;
 		}
 		Integer colsCount = getColsCount();
-		for (int i = 0; i < colsCount; i++) {
-			if (findElementsByXpathWithOutWait(path + "/descendant::tr/td[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
+		for (int i = 1; i <= colsCount; i++) {
+			if (findElementsByXpath(path + "/descendant::tr/th[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
 				return i;
 			}
 		}
