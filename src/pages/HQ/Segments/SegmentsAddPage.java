@@ -10,7 +10,6 @@ import selenium.CommonUtils;
 public class SegmentsAddPage extends SegmentsPage{
 
 	TextBox segmentNameField = new TextBox("//input[@name='name']", "Segment name");
-	TextBox segmentTagField = new TextBox("//input[@name='segment.tags']", "Segment tags");
 	Button saveButton = new Button("//button/span[text()='Save Segment']", "Save button");
 	Button addRuleSet = new Button("//button[contains(text(), 'Who should we add?')]", "Add rule set");
 	Panel ruleSet = new Panel("//div[@class='ruleSet']/descendant::div[@class='row rule ng-scope']", "Rule set");
@@ -20,14 +19,12 @@ public class SegmentsAddPage extends SegmentsPage{
 	TextBox serachExcludeSupporterManuallyField = new TextBox("//h2[.=\"I'd like to leave out a few individuals, too.\"]/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::input", "Manually add supporter search field");
 	Button searchExcludeSupporterManuallyButton = new Button("//h2[.=\"I'd like to leave out a few individuals, too.\"]/ancestor::div[@class='row']/following-sibling::div[@class='row']/descendant::a[@ng-click='doSearch()']", "Add manually search button");
 	
-	public SegmentsPage createNewSegment(String segmentName,
-										String segmentTag,
-										String addIncludeRule,
-										String addExcludeRule,
-										String criteriaForExcludeSupporterManually,
-										String criteriaForAddSupporterManually) {
+	public SegmentsPage createNewCustomSegment(String segmentName,
+											   String addIncludeRule,
+											   String addExcludeRule,
+											   String criteriaForExcludeSupporterManually,
+											   String criteriaForAddSupporterManually) {
 		segmentNameField.type(segmentName);
-		//segmentTagField.type(segmentTag);
 		addRule(addIncludeRule);
 		addRule(addExcludeRule);
 		excludeSupporterManually(criteriaForExcludeSupporterManually);
@@ -36,9 +33,8 @@ public class SegmentsAddPage extends SegmentsPage{
 		return new SegmentsPage();
 	}	
 
-
 	private void addRule(String ruleCriteria) {
-		String rules[] = CommonUtils.getArrayFromStringBySymbol(ruleCriteria, ";");
+		String rules[] = CommonUtils.getArrayFromStringBySymbol(ruleCriteria, ":");
 		int amountExistedRules = ruleSet.getElementsCount();
 		int amountOfSup = Integer.valueOf(CommonUtils.getProperty("amountOfSupporters"));
 		for (int i = 1 + amountExistedRules; i <= rules.length + amountExistedRules; i++) {
@@ -81,20 +77,26 @@ public class SegmentsAddPage extends SegmentsPage{
 		
 	}
 	
-	private void selectChooseMetric(String metric, int ruleSetNumber) {
-		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
-		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose metric...']", ruleSetNumber);
-		new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(metric);
-	}
-	
-	private void selectCategory(String category, int ruleSetNumber) {
-		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
+		private void selectCategory(String category, int ruleSetNumber) {
+		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown ng-isolate-scope']", ruleSetNumber);
 		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Category']", ruleSetNumber);
 		new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(category);
 	}
+		
+	
+	/*private void selectCategory(String category, int ruleSetNumber) {
+			String extendButtonPath = ruleSet.getChildElementPath("span[text()='Category']", ruleSetNumber);
+		new DropDown(extendButtonPath, "Category").selectByLabel(category);
+	}*/
+	
+		private void selectChooseMetric(String metric, int ruleSetNumber) {
+			String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
+			String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose metric...']", ruleSetNumber);
+			new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(metric);
+		}
 	
 	private void selectOperator(String operator, int ruleSetNumber) {
-		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown']", ruleSetNumber);
+		String pathToDropDown = ruleSet.getChildElementPath("div[@class='custom dropdown ng-isolate-scope']", ruleSetNumber);
 		String extendButtonPath = ruleSet.getChildElementPath("span[text()='Choose operator...']", ruleSetNumber);
 		new DropDown(pathToDropDown, extendButtonPath, "Category").selectByLabel(operator);
 	}

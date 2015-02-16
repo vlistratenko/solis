@@ -9,6 +9,7 @@ import objects.Panel;
 import objects.TextBox;
 import pages.Donation.DonationsPage;
 import pages.HQ.Activities.ActivitiesPage;
+import pages.HQ.Assets.AssetsPage;
 import pages.HQ.Manage.ManagePage;
 import selenium.CommonUtils;
 import selenium.Environment;
@@ -29,6 +30,7 @@ public class HomePage extends Browser{
 	Button activitiesTab = new Button("//a[@href='/#/activities']", "Activities tab");
 	Button donationTab = new Button("//a[@href='/#/insight/donations']", "Donations tab");
 	Button dashboardTab = new Button("//a[@href='/#/dashboard']", "Dashboard tab");
+	Button assetsTab = new Button ("//a[@href='/#/assets']", "Assets tab");
 	
 	//Top navigation bar
 	Button settingsTab = new Button("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");
@@ -128,5 +130,11 @@ public class HomePage extends Browser{
 			saveButtonConfigNewOrgPage.click();
 		}
 		return this;
+	}
+	
+	public AssetsPage openAssetsPage (){
+		
+		assetsTab.click();
+		return new AssetsPage();
 	}
 }

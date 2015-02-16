@@ -1,17 +1,18 @@
 #AUTOMATICALLY GENERATED
-#Tue Feb 10 16:45:22 EET 2015
+#Mon Feb 16 16:46:20 EET 2015
 amountOfSupporters=11
 current.Password=qwerty
 segmentName=SegmentName20140807142703
 oneTimeWidgetName=AutoWidgetName20150210122352
 planName=BuildAcceptanceTest
 currentWindowHandle=CDwindow-32283D2E-494C-4639-A220-4FE27ABD6851
+imageName=Image
 emailBlastName=TestV20150210130349
 amountOfPablishedEmails=22
 ldap.login=vavramchuk
 CM.lastName=CMLastNameAuto
 updateTC=false
-Admin.email=insight3.03eed056@mailosaur.in
+Admin.email=neworg1.03eed056@mailosaur.in
 buildVersion=Ignite 0.16
 current.firstName=AutoTester
 current.lastName=AutoTesterov
@@ -19,6 +20,8 @@ emailSplitsSubject=TestVAuto20141117144806
 Admin.orgName=AutoTestV2 Org20150210125620
 ldap.password=\!QAZ2wsx
 emailSubject=TestVAuto20150210130349
+assets.Password=qwerty
+assets.Username=neworg1.03eed056@mailosaur.in
 CM.Login=cm20150210163003.4441b2bf@mailosaur.in
 emailFrom=info@salsalabs.com
 recurringWidgetName=AutoWidgetName20150210121851
@@ -31,9 +34,9 @@ Environment=TEST
 ImportName=AutoTestImport20150210125916
 percentageOfTestGroup=50
 unsubscribedSupporter=20150210123739.4441b2bf@mailosaur.in
-current.Login=insight3.03eed056@mailosaur.in
+current.Login=neworg1.03eed056@mailosaur.in
 CM.Password=\!QAZ2wsx
 Admin.firstName=AutoTester
 Admin.lastName=AutoTesterov
-subscribeWidget=AutoWidgetName20150210124740
 CM.firstName=CMFirstNameAuto
+subscribeWidget=AutoWidgetName20150210124740

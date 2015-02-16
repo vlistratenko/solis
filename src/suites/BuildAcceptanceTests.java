@@ -27,7 +27,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 						String firstName,
 						String lastName,		
 						String status,
-						String featureList){
+						String featureList) {
 		
 		orgName = orgName + CommonUtils.getUnicName();
 		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
@@ -118,30 +118,35 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	}
 	
 	@Parameters({"segmentName",
-				"segmentTag",
-				"addIncludeRule",
-				"addExcludeRule",
-				"criteriaForExcludeSupporterManually",
-				"criteriaForAddSupporterManually"})
-	@Test(priority=70, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods={"loginAsNewSuperAdminTest","createSupporerManually"} , description = "516:59:Segment was NOT created.")
-	public void creteSegmentTest(String segmentName,
-							String segmentTag,
-							String addIncludeRule,
-							String addExcludeRule,
-							String criteriaForExcludeSupporterManually,
-							String criteriaForAddSupporterManually){
+				 "addIncludeRule",
+				 "addExcludeRule",
+				 "criteriaForExcludeSupporterManually",
+				 "criteriaForAddSupporterManually"})
+	
+	@Test(priority=70, groups = {"acceptanceTests.user", "qa"},  description = "516:59:Segment was NOT created.")
+	public void createCustomSegmentTest(String segmentName,
+							            String addIncludeRule,
+							            String addExcludeRule,
+							            String criteriaForExcludeSupporterManually,
+							            String criteriaForAddSupporterManually){
+		
 		segmentName = segmentName + CommonUtils.getUnicName();
+		///////
+		LoginPage loginPage = new LoginPage();
+		loginPage.
+		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password"));
+		//////
 		HomePage homePage = new HomePage();
+		
 		homePage.
 		openAudiencePage().
 		openSegmentsPage().
 		openAddSegmentPage().
-		createNewSegment(segmentName,
-				segmentTag,
-				addIncludeRule,
-				addExcludeRule,
-				criteriaForExcludeSupporterManually,
-				criteriaForAddSupporterManually).
+		createNewCustomSegment(segmentName,
+						       addIncludeRule,
+						       addExcludeRule,
+						       criteriaForExcludeSupporterManually,
+						       criteriaForAddSupporterManually).
 		checkSegmentsExists(segmentName);
 		CommonUtils.setProperty("segmentName", segmentName);
 	
@@ -312,14 +317,19 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 				"addExcludeRule",
 				"criteriaForExcludeSupporterManually",
 				"criteriaForAddSupporterManually"})
+	
 	@Test(priority=18, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	public void creteSegmentTestAsCM(String segmentName,
-							String segmentTag,
-							String addIncludeRule,
-							String addExcludeRule,
-							String criteriaForExcludeSupporterManually,
-							String criteriaForAddSupporterManually){
-		creteSegmentTest(segmentName, segmentTag, addIncludeRule, addExcludeRule, criteriaForExcludeSupporterManually, criteriaForAddSupporterManually);
+								     String segmentTag,
+								     String addIncludeRule,
+								     String addExcludeRule,
+								     String criteriaForExcludeSupporterManually,
+								     String criteriaForAddSupporterManually) {
+		createCustomSegmentTest(segmentName, 
+						     	addIncludeRule, 
+						     	addExcludeRule, 
+						     	criteriaForExcludeSupporterManually, 
+						     	criteriaForAddSupporterManually);
 	
 	}
 	

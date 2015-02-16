@@ -7,7 +7,7 @@ import pages.HQ.HomePage;
 
 
 public class SegmentsPage extends HomePage{
-	Button AddSegmentButton = new Button("//button[text()='Make a New Segment']", "Add Segment");
+	Button AddSegmentButton = new Button("//button[text()='Make a New Custom Segment']", "Add Segment");
 	Table SegmentTable = new Table("//table/descendant::a[text()='Segment Name']/ancestor::table", "Table with segments");
 	
 	public SegmentsAddPage openAddSegmentPage() {

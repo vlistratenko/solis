@@ -37,8 +37,7 @@
 		<parameter name="fail.password"  value=":!QAZ2wsx:test"></parameter>
 		
 		<parameter name="segmentName"  value="SegmentName"></parameter>
-		<parameter name="segmentTag"  value="AutoTag"></parameter>
-		<parameter name="addIncludeRule"  value="Organize:Email:CONTAINS:mailosaur.in:1"></parameter>
+		<parameter name="addIncludeRule"  value="Organize:Email Address:CONTAINS:mailosaur.in:1"></parameter>
 		<parameter name="addExcludeRule"  value="Organize:City:IS NOT:test:1"></parameter>
 		<parameter name="criteriaForExcludeSupporterManually"  value="sup"></parameter>
 		<parameter name="criteriaForAddSupporterManually"  value="sup"></parameter> 	

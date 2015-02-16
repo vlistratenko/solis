@@ -20,6 +20,13 @@ public class DropDown extends Element implements iDropDown {
 		}
 		
 	}
+	
+	public DropDown(String elementPath, String elementName) {
+		super(elementPath, elementName);
+		
+			this.extendButtonPath = elementPath;
+				
+	}
 
 	private Button getChildItemByLabel(String label) {
 		logger.info("Get item with label " + label);
