@@ -1,7 +1,8 @@
 #AUTOMATICALLY GENERATED
-#Mon Feb 16 16:46:20 EET 2015
+#Wed Feb 18 11:42:30 EET 2015
 amountOfSupporters=11
 current.Password=qwerty
+assets.username=neworg1.03eed056@mailosaur.in
 segmentName=SegmentName20140807142703
 oneTimeWidgetName=AutoWidgetName20150210122352
 planName=BuildAcceptanceTest
@@ -20,13 +21,12 @@ emailSplitsSubject=TestVAuto20141117144806
 Admin.orgName=AutoTestV2 Org20150210125620
 ldap.password=\!QAZ2wsx
 emailSubject=TestVAuto20150210130349
-assets.Password=qwerty
-assets.Username=neworg1.03eed056@mailosaur.in
 CM.Login=cm20150210163003.4441b2bf@mailosaur.in
 emailFrom=info@salsalabs.com
 recurringWidgetName=AutoWidgetName20150210121851
 CM.email=cm20150210163003.4441b2bf@mailosaur.in
 Admin.Password=qwerty
+assets.imageName=image2.jpg
 donationWidgetLink=https\://autotestv2org20150210121520.test.igniteaction.net/autowidgetname20150210122352
 subscribedSupporter=emailforsub20150210125100.4441b2bf@mailosaur.in
 subscribeWidgetLink=https\://autotestv2org20150210123444.test.igniteaction.net/autowidgetname20150210124740
@@ -34,9 +34,10 @@ Environment=TEST
 ImportName=AutoTestImport20150210125916
 percentageOfTestGroup=50
 unsubscribedSupporter=20150210123739.4441b2bf@mailosaur.in
-current.Login=neworg1.03eed056@mailosaur.in
 CM.Password=\!QAZ2wsx
-Admin.firstName=AutoTester
+current.Login=neworg1.03eed056@mailosaur.in
 Admin.lastName=AutoTesterov
-CM.firstName=CMFirstNameAuto
+Admin.firstName=AutoTester
+assets.password=qwerty
 subscribeWidget=AutoWidgetName20150210124740
+CM.firstName=CMFirstNameAuto

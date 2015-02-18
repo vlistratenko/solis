@@ -2,6 +2,7 @@ package objects;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+
 import selenium.CommonUtils;
 import selenium.SeleneseTestCase;
 
@@ -642,6 +645,16 @@ abstract class Element {
 	public Integer isValueExists(String value) {
 		
 		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();		
+	}
+		
+	public Boolean waitConditionBecomesTrue(Boolean condition, Integer timeOut) {
+		if (!condition) {
+			sleep(timeOut);
+			return false;
+		}else{
+			return true;
+		}
+		
 	}
 
 }

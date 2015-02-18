@@ -1,10 +1,11 @@
 package objects;
 
+import java.io.File;
+
 import org.openqa.selenium.interactions.Actions;
 
 import selenium.SeleneseTestCase;
 import interfaces.iTextBox;
-
 
 public class TextBox extends Element implements iTextBox {
 
@@ -93,6 +94,27 @@ public class TextBox extends Element implements iTextBox {
 	public boolean isNotDisplayed() {
 		logger.info("Check that " + elementName + " is not displayed.");
 		return super.isNotDisplayed(path);
+	}
+	
+	public void uploadAssetsImage(String filePath, String imageName) {
+		
+		logger.info("Trying to upload to Assets image called " + imageName);
+		
+		File image = new File(filePath);
+		
+		if (image.exists()) {
+			
+			setAttribute("class", "ng ng-valid ng-dirty");
+			type(image.getAbsolutePath());
+			
+			logger.info("Image called " + imageName + " is being uploaded to Assets");
+				
+		} else { 
+			
+			logger.error("Image called " + imageName + " was NOT found in /images directory");
+							
+		}
+		
 	}
 
 }
