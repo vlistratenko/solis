@@ -1,7 +1,10 @@
 package objects;
 
 import java.util.List;
+
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import selenium.SeleneseTestCase;
 import interfaces.iButton;
 
@@ -48,7 +51,7 @@ public class Button extends Element implements iButton {
 		
 	
 	public void moveAndClick() {
-		//new Actions(driver).moveToElement(findElementByXpath(path)).perform();
+		new Actions(driver).moveToElement(findElementByXpath(path)).perform();
 		click();
 		
 	}

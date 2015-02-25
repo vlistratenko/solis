@@ -624,6 +624,12 @@ abstract class Element {
 	public void changePath(String old, String newPath) {
 		this.path = this.path.replace(old, newPath);
 	}
+	
+	public void addPath(String pathToAdd) {
+		
+		this.path = this.path+pathToAdd;
+		
+	}
 
 	
 	protected Actions getActionBuilder() {
