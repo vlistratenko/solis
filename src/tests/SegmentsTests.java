@@ -22,6 +22,8 @@ public class SegmentsTests extends SeleneseTestCase{
 
 	}
 	
+	//NB!! DONT DELETE! WORK IN PROGRESS!!!!!!!
+	
 	/*@Parameters({"segmentName",
 		"segmentTag",
 		"addIncludeRule",
