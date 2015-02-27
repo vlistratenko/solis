@@ -22,7 +22,7 @@ public class SegmentsTests extends SeleneseTestCase{
 
 	}
 	
-	@Parameters({"segmentName",
+	/*@Parameters({"segmentName",
 		"segmentTag",
 		"addIncludeRule",
 		"addExcludeRule",
@@ -51,7 +51,7 @@ public class SegmentsTests extends SeleneseTestCase{
 		checkSegmentsExists(segmentName);
 		CommonUtils.setProperty("segmentName", segmentName);
 
-	}
+	}*/
 	
 }
 		
