@@ -6,7 +6,7 @@
     <parameter name="trial.password" value="!QAZ2wsx"></parameter>
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
    	<listeners>
-    	<listener class-name="selenium.MyTestListener" />
+    	<listener class-name="core.util.MyTestListener" />
   	</listeners>
   	<test verbose="2" name="BuyLicenseAnnualTest1" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>

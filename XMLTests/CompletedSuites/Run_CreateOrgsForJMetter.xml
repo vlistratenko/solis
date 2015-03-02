@@ -3,7 +3,7 @@
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
   	<listeners>
-    	<listener class-name="selenium.MyTestListener" />
+    	<listener class-name="core.util.MyTestListener" />
   	</listeners>
   	
   	<test verbose="3" name="Create orgs for JMetter" annotations="JDK" >

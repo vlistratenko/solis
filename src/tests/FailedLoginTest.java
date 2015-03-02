@@ -2,9 +2,10 @@ package tests;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.HQ.LoginPage;
-import selenium.CommonUtils;
-import selenium.SeleneseTestCase;
+
+import core.util.CommonUtils;
+import core.util.SeleneseTestCase;
+import pages.hq.LoginPage;
 
 public class FailedLoginTest extends SeleneseTestCase {
 

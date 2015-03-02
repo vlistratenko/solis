@@ -1,11 +1,12 @@
 package tests;
 
 
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.HQ.LoginPage;
-import selenium.CommonUtils;
-import selenium.SeleneseTestCase;
+
+import pages.hq.LoginPage;
+import core.util.CommonUtils;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
 
 public class SegmentsTests extends SeleneseTestCase{
 	
@@ -15,7 +16,7 @@ public class SegmentsTests extends SeleneseTestCase{
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openSettingsPage().
 		switchToPaymentGatewaysPage();
 		
@@ -40,7 +41,7 @@ public class SegmentsTests extends SeleneseTestCase{
 		segmentName = segmentName + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openAudiencePage().
 		openSegmentsPage().
 		openAddSegmentPage().

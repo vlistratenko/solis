@@ -13,9 +13,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.HQ.LoginPage;
-import selenium.CommonUtils;
-import selenium.SeleneseTestCase;
+import core.util.CommonUtils;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import pages.hq.LoginPage;
 import tests.ActivitiesTests;
 import tests.AdminTest;
 import tests.SettingsTests;
@@ -46,15 +47,15 @@ public class DataForJMetter extends SeleneseTestCase{
 		new AdminTest().createOrgTest(domainType, orgName, orgDescrption, firstName, lastName, status, featureList).
 		confirmAdminAccountTest(userPassword);
 		CommonUtils.saveDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(),
-				CommonUtils.getProperty("Admin.email") + ":" + CommonUtils.getProperty("Admin.Password") + ":" + CommonUtils.getProperty("Admin.orgName"), true);
+				CommonUtils.getProperty(PropertyName.ADMIN_EMAIL) + ":" + CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD) + ":" + CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME), true);
 		new LoginPage(true);
 	}
 	
 	@Test(priority=10, enabled = true, groups = {"createWePay"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createNewOrgs"})
 	public void createWePayInOrgs(String login, String pass) throws IOException {
 		
-		CommonUtils.setProperty("Admin.email", login); 
-		CommonUtils.setProperty("Admin.Password", pass);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 
+		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, pass);
 		String wePayName = CommonUtils.getUnicName();
 		new SettingsTests().createWePayAcountTest(wePayName, "Description", "nonprofit");
 		new LoginPage(true);
@@ -64,30 +65,29 @@ public class DataForJMetter extends SeleneseTestCase{
 	@Test(priority=10, enabled = true, groups = {"createDonationWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createWePayInOrgs"})
 	public void createDonationWidgetsInOrgs(String login, String pass) throws IOException {
 		
-		CommonUtils.setProperty("Admin.email", login); 
-		CommonUtils.setProperty("Admin.Password", pass);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 
+		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, pass);
 		String widgetName = CommonUtils.getUnicName();
 		new ActivitiesTests().createDonationWidgetTest(widgetName, "JM descr for widget", "Basic", false);
 		new LoginPage(true);
-		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty("donationWidgetLink").replace("https://", ""), login);
+		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty(PropertyName.DONATION_WIDGET_LINK).replace("https://", ""), login);
 	}
 	
 	@Test(priority=10, enabled = false, groups = {"createSubscriptionnWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createDonationWidgetsInOrgs"})
 	public void createSubscriptionnWidgetsInOrgs(String login, String pass) throws IOException {
 		
-		CommonUtils.setProperty("Admin.email", login); 
-		CommonUtils.setProperty("Admin.Password", pass);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 
+		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, pass);
 		String widgetName = CommonUtils.getUnicName();
 		new ActivitiesTests().createSubscribeWidget(widgetName, "JM descr for widget", "Basic");
 		new LoginPage(true);
-		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty("subscribeWidgetLink").replace("https://", ""), login);
+		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty(PropertyName.SUBSCRIBE_WIDGET_LINK).replace("https://", ""), login);
 	}
 	
 	@DataProvider(name = "getDataFromCSV")
     public Iterator<Object []> getDataFromCSV( ) throws InterruptedException, IOException
     {
         List<Object []> testCases = new ArrayList<>();
-        //String[] data= null;
 
         //this loop is pseudo code
         BufferedReader br = new BufferedReader(new FileReader(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath()));

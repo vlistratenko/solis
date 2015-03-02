@@ -4,7 +4,7 @@
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
   	<parameter name="bpath" value="*chrome"></parameter>
    	<listeners>
-    	<listener class-name="selenium.MyTestListener" />
+    	<listener class-name="core.util.MyTestListener" />
   	</listeners>>
   <suite-files>	
  	<suite-file path="/CompletedSuites/Run_Donations_Suite_Completed.xml" />      

@@ -2,7 +2,8 @@ package suites;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import selenium.SeleneseTestCase;
+
+import core.util.SeleneseTestCase;
 import tests.AdminTest;
 import tests.EmailBlastTest;
 import tests.SettingsTests;

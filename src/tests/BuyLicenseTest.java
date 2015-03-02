@@ -3,16 +3,15 @@ package tests;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
-import org.apache.commons.collections.map.StaticBucketMap;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.HQ.LoginPage;
-import pages.HQ.PurchasePage;
-import selenium.SeleneseTestCase;
+import pages.hq.LoginPage;
+import pages.hq.PurchasePage;
+import core.util.SeleneseTestCase;
 
 public class BuyLicenseTest extends SeleneseTestCase {
-	public static Boolean sendEmails = true;
+	public static boolean sendEmails = true;
 	
 	@Parameters({ "trial.login", "trial.password", "paymentFrequency"})
 	@Test(priority=10, groups = {"BuyLicenseTest"}, description = "")

@@ -3,7 +3,7 @@
   	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
    	<listeners>
-    	<listener class-name="selenium.MyTestListener" />
+    	<listener class-name="core.util.MyTestListener" />
   	</listeners>>
   <suite-files>
  	<suite-file path="/CompletedSuites/Run_EmailKPI_Suite_Completed.xml" /> 	

@@ -3,10 +3,12 @@ package tests;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.HQ.LoginPage;
-import pages.HQ.Supporters.SupportersPage;
-import selenium.CommonUtils;
-import selenium.SeleneseTestCase;
+
+import core.util.CommonUtils;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import pages.hq.LoginPage;
+import pages.hq.supporters.SupportersPage;
 
 public class SupportersTests extends SeleneseTestCase{
 	
@@ -15,7 +17,7 @@ public class SupportersTests extends SeleneseTestCase{
 	public void createSupporerManually(Integer amount){
 		LoginPage loginPage = new LoginPage();
 		SupportersPage supportersPage = loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openAudiencePage().
 		openSupportersPage();
 		
@@ -26,8 +28,8 @@ public class SupportersTests extends SeleneseTestCase{
 			checkSupporterExists(CommonUtils.getParam("supporterEmail"));
 			logger.info("Supporter #" + i + " was added");
 		}
-		amount = amount + Integer.parseInt(CommonUtils.getProperty("amountOfSupporters")); 
-		CommonUtils.setProperty("amountOfSupporters", amount.toString());
+		amount = amount + Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_SUPPORTERS)); 
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, amount.toString());
 		
 	}
 	

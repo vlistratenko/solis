@@ -2,7 +2,8 @@ package suites;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import selenium.SeleneseTestCase;
+
+import core.util.SeleneseTestCase;
 import tests.ActivitiesTests;
 import tests.AdminTest;
 import tests.SettingsTests;
@@ -80,11 +81,11 @@ public class Donations_Suite extends SeleneseTestCase{
 			String cvv,
 			String expiryMonth,
 			String expiryYear,			
-			Boolean isFundraising,
-			Boolean isNewsletter,
-			Boolean isEmail)
+			boolean isFundraising,
+			boolean isNewsletter,
+			boolean isEmail)
 	{	
-		Boolean recurringDonation = false;
+		boolean recurringDonation = false;
 		new ActivitiesTests().makeDonationTest(widgetName,
 				widgetDescription,
 				widgetLayoutName,
@@ -129,7 +130,7 @@ public class Donations_Suite extends SeleneseTestCase{
 			String personCity,
 			String personZip) 
 	{	
-		Boolean recurringDonation = false;
+		boolean recurringDonation = false;
 		new ActivitiesTests().refundDonation(donationAmount,
 				cardNumber,
 				expiryMonth,
@@ -176,11 +177,11 @@ public class Donations_Suite extends SeleneseTestCase{
 			String cvv,
 			String expiryMonth,
 			String expiryYear,			
-			Boolean isFundraising,
-			Boolean isNewsletter,
-			Boolean isEmail)
+			boolean isFundraising,
+			boolean isNewsletter,
+			boolean isEmail)
 	{
-		Boolean recurringDonation = true;
+		boolean recurringDonation = true;
 		new ActivitiesTests().makeDonationTest(widgetName,
 				widgetDescription,
 				widgetLayoutName,
@@ -225,7 +226,7 @@ public class Donations_Suite extends SeleneseTestCase{
 			String personCity,
 			String personZip) 
 	{	
-		Boolean recurringDonation = true;
+		boolean recurringDonation = true;
 		new ActivitiesTests().refundDonation(donationAmount,
 				cardNumber,
 				expiryMonth,
@@ -238,81 +239,4 @@ public class Donations_Suite extends SeleneseTestCase{
 				personZip,
 				recurringDonation);
 	}
-
-/*	
-	@DataProvider(name = "donationData")
-	public Object[][] donationData(ITestContext context) 
-	{
-		XmlTest xTest = context.getCurrentXmlTest(); 
-		return new Object[][] {
-		   {xTest.getParameter("createwidget.widgetName"),
-			   xTest.getParameter("createwidget.widgetDescription"), 
-			   xTest.getParameter("donation.personEmail"),
-			   xTest.getParameter("donation.personFName"),
-			   xTest.getParameter("donation.personLName"),
-			   xTest.getParameter("donation.personAddressLine1"),
-			   xTest.getParameter("donation.personAddressLine2"),
-			   xTest.getParameter("donation.personCity"),
-			   xTest.getParameter("donation.personZip"),
-			   new Boolean("false"),
-			   xTest.getParameter("donation.donationAmount"),
-			   xTest.getParameter("donation.nameOnCard"),
-			   xTest.getParameter("donation.cardNumber"),
-			   xTest.getParameter("donation.cvv"),
-			   xTest.getParameter("donation.expiryMonth"),
-			   xTest.getParameter("donation.expiryYear"),			
-			   new Boolean(xTest.getParameter("donation.isFundraising")),
-			   new Boolean(xTest.getParameter("donation.isNewsletter")),
-			   new Boolean(xTest.getParameter("donation.isEmail"))},
-		   {xTest.getParameter("createwidget.widgetName"),
-				   xTest.getParameter("createwidget.widgetDescription"), 
-				   xTest.getParameter("donation.personEmail"),
-				   xTest.getParameter("donation.personFName"),
-				   xTest.getParameter("donation.personLName"),
-				   xTest.getParameter("donation.personAddressLine1"),
-				   xTest.getParameter("donation.personAddressLine2"),
-				   xTest.getParameter("donation.personCity"),
-				   xTest.getParameter("donation.personZip"),
-				   new Boolean("true"),
-				   xTest.getParameter("donation.donationAmount"),
-				   xTest.getParameter("donation.nameOnCard"),
-				   xTest.getParameter("donation.cardNumber"),
-				   xTest.getParameter("donation.cvv"),
-				   xTest.getParameter("donation.expiryMonth"),
-				   xTest.getParameter("donation.expiryYear"),			
-				   new Boolean(xTest.getParameter("donation.isFundraising")),
-				   new Boolean(xTest.getParameter("donation.isNewsletter")),
-				   new Boolean(xTest.getParameter("donation.isEmail"))},
-		 };
-	}
-
-	@DataProvider(name = "donationDataForRefund")
-	public Object[][] donationDataForRefund(ITestContext context) 
-	{
-		XmlTest xTest = context.getCurrentXmlTest(); 
-		return new Object[][] {
-		   {xTest.getParameter("donation.donationAmount"),
-			   xTest.getParameter("donation.cardNumber"), 
-			   xTest.getParameter("donation.expiryMonth"),
-			   xTest.getParameter("donation.expiryYear"),
-			   xTest.getParameter("donation.personFName"),
-			   xTest.getParameter("donation.personLName"),
-			   xTest.getParameter("donation.personAddressLine1"),
-			   xTest.getParameter("donation.personAddressLine2"),
-			   xTest.getParameter("donation.personCity"),
-			   xTest.getParameter("donation.personZip"),
-			   new Boolean("false")},
-		   {xTest.getParameter("donation.donationAmount"),
-			   xTest.getParameter("donation.cardNumber"), 
-			   xTest.getParameter("donation.expiryMonth"),
-			   xTest.getParameter("donation.expiryYear"),
-			   xTest.getParameter("donation.personFName"),
-			   xTest.getParameter("donation.personLName"),
-			   xTest.getParameter("donation.personAddressLine1"),
-			   xTest.getParameter("donation.personAddressLine2"),
-			   xTest.getParameter("donation.personCity"),
-			   xTest.getParameter("donation.personZip"),
-			   new Boolean("true")},
-		 };
-	}*/
 }

@@ -5,19 +5,22 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import objects.Supporter;
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import selenium.CommonUtils;
-import selenium.EmailClient;
-import selenium.HttpClient;
-import selenium.SeleneseTestCase;
+
 import tests.ActivitiesTests;
 import tests.AdminTest;
 import tests.EmailBlastTest;
 import tests.SettingsTests;
+import core.util.CommonUtils;
+import core.util.EmailClient;
+import core.util.HttpClient;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import core.util.Supporter;
 
 public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 
@@ -59,21 +62,15 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 		new ActivitiesTests().subscribeSupporterTest("");
 	}
 	
-/*	@Test( priority=30, groups = {"activities.subscribeByLinkInEmail"}, description = "", dependsOnMethods="createSubscribeFormAndSubscribeSupporter")
-	public void subscribeByLinkInEmail(){
-		new ActivitiesTests().subscribeSupporterTest();
-	}
-	*/
-	
 	@Test( priority=50, groups = {"activities.subscribeExistedSupporter"}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
 	public void subscribeExistedSupporter() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException, JSONException{
 		Supporter supporter = new Supporter();
-		supporter.finalEMAIL = EmailClient.getEmailBox("emailforsub" + CommonUtils.getUnicName());
+		supporter.setFinalEMAIL(EmailClient.getEmailBox("emailforsub" + CommonUtils.getUnicName()));
 		
 		//Create new supporter
-		new HttpClient().login().createSupporter(supporter.getSupporterJSON(supporter.finalEMAIL));
+		new HttpClient().login().createSupporter(supporter.getSupporterJSON(supporter.getFinalEMAIL()));
 		
-		new ActivitiesTests().subscribeSupporterTest(supporter.finalEMAIL);
+		new ActivitiesTests().subscribeSupporterTest(supporter.getFinalEMAIL());
 	}	
 	
 	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
@@ -100,19 +97,6 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	
 	@Test( priority=30, groups = {"activities.subscribeUnsubscribedSupporter"}, description = "", dependsOnMethods="unsubscribeSupporterTest")
 	public void subscribeUnsubscribedSupporter(){
-		new ActivitiesTests().subscribeSupporterTest(CommonUtils.getProperty("unsubscribedSupporter"));
+		new ActivitiesTests().subscribeSupporterTest(CommonUtils.getProperty(PropertyName.UNSUBSCRIBED_SUPPORTER));
 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*	@DataProvider(name = "getLinkFromEmail")
-	public Object[][] getLinkFromEmail() {
-	 
-		new ActivitiesTests().
-		
-		return new Object[][] {
-	   { "Cedric"}
-	 };
-	}*/
-
-
 }

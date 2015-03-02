@@ -2,13 +2,15 @@ package suites;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.Admin.LoginPageAdmin;
-import pages.HQ.HomePage;
-import pages.HQ.LoginPage;
-import pages.HQ.Supporters.SupportersPage;
-import selenium.CommonUtils;
-import selenium.EmailClient;
-import selenium.SeleneseTestCase;
+
+import core.util.CommonUtils;
+import core.util.EmailClient;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import pages.admin.LoginPageAdmin;
+import pages.hq.HomePage;
+import pages.hq.LoginPage;
+import pages.hq.supporters.SupportersPage;
 
 public class BuildAcceptanceTests extends SeleneseTestCase {
 
@@ -38,10 +40,10 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 			checkOrganizationExists(orgName).
 			clickLogOut();
 		
-		CommonUtils.setProperty("Admin.email", orgAdminUserId);
-		CommonUtils.setProperty("Admin.firstName", firstName);
-		CommonUtils.setProperty("Admin.lastName", lastName);
-		CommonUtils.setProperty("Admin.orgName", orgName);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, orgAdminUserId);
+		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
+		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
+		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);
 	}
 	
     @Test(priority=20, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
@@ -57,8 +59,8 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		openConfirmationPage().
 		completeInvite(userPassword);
 		
-		CommonUtils.setProperty("Admin.Password", userPassword);
-		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));
+		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, userPassword);
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, String.valueOf(1));
 	}
 	
 	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
@@ -66,10 +68,8 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
-		//configureNewOrg(CommonUtils.getProperty("Admin.email"), "11111", "TestCity").
-		verifyHomePageIsOpened();//.
-		//verifyOrgNameDisplayed();
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
+		verifyHomePageIsOpened();
 	}
 	
 	@Parameters({ "createSupporter.amount"})
@@ -88,8 +88,8 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 			checkSupporterExists(CommonUtils.getParam("supporterEmail"));
 			logger.info("Supporter �" + i + " was added");
 		}
-		amount = amount + Integer.parseInt(CommonUtils.getProperty("amountOfSupporters")); 
-		CommonUtils.setProperty("amountOfSupporters", amount.toString());
+		amount = amount + Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_SUPPORTERS)); 
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, amount.toString());
 		
 	}
 	
@@ -113,8 +113,6 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyNewsPopUpIsExists().
 		openSettingsPage().
 		verifyURL();
-		//openSearchPage().
-		//verifyURL();
 	}
 	
 	@Parameters({"segmentName",
@@ -134,7 +132,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		///////
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password"));
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD));
 		//////
 		HomePage homePage = new HomePage();
 		
@@ -190,16 +188,16 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
 		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount);
 		
-		CommonUtils.setProperty("emailBlastName", emailBlastName);
+		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
 		if (splitsAmount <= 1) {
-			CommonUtils.setProperty("emailSubject", emailSubject);
+			CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
 		}else{
-			CommonUtils.setProperty("emailSplitsSubject", emailSubject);
+			CommonUtils.setProperty(PropertyName.EMAIL_SPLIT_SUBJECT, emailSubject);
 		}
 			
-		CommonUtils.setProperty("emailFrom", emailFrom);
+		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		if (splitsAmount > 1) {
-			CommonUtils.setProperty("percentageOfTestGroup", percentageOfTestGroup.toString());
+			CommonUtils.setProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP, percentageOfTestGroup.toString());
 		}
 		
 	}
@@ -209,7 +207,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	public void confirmTestEmailsWereSentTest(int SplitsAmount){
 		
 		new LoginPage().
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfSupporters")), SplitsAmount, 5, true);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_SUPPORTERS)), SplitsAmount, 5, true);
 	}
 	
 	@Test(priority=110, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods={"loginAsNewSuperAdminTest"}, description = "536:63:Emails were NOT sent")
@@ -271,10 +269,10 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 					  cmAssetManagementRole1).
 		verifyInvitationSent();	
 		
-		CommonUtils.setProperty("CM.Login", cmEmail);
-		CommonUtils.setProperty("CM.firstName", cmFirstName);
-		CommonUtils.setProperty("CM.lastName", cmLastName);
-		CommonUtils.setProperty("CM.email", cmEmail);
+		CommonUtils.setProperty(PropertyName.CM_LOGIN, cmEmail);
+		CommonUtils.setProperty(PropertyName.CM_FIRST_NAME, cmFirstName);
+		CommonUtils.setProperty(PropertyName.CM_LAST_NAME, cmLastName);
+		CommonUtils.setProperty(PropertyName.CM_EMAIL, cmEmail);
 	}
 	
 	@Test(priority=140, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="createCMManually", description = "506:56:New CM account was NOT confirmed.")
@@ -289,9 +287,9 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		openConfirmationPage().
 		completeInvite(userPassword);
 		
-		CommonUtils.setProperty("CM.Password", userPassword);
-		Integer newValueOfSupporters = Integer.valueOf(CommonUtils.getProperty("amountOfSupporters")) + 1;
-		CommonUtils.setProperty("amountOfSupporters", newValueOfSupporters.toString());
+		CommonUtils.setProperty(PropertyName.CM_PASSWORD, userPassword);
+		Integer newValueOfSupporters = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_SUPPORTERS)) + 1;
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, newValueOfSupporters.toString());
 		
 
 	}
@@ -301,7 +299,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("CM.Login"),  CommonUtils.getProperty("CM.Password"));//.
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.CM_LOGIN),  CommonUtils.getProperty(PropertyName.CM_PASSWORD));//.
 		//verifyUserNameDisplayed().
 		//verifyOrgNameDisplayed();
 	}

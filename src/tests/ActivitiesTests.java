@@ -1,30 +1,30 @@
 package tests;
 
 
-import objects.Supporter;
-
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import pages.HQ.LoginPage;
-import pages.HQ.Activities.DonationWidget;
-import selenium.CommonUtils;
-import selenium.EmailClient;
-import selenium.SeleneseTestCase;
+import pages.hq.LoginPage;
+import pages.hq.activities.DonationWidget;
+import core.util.CommonUtils;
+import core.util.EmailClient;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import core.util.Supporter;
 
 public class ActivitiesTests extends SeleneseTestCase{
 	
 	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName", "donation.recurringDonation"})
 	//@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
-	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, String widgetLayoutName, Boolean recurringDonation) 
+	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, String widgetLayoutName, boolean recurringDonation) 
 	{		
 		//widgetName = widgetName + CommonUtils.getUnicName();
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
 			
 		DonationWidget widget = loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openFundraisingWidgetPage().
 		openAddDonationWidgetPage().
@@ -36,9 +36,9 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openDonationWidget();
 		
 		if (recurringDonation) {
-			CommonUtils.setProperty("recurringWidgetName", widgetName);
+			CommonUtils.setProperty(PropertyName.RECURRING_WIDGET_NAME, widgetName);
 		}else{
-			CommonUtils.setProperty("oneTimeWidgetName", widgetName);
+			CommonUtils.setProperty(PropertyName.ONETIME_WIDGET_NAME, widgetName);
 		}
 		
 		return widget;
@@ -71,16 +71,16 @@ public class ActivitiesTests extends SeleneseTestCase{
 			String personAddressLine2,
 			String personCity,
 			String personZip,
-			Boolean recurringDonation,
+			boolean recurringDonation,
 			String donationAmount,
 			String nameOnCard,
 			String cardNumber,
 			String cvv,
 			String expiryMonth,
 			String expiryYear,			
-			Boolean isFundraising,
-			Boolean isNewsletter,
-			Boolean isEmail) 
+			boolean isFundraising,
+			boolean isNewsletter,
+			boolean isEmail) 
 	{		
 		widgetName = widgetName + CommonUtils.getUnicName();
 		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
@@ -117,9 +117,9 @@ public class ActivitiesTests extends SeleneseTestCase{
 		checkSupporterExists(personEmail);
 		
 		if (recurringDonation) {
-			CommonUtils.setProperty("recurringWidgetName", widgetName);
+			CommonUtils.setProperty(PropertyName.RECURRING_WIDGET_NAME, widgetName);
 		}else{
-			CommonUtils.setProperty("oneTimeWidgetName", widgetName);
+			CommonUtils.setProperty(PropertyName.ONETIME_WIDGET_NAME, widgetName);
 		}
 		CommonUtils.checkAndFail("makeDonationTest");
 	}
@@ -146,21 +146,21 @@ public class ActivitiesTests extends SeleneseTestCase{
 			String personAddressLine2,
 			String personCity,
 			String personZip,
-			Boolean recurringDonation) 
+			boolean recurringDonation) 
 	{
 		LoginPage loginPage = new LoginPage();
 		String status= "";		
 		String widgetName;		
 		if (recurringDonation) {
-			widgetName = CommonUtils.getProperty("recurringWidgetName");
+			widgetName = CommonUtils.getProperty(PropertyName.RECURRING_WIDGET_NAME);
 			status = "COMPLETE";
 		}else{
-			widgetName = CommonUtils.getProperty("oneTimeWidgetName");
+			widgetName = CommonUtils.getProperty(PropertyName.ONETIME_WIDGET_NAME);
 			status = "CHARGE";
 		}
 		
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openDonationsPage().
 		openDonation(widgetName).
 		verifyDonation(donationAmount,
@@ -189,7 +189,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		LoginPage loginPage = new LoginPage();
 		
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openSubscribeWidgetsPage().
 		openAddSubscribeWidgetPage().
@@ -200,7 +200,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openSubscribeWidget().
 		backToSubscribegWidgetPage();
 		
-		CommonUtils.setProperty("subscribeWidget", widgetName);
+		CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET, widgetName);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}
 	
@@ -211,18 +211,18 @@ public class ActivitiesTests extends SeleneseTestCase{
 		Supporter supporter = new Supporter();
 		LoginPage loginPage = new LoginPage(true);
 		if (!supporterEmail.contains("@")) {
-			supporterEmail = EmailClient.getEmailBox(new Supporter().subscribedEmail + CommonUtils.getUnicName());
-			supporter.cPhone = "";
-			supporter.addressLine1 = "";
-			supporter.facebook = "";
-			supporter.twitter = "";
+			supporterEmail = EmailClient.getEmailBox(new Supporter().getSubscribedEmail() + CommonUtils.getUnicName());
+			supporter.setcPhone("");
+			supporter.setAddressLine1("");
+			supporter.setFacebook("");
+			supporter.setTwitter("");
 		}
 		loginPage.
 		openSubscribeWidgetByLink().
-		fillSubscribeWidget(supporterEmail, supporter.firstName, supporter.lastName, supporter.City, supporter.zipCode).
+		fillSubscribeWidget(supporterEmail, supporter.getFirstName(), supporter.getLastName(), supporter.getCity(), supporter.getZipCode()).
 		verifySubscriptionIsSuccesses().
 		backToLoginPage().
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openAudiencePage().
 		openSupportersPage().
 		searchSupporter(supporterEmail).
@@ -230,16 +230,16 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openSupporterDetailsPage().
 		verifySupporterData(
 				supporterEmail,
-				supporter.firstName,
-				supporter.lastName,
-				supporter.cPhone,
-				supporter.addressLine1,
-				supporter.City,				
-				supporter.zipCode,
-				supporter.facebook,
-				supporter.twitter,
+				supporter.getFirstName(),
+				supporter.getLastName(),
+				supporter.getcPhone(),
+				supporter.getAddressLine1(),
+				supporter.getCity(),				
+				supporter.getZipCode(),
+				supporter.getFacebook(),
+				supporter.getTwitter(),
 				"Subscribed");
-				CommonUtils.setProperty("subscribedSupporter", supporterEmail);
+				CommonUtils.setProperty(PropertyName.SUBSCRIBED_SUPPORTER, supporterEmail);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}
 

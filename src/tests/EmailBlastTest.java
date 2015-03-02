@@ -5,18 +5,21 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import objects.Supporter;
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.HQ.LoginPage;
-import pages.HQ.Manage.UnsubscribePage;
-import pages.Other.Dispatcher;
-import selenium.CommonUtils;
-import selenium.EmailClient;
-import selenium.HttpClient;
-import selenium.SeleneseTestCase;
+
+import pages.hq.LoginPage;
+import pages.hq.manage.UnsubscribePage;
+import pages.other.Dispatcher;
+import core.util.CommonUtils;
+import core.util.EmailClient;
+import core.util.HttpClient;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
+import core.util.Supporter;
 
 public class EmailBlastTest extends SeleneseTestCase{
 	
@@ -25,9 +28,9 @@ public class EmailBlastTest extends SeleneseTestCase{
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
-		CommonUtils.setProperty("emailBlastName", emailBlastName);
-		CommonUtils.setProperty("emailSubject", emailSubject);	
-		CommonUtils.setProperty("emailFrom", emailFrom);
+		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
+		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);	
+		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		
 		if(emailOfSupporter.equals("")){
 			emailOfSupporter = EmailClient.getEmailBox("");
@@ -35,7 +38,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
@@ -48,18 +51,18 @@ public class EmailBlastTest extends SeleneseTestCase{
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 15, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 5, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, 1, 5, true);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 15, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 5, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 5, true);
 		
-		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
-		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
 		
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openEmailBlastsPage().
-		openEmailBlastDetailsPage(CommonUtils.getProperty("emailBlastName")).
+		openEmailBlastDetailsPage(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME)).
 		verifyOpenRateStat(openAmount).
 		verifyClickRateStat(clickAmount).
 		verifyHardBouncesStat(hardBounceAmount);
@@ -86,10 +89,10 @@ public class EmailBlastTest extends SeleneseTestCase{
 			int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
-		CommonUtils.setProperty("emailBlastName", emailBlastName);
-		CommonUtils.setProperty("emailSplitsSubject", emailSubject);
-		CommonUtils.setProperty("emailFrom", emailFrom);
-		CommonUtils.setProperty("percentageOfTestGroup", percentageOfTestGroup.toString());
+		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
+		CommonUtils.setProperty(PropertyName.EMAIL_SPLIT_SUBJECT, emailSubject);
+		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
+		CommonUtils.setProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP, percentageOfTestGroup.toString());
 		
 		if(emailOfSupporter.equals("")){
 			emailOfSupporter = EmailClient.getEmailBox("");
@@ -97,7 +100,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
@@ -110,20 +113,20 @@ public class EmailBlastTest extends SeleneseTestCase{
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
 		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 15, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 5, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")) - hardBounceAmount, splitsAmount, 5, true);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, splitsAmount, 15, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, splitsAmount, 5, false).
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, splitsAmount, 5, true);
 		
-		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
-		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails"))*/);
+		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
 
 
 		
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openEmailBlastsPage().
-		openEmailBlastDetailsPage(CommonUtils.getProperty("emailBlastName")).
+		openEmailBlastDetailsPage(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME)).
 		verifyOpenRateStat(openAmount).
 		verifyClickRateStat(clickAmount).
 		verifyHardBouncesStat(hardBounceAmount);
@@ -138,44 +141,44 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 		String emailSubj = "SendEmailsToUnsubscribed" + CommonUtils.getUnicName();
 		String emailBlastName = CommonUtils.getUnicName();
-		CommonUtils.setProperty("emailSubject", emailSubj);
+		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubj);
 		
 		Supporter supporter1 = new Supporter();
 		Supporter supporter2 = new Supporter();
 		Supporter supporter3 = new Supporter();
 		Supporter supporter4 = new Supporter();
 		
-		supporter1.finalEMAIL = EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName());
-		new HttpClient().login(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
-			createSupporter(supporter1.getSupporterJSON(supporter1.finalEMAIL));
+		supporter1.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
+			createSupporter(supporter1.getSupporterJSON(supporter1.getFinalEMAIL()));
 		
-		supporter2.finalEMAIL = EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName());
-		new HttpClient().login(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
-			createSupporter(supporter2.getSupporterJSON(supporter2.finalEMAIL));
+		supporter2.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
+			createSupporter(supporter2.getSupporterJSON(supporter2.getFinalEMAIL()));
 		
-		supporter3.finalEMAIL = EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName());
-		new HttpClient().login(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
-			createSupporter(supporter3.getSupporterJSON(supporter3.finalEMAIL));
+		supporter3.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
+			createSupporter(supporter3.getSupporterJSON(supporter3.getFinalEMAIL()));
 		
-		supporter4.finalEMAIL = EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName());
-		new HttpClient().login(CommonUtils.getProperty("Admin.email"), CommonUtils.getProperty("Admin.Password")).
-			createSupporter(supporter4.getSupporterJSON(supporter4.finalEMAIL));
+		supporter4.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
+			createSupporter(supporter4.getSupporterJSON(supporter4.getFinalEMAIL()));
 		
 		
 		LoginPage loginPage = new LoginPage();
 		UnsubscribePage unsPage = loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openSettingsPage().switchToUnsubscribeSettingsPage().openUnsubscribePage();
 		
 		unsPage.
-		fillUnsubscribeForm(supporter1.finalEMAIL).
+		fillUnsubscribeForm(supporter1.getFinalEMAIL()).
 		clickUnsubscribeButton().
 		verifyUnsubscribeIsSuccesses();
 		
 		unsPage.clearCache().refreshPage();
 		
 		unsPage.
-		fillUnsubscribeForm(supporter2.finalEMAIL).
+		fillUnsubscribeForm(supporter2.getFinalEMAIL()).
 		clickUnsubscribeButton().
 		verifyUnsubscribeIsSuccesses();
 		
@@ -193,7 +196,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndGoForward(emailSubj, "", 1).
 		fillAllFieldsAndPublish(100, 1).
 		verifyAmountOfEmailsForPublishing("2").
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty("amountOfPablishedEmails")), 1, 15, true);
+		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)), 1, 15, true);
 		
 		new Dispatcher().
 				openDispatcher().

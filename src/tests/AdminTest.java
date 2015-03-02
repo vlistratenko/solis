@@ -1,13 +1,14 @@
 package tests;
 
-import junit.framework.AssertionFailedError;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.Admin.LoginPageAdmin;
-import pages.HQ.LoginPage;
-import selenium.CommonUtils;
-import selenium.EmailClient;
-import selenium.SeleneseTestCase;
+
+import pages.admin.LoginPageAdmin;
+import pages.hq.LoginPage;
+import core.util.CommonUtils;
+import core.util.EmailClient;
+import core.util.PropertyName;
+import core.util.SeleneseTestCase;
 
 public class AdminTest extends SeleneseTestCase{
 	@Test( priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
@@ -38,10 +39,10 @@ public class AdminTest extends SeleneseTestCase{
 			checkOrganizationExists(orgName).
 			clickLogOut();
 		
-		CommonUtils.setProperty("Admin.email", orgAdminUserId);
-		CommonUtils.setProperty("Admin.firstName", firstName);
-		CommonUtils.setProperty("Admin.lastName", lastName);
-		CommonUtils.setProperty("Admin.orgName", orgName);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, orgAdminUserId);
+		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
+		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
+		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);
 		return this;
 	}
 	
@@ -55,8 +56,8 @@ public class AdminTest extends SeleneseTestCase{
 		completeInvite(userPassword).
 		verifyHomePageIsOpened();
 		
-    	CommonUtils.setProperty("Admin.Password", userPassword);
-		CommonUtils.setProperty("amountOfSupporters", String.valueOf(1));		
+    	CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, userPassword);
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, String.valueOf(1));		
 		return this;
 	}
 	
@@ -65,7 +66,7 @@ public class AdminTest extends SeleneseTestCase{
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty("Admin.email"),  CommonUtils.getProperty("Admin.Password")).
+		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		verifyHomePageIsOpened();
 	}
 }
