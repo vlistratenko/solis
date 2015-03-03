@@ -11,11 +11,11 @@ public class DonationsPage extends HomePage{
 	
 	public DonationsPage verifyDonationRecordInTable(String amount, String status, boolean type, String source, String supporter) {
 		for (int i = 0; i < 15; i++) {
-			if (waitConditionBecomesTrueWithRefersh(donationsTable.isValueExists(source)>0, 60000)) {
+			if (waitConditionBecomesTrueWithRefersh(donationsTable.isValueExists(source)>0, 60)) {
 				break;
 			}
 		}
-		verifier.verifyEquals(donationsTable.isValueExists(source)>0, true, "Donation item with source " + source + "is not found");
+		verifier.verifyTrue(donationsTable.isValueExists(source)>0, "Donation item with source " + source + "is not found");
 		
 		String dType;
 		if (!type) {
@@ -29,10 +29,10 @@ public class DonationsPage extends HomePage{
 				break;
 			}
 		}
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Status"), status, "Wrong status", false);
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Type"), dType, "Wrong type", false);
-		verifier.verifyEquals(source.contains(donationsTable.getCellValue(1, "Source")), true, "Wrong source " + donationsTable.getCellValue(1, "Source"), false);
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Supporter"), supporter, "Wrong supporter", false);
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Status"), status, "Wrong status");
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Type"), dType, "Wrong type");
+		verifier.verifyTrue(source.contains(donationsTable.getCellValue(1, "Source")), "Wrong source " + donationsTable.getCellValue(1, "Source"));
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Supporter"), supporter, "Wrong supporter");
 		return new DonationsPage();
 	}
 

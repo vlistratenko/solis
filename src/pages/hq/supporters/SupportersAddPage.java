@@ -70,7 +70,7 @@ public class SupportersAddPage extends HomePage{
 			tempElement = supporterStatusRadio;
 		}
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrueWithRefersh(tempElement.getText().equalsIgnoreCase(status), 30000)) {
+			if (waitConditionBecomesTrueWithRefersh(tempElement.getText().equalsIgnoreCase(status), 30)) {
 				break;
 			}
 		}

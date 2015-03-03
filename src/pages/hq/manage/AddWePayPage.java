@@ -28,7 +28,7 @@ public class AddWePayPage extends HomePage{
 		firstName.type(CommonUtils.getProperty(PropertyName.ADMIN_FIRST_NAME));
 		lastName.type(CommonUtils.getProperty(PropertyName.ADMIN_LAST_NAME));
 		submitButton.click();
-		sleep(10000);
+		sleep(10);
 		return new PaymentGatewaysPage();
 	}
 }

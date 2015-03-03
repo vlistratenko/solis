@@ -41,7 +41,7 @@ public class Google extends Browser{
 		email.setImplicity(600);
 		email.click();
 		email.setImplicity(SeleneseTestCase.defaultTimeOut);
-		sleep(5000);
+		sleep(5);
 		String url = inviteLink.getLastElement().getAttribute("href");
 		deletecoockies();
 		open(url);

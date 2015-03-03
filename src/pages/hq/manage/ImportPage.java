@@ -19,7 +19,7 @@ public class ImportPage extends ManagePage{
 		
 		verifier.verifyEquals(tableWithImports.getCellValue(1, "Name"), importName, "Row of import is not found or not first");
 		for (int i = 0; i < 10; i++) {
-			waitConditionBecomesTrueWithRefersh(tableWithImports.getCellValue(1, "Status").equalsIgnoreCase(importStatus), 30000);
+			waitConditionBecomesTrueWithRefersh(tableWithImports.getCellValue(1, "Status").equalsIgnoreCase(importStatus), 30);
 		}
 		verifier.verifyEquals(tableWithImports.getCellValue(1, "Status"), importStatus, "Wrong import status");
 		return this;		

@@ -43,8 +43,8 @@ public class PurchasePage extends Browser {
 			}
 			
 		}
-		verifier.verifyEquals(price.equalsIgnoreCase("Loading"), false, "Price is not correct. " + price, false);
-		verifier.verifyEquals(processingIconLabel.waitForNotExists(30), true, "Processing icon is not hiden", false);
+		verifier.verifyFalse(price.equalsIgnoreCase("Loading"), "Price is not correct. " + price);
+		verifier.verifyTrue(processingIconLabel.waitForNotExists(30), "Processing icon is not hiden");
 		return this;
 	}
 	
@@ -56,7 +56,7 @@ public class PurchasePage extends Browser {
 	public PurchasePage selectPaymentFrequency(String frequency) {
 		paymentFrequencyRadioButton = new ButtonImpl("//*[contains(text(), '" + frequency + "')]/ancestor::tr/descendant::*[contains(@class, 'custom radio')]", "payment Frequency");
 		paymentFrequencyRadioButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 }

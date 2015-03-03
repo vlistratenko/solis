@@ -60,11 +60,11 @@ public class SubscribeWidget extends Browser{
 	
 	public SubscribeWidget verifySubscriptionIsSuccesses() {
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(subscriptionIsSccessMessage.isDisplayed(), 10000)) {
+			if (waitConditionBecomesTrue(subscriptionIsSccessMessage.isDisplayed(), 10)) {
 				break;
 			}
 		}
-		verifier.verifyEquals(subscriptionIsSccessMessage.isDisplayed(), true, "Message that subscription success, is not displayed");
+		verifier.verifyElementIsDisplayed(subscriptionIsSccessMessage);
 		return this;
 	}
 }

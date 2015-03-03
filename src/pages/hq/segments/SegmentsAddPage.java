@@ -59,14 +59,14 @@ public class SegmentsAddPage extends SegmentsPage{
 	private void addSupporterManually(String supporter) {
 		serachAddSupporterManuallyField.type(supporter);
 		searchAddSupporterManuallyButton.click();
-		sleep(5000);
+		sleep(5);
 		selectSupporterFromList("sup");
 	}
 	
 	private void excludeSupporterManually(String supporter) {
 		serachExcludeSupporterManuallyField.type(supporter);
 		searchExcludeSupporterManuallyButton.click();
-		sleep(5000);
+		sleep(5);
 		selectSupporterFromList("sup");
 	}
 
@@ -75,7 +75,7 @@ public class SegmentsAddPage extends SegmentsPage{
 		String checkRuleButtonPath = ruleSet.getChildElementPath("button[contains(text(),'check')]", ruleSetNumber);
 		String amountSupportersLabel = ruleSet.getChildElementPath("span[contains(@class,'ruleCalc')]", ruleSetNumber);
 		new ButtonImpl(checkRuleButtonPath, "Check rule").click();
-		sleep(8000);
+		sleep(8);
 		Integer actualAmount = Integer.valueOf(new LabelImpl(amountSupportersLabel, "Label with supporters in rule").getText());
 		verifier.verifyEquals( actualAmount >= amountOfSupporters, true, "Wrong amount of supporters");
 		

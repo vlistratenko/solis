@@ -56,7 +56,6 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 	@Override
 	public void selectByID(String id) {
 		logger.info("Select value by id " + id + " in the " + elementName);
-		// sleep(3000);
 		sendKeys(extendButtonPath, Keys.TAB);
 		waitObject(path + "[" + id + "]", 10 * cTimeOut);
 		onClick(findElementByXpath(path + "[" + id + "]"));

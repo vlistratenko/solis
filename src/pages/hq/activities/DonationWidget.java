@@ -97,7 +97,7 @@ public class DonationWidget extends Browser{
 	
 	public DonationWidget verifyDonationIsSuccesses() {
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(donationIsSccessMessage.isDisplayed(), 10000)) {
+			if (waitConditionBecomesTrue(donationIsSccessMessage.isDisplayed(), 10)) {
 				break;
 			}
 		}

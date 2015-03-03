@@ -139,10 +139,10 @@ abstract class ElementImpl implements Element {
 	 * @param cTimeOut
 	 *            in miliseconds
 	 */
-	protected void sleep(int cTimeOut) {
+	protected void sleep(int seconds) {
 		try {
-			logger.debug("Sleep on " + cTimeOut / 1000 + " seconds");
-			Thread.sleep(cTimeOut);
+			logger.debug("Sleep on " + seconds + " seconds");
+			Thread.sleep(seconds * 1000);
 			logger.debug("Sleep on is over");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -668,10 +668,10 @@ abstract class ElementImpl implements Element {
 				} else if (i == aTime / 1000 - 1) {
 					throw new Exception("Exception: Wrong text. Text '" + aText + "' is not found.");
 				} else {
-					sleep(1000);
+					sleep(1);
 				}
 			} else {
-				sleep(1000);
+				sleep(1);
 			}
 
 		}

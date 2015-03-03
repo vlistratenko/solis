@@ -31,21 +31,21 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
 		nextButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 	
 	public AddDonationWidgetPage selectLayoutForDanationWidgetStep(String layoutName) {
-		sleep(10000);
+		sleep(10);
 		layoutButton.changePath("layoutName", layoutName);
 		layoutButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 	
 	public AddDonationWidgetPage createDonationWidgetDesignWidgetStep() {
 		publishButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 	
@@ -62,7 +62,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	}
 	
 	public DonationWidget openDonationWidget() {
-		sleep(5000);
+		sleep(5);
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();			
@@ -72,7 +72,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	}
 	
 	public AddDonationWidgetPage saveDonationWidgetLink() {
-		sleep(5000);
+		sleep(5);
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		currentWindowHandle = getWindowHandle();
 		CommonUtils.setProperty(PropertyName.DONATION_WIDGET_LINK, widgetLink.getAttribute("href"));

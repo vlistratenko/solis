@@ -44,7 +44,7 @@ public class AssetsPage extends HomePage {
 
 		if (imageUploading.isDisplayed()) {
 			
-			waitConditionBecomesTrue(!imageUploading.isDisplayed(), 2000);
+			waitConditionBecomesTrue(!imageUploading.isDisplayed(), 2);
 						
 		} else {return new AssetsPage();}
 		
@@ -87,7 +87,7 @@ public class AssetsPage extends HomePage {
 		
 		Button image = new ButtonImpl ("//*[@class='thumbnailItem ng-scope']/descendant::h6[(contains(text(), '" + imageName + "'))]", "Image that need to be deleted");
 		
-		verifier.verifyEquals(image.isDisplayed(), true, "Requested image is not deleted");
+		verifier.verifyElementIsDisplayed(image);
 		
 		return this;
 			

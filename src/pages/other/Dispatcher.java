@@ -19,7 +19,7 @@ public class Dispatcher extends Browser{
 	
 	public Dispatcher selectJob(String jobLabel) {
 		selectJobSelectBox.selectByLabel(jobLabel);
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 	

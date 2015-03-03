@@ -20,7 +20,7 @@ public class UnsubscribePage extends Browser{
 	public UnsubscribePage fillUnsubscribeForm(String personEmail) 
 	{
 		emailField.type(personEmail);
-		sleep(2000);
+		sleep(2);
 		return this;
 	}
 	
@@ -36,12 +36,12 @@ public class UnsubscribePage extends Browser{
 	
 	public UnsubscribePage verifyUnsubscribeIsSuccesses() {
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(unsubscribeIsSuccesLabel.isDisplayed(), 10000)) {
+			if (waitConditionBecomesTrue(unsubscribeIsSuccesLabel.isDisplayed(), 10)) {
 				break;
 			}
 		}
 		verifier.verifyEquals(unsubscribeIsSuccesLabel.isDisplayed(), true, "Message that unsubscibe success, is not displayed");
-		sleep(30000);
+		sleep(30);
 		return this;
 	}
 	

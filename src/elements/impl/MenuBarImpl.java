@@ -23,6 +23,6 @@ public class MenuBarImpl extends ElementImpl implements List {
 		logger.info("Select value by label " + value + " in the " + elementName);
 		SeleneseTestCase.bug.add("Select value by label " + value + " in the " + elementName);
 		this.getChildItemByLabel(value).click();
-		sleep(1500);
+		sleep(2);
 	}
 }

@@ -45,7 +45,7 @@ public abstract class Browser {
 	protected LoginPage logOut() {
 		deletecoockies();
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
-		sleep(5000);
+		sleep(5);
 		return new LoginPage();
 	}
 
@@ -79,7 +79,7 @@ public abstract class Browser {
 
 	protected void deletecoockies() {
 		SeleneseTestCase.deletecoockies();
-		sleep(5000);
+		sleep(5);
 	}
 
 	protected Set<Cookie> getCoockies() {
@@ -143,7 +143,7 @@ public abstract class Browser {
 		logger.info("LogOut from google and back to the test page");
 		deletecoockies();
 		SeleneseTestCase.driver.navigate().to("https://mail.google.com/mail/?logout&hl=ru");
-		sleep(3000);
+		sleep(3);
 
 	}
 
@@ -162,7 +162,7 @@ public abstract class Browser {
 			logger.info("Wait for condition");
 			sleep(timeOut);
 			refresh();
-			sleep(3000);
+			sleep(3);
 			return false;
 		} else {
 			return true;
@@ -176,10 +176,10 @@ public abstract class Browser {
 
 	}
 
-	protected void sleep(int t) {
+	protected void sleep(int seconds) {
 		try {
-			logger.info("Wait for " + t / 1000 + " seconds");
-			Thread.sleep(t);
+			logger.info("Wait for " + seconds + " seconds");
+			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
 			logger.error("", e);
 		}

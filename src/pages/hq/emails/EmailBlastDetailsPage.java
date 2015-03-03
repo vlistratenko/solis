@@ -37,7 +37,7 @@ public class EmailBlastDetailsPage extends HomePage {
 	private boolean waitConditionBecomesTrue(boolean condition) {
 		if (!condition) {
 			refresh();
-			sleep(30000);
+			sleep(30);
 			return false;
 		}
 		return true;

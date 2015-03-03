@@ -40,7 +40,7 @@ public class LoginPage extends Browser{
 	
 	public HomePage doSuccessLogin(String userName, String password) {
 		open();
-		sleep(3000);
+		sleep(3);
 		if(new HomePage().dashboardTab.isNotExists()) {
 			logOut();
 			LoginField.type(userName);
@@ -56,7 +56,7 @@ public class LoginPage extends Browser{
 				CommonUtils.setProperty(PropertyName.CURRENT_FIRST_NAME, CommonUtils.getProperty(PropertyName.CM_FIRST_NAME));
 				CommonUtils.setProperty(PropertyName.CURRENT_LAST_NAME, CommonUtils.getProperty(PropertyName.CM_LAST_NAME));
 			}
-			sleep(5000);
+			sleep(5);
 		}else{
 			new HomePage().dashboardTab.click();
 		}
@@ -84,13 +84,13 @@ public class LoginPage extends Browser{
 	
 	public SubscribeWidget openSubscribeWidgetByLink() {
 		String currentWindowHandle = super.openInNewWindow(CommonUtils.getProperty(PropertyName.SUBSCRIBE_WIDGET_LINK));		
-		sleep(5000);
+		sleep(5);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);		
 		return new SubscribeWidget();
 	}
 	
 	public LoginPage verifyValidationForFailLogin(String userName) {
-		sleep(5000);
+		sleep(5);
 		if (userName.equals("") || !userName.contains("@")) {
 			InvalidEmailAddressOrPasswordValidationLabel.isDisplayed();
 			EmailAddressandPasswordIsRequiredValidationLabel.isDisplayed();

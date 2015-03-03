@@ -14,10 +14,10 @@ public class UnsubscribeSettingsPage extends ManagePage {
 	Button saveButton = new ButtonImpl("//button[@id='btnSave']", "Save", true);
 	
 	public UnsubscribeSettingsPage editIntroductionaryText(String text) {
-		sleep(3000);
+		sleep(3);
 		introductoryTextField.type(text);
 		saveButton.click();
-		sleep(5000);		
+		sleep(5);		
 		return this;
 	}
 	

@@ -33,12 +33,12 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		if (amount==0) {
 			return this;
 		}
-		sleep(5000);
+		sleep(5);
 		addSupportersField.type(searchString);
-		sleep(5000);
+		sleep(5);
 		for (int i = 0; i < amount; i++) {
 			suppirtersItemInTheSearchButton.click();
-			sleep(1000);
+			sleep(1);
 		}
 		return this;
 	}

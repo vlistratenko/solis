@@ -49,7 +49,7 @@ public class ImportAddPage extends ManagePage{
 		
 		nextStepButton.click();
 		CommonUtils.setProperty(PropertyName.IMPORT_NAME, name);
-		sleep(15000);
+		sleep(2);
 		return this;
 	}
 	
@@ -65,13 +65,13 @@ public class ImportAddPage extends ManagePage{
 			
 		}
 		dedupeButton.click();
-		sleep(5000);
+		sleep(5);
 		return this;
 	}
 	
 	public ImportAddPage fillThirdStep() {
 		doneButton.click();
-		sleep(30000);
+		sleep(30);
 		return this;
 	}
 	

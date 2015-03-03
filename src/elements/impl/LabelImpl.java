@@ -30,7 +30,7 @@ public class LabelImpl extends ElementImpl implements Label {
 			if (isNotExists()) {
 				break;
 			} else {
-				sleep(1000);
+				sleep(1);
 			}
 		}
 		return isNotExists();

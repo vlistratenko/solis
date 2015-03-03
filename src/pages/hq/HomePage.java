@@ -68,11 +68,11 @@ public class HomePage extends Browser{
 	}
 	
 	public HomePage verifyHomePageIsOpened() {
-		sleep(10000);
+		sleep(10);
 		if (SeleneseTestCase.USED_ENVIRONMENT.server.equals(Environment.LocationOfServer.REMOTE)) {
-			sleep(20000);
+			sleep(20);
 		}
-		verifier.verifyEquals(getLocation().contains("dashboard") , true, "Wrong url " + getLocation());
+		verifier.verifyTrue(getLocation().contains("dashboard"), "Wrong url " + getLocation());
 		return this;
 	}
 	
@@ -107,21 +107,21 @@ public class HomePage extends Browser{
 	}
 	
 	public NewsPop openNewsPopup() {
-		sleep(5000);
+		sleep(5);
 		newsTab.click();
 		return new NewsPop();
 		
 	}
 
 	public PurchasePage clickBuyButton() {
-		sleep(5000);
+		sleep(5);
 		buyButton.click();
-		sleep(5000);
+		sleep(5);
 		return new PurchasePage();
 		
 	}
 	public HomePage configureNewOrg(String email, String zip, String city) {
-		sleep(10000);
+		sleep(10);
 		if (getLocation().contains("/configure/new-organization")) {
 			emailConfigNewOrgPage.type(email);
 			zipConfigNewOrgPage.type(zip);

@@ -30,20 +30,20 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		widgetNameField.type(widgetName); 
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;		
 	}
 	
 	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep(String layoutName) {
 		layoutButton.changePath("layoutName", layoutName);
 		layoutButton.click();
-		sleep(5000);
+		sleep(5);
 		return this;
 	}
 
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {		
 		openPublishStepButton.click();
-		sleep(10000);
+		sleep(10);
 		return this;		
 	}
 	
@@ -56,7 +56,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		titleField.type(widgetTitle);
 		saveAndPublish.scrollIntoView();
 		saveAndPublish.click();
-		sleep(5000);
+		sleep(5);
 		return this;
 	}
 	
@@ -65,7 +65,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET_LINK, widgetLink.getAttribute("href"));
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();	
-		sleep(5000);
+		sleep(5);
 		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		return new SubscribeWidget();

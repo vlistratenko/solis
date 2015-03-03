@@ -23,14 +23,14 @@ public class EmailBlastsPage extends HomePage{
 	}
 
 	public EmailBlastsPage checkEmailExists(String param) {
-		verifier.verifyEquals(emailsTable.isValueExists(param)>0, true, "Email " + param + " was not found."); 
+		verifier.verifyTrue(emailsTable.isValueExists(param) > 0, "Email " + param + " was not found.");
 		return this;
 		
 	}
 	
 	public EmailBlastDetailsPage openEmailBlastDetailsPage(String emailName) {
 		emailNameLink.changePath(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME), emailName);
-		sleep(3000);
+		sleep(3);
 		emailNameLink.click();
 		return new EmailBlastDetailsPage();
 		

@@ -13,7 +13,7 @@ public class ActivitiesPage extends HomePage{
 	Button subscribeWidgetLink = new ButtonImpl("//a[.='Grow Your List']", "Grow Your List");
 
 	public ActivitiesPage verifyURL() {
-		verifier.verifyEquals(getLocation().contains("activities"), true, "Current URL is not contains Activities");
+		verifier.verifyTrue(getLocation().contains("activities"), "Current URL is not contains Activities");
 		return this;
 	}
 	

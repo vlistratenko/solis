@@ -46,9 +46,17 @@ public class Verifier {
 	public void verifyEquals(Object actual, Object expected) {
 		verifyEquals(actual, expected, "", false);
 	}
+	
+	public void verifyTrue(Object actual, String message) {
+		verifyTrue(actual, message, false);
+	}
 
 	public void verifyTrue(Object actual, String message, boolean fail) {
 		verifyEquals(actual, true, message, fail);
+	}
+	
+	public void verifyFalse(Object actual, String message) {
+		verifyFalse(actual, message, false);
 	}
 
 	public void verifyFalse(Object actual, String message, boolean fail) {

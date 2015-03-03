@@ -24,7 +24,7 @@ public class AudiencePage extends HomePage{
 	
 	public AudiencePage verifyURL() {
 			
-		verifier.verifyEquals(getLocation().contains("audience"), true, "Current URL is not contains Audience");
+		verifier.verifyTrue(getLocation().contains("audience"), "Current URL is not contains Audience");
 		return this;
 	}
 }

@@ -14,13 +14,13 @@ public class ManagePage  extends HomePage{
 	DropDown switchToDropDown = new DropDownImpl("//ul[@id='settingsDropdown']/li", "//button[contains(@ng-click, 'changeSettingDropdown')]", "Switch To");
 	
 	public AccountsPage openAccountsPage() {
-		sleep(5000);
+		sleep(5);
 		manageAccountsButton.click();
 		return new AccountsPage();
 	}
 	
 	public ImportPage openImportPage() {
-		sleep(5000);
+		sleep(5);
 		manageImportsButton.click();
 		return new ImportPage();
 	}

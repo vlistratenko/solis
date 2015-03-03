@@ -39,7 +39,7 @@ public class SupportersPage extends AudiencePage{
 		searchField.type(personEmail);
 		for (int i = 0; i < 10; i++) {
 			doSearchButton.click();
-			if (waitConditionBecomesTrue(supportersTable.isValueExists(personEmail)>0, 15000)) {
+			if (waitConditionBecomesTrue(supportersTable.isValueExists(personEmail)>0, 15)) {
 				break;
 			}
 		}
@@ -47,7 +47,7 @@ public class SupportersPage extends AudiencePage{
 	}
 
 	public SupportersAddPage openSupporterDetailsPage() {
-		sleep(3000);
+		sleep(3);
 		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
 		return new SupportersAddPage();
 	}

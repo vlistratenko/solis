@@ -21,19 +21,19 @@ public class DonationsDetailsPage extends DonationsPage {
 
 	public DonationsDetailsPage verifyDonation(String amount, String totalAmount, String creditCrdDetails, String source, String firstAndLastNameOfDonor, String addressLine1, String addressLine2, String city, String zip,
 			String donationAmountInTable, String dType, String status, boolean recurringDonation) {
-		verifier.verifyEquals(donationAmountLabel.getText(), amount, "Wrong Donation amount", false);
-		verifier.verifyEquals(donationTotalAmountLabel.getText(), totalAmount, "Wrong Total donation amount", false);
-		verifier.verifyEquals(creditCardDetailsLabel.getText(), creditCrdDetails, "Credit card details", false);
-		verifier.verifyEquals(sourceLabel.getText(), source, "Wrong Source", false);
-		verifier.verifyEquals(donorLabel.getText(), firstAndLastNameOfDonor, "Wrong Donor name", false);
-		verifier.verifyTrue(mainPanel.isValueExists(addressLine1) > 0, "Element with address line 1 does not exist", false);
-		verifier.verifyTrue(mainPanel.isValueExists(addressLine2) > 0, "Element with address line 2 does not exist", false);
-		verifier.verifyTrue(mainPanel.isValueExists(city) > 0, "Element with city does not exist", false);
-		verifier.verifyTrue(mainPanel.isValueExists(zip) > 0, "Element with zip does not exist", false);
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Amount"), donationAmountInTable, "Wrong amount", false);
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Type"), dType, "Wrong type", false);
-		verifier.verifyEquals(donationsTable.getCellValue(1, "Status").toLowerCase(), "CHARGE".toLowerCase(), "Wrong", false);
-		verifier.verifyEquals(statusLabel.getText().toLowerCase(), status.toLowerCase(), "Wrong status", false);
+		verifier.verifyEquals(donationAmountLabel.getText(), amount, "Wrong Donation amount");
+		verifier.verifyEquals(donationTotalAmountLabel.getText(), totalAmount, "Wrong Total donation amount");
+		verifier.verifyEquals(creditCardDetailsLabel.getText(), creditCrdDetails, "Credit card details");
+		verifier.verifyEquals(sourceLabel.getText(), source, "Wrong Source");
+		verifier.verifyEquals(donorLabel.getText(), firstAndLastNameOfDonor, "Wrong Donor name");
+		verifier.verifyTrue(mainPanel.isValueExists(addressLine1) > 0, "Element with address line 1 does not exist");
+		verifier.verifyTrue(mainPanel.isValueExists(addressLine2) > 0, "Element with address line 2 does not exist");
+		verifier.verifyTrue(mainPanel.isValueExists(city) > 0, "Element with city does not exist");
+		verifier.verifyTrue(mainPanel.isValueExists(zip) > 0, "Element with zip does not exist");
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Amount"), donationAmountInTable, "Wrong amount");
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Type"), dType, "Wrong type");
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Status").toLowerCase(), "CHARGE".toLowerCase(), "Wrong");
+		verifier.verifyEquals(statusLabel.getText().toLowerCase(), status.toLowerCase(), "Wrong status");
 		if (recurringDonation) {
 			verifier.verifyElementIsDisplayed(cancelAllLink);
 		}
@@ -47,7 +47,7 @@ public class DonationsDetailsPage extends DonationsPage {
 			cancelAllLink.click();
 			refundLink.click();
 		}
-		sleep(5000);
+		sleep(5);
 		return this;
 	}
 

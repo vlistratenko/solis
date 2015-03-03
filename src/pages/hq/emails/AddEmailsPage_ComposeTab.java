@@ -32,7 +32,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 				SplitTab.clickByNumber(i);
 				subj = subj.replace(" Split " + (i-1), "");
 				subj = subj + " Split " + i;				
-				sleep(8000);
+				sleep(8);
 			}
 			selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
@@ -50,9 +50,9 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 * @return
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
-		sleep(10000);
+		sleep(10);
 		new ButtonImpl("//p[.='" + layout + "']/preceding-sibling::img", layout + "layout").click();
-		sleep(10000);
+		sleep(10);
 		return this;
 	}
 	
@@ -75,9 +75,9 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	private void addSplit(Integer splitAmounts) {
 		for (int i = 1; i < splitAmounts; i++) {
-			sleep(10000);
+			sleep(10);
 			addSplitButton.click();
-			sleep(10000);
+			sleep(10);
 		}
 	}
 }
