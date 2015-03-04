@@ -55,7 +55,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 		classificationType.selectByLabel(classificationValue);
 		crmID.type(CommonUtils.getUnicName());
 		createButton.click();
-		sleep(10);
+		sleep(5);
 		return new OrganizationsListPage();
 	}
 }

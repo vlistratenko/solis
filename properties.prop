@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Tue Mar 03 13:49:26 EET 2015
+#Wed Mar 04 13:31:32 EET 2015
 amountOfSupporters=1
 current.Password=\!QAZ2wsx
 assets.username=neworg1.03eed056@mailosaur.in
@@ -13,12 +13,12 @@ amountOfPablishedEmails=22
 ldap.login=vavramchuk
 CM.lastName=CMLastNameAuto
 updateTC=false
-Admin.email=20150303134731.4441b2bf@mailosaur.in
+Admin.email=20150304132951.4441b2bf@mailosaur.in
 buildVersion=Ignite 0.16
 current.firstName=AutoTester
 current.lastName=AutoTesterov
 emailSplitsSubject=TestVAuto20141117144806
-Admin.orgName=AutoTestV2 Org20150303134731
+Admin.orgName=AutoTestV2 Org20150304132951
 ldap.password=\!QAZ2wsx
 emailSubject=TestVAuto20150210130349
 CM.Login=cm20150210163003.4441b2bf@mailosaur.in
@@ -34,10 +34,10 @@ Environment=TEST
 ImportName=AutoTestImport20150302153351
 percentageOfTestGroup=50
 unsubscribedSupporter=20150210123739.4441b2bf@mailosaur.in
-current.Login=20150303130314.4441b2bf@mailosaur.in
 CM.Password=\!QAZ2wsx
-Admin.firstName=AutoTester
+current.Login=20150303130314.4441b2bf@mailosaur.in
 Admin.lastName=AutoTesterov
-CM.firstName=CMFirstNameAuto
-subscribeWidget=AutoWidgetName20150210124740
+Admin.firstName=AutoTester
 assets.password=qwerty
+subscribeWidget=AutoWidgetName20150210124740
+CM.firstName=CMFirstNameAuto

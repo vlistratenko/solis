@@ -166,7 +166,7 @@ public class EmailClient {
 				mBoxAPI.deleteAllEmail();
 			}
 		} catch (Exception e) {
-			logger.error("", e);
+			logger.warn("", e);
 		}
 	}
 

@@ -12,9 +12,9 @@ import elements.impl.TextBoxImpl;
 
 public class LoginPageAdmin extends Browser {
 
-	Button		LoginButton = new ButtonImpl("//input[@value='Login']", "Login button");
-	TextBox 	LoginField = new TextBoxImpl("//input[@name='j_username']", "Login field");
-	TextBox 	PasswordField = new TextBoxImpl("//input[@name='j_password']", "Password field");
+	Button		loginButton = new ButtonImpl("//input[@value='Login']", "Login button");
+	TextBox 	loginField = new TextBoxImpl("//input[@name='j_username']", "Login field");
+	TextBox 	passwordField = new TextBoxImpl("//input[@name='j_password']", "Password field");
 	
 	public LoginPageAdmin() {
 	}
@@ -34,9 +34,9 @@ public class LoginPageAdmin extends Browser {
 		}else{
 			password = CommonUtils.getProperty(PropertyName.LDAP_PASSWORD);
 		}
-		LoginField.type(userName);
-		PasswordField.type(password);
-		LoginButton.click();
+		loginField.type(userName);
+		passwordField.type(password);
+		loginButton.click();
 		return new HomePageAdmin();
 	}
 
