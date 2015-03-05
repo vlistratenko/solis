@@ -212,11 +212,10 @@ public class SeleneseTestCase {
 
 	public static File makeScreenshot(String filename) {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		/* filename = filename + "_" + CommonUtils.getUnicName(); */
-		File file = new File("test-output\\" + filename + ".png");
-		logger.info("Screnshot was saved to " + file.getAbsoluteFile());
+		File file = new File("test-output\\fail-screenshots\\" + filename + ".png");
+		logger.info("Screenshot was saved to " + file.getAbsoluteFile());
 		try {
-			FileUtils.copyFile(scrFile, new File("test-output\\" + filename + ".png").getAbsoluteFile());
+			FileUtils.copyFile(scrFile, file.getAbsoluteFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
