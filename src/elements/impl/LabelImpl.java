@@ -18,21 +18,4 @@ public class LabelImpl extends ElementImpl implements Label {
 		logger.info("Text is " + super.getText(path));
 		return super.getText(path);
 	}
-
-	private boolean isNotExists() {
-		logger.info("Check that " + elementName + " is not exists.");
-		return super.isNotElementPresent(path);
-	}
-
-	@Override
-	public boolean waitForNotExists(Integer timeOut) {
-		for (int i = 0; i < timeOut; i++) {
-			if (isNotExists()) {
-				break;
-			} else {
-				sleep(1);
-			}
-		}
-		return isNotExists();
-	}
 }

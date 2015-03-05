@@ -8,10 +8,6 @@ public interface TextBox extends Element {
 
 	void clear();
 
-	String setAttribute(String attName, String attValue);
-
-	void removeAttribute(String string);
-
 	void uploadAssetsImage(String filePath, String imageName);
 
 	String getValue();

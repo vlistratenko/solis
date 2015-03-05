@@ -1,6 +1,5 @@
 package elements;
 
-import org.openqa.selenium.WebElement;
 
 public interface Button extends Element {
 
@@ -9,14 +8,4 @@ public interface Button extends Element {
 	String getLabel();
 
 	void onClick();
-
-	boolean isNotExists();
-
-	void clickByNumber(Integer number);
-
-	String getAttribute(String attrName);
-
-	void moveAndClick();
-
-	WebElement getLastElement();
 }

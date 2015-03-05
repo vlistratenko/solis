@@ -135,6 +135,65 @@ abstract class ElementImpl implements Element {
 		return elementName;
 	}
 
+	@Override
+	public void moveAndClick() {
+		new Actions(driver).moveToElement(findElementByXpath(path)).perform();
+		click();
+
+	}
+
+	@Override
+	public void clickByNumber(Integer number) {
+		logger.info(elementName + " was clicked.");
+		click(path + "[" + number + "]");
+
+	}
+
+	@Override
+	public String getAttribute(String attrName) {
+		return getAttributeValue(path, attrName);
+	}
+
+	@Override
+	public boolean isNotExists() {
+		logger.info("Check that " + elementName + " is not exists.");
+		return isNotElementPresent(path);
+	}
+
+	@Override
+	public WebElement getLastElement() {
+		List<WebElement> ss = findElementsByXpath(path);
+		int s = ss.size();
+		return ss.get(s - 1);
+	}
+
+	@Override
+	public boolean waitForNotExists(Integer timeOut) {
+		for (int i = 0; i < timeOut; i++) {
+			if (isNotExists()) {
+				break;
+			} else {
+				sleep(1);
+			}
+		}
+		return isNotExists();
+	}
+	
+	@Override
+	public String setAttribute(String attName, String attValue) {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attName, attValue);
+		return attValue;
+	}
+
+	@Override
+	public void removeAttribute(String attName) {
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].removeAttribute(arguments[1]);", element, attName);
+	}
+
 	/**
 	 * @param cTimeOut
 	 *            in miliseconds
@@ -163,19 +222,6 @@ abstract class ElementImpl implements Element {
 	protected void moveToElement(String locator) {
 		logger.debug("Move to element < " + locator + " >.");
 		getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
-	}
-
-	public String setAttribute(String attName, String attValue) {
-		WebElement element = findElementByXpath(path);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attName, attValue);
-		return attValue;
-	}
-
-	public void removeAttribute(String attName) {
-		WebElement element = findElementByXpath(path);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].removeAttribute(arguments[1]);", element, attName);
 	}
 
 	protected void onClick(WebElement element) {
@@ -234,22 +280,6 @@ abstract class ElementImpl implements Element {
 		findElementByXpath(locator).sendKeys(key);
 
 	}
-
-	/*
-	 * protected void clickAt(String locator, String coordString){
-	 * waitObject(locator, cTimeOut*60); try { selenium.clickAt(locator,
-	 * coordString); } catch (Exception e) { if (isRequeired)
-	 * {e.printStackTrace(); throw new ElementNotFoundException(locator,
-	 * "xpath", locator); }else{ logger.error(e.getMessage());
-	 * e.printStackTrace(); } } logger.debug("Click on < " + locator +
-	 * " >. by coord - " + coordString); }
-	 * 
-	 * protected void click2(String locator){ try { selenium.click(locator); }
-	 * catch (Exception e) { if (isRequeired) { e.printStackTrace(); throw new
-	 * ElementNotFoundException(elementName, "xpath", locator); }else{
-	 * logger.error(e.getMessage()); e.printStackTrace(); } }
-	 * logger.debug("Click on < " + locator + " >."); }
-	 */
 
 	protected void submit(String locator) {
 		waitObject(locator, cTimeOut * 30);
@@ -692,11 +722,6 @@ abstract class ElementImpl implements Element {
 
 	protected boolean isNotDisplayed(String path) {
 		return findElementsByXpath(path).size() == 0;
-	}
-
-	public int isValueExists(String value) {
-
-		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();
 	}
 
 	protected boolean waitConditionBecomesTrue(boolean condition, int timeOut) {

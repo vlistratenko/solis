@@ -21,5 +21,9 @@ public class PanelImpl extends ElementImpl implements Panel {
 	public String getChildElementPath(String elementPath, int setNumder) {
 		return path + "[" + setNumder + "]/descendant::" + elementPath;
 	}
+	
+	public int isValueExists(String value) {
+		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();
+	}
 
 }

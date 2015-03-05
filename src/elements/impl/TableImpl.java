@@ -127,4 +127,8 @@ public class TableImpl extends ElementImpl implements Table {
 		}
 		return headers;
 	}
+	
+	public int isValueExists(String value) {
+		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();
+	}
 }
