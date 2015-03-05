@@ -1,0 +1,36 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Create orgs for JMetter" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+  	<listeners>
+    	<listener class-name="com.salsalabs.ignite.automation.common.MyTestListener" />
+  	</listeners>
+  	
+  	<test verbose="3" name="Create orgs for JMetter" annotations="JDK" >
+    	<parameter name="admin.login" value="vavramchuk"></parameter>
+     	<parameter name="admin.password" value="aVitalik3124"></parameter>
+     	
+     	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
+		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>
+		<parameter name="createOrg.orgDescrption"  value="AutoTestV descr"></parameter>
+
+		<parameter name="createOrg.firstName"  value="AutoTester"></parameter>
+		<parameter name="createOrg.lastName"  value="AutoTesterov"></parameter>		
+		<parameter name="createOrg.status"  value="Standard"></parameter>
+		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
+		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
+		<parameter name="createOrg.amountOfOrgs" value="3"></parameter>		
+		
+     	<groups>
+    		<run>
+     			 <include name="createAdmin"/>
+     			 <include name="createWePay"/>
+     			 <include name="createDonationWidgets"/>
+     			 <include name="createSubscriptionnWidgets"/>
+    		</run>
+  		</groups>
+     	<classes>
+      		<class name="com.salsalabs.ignite.automation.suites.DataForJMetter"/>
+    	</classes>
+  	</test>   
+ </suite>

@@ -1,0 +1,39 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Donation" parallel="false" thread-count="1">
+  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+
+  	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
+   	<listeners>
+    	<listener class-name="com.salsalabs.ignite.automation.common.MyTestListener" />
+  	</listeners>
+  	<test verbose="2" name="Create and Publish donation form" annotations="JDK" >
+    	<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
+		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>
+		<parameter name="createwidget.widgetLayoutName"  value="Basic"></parameter>
+		<parameter name="donation.personEmail"  value="supByDonate"></parameter>
+		<parameter name="donation.personFName"  value="supByDonateF"></parameter>
+		<parameter name="donation.personLName"  value="supByDonateL"></parameter>
+		<parameter name="donation.personAddressLine1"  value="Auto test address line 1"></parameter>
+		<parameter name="donation.personAddressLine2"  value="Auto test address line 2"></parameter>
+		<parameter name="donation.personCity"  value="AutoTestCity"></parameter>
+		<parameter name="donation.personZip"  value="20147"></parameter>
+		<parameter name="donation.recurringDonation"  value="false"></parameter>
+		<parameter name="donation.donationAmount"  value="$15"></parameter>
+		<parameter name="donation.nameOnCard"  value="AutoTester Testerov"></parameter>
+		<parameter name="donation.cardNumber"  value="4111111111111111"></parameter>
+		<parameter name="donation.cvv"  value="132"></parameter>
+		<parameter name="donation.expiryMonth"  value="10"></parameter>
+		<parameter name="donation.expiryYear"  value="19"></parameter>	
+		<parameter name="donation.isFundraising"  value="true"></parameter>
+		<parameter name="donation.isNewsletter"  value="true"></parameter>
+		<parameter name="donation.isEmail"  value="true"></parameter>
+     	<groups>
+    		<run>
+     			 <include name="activities.createDonationForm"/>
+    		</run>
+  		</groups>
+     	<classes>
+      		<class name="com.salsalabs.ignite.automation.tests.ActivitiesTests"/>
+    	</classes>
+  	</test>   
+ </suite>

@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Create Pauments gateway" parallel="false" thread-count="1">
+  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+
+  	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
+   	<listeners>
+    	<listener class-name="com.salsalabs.ignite.automation.common.MyTestListener" />
+  	</listeners>
+  	<test verbose="2" name="Create WePay" annotations="JDK" >
+    	<parameter name="wePayNickName"  value="AutoNickName"></parameter>
+		<parameter name="wePayDescr"  value="Auto test description"></parameter>
+		<parameter name="wePayOrgType"  value="nonprofit"></parameter>
+     	<groups>
+    		<run>
+     			 <include name="settings.wepay"/>
+    		</run>
+  		</groups>
+     	<classes>
+      		<class name="com.salsalabs.ignite.automation.tests.SettingsTests"/>
+    	</classes>
+  	</test>   
+ </suite>

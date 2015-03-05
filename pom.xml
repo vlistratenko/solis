@@ -27,7 +27,7 @@
 			<USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
                 </systemPropertyVariables>
           	<suiteXmlFiles>
-            		<suiteXmlFile>XMLTests\CompletedSuites\${testSuite}</suiteXmlFile>
+            		<suiteXmlFile>xml-tests\completed-suites\${testSuite}</suiteXmlFile>
           	</suiteXmlFiles>
         </configuration>
       </plugin>
