@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Create orgs for JMetter" parallel="false" thread-count="1">
+<suite name="Create new org" parallel="false" thread-count="1">
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.MyTestListener" />
+  		<listener class-name="com.salsalabs.ignite.automation.common.TestListener" />
+    	<listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
   	</listeners>
   	
-  	<test verbose="1" name="Create orgs for JMetter" annotations="JDK" >
+  	<test verbose="1" name="Create new org" annotations="JDK" >
     	<parameter name="admin.login" value="vavramchuk"></parameter>
      	<parameter name="admin.password" value="aVitalik3124"></parameter>
      	

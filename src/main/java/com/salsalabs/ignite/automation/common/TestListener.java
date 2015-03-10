@@ -16,7 +16,7 @@ import org.testng.annotations.ITestAnnotation;
 
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 
-public class MyTestListener extends SeleneseTestCase implements ITestListener, IInvokedMethodListener, IAnnotationTransformer {
+public class TestListener extends SeleneseTestCase implements ITestListener, IInvokedMethodListener, IAnnotationTransformer {
 	Properties props = new Properties();
 	static String propFileName = "properties.prop";
 	boolean updateTC = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC, "false"));
@@ -62,7 +62,7 @@ public class MyTestListener extends SeleneseTestCase implements ITestListener, I
 			}
 		}
 
-		SeleneseTestCase.logger.error("Test " + result.getName() + " is FAILED");
+		//SeleneseTestCase.logger.error("Test " + result.getName() + " is FAILED");
 
 		Reporter.log("Steps:");
 		for (int i = 0; i < bug.size(); i++) {
