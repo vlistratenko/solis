@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.tests.ActivitiesTests;
@@ -24,7 +25,7 @@ import com.salsalabs.ignite.automation.tests.SettingsTests;
 public class DataForJMetter extends SeleneseTestCase{
 
 	String pathToJMDataFile = "apache-jmeter-2.11/bin/";
-	@Test(priority=10, enabled = true, groups = {"createAdmin"}, invocationCount=1)
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {"createAdmin"}, invocationCount=1)
 	@Parameters({"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
@@ -51,7 +52,7 @@ public class DataForJMetter extends SeleneseTestCase{
 		new LoginPage(true);
 	}
 	
-	@Test(priority=10, enabled = true, groups = {"createWePay"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createNewOrgs"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {"createWePay"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createNewOrgs"})
 	public void createWePayInOrgs(String login, String pass) throws IOException {
 		
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 
@@ -62,7 +63,7 @@ public class DataForJMetter extends SeleneseTestCase{
 		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), wePayName, login);
 	}
 	
-	@Test(priority=10, enabled = true, groups = {"createDonationWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createWePayInOrgs"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {"createDonationWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createWePayInOrgs"})
 	public void createDonationWidgetsInOrgs(String login, String pass) throws IOException {
 		
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 
@@ -73,7 +74,7 @@ public class DataForJMetter extends SeleneseTestCase{
 		CommonUtils.addDataToCSV(new File(pathToJMDataFile + "orgDataForJmetter.csv").getAbsolutePath(), CommonUtils.getProperty(PropertyName.DONATION_WIDGET_LINK).replace("https://", ""), login);
 	}
 	
-	@Test(priority=10, enabled = false, groups = {"createSubscriptionnWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createDonationWidgetsInOrgs"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = false, groups = {"createSubscriptionnWidgets"}, invocationCount=1, dataProvider = "getDataFromCSV", dependsOnMethods={"createDonationWidgetsInOrgs"})
 	public void createSubscriptionnWidgetsInOrgs(String login, String pass) throws IOException {
 		
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, login); 

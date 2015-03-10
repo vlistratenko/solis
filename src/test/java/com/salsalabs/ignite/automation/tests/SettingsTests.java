@@ -16,6 +16,7 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -23,7 +24,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 public class SettingsTests extends SeleneseTestCase{
 	
 	@Parameters({"wePayNickName", "wePayDescr", "wePayOrgType"})
-	@Test( priority=10, groups = {"settings.wepay", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.wepay", ""}, description = "")
 	public void createWePayAcountTest(String wePayNickName, String wePayDescr, String wePayOrgType) {		
 		wePayNickName = wePayNickName + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
@@ -39,7 +40,7 @@ public class SettingsTests extends SeleneseTestCase{
 	}
 	
 
-	@Test( priority=10, groups = {"settings.import", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.import", ""}, description = "")
 	public void importSupportersTest() {
 		
 		LoginPage loginPage = new LoginPage();
@@ -69,7 +70,7 @@ public class SettingsTests extends SeleneseTestCase{
 		"Subscribed");
 	}
 	
-	@Test( priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
 	public void unsubscribeSupporterTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		String introductoryText = "Message edited by Auto script";
 		Supporter supporter = new Supporter();
@@ -107,7 +108,7 @@ public class SettingsTests extends SeleneseTestCase{
 		
 	}
 	
-	@Test( priority=13, groups = {"settings.unsubscribeUnexistedSupporterTest", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=13, groups = {"settings.unsubscribeUnexistedSupporterTest", ""}, description = "")
 	public void unsubscribeUnexistedSupporterTest(){
 		Supporter supporter = new Supporter();
 		supporter.setFinalEMAIL(EmailClient.getEmailBox(CommonUtils.getUnicName()));
@@ -128,7 +129,7 @@ public class SettingsTests extends SeleneseTestCase{
 		CommonUtils.checkAndFail("unsubscribeSupporterTest");		
 	}
 	
-	@Test( priority=10, groups = {"settings.unsubscribeSupporterViaEMAIL", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporterViaEMAIL", ""}, description = "")
 	public void unsubscribeSupporterByEmailTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 
 		Supporter supporter = new Supporter();

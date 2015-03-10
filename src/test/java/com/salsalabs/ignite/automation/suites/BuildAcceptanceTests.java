@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.admin.LoginPageAdmin;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
@@ -14,7 +15,7 @@ import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 
 public class BuildAcceptanceTests extends SeleneseTestCase {
 
-	@Test(priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
@@ -46,7 +47,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);
 	}
 	
-    @Test(priority=20, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
+    @Test(retryAnalyzer=RetryAnalyzer.class, priority=20, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
 	@Parameters({ "email.login",
      	"email.password",
      	"newuser.password"})
@@ -63,7 +64,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.AMOUNT_OF_SUPPORTERS, String.valueOf(1));
 	}
 	
-	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
 	public void loginAsNewSuperAdminTest(){
 		
 		LoginPage loginPage = new LoginPage();
@@ -73,7 +74,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	}
 	
 	@Parameters({ "createSupporter.amount"})
-	@Test(priority=40, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "494:53:Supporter was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=40, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "494:53:Supporter was NOT created")
 	public void createSupporerManually(Integer amount){
 		
 		HomePage homePage = new HomePage();
@@ -93,7 +94,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	//@Test(priority=50, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "510:57:Links are NOT correct in the Side bar.")
+	//@Test(retryAnalyzer=RetryAnalyzer.class, priority=50, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "510:57:Links are NOT correct in the Side bar.")
 	public void verifyLinksInSideBarTest(){
 		HomePage homePage = new HomePage();
 		homePage.
@@ -103,7 +104,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyURL();
 	}
 	
-	//@Test(priority=60, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "513:58:Links are NOT correct in the Tool set.")
+	//@Test(retryAnalyzer=RetryAnalyzer.class, priority=60, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "513:58:Links are NOT correct in the Tool set.")
 	public void verifyLinksInToolSetTest(){
 		HomePage homePage = new HomePage();
 		homePage.
@@ -121,7 +122,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 				 "criteriaForExcludeSupporterManually",
 				 "criteriaForAddSupporterManually"})
 	
-	@Test(priority=70, groups = {"acceptanceTests.user", "qa"},  description = "516:59:Segment was NOT created.")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=70, groups = {"acceptanceTests.user", "qa"},  description = "516:59:Segment was NOT created.")
 	public void createCustomSegmentTest(String segmentName,
 							            String addIncludeRule,
 							            String addExcludeRule,
@@ -150,7 +151,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	
 	}
 	
-	@Test(priority=80, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="creteSegmentTest",  description = "521:60:Alert for egment was NOT found.")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=80, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="creteSegmentTest",  description = "521:60:Alert for egment was NOT found.")
 	public void verifyMessagesInAlertsTest() {
 		loginAsNewSuperAdminTest();
 		HomePage homePage = new HomePage();
@@ -161,7 +162,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyTableWithAlertsDisplayed();
 	}
 	
-	//@Test(groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", priority=8, description = "521:60:News messages was NOT found.")
+	//@Test(retryAnalyzer=RetryAnalyzer.class, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", priority=8, description = "521:60:News messages was NOT found.")
 	public void verifyMessagesInNewsTest() {
 		HomePage homePage = new HomePage();
 		homePage.
@@ -172,7 +173,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	}
 	
 	@Parameters({"sendEmail.From", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
-	@Test( priority=90, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "528:62:Split emails were NOT sent")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=90, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "528:62:Split emails were NOT sent")
 	public void sendTestEmailsTest(String emailFrom, Integer percentageOfTestGroup, int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
@@ -202,7 +203,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		
 	}
 	
-	@Test(priority=100, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendTestEmailsTest", description = "536:63:Split emails were NOT delivered")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=100, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendTestEmailsTest", description = "536:63:Split emails were NOT delivered")
 	@Parameters({"sendEmail.splitsAmount"})
 	public void confirmTestEmailsWereSentTest(int SplitsAmount){
 		
@@ -210,14 +211,14 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_SUPPORTERS)), SplitsAmount, 5, true);
 	}
 	
-	@Test(priority=110, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods={"loginAsNewSuperAdminTest"}, description = "536:63:Emails were NOT sent")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=110, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods={"loginAsNewSuperAdminTest"}, description = "536:63:Emails were NOT sent")
 	@Parameters({"sendEmail.From"})
 	public void sendEmailsTest(String emailFrom) {
 		sendTestEmailsTest(emailFrom, 100, 1);
 		
 	}
 	
-	@Test(expectedExceptions = AssertionError.class, priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "528:62:Emails were NOT delivered")
+	@Test(retryAnalyzer=RetryAnalyzer.class, expectedExceptions = AssertionError.class, priority=120, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="sendEmailsTest",description = "528:62:Emails were NOT delivered")
 	@Parameters({ "email.login",
      	"email.password"})
 	public void confirmEmailsWereSentTest(String login,
@@ -239,7 +240,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 				 "cm.dataAndAnalyticsTable.role3",
 				 "cm.assetManagementTable.role1"})
 	
-	@Test (priority=130, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "506:56:New CM account was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=130, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "506:56:New CM account was NOT created")
 	public void createCMManually(String cmFirstName,
 								 String cmLastName,
 								 String cmContentAndMessagingRole1,
@@ -275,7 +276,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.CM_EMAIL, cmEmail);
 	}
 	
-	@Test(priority=140, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="createCMManually", description = "506:56:New CM account was NOT confirmed.")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=140, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="createCMManually", description = "506:56:New CM account was NOT confirmed.")
 	@Parameters({ "email.login",
      	"email.password",
      	"newuser.password"})
@@ -294,7 +295,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 
 	}
 
-	@Test(priority=160, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="confirmCMAccountTest", description = "498:54:New CM can NOT login")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=160, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="confirmCMAccountTest", description = "498:54:New CM can NOT login")
 	public void loginAsNewCMTest(){
 		
 		LoginPage loginPage = new LoginPage();
@@ -304,7 +305,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		//verifyOrgNameDisplayed();
 	}
 	
-	@Test(priority=170, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=170, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	public void verifyLinksInSideBarTestAsCM(){
 		verifyLinksInSideBarTest();
 	}
@@ -316,7 +317,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 				"criteriaForExcludeSupporterManually",
 				"criteriaForAddSupporterManually"})
 	
-	@Test(priority=18, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=18, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	public void creteSegmentTestAsCM(String segmentName,
 								     String segmentTag,
 								     String addIncludeRule,
@@ -331,38 +332,38 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	
 	}
 	
-	@Test(priority=180, groups = {"acceptanceTests.user"}, dependsOnMethods="creteSegmentTestAsCM")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=180, groups = {"acceptanceTests.user"}, dependsOnMethods="creteSegmentTestAsCM")
 	public void verifyMessagesInAlertsTestAsCM() {
 		verifyMessagesInAlertsTest();
 	}
 	
-	@Test(priority=190, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest" )
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=190, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest" )
 	public void verifyMessagesInNewsTestAsCM() {
 		verifyMessagesInNewsTest();
 	}
 	
 	@Parameters({"sendEmail.From", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
-	@Test(priority=200, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=200, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	public void sendTestEmailsTestAsCM(String emailFrom, Integer percentageOfTestGroup, int splitsAmount) {
 		sendTestEmailsTest(emailFrom, percentageOfTestGroup, splitsAmount);
 		
 	}
 	
-	@Test(expectedExceptions = AssertionError.class, priority=210, groups = {"acceptanceTests.user"}, dependsOnMethods="sendTestEmailsTestAsCM")
+	@Test(retryAnalyzer=RetryAnalyzer.class, expectedExceptions = AssertionError.class, priority=210, groups = {"acceptanceTests.user"}, dependsOnMethods="sendTestEmailsTestAsCM")
 	@Parameters({"sendEmail.splitsAmount"})
 	public void confirmTestEmailsWereSentTestAsCM(int SplitsAmount){
 		
 		confirmTestEmailsWereSentTest(SplitsAmount);
 	}
 	
-	@Test(priority=220, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=220, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	@Parameters({"sendEmail.From"})
 	public void sendEmailsTestAsCM(String emailFrom) {
 		sendTestEmailsTest(emailFrom, 100, 1);
 		
 	}
 	
-	@Test(expectedExceptions = AssertionError.class, priority=230, groups = {"acceptanceTests.user"}, dependsOnMethods="sendEmailsTestAsCM")
+	@Test(retryAnalyzer=RetryAnalyzer.class, expectedExceptions = AssertionError.class, priority=230, groups = {"acceptanceTests.user"}, dependsOnMethods="sendEmailsTestAsCM")
 	public void confirmEmailsWereSentTestAsCM(){
 		
 		confirmTestEmailsWereSentTest(1);

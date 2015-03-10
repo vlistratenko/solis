@@ -3,7 +3,7 @@
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
    	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" />
+    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
   	</listeners>
   	<test verbose="2" name="FailedLogin" annotations="JDK" >
     	<parameter name="fail.login"  value=":test12321@ttt.tt:test"></parameter>

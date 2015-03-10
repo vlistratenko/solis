@@ -5,13 +5,14 @@ import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class SegmentsTests extends SeleneseTestCase{
 	
 	//@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount"})
-	@Test( priority=10, groups = {"settings.wepay", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.wepay", ""}, description = "")
 	public void createWePayTestTest(/*String emailFrom, Integer openAmount, Integer clickAmount*/) {
 		
 		LoginPage loginPage = new LoginPage();
@@ -31,7 +32,7 @@ public class SegmentsTests extends SeleneseTestCase{
 		"addExcludeRule",
 		"criteriaForExcludeSupporterManually",
 		"criteriaForAddSupporterManually"})
-	@Test(priority=70, groups = {"acceptanceTests.user", "createSegment.manually"}, description = "516:59:Segment was NOT created.")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=70, groups = {"acceptanceTests.user", "createSegment.manually"}, description = "516:59:Segment was NOT created.")
 	public void createSegmentTest(String segmentName,
 			String segmentTag,
 			String addIncludeRule,

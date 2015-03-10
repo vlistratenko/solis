@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -16,7 +17,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 public class ActivitiesTests extends SeleneseTestCase{
 	
 	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName", "donation.recurringDonation"})
-	//@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
+	//@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.createDonationForm"}, description = "")
 	public DonationWidget createDonationWidgetTest(String widgetName, String widgetDescription, String widgetLayoutName, boolean recurringDonation) 
 	{		
 		//widgetName = widgetName + CommonUtils.getUnicName();
@@ -62,7 +63,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		"donation.isFundraising",
 		"donation.isNewsletter",
 		"donation.isEmail"})
-	@Test( priority=10, groups = {"activities.createDonationForm"}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.createDonationForm"}, description = "")
 	public void makeDonationTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
@@ -135,7 +136,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		"donation.personCity",
 		"donation.personZip",
 		"donation.recurringDonation"})
-	@Test( priority=10, groups = {"activities.refundDonation"}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.refundDonation"}, description = "")
 	public void refundDonation(String donationAmount,
 			String cardNumber,
 			String expiryMonth,
@@ -181,7 +182,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 	}
 
 	@Parameters({"createwidget.widgetName", "createwidget.widgetDescription", "createwidget.widgetLayoutName"})
-	@Test( priority=10, groups = {"activities.createSubscribeForm"}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.createSubscribeForm"}, description = "")
 	public void createSubscribeWidget(String widgetName, String widgetDescription, String widgetLayoutName) 
 	{	
 		widgetName = widgetName + CommonUtils.getUnicName();
@@ -205,7 +206,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 	}
 	
 	@Parameters({"supporter.email"})
-	@Test( priority=10, groups = {"activities.subscribeSupporter"}, description = "", dependsOnMethods = {"createSubscribeWidget"})
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.subscribeSupporter"}, description = "", dependsOnMethods = {"createSubscribeWidget"})
 	public void subscribeSupporterTest(@Optional("") String supporterEmail) 
 	{	
 		Supporter supporter = new Supporter();

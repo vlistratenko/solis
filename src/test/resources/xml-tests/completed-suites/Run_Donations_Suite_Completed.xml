@@ -3,7 +3,7 @@
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
   	<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
    	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" />
+    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
   	</listeners>>
 	<test verbose="2" name="Donations" annotations="JDK" >
      	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>

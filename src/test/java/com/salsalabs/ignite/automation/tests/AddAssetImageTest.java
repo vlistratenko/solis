@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
@@ -12,7 +13,7 @@ public class AddAssetImageTest extends SeleneseTestCase {
 	
 	@Parameters({"imageToUpload"})
 	
-	@Test (groups={"qa2"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, groups={"qa2"})
 	public void addNewAssetImage(String imageToUpload) {
 		
 		LoginPage page = new LoginPage();
@@ -25,7 +26,7 @@ public class AddAssetImageTest extends SeleneseTestCase {
 		
 	}
 	
-	@Test (groups={"qa3"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, groups={"qa3"})
 	public void checkElementsPresence() {
 		
 		LoginPage page = new LoginPage();
@@ -39,7 +40,7 @@ public class AddAssetImageTest extends SeleneseTestCase {
 	
 	@Parameters({"imageToDelete"})
 	
-	@Test (groups={"qa4"})
+	@Test(retryAnalyzer=RetryAnalyzer.class, groups={"qa4"})
 	public void deleteAddedImage(String imageToDelete) {
 		
 		LoginPage page = new LoginPage();

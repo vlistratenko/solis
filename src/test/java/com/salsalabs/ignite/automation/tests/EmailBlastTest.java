@@ -15,6 +15,7 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -24,7 +25,7 @@ import com.salsalabs.ignite.automation.pages.other.Dispatcher;
 public class EmailBlastTest extends SeleneseTestCase{
 	
 	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
-	@Test( priority=10, groups = {"email.sendEmails", ""}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmails", ""}, description = "")
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
@@ -78,7 +79,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		"sendEmail.hardBounceAmount",
 		"sendEmail.percentageOfTestGroup",
 		"sendEmail.splitsAmount"})
-	@Test( priority=20, groups = {"email.sendSplitEmails"}, description = "528:62:Split emails were NOT sent")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=20, groups = {"email.sendSplitEmails"}, description = "528:62:Split emails were NOT sent")
 	public void sendSplitEmailsTest(String emailFrom,
 			Integer openAmount,
 			Integer clickAmount,
@@ -136,7 +137,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	}
 
 	//@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
-	@Test( priority=10, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "")
 	public void sendEmailsToUnsubscribedSupporters() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		
 		String emailSubj = "SendEmailsToUnsubscribed" + CommonUtils.getUnicName();

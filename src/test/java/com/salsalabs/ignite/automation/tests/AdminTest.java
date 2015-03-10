@@ -6,12 +6,13 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.admin.LoginPageAdmin;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class AdminTest extends SeleneseTestCase{
-	@Test( priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({ "admin.login",
      	"admin.password",     	
      	"createOrg.domainType",
@@ -46,7 +47,7 @@ public class AdminTest extends SeleneseTestCase{
 		return this;
 	}
 	
-    @Test(priority=20, enabled = true, groups = {"dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
+    @Test(retryAnalyzer=RetryAnalyzer.class, priority=20, enabled = true, groups = {"dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")
 	@Parameters({"newuser.password"})
 	public AdminTest confirmAdminAccountTest(String userPassword){
     	
@@ -61,7 +62,7 @@ public class AdminTest extends SeleneseTestCase{
 		return this;
 	}
 	
-	@Test(priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=30, groups = {"acceptanceTests.user", "dev", "test", "createAdmin"}, description = "489:52:New admin can NOT login", dependsOnMethods="confirmAdminAccountTest")
 	public void loginAsNewSuperAdminTest(){
 		
 		LoginPage loginPage = new LoginPage();
