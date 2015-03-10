@@ -62,7 +62,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			}
 		}
 
-		//SeleneseTestCase.logger.error("Test " + result.getName() + " is FAILED");
+		SeleneseTestCase.logger.error("Test " + result.getName() + " is FAILED");
 
 		Reporter.log("Steps:");
 		for (int i = 0; i < bug.size(); i++) {
