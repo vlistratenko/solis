@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Wed Mar 11 12:51:33 EET 2015
+#Wed Mar 11 13:03:47 EET 2015
 amountOfSupporters=1
 current.Password=\!QAZ2wsx
 assets.username=neworg1.03eed056@mailosaur.in
@@ -31,14 +31,14 @@ assets.imageName=image2.jpg
 donationWidgetLink=https\://autotestv2org20150305140225.test.igniteaction.net/autowidgetname20150305140457
 subscribedSupporter=emailforsub20150210125100.4441b2bf@mailosaur.in
 subscribeWidgetLink=https\://autotestv2org20150210123444.test.igniteaction.net/autowidgetname20150210124740
-Environment=DEV
+Environment=TEST
 ImportName=AutoTestImport20150302153351
 percentageOfTestGroup=50
 unsubscribedSupporter=20150305143500.4441b2bf@mailosaur.in
-current.Login=20150305143233.4441b2bf@mailosaur.in
 CM.Password=\!QAZ2wsx
-Admin.firstName=AutoTester
+current.Login=20150305143233.4441b2bf@mailosaur.in
 Admin.lastName=AutoTesterov
-CM.firstName=CMFirstNameAuto
-subscribeWidget=AutoWidgetName20150210124740
+Admin.firstName=AutoTester
 assets.password=qwerty
+subscribeWidget=AutoWidgetName20150210124740
+CM.firstName=CMFirstNameAuto

@@ -39,12 +39,12 @@ public class Driver {
 	}
 	
 	private static WebDriver getChromeDiver(){		
-		System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/browsers/chromedriver.exe");
 		return new ChromeDriver();
 	}
 	
 	private static WebDriver getIEDriver() {
-		System.setProperty("webdriver.ie.driver", "lib/IEDriverServer.exe");
+		System.setProperty("webdriver.ie.driver", "src/test/resources/browsers/IEDriverServer.exe");
 		return new InternetExplorerDriver();
 	}
 	
