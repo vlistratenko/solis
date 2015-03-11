@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="AcceptanceTests" parallel="false" thread-count="1">
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
-  	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>  	
+  	
+    	
+  	  	
   	<test verbose="2" name="Create admin" annotations="JDK" >
      	
      	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>

@@ -28,11 +28,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
 
 import com.salsalabs.ignite.automation.common.Environment.LocationOfServer;
 
+@Listeners({ TestListener.class, RetryTestListener.class })
 public class SeleneseTestCase {
 
 	protected static Driver Driver = new Driver();

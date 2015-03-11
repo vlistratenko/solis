@@ -2,9 +2,9 @@
 <suite name="Email KPI Tests" parallel="false" thread-count="2">
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
   	<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
-   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>>
+   	
+    	
+
 	<test verbose="2" name="Email KPI Test" annotations="JDK" >
      	<parameter name="email.login" value="vavramchuk@salsalabs.com"></parameter>
      	<parameter name="email.password" value="aVitalik3124"></parameter>     	

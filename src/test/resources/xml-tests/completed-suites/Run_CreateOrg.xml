@@ -3,10 +3,10 @@
 <suite name="Create new org" parallel="false" thread-count="1">
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
-  	<listeners>
-  		<listener class-name="com.salsalabs.ignite.automation.common.TestListener" />
-    	<listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>
+  	
+  		
+    	
+  	
   	
   	<test verbose="1" name="Create new org" annotations="JDK" >
     	<parameter name="admin.login" value="vavramchuk"></parameter>

@@ -3,9 +3,9 @@
   	<parameter name="bpath" value="*chrome"></parameter>//*iexplore*firefox  	
   	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
-   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>
+   	
+    	
+  	
   	<test verbose="2" name="AcceptanceTests" annotations="JDK" >
      	
      	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>

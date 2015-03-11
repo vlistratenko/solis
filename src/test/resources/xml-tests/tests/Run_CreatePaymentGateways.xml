@@ -3,9 +3,9 @@
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
 
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
-   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>
+   	
+    	
+  	
   	<test verbose="2" name="Create WePay" annotations="JDK" >
     	<parameter name="wePayNickName"  value="AutoNickName"></parameter>
 		<parameter name="wePayDescr"  value="Auto test description"></parameter>

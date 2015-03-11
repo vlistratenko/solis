@@ -3,9 +3,9 @@
   	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
 
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
-   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>
+   	
+    	
+  	
   	<test verbose="2" name="Create and Publish donation form" annotations="JDK" >
     	<parameter name="createwidget.widgetName"  value="AutoWidgetName"></parameter>
 		<parameter name="createwidget.widgetDescription"  value="Auto widget description"></parameter>

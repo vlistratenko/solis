@@ -5,9 +5,9 @@
   	<parameter name="trial.login" value="141.3e41c646@mailosaur.in"></parameter>
     <parameter name="trial.password" value="!QAZ2wsx"></parameter>
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
-   	<listeners>
-    	<listener class-name="com.salsalabs.ignite.automation.common.TestListener" /><listener class-name="com.salsalabs.ignite.automation.common.RetryTestListener" />
-  	</listeners>
+   	
+    	
+  	
   	<test verbose="2" name="BuyLicenseAnnualTest1" annotations="JDK" >    	
      	<parameter name="paymentFrequency" value="Annual:Quarterly:Monthly"></parameter>
      	<classes>
