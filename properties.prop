@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Thu Mar 12 13:41:16 EET 2015
+#Thu Mar 12 14:03:45 EET 2015
 amountOfSupporters=1
 current.Password=\!QAZ2wsx
 assets.username=neworg1.03eed056@mailosaur.in
@@ -13,12 +13,12 @@ amountOfPablishedEmails=1
 ldap.login=vavramchuk
 CM.lastName=CMLastNameAuto
 updateTC=false
-Admin.email=20150312131138.4441b2bf@mailosaur.in
+Admin.email=20150312140103.4441b2bf@mailosaur.in
 buildVersion=Ignite 0.16
 current.firstName=AutoTester
 current.lastName=AutoTesterov
 emailSplitsSubject=TestVAuto20141117144806
-Admin.orgName=AutoTestV2 Org20150312131138
+Admin.orgName=AutoTestV2 Org20150312140103
 ldap.password=\!QAZ2wsx
 emailSubject=Subj20150305145435
 maxRetryCount=2

@@ -36,6 +36,7 @@
 						<USED_SERVER>${server}</USED_SERVER>
 						<USED_ADMIN_USER>${adminLogin}</USED_ADMIN_USER>
 						<USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
+						<USED_BROWSER>${browser}</USED_BROWSER>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>

@@ -86,16 +86,6 @@ public class CommonUtils {
 		strMap.clear();
 	}
 
-	public static String setBrowser(String aBrowser) {
-		if (aBrowser == "IE") {
-			return "*iehta";
-		} else if (aBrowser == "FF") {
-			return "*firefox";
-		} else {
-			return "*chrome";
-		}
-	}
-
 	public static boolean assertValue(String message, Object expected, Object actual, boolean ignoreException) throws ComparisonFailure {
 		try {
 			Assert.assertEquals(expected, actual);
@@ -189,7 +179,7 @@ public class CommonUtils {
 	}
 
 	public static String getDatesSeparator(String aBrowser) {
-		if (aBrowser.equalsIgnoreCase("*iexplore")) {
+		if (aBrowser.equalsIgnoreCase("IE")) {
 			return ".";
 		} else
 			return "/";

@@ -3,7 +3,7 @@
   	
     	
   	
-  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+  	<parameter name="USED_BROWSER" value="FIREFOX"></parameter>//IEFIREFOX
   	
   	<parameter name="USED_ENVIRONMENT" value="UAT"></parameter>
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>

@@ -45,7 +45,7 @@ public class SeleneseTestCase {
 	private static List<WebDriver> webDriverPool = Collections.synchronizedList(new ArrayList<WebDriver>());
 	private static ThreadLocal<WebDriver> driverThread;
 	
-	@Parameters({ "bpath", "USED_ENVIRONMENT", "USED_SERVER" })
+	@Parameters({ "USED_BROWSER", "USED_ENVIRONMENT", "USED_SERVER" })
 	@BeforeSuite(alwaysRun = true)
 	protected void beforeSuite(@Optional("FIREFOX") String bpath, @Optional("TEST") String TestEnv, @Optional("LOCAL") String locationServer) throws Exception {
 		if (System.getProperty("USED_ENVIRONMENT") != null) {
@@ -53,6 +53,9 @@ public class SeleneseTestCase {
 		}
 		if (System.getProperty("USED_SERVER") != null) {
 			locationServer = System.getProperty("USED_SERVER");
+		}
+		if (System.getProperty("USED_BROWSER") != null) {
+			bpath = System.getProperty("USED_BROWSER");
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
 		getLogger();

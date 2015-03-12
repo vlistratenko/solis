@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="AcceptanceTests" parallel="false" thread-count="1">
-  	<parameter name="bpath" value="*chrome"></parameter>//*iexplore*firefox  	
+  	<parameter name="USED_BROWSER" value="CHROME"></parameter>//IEFIREFOX  	
   	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
    	

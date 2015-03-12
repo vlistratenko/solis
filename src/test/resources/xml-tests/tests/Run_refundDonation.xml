@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="Donation" parallel="false" thread-count="1">
-  	<parameter name="bpath" value="*firefox"></parameter>//*iexplore*firefox
+  	<parameter name="USED_BROWSER" value="FIREFOX"></parameter>//IEFIREFOX
 
   	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
    	
