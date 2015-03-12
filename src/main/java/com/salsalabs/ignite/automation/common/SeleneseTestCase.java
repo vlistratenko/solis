@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.common;
 
+import static com.salsalabs.ignite.automation.common.config.DriverType.determineEffectiveDriverType;
+
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +11,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -33,83 +37,17 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
 
 import com.salsalabs.ignite.automation.common.Environment.LocationOfServer;
+import com.salsalabs.ignite.automation.common.config.DriverType;
 
 @Listeners({ TestListener.class, RetryTestListener.class })
 public class SeleneseTestCase {
-
-	protected static Driver Driver = new Driver();
-
-	public static Environment USED_ENVIRONMENT;
-
-	public static Integer defaultTimeOut = 30;
-
-	public static int cTimeOut = 1000;
-
-	public static String browser;
-
-	public static WebDriver driver;
-	public static Logger logger;
-	protected String Browser;
-	public static boolean isDebugMode = false;
-	protected boolean createIssues = false;
-	public static ArrayList<String> bug = new ArrayList<String>();
-
-	public void startTestOnDriver(String bpath, String testURL) throws Exception {
-		driver = Driver.getDriver(bpath);
-		browser = bpath;
-		logger.info("Open home page - " + testURL);
-		if (!(bpath.equalsIgnoreCase("*android") || bpath.equalsIgnoreCase("*html"))) {
-			driver.manage().window().setSize(getScreenSize());
-		}
-	}
-
-	public void startRemouteTestOnDriver(String browser, String build, String os) throws MalformedURLException {
-		String login = "kvooturi@salsalabs.com";
-		try {
-			login = URLEncoder.encode(login, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			logger.error("", e);
-		}
-		DesiredCapabilities caps = new DesiredCapabilities();
-
-		switch (browser) {
-		case "FF30":
-			FirefoxProfile profile = new FirefoxProfile();
-			profile.setAssumeUntrustedCertificateIssuer(false);
-			caps = DesiredCapabilities.firefox();
-			caps.setCapability(FirefoxDriver.PROFILE, profile);
-			break;
-		case "Chrome34":
-			caps = DesiredCapabilities.chrome();
-			caps.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
-			break;
-		case "IE10":
-			caps = DesiredCapabilities.internetExplorer();
-			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			break;
-		}
-
-		caps.setCapability("browser_api_name", browser);
-		if (build != null) {
-			caps.setCapability("build", build);
-		}
-		caps.setCapability("os_api_name", os);
-		caps.setCapability("name", "Selenium Test Example");
-		caps.setCapability("screen_resolution", "1024x768");
-		caps.setCapability("record_video", "true");
-		caps.setCapability("record_network", "true");
-		caps.setCapability("record_snapshot", "false");
-		SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
-	}
-
-	protected static void getLogger() {
-		System.setProperty("log4j.configurationFile", "log4j.xml");
-		logger = LogManager.getLogger(SeleneseTestCase.class);
-	}
-
+	
+	private static List<WebDriver> webDriverPool = Collections.synchronizedList(new ArrayList<WebDriver>());
+	private static ThreadLocal<WebDriver> driverThread;
+	
 	@Parameters({ "bpath", "USED_ENVIRONMENT", "USED_SERVER" })
 	@BeforeSuite(alwaysRun = true)
-	protected void beforeSuite(@Optional("*firefox") String bpath, @Optional("TEST") String TestEnv, @Optional("LOCAL") String locationServer) throws Exception {
+	protected void beforeSuite(@Optional("FIREFOX") String bpath, @Optional("TEST") String TestEnv, @Optional("LOCAL") String locationServer) throws Exception {
 		if (System.getProperty("USED_ENVIRONMENT") != null) {
 			TestEnv = System.getProperty("USED_ENVIRONMENT");
 		}
@@ -119,16 +57,47 @@ public class SeleneseTestCase {
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
 		getLogger();
 		new EmailClient().deleteAllEmails();
-		if (!CommonUtils.getParam("browser", false).equals("false")) {
-			bpath = CommonUtils.getParam("browser");
-		} else if (bpath.equalsIgnoreCase("")) {
-			bpath = CommonUtils.getProperty("bpath");
-		}
 		if (USED_ENVIRONMENT.server.equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		} else {
 			startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
 		}
+	}
+	
+	public static WebDriver getDriver() {
+        return driverThread.get();
+    }
+
+	public static Environment USED_ENVIRONMENT;
+
+	public static Integer defaultTimeOut = 30;
+
+	public static int cTimeOut = 1000;
+
+	public static WebDriver driver;
+	public static Logger logger;
+	public static boolean isDebugMode = false;
+	protected boolean createIssues = false;
+	public static ArrayList<String> bug = new ArrayList<String>();
+
+	public void startTestOnDriver(String bpath, String testURL) throws Exception {
+		final DriverType desiredDriver = determineEffectiveDriverType(bpath);
+
+		driverThread = new ThreadLocal<WebDriver>() {
+			@Override
+			protected WebDriver initialValue() {
+				final WebDriver webDriver = desiredDriver.configureDriverBinaryAndInstantiateWebDriver();
+				webDriverPool.add(webDriver);
+				return webDriver;
+			}
+		};
+		driver = getDriver();
+		logger.info("Open home page - " + testURL);
+	}
+
+	protected static void getLogger() {
+		System.setProperty("log4j.configurationFile", "log4j.xml");
+		logger = LogManager.getLogger(SeleneseTestCase.class);
 	}
 
 	protected void beforeTest() {
@@ -222,6 +191,45 @@ public class SeleneseTestCase {
 			e.printStackTrace();
 		}
 		return file;
+	}
+	
+	public void startRemouteTestOnDriver(String browser, String build, String os) throws MalformedURLException {
+		String login = "kvooturi@salsalabs.com";
+		try {
+			login = URLEncoder.encode(login, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("", e);
+		}
+		DesiredCapabilities caps = new DesiredCapabilities();
+
+		switch (browser) {
+		case "FF30":
+			FirefoxProfile profile = new FirefoxProfile();
+			profile.setAssumeUntrustedCertificateIssuer(false);
+			caps = DesiredCapabilities.firefox();
+			caps.setCapability(FirefoxDriver.PROFILE, profile);
+			break;
+		case "Chrome34":
+			caps = DesiredCapabilities.chrome();
+			caps.setCapability("chrome.switches", Arrays.asList("--ignore-certificate-errors"));
+			break;
+		case "IE10":
+			caps = DesiredCapabilities.internetExplorer();
+			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+			break;
+		}
+
+		caps.setCapability("browser_api_name", browser);
+		if (build != null) {
+			caps.setCapability("build", build);
+		}
+		caps.setCapability("os_api_name", os);
+		caps.setCapability("name", "Selenium Test Example");
+		caps.setCapability("screen_resolution", "1024x768");
+		caps.setCapability("record_video", "true");
+		caps.setCapability("record_network", "true");
+		caps.setCapability("record_snapshot", "false");
+		SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
 	}
 
 }

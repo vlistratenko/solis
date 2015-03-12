@@ -97,19 +97,6 @@ public abstract class Browser {
 		return driver.getWindowHandle();
 	}
 
-	protected void openURLInOtherBrowserAndVerifyByTitle() {
-		WebDriver driverT = null;
-		String windHandle = getWindowHandle();
-		if (/* browser */getBrowser().contains("firefox")) {
-			driverT = new Driver().getDriver("*iexplore");
-		} else {
-			driverT = new Driver().getDriver("*firefox");
-		}
-		driverT.navigate().to(SeleneseTestCase.driver.getCurrentUrl());
-		driverT.close();
-		switchToWindow(windHandle);
-	}
-
 	protected void switchToWindow(String popUpWindowHandle) {
 		logger.debug("Try to switch focus to window " + popUpWindowHandle);
 		SeleneseTestCase.driver.switchTo().window(popUpWindowHandle);
