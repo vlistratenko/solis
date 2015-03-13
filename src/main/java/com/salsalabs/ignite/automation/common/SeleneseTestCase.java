@@ -58,7 +58,6 @@ public class SeleneseTestCase {
 			bpath = System.getProperty("USED_BROWSER");
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
-		getLogger();
 		new EmailClient().deleteAllEmails();
 		if (USED_ENVIRONMENT.server.equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
@@ -82,6 +81,11 @@ public class SeleneseTestCase {
 	public static boolean isDebugMode = false;
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
+	
+	static {
+		System.setProperty("log4j.configurationFile", "log4j.xml");
+		logger = LogManager.getLogger(SeleneseTestCase.class);
+	}
 
 	public void startTestOnDriver(String bpath, String testURL) throws Exception {
 		final DriverType desiredDriver = determineEffectiveDriverType(bpath);
@@ -97,12 +101,7 @@ public class SeleneseTestCase {
 		driver = getDriver();
 		logger.info("Open home page - " + testURL);
 	}
-
-	protected static void getLogger() {
-		System.setProperty("log4j.configurationFile", "log4j.xml");
-		logger = LogManager.getLogger(SeleneseTestCase.class);
-	}
-
+	
 	protected void beforeTest() {
 		bug.clear();
 	}
