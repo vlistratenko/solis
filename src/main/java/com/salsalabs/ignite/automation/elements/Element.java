@@ -30,7 +30,9 @@ public interface Element {
 
 	void clickByTABKey();
 
-	void waitElement();
+	boolean waitElement();
+	
+	boolean waitElement(int seconds);
 
 	String getName();
 

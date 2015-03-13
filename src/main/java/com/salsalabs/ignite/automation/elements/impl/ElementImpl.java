@@ -80,8 +80,13 @@ abstract class ElementImpl implements Element {
 	}
 
 	@Override
-	public void waitElement() {
-		waitObject(path, 30000);
+	public boolean waitElement() {
+		return waitObject(path, 30000);
+	}
+	
+	@Override
+	public boolean waitElement(int seconds) {
+		return waitObject(path, seconds * 1000);
 	}
 
 	@Override
@@ -675,7 +680,7 @@ abstract class ElementImpl implements Element {
 				}
 			}
 		} catch (Exception e) {
-			logger.error("Exception: Element " + aIdLocator + " not found!");
+			logger.error("Exception: Element " + aIdLocator + " not found!", e);
 			return false;
 		}
 		return false;

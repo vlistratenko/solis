@@ -9,11 +9,15 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
 import com.mailosaur.exception.MailosaurException;
 import com.mailosaur.model.Email;
+import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public abstract class Browser {
@@ -52,6 +56,13 @@ public abstract class Browser {
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
+		if (driver instanceof InternetExplorerDriver) {
+			Button link = new ButtonImpl("//a[@name='overridelink']", "Continue");
+			sleep(5);
+			if (!link.isNotExists()) {
+				link.click();
+			}
+		}
 	}
 
 	protected String openInNewWindow(String url) {
