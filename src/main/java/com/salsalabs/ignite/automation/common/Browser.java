@@ -9,7 +9,6 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -58,7 +57,7 @@ public abstract class Browser {
 		driver.navigate().to(url);
 		if (driver instanceof InternetExplorerDriver) {
 			Button link = new ButtonImpl("//a[@name='overridelink']", "Continue");
-			sleep(5);
+			sleep(15);
 			if (!link.isNotExists()) {
 				link.click();
 			}
