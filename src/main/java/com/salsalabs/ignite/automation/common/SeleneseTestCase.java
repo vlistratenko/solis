@@ -29,9 +29,9 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
@@ -46,7 +46,7 @@ public class SeleneseTestCase {
 	private static ThreadLocal<WebDriver> driverThread;
 	
 	@Parameters({ "USED_BROWSER", "USED_ENVIRONMENT", "USED_SERVER" })
-	@BeforeSuite(alwaysRun = true)
+	@BeforeTest(alwaysRun = true)
 	protected void beforeSuite(@Optional("FIREFOX") String bpath, @Optional("TEST") String TestEnv, @Optional("LOCAL") String locationServer) throws Exception {
 		if (System.getProperty("USED_ENVIRONMENT") != null) {
 			TestEnv = System.getProperty("USED_ENVIRONMENT");
@@ -99,7 +99,6 @@ public class SeleneseTestCase {
 			}
 		};
 		driver = getDriver();
-		logger.info("Open home page - " + testURL);
 	}
 	
 	protected void beforeTest() {
@@ -110,7 +109,7 @@ public class SeleneseTestCase {
 		System.err.println("Test");
 	}
 
-	@AfterSuite(alwaysRun = true)
+	@AfterTest(alwaysRun = true)
 	protected void stopTestOnDriver() throws Exception {
 		driver.manage().deleteAllCookies();
 		close();

@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Create new org" parallel="false" thread-count="1">
-  	
-  	<test verbose="1" name="Create new org" annotations="JDK" >
-    	<parameter name="admin.login" value="vavramchuk"></parameter>
-     	<parameter name="admin.password" value="aVitalik3124"></parameter>
-     	
-     	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
-		<parameter name="createOrg.orgName"  value="AutoTestV2 Org"></parameter>
-		<parameter name="createOrg.orgDescrption"  value="AutoTestV descr"></parameter>
+	<parameter name="USED_ENVIRONMENT" value="UAT"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="admin.login" value="vavramchuk"></parameter>
+	<parameter name="admin.password" value="aVitalik3124"></parameter>
 
-		<parameter name="createOrg.firstName"  value="AutoTester"></parameter>
-		<parameter name="createOrg.lastName"  value="AutoTesterov"></parameter>		
-		<parameter name="createOrg.status"  value="Standard"></parameter>
-		<parameter name="createOrg.featureList"  value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>		
-		<parameter name="newuser.password"  value="!QAZ2wsx"></parameter>
-		<parameter name="createOrg.amountOfOrgs" value="3"></parameter>		
-		
-     	<groups>
-    		<run>
-     			 <include name="createAdmin"/>
-    		</run>
-  		</groups>
-     	<classes>
-      		<class name="com.salsalabs.ignite.automation.suites.CreateOrgTest"/>
-    	</classes>
-  	</test>   
- </suite>
+	<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
+	<parameter name="createOrg.orgName" value="AutoTestV2 Org"></parameter>
+	<parameter name="createOrg.orgDescrption" value="AutoTestV descr"></parameter>
+
+	<parameter name="createOrg.firstName" value="AutoTester"></parameter>
+	<parameter name="createOrg.lastName" value="AutoTesterov"></parameter>
+	<parameter name="createOrg.status" value="Standard"></parameter>
+	<parameter name="createOrg.featureList"
+		value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>
+	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
+	<parameter name="createOrg.amountOfOrgs" value="3"></parameter>
+	<test verbose="1" name="Create new org CHROME" annotations="JDK">
+		<parameter name="USED_BROWSER" value="CHROME"></parameter>
+		<groups>
+			<run>
+				<include name="createAdmin" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.CreateOrgTest" />
+		</classes>
+	</test>
+
+	<test verbose="1" name="Create new org FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="createAdmin" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.CreateOrgTest" />
+		</classes>
+	</test>
+</suite>

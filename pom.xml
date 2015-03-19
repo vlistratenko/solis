@@ -6,13 +6,11 @@
 	<version>1</version>
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <browser>firefox</browser>
         <threads>1</threads>
         <standalone.binary.root.folder>${project.basedir}/src/test/resources/selenium_standalone_binaries</standalone.binary.root.folder>
         <remote>false</remote>
         <seleniumGridURL/>
         <platform/>
-        <browserVersion/>
     </properties>
 	<build>
 		<plugins>
