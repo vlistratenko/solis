@@ -30,7 +30,7 @@ public class PaymentGatewaysPage extends ManagePage {
 	public PaymentGatewaysPage verifyWePayEmail() {
 		Integer amounOfEmails = 0;
 		try {
-			amounOfEmails = new EmailClient().waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
+			amounOfEmails = SeleneseTestCase.emailClient.waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
 		} catch (MailosaurException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
@@ -43,7 +43,7 @@ public class PaymentGatewaysPage extends ManagePage {
 		String activationLink = "";
 		Button wePayAccessButton = new ButtonImpl("//input[@value='Grant Access']", "Grant Access");
 		try {
-			activationLink = new EmailClient().getURLByDomain("Please confirm your ignite account", "stage.wepay.com");
+			activationLink = SeleneseTestCase.emailClient.getURLByDomain("Please confirm your ignite account", "stage.wepay.com");
 		} catch (MailosaurException e) {
 			e.printStackTrace();
 		}

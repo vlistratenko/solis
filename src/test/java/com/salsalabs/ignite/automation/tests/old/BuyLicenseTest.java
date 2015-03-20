@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;

@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -34,7 +34,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		
 		if(emailOfSupporter.equals("")){
-			emailOfSupporter = EmailClient.getEmailBox("");
+			emailOfSupporter = emailClient.getEmailBox("");
 		}
 		
 		LoginPage loginPage = new LoginPage();
@@ -96,7 +96,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		CommonUtils.setProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP, percentageOfTestGroup.toString());
 		
 		if(emailOfSupporter.equals("")){
-			emailOfSupporter = EmailClient.getEmailBox("");
+			emailOfSupporter = emailClient.getEmailBox("");
 		}
 		
 		LoginPage loginPage = new LoginPage();
@@ -149,19 +149,19 @@ public class EmailBlastTest extends SeleneseTestCase{
 		Supporter supporter3 = new Supporter();
 		Supporter supporter4 = new Supporter();
 		
-		supporter1.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		supporter1.setFinalEMAIL(emailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter1.getSupporterJSON(supporter1.getFinalEMAIL()));
 		
-		supporter2.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		supporter2.setFinalEMAIL(emailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter2.getSupporterJSON(supporter2.getFinalEMAIL()));
 		
-		supporter3.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		supporter3.setFinalEMAIL(emailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter3.getSupporterJSON(supporter3.getFinalEMAIL()));
 		
-		supporter4.setFinalEMAIL(EmailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
+		supporter4.setFinalEMAIL(emailClient.getEmailBox("emailforunsub" + CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter4.getSupporterJSON(supporter4.getFinalEMAIL()));
 		

@@ -11,7 +11,7 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 public class AccountsPage extends HomePage{
 
 	Button inviteNewUserButton =  new ButtonImpl("//button[text()='+ Invite my team member']", "Invite new user");
-	Table invitationsTable = new TableImpl("//*[@id='JColResizer1']", "Pending Invitations");
+	Table invitationsTable = new TableImpl("//*[@id='JColResizer2']", "Pending Invitations");
 
 	public CreateInvitePage openInviteNewUserPage() {
 		inviteNewUserButton.click();
@@ -20,7 +20,8 @@ public class AccountsPage extends HomePage{
 	}
 
 	public AccountsPage verifyInvitationSent() {
-		verifier.verifyEquals(invitationsTable.isValueExists(CommonUtils.getProperty(PropertyName.CM_EMAIL))>0, true, "User " + CommonUtils.getProperty(PropertyName.CM_EMAIL) + " was not found.");
+		sleep(10);
+		verifier.verifyTrue(invitationsTable.isValueExists(CommonUtils.getProperty(PropertyName.CM_EMAIL)) > 0, "User " + CommonUtils.getProperty(PropertyName.CM_EMAIL) + " was not found.");
 		return this;
 	}
 	

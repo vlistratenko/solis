@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -30,8 +30,8 @@ public class AdminTest extends SeleneseTestCase{
 						String status,
 						String featureList){
 		
-		orgName = orgName + CommonUtils.getUnicName();
-		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
+		orgName = CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME);
+		String orgAdminUserId = CommonUtils.getProperty(PropertyName.ADMIN_EMAIL);
 		
 		new LoginPageAdmin().
 			doSuccessLogin().

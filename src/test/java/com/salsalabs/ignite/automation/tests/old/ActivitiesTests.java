@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 
 import org.testng.annotations.Optional;
@@ -84,7 +84,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 			boolean isEmail) 
 	{		
 		widgetName = widgetName + CommonUtils.getUnicName();
-		personEmail = EmailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
+		personEmail = emailClient.getEmailBox(personEmail+CommonUtils.getUnicName());
 		String status = "COMPLETE";
 		if (!recurringDonation) {
 			status = "CHARGE";
@@ -212,7 +212,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		Supporter supporter = new Supporter();
 		LoginPage loginPage = new LoginPage(true);
 		if (!supporterEmail.contains("@")) {
-			supporterEmail = EmailClient.getEmailBox(new Supporter().getSubscribedEmail() + CommonUtils.getUnicName());
+			supporterEmail = emailClient.getEmailBox(new Supporter().getSubscribedEmail() + CommonUtils.getUnicName());
 			supporter.setcPhone("");
 			supporter.setAddressLine1("");
 			supporter.setFacebook("");

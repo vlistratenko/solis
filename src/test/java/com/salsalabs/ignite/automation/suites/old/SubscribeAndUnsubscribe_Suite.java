@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,10 +18,10 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
-import com.salsalabs.ignite.automation.tests.ActivitiesTests;
-import com.salsalabs.ignite.automation.tests.AdminTest;
-import com.salsalabs.ignite.automation.tests.EmailBlastTest;
-import com.salsalabs.ignite.automation.tests.SettingsTests;
+import com.salsalabs.ignite.automation.tests.old.ActivitiesTests;
+import com.salsalabs.ignite.automation.tests.old.AdminTest;
+import com.salsalabs.ignite.automation.tests.old.EmailBlastTest;
+import com.salsalabs.ignite.automation.tests.old.SettingsTests;
 
 public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 
@@ -66,7 +66,7 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=50, groups = {"activities.subscribeExistedSupporter"}, description = "", dependsOnMethods="loginAsNewSuperAdminTest")
 	public void subscribeExistedSupporter() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException, JSONException{
 		Supporter supporter = new Supporter();
-		supporter.setFinalEMAIL(EmailClient.getEmailBox("emailforsub" + CommonUtils.getUnicName()));
+		supporter.setFinalEMAIL(emailClient.getEmailBox("emailforsub" + CommonUtils.getUnicName()));
 		
 		//Create new supporter
 		new HttpClient().login().createSupporter(supporter.getSupporterJSON(supporter.getFinalEMAIL()));

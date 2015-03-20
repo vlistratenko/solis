@@ -69,7 +69,7 @@ public class HomePage extends Browser{
 	
 	public HomePage verifyHomePageIsOpened() {
 		sleep(10);
-		if (SeleneseTestCase.USED_ENVIRONMENT.server.equals(Environment.LocationOfServer.REMOTE)) {
+		if (SeleneseTestCase.USED_ENVIRONMENT.getServer().equals(Environment.LocationOfServer.REMOTE)) {
 			sleep(20);
 		}
 		verifier.verifyTrue(getLocation().contains("dashboard"), "Wrong url " + getLocation());

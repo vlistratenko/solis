@@ -80,4 +80,16 @@ public class InviteCompletionPage extends Browser {
 		finishButton.click();		
 		return new HomePage();
 	}
+	
+	public HomePage completeCMInvite(String password) {
+		sleep(3);
+		passwordField.type(password);
+		confirmPasswordField.type(password);
+		recoveryQuestionField.selectByLabelJS("What was your childhood nickname?");
+		recoveryAnswerField.type("Auto answer");
+		recoveryQuestionField2.selectByLabelJS("What school did you attend for sixth grade?");
+		recoveryAnswerField2.type("Auto answer");
+		createAccountButton.click();
+		return new HomePage();
+	}
 }

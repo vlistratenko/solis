@@ -101,7 +101,7 @@ public class LoginPage extends Browser{
 	
 	public InviteCompletionPage openConfirmationPage() {
 		try {
-			open(new EmailClient().getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion"));
+			open(SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion"));
 		} catch (MailosaurException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
@@ -110,7 +110,7 @@ public class LoginPage extends Browser{
 	
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {
 		try {
-			open(new EmailClient().getUnsubscribeLink(emailSubj));
+			open(SeleneseTestCase.emailClient.getUnsubscribeLink(emailSubj));
 		} catch (MailosaurException e) {
 			e.printStackTrace();
 		}

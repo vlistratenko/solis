@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -33,7 +33,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 						String featureList) {
 		
 		orgName = orgName + CommonUtils.getUnicName();
-		String orgAdminUserId = EmailClient.getEmailBox(CommonUtils.getUnicName());
+		String orgAdminUserId = emailClient.getEmailBox(CommonUtils.getUnicName());
 		new LoginPageAdmin().
 			doSuccessLogin().
 			openAddNewOrganizationPage().
@@ -251,8 +251,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 								 String cmDataAndAnalyticsRole3,
 								 String cmAssetManagementRole1) {
 				
-		new EmailClient();
-		String cmEmail =  EmailClient.getEmailBox("cm" + CommonUtils.getUnicName());
+		String cmEmail =  emailClient.getEmailBox("cm" + CommonUtils.getUnicName());
 		HomePage homePage = new HomePage();
 		homePage.
 		openSettingsPage().

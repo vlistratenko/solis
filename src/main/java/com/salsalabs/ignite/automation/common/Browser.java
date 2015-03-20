@@ -204,7 +204,7 @@ public abstract class Browser {
 			Integer amountEmails = null;
 			try {
 
-				amountEmails = new EmailClient().waitForEmails(subj, amountEmailsInSplit, amountOfMinutes).getEmailsBySubject(subj).size();
+				amountEmails = SeleneseTestCase.emailClient.waitForEmails(subj, amountEmailsInSplit, amountOfMinutes).getEmailsBySubject(subj).size();
 			} catch (MailosaurException e) {
 				e.printStackTrace();
 			}
@@ -219,7 +219,7 @@ public abstract class Browser {
 	}
 
 	public void openEmails(String subj, Integer amount) {
-		EmailClient client = new EmailClient();
+		EmailClient client = SeleneseTestCase.emailClient;
 		ArrayList<Email> emails = null;
 		try {
 			emails = client.getEmailsBySubject(subj);
@@ -235,7 +235,7 @@ public abstract class Browser {
 	}
 
 	public void clickLinkInEmail(String subj, String linkText, Integer amountOfEmails) {
-		EmailClient client = new EmailClient();
+		EmailClient client = SeleneseTestCase.emailClient;
 		ArrayList<Email> emails = null;
 		try {
 			emails = client.getEmailsBySubject(subj);

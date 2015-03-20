@@ -17,17 +17,6 @@
 		value="Advocacy - content:Asset - data:Communication - content:Fundraising - content:Fundraising - data:Intelligence - data:Organization Administration:Organize - content:Organize - data"></parameter>
 	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 	<parameter name="createOrg.amountOfOrgs" value="3"></parameter>
-	<test verbose="1" name="Create new org CHROME" annotations="JDK">
-		<parameter name="USED_BROWSER" value="CHROME"></parameter>
-		<groups>
-			<run>
-				<include name="createAdmin" />
-			</run>
-		</groups>
-		<classes>
-			<class name="com.salsalabs.ignite.automation.suites.CreateOrgTest" />
-		</classes>
-	</test>
 
 	<test verbose="1" name="Create new org FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
@@ -37,7 +26,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="com.salsalabs.ignite.automation.suites.CreateOrgTest" />
+			<class name="com.salsalabs.ignite.automation.suites.old.CreateOrgTest" />
 		</classes>
 	</test>
 </suite>

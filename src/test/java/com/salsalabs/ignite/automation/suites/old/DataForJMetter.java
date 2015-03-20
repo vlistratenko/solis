@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,9 +18,9 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.tests.ActivitiesTests;
-import com.salsalabs.ignite.automation.tests.AdminTest;
-import com.salsalabs.ignite.automation.tests.SettingsTests;
+import com.salsalabs.ignite.automation.tests.old.ActivitiesTests;
+import com.salsalabs.ignite.automation.tests.old.AdminTest;
+import com.salsalabs.ignite.automation.tests.old.SettingsTests;
 
 public class DataForJMetter extends SeleneseTestCase{
 

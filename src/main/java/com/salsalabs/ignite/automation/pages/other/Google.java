@@ -62,7 +62,7 @@ public class Google extends Browser{
 			String subj = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT) + " Split " + i;
 			Integer amountEmails = null;
 			try {
-				amountEmails = new EmailClient().getEmailsBySubject(subj).size();
+				amountEmails = SeleneseTestCase.emailClient.getEmailsBySubject(subj).size();
 			} catch (MailosaurException e) {
 				SeleneseTestCase.logger.error("",e);
 			}

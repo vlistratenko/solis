@@ -36,8 +36,15 @@ public class TableImpl extends ElementImpl implements Table {
 	@Override
 	public void clickInCell(String rowHeader, String colHeader) {
 		logger.info(elementName + " was clicked in cell, row " + rowHeader + " and column " + colHeader);
-		Integer rowNumber = getRowsNumberByValue(rowHeader);
-		Integer colNumber = getColNumberByValue(colHeader);
+		Integer rowNumber;
+		Integer colNumber;
+		try {
+			rowNumber = Integer.valueOf(rowHeader);
+			colNumber = Integer.valueOf(colHeader);
+		} catch (NumberFormatException e) {
+			rowNumber = getRowsNumberByValue(rowHeader);
+			colNumber = getColNumberByValue(colHeader);
+		}
 		clickInCell(rowNumber, colNumber);
 	}
 
@@ -76,7 +83,7 @@ public class TableImpl extends ElementImpl implements Table {
 		}
 		Integer colsCount = getColsCount();
 		for (int i = 1; i <= colsCount; i++) {
-			if (findElementsByXpath(path + "/descendant::tr/th[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
+			if (findElementsByXpathWithOutWait(path + "/descendant::tr/th[" + i + "]/descendant-or-self::*[contains(text(), '" + value + "')]").size() > 0) {
 				return i;
 			}
 		}

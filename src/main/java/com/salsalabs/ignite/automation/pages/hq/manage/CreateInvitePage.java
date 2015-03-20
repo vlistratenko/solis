@@ -13,9 +13,9 @@ public class CreateInvitePage {
 	TextBox emailField = new TextBoxImpl("//input[@id='invite_email']", "Email");
 	TextBox firstNameField = new TextBoxImpl("//input[@id='invite_firstName']", "First name");
 	TextBox lastNameField = new TextBoxImpl("//input[@id='invite_lastName']", "Last name");
-	Table contentAndMessagingTable = new TableImpl("//form[@id='inviteForm']/descendant::*[text()='Campaign Communications']/following-sibling::table[1]", "Content and Messaging permissions grid");
-	Table dataAndAnalyticsTable = new TableImpl("//form[@id='inviteForm']/descendant::*[text()='Data and Insight']/following-sibling::table[1]", "Data And Analytics permissions grid");
-	Table assetManagementTable = new TableImpl("//form[@id='inviteForm']/descendant::*[text()='Asset Management']/following-sibling::table[1]", "Asset Management permissions grid");
+	Table contentAndMessagingTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[1]", "Content and Messaging permissions grid");
+	Table dataAndAnalyticsTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[2]", "Data And Analytics permissions grid");
+	Table assetManagementTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[3]", "Asset Management permissions grid");
 	Button saveInviteButton = new ButtonImpl("//button[@id='btnSendInvite']", "Save invite");
 	
 	public AccountsPage inviteNewUser(String cmEmail,

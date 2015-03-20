@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 
 import org.testng.annotations.Parameters;

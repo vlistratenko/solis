@@ -1,13 +1,13 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
-import com.salsalabs.ignite.automation.tests.ActivitiesTests;
-import com.salsalabs.ignite.automation.tests.AdminTest;
-import com.salsalabs.ignite.automation.tests.SettingsTests;
+import com.salsalabs.ignite.automation.tests.old.ActivitiesTests;
+import com.salsalabs.ignite.automation.tests.old.AdminTest;
+import com.salsalabs.ignite.automation.tests.old.SettingsTests;
 
 public class Donations_Suite extends SeleneseTestCase{
 

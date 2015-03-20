@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.tests.AdminTest;
+import com.salsalabs.ignite.automation.tests.old.AdminTest;
 
 public class CreateOrgTest extends SeleneseTestCase {
 	@Test(priority=10, enabled = true, groups = {"createAdmin"}, invocationCount=1, retryAnalyzer=RetryAnalyzer.class)

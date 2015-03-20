@@ -2,6 +2,7 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.EmailClient;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
@@ -31,7 +32,7 @@ public class SupportersAddPage extends HomePage{
 	
 	public SupportersPage createNewSupporter() {
 		String unicID = CommonUtils.getRandomValue(100000, 0);
-		CommonUtils.setParam("supporterEmail", EmailClient.getEmailBox("supman" + unicID));
+		CommonUtils.setParam("supporterEmail", SeleneseTestCase.emailClient.getEmailBox("supman" + unicID));
 		supporterEmailField.type(CommonUtils.getParam("supporterEmail"));
 		supporterFirstNameField.type("Tester" + unicID);
 		supporterLastNameField.type("Testerov" + unicID);

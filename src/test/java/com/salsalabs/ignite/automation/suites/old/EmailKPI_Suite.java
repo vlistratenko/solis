@@ -1,14 +1,14 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
-import com.salsalabs.ignite.automation.tests.AdminTest;
-import com.salsalabs.ignite.automation.tests.EmailBlastTest;
-import com.salsalabs.ignite.automation.tests.SettingsTests;
-import com.salsalabs.ignite.automation.tests.SupportersTests;
+import com.salsalabs.ignite.automation.tests.old.AdminTest;
+import com.salsalabs.ignite.automation.tests.old.EmailBlastTest;
+import com.salsalabs.ignite.automation.tests.old.SettingsTests;
+import com.salsalabs.ignite.automation.tests.old.SupportersTests;
 
 public class EmailKPI_Suite extends SeleneseTestCase{
 

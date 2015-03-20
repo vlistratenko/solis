@@ -27,14 +27,14 @@ public class PurchasePage extends Browser {
 		String[] prices = {"$160", "$314", "$1188","$160.00", "$314.00", "$1,188.00"};
 		if (!Arrays.asList(prices).contains(price) && sendEmails) {
 			try {
-				new EmailClient().sendEmail("Wrong price", "Wrong price " + price, SeleneseTestCase.makeScreenshot("WrongPrice" + CommonUtils.getUnicName()));
+				SeleneseTestCase.emailClient.sendEmail("Wrong price", "Wrong price " + price, SeleneseTestCase.makeScreenshot("WrongPrice" + CommonUtils.getUnicName()));
 				//BuyLicenseTest.sendEmails = false;
 			} catch (MessagingException e) {
 				SeleneseTestCase.logger.error("",e);
 			}
 		}else if (Arrays.asList(prices).contains(price) && !sendEmails) {
 			try {
-				new EmailClient().sendEmail("Price is correct ", "Price is correct " + price, SeleneseTestCase.makeScreenshot("PriceIsCorrect" + CommonUtils.getUnicName()));
+				SeleneseTestCase.emailClient.sendEmail("Price is correct ", "Price is correct " + price, SeleneseTestCase.makeScreenshot("PriceIsCorrect" + CommonUtils.getUnicName()));
 				//BuyLicenseTest.sendEmails = true;
 			} catch (AddressException e) {
 				SeleneseTestCase.logger.error("",e);

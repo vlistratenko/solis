@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.tests;
+package com.salsalabs.ignite.automation.tests.old;
 
 
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class SettingsTests extends SeleneseTestCase{
 	public void unsubscribeSupporterTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		String introductoryText = "Message edited by Auto script";
 		Supporter supporter = new Supporter();
-		supporter.setFinalEMAIL(EmailClient.getEmailBox(CommonUtils.getUnicName()));
+		supporter.setFinalEMAIL(emailClient.getEmailBox(CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter.getSupporterJSON(supporter.getFinalEMAIL()));
 		CommonUtils.setProperty(PropertyName.UNSUBSCRIBED_SUPPORTER, supporter.getFinalEMAIL());
@@ -111,7 +111,7 @@ public class SettingsTests extends SeleneseTestCase{
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=13, groups = {"settings.unsubscribeUnexistedSupporterTest", ""}, description = "")
 	public void unsubscribeUnexistedSupporterTest(){
 		Supporter supporter = new Supporter();
-		supporter.setFinalEMAIL(EmailClient.getEmailBox(CommonUtils.getUnicName()));
+		supporter.setFinalEMAIL(emailClient.getEmailBox(CommonUtils.getUnicName()));
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
@@ -133,7 +133,7 @@ public class SettingsTests extends SeleneseTestCase{
 	public void unsubscribeSupporterByEmailTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 
 		Supporter supporter = new Supporter();
-		supporter.setFinalEMAIL(EmailClient.getEmailBox(CommonUtils.getUnicName()));
+		supporter.setFinalEMAIL(emailClient.getEmailBox(CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter.getSupporterJSON(supporter.getFinalEMAIL()));
 		String emailSubj = "Subj" + CommonUtils.getUnicName(); 
