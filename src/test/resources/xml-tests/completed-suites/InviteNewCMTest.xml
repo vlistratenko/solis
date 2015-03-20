@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Create new org" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+
+	<parameter name="cm.firstName" value="CMFirstNameAuto"></parameter>
+	<parameter name="cm.lastName" value="CMLastNameAuto"></parameter>
+	<parameter name="cm.contentAndMessagingTable.role1" value="1:5"></parameter>
+	<parameter name="cm.contentAndMessagingTable.role2" value="2:5"></parameter>
+	<parameter name="cm.contentAndMessagingTable.role3" value="3:5"></parameter>
+
+	<parameter name="cm.dataAndAnalyticsTable.role1" value="1:4"></parameter>
+	<parameter name="cm.dataAndAnalyticsTable.role2" value="2:4"></parameter>
+	<parameter name="cm.dataAndAnalyticsTable.role3" value="3:4"></parameter>
+	<parameter name="cm.assetManagementTable.role1" value="1:4"></parameter>
+	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
+
+
+	<test verbose="1" name="Invite new CM FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="inviteCM" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.InviteNewCMTest" />
+		</classes>
+	</test>
+</suite>

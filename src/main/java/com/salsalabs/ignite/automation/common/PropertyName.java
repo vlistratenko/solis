@@ -15,6 +15,7 @@ public interface PropertyName {
 	String CM_LAST_NAME = "CM.lastName";
 	String UPDATE_TC = "updateTC";
 	String ADMIN_EMAIL = "Admin.email";
+	String ADMIN_EMAIL_BASE = "Admin.emailBase";
 	String BUILD_VERSION = "buildVersion";
 	String CURRENT_FIRST_NAME = "current.firstName";
 	String CURRENT_LAST_NAME = "current.lastName";

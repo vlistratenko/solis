@@ -33,8 +33,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.salsalabs.ignite.automation.common.Environment.LocationOfServer;
 import com.salsalabs.ignite.automation.common.config.DriverType;
@@ -44,6 +44,20 @@ public class SeleneseTestCase {
 	
 	private static List<WebDriver> webDriverPool = Collections.synchronizedList(new ArrayList<WebDriver>());
 	private static ThreadLocal<WebDriver> driverThread;
+	public static Environment USED_ENVIRONMENT;
+	public static Integer defaultTimeOut = 30;
+	public static int cTimeOut = 1000;
+	public static WebDriver driver;
+	public static Logger logger;
+	public static boolean isDebugMode = false;
+	protected boolean createIssues = false;
+	public static ArrayList<String> bug = new ArrayList<String>();
+	public static EmailClient emailClient;
+	
+	static {
+		System.setProperty("log4j.configurationFile", "log4j.xml");
+		logger = LogManager.getLogger(SeleneseTestCase.class);
+	}
 	
 	@Parameters({ "USED_BROWSER", "USED_ENVIRONMENT", "USED_SERVER" })
 	@BeforeTest(alwaysRun = true)
@@ -58,34 +72,26 @@ public class SeleneseTestCase {
 			bpath = System.getProperty("USED_BROWSER");
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
-		new EmailClient().deleteAllEmails();
-		if (USED_ENVIRONMENT.server.equals(LocationOfServer.LOCAL)) {
+		emailClient = USED_ENVIRONMENT.getEmailClient();
+		setAdminEmail();
+		emailClient.deleteAllEmails();
+		
+		if (USED_ENVIRONMENT.getServer().equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		} else {
 			startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
 		}
 	}
 	
+	private void setAdminEmail() {
+		String adminEmail = CommonUtils.getProperty(PropertyName.ADMIN_EMAIL_BASE);
+		adminEmail = emailClient.getEmailBox(adminEmail);
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, adminEmail);
+	}
+	
 	public static WebDriver getDriver() {
         return driverThread.get();
     }
-
-	public static Environment USED_ENVIRONMENT;
-
-	public static Integer defaultTimeOut = 30;
-
-	public static int cTimeOut = 1000;
-
-	public static WebDriver driver;
-	public static Logger logger;
-	public static boolean isDebugMode = false;
-	protected boolean createIssues = false;
-	public static ArrayList<String> bug = new ArrayList<String>();
-	
-	static {
-		System.setProperty("log4j.configurationFile", "log4j.xml");
-		logger = LogManager.getLogger(SeleneseTestCase.class);
-	}
 
 	public void startTestOnDriver(String bpath, String testURL) throws Exception {
 		final DriverType desiredDriver = determineEffectiveDriverType(bpath);

@@ -43,11 +43,13 @@ public class EmailClient {
 
 	private static final Logger logger = SeleneseTestCase.logger;
 
-	public static String mbox = "4441b2bf";
+	private String mbox;
 	public String apikey = "b4e4d2b193b5eb2";
 	MailboxApi mBoxAPI;
+	private String suffix = "@mailosaur.in";
 
-	public EmailClient() {
+	public EmailClient(String mbox) {
+		this.mbox = mbox;
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 			public java.security.cert.X509Certificate[] getAcceptedIssuers() {
 				return null;
@@ -151,13 +153,13 @@ public class EmailClient {
 		return getLinkByText(e, "unsubscribe");
 	}
 
-	public static String getEmailBox(String name) {
-		return name + "." + mbox + "@mailosaur.in";
+	public String getEmailBox(String name) {
+		return name + "." + mbox + suffix;
 	}
 
 	public String openEmailBySubj(String emailSubj) {
 
-		return "." + mbox + "@mailosaur.in";
+		return "." + mbox + suffix;
 	}
 
 	public void deleteAllEmails() {
@@ -166,7 +168,7 @@ public class EmailClient {
 				mBoxAPI.deleteAllEmail();
 			}
 		} catch (Exception e) {
-			logger.warn("", e);
+			logger.warn("Unable to parse API response");
 		}
 	}
 
@@ -304,4 +306,7 @@ public class EmailClient {
 		t.close();
 	}
 
+	public String getMbox() {
+		return mbox;
+	}
 }
