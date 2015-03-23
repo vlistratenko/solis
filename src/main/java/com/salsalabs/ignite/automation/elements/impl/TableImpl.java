@@ -35,17 +35,25 @@ public class TableImpl extends ElementImpl implements Table {
 
 	@Override
 	public void clickInCell(String rowHeader, String colHeader) {
+		clickInCell(rowHeader, colHeader, "input");
+	}
+
+	@Override
+	public void clickInCell(String rowHeader, String colHeader, String tag) {
 		logger.info(elementName + " was clicked in cell, row " + rowHeader + " and column " + colHeader);
 		Integer rowNumber;
 		Integer colNumber;
 		try {
 			rowNumber = Integer.valueOf(rowHeader);
-			colNumber = Integer.valueOf(colHeader);
 		} catch (NumberFormatException e) {
 			rowNumber = getRowsNumberByValue(rowHeader);
+		}
+		try {
+			colNumber = Integer.valueOf(colHeader);
+		} catch (NumberFormatException e) {
 			colNumber = getColNumberByValue(colHeader);
 		}
-		clickInCell(rowNumber, colNumber);
+		clickInCell(rowNumber, colNumber, tag);
 	}
 
 	@Override
