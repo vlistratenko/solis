@@ -11,8 +11,6 @@ public interface Table extends Element {
 	void sendKeysInCell(int row, int col, String tag, String key);
 
 	void clickInCell(String rowHeader, String colHeader);
-	
-	void clickInCell(String rowHeader, String colHeader, String tag);
 
 	String getCellValue(int row, int col);
 
