@@ -3,7 +3,6 @@ package com.salsalabs.ignite.automation.pages.hq;
 import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -34,6 +33,10 @@ public class LoginPage extends Browser{
 		if (doLogOut) {
 			logOut();
 		}
+	}
+	
+	public HomePage doSuccessLogin() {
+		return doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD));
 	}
 	
 	public HomePage doSuccessLogin(String userName, String password) {
@@ -100,12 +103,17 @@ public class LoginPage extends Browser{
 	}
 	
 	public InviteCompletionPage openConfirmationPage() {
-		try {
-			open(SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion"));
-		} catch (MailosaurException e) {
-			SeleneseTestCase.logger.error("",e);
-		}
+		open(getInvitationUrl());
 		return new InviteCompletionPage();
+	}
+	
+	public String getInvitationUrl() {
+		try {
+			return SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion");
+		} catch (MailosaurException e) {
+			SeleneseTestCase.logger.error("", e);
+			return null;
+		}
 	}
 	
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {

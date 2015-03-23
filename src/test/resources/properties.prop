@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Fri Mar 20 17:28:19 EET 2015
+#Mon Mar 23 17:20:08 EET 2015
 amountOfSupporters=1
 current.Password=11111111
 assets.username=neworg1.03eed056@mailosaur.in
@@ -13,7 +13,7 @@ amountOfPablishedEmails=1
 ldap.login=vavramchuk
 CM.lastName=CMLastNameAuto
 updateTC=false
-Admin.email=automation1_admin1.d05ab35d@mailosaur.in
+Admin.email=automation1_admin1.612fb360@mailosaur.in
 buildVersion=Ignite 0.16
 current.firstName=AutoTester
 current.lastName=AutoTesterov
@@ -22,20 +22,20 @@ Admin.orgName=automated_testing1
 ldap.password=\!QAZ2wsx
 emailSubject=Subj20150305145435
 maxRetryCount=2
-CM.Login=cm20150320172626.d05ab35d@mailosaur.in
+CM.Login=cm20150323171643.612fb360@mailosaur.in
 emailFrom=info@salsalabs.com
 recurringWidgetName=AutoWidgetName20150305140457
-CM.email=cm20150320172626.d05ab35d@mailosaur.in
+CM.email=cm20150323171643.612fb360@mailosaur.in
 Admin.Password=11111111
 assets.imageName=image2.jpg
 donationWidgetLink=https\://autotestv2org20150305140225.test.igniteaction.net/autowidgetname20150305140457
 subscribedSupporter=emailforsub20150210125100.4441b2bf@mailosaur.in
 subscribeWidgetLink=https\://autotestv2org20150210123444.test.igniteaction.net/autowidgetname20150210124740
-Environment=UAT
+Environment=TEST
 ImportName=AutoTestImport20150302153351
 percentageOfTestGroup=50
 unsubscribedSupporter=20150305143500.4441b2bf@mailosaur.in
-current.Login=automation1_admin1.d05ab35d@mailosaur.in
+current.Login=automation1_admin1.612fb360@mailosaur.in
 CM.Password=\!QAZ2wsx
 Admin.emailBase=automation1_admin1
 Admin.firstName=AutoTester

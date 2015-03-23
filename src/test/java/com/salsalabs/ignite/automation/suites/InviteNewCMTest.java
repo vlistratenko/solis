@@ -8,9 +8,10 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.manage.AccountsPage;
 
 public class InviteNewCMTest extends SeleneseTestCase {
-	@Test(groups = {"inviteCM"}, retryAnalyzer=RetryAnalyzer.class)
+	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class)
 	@Parameters({"cm.firstName",
 				 "cm.lastName",
 				 "cm.contentAndMessagingTable.role1",
@@ -34,19 +35,25 @@ public class InviteNewCMTest extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.CM_EMAIL, cmEmail);
 		
 		new LoginPage()
-		.doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD))
+		.doSuccessLogin()
 		.openSettingsPage()
 		.openAccountsPage()
 		.openInviteNewUserPage()
 		.inviteNewUser(cmEmail, cmFirstName, cmLastName, cmContentAndMessagingRole1, cmContentAndMessagingRole2, cmContentAndMessagingRole3, cmDataAndAnalyticsRole1, cmDataAndAnalyticsRole2, cmDataAndAnalyticsRole3, cmAssetManagementRole1)
-		.verifyInvitationSent();	
+		.verifyInvitationSent();
 		
 		CommonUtils.setProperty(PropertyName.CM_LOGIN, cmEmail);
 		CommonUtils.setProperty(PropertyName.CM_FIRST_NAME, cmFirstName);
 		CommonUtils.setProperty(PropertyName.CM_LAST_NAME, cmLastName);
 	}
 	
-	@Test(groups = {"inviteCM"}, retryAnalyzer=RetryAnalyzer.class, dependsOnMethods = {"inviteNewCM"})
+	@Test(groups = {"resendInvite"}, retryAnalyzer=RetryAnalyzer.class, dependsOnMethods = {"inviteNewCM"})
+	public void resendInvitation() {
+		emailClient.deleteAllEmails();
+		new AccountsPage().resendInvite();
+	}
+	
+	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class, dependsOnMethods = {"inviteNewCM","resendInvitation"})
 	@Parameters({"newuser.password"})
 	public void provisionNewCM(String userPassword) {
 		

@@ -17,11 +17,12 @@
 	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 
 
-	<test verbose="1" name="Invite new CM FIREFOX" annotations="JDK">
+	<test verbose="1" name="Resend invite FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
 				<include name="inviteCM" />
+				<include name="resendInvite" />
 			</run>
 		</groups>
 		<classes>
