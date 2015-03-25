@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Invite new CM" parallel="false" thread-count="1">
+<suite name="Provision new CM / Resend Invitation" parallel="false" thread-count="1">
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 
@@ -17,7 +17,7 @@
 	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 
 
-	<test verbose="1" name="Resend invite FIREFOX" annotations="JDK">
+	<test verbose="1" name="Provision new CM / Resend Invitation (FIREFOX)" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
