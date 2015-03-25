@@ -165,6 +165,7 @@ public class EmailClient {
 	public void deleteAllEmails() {
 		try {
 			if (mBoxAPI.getEmails().length > 0) {
+				logger.info("Deleting all emails from the mailbox: " + mbox);
 				mBoxAPI.deleteAllEmail();
 			}
 		} catch (Exception e) {
