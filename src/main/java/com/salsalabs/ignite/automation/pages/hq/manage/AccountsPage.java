@@ -27,6 +27,8 @@ public class AccountsPage extends HomePage{
 
 	public AccountsPage verifyInvitationSent() {
 		sleep(5);
+		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
+		inviteSearchBtn.click();
 		verifier.verifyTrue(invitationsTable.isValueExists(CommonUtils.getProperty(PropertyName.CM_EMAIL)) > 0, "User " + CommonUtils.getProperty(PropertyName.CM_EMAIL) + " was not found.");
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);
 		return this;
