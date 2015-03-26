@@ -41,4 +41,9 @@ public class ManagePage  extends HomePage{
 		return new UnsubscribeSettingsPage();
 	}
 
+	public CustomFieldsPage switchToCustomFieldsPage() {
+		switchToDropDown.selectByLabelJS("Custom Fields");
+		return new CustomFieldsPage();
+	}
+
 }

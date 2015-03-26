@@ -1,7 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
 import com.mailosaur.exception.MailosaurException;
-import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
