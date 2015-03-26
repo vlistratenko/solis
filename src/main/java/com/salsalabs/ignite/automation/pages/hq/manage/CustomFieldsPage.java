@@ -4,9 +4,11 @@ package com.salsalabs.ignite.automation.pages.hq.manage;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Element;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
@@ -21,10 +23,19 @@ public class CustomFieldsPage extends ManagePage {
 	private TextBox cfValue = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[3]/div[1]/div/div[2]/span/span/input", "Text", true);
 	private Button customFieldButton;
 	
+	public void createCustomFields() {
+		for (CustomFieldType cf : CustomFieldType.values()) {
+			createCustomField(cf);
+		}
+	}
+	
 	public void createCustomField(String customFieldType) {
+		createCustomField(CustomFieldType.valueOf(customFieldType));
+	}
+	
+	private void createCustomField(CustomFieldType cfType) {
 		createCFBtn.clickJS();
-		CustomFieldType cfType = CustomFieldType.valueOf(customFieldType);
-		customFieldButton = new ButtonImpl(cfType.getXpath(), customFieldType, true);
+		customFieldButton = new ButtonImpl(cfType.getXpath(), cfType.name(), true);
 		customFieldButton.clickJS();
 		toStep2Btn.clickJS();
 		String fieldName = cfType.name() + "_field_" + RandomStringUtils.randomAlphabetic(10);
@@ -34,16 +45,29 @@ public class CustomFieldsPage extends ManagePage {
 		if (cfType.getGhostText() != null) {
 			cfValue.type(cfType.getGhostText());
 		}
+		if (cfType.equals(CustomFieldType.SingleChoice)) {
+			constructSingleChoiceOptions();
+		}
 		createFieldBtn.clickJS();
+		sleep(2);
 		Element field = new LabelImpl("//*[text()='" + fieldName + "']", "");
 		verifier.verifyElementIsDisplayed(field);
+	}
+	
+	private void constructSingleChoiceOptions() {
+		CheckBox noSelectionCheckBox = new CheckBoxImpl("//*[@id='choiceFieldNoSelected']/li/div/div[1]/input", "No Selection");
+		noSelectionCheckBox.check();
+		TextBox newOption = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[3]/div[3]/div/div[1]/div[3]/div[1]/input", "New option name");
+		newOption.type("New Option");
+		Button addBtn = new ButtonImpl("//*[@id='cf_form']/div[2]/div[3]/div[3]/div/div[1]/div[3]/div[2]/button", "Add Button");
+		addBtn.clickJS();
 	}
 	
 	enum CustomFieldType {
 		TextBox("//*[@id='cf_form']/div[2]/div[1]/ul/li[1]/a/p", "Ghost Text"), 
 		Number("//*[@id='cf_form']/div[2]/div[1]/ul/li[2]/a/p", "Ghost Number Text"), 
 		YesNo("//*[@id='cf_form']/div[2]/div[1]/ul/li[3]/a/p", null), 
-		DateTime("//*[@id='cf_form']/div[2]/div[1]/ul/li[4]/a/p", "03/25/2015"), 
+		DateTime("//*[@id='cf_form']/div[2]/div[1]/ul/li[4]/a/p", null), 
 		SingleChoice("//*[@id='cf_form']/div[2]/div[1]/ul/li[5]/a/p", null);
 		
 		private String xpath;

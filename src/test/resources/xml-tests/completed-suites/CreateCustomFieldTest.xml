@@ -6,7 +6,7 @@
 	<!-- 
 	cf.customFieldType - allowed parameters:
 		TextBox, Number, YesNo, DateTime, SingleChoice
-	 -->
+	
 	<parameter name="cf.customFieldType" value="TextBox"></parameter>
 
 	<test verbose="1" name="Create Custom Field FIREFOX" annotations="JDK">
@@ -20,4 +20,18 @@
 			<class name="com.salsalabs.ignite.automation.suites.CreateCustomFieldTest" />
 		</classes>
 	</test>
+	 -->
+	 
+	<test verbose="1" name="Create All Custom Fields FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="createAllCustomFields" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.CreateCustomFieldTest" />
+		</classes>
+	</test>
+	
 </suite>
