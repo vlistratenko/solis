@@ -11,13 +11,11 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.List;
 import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.ListImpl;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.donation.DonationsPage;
@@ -48,7 +46,9 @@ public class HomePage extends Browser{
 	Button settingsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");
 	Button alertsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Alerts']", "Alerts popup");
 	Button newsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='News']", "News popup");
-	List helpTab = new ListImpl("//div[@id='topNav_help']", "Help");
+	Button helpTab = new ButtonImpl("//div[@id='topNav_help']/a", "Help");
+	
+	DropDown helpItems = new DropDownImpl("//div[@id='topNav_help']/ul", "Help Items");
 	
 	//Configure new org
 	Button nextButtonConfigNewOrgPage = new ButtonImpl("//div[@class='row' and @ng-show='isNewOrg']/descendant::*[contains(text(), 'Save')]/ancestor-or-self::button", "Save & Keep Going!");
@@ -163,7 +163,7 @@ public class HomePage extends Browser{
 	
 	public ZendeskPage openHelpPage() {
 		helpTab.click();
-		helpTab.selectByLabel("Help");
+		helpItems.selectByLabel("Help");
 		sleep(5);
 		switchToNewWindow();
 		verifier.verifyTrue(getLocation().contains("zendesk"), "Wrong url " + getLocation());
@@ -172,7 +172,7 @@ public class HomePage extends Browser{
 	
 	public ZendeskSubmitRequestPage openSubmitRequestPage() {
 		helpTab.click();
-		helpTab.selectByLabel("Submit support request");
+		helpItems.selectByLabel("Submit support request");
 		sleep(5);
 		switchToNewWindow();
 		verifier.verifyTrue(getLocation().contains("zendesk"), "Wrong url " + getLocation());
