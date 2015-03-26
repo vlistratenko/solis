@@ -52,6 +52,7 @@ public abstract class Browser {
 	}
 
 	protected void open(String url) {
+		url = url.replaceFirst("igniteaction.net", "ignite.net");
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
