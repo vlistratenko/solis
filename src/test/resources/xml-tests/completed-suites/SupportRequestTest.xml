@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Navigating to Help. Submit support request" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+
+	<test verbose="1" name="Navigating to Help. Submit support request (FIREFOX)" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="supportRequest" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.SupportRequestTest" />
+		</classes>
+	</test>
+</suite>

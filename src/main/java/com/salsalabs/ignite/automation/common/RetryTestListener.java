@@ -14,7 +14,7 @@ public class RetryTestListener extends TestListenerAdapter {
 		RetryAnalyzer retryAnalizer = (RetryAnalyzer) result.getMethod().getRetryAnalyzer();
 		if (retryAnalizer != null && retryAnalizer.willRetry(result)) {
 			result.setStatus(ITestResult.SKIP);
-			SeleneseTestCase.logger.warn("Error in " + result.getName() + ". Retrying...");
+			SeleneseTestCase.logger.warn("Error in " + result.getName() + ". Retrying...", result.getThrowable());
 			SeleneseTestCase.logger.info("Setting test run attempt status to SKIPPED");
 		} else {
 			SeleneseTestCase.logger.error("Retry limit exceeded for " + result.getName());

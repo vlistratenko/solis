@@ -43,7 +43,7 @@ public class LoginPage extends Browser{
 		open();
 		sleep(3);
 		if(new HomePage().dashboardTab.isNotExists()) {
-			logOut();
+			//logOut();
 			LoginField.type(userName);
 			PasswordField.removeAttribute("readonly");
 			PasswordField.type(password);

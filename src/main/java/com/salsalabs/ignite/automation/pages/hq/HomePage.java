@@ -1,6 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq;
 
 
+import java.util.Set;
+
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.Environment;
@@ -20,6 +22,8 @@ import com.salsalabs.ignite.automation.pages.donation.DonationsPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
+import com.salsalabs.ignite.automation.pages.zendesk.ZendeskPage;
+import com.salsalabs.ignite.automation.pages.zendesk.ZendeskSubmitRequestPage;
 
 public class HomePage extends Browser{
 	
@@ -42,6 +46,7 @@ public class HomePage extends Browser{
 	Button settingsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");
 	Button alertsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Alerts']", "Alerts popup");
 	Button newsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='News']", "News popup");
+	DropDown helpTab = new DropDownImpl("//div[@id='topNav_help']", "Help");
 	
 	//Configure new org
 	Button nextButtonConfigNewOrgPage = new ButtonImpl("//div[@class='row' and @ng-show='isNewOrg']/descendant::*[contains(text(), 'Save')]/ancestor-or-self::button", "Save & Keep Going!");
@@ -143,4 +148,31 @@ public class HomePage extends Browser{
 		assetsTab.click();
 		return new AssetsPage();
 	}
+	
+	public void switchToNewWindow(){
+		Set<String> windows = SeleneseTestCase.driver.getWindowHandles();
+		verifier.verifyTrue(windows.size() > 0, "New window hasn't been opened");
+		for (String w : windows) {
+			if (!w.equals(SeleneseTestCase.driver.getWindowHandle())) {
+				SeleneseTestCase.driver.switchTo().window(w);
+			}
+		}
+	}
+	
+	public ZendeskPage openHelpPage() {
+		helpTab.selectByLabel("Help");
+		sleep(5);
+		switchToNewWindow();
+		verifier.verifyTrue(getLocation().contains("zendesk"), "Wrong url " + getLocation());
+		return new ZendeskPage();
+	}
+	
+	public ZendeskSubmitRequestPage openSubmitRequestPage() {
+		helpTab.selectByLabel("Submit support request");
+		sleep(5);
+		switchToNewWindow();
+		verifier.verifyTrue(getLocation().contains("zendesk"), "Wrong url " + getLocation());
+		return new ZendeskSubmitRequestPage();
+	}
+	
 }
