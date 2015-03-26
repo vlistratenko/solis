@@ -33,7 +33,7 @@ public class CustomFieldsPage extends ManagePage {
 		createCustomField(CustomFieldType.valueOf(customFieldType));
 	}
 	
-	private void createCustomField(CustomFieldType cfType) {
+	public void createCustomField(CustomFieldType cfType) {
 		createCFBtn.clickJS();
 		customFieldButton = new ButtonImpl(cfType.getXpath(), cfType.name(), true);
 		customFieldButton.clickJS();
@@ -63,7 +63,7 @@ public class CustomFieldsPage extends ManagePage {
 		addBtn.clickJS();
 	}
 	
-	enum CustomFieldType {
+	public enum CustomFieldType {
 		TextBox("//*[@id='cf_form']/div[2]/div[1]/ul/li[1]/a/p", "Ghost Text"), 
 		Number("//*[@id='cf_form']/div[2]/div[1]/ul/li[2]/a/p", "Ghost Number Text"), 
 		YesNo("//*[@id='cf_form']/div[2]/div[1]/ul/li[3]/a/p", null), 

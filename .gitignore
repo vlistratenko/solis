@@ -1,1 +1,8 @@
 /target/
+*.exe
+*.zip
+*.html
+*.png
+*.gif
+*.js
+*.css
