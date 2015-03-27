@@ -3,9 +3,11 @@ package com.salsalabs.ignite.automation.pages.hq.manage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
@@ -17,6 +19,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomField;
 
 public class ImportAddPage extends ManagePage{
 	Button importLink = new ButtonImpl("//a[@href='/#/settings/imports']", "Import link");
@@ -36,13 +39,17 @@ public class ImportAddPage extends ManagePage{
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
 	
 	public ImportAddPage fillFirstStep(String name, String description) {
+		return this.fillFirstStep(name, description, null);
+	}
+	
+	public ImportAddPage fillFirstStep(String name, String description, List<CustomField> customFields) {
 		name = name + CommonUtils.getUnicName();
 		importNameField.type(name);
 		importDescriptionField.type(description);
 		
 		fileUpload.setAttribute("class", "ng-pristine ng-valid");
 		try {
-			fileUpload.type(generateSupporters(50, 20));
+			fileUpload.type(generateSupporters(50, 20, customFields));
 		} catch (FileNotFoundException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
@@ -80,25 +87,21 @@ public class ImportAddPage extends ManagePage{
 		return new ImportPage();
 	}
 	
-	
-	
 	public String generateSupporters(Integer amount, Integer amountOfRealSupporters) throws FileNotFoundException {
+		return generateSupporters(amount, amountOfRealSupporters, null);
+	}
+	
+	public String generateSupporters(Integer amount, Integer amountOfRealSupporters, List<CustomField> customFields) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter("supporters.csv");
-		out.println("Cell Phone,"
-				+ "City,"
-				+ "Email Address,"
-				+ "Facebook Id,"
-				+ "First Name,"
-				+ "Home Phone,"
-				+ "Last Name,"
-				+ "Preferred Language,"
-				+ "State,"
-				+ "Twitter Id,"
-				+ "Zip Code," 
-				+ "\"Address, line 1\","
-				+ "\"Address, line 2\","
-				+ "Middle Name"
-				);
+		StringBuilder header = new StringBuilder();
+		header.append("Cell Phone,City,Email Address,Facebook Id,First Name,Home Phone,Last Name,Preferred Language,");
+		header.append("State,Twitter Id,Zip Code,\"Address, line 1\",\"Address, line 2\",Middle Name");
+		if (customFields != null) {
+			for (CustomField type : customFields) {
+				header.append(",").append(type.getName());
+			}
+		}
+		out.println(header.toString());
 		boolean unexistedDomain = false;
 		boolean unexistedEmail = false;
 		
@@ -117,23 +120,44 @@ public class ImportAddPage extends ManagePage{
 				supporter.setImportedEmail("unexisting@igniteaction.net");
 				unexistedEmail = true;
 			}
-			out.println(supporter.getcPhone() + "," +
-					supporter.getCity() + i + "," +
-					supporter.getImportedEmail() + "," +
-					supporter.getFacebook() + "," +
-					supporter.getFirstName() + i + "," +
-					supporter.getHome_Phone() + "," +
-					supporter.getLastName() + i + "," +
-					supporter.getPreferredLanguage() + "," +
-					supporter.getState() + "," +
-					supporter.getTwitter() + "," +
-					supporter.getZipCode() + "," +
-					supporter.getAddressLine1() + i + "," +
-					supporter.getAddressLine2() + i + "," +
-					supporter.getMiddleName() + i
-					);
+			StringBuilder row = new StringBuilder();
+			row.append(supporter.getcPhone()).append(",");
+			row.append(supporter.getCity()).append(",");
+			row.append(supporter.getImportedEmail()).append(",");
+			row.append(supporter.getFacebook()).append(",");
+			row.append(supporter.getFirstName()).append(",");
+			row.append(supporter.getHome_Phone()).append(",");
+			row.append(supporter.getLastName()).append(",");
+			row.append(supporter.getPreferredLanguage()).append(",");
+			row.append(supporter.getState()).append(",");
+			row.append(supporter.getTwitter()).append(",");
+			row.append(supporter.getZipCode()).append(",");
+			row.append(supporter.getAddressLine1()).append(",");
+			row.append(supporter.getAddressLine2()).append(",");
+			row.append(supporter.getMiddleName());
+			if (customFields != null) {
+				appendCustomFields(row, customFields);
+			}
+			out.println(row.toString());
 		}
 		out.close();
 		return new File("supporters.csv").getAbsolutePath();
+	}
+	
+	private void appendCustomFields(StringBuilder row, List<CustomField> customFields) {
+		for (CustomField cf : customFields) {
+			row.append(",");
+			switch (cf.getType()) {
+				case TextBox: {
+					row.append(RandomStringUtils.randomAlphabetic(5));
+					break;
+				}
+				case Number: {
+					row.append(CommonUtils.getRandomNumericValueFixedLength(5));
+					break;
+				}
+				default: { break; }
+			}
+		}
 	}
 }

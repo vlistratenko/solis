@@ -1,8 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
 
-import org.apache.commons.lang3.RandomStringUtils;
-
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Element;
@@ -33,13 +32,17 @@ public class CustomFieldsPage extends ManagePage {
 		createCustomField(CustomFieldType.valueOf(customFieldType));
 	}
 	
-	public void createCustomField(CustomFieldType cfType) {
+	public CustomFieldsPage createCustomField(CustomFieldType cfType) {
+		return this.createCustomField(new CustomField(cfType, cfType.name() + "_" + CommonUtils.getUnicName()));
+	}
+	
+	public CustomFieldsPage createCustomField(CustomField customField) {
 		createCFBtn.clickJS();
+		CustomFieldType cfType = customField.getType();
 		customFieldButton = new ButtonImpl(cfType.getXpath(), cfType.name(), true);
 		customFieldButton.clickJS();
 		toStep2Btn.clickJS();
-		String fieldName = cfType.name() + "_field_" + RandomStringUtils.randomAlphabetic(10);
-		fieldNameTxtBox.type(fieldName);
+		fieldNameTxtBox.type(customField.getName());
 		descriptionTxtBox.type("Description");
 		toStep3Btn.clickJS();
 		if (cfType.getGhostText() != null) {
@@ -50,8 +53,9 @@ public class CustomFieldsPage extends ManagePage {
 		}
 		createFieldBtn.clickJS();
 		sleep(2);
-		Element field = new LabelImpl("//*[text()='" + fieldName + "']", "");
+		Element field = new LabelImpl("//*[text()='" + customField.getName() + "']", "");
 		verifier.verifyElementIsDisplayed(field);
+		return this;
 	}
 	
 	private void constructSingleChoiceOptions() {
@@ -61,6 +65,17 @@ public class CustomFieldsPage extends ManagePage {
 		newOption.type("New Option");
 		Button addBtn = new ButtonImpl("//*[@id='cf_form']/div[2]/div[3]/div[3]/div/div[1]/div[3]/div[2]/button", "Add Button");
 		addBtn.clickJS();
+	}
+	
+	public static class CustomField {
+		private CustomFieldType type;
+		private String name;
+		public CustomField(CustomFieldType type, String name) {
+			this.type = type;
+			this.name = name;
+		}
+		public CustomFieldType getType() { return type; }
+		public String getName() { return name; }
 	}
 	
 	public enum CustomFieldType {
