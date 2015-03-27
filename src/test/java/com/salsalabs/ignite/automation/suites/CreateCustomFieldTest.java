@@ -9,9 +9,27 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFieldType;
 
+/**
+ * <b>This test contains scenarios related to custom fields creation (TestLink: TC8)</b>
+ *
+ */
 public class CreateCustomFieldTest extends SeleneseTestCase {
 	private CustomFieldsPage page;
 
+	/**
+	 * <b>Create single custom field of specified type.</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into existing organization
+	 * <li> Open custom field creation page
+	 * <li> Fill name, description
+	 * <li> Fill specific field type options
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createCustomField"}, retryAnalyzer = RetryAnalyzer.class)
 	@Parameters({"cf.customFieldType"})
 	public void createCustomField(String customFieldType) {
