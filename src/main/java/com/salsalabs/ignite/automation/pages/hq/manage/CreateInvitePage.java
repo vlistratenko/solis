@@ -43,7 +43,7 @@ public class CreateInvitePage {
 				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole3, ":")[0],
 				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole3, ":")[1]
 				);
-
+		dataAndAnalyticsTable.scrollIntoView();
 		dataAndAnalyticsTable.clickInCell(
 				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole1, ":")[0],
 				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole1, ":")[1]
