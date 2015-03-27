@@ -176,6 +176,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+			  <groupId>com.sun</groupId>
+			  <artifactId>tools</artifactId>
+			  <version>1.6.0</version>
+			  <scope>system</scope>
+			  <systemPath>${java.home}/../lib/tools.jar</systemPath>
+		</dependency>
 	</dependencies>
 	<profiles>
         <profile>
@@ -231,9 +238,28 @@
                                 <include>**/*WebDriver.java</include>
                             </includes>
                         </configuration>
-                    </plugin>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.10.2</version>
+						<configuration>
+							<doclet>com.salsalabs.ignite.automation.javadoc.Doclet</doclet>
+							<docletPath>${project.basedir}\target\classes\</docletPath>
+							<excludePackageNames>
+								com.salsalabs.ignite.automation.suites.old:*:com.salsalabs.ignite.automation.tests.old:*
+							</excludePackageNames>	
+						<!-- 
+							<reportOutputDirectory>C:/myoutput</reportOutputDirectory>
+							<destDir>myapidocs</destDir>	
+						-->																			
+						</configuration>
+					</plugin>
+    
                 </plugins>
             </build>
         </profile>
     </profiles>
+
 </project>
