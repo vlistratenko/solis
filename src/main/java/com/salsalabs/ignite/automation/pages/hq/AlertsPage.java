@@ -16,7 +16,7 @@ public class AlertsPage extends HomePage{
 		return this;
 	}
 	
-	public AlertsPage checkImport(String importName) {
+	public AlertsPage verifyImportAlerts(String importName) {
 		String importStarted = String.format(ImportPage.IMPORT_STARTED, importName);
 		String importFinished = String.format(ImportPage.IMPORT_FINISHED, importName);
 		sleep(2);

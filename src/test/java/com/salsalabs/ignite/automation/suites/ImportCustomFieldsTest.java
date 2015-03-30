@@ -18,6 +18,10 @@ import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFi
 import com.salsalabs.ignite.automation.pages.hq.manage.ImportAddPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ImportPage;
 
+/**
+ * <b>This test contains scenarios related to custom fields import (TestLink: TC9)</b>
+ *
+ */
 public class ImportCustomFieldsTest extends SeleneseTestCase {
 	private HomePage homePage;
 	private CustomFieldsPage customFieldsPage;
@@ -33,6 +37,30 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 		customFields.add(new CustomField(CustomFieldType.Number, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
 	}
 
+	/**
+	 * <b>Import of supporters with 2 custom fields (Text and Numeric).</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into existing organization
+	 * <li> Open custom field creation page
+	 * <li> Create 2 new custom fields (Text and Numeric)
+	 * <li> Open imports page (Audience --> Manage Imports)
+	 * <li> Click on Import Supporters List button
+	 * <li> Fill import name, description, choose generated file with 2 custom fields
+	 * <li> Click on Next button
+	 * <li> Choose that data starts on row #2
+	 * <li> Map fields including new custom fields
+	 * <li> Click on Next button
+	 * <li> Wait for completion
+	 * <li> Go to import's page
+	 * <li> <font color="green"><b>Verify that table contains record about current import completed</b></font>
+	 * <li> Open alerts page
+	 * <li> <font color="green"><b>Verify that alerts table contains record about current import started</b></font>
+	 * <li> <font color="green"><b>Verify that alerts table contains record about current import finished</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initImportWithCustomFieldsTest() {
 		doLogin();
@@ -41,7 +69,7 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 		importWithCustomFields();
 		importPage.verifyStatusOfImport(importName, importStatusCompleted);
 		openAlertsPage();
-		alertsPage.checkImport(importName);
+		alertsPage.verifyImportAlerts(importName);
 	}
 	
 	private void importWithCustomFields() {
