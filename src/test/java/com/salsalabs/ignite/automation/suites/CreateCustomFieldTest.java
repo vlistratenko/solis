@@ -23,9 +23,9 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <ul>
 	 * <li> Login into existing organization
 	 * <li> Open custom field creation page
-	 * <li> Fill name, description
-	 * <li> Fill specific field type options
-	 * <li> Click creation button
+	 * <li> Fill specific field type options on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Click creation button on step 3
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
 	 * </ul>
 	 *  
@@ -36,6 +36,16 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 		doLoginAndOpenCustomFieldPage().createCustomField(customFieldType);
 	}
 	
+	/**
+	 * <b>Initializing of custom fields page</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into existing organization
+	 * <li> Open custom field creation page
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initAllCustomFieldsCreationTest() {
 		if (page == null) {
@@ -43,26 +53,101 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 		}
 	}
 	
+	/**
+	 * <b>Create single custom field of Text type.</b>
+	 * Depends on {@link #initAllCustomFieldsCreationTest() initAllCustomFieldsCreationTest} method.
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Using Custom Field page, click on Create Custom Field button
+	 * <li> Click on Text Box on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Fill ghost text on step 3
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createTextBoxCustomField() {
 		page.createCustomField(CustomFieldType.TextBox);
 	}
 	
+	/**
+	 * <b>Create single custom field of Number type.</b>
+	 * Depends on {@link #initAllCustomFieldsCreationTest() initAllCustomFieldsCreationTest} method.
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Using Custom Field page, click on Create Custom Field button
+	 * <li> Click on Number on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Fill ghost text on step 3
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createNumberCustomField() {
 		page.createCustomField(CustomFieldType.Number);
 	}
 	
+	/**
+	 * <b>Create single custom field of Boolean (Yes/No) type.</b>
+	 * Depends on {@link #initAllCustomFieldsCreationTest() initAllCustomFieldsCreationTest} method.
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Using Custom Field page, click on Create Custom Field button
+	 * <li> Click on Yes/No on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Fill ghost text on step 3
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createYesNoCustomField() {
 		page.createCustomField(CustomFieldType.YesNo);
 	}
 	
+	/**
+	 * <b>Create single custom field of Date/Time type.</b>
+	 * Depends on {@link #initAllCustomFieldsCreationTest() initAllCustomFieldsCreationTest} method.
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Using Custom Field page, click on Create Custom Field button
+	 * <li> Click on Date/Time on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Fill ghost text on step 3
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createDateTimeCustomField() {
 		page.createCustomField(CustomFieldType.DateTime);
 	}
 	
+	/**
+	 * <b>Create single custom field of Single Choice type.</b>
+	 * Depends on {@link #initAllCustomFieldsCreationTest() initAllCustomFieldsCreationTest} method.
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Using Custom Field page, click on Create Custom Field button
+	 * <li> Click on Single Choice on step 1
+	 * <li> Fill name, description on step 2
+	 * <li> Fill ghost text on step 3
+	 * <li> Click creation button
+	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createSingleChoiceCustomField() {
 		page.createCustomField(CustomFieldType.SingleChoice);

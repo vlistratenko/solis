@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Mon Mar 23 17:20:08 EET 2015
+#Mon Mar 30 15:22:25 EEST 2015
 amountOfSupporters=1
 current.Password=11111111
 assets.username=neworg1.03eed056@mailosaur.in
@@ -32,7 +32,7 @@ donationWidgetLink=https\://autotestv2org20150305140225.test.igniteaction.net/au
 subscribedSupporter=emailforsub20150210125100.4441b2bf@mailosaur.in
 subscribeWidgetLink=https\://autotestv2org20150210123444.test.igniteaction.net/autowidgetname20150210124740
 Environment=TEST
-ImportName=AutoTestImport20150302153351
+ImportName=Import_20150330152115
 percentageOfTestGroup=50
 unsubscribedSupporter=20150305143500.4441b2bf@mailosaur.in
 current.Login=automation1_admin1.612fb360@mailosaur.in

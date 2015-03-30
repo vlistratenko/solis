@@ -19,6 +19,11 @@ public class ManagePage  extends HomePage{
 		return new AccountsPage();
 	}
 	
+	/**
+	 * Use the  {@link com.salsalabs.ignite.automation.pages.hq.AudiencePage#openImportPage() openImportPage()} method
+	 * @return
+	 */
+	@Deprecated
 	public ImportPage openImportPage() {
 		sleep(5);
 		manageImportsButton.click();

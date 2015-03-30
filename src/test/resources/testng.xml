@@ -5,5 +5,6 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupportRequestTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/ImportCustomFieldsTest.xml" />
 	</suite-files>
 </suite>
