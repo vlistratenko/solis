@@ -179,4 +179,9 @@ public class HomePage extends Browser{
 		return new ZendeskSubmitRequestPage();
 	}
 	
+	public AlertsPage openAlertsPage() {
+		super.open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/notifications/alerts");
+		return new AlertsPage();
+	}
+	
 }
