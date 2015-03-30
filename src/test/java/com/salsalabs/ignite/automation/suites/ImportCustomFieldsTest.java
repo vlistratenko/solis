@@ -95,7 +95,7 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 	}
 	
 	private void openAlertsPage() {
-		alertsPage = homePage.openAlertPopup().openAlertsPage();
+		alertsPage = homePage.openAlertsPage();
 	}
 
 }
