@@ -13,10 +13,12 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomField;
@@ -37,6 +39,8 @@ public class ImportAddPage extends ManagePage{
 	
 	//I'm done step
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
+	private int amountOfSupporters = 50;
+	private static final String IMPORT_DONE_LABEL = " rows were imported. Well done!";
 	
 	public ImportAddPage fillFirstStep(String name, String description) {
 		return this.fillFirstStep(name, description, null);
@@ -49,7 +53,7 @@ public class ImportAddPage extends ManagePage{
 		fileUpload.setAttribute("class", "ng-pristine ng-valid");
 		fileUpload.scrollIntoView();
 		try {
-			fileUpload.type(generateSupporters(50, 20, customFields));
+			fileUpload.type(generateSupporters(amountOfSupporters, 20, customFields));
 		} catch (FileNotFoundException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
@@ -80,6 +84,11 @@ public class ImportAddPage extends ManagePage{
 	public ImportAddPage fillThirdStep() {
 		doneButton.click();
 		sleep(60);
+		String expectedLabel = amountOfSupporters + IMPORT_DONE_LABEL;
+		Label label = new LabelImpl("//h3[contains(text(), '" + expectedLabel + "')]", "Import done");
+		for (int i = 0; i < 10; i++) {
+			waitConditionBecomesTrueWithRefersh(label.isDisplayed(), 30);
+		}
 		return this;
 	}
 	
