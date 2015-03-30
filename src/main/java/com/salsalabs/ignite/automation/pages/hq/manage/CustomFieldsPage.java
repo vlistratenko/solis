@@ -46,7 +46,7 @@ public class CustomFieldsPage extends ManagePage {
 		descriptionTxtBox.type("Description");
 		toStep3Btn.clickJS();
 		if (cfType.getGhostText() != null) {
-			cfValue.type(cfType.getGhostText());
+			cfValue.type(cfType.getGhostText() + CommonUtils.getUnicName());
 		}
 		if (cfType.equals(CustomFieldType.SingleChoice)) {
 			constructSingleChoiceOptions();

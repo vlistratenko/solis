@@ -22,7 +22,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomField;
 
 public class ImportAddPage extends ManagePage{
-	Button importLink = new ButtonImpl("//a[@href='/#/settings/imports']", "Import link");
+	Button importLink = new ButtonImpl("//a[@href='/#/audience/supporters/imports']", "Import link");
 	
 	//firs step
 	TextBox importNameField = new TextBoxImpl("//input[@id='name']", "Import Name", true);
@@ -43,11 +43,11 @@ public class ImportAddPage extends ManagePage{
 	}
 	
 	public ImportAddPage fillFirstStep(String name, String description, List<CustomField> customFields) {
-		name = name + CommonUtils.getUnicName();
 		importNameField.type(name);
 		importDescriptionField.type(description);
 		
 		fileUpload.setAttribute("class", "ng-pristine ng-valid");
+		fileUpload.scrollIntoView();
 		try {
 			fileUpload.type(generateSupporters(50, 20, customFields));
 		} catch (FileNotFoundException e) {
@@ -61,6 +61,7 @@ public class ImportAddPage extends ManagePage{
 	}
 	
 	public ImportAddPage fillSecondStep(String importFromRow) {
+		sleep(2);
 		importFromRowField.type(importFromRow);
 		Integer amountOfFields = mapTable.getRowsCount();
 		
@@ -68,7 +69,7 @@ public class ImportAddPage extends ManagePage{
 			String fieldName = mapTable.getCellValue(i, 1);
 			String pathToDropDown = mapTable.getPathToChildElement(i, 2, "div[contains(@class, 'custom dropdown')]");
 			DropDown mapToField = new DropDownImpl(pathToDropDown, pathToDropDown + "/a", "MapToField");
-			mapToField.selectByLabel(fieldName);
+			mapToField.selectByLabelJS(fieldName);
 			
 		}
 		dedupeButton.click();
@@ -78,7 +79,7 @@ public class ImportAddPage extends ManagePage{
 	
 	public ImportAddPage fillThirdStep() {
 		doneButton.click();
-		sleep(30);
+		sleep(60);
 		return this;
 	}
 	
