@@ -68,8 +68,8 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 		openImportsPage();
 		importWithCustomFields();
 		importPage.verifyStatusOfImport(importName, importStatusCompleted);
-//		openAlertsPage();
-//		alertsPage.verifyImportAlerts(importName);
+		openAlertsPage();
+		alertsPage.verifyImportAlerts(importName);
 	}
 	
 	private void importWithCustomFields() {
