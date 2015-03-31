@@ -22,6 +22,22 @@ public class Supporter {
 	private String addressLine1 = "Street line1";
 	private String addressLine2 = "Street line2 ";
 	private String middleName = "MName";
+	
+	public static Supporter generateSupporter() {
+		Supporter result = new Supporter();
+		String unicID = CommonUtils.getRandomValue(100000, 0);
+		result.setFinalEMAIL(SeleneseTestCase.emailClient.getEmailBox("supman" + unicID));
+		result.setFirstName("Tester" + unicID);
+		result.setLastName("Testerov" + unicID);
+		result.setcPhone("23" + CommonUtils.getRandomNumericValueFixedLength(9));
+		result.setCity("City" + unicID);
+		result.setAddressLine1("Street1" + unicID);
+		result.setAddressLine2("Street2" + unicID);
+		result.setZipCode(CommonUtils.getRandomNumericValueFixedLength(6));
+		result.setFacebook("FB" + unicID);
+		result.setTwitter("twitter" + unicID);
+		return result;
+	}
 
 	public String getFinalEMAIL() {
 		return finalEMAIL;
