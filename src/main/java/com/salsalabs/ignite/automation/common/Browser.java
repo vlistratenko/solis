@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
@@ -249,5 +250,9 @@ public abstract class Browser {
 			client.clickLinkByText(emails.get(i), linkText);
 			logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
 		}
+	}
+	
+	protected Alert switchToAlert() {
+		return driver.switchTo().alert();
 	}
 }
