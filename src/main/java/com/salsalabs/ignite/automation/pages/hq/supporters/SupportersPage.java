@@ -2,25 +2,28 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
 
 public class SupportersPage extends AudiencePage{
 
-	Button AddSupporterButton = new ButtonImpl("//button[text()='Add a New Supporter']", "Add supporter");
+	Button addSupporterButton = new ButtonImpl("//button[text()='Add a New Supporter']", "Add supporter");
 	Table supportersTable = new TableImpl("//table-list/div[2]/div/div/table", "Table with supporters");
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
 	Button doSearchButton = new ButtonImpl("//a[contains(@ng-click,'processing.search')]", "Do search");
+	DropDown addSupporterDropDown = new DropDownImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/ul/li", "//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/button", "Add Supporters");
 	
 	public SupportersAddPage openAddSupporterPage() {
 		if (feedBackDialogPanel.isDisplayed()) {
 			closeFeedbackDialog.click();
 		}
-		AddSupporterButton.click();
+		addSupporterButton.click();
 		return new SupportersAddPage();
 	}
 	
@@ -35,13 +38,13 @@ public class SupportersPage extends AudiencePage{
 	}
 
 	public SupportersPage checkSupporterExists(String param) {
-		verifier.verifyEquals(supportersTable.isValueExists(param)>0, true, "Supporter " + param + " was not found."); 
+		verifier.verifyEquals(supportersTable.isValueExists(param) > 0, true, "Supporter " + param + " was not found."); 
 		return this;
 		
 	}
 	
 	public SupportersPage checkSupporterNotExists(String param) {
-		verifier.verifyEquals(supportersTable.isValueExists(param)>0, false, "Supporter " + param + " was found."); 
+		verifier.verifyEquals(supportersTable.isValueExists(param) > 0, false, "Supporter " + param + " was found."); 
 		return this;
 		
 	}
@@ -60,6 +63,12 @@ public class SupportersPage extends AudiencePage{
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
 		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
+		return new SupportersAddPage();
+	}
+	
+	public SupportersAddPage switchToSupporterAddManually() {
+		sleep(5);
+		addSupporterDropDown.selectByLabelJS("Add a Single Supporter");
 		return new SupportersAddPage();
 	}
 

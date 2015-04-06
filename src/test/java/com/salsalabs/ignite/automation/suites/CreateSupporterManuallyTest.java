@@ -24,6 +24,6 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 	
 	private void doLoginAndOpenAddSupporterPage() {
 		supporterAddPage = new LoginPage().doSuccessLogin().
-				openAudiencePage().openSupportersPage().openAddSupporterPage();
+				openAudiencePage().openSupportersPage().switchToSupporterAddManually();
 	}
 }
