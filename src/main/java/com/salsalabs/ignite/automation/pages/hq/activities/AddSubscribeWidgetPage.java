@@ -22,6 +22,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	Button saveAndPublish = new ButtonImpl("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
 	Button widgetLink;
 	Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
+	Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	
 	
 
@@ -41,10 +42,21 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		return this;
 	}
 
-	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {		
-		openPublishStepButton.click();
+	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {
+		toPageSettingsBtn.click();
 		sleep(10);
 		return this;		
+	}
+	
+	public AddSubscribeWidgetPage publishForm() {
+		openPublishStepButton.click();
+		sleep(5);
+		return this;
+	}
+	
+	public void verifyFormLinkIsPresent(String expectedLink) {
+		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
+		verifier.verifyElementIsDisplayed(link);
 	}
 	
 	public AddSubscribeWidgetPage hosteWidgetOnLocalPage(String widgetTitle, boolean isHostedOnLocalPage) {
@@ -69,6 +81,13 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		return new SubscribeWidget();
+	}
+	
+	public void openWidgetInNewWindow(String link) {
+		if (link.contains(".ignite.")) {
+			link = link.replaceFirst(".ignite.", ".igniteaction.");
+		}
+		this.openInNewWindow(link);
 	}
 
 }
