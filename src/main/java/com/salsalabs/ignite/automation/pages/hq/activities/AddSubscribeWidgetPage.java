@@ -23,8 +23,9 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	Button widgetLink;
 	Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
 	Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
-	
-	
+	Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
+	Button makePrivateButton = new ButtonImpl("//*[@id='widgetform']/div[7]/div/div[1]/div/ul/li[4]/div/div[2]/a", "Make it Private");
+//	Button makePrivateButton = new ButtonImpl("//*[@id='widgetform']/div[6]/div/div[1]/div/ul/li[4]/div/div[2]/a", "Make private"); 
 
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -83,11 +84,34 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		return new SubscribeWidget();
 	}
 	
-	public void openWidgetInNewWindow(String link) {
+	public ActivitiesPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
 		if (link.contains(".ignite.")) {
 			link = link.replaceFirst(".ignite.", ".igniteaction.");
 		}
-		this.openInNewWindow(link);
+		String primaryHandle = this.getWindowHandle();
+		this.openInNewWindow(link + "/index.html", false);
+		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
+		if (visibleForCm) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.deletecoockies();
+		this.refresh();
+		if (visibleForSupporter) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return new ActivitiesPage();
+	}
+
+	public void makeWidgetPrivate() {
+		settingsButton.click();
+		makePrivateButton.click();
+		sleep(10);
 	}
 
 }

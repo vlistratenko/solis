@@ -53,7 +53,13 @@ public abstract class Browser {
 	}
 
 	protected void open(String url) {
-		url = url.replaceFirst("igniteaction.net", "ignite.net");
+		this.open(url, true);
+	}
+	
+	protected void open(String url, boolean replace) {
+		if (replace) {
+			url = url.replaceFirst("igniteaction.net", "ignite.net");
+		}
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
@@ -67,11 +73,15 @@ public abstract class Browser {
 	}
 
 	protected String openInNewWindow(String url) {
+		return this.openInNewWindow(url, true);
+	}
+	
+	protected String openInNewWindow(String url, boolean replace) {
 		String currentWindowHandle = getWindowHandle();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open()");
 		switchToPopupWindow(currentWindowHandle);
-		open(url);
+		open(url, replace);
 		return currentWindowHandle;
 	}
 
@@ -255,4 +265,5 @@ public abstract class Browser {
 	protected Alert switchToAlert() {
 		return driver.switchTo().alert();
 	}
+
 }
