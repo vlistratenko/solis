@@ -58,6 +58,9 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 	 * <li> Open alerts page
 	 * <li> <font color="green"><b>Verify that alerts table contains record about current import started</b></font>
 	 * <li> <font color="green"><b>Verify that alerts table contains record about current import finished</b></font>
+	 * <li> Open custom fields page
+	 * <li> Remove each new custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
@@ -68,6 +71,7 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 		openImportsPage();
 		importWithCustomFields();
 		importPage.verifyStatusOfImport(importName, importStatusCompleted);
+		removeCustomFields();
 //		openAlertsPage();
 //		alertsPage.verifyImportAlerts(importName);
 	}
@@ -96,6 +100,13 @@ public class ImportCustomFieldsTest extends SeleneseTestCase {
 	
 	private void openAlertsPage() {
 		alertsPage = homePage.openAlertsPage();
+	}
+	
+	private void removeCustomFields() {
+		customFieldsPage = homePage.openSettingsPage().switchToCustomFieldsPage();
+		for (CustomField cf : customFields) {
+			customFieldsPage.deleteCustomField(cf);
+		}
 	}
 
 }

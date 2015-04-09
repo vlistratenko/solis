@@ -22,8 +22,10 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	Button saveAndPublish = new ButtonImpl("//button[contains(@ng-click,'publishHostedPage')]", "Save and Publish");
 	Button widgetLink;
 	Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
-	
-	
+	Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
+	Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
+	Button makePrivateButton = new ButtonImpl("//*[@id='widgetform']/div[7]/div/div[1]/div/ul/li[4]/div/div[2]/a", "Make it Private");
+//	Button makePrivateButton = new ButtonImpl("//*[@id='widgetform']/div[6]/div/div[1]/div/ul/li[4]/div/div[2]/a", "Make private"); 
 
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -41,10 +43,21 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		return this;
 	}
 
-	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {		
-		openPublishStepButton.click();
+	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepTwo() {
+		toPageSettingsBtn.click();
 		sleep(10);
 		return this;		
+	}
+	
+	public AddSubscribeWidgetPage publishForm() {
+		openPublishStepButton.click();
+		sleep(5);
+		return this;
+	}
+	
+	public void verifyFormLinkIsPresent(String expectedLink) {
+		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
+		verifier.verifyElementIsDisplayed(link);
 	}
 	
 	public AddSubscribeWidgetPage hosteWidgetOnLocalPage(String widgetTitle, boolean isHostedOnLocalPage) {
@@ -69,6 +82,36 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		return new SubscribeWidget();
+	}
+	
+	public ActivitiesPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
+		if (link.contains(".ignite.")) {
+			link = link.replaceFirst(".ignite.", ".igniteaction.");
+		}
+		String primaryHandle = this.getWindowHandle();
+		this.openInNewWindow(link + "/index.html", false);
+		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
+		if (visibleForCm) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.deletecoockies();
+		this.refresh();
+		if (visibleForSupporter) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return new ActivitiesPage();
+	}
+
+	public void makeWidgetPrivate() {
+		settingsButton.click();
+		makePrivateButton.click();
+		sleep(10);
 	}
 
 }

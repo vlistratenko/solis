@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.supporters;
 
+import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -22,15 +23,25 @@ public class SupportersPage extends AudiencePage{
 		AddSupporterButton.click();
 		return new SupportersAddPage();
 	}
+	
+	@SuppressWarnings("unused")
+	public SupportersPage verifySupporterOnTopOfTable(Supporter supporter) {
+		String email = supportersTable.getCellValue(1, "Email address");
+		String firstName = supportersTable.getCellValue(1, "First name");
+		String lastName = supportersTable.getCellValue(1, "Last name");
+		String state = supportersTable.getCellValue(1, "State");
+		String zipCode = supportersTable.getCellValue(1, "Zip code");
+		return this;
+	}
 
 	public SupportersPage checkSupporterExists(String param) {
-		verifier.verifyEquals(supportersTable.isValueExists(param)>0, true, "Supprter " + param + " was not found."); 
+		verifier.verifyEquals(supportersTable.isValueExists(param)>0, true, "Supporter " + param + " was not found."); 
 		return this;
 		
 	}
 	
 	public SupportersPage checkSupporterNotExists(String param) {
-		verifier.verifyEquals(supportersTable.isValueExists(param)>0, false, "Supprter " + param + " was found."); 
+		verifier.verifyEquals(supportersTable.isValueExists(param)>0, false, "Supporter " + param + " was found."); 
 		return this;
 		
 	}

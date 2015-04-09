@@ -22,12 +22,6 @@ public class CustomFieldsPage extends ManagePage {
 	private TextBox cfValue = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[3]/div[1]/div/div[2]/span/span/input", "Text", true);
 	private Button customFieldButton;
 	
-	public void createCustomFields() {
-		for (CustomFieldType cf : CustomFieldType.values()) {
-			createCustomField(cf);
-		}
-	}
-	
 	public void createCustomField(String customFieldType) {
 		createCustomField(CustomFieldType.valueOf(customFieldType));
 	}
@@ -55,6 +49,19 @@ public class CustomFieldsPage extends ManagePage {
 		sleep(2);
 		Element field = new LabelImpl("//*[text()='" + customField.getName() + "']", "");
 		verifier.verifyElementIsDisplayed(field);
+		return this;
+	}
+	
+	public CustomFieldsPage deleteCustomField(CustomField customField) {
+		return deleteCustomField(customField.getName());
+	}
+	
+	public CustomFieldsPage deleteCustomField(String customFieldName) {
+		Element delete = new ButtonImpl("//li[.//h3[text()='" + customFieldName + "']]//a[@class='delete']", "Delete");
+		delete.clickJS();
+		switchToAlert().accept();
+		Element field = new LabelImpl("//*[text()='" + customFieldName + "']", "");
+		verifier.verifyElementIsNotDisplayed(field);
 		return this;
 	}
 	

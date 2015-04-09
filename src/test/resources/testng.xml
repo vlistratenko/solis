@@ -3,7 +3,13 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<suite-files>
 		<suite-file path="src/test/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />
-		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
+		<!-- 
+		Temporary disabled due the problems with Zendesk
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupportRequestTest.xml" />
+		 -->
+		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/ImportCustomFieldsTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSupporterManuallyTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSignupFormTest.xml" />
 	</suite-files>
 </suite>
