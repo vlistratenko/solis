@@ -9,16 +9,35 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersAddPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 
+/**
+ * <b>This test contains scenarios related to supporter manual creation (TestLink: TC6)</b>
+ *
+ */
 public class CreateSupporterManuallyTest extends SeleneseTestCase {
 	private SupportersAddPage supporterAddPage;
 	private SupportersPage supportersPage;
 	private Supporter supporter;
 	
+	/**
+	 * <b>Manually create single supporter.</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into existing organization
+	 * <li> Open Audience page
+	 * <li> Open Supporters tab
+	 * <li> Click on "Add Supporters" dropdown and choose "Add a Single Supporter"
+	 * <li> Type email, first name, last name, city, state, zip code
+	 * <li> Click "Save this supporter!" button
+	 * <li> <font color="green"><b>Verify that new supporter is added and present on the top of the supporters table</b></font>
+	 * </ul>
+	 *  
+	 */
 	@Test(groups = {"createSupporterManually"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateSupporterManually() {
 		doLoginAndOpenAddSupporterPage();
 		supporter = Supporter.generateSupporter();
-		supporterAddPage.createNewSupporter(supporter);
+		supportersPage = supporterAddPage.createNewSupporter(supporter);
 		supportersPage.verifySupporterOnTopOfTable(supporter);
 	}
 	

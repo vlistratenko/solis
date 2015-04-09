@@ -1,7 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
@@ -64,6 +63,7 @@ public class SupportersAddPage extends HomePage{
 		supporterFaceBookField.type(supporter.getFacebook());
 		supporterTwitterField.type(supporter.getTwitter());
 		saveButton.click();
+		sleep(3);
 		return new SupportersPage();
 	}
 	
