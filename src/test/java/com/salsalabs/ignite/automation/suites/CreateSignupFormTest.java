@@ -1,7 +1,6 @@
 package com.salsalabs.ignite.automation.suites;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
@@ -10,14 +9,11 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-
 /**
  * <b>This test contains scenarios related to sign-up form creation (TestLink: TC16)</b>
  *
  */
 public class CreateSignupFormTest extends SeleneseTestCase {
-	private String[] layouts = {"Hero", "Sidebar Right", "Hero Sidekick", "Newsletter", 
-			"Sidebar Hero Left", "Sidebar Left", "Sidebar Hero Right", "Basic"};
 	private AddSubscribeWidgetPage addSignupFormsPage;
 	private ActivitiesPage activitiesPage;
 	
@@ -74,13 +70,11 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		doLoginAndOpenSignupFormsPage();
 		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
 		String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-		// choose random layout
-		String layoutName = this.layouts[RandomUtils.nextInt(0, this.layouts.length)];
 		String expectedLink = ("https://automatedtesting1." + SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name() + ".igniteaction.net/" + widgetName).toLowerCase();
 		// fill title and description
 		addSignupFormsPage.fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription);
 		// select layout for form
-		addSignupFormsPage.selectLayoutForSubscribeWidgetStep(layoutName);
+		addSignupFormsPage.selectLayoutForSubscribeWidgetStep();
 		// leave default design and go to settings
 		addSignupFormsPage.fillFieldsSubscribeWidgetStepTwo();
 		// leave default settings and publish form
