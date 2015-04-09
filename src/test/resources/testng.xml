@@ -2,7 +2,6 @@
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<suite-files>
-		<!-- 
 		<suite-file path="src/test/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />
 		<!-- 
 		Temporary disabled due the problems with Zendesk
@@ -12,7 +11,5 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/ImportCustomFieldsTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSupporterManuallyTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSignupFormTest.xml" />
-		 -->
-		 <suite-file path="src/test/resources/xml-tests/completed-suites/SupporterSubscribeSignupFormTest.xml" />
 	</suite-files>
 </suite>

@@ -11,7 +11,7 @@ public class AudiencePage extends HomePage{
 	Button supportersButton = new ButtonImpl("//a[text()='Supporters']", "Supporters");
 	Button segmentsButton = new ButtonImpl("//a[text()='Segments']", "Segments");
 	Button manageImportsButton = new ButtonImpl("//a[text()='Manage Imports']", "Manage Imports");
-	
+
 	public SupportersPage openSupportersPage() {
 		supportersButton.click();
 		return new SupportersPage();
@@ -32,4 +32,5 @@ public class AudiencePage extends HomePage{
 		manageImportsButton.click();
 		return new ImportPage();
 	}
+	
 }
