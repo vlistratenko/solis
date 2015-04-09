@@ -84,7 +84,6 @@ public class ImportAddPage extends ManagePage{
 	public ImportAddPage fillThirdStep() {
 		doneButton.click();
 		sleep(60);
-//		String expectedLabel = amountOfSupporters + IMPORT_DONE_LABEL;
 		Label label = new LabelImpl("//*[contains(text(), '" + IMPORT_DONE_LABEL + "')]", "Import done");
 		for (int i = 0; i < 10; i++) {
 			waitConditionBecomesTrueWithRefersh(label.isDisplayed(), 30);
