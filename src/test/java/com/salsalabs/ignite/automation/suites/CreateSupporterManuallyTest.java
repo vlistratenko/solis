@@ -20,16 +20,17 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 	private Supporter supporter;
 	
 	/**
-	 * <b>Create a single supporter manually</b>
+	 * <b>Manually create single supporter.</b>
 	 * <p>
 	 * Steps:
 	 * <ul>
 	 * <li> Login into existing organization
-	 * <li> Open Audience page 
-	 * <li> Click on Add Supporter button, choose Add a Single Supporter form dropdown
-	 * <li> Fill email, first name, last name, phone, address, city, state, zip code, facebook, twitter
-	 * <li> Click on Save button
-	 * <li> <font color="green"><b>Verify that record about the user is on the top of the table</b></font>
+	 * <li> Open Audience page
+	 * <li> Open Supporters tab
+	 * <li> Click on "Add Supporters" dropdown and choose "Add a Single Supporter"
+	 * <li> Type email, first name, last name, city, state, zip code
+	 * <li> Click "Save this supporter!" button
+	 * <li> <font color="green"><b>Verify that new supporter is added and present on the top of the supporters table</b></font>
 	 * </ul>
 	 *  
 	 */
