@@ -37,7 +37,7 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 	public void testCreateSupporterManually() {
 		doLoginAndOpenAddSupporterPage();
 		supporter = Supporter.generateSupporter();
-		supporterAddPage.createNewSupporter(supporter);
+		supportersPage = supporterAddPage.createNewSupporter(supporter);
 		supportersPage.verifySupporterOnTopOfTableFull(supporter);
 	}
 	
