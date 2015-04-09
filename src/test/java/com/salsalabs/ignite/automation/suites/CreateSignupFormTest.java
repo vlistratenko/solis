@@ -11,7 +11,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPag
 
 /**
  * <b>This test contains scenarios related to sign-up form creation (TestLink: TC16)</b>
- *
+ * @author a.hubachov
  */
 public class CreateSignupFormTest extends SeleneseTestCase {
 	private AddSubscribeWidgetPage addSignupFormsPage;

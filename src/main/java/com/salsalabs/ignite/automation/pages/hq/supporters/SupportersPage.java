@@ -24,15 +24,32 @@ public class SupportersPage extends AudiencePage{
 		return new SupportersAddPage();
 	}
 	
-	@SuppressWarnings("unused")
-	public SupportersPage verifySupporterOnTopOfTable(Supporter supporter) {
-		String email = supportersTable.getCellValue(1, "Email address");
-		String firstName = supportersTable.getCellValue(1, "First name");
-		String lastName = supportersTable.getCellValue(1, "Last name");
-		String state = supportersTable.getCellValue(1, "State");
-		String zipCode = supportersTable.getCellValue(1, "Zip code");
+	public SupportersPage verifySupporterOnTopOfTableFull(Supporter supporter) {
+		verifier.verifyEquals(supportersTable.getCellValue(1, 2), supporter.getFinalEMAIL());
+		verifier.verifyEquals(supportersTable.getCellValue(1, 3), supporter.getFirstName());
+		verifier.verifyEquals(supportersTable.getCellValue(1, 4), supporter.getLastName());
+		verifier.verifyEquals(supportersTable.getCellValue(1, 5), supporter.getCity());
+		verifier.verifyEquals(supportersTable.getCellValue(1, 7), supporter.getZipCode());
 		return this;
 	}
+	
+	public SupportersPage verifySupporterOnTopOfTableByEmail(Supporter supporter) {
+		return verifySupporterOnTopOfTableByEmail(supporter.getFinalEMAIL());
+	}
+	
+	public SupportersPage verifySupporterOnTopOfTableByEmail(String email) {
+		verifier.verifyEquals(supportersTable.getCellValue(1, 2), email);
+		return this;
+	}
+	
+//	public SupportersPage verifySupporterIsNotInTable(Supporter supporter) {
+//		return verifySupporterIsNotInTable(supporter.getFinalEMAIL());
+//	}
+//	
+//	public SupportersPage verifySupporterIsNotInTable(String email) {
+//		verifier.verifyElementIsNotDisplayed(new ButtonImpl("//span[contains(text(), '" + email + "')]", ""));
+//		return this;
+//	}
 
 	public SupportersPage checkSupporterExists(String param) {
 		verifier.verifyEquals(supportersTable.isValueExists(param)>0, true, "Supporter " + param + " was not found."); 

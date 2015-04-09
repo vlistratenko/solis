@@ -20,7 +20,7 @@ import com.salsalabs.ignite.automation.pages.hq.manage.ImportPage;
 
 /**
  * <b>This test contains scenarios related to custom fields import (TestLink: TC9)</b>
- *
+ * @author a.hubachov
  */
 public class ImportCustomFieldsTest extends SeleneseTestCase {
 	private HomePage homePage;
