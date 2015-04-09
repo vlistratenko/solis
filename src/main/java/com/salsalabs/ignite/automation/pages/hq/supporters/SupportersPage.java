@@ -11,19 +11,19 @@ import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
 
 public class SupportersPage extends AudiencePage {
 
-	Button addSupporterButton = new ButtonImpl("//button[text()='Add a New Supporter']", "Add supporter");
+	Button addSupporterButton = new ButtonImpl("//button[./span[text()='Add Supporters']]", "Add supporter");
+	Button addSingleSupporterBtn = new ButtonImpl("//a[contains(text(), 'Add a Single Supporter')]", "Add a Single Supporter");
 	Table supportersTable = new TableImpl("//table-list/div[2]/div/div/table", "Table with supporters");
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
 	Button doSearchButton = new ButtonImpl("//a[contains(@ng-click,'processing.search')]", "Do search");
 	Button openAddSupporterMenuButton = new ButtonImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/button", "Add Supporters");
-	Button addSingleSupporterBtn = new ButtonImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/ul/div[1]/li/a", "Button", true);
 	
-	@Deprecated
 	public SupportersAddPage openAddSupporterPage() {
 		if (feedBackDialogPanel.isDisplayed()) {
 			closeFeedbackDialog.click();
 		}
 		addSupporterButton.click();
+		addSingleSupporterBtn.click();
 		return new SupportersAddPage();
 	}
 	
@@ -64,15 +64,5 @@ public class SupportersPage extends AudiencePage {
 		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
 		return new SupportersAddPage();
 	}
-	
-	public SupportersAddPage switchToSupporterAddManually() {
-		sleep(5);
-		openAddSupporterMenuButton.click();
-		sleep(2);
-		addSingleSupporterBtn.click();
-		sleep(5);
-		return new SupportersAddPage();
-	}
-
 	
 }
