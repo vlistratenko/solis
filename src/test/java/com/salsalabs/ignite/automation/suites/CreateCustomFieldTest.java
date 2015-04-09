@@ -3,10 +3,12 @@ package com.salsalabs.ignite.automation.suites;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
+import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomField;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFieldType;
 
 /**
@@ -27,13 +29,16 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill name, description on step 2
 	 * <li> Click creation button on step 3
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createCustomField"}, retryAnalyzer = RetryAnalyzer.class)
 	@Parameters({"cf.customFieldType"})
-	public void createCustomField(String customFieldType) {
-		doLoginAndOpenCustomFieldPage().createCustomField(customFieldType);
+	public void createCustomField(String cfType) {
+		CustomField cf = generateCustomField(cfType);
+		doLoginAndOpenCustomFieldPage().createCustomField(cf).deleteCustomField(cf);
 	}
 	
 	/**
@@ -65,12 +70,15 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill ghost text on step 3
 	 * <li> Click creation button
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createTextBoxCustomField() {
-		page.createCustomField(CustomFieldType.TextBox);
+		CustomField cf = generateCustomField(CustomFieldType.TextBox);
+		page.createCustomField(cf).deleteCustomField(cf);
 	}
 	
 	/**
@@ -85,12 +93,15 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill ghost text on step 3
 	 * <li> Click creation button
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createNumberCustomField() {
-		page.createCustomField(CustomFieldType.Number);
+		CustomField cf = generateCustomField(CustomFieldType.Number);
+		page.createCustomField(cf).deleteCustomField(cf);
 	}
 	
 	/**
@@ -105,12 +116,15 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill ghost text on step 3
 	 * <li> Click creation button
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createYesNoCustomField() {
-		page.createCustomField(CustomFieldType.YesNo);
+		CustomField cf = generateCustomField(CustomFieldType.YesNo);
+		page.createCustomField(cf).deleteCustomField(cf);
 	}
 	
 	/**
@@ -125,12 +139,15 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill ghost text on step 3
 	 * <li> Click creation button
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createDateTimeCustomField() {
-		page.createCustomField(CustomFieldType.DateTime);
+		CustomField cf = generateCustomField(CustomFieldType.DateTime);
+		page.createCustomField(cf).deleteCustomField(cf);
 	}
 	
 	/**
@@ -145,13 +162,24 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * <li> Fill ghost text on step 3
 	 * <li> Click creation button
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Remove custom field
+	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
 	 *  
 	 */
 	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createSingleChoiceCustomField() {
-		page.createCustomField(CustomFieldType.SingleChoice);
+		CustomField cf = generateCustomField(CustomFieldType.SingleChoice);
+		page.createCustomField(cf).deleteCustomField(cf);
 	}
+	
+	private CustomField generateCustomField(String customFieldType) {
+		return generateCustomField(CustomFieldType.valueOf(customFieldType));
+	}
+	
+	private CustomField generateCustomField(CustomFieldType customFieldType) {
+		return new CustomField(customFieldType, customFieldType.name() + "_" + CommonUtils.getUnicName());
+	} 
 	
 	private CustomFieldsPage doLoginAndOpenCustomFieldPage() {
 		return new LoginPage().
