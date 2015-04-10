@@ -21,8 +21,8 @@ public class ImportPage extends ManagePage{
 	}
 
 	public ImportPage verifyStatusOfImport(String importName, String importStatus){
-		Label name = new LabelImpl("//*[@id='JColResizer2']/tbody/tr[1]/td[2]/div/span/span/span", "Import Name");
-		Label status = new LabelImpl("//*[@id='JColResizer2']/tbody/tr[1]/td[4]/div/span/span/span", "Import Status");
+		Label name = new LabelImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[2]/div/span/span/span", "Import Name");
+		Label status = new LabelImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[4]/div/span/span/span", "Import Status");
 		verifier.verifyEquals(name.getText(), importName, "Row of import is not found or not first");
 		verifier.verifyEquals(status.getText(), importStatus, "Wrong import status");
 		return this;		
