@@ -2,9 +2,11 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
@@ -44,15 +46,6 @@ public class SupportersPage extends AudiencePage {
 		verifier.verifyEquals(supportersTable.getCellValue(1, 2), email);
 		return this;
 	}
-	
-//	public SupportersPage verifySupporterIsNotInTable(Supporter supporter) {
-//		return verifySupporterIsNotInTable(supporter.getFinalEMAIL());
-//	}
-//	
-//	public SupportersPage verifySupporterIsNotInTable(String email) {
-//		verifier.verifyElementIsNotDisplayed(new ButtonImpl("//span[contains(text(), '" + email + "')]", ""));
-//		return this;
-//	}
 
 	public SupportersPage checkSupporterExists(String param) {
 		verifier.verifyEquals(supportersTable.isValueExists(param) > 0, true, "Supporter " + param + " was not found."); 
@@ -64,6 +57,18 @@ public class SupportersPage extends AudiencePage {
 		verifier.verifyEquals(supportersTable.isValueExists(param) > 0, false, "Supporter " + param + " was found."); 
 		return this;
 		
+	}
+	
+	public void verifySupporterExists(String email, boolean exists) {
+		searchField.type(email);
+		doSearchButton.click();
+		sleep(10);
+		Label record = new LabelImpl("//*[contains(text(), '" + email + "')]", "Supporter in table");
+		if (exists) {
+			verifier.verifyFalse(record.isNotExists(), "Supporter NOT exists");
+		} else {
+			verifier.verifyTrue(record.isNotExists(), "Supporter exists");
+		}
 	}
 
 	public SupportersPage searchSupporter(String personEmail) {
@@ -79,7 +84,7 @@ public class SupportersPage extends AudiencePage {
 
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
-		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
+		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		return new SupportersAddPage();
 	}
 	
