@@ -40,7 +40,7 @@ public class ImportAddPage extends ManagePage{
 	//I'm done step
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
 	private int amountOfSupporters = 50;
-	private static final String IMPORT_DONE_LABEL = " rows were imported. Well done!";
+	private static final String IMPORT_DONE_LABEL = "Congrats! Your import is complete.";
 	
 	public ImportAddPage fillFirstStep(String name, String description) {
 		return this.fillFirstStep(name, description, null);
@@ -84,8 +84,7 @@ public class ImportAddPage extends ManagePage{
 	public ImportAddPage fillThirdStep() {
 		doneButton.click();
 		sleep(60);
-		String expectedLabel = amountOfSupporters + IMPORT_DONE_LABEL;
-		Label label = new LabelImpl("//h3[contains(text(), '" + expectedLabel + "')]", "Import done");
+		Label label = new LabelImpl("//*[contains(text(), '" + IMPORT_DONE_LABEL + "')]", "Import done");
 		for (int i = 0; i < 10; i++) {
 			waitConditionBecomesTrueWithRefersh(label.isDisplayed(), 30);
 		}
