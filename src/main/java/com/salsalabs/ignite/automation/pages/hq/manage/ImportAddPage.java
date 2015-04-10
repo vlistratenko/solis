@@ -35,7 +35,7 @@ public class ImportAddPage extends ManagePage{
 	//second step
 	TextBox importFromRowField = new TextBoxImpl("//input[@id='offset']", " My data starts on row", false);
 	Table mapTable = new TableImpl("//form[@id='importForm']/descendant::table", "Map");
-	Button dedupeButton = new ButtonImpl("//button[@id='btnSave2']/*", "Match My Fields");
+	Button dedupeButton = new ButtonImpl("//button[contains(@id,'btnSave')]/*", "Match My Fields");
 	
 	//I'm done step
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
