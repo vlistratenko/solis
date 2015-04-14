@@ -10,7 +10,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.emails.AddEmailsPage_PublishTab;
 
 /**
- * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18)</b>
+ * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18, TC19)</b>
  *
  */
 public class EmailBlastTest extends SeleneseTestCase{
