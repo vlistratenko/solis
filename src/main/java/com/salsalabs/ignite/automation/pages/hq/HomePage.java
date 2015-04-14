@@ -20,6 +20,7 @@ import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.donation.DonationsPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.MessagingPage;
 import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskPage;
@@ -38,6 +39,7 @@ public class HomePage extends Browser{
 	//left navigation bar
 	Button audienceTab = new ButtonImpl("//a[@href='/#/audience']", "Audience tab");
 	Button activitiesTab = new ButtonImpl("//a[@href='/#/activities']", "Activities tab");
+	Button messagingTab = new ButtonImpl("//a[@href='/#/messaging']", "Messaging tab");
 	Button donationTab = new ButtonImpl("//a[@href='/#/insight/donations']", "Donations tab");
 	Button dashboardTab = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard tab");
 	Button assetsTab = new ButtonImpl ("//a[@href='/#/assets']", "Assets tab");
@@ -93,6 +95,11 @@ public class HomePage extends Browser{
 		activitiesTab.click();
 		return new ActivitiesPage();
 		
+	}
+	
+	public MessagingPage openMessagingPage() {
+		messagingTab.click();
+		return new MessagingPage();
 	}
 	
 	public DonationsPage openDonationsPage() {

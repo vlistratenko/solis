@@ -1,6 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.emails;
 
 
+import org.openqa.selenium.Keys;
+
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Table;
@@ -16,7 +18,8 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	DropDown selectScheme = new DropDownImpl("//custom-select-scheme/div[@class='custom dropdown scheme']", "a", "Select Scheme");
 	TextBox subjectField = new ContentEditTextBoxImpl("//iframe[@id='subjectFrame']" ,"//*[@id='subjectId']", "Subject", true);
-	Table EmailTemplate = new TableImpl("//emailtemplate/descendant::table[@class='body-wrap']/descendant::div[@class='content']/descendant::table", "Email Template body" );
+	TextBox emailTemplate = new ContentEditTextBoxImpl("//iframe[@id='veframe']" ,"//div[@class='lead editable restricted paragraph']", "Email Template body", true);
+	//Table EmailTemplate = new TableImpl("//div[@class=\"content\"]/table", "Email Template body" );
 	Button addLinkButtonMenu = new ButtonImpl("//span[@title='Link']", "Add link on the menu");
 	Button PublishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
 	TextBox emailFromField = new TextBoxImpl("//input[@name='fromAddress']", "Email from");
@@ -34,7 +37,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 				subj = subj + " Split " + i;				
 				sleep(8);
 			}
-			selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
+			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
 			addLink("salsalabs.com");
@@ -51,7 +54,11 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
 		sleep(10);
-		new ButtonImpl("//p[.='" + layout + "']/preceding-sibling::img", layout + "layout").click();
+		Button lay=new ButtonImpl("//p[.='" + layout + "']/preceding-sibling::img", layout + "layout");
+		lay.click();
+		/*while(!lay.isNotDisplayed()){
+			lay.click();
+		}*/
 		sleep(10);
 		return this;
 	}
@@ -59,15 +66,11 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	public AddEmailsPage_ComposeTab addLink(String link) {
 		TextBox inputLinkField = new TextBoxImpl("//input[@name='url']", "Input Link");
 		Button addLinkButton = new ButtonImpl("//a[.='Add it!']", "Add link on the popup");
-		switchToFrame("//iframe[@id='veframe']");
-		try {
-			EmailTemplate.clickInCell(1, 1, "h3[contains(text(),'Hi')]");
-		} catch (Exception e) {
-			e.printStackTrace();
-			switchDefaultContent();
-		}
+		Button addExternal = new ButtonImpl("//a[.='An External Page']", "An External Page");
+		emailTemplate.type("Link: ");
 		switchDefaultContent();
 		addLinkButtonMenu.click();
+		addExternal.click();
 		inputLinkField.type(link);
 		addLinkButton.click();		
 		return this;

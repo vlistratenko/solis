@@ -17,7 +17,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button ComposeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
 	
 	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add some additional folks to this blast?')]/following-sibling::div/descendant::input", "Manually add supporters");
-	Button suppirtersItemInTheSearchButton = new ButtonImpl("//div[@class='row result fade-out ng-scope']", "Supporters item in the search result", false);
+	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//div[@class='flex-container result fade-out ng-scope'])[last()]", "Supporters item in the search result", false);
 	
 	public AddEmailsPage_ChooseAudienceTab selectAudienceType(String type) {
 		if (type.trim().equalsIgnoreCase("Entire list")) {
@@ -34,6 +34,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 			return this;
 		}
 		sleep(5);
+		addSupportersField.scrollIntoView();
 		addSupportersField.type(searchString);
 		sleep(5);
 		for (int i = 0; i < amount; i++) {

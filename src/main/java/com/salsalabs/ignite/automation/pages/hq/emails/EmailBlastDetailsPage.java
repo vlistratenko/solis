@@ -7,12 +7,26 @@ import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
 public class EmailBlastDetailsPage extends HomePage {
+	Label deliveryRateLabel = new LabelImpl("//div[.='Delivery rate']/following-sibling::div", "Delivery rate label");
 	Label openRateLabel = new LabelImpl("//div[.='Open rate']/following-sibling::div", "Open rate label");
 	Label clikRateLabel = new LabelImpl("//div[.='Click rate']/following-sibling::div", "Click rate label");
 	Label hardBounceLabel = new LabelImpl("//insight-linear-stat[@text='Hard bounces']/descendant::span[2]", "Hard bounce label");
 
-	public EmailBlastDetailsPage verifyOpenRateStat(Integer openAmount) {
+	public EmailBlastDetailsPage verifyDeliveryRateStat(Integer hardBounceAmount) {
 		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		Integer deliveryAmount = amountOfPablishedEmails - hardBounceAmount;
+		String rate = String.valueOf(deliveryAmount*100/amountOfPablishedEmails) + "%";
+		for (int i = 1; i <= 30; i++) {
+			if (waitConditionBecomesTrue(deliveryRateLabel.getText().equalsIgnoreCase(rate))) {
+				break;
+			}
+		}
+		verifier.verifyEquals(deliveryRateLabel.getText(), rate, "Wrong delivery rate");
+		return this;
+	}
+	
+	public EmailBlastDetailsPage verifyOpenRateStat(Integer openAmount, Integer hardBounceAmount) {
+		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))-hardBounceAmount;
 		String rate = String.valueOf(openAmount*100/amountOfPablishedEmails) + "%";
 		for (int i = 1; i <= 30; i++) {
 			if (waitConditionBecomesTrue(openRateLabel.getText().equalsIgnoreCase(rate))) {
@@ -23,8 +37,8 @@ public class EmailBlastDetailsPage extends HomePage {
 		return this;
 	}
 
-	public EmailBlastDetailsPage verifyClickRateStat(Integer clickAmount) {
-		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+	public EmailBlastDetailsPage verifyClickRateStat(Integer clickAmount, Integer hardBounceAmount) {
+		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))-hardBounceAmount;
 		String rate = String.valueOf(clickAmount*100/amountOfPablishedEmails) + "%";
 		for (int i = 1; i <= 30; i++) {
 			if (waitConditionBecomesTrue(clikRateLabel.getText().equalsIgnoreCase(rate))) {

@@ -63,6 +63,7 @@ public abstract class Browser {
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
+		driver.manage().window().maximize();
 		if (driver instanceof InternetExplorerDriver) {
 			Button link = new ButtonImpl("//a[@name='overridelink']", "Continue");
 			sleep(15);

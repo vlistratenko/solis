@@ -11,6 +11,7 @@ import java.net.URL;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -44,7 +45,9 @@ public enum DriverType implements DriverSetup {
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-            return new ChromeDriver(capabilities);
+        	ChromeOptions options = new ChromeOptions();
+        	options.addArguments("--start-maximized");
+        	return new ChromeDriver(options);
         }
 
         @Override

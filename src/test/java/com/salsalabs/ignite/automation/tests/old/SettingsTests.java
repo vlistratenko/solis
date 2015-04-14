@@ -142,7 +142,7 @@ public class SettingsTests extends SeleneseTestCase{
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
-		openActivitiesPage().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(CommonUtils.getUnicName()).
