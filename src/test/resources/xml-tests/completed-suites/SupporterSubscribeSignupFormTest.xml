@@ -8,7 +8,7 @@
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
-				<!-- <include name="subscribeExistingSupporter" /> -->
+				<include name="subscribeExistingSupporter" />
 				<include name="subscribeNewSupporter" />
 			</run>
 		</groups>
