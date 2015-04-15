@@ -14,7 +14,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class AccountsPage extends HomePage{
 
-	Button inviteNewUserButton =  new ButtonImpl("//button[text()='+ Invite my team member']", "Invite new user");
+	Button inviteNewUserButton =  new ButtonImpl("//button[@ng-click='btnInviteUser()']", "Invite new user");
 	Table invitationsTable = new TableImpl("//table[last()]", "Pending Invitations");
 	TextBox inviteSearch = new TextBoxImpl("(//input[@placeholder='search...'])[last()]", "Search invite textbox");
 	Button inviteSearchBtn = new ButtonImpl("(//a[@ng-click='processing.search = true; doSearch();'])[last()]", "Search invite btn");
