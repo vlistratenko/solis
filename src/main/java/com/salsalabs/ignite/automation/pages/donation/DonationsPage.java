@@ -1,6 +1,8 @@
 package com.salsalabs.ignite.automation.pages.donation;
 
+import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Table;
+import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
@@ -8,6 +10,7 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 public class DonationsPage extends HomePage{
 
 	Table donationsTable = new TableImpl("//*[.='Transaction Date']/ancestor::table", "Table with Donations");
+	Button createDonationFormBtn = new ButtonImpl("//a[contains(@href, '/#/activities/widget/create?type=FUNDRAISE')]", "Add Donation Form");
 	
 	public DonationsPage verifyDonationRecordInTable(String amount, String status, boolean type, String source, String supporter) {
 		for (int i = 0; i < 15; i++) {
@@ -42,6 +45,11 @@ public class DonationsPage extends HomePage{
 				donationsTable.getColumnNumberByHeader("Source"),
 				"span");
 		return new DonationsDetailsPage();
+	}
+	
+	public DonationsAddPage openCreateDonationPage() {
+		createDonationFormBtn.click();
+		return new DonationsAddPage();
 	}
 
 }
