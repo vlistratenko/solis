@@ -20,6 +20,7 @@ public class AccountsPage extends HomePage{
 	Button inviteSearchBtn = new ButtonImpl("(//a[@ng-click='processing.search = true; doSearch();'])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
+		sleep(5);
 		inviteNewUserButton.click();
 		return new CreateInvitePage();
 		
