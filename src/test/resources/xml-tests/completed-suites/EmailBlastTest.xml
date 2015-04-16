@@ -6,7 +6,7 @@
 	<parameter name="sendEmail.From" value="info@salsalabs.com"></parameter>
 	<parameter name="sendEmail.openAmount" value="4"></parameter>
 	<parameter name="sendEmail.amountOfSupporter" value="4"></parameter>
-	<parameter name="sendEmail.hardBounceAmount" value="2"></parameter>
+	<parameter name="sendEmail.hardBounceAmount" value="1"></parameter>
 	<parameter name="sendEmail.clickAmount" value="2"></parameter>
 	<parameter name="sendEmail.unsubscribeAmount" value="1"></parameter>
 	<parameter name="sendEmail.emailOfSupporter" value="supMan"></parameter>

@@ -190,13 +190,13 @@ public abstract class Browser {
 	}
 
 	public LoginPage verifyAmountOfEmails(int amountOfEmails, int amountOfSplits, int amountOfMinutes, boolean doFail) {
-		Integer amountEmailsInSplit = amountOfEmails;
+		Integer amountEmailsTotal = amountOfEmails;
 		if (amountOfSplits > 1) {
 			Integer testGroup = Integer.valueOf(CommonUtils.getProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP));
 			float s = (float) ((float) testGroup / (float) 100);
-			amountEmailsInSplit = (int) (amountOfEmails / amountOfSplits * s);
-
+			amountEmailsTotal = (int) (amountOfEmails * s);
 		}
+		Integer amountEmails = 0;
 		for (int i = 1; i <= amountOfSplits; i++) {
 			String subj;
 			if (amountOfSplits > 1) {
@@ -204,14 +204,13 @@ public abstract class Browser {
 			} else {
 				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
 			}
-			Integer amountEmails = null;
 			try {
-				amountEmails = SeleneseTestCase.emailClient.waitForEmails(subj, amountEmailsInSplit, amountOfMinutes).getEmailsBySubject(subj).size();
+				amountEmails += SeleneseTestCase.emailClient.waitForEmails(subj, amountEmailsTotal, amountOfMinutes).getEmailsBySubject(subj).size();
 			} catch (MailosaurException e) {
 				logger.error("", e);
 			}
-			verifier.verifyEquals(amountEmails, amountEmailsInSplit, "Not all emails " + subj + " were delivered", doFail);
 		}
+		verifier.verifyEquals(amountEmails, amountEmailsTotal, "Not all emails were delivered", doFail);
 		return new LoginPage();
 	}
 
