@@ -1,7 +1,6 @@
 package com.salsalabs.ignite.automation.suites;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
@@ -10,14 +9,11 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-
 /**
  * <b>This test contains scenarios related to sign-up form creation (TestLink: TC16)</b>
- *
+ * @author a.hubachov
  */
 public class CreateSignupFormTest extends SeleneseTestCase {
-	private String[] layouts = {"Hero", "Sidebar Right", "Hero Sidekick", "Newsletter", 
-			"Sidebar Hero Left", "Sidebar Left", "Sidebar Hero Right", "Basic"};
 	private AddSubscribeWidgetPage addSignupFormsPage;
 	private ActivitiesPage activitiesPage;
 	
@@ -27,8 +23,8 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 	 * Steps:
 	 * <ul>
 	 * <li> Login into existing organization
-	 * <li> Open Activities page --> Fundraising Forms
-	 * <li> Click on Create a Fundraising Form button
+	 * <li> Open Activities page --> Signup Forms
+	 * <li> Click on Create a Signup Form button
 	 * <li> Fill title and description
 	 * <li> Choose random layout
 	 * <li> Leave default design and click Next button
@@ -58,7 +54,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 	 * <li> <font color="green"><b>Verify that button for removing is appeared</b></font>
 	 * <li> Click on Remove button, confirm action in modal window
 	 * <li> <font color="green"><b>Verify that table do not contains record about form (All Activities)</b></font>
-	 * <li> Open Fundraising Forms tab
+	 * <li> Open Sign-Up Forms tab
 	 * <li><font color="green"><b>Verify that table do not contains record about form (Sign-Up Forms)</b></font>
 	 * <li> Open in separate window 
 	 * <li> Open form by link in separated window
@@ -74,13 +70,11 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		doLoginAndOpenSignupFormsPage();
 		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
 		String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-		// choose random layout
-		String layoutName = this.layouts[RandomUtils.nextInt(0, this.layouts.length)];
 		String expectedLink = ("https://automatedtesting1." + SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name() + ".igniteaction.net/" + widgetName).toLowerCase();
 		// fill title and description
 		addSignupFormsPage.fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription);
 		// select layout for form
-		addSignupFormsPage.selectLayoutForSubscribeWidgetStep(layoutName);
+		addSignupFormsPage.selectLayoutForSubscribeWidgetStep();
 		// leave default design and go to settings
 		addSignupFormsPage.fillFieldsSubscribeWidgetStepTwo();
 		// leave default settings and publish form
@@ -91,11 +85,11 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "PUBLISHED");
 		// verify that new widget present in table in Signup Forms tab (Published state)
-		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableSignupForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
+		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
 		// open widget link in new tab and ensure it visible for CM and supporter
 		activitiesPage = addSignupFormsPage.verifyWidgetVisible(expectedLink, true, true);
 		// click on widget in table to open it
-		addSignupFormsPage = activitiesPage.openWidgetFromTable();
+		addSignupFormsPage = activitiesPage.openSignupWidgetFromTable();
 		// make widget private
 		addSignupFormsPage.makeWidgetPrivate();
 		// open widget link in new tab and ensure it NOT visible
@@ -104,11 +98,11 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "DRAFT");
 		// open Sign-Up Forms tab and check that our form is present in table too (Draft state)
-		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableSignupForms(widgetName, widgetDescription, "DRAFT", "PRIVATE");;
+		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "DRAFT", "PRIVATE");;
 		// remove widget
 		activitiesPage.removeWidgetSuccessfully();
 		// make sure it's not present in in table in All Activities tab
-		activitiesPage.verifyWidgetIsNotPresentInTableSignupForms(widgetName, widgetDescription);
+		activitiesPage.verifyWidgetIsNotPresentInTableForms(widgetName, widgetDescription);
 		// make sure it's not present in table in Signup Forms tab
 		activitiesPage.openAllActivitiesTab().verifyActivityIsNotPresentInTableAllActivities(widgetName, widgetDescription);
 		// try to open widget in separate window

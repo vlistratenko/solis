@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -16,6 +18,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget Name", true);
 	TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget description", false);
 	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
+	Button goToStep3Btn = new ButtonImpl("//button[@id='btnCompose3']", "Next: age Settings >>");
 	Button publishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish button", true);
 	CheckBox iNeedHostedPageCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	CheckBox iNeedWidgetCodeCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
@@ -26,6 +29,16 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	
 	Button widgetLink;
 	
+	public AddDonationWidgetPage() {
+		widgetButtonText = "Donate!";
+	}
+	
+	public AddDonationWidgetPage createDonationWidgetSetupStep() {
+		String formName = "DonationFormName_" + RandomStringUtils.randomAlphanumeric(5);
+		String formDescription = "DonationFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
+		return this.createDonationWidgetSetupStep(formName, formDescription);
+	}
+	
 	public AddDonationWidgetPage createDonationWidgetSetupStep(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName);
@@ -35,11 +48,22 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 		return this;
 	}
 	
+	public AddDonationWidgetPage selectLayoutForDanationWidgetStep() {
+		return this.selectLayoutForDanationWidgetStep(chooseRandomLayout());
+	}
+	
 	public AddDonationWidgetPage selectLayoutForDanationWidgetStep(String layoutName) {
 		sleep(10);
 		layoutButton.changePath("layoutName", layoutName);
 		layoutButton.click();
 		sleep(10);
+		return this;
+	}
+	
+	// Go to settings of form
+	public AddDonationWidgetPage fillThirdStep() {
+		goToStep3Btn.click();
+		sleep(5);
 		return this;
 	}
 	
@@ -59,6 +83,11 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 		saveAndPublish.scrollIntoView();
 		saveAndPublish.click();
 		return this;
+	}
+	
+	public DonationWidget openDonationWidget(String formName) {
+		this.widgetName = formName;
+		return this.openDonationWidget();
 	}
 	
 	public DonationWidget openDonationWidget() {

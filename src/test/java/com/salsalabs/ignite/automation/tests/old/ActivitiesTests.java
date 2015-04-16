@@ -199,7 +199,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		fillFieldsSubscribeWidgetStepTwo().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		openSubscribeWidget().
-		backToSubscribegWidgetPage();
+		backToSubscribeWidgetPage();
 		
 		CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET, widgetName);
 		CommonUtils.checkAndFail("subscribeSupporterTest");

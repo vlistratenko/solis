@@ -2,9 +2,11 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
@@ -27,12 +29,21 @@ public class SupportersPage extends AudiencePage {
 		return new SupportersAddPage();
 	}
 	
-	public SupportersPage verifySupporterOnTopOfTable(Supporter supporter) {
-		verifier.verifyEquals(supporter.getFinalEMAIL(), supportersTable.getCellValue(1, 2), "Supporter was not created (email)");
-		verifier.verifyEquals(supporter.getFirstName(), supportersTable.getCellValue(1, 3), "Supporter was not created (first name)");
-		verifier.verifyEquals(supporter.getLastName(), supportersTable.getCellValue(1, 4), "Supporter was not created (last name)");
-		verifier.verifyEquals(supporter.getCity(), supportersTable.getCellValue(1, 5), "Supporter was not created (city)");
-		verifier.verifyEquals(supporter.getZipCode(), supportersTable.getCellValue(1, 7), "Supporter was not created (zip code)");
+	public SupportersPage verifySupporterOnTopOfTableFull(Supporter supporter) {
+		verifier.verifyEquals(supportersTable.getCellValue(1, 2), supporter.getFinalEMAIL(), "Supporter was not created (email)");
+		verifier.verifyEquals(supportersTable.getCellValue(1, 3), supporter.getFirstName(), "Supporter was not created (first name)");
+		verifier.verifyEquals(supportersTable.getCellValue(1, 4), supporter.getLastName(), "Supporter was not created (last name)");
+		verifier.verifyEquals(supportersTable.getCellValue(1, 5), supporter.getCity(), "Supporter was not created (city)");
+		verifier.verifyEquals(supportersTable.getCellValue(1, 7), supporter.getZipCode(), "Supporter was not created (zip code)");
+		return this;
+	}
+	
+	public SupportersPage verifySupporterOnTopOfTableByEmail(Supporter supporter) {
+		return verifySupporterOnTopOfTableByEmail(supporter.getFinalEMAIL());
+	}
+	
+	public SupportersPage verifySupporterOnTopOfTableByEmail(String email) {
+		verifier.verifyEquals(supportersTable.getCellValue(1, 2), email);
 		return this;
 	}
 
@@ -46,6 +57,18 @@ public class SupportersPage extends AudiencePage {
 		verifier.verifyEquals(supportersTable.isValueExists(param) > 0, false, "Supporter " + param + " was found."); 
 		return this;
 		
+	}
+	
+	public void verifySupporterExists(String email, boolean exists) {
+		searchField.type(email);
+		doSearchButton.click();
+		sleep(10);
+		Label record = new LabelImpl("//*[contains(text(), '" + email + "')]", "Supporter in table");
+		if (exists) {
+			verifier.verifyFalse(record.isNotExists(), "Supporter NOT exists");
+		} else {
+			verifier.verifyTrue(record.isNotExists(), "Supporter exists");
+		}
 	}
 
 	public SupportersPage searchSupporter(String personEmail) {
@@ -61,7 +84,7 @@ public class SupportersPage extends AudiencePage {
 
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
-		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
+		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		return new SupportersAddPage();
 	}
 	
