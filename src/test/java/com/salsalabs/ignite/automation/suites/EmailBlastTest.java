@@ -80,9 +80,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 			hardBounceAmount = 0;
 		}
 		new AddEmailsPage_PublishTab().
-		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 15, false).
-		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 5, false).
-		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 5, true);
+		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 20, false);
 		
 		loginPage.openEmails(splitsAmount, openAmount);
 		loginPage.clickLinkInEmail(splitsAmount, "http://salsalabs.com", clickAmount);
