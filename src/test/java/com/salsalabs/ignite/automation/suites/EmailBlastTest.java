@@ -98,7 +98,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	 * <li> Open Messaging page --> Emails
 	 * <li> Click on the last completed email
 	 * <li> <font color="green"><b>In the delivery section, verify: [a] the delivery rate is displayed and the bar is colored the appropriate amount; [b] numbers are displayed for soft and hard bounces. </b></font>
-	 * <li> <font color="green"><b>In the performance section, verify that the rates are displayed and the bar is colored the appropriate amounts for: [a] open rate; [b] click rate;</b></font>
+	 * <li> <font color="green"><b>In the performance section, verify that the rates are displayed and the bar is colored the appropriate amounts for: [a] open rate; [b] click rate; [d] unsubscribe rate. </b></font>
 	 * <li> Make screenshot
 	 * </ul>
 	 *  
