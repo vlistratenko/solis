@@ -30,7 +30,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage {
 	Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
 	Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
-	
+
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName); 
@@ -97,7 +97,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage {
 			link = link.replaceFirst(".ignite.", ".igniteaction.");
 		}
 		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html", false);
+		this.openInNewWindow(link + "/index.html");
 		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
 		if (visibleForCm) {
 			verifier.verifyElementIsDisplayed(subscribeButton);

@@ -92,7 +92,7 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "", dependsOnMethods="unsubscribeSupporterTest")
 	public void sendEmailsToUnsubscribedSupporters() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException{
-		new EmailBlastTest().sendEmailsToUnsubscribedSupporters();
+		//new EmailBlastTest().sendEmailsToUnsubscribedSupporters();
 
 	}			
 	
