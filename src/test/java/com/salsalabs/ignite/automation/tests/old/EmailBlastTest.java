@@ -19,12 +19,13 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.emails.AddEmailsPage_PublishTab;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
 import com.salsalabs.ignite.automation.pages.other.Dispatcher;
 
 public class EmailBlastTest extends SeleneseTestCase{
 	
-	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
+	@Parameters({"sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmails", ""}, description = "")
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
@@ -39,41 +40,47 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
-		openActivitiesPage().
+		doSuccessLogin().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
+		SelectEmailType().
 		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSupporters(emailOfSupporter, amountOfSupporters).
 		addSupporters("unex", hardBounceAmount).
-		SelectEmailType().
 		openComposePage().
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
-		fillAllFieldsAndPublish(100, 1).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 15, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 5, false).
-		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, 1, 5, true);
+		fillAllFieldsAndPublish(100, 1);
+		Integer published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		if (published == amountOfSupporters) {
+			hardBounceAmount = 0;
+		}
+		new AddEmailsPage_PublishTab().
+		verifyAmountOfEmails(published - hardBounceAmount, 1, 15, false).
+		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, false).
+		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, true);
 		
 		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
 		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
 		
 		loginPage.
-		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
-		openActivitiesPage().
+		doSuccessLogin().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openEmailBlastDetailsPage(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME)).
-		verifyOpenRateStat(openAmount).
-		verifyClickRateStat(clickAmount).
+		verifyDeliveryRateStat(hardBounceAmount).
+		verifyOpenRateStat(openAmount, hardBounceAmount).
+		verifyClickRateStat(clickAmount, hardBounceAmount).
 		verifyHardBouncesStat(hardBounceAmount);
 		
 		makeScreenshot("Email KPI Success");
 	}
 	
 	@Parameters({"sendEmail.From",
-		"sendEmail.OpenAmount",
-		"sendEmail.ClickAmount",
+		"sendEmail.openAmount",
+		"sendEmail.clickAmount",
 		"sendEmail.emailOfSupporter",
 		"sendEmail.amountOfSupporter",
 		"sendEmail.hardBounceAmount",
@@ -102,7 +109,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
-		openActivitiesPage().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
@@ -118,25 +125,25 @@ public class EmailBlastTest extends SeleneseTestCase{
 		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, splitsAmount, 5, false).
 		verifyAmountOfEmails(Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount, splitsAmount, 5, true);
 		
-		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
-		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
+		loginPage.openEmails(emailSubject, openAmount);
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount);
 
 
 		
 		loginPage.
 		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
-		openActivitiesPage().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openEmailBlastDetailsPage(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME)).
-		verifyOpenRateStat(openAmount).
-		verifyClickRateStat(clickAmount).
+		verifyOpenRateStat(openAmount,hardBounceAmount).
+		verifyClickRateStat(clickAmount,hardBounceAmount).
 		verifyHardBouncesStat(hardBounceAmount);
 		
 		makeScreenshot("Email KPI Success");
 		
 	}
 
-	//@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
+	//@Parameters({"sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "")
 	public void sendEmailsToUnsubscribedSupporters() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		
@@ -185,7 +192,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 		unsPage.
 		backToUnsubscribeSettingsPage().		
-		openActivitiesPage().
+		openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).

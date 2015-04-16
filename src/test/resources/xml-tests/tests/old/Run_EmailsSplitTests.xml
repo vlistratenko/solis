@@ -10,8 +10,8 @@
   	<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
    	
   	<test verbose="2" name="Send split emails" annotations="JDK" >		
-		<parameter name="sendEmail.OpenAmount"  value="8"></parameter>
-		<parameter name="sendEmail.ClickAmount"  value="4"></parameter>
+		<parameter name="sendEmail.openAmount"  value="8"></parameter>
+		<parameter name="sendEmail.clickAmount"  value="4"></parameter>
 		<parameter name="sendEmail.emailOfSupporter"  value="mailo"></parameter>
 		<parameter name="sendEmail.amountOfSupporter"  value="10"></parameter>
 		<parameter name="sendEmail.hardBounceAmount"  value="2"></parameter>

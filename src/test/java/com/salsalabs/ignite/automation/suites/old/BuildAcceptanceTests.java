@@ -178,7 +178,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
 		HomePage homePage = new HomePage();
-		homePage.openActivitiesPage().
+		homePage.openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).

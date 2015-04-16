@@ -12,5 +12,6 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSupporterManuallyTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSignupFormTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupporterSubscribeSignupFormTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastTest.xml" />
 	</suite-files>
 </suite>
