@@ -23,14 +23,14 @@ public class SubscribeWidget extends Browser{
 	SelectBox personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
 	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
 	
-	Label subscriptionIsSccessMessage = new LabelImpl("//div[.='Thanks for signing up!']", "Subscription is success");
+	Label subscriptionIsSuccessMessage = new LabelImpl("//div[.='Thank you for your submission.']", "Subscription is success");
 
 	public SubscribeWidget() {
 		deletecoockies();
 		refresh();
 	}
 	
-	public AddSubscribeWidgetPage backToSubscribegWidgetPage() {
+	public AddSubscribeWidgetPage backToSubscribeWidgetPage() {
 		closeWindow();
 		switchToWindow(CommonUtils.getProperty(PropertyName.CURRENT_WINDOW_HANDLE));
 		return new AddSubscribeWidgetPage();
@@ -60,11 +60,11 @@ public class SubscribeWidget extends Browser{
 	
 	public SubscribeWidget verifySubscriptionIsSuccesses() {
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(subscriptionIsSccessMessage.isDisplayed(), 10)) {
+			if (waitConditionBecomesTrue(subscriptionIsSuccessMessage.isDisplayed(), 10)) {
 				break;
 			}
 		}
-		verifier.verifyElementIsDisplayed(subscriptionIsSccessMessage);
+		verifier.verifyElementIsDisplayed(subscriptionIsSuccessMessage);
 		return this;
 	}
 }

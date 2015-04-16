@@ -13,7 +13,7 @@ import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFi
 
 /**
  * <b>This test contains scenarios related to custom fields creation (TestLink: TC8)</b>
- *
+ * @author a.hubachov
  */
 public class CreateCustomFieldTest extends SeleneseTestCase {
 	private CustomFieldsPage page;

@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -9,7 +11,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
-public class AddSubscribeWidgetPage extends ActivitiesPage{
+public class AddSubscribeWidgetPage extends ActivitiesPage {
 	String widgetName;
 	String currentWindowHandle;
 	TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
@@ -23,9 +25,11 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 	Button widgetLink;
 	Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
 	Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
-	Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
-	Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 
+	public AddSubscribeWidgetPage() {
+		widgetButtonText = "Subscribe!";
+	}
+	
 	public AddSubscribeWidgetPage fillFieldsSubscribeWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName); 
@@ -33,6 +37,10 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		openComposeStepButton.click();
 		sleep(10);
 		return this;		
+	}
+	
+	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep() {
+		return this.selectLayoutForSubscribeWidgetStep(chooseRandomLayout());
 	}
 	
 	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep(String layoutName) {
@@ -52,11 +60,6 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		openPublishStepButton.click();
 		sleep(5);
 		return this;
-	}
-	
-	public void verifyFormLinkIsPresent(String expectedLink) {
-		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
-		verifier.verifyElementIsDisplayed(link);
 	}
 	
 	public AddSubscribeWidgetPage hosteWidgetOnLocalPage(String widgetTitle, boolean isHostedOnLocalPage) {
@@ -83,34 +86,23 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		return new SubscribeWidget();
 	}
 	
-	public ActivitiesPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
-		if (link.contains(".ignite.")) {
-			link = link.replaceFirst(".ignite.", ".igniteaction.");
-		}
-		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html", false);
-		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
-		if (visibleForCm) {
-			verifier.verifyElementIsDisplayed(subscribeButton);
-		} else {
-			verifier.verifyElementIsNotDisplayed(subscribeButton);
-		}
-		this.deletecoockies();
-		this.refresh();
-		if (visibleForSupporter) {
-			verifier.verifyElementIsDisplayed(subscribeButton);
-		} else {
-			verifier.verifyElementIsNotDisplayed(subscribeButton);
-		}
-		this.closeWindow();
-		this.switchToWindow(primaryHandle);
-		return new ActivitiesPage();
+	// create widget in one step without verifications
+	public AddSubscribeWidgetPage createSignupForm() {
+		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+		String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+		return this.createSignupForm(widgetName, widgetDescription);
 	}
-
-	public void makeWidgetPrivate() {
-		settingsButton.click();
-		makePrivateButton.click();
-		sleep(10);
+	
+	public AddSubscribeWidgetPage createSignupForm(String widgetName, String widgetDescription) {
+		return this.createSignupForm(widgetName, widgetDescription, chooseRandomLayout());
 	}
-
+	
+	public AddSubscribeWidgetPage createSignupForm(String widgetName, String widgetDescription, String layoutName) {
+		this.fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription);
+		this.selectLayoutForSubscribeWidgetStep(layoutName);
+		this.fillFieldsSubscribeWidgetStepTwo();
+		this.publishForm();
+		return this;
+	}
+	
 }

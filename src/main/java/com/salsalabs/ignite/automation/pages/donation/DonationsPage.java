@@ -46,10 +46,5 @@ public class DonationsPage extends HomePage{
 				"span");
 		return new DonationsDetailsPage();
 	}
-	
-	public DonationsAddPage openCreateDonationPage() {
-		createDonationFormBtn.click();
-		return new DonationsAddPage();
-	}
 
 }
