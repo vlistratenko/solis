@@ -2,9 +2,11 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 
@@ -17,7 +19,9 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button ComposeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
 	
 	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add some additional folks to this blast?')]/following-sibling::div/descendant::input", "Manually add supporters");
-	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[contains(@class,'result')])[last()]", "Supporters item in the search result", false);
+	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[@class='result fade-out ng-scope'])[last()]", "Supporters item in the search result", false);
+	Button calculateAudience = new ButtonImpl("//span[contains(text(),'Calculate')]", "Calculate Audience Reach");
+	Label calculatedLabel = new LabelImpl("//span[@ng-show='blast.reachTotal>=0']", "Calculated Audience");
 	
 	public AddEmailsPage_ChooseAudienceTab selectAudienceType(String type) {
 		if (type.trim().equalsIgnoreCase("Entire list")) {
@@ -35,12 +39,28 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		}
 		sleep(5);
 		addSupportersField.scrollIntoView();
-		addSupportersField.type(searchString);
-		sleep(5);
-		for (int i = 0; i < amount; i++) {
-			suppirtersItemInTheSearchButton.click();
-			sleep(1);
+		
+		int delta = 0, calculated = 0, num = amount;
+		if (calculateAudience.isVisible()) {
+			calculateAudience.click();
+			sleep(2);
 		}
+		delta = Integer.parseInt(calculatedLabel.getText().replace(" supporter(s)", ""));
+		do {
+			addSupportersField.type(searchString);
+			sleep(5);
+			if (suppirtersItemInTheSearchButton.isNotDisplayed()) {
+				break;
+			}
+			for (int i = 0; i < num; i++) {
+				suppirtersItemInTheSearchButton.click();
+				sleep(1);
+			}
+			calculateAudience.click();
+			sleep(2);
+			calculated = Integer.parseInt(calculatedLabel.getText().replace(" supporter(s)", "")) - delta;
+			num = amount - calculated;
+		} while (num > 0);
 		return this;
 	}
 	

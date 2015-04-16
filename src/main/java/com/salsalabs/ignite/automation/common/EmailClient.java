@@ -119,6 +119,7 @@ public class EmailClient {
 	}
 
 	public ArrayList<Email> getEmailsBySubject(String subj) throws MailosaurException {
+		SeleneseTestCase.logger.info("Try to find email with subject - " + subj);
 		Email[] e = mBoxAPI.getEmails();
 		ArrayList<Email> result = new ArrayList<Email>();
 		for (int i = 0; i < e.length; i++) {

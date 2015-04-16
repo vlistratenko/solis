@@ -89,7 +89,7 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 			link = link.replaceFirst(".ignite.", ".igniteaction.");
 		}
 		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html", false);
+		this.openInNewWindow(link + "/index.html");
 		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
 		if (visibleForCm) {
 			verifier.verifyElementIsDisplayed(subscribeButton);

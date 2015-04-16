@@ -2,12 +2,14 @@ package com.salsalabs.ignite.automation.suites;
 
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.emails.AddEmailsPage_PublishTab;
+import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastDetailsPage;
 
 /**
  * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18, TC19)</b>
@@ -33,24 +35,26 @@ public class EmailBlastTest extends SeleneseTestCase{
 	 * <li> Click 'Next' Button
 	 * <li> <font color="green"><b>Verify Audience number</b></font>
 	 * <li> Click 'Send now' Button
+	 * <li> <font color="green"><b>Verify Email is present in the All Messaging table. Check the status.</b></font>
 	 * <li> Wait for emails
 	 * <li> Open emails
 	 * <li> Click on the link
-	 * <li> Open result page
-	 * <li> <font color="green"><b>In the delivery section, verify: [a] the delivery rate is displayed and the bar is colored the appropriate amount; [b] numbers are displayed for soft and hard bounces. </b></font>
-	 * <li> <font color="green"><b>In the performance section, verify that the rates are displayed and the bar is colored the appropriate amounts for: [a] open rate; [b] click rate;</b></font>
-	 * <li> Make screenshot
 	 * </ul>
 	 *  
-	 */
-	@Parameters({"sendEmail.From", "sendEmail.OpenAmount", "sendEmail.ClickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
-	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmails", ""}, description = "")
-	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
+	 */	
+	@Parameters({ "sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.unsubscribeAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount", "sendEmail.percentageOfTestGroup", "sendEmail.splitsAmount" })
+	@Test(retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmails" }, description = "")
+	public void sendEmailBlastTest(String emailFrom, Integer openAmount, Integer clickAmount, Integer unsubAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount, Integer percentageOfTestGroup, int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
 		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
-		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);	
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
+		if (splitsAmount > 1) {
+			CommonUtils.setProperty(PropertyName.EMAIL_SPLIT_SUBJECT, emailSubject);
+			CommonUtils.setProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP, percentageOfTestGroup.toString());
+		} else {
+			CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
+		}
 		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
@@ -65,21 +69,48 @@ public class EmailBlastTest extends SeleneseTestCase{
 		addSupporters("unex", hardBounceAmount).
 		openComposePage().
 		selectLayout("Basic").
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
-		fillAllFieldsAndPublish(100, 1);
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
+		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount).
+		openDashboard().
+		openMessagingPage().
+		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
+		
 		Integer published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
 		if (published == amountOfSupporters) {
 			hardBounceAmount = 0;
 		}
 		new AddEmailsPage_PublishTab().
-		verifyAmountOfEmails(published - hardBounceAmount, 1, 15, false).
-		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, false).
-		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, true);
+		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 15, false).
+		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 5, false).
+		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 5, true);
 		
-		loginPage.openEmails(emailSubject, openAmount);
-		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount);
-		
-		loginPage.
+		loginPage.openEmails(splitsAmount, openAmount);
+		loginPage.clickLinkInEmail(splitsAmount, "http://salsalabs.com", clickAmount);
+		loginPage.unsubscribeByEmail(splitsAmount, unsubAmount);
+	}
+	
+	/**
+	 * <b>Verify email KPI</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into existing organization
+	 * <li> Open Messaging page --> Emails
+	 * <li> Click on the last completed email
+	 * <li> <font color="green"><b>In the delivery section, verify: [a] the delivery rate is displayed and the bar is colored the appropriate amount; [b] numbers are displayed for soft and hard bounces. </b></font>
+	 * <li> <font color="green"><b>In the performance section, verify that the rates are displayed and the bar is colored the appropriate amounts for: [a] open rate; [b] click rate;</b></font>
+	 * <li> Make screenshot
+	 * </ul>
+	 *  
+	 */	
+	@Parameters({ "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.unsubscribeAmount", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount", "sendEmail.splitsAmount" })
+	@Test(retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmails", "email.verifyKPI" }, description = "")
+	public void verifyEmailKPITest(Integer openAmount, Integer clickAmount, Integer unsubAmount, Integer amountOfSupporters, Integer hardBounceAmount, Integer splitAmount) {
+		Integer published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		if (published == amountOfSupporters) {
+			hardBounceAmount = 0;
+		}
+		new LoginPage().
 		doSuccessLogin().
 		openMessagingPage().
 		openEmailBlastsPage().
@@ -87,7 +118,12 @@ public class EmailBlastTest extends SeleneseTestCase{
 		verifyDeliveryRateStat(hardBounceAmount).
 		verifyOpenRateStat(openAmount, hardBounceAmount).
 		verifyClickRateStat(clickAmount, hardBounceAmount).
-		verifyHardBouncesStat(hardBounceAmount);
+		verifyHardBouncesStat(hardBounceAmount).
+		verifyUnsubRateStat(unsubAmount, hardBounceAmount);
+		
+		if (splitAmount > 1) {
+			new EmailBlastDetailsPage().verifySplitTestResult(splitAmount, openAmount, clickAmount, unsubAmount, hardBounceAmount);
+		}
 		
 		makeScreenshot("Email KPI Success");
 	}

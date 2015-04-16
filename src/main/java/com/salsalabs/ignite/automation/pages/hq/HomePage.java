@@ -65,6 +65,7 @@ public class HomePage extends Browser{
 	TextBox fromAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='fromAddress']", "From Address", true);
 	TextBox replyAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='replyAddress']", "Reply Address", true);
 	Button buyButton = new ButtonImpl("//a[@href='/#/purchase']", "Buy");
+	Button dashboardButton = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard");
 	
 	public HomePage verifyUserNameDisplayed() {
 		verifier.verifyElementIsDisplayed(userlabel);
@@ -189,6 +190,11 @@ public class HomePage extends Browser{
 	public AlertsPage openAlertsPage() {
 		super.open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/notifications/alerts");
 		return new AlertsPage();
+	}
+	
+	public HomePage openDashboard() {
+		dashboardButton.click();
+		return new HomePage();
 	}
 	
 }
