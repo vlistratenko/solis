@@ -1,5 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -9,7 +12,9 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
-public class AddSubscribeWidgetPage extends ActivitiesPage{
+public class AddSubscribeWidgetPage extends ActivitiesPage {
+	private String[] layouts = {"Hero", "Sidebar Right", "Hero Sidekick", "Newsletter", 
+			"Sidebar Hero Left", "Sidebar Left", "Sidebar Hero Right", "Basic"};
 	String widgetName;
 	String currentWindowHandle;
 	TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
@@ -33,6 +38,10 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		openComposeStepButton.click();
 		sleep(10);
 		return this;		
+	}
+	
+	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep() {
+		return this.selectLayoutForSubscribeWidgetStep(chooseRandomLayout());
 	}
 	
 	public AddSubscribeWidgetPage selectLayoutForSubscribeWidgetStep(String layoutName) {
@@ -111,6 +120,29 @@ public class AddSubscribeWidgetPage extends ActivitiesPage{
 		settingsButton.click();
 		makePrivateButton.click();
 		sleep(10);
+	}
+	
+	// create widget in one step without verifications
+	public AddSubscribeWidgetPage createSignupForm() {
+		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+		String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+		return this.createSignupForm(widgetName, widgetDescription);
+	}
+	
+	public AddSubscribeWidgetPage createSignupForm(String widgetName, String widgetDescription) {
+		return this.createSignupForm(widgetName, widgetDescription, chooseRandomLayout());
+	}
+	
+	public AddSubscribeWidgetPage createSignupForm(String widgetName, String widgetDescription, String layoutName) {
+		this.fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription);
+		this.selectLayoutForSubscribeWidgetStep(layoutName);
+		this.fillFieldsSubscribeWidgetStepTwo();
+		this.publishForm();
+		return this;
+	}
+	
+	public String chooseRandomLayout() {
+		return this.layouts[RandomUtils.nextInt(0, this.layouts.length)];
 	}
 
 }

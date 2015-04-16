@@ -10,7 +10,8 @@ import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersAddPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 
 /**
- * <b>This test contains scenarios related to supporter manual creation (TestLink: TC6)</b>
+ * <b>This test contains scenarios related to manual supporter creation (TestLink: TC6)</b>
+ * @author a.hubachov
  *
  */
 public class CreateSupporterManuallyTest extends SeleneseTestCase {
@@ -38,7 +39,7 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 		doLoginAndOpenAddSupporterPage();
 		supporter = Supporter.generateSupporter();
 		supportersPage = supporterAddPage.createNewSupporter(supporter);
-		supportersPage.verifySupporterOnTopOfTable(supporter);
+		supportersPage.verifySupporterOnTopOfTableFull(supporter);
 	}
 	
 	private void doLoginAndOpenAddSupporterPage() {

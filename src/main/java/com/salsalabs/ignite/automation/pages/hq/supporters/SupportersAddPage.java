@@ -29,24 +29,6 @@ public class SupportersAddPage extends HomePage{
 	Label supporterStatusLabel = new LabelImpl("//p[.='Unsubscribed']", "Status");
 	Button saveButton = new ButtonImpl("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
 	
-//	public SupportersPage createNewSupporter() {
-//		String unicID = CommonUtils.getRandomValue(100000, 0);
-//		CommonUtils.setParam("supporterEmail", SeleneseTestCase.emailClient.getEmailBox("supman" + unicID));
-//		supporterEmailField.type(CommonUtils.getParam("supporterEmail"));
-//		supporterFirstNameField.type("Tester" + unicID);
-//		supporterLastNameField.type("Testerov" + unicID);
-//		supporterPhoneField.type("23" + CommonUtils.getRandomNumericValueFixedLength(9));
-//		supporterStreetField.type("Street" + unicID);
-//		supporterCityField.type("City" + unicID);
-//		supporterStatesField.selectByID(CommonUtils.getRandomValueFromTo(1, 5, 0));
-//		supporterZipField.type(CommonUtils.getRandomNumericValueFixedLength(6));
-//		supporterFaceBookField.type("FB" + unicID);
-//		supporterTwitterField.type("twitter" + unicID);
-//		supporterGooglePlusField.type("googlePlus" + unicID);
-//		saveButton.click();
-//		return new SupportersPage();
-//	}
-	
 	public SupportersPage createNewSupporter() {
 		return createNewSupporter(Supporter.generateSupporter());
 	}
