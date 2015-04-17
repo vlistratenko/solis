@@ -77,16 +77,16 @@ public class EmailBlastDetailsPage extends HomePage {
 	
 	public EmailBlastDetailsPage verifySplitTestResult(Integer splitAmount, Integer openAmount, Integer clickAmount, Integer unsubAmount, Integer hardBounceAmount) {
 		Integer amountOfPublishedEmails = (Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount)/splitAmount;
-		String clickRate = getRate(clickAmount, amountOfPublishedEmails);
-		String openRate = getRate(openAmount, amountOfPublishedEmails);
-		String unsubRate = getRate(unsubAmount, amountOfPublishedEmails);
+		String clickRate = getRate(clickAmount / splitAmount, amountOfPublishedEmails);
+		String openRate = getRate(openAmount / splitAmount, amountOfPublishedEmails);
+		String unsubRate = getRate(unsubAmount / splitAmount, amountOfPublishedEmails);
 		String targets = String.valueOf(amountOfPublishedEmails);
 		for (int i = 1; i <= splitAmount; i++) {
 			SeleneseTestCase.logger.info("Verify Split Test Result");
-			verifier.verifyEquals(splitTable.getCellValue(i, 3), openRate);
-			verifier.verifyEquals(splitTable.getCellValue(i, 4), clickRate);
-			verifier.verifyEquals(splitTable.getCellValue(i, 6), unsubRate);
-			verifier.verifyEquals(splitTable.getCellValue(i, 7), targets);
+			verifier.verifyEquals(splitTable.getCellValue(i, 3), openRate, "Wrong rate", true);
+			verifier.verifyEquals(splitTable.getCellValue(i, 4), clickRate, "Wrong rate", true);
+			verifier.verifyEquals(splitTable.getCellValue(i, 6), unsubRate, "Wrong rate", true);
+			verifier.verifyEquals(splitTable.getCellValue(i, 7), targets, "Wrong rate", true);
 		}
 		return this;
 	}
