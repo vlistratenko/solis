@@ -32,7 +32,7 @@ public class EmailBlastDetailsPage extends HomePage {
 	}
 	
 	private EmailBlastDetailsPage verifyRateStat(Label label, String value) {
-		for (int i = 1; i <= 30; i++) {
+		for (int i = 1; i <= 5; i++) {
 			if (waitConditionBecomesTrue(label.getText().equalsIgnoreCase(value))) {
 				break;
 			}
