@@ -10,7 +10,9 @@ public interface PropertyName {
 	String CURRENT_WINDOW_HANDLE = "currentWindowHandle";
 	String IMAGE_NAME = "imageName";
 	String EMAIL_BLAST_NAME = "emailBlastName";
-	String AMOUNT_OF_PUBLISHED_EMAILS = "amountOfPablishedEmails";
+	String EMAIL_SPLIT_BLAST_NAME = "emailSplitBlastName";
+	String AMOUNT_OF_PUBLISHED_EMAILS = "amountOfPublishedEmails";
+	String AMOUNT_OF_PUBLISHED_SPLIT_EMAILS = "amountOfPublishedSplitEmails";
 	String LDAP_LOGIN = "ldap.login";
 	String CM_LAST_NAME = "CM.lastName";
 	String UPDATE_TC = "updateTC";

@@ -48,12 +48,13 @@ public class EmailBlastTest extends SeleneseTestCase{
 	public void sendEmailBlastTest(String emailFrom, Integer openAmount, Integer clickAmount, Integer unsubAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount, Integer percentageOfTestGroup, int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
-		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		if (splitsAmount > 1) {
+			CommonUtils.setProperty(PropertyName.EMAIL_SPLIT_BLAST_NAME, emailBlastName);
 			CommonUtils.setProperty(PropertyName.EMAIL_SPLIT_SUBJECT, emailSubject);
 			CommonUtils.setProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP, percentageOfTestGroup.toString());
 		} else {
+			CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
 			CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
 		}
 		
@@ -76,7 +77,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openMessagingPage().
 		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
 		
-		Integer published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		Integer published = Integer.valueOf(CommonUtils.getProperty(splitsAmount > 1 ? PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS : PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
 		if (published == amountOfSupporters) {
 			hardBounceAmount = 0;
 		}
@@ -103,9 +104,17 @@ public class EmailBlastTest extends SeleneseTestCase{
 	 *  
 	 */	
 	@Parameters({ "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.unsubscribeAmount", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount", "sendEmail.splitsAmount" })
-	@Test(retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmails", "email.verifyKPI" }, description = "")
+	@Test(retryAnalyzer = RetryAnalyzer.class, groups = { "email.verifyKPI" }, description = "")
 	public void verifyEmailKPITest(Integer openAmount, Integer clickAmount, Integer unsubAmount, Integer amountOfSupporters, Integer hardBounceAmount, Integer splitAmount) {
-		Integer published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		String name;
+		Integer published;
+		if (splitAmount > 1) {
+			name = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_BLAST_NAME);
+			published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS));
+		} else {
+			name = CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME);
+			published = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		}
 		if (published == amountOfSupporters) {
 			hardBounceAmount = 0;
 		}
@@ -113,15 +122,15 @@ public class EmailBlastTest extends SeleneseTestCase{
 		doSuccessLogin().
 		openMessagingPage().
 		openEmailBlastsPage().
-		openEmailBlastDetailsPage(CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME)).
-		verifyDeliveryRateStat(hardBounceAmount).
-		verifyOpenRateStat(openAmount, hardBounceAmount).
-		verifyClickRateStat(clickAmount, hardBounceAmount).
+		openEmailBlastDetailsPage(name).
+		verifyDeliveryRateStat(published, hardBounceAmount).
+		verifyOpenRateStat(openAmount, published, hardBounceAmount).
+		verifyClickRateStat(clickAmount, published, hardBounceAmount).
 		verifyHardBouncesStat(hardBounceAmount).
-		verifyUnsubRateStat(unsubAmount, hardBounceAmount);
+		verifyUnsubRateStat(unsubAmount, published, hardBounceAmount);
 		
 		if (splitAmount > 1) {
-			new EmailBlastDetailsPage().verifySplitTestResult(splitAmount, openAmount, clickAmount, unsubAmount, hardBounceAmount);
+			new EmailBlastDetailsPage().verifySplitTestResult(splitAmount, openAmount, clickAmount, unsubAmount, published, hardBounceAmount);
 		}
 		
 		makeScreenshot("Email KPI Success");

@@ -25,7 +25,7 @@ import com.salsalabs.ignite.automation.pages.other.Dispatcher;
 
 public class EmailBlastTest extends SeleneseTestCase{
 	
-	@Parameters({"sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
+	/*@Parameters({"sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmails", ""}, description = "")
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
@@ -62,8 +62,8 @@ public class EmailBlastTest extends SeleneseTestCase{
 		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, false).
 		verifyAmountOfEmails(published - hardBounceAmount, 1, 5, true);
 		
-		loginPage.openEmails(emailSubject, openAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
-		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmount/*Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS))*/);
+		loginPage.openEmails(emailSubject, openAmountInteger.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
+		loginPage.clickLinkInEmail(emailSubject, "http://salsalabs.com", clickAmountInteger.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
 		
 		loginPage.
 		doSuccessLogin().
@@ -211,5 +211,5 @@ public class EmailBlastTest extends SeleneseTestCase{
 				selectJob("Email Blast - Sender").
 				verifyValue("Throughput", "Email Blast: " + emailBlastName, "2 / 2 (2 ps)", "Wrong value in the dispatcher", true);
 
-	}
+	}*/
 }
