@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="Email KPI Tests" parallel="false" thread-count="2">
   	<parameter name="USED_SERVER" value="LOCAL"></parameter>
-  	<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
+  	<parameter name="sendEmail.from"  value="info@salsalabs.com"></parameter>
    	
     	
 

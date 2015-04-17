@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Thu Apr 16 16:46:33 EEST 2015
+#Fri Apr 17 10:35:46 EEST 2015
 amountOfSupporters=1
 current.Password=11111111
 assets.username=neworg1.03eed056@mailosaur.in
@@ -8,7 +8,7 @@ oneTimeWidgetName=AutoWidgetName20150210122352
 planName=BuildAcceptanceTest
 currentWindowHandle={3a60ee30-a739-4d76-a39d-5c092f342067}
 imageName=Image
-emailBlastName=TestV20150416164157
+emailBlastName=TestV20150417100903
 amountOfPablishedEmails=4
 ldap.login=solisqa
 CM.lastName=CMLastNameAuto
@@ -17,7 +17,7 @@ Admin.email=automation1_admin1.6fe4a402@mailosaur.in
 buildVersion=Ignite 0.16
 current.firstName=AutoTester
 current.lastName=AutoTesterov
-emailSplitsSubject=TestVAuto20150416150525
+emailSplitsSubject=TestVAuto20150417100903
 Admin.orgName=automated_testing1
 ldap.password=Salsa123\!
 emailSubject=TestVAuto20150416164157
