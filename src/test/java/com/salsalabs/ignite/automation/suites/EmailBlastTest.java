@@ -12,13 +12,13 @@ import com.salsalabs.ignite.automation.pages.hq.emails.AddEmailsPage_PublishTab;
 import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastDetailsPage;
 
 /**
- * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18, TC19)</b>
+ * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18, TC19, TC20, TC21)</b>
  *
  */
 public class EmailBlastTest extends SeleneseTestCase{
 	
 	/**
-	 * <b>Create and send single email blast</b>
+	 * <b>Create and send single/split email blast</b>
 	 * <p>
 	 * Steps:
 	 * <ul>
@@ -29,6 +29,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	 * <li> Add supporters to receive this email 
 	 * <li> Add a supporter that will be bounced
 	 * <li> Choose basic layout
+	 * <li> Add some splits if it's required
 	 * <li> Fill From Address
 	 * <li> Fill Subject
 	 * <li> Insert a Link to the email
