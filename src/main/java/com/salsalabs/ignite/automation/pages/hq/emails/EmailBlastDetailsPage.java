@@ -25,8 +25,8 @@ public class EmailBlastDetailsPage extends HomePage {
 		return String.valueOf(new BigDecimal(amount.doubleValue() * 100.0 / published.doubleValue()).setScale(round ? 2 : 0, RoundingMode.HALF_UP)) + "%";
 	}
 	
-	private EmailBlastDetailsPage verifyRateStat(Label label, Integer amount, Integer hardBounceAmount) {
-		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount;
+	private EmailBlastDetailsPage verifyRateStat(Label label, Integer amount, Integer published, Integer hardBounceAmount) {
+		Integer amountOfPablishedEmails = published - hardBounceAmount;
 		String rate = getRate(amount, amountOfPablishedEmails);
 		return verifyRateStat(label, rate);
 	}
@@ -41,22 +41,22 @@ public class EmailBlastDetailsPage extends HomePage {
 		return this;
 	}
 
-	public EmailBlastDetailsPage verifyDeliveryRateStat(Integer hardBounceAmount) {
+	public EmailBlastDetailsPage verifyDeliveryRateStat(Integer published, Integer hardBounceAmount) {
 		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
 		Integer deliveryAmount = amountOfPablishedEmails - hardBounceAmount;
-		return verifyRateStat(deliveryRateLabel, deliveryAmount, 0);
+		return verifyRateStat(deliveryRateLabel, deliveryAmount, published, 0);
 	}
 	
-	public EmailBlastDetailsPage verifyOpenRateStat(Integer openAmount, Integer hardBounceAmount) {
-		return verifyRateStat(openRateLabel, openAmount, hardBounceAmount);
+	public EmailBlastDetailsPage verifyOpenRateStat(Integer openAmount, Integer published, Integer hardBounceAmount) {
+		return verifyRateStat(openRateLabel, openAmount, published, hardBounceAmount);
 	}
 
-	public EmailBlastDetailsPage verifyClickRateStat(Integer clickAmount, Integer hardBounceAmount) {
-		return verifyRateStat(clikRateLabel, clickAmount, hardBounceAmount);
+	public EmailBlastDetailsPage verifyClickRateStat(Integer clickAmount, Integer published, Integer hardBounceAmount) {
+		return verifyRateStat(clikRateLabel, clickAmount, published, hardBounceAmount);
 	}
 	
-	public EmailBlastDetailsPage verifyUnsubRateStat(Integer unsubAmount, Integer hardBounceAmount) {
-		return verifyRateStat(unsubLabel, unsubAmount, hardBounceAmount);
+	public EmailBlastDetailsPage verifyUnsubRateStat(Integer unsubAmount, Integer published, Integer hardBounceAmount) {
+		return verifyRateStat(unsubLabel, unsubAmount, published, hardBounceAmount);
 	}
 	
 	private boolean waitConditionBecomesTrue(boolean condition) {
@@ -75,8 +75,8 @@ public class EmailBlastDetailsPage extends HomePage {
 		return verifyRateStat(hardBounceLabel, hardBounceAmount.toString());
 	}
 	
-	public EmailBlastDetailsPage verifySplitTestResult(Integer splitAmount, Integer openAmount, Integer clickAmount, Integer unsubAmount, Integer hardBounceAmount) {
-		Integer amountOfPublishedEmails = (Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)) - hardBounceAmount)/splitAmount;
+	public EmailBlastDetailsPage verifySplitTestResult(Integer splitAmount, Integer openAmount, Integer clickAmount, Integer unsubAmount, Integer published, Integer hardBounceAmount) {
+		Integer amountOfPublishedEmails = (published - hardBounceAmount)/splitAmount;
 		String clickRate = getRate(clickAmount / splitAmount, amountOfPublishedEmails);
 		String openRate = getRate(openAmount / splitAmount, amountOfPublishedEmails);
 		String unsubRate = getRate(unsubAmount / splitAmount, amountOfPublishedEmails);
