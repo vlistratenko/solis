@@ -57,9 +57,11 @@ public class CustomFieldsPage extends ManagePage {
 	}
 	
 	public CustomFieldsPage deleteCustomField(String customFieldName) {
-		Element delete = new ButtonImpl("//li[.//h3[text()='" + customFieldName + "']]//a[@class='delete']", "Delete");
+		sleep(4);
+		Element delete = new ButtonImpl("//a[@autotest-id='delete_" + customFieldName + "']", "Delete");
 		delete.clickJS();
 		switchToAlert().accept();
+		sleep(6);
 		Element field = new LabelImpl("//*[text()='" + customFieldName + "']", "");
 		verifier.verifyElementIsNotDisplayed(field);
 		return this;
