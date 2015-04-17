@@ -25,7 +25,7 @@ import com.salsalabs.ignite.automation.pages.other.Dispatcher;
 
 public class EmailBlastTest extends SeleneseTestCase{
 	
-	@Parameters({"sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
+	@Parameters({"sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmails", ""}, description = "")
 	public void sendEmailsTest(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
@@ -78,7 +78,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		makeScreenshot("Email KPI Success");
 	}
 	
-	@Parameters({"sendEmail.From",
+	@Parameters({"sendEmail.from",
 		"sendEmail.openAmount",
 		"sendEmail.clickAmount",
 		"sendEmail.emailOfSupporter",
@@ -143,7 +143,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		
 	}
 
-	//@Parameters({"sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
+	//@Parameters({"sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"email.sendEmailsToUnsubscribedSupporters"}, description = "")
 	public void sendEmailsToUnsubscribedSupporters() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		

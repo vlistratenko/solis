@@ -42,7 +42,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 	 * </ul>
 	 *  
 	 */	
-	@Parameters({ "sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.unsubscribeAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount", "sendEmail.percentageOfTestGroup", "sendEmail.splitsAmount" })
+	@Parameters({ "sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount", "sendEmail.unsubscribeAmount", "sendEmail.emailOfSupporter", "sendEmail.amountOfSupporter", "sendEmail.hardBounceAmount", "sendEmail.percentageOfTestGroup", "sendEmail.splitsAmount" })
 	@Test(retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmails" }, description = "")
 	public void sendEmailBlastTest(String emailFrom, Integer openAmount, Integer clickAmount, Integer unsubAmount, String emailOfSupporter, Integer amountOfSupporters, Integer hardBounceAmount, Integer percentageOfTestGroup, int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();

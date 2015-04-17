@@ -42,7 +42,7 @@
 		<parameter name="criteriaForExcludeSupporterManually"  value="sup"></parameter>
 		<parameter name="criteriaForAddSupporterManually"  value="sup"></parameter> 	
 		
-		<parameter name="sendEmail.From"  value="info@salsalabs.com"></parameter>
+		<parameter name="sendEmail.from"  value="info@salsalabs.com"></parameter>
 		<parameter name="sendEmail.percentageOfTestGroup"  value="50"></parameter>
 		<parameter name="sendEmail.splitsAmount"  value="2"></parameter>
 		

@@ -37,7 +37,7 @@ public class EmailBlastDetailsPage extends HomePage {
 				break;
 			}
 		}
-		verifier.verifyEquals(label.getText(), value, "Wrong rate");
+		verifier.verifyEquals(label.getText(), value, "Wrong rate", true);
 		return this;
 	}
 
