@@ -3,8 +3,6 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
@@ -42,8 +40,7 @@ public class EmailBlastDetailsPage extends HomePage {
 	}
 
 	public EmailBlastDetailsPage verifyDeliveryRateStat(Integer published, Integer hardBounceAmount) {
-		Integer amountOfPablishedEmails = Integer.valueOf(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
-		Integer deliveryAmount = amountOfPablishedEmails - hardBounceAmount;
+		Integer deliveryAmount = published - hardBounceAmount;
 		return verifyRateStat(deliveryRateLabel, deliveryAmount, published, 0);
 	}
 	
