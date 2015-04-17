@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Mon Mar 30 15:22:25 EEST 2015
+#Fri Apr 17 16:19:43 EEST 2015
 amountOfSupporters=1
 current.Password=11111111
 assets.username=neworg1.03eed056@mailosaur.in
@@ -35,11 +35,11 @@ Environment=TEST
 ImportName=Import_20150330152115
 percentageOfTestGroup=50
 unsubscribedSupporter=20150305143500.4441b2bf@mailosaur.in
-current.Login=automation1_admin1.612fb360@mailosaur.in
 CM.Password=\!QAZ2wsx
+current.Login=automation1_admin1.612fb360@mailosaur.in
 Admin.emailBase=automation1_admin1
-Admin.firstName=AutoTester
 Admin.lastName=AutoTesterov
-CM.firstName=CMFirstNameAuto
-subscribeWidget=AutoWidgetName20150210124740
+Admin.firstName=AutoTester
 assets.password=qwerty
+subscribeWidget=AutoWidgetName20150210124740
+CM.firstName=CMFirstNameAuto
