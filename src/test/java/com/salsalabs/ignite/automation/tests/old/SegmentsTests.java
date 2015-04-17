@@ -11,7 +11,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class SegmentsTests extends SeleneseTestCase{
 	
-	//@Parameters({"sendEmail.From", "sendEmail.openAmount", "sendEmail.clickAmount"})
+	//@Parameters({"sendEmail.from", "sendEmail.openAmount", "sendEmail.clickAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.wepay", ""}, description = "")
 	public void createWePayTestTest(/*String emailFrom, Integer openAmount, Integer clickAmount*/) {
 		

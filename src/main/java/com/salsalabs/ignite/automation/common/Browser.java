@@ -223,6 +223,9 @@ public abstract class Browser {
 	}
 	
 	public void openEmails(Integer amountOfSplits, Integer amount) {
+		if (amount == 0) {
+			return;
+		}
 		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
 		for (int i = 1; i <= amountOfSplits; i++) {
 			String subj;
@@ -236,6 +239,9 @@ public abstract class Browser {
 	}
 	
 	public void clickLinkInEmail(Integer amountOfSplits, String linkText, Integer amountOfEmails) {
+		if (amountOfEmails == 0) {
+			return;
+		}
 		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
 		for (int i = 1; i <= amountOfSplits; i++) {
 			String subj;
@@ -265,6 +271,9 @@ public abstract class Browser {
 	}
 	
 	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
+		if (amountOfEmails == 0) {
+			return;
+		}
 		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
 		for (int i = 1; i <= amountOfSplits; i++) {
 			String subj;
