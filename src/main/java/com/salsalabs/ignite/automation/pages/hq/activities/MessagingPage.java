@@ -13,8 +13,11 @@ import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastsPage;
 
 public class MessagingPage extends HomePage {
 	
-	Button emailBlastsLink = new ButtonImpl("//a[.='Emails']", "Email blast"); 
-	Button allActivitiesTab = new ButtonImpl("//a[.='All Messaging']", "All Messaging");
+	Button emailTab = new ButtonImpl("//a[@autotest-id='EMAIL']", "Emails tab"); 
+	Button socialTab = new ButtonImpl("//a[@autotest-id='SOCIAL']", "Social Posts tab"); 
+	Button mseriesTab = new ButtonImpl("//a[@autotest-id='MESSAGE_SERIES']", "Messsage series tab"); 
+	Button receiptTab = new ButtonImpl("//a[@autotest-id='COMM_CONFIRMATION']", "Receipts tab"); 
+	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Messaging tab");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Messaging Table");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
@@ -27,7 +30,7 @@ public class MessagingPage extends HomePage {
 	}
 	
 	public EmailBlastsPage openEmailBlastsPage() {
-		emailBlastsLink.click();
+		emailTab.click();
 		return new EmailBlastsPage();
 	}
 	
