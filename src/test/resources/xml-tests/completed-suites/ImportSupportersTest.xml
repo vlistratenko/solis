@@ -12,7 +12,19 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="com.salsalabs.ignite.automation.suites.ImportCustomFieldsTest" />
+			<class name="com.salsalabs.ignite.automation.suites.ImportSupportersTest" />
+		</classes>
+	</test>
+	
+	<test verbose="1" name="Import Without Custom Fields FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="importSupporters" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.ImportSupportersTest" />
 		</classes>
 	</test>
 	
