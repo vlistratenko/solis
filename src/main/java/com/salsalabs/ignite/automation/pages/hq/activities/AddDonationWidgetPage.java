@@ -18,7 +18,7 @@ public class AddDonationWidgetPage extends ActivitiesPage {
 	TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget Name", true);
 	TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget description", false);
 	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
-	Button goToStep3Btn = new ButtonImpl("//button[@id='btnCompose3']", "Next: age Settings >>");
+	Button goToStep3Btn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings >>");
 	Button publishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish button", true);
 	CheckBox iNeedHostedPageCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	CheckBox iNeedWidgetCodeCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
