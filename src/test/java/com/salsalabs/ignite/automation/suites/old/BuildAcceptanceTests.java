@@ -172,13 +172,13 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyTableWithMessagesDisplayed();
 	}
 	
-	@Parameters({"sendEmail.From", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
+	@Parameters({"sendEmail.from", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=90, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="loginAsNewSuperAdminTest", description = "528:62:Split emails were NOT sent")
 	public void sendTestEmailsTest(String emailFrom, Integer percentageOfTestGroup, int splitsAmount) {
 		String emailBlastName = "TestV" + CommonUtils.getUnicName();
 		String emailSubject = "TestVAuto" + CommonUtils.getUnicName();
 		HomePage homePage = new HomePage();
-		homePage.openActivitiesPage().
+		homePage.openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
@@ -212,7 +212,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	}
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=110, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods={"loginAsNewSuperAdminTest"}, description = "536:63:Emails were NOT sent")
-	@Parameters({"sendEmail.From"})
+	@Parameters({"sendEmail.from"})
 	public void sendEmailsTest(String emailFrom) {
 		sendTestEmailsTest(emailFrom, 100, 1);
 		
@@ -341,7 +341,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyMessagesInNewsTest();
 	}
 	
-	@Parameters({"sendEmail.From", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
+	@Parameters({"sendEmail.from", "sendEmail.percentageOfTestGroup","sendEmail.splitsAmount"})
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=200, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
 	public void sendTestEmailsTestAsCM(String emailFrom, Integer percentageOfTestGroup, int splitsAmount) {
 		sendTestEmailsTest(emailFrom, percentageOfTestGroup, splitsAmount);
@@ -356,7 +356,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 	}
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=220, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
-	@Parameters({"sendEmail.From"})
+	@Parameters({"sendEmail.from"})
 	public void sendEmailsTestAsCM(String emailFrom) {
 		sendTestEmailsTest(emailFrom, 100, 1);
 		

@@ -58,19 +58,19 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 		new SupportersTests().createSupporerManually(amount);		
 	}
 	
-	@Parameters({"sendEmail.From", "sendEmailImport.OpenAmount", "sendEmailImport.ClickAmount", "sendEmailImport.emailOfSupporter", "sendEmailImport.amountOfSupporter"})
+	/*@Parameters({"sendEmail.from", "sendEmailImport.OpenAmount", "sendEmailImport.ClickAmount", "sendEmailImport.emailOfSupporter", "sendEmailImport.amountOfSupporter"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"settings.import"})
 	public void sendEmailsTestForImported(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
 		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, "", amountOfSupporters, 2);
 	}
 	
-	@Parameters({"sendEmail.From", "sendEmailManuall.OpenAmount", "sendEmailManuall.ClickAmount", "sendEmailManuall.emailOfSupporter", "sendEmailManuall.amountOfSupporter"})
+	@Parameters({"sendEmail.from", "sendEmailManuall.OpenAmount", "sendEmailManuall.ClickAmount", "sendEmailManuall.emailOfSupporter", "sendEmailManuall.amountOfSupporter"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=70, groups = {"email.sendEmails", ""}, description = "", dependsOnGroups={"createSupporter.manually"})
 	public void sendEmailsTestForManual(String emailFrom, Integer openAmount, Integer clickAmount, String emailOfSupporter, Integer amountOfSupporters) {
 		
 		new EmailBlastTest().sendEmailsTest(emailFrom, openAmount, clickAmount, emailOfSupporter, amountOfSupporters, 0);
-	}
+	}*/
 	
 	
 

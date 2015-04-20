@@ -47,3 +47,4 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 				openAudiencePage().openSupportersPage().openAddSupporterPage();
 	}
 }
+

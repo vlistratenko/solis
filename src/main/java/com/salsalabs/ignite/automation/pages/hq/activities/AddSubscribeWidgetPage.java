@@ -86,6 +86,36 @@ public class AddSubscribeWidgetPage extends ActivitiesPage {
 		return new SubscribeWidget();
 	}
 	
+	public ActivitiesPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
+		if (link.contains(".ignite.")) {
+			link = link.replaceFirst(".ignite.", ".igniteaction.");
+		}
+		String primaryHandle = this.getWindowHandle();
+		this.openInNewWindow(link + "/index.html");
+		Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe Button");
+		if (visibleForCm) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.deletecoockies();
+		this.refresh();
+		if (visibleForSupporter) {
+			verifier.verifyElementIsDisplayed(subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(subscribeButton);
+		}
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return new ActivitiesPage();
+	}
+
+	public void makeWidgetPrivate() {
+		settingsButton.click();
+		makePrivateButton.click();
+		sleep(10);
+	}
+
 	// create widget in one step without verifications
 	public AddSubscribeWidgetPage createSignupForm() {
 		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);

@@ -1,0 +1,44 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">
+<!ENTITY parent SYSTEM "src/test/resources/xml-tests/completed-suites/EmailBlastSendTest.xml">
+]>
+<suite name="Verify email blast KPI" parallel="false" thread-count="1">
+
+	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
+	<parameter name="sendEmail.openAmount" value="4"></parameter>
+	<parameter name="sendEmail.amountOfSupporter" value="4"></parameter>
+	<parameter name="sendEmail.clickAmount" value="2"></parameter>
+	<parameter name="sendEmail.emailOfSupporter" value="supMan"></parameter>
+	<parameter name="sendEmail.percentageOfTestGroup" value="100"></parameter>
+	<parameter name="sendEmail.splitsAmount" value="1"></parameter>
+	<parameter name="sendEmail.hardBounceAmount" value="1"></parameter>
+	<parameter name="sendEmail.unsubscribeAmount" value="1"></parameter>
+
+	<test verbose="1" name="Verify single email blast KPI (FIREFOX)" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+			<run>
+				<include name="email.verifyKPI" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.EmailBlastTest" />
+		</classes>
+	</test>
+	
+	<test verbose="1" name="Verify split email blast KPI (FIREFOX)" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<parameter name="sendEmail.splitsAmount" value="2"></parameter>
+		<parameter name="sendEmail.hardBounceAmount" value="0"></parameter>
+		<parameter name="sendEmail.unsubscribeAmount" value="0"></parameter>
+		<groups>
+			<run>
+				<include name="email.verifyKPI" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.EmailBlastTest" />
+		</classes>
+	</test>
+</suite>

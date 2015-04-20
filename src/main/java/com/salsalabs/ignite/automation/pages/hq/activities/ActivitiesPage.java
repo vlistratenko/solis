@@ -9,16 +9,16 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastsPage;
 
 
 public class ActivitiesPage extends HomePage {
+
 	protected String[] layouts = {"Hero", "Sidebar Right", "Hero Sidekick", "Newsletter", 
 			"Sidebar Hero Left", "Sidebar Left", "Sidebar Hero Right", "Basic"};
 	String widgetButtonText;
 	Button emailBlastsLink = new ButtonImpl("//a[.='Manage Emails']", "Email blast"); 
-	Button fundraisingWidgetLink = new ButtonImpl("//a[@autotest-id='FUNDRAISE']", "Fundraising Forms");
-	Button subscribeWidgetLink = new ButtonImpl("//a[text()='Sign-Up Forms']", "Sign-Up Forms");
+	Button fundraisingWidgetLink = new ButtonImpl("//a[@autotest-id='FUNDRAISE']", "Fundraising Widget");
+	Button subscribeWidgetLink = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
@@ -34,11 +34,6 @@ public class ActivitiesPage extends HomePage {
 		return this;
 	}
 	
-	public EmailBlastsPage openEmailBlastsPage() {
-		emailBlastsLink.click();
-		return new EmailBlastsPage();
-	}
-	
 	public FundraisingWidgetPage openFundraisingWidgetPage() {
 		fundraisingWidgetLink.click();
 		return new FundraisingWidgetPage();
@@ -51,12 +46,6 @@ public class ActivitiesPage extends HomePage {
 	
 	public ActivitiesPage openAllActivitiesTab() {
 		allActivitiesTab.click();
-		sleep(2);
-		return this;
-	}
-	
-	public ActivitiesPage openSignupFormsTab() {
-		signupFormsTab.click();
 		sleep(2);
 		return this;
 	}
@@ -120,7 +109,7 @@ public class ActivitiesPage extends HomePage {
 			link = link.replaceFirst(".ignite.", ".igniteaction.");
 		}
 		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html", false);
+		this.openInNewWindow(link + "/index.html");
 		Button subscribeButton = new ButtonImpl("//input[@value='" + widgetButtonText + "']", widgetButtonText + " Button");
 		if (visibleForCm) {
 			verifier.verifyElementIsDisplayed(subscribeButton);

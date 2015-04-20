@@ -85,7 +85,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "PUBLISHED");
 		// verify that new widget present in table in Signup Forms tab (Published state)
-		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
+		activitiesPage.openSubscribeWidgetsPage().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
 		// open widget link in new tab and ensure it visible for CM and supporter
 		activitiesPage = addSignupFormsPage.verifyWidgetVisible(expectedLink, true, true);
 		// click on widget in table to open it
@@ -98,7 +98,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "DRAFT");
 		// open Sign-Up Forms tab and check that our form is present in table too (Draft state)
-		activitiesPage.openSignupFormsTab().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "DRAFT", "PRIVATE");;
+		activitiesPage.openSubscribeWidgetsPage().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "DRAFT", "PRIVATE");;
 		// remove widget
 		activitiesPage.removeWidgetSuccessfully();
 		// make sure it's not present in in table in All Activities tab
@@ -115,3 +115,4 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 	}
 
 }
+

@@ -51,18 +51,13 @@ public abstract class Browser {
 		sleep(5);
 		return new LoginPage();
 	}
-
-	protected void open(String url) {
-		this.open(url, true);
-	}
 	
-	protected void open(String url, boolean replace) {
-		if (replace) {
-			url = url.replaceFirst("igniteaction.net", "ignite.net");
-		}
+	protected void open(String url) {
+		url = url.replaceFirst("hq.uat.igniteaction.net", "hq.uat.ignite.net");
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
+		driver.manage().window().maximize();
 		if (driver instanceof InternetExplorerDriver) {
 			Button link = new ButtonImpl("//a[@name='overridelink']", "Continue");
 			sleep(15);
@@ -71,17 +66,13 @@ public abstract class Browser {
 			}
 		}
 	}
-
-	protected String openInNewWindow(String url) {
-		return this.openInNewWindow(url, true);
-	}
 	
-	protected String openInNewWindow(String url, boolean replace) {
+	protected String openInNewWindow(String url) {
 		String currentWindowHandle = getWindowHandle();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open()");
 		switchToPopupWindow(currentWindowHandle);
-		open(url, replace);
+		open(url);
 		return currentWindowHandle;
 	}
 
@@ -199,34 +190,19 @@ public abstract class Browser {
 	}
 
 	public LoginPage verifyAmountOfEmails(int amountOfEmails, int amountOfSplits, int amountOfMinutes, boolean doFail) {
-		Integer amountEmailsInSplit = amountOfEmails;
+		String[] subjs = new String[amountOfSplits];
 		if (amountOfSplits > 1) {
 			Integer testGroup = Integer.valueOf(CommonUtils.getProperty(PropertyName.PERCENTAGE_OF_TEST_GROUP));
 			float s = (float) ((float) testGroup / (float) 100);
-			amountEmailsInSplit = (int) (amountOfEmails / amountOfSplits * s);
-
+			amountOfEmails = (int) (amountOfEmails * s);
+			for (int i = 1; i <= amountOfSplits; i++) {
+				subjs[i - 1] = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT) + " Split " + i;
+			}
+		} else {
+			subjs[0] = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
 		}
-		for (int i = 1; i <= amountOfSplits; i++) {
-			String subj;
-			if (amountOfSplits > 1) {
-				subj = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT) + " Split " + i;
-			} else {
-				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
-			}
-			Integer amountEmails = null;
-			try {
-
-				amountEmails = SeleneseTestCase.emailClient.waitForEmails(subj, amountEmailsInSplit, amountOfMinutes).getEmailsBySubject(subj).size();
-			} catch (MailosaurException e) {
-				e.printStackTrace();
-			}
-			if (!CommonUtils.getProperty(PropertyName.ENVIRONMENT).equalsIgnoreCase("dev")) {
-				verifier.verifyEquals(amountEmails, amountEmailsInSplit, "Not all emails " + subj + " were delivered", doFail);
-			} else {
-				verifier.verifyTrue(amountEmails > 0, "O emails were delivered", doFail);
-			}
-		}
-
+		int amountEmails = SeleneseTestCase.emailClient.waitForEmails(subjs, amountOfEmails, amountOfMinutes);
+		verifier.verifyEquals(amountEmails, amountOfEmails, "Not all emails were delivered", doFail);
 		return new LoginPage();
 	}
 
@@ -245,6 +221,38 @@ public abstract class Browser {
 			logger.info("Email for " + emails.get(i).to[0].address + " was opened");
 		}
 	}
+	
+	public void openEmails(Integer amountOfSplits, Integer amount) {
+		if (amount == 0) {
+			return;
+		}
+		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
+		for (int i = 1; i <= amountOfSplits; i++) {
+			String subj;
+			if (amountOfSplits > 1) {
+				subj = subjBase + " Split " + i;
+			} else {
+				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
+			}
+			openEmails(subj, amount / amountOfSplits);
+		}
+	}
+	
+	public void clickLinkInEmail(Integer amountOfSplits, String linkText, Integer amountOfEmails) {
+		if (amountOfEmails == 0) {
+			return;
+		}
+		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
+		for (int i = 1; i <= amountOfSplits; i++) {
+			String subj;
+			if (amountOfSplits > 1) {
+				subj = subjBase + " Split " + i;
+			} else {
+				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
+			}
+			clickLinkInEmail(subj, linkText, amountOfEmails / amountOfSplits);
+		}
+	}
 
 	public void clickLinkInEmail(String subj, String linkText, Integer amountOfEmails) {
 		EmailClient client = SeleneseTestCase.emailClient;
@@ -259,6 +267,40 @@ public abstract class Browser {
 		for (int i = 0; i < amountOfEmails; i++) {
 			client.clickLinkByText(emails.get(i), linkText);
 			logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+		}
+	}
+	
+	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
+		if (amountOfEmails == 0) {
+			return;
+		}
+		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
+		for (int i = 1; i <= amountOfSplits; i++) {
+			String subj;
+			if (amountOfSplits > 1) {
+				subj = subjBase + " Split " + i;
+			} else {
+				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
+			}
+			unsubscribeByEmail(subj, amountOfEmails / amountOfSplits);
+		}
+	}
+	
+	public void unsubscribeByEmail(String subj, Integer amountOfEmails) {
+		EmailClient client = SeleneseTestCase.emailClient;
+		ArrayList<Email> emails = null;
+		try {
+			emails = client.getEmailsBySubject(subj);
+		} catch (MailosaurException e) {
+			logger.error("", e);
+		}
+		if (emails.size() < amountOfEmails)
+			amountOfEmails = emails.size();
+		for (int i = 0; i < amountOfEmails; i++) {
+			new LoginPage().openUnsubscribeLinkFromEmail(subj).
+			fillUnsubscribeForm(emails.get(i).to[0].address).
+			clickUnsubscribeButton().
+			verifyUnsubscribeIsSuccesses();
 		}
 	}
 	

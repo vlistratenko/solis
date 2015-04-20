@@ -119,6 +119,7 @@ public class EmailClient {
 	}
 
 	public ArrayList<Email> getEmailsBySubject(String subj) throws MailosaurException {
+		SeleneseTestCase.logger.info("Try to find email with subject - " + subj);
 		Email[] e = mBoxAPI.getEmails();
 		ArrayList<Email> result = new ArrayList<Email>();
 		for (int i = 0; i < e.length; i++) {
@@ -238,6 +239,30 @@ public class EmailClient {
 			}
 		}
 		return this;
+	}
+	
+	public int waitForEmails(String[] subjs, Integer emailsAmount, Integer timeMin) {
+		int num = 0;
+		for (int i = 0; i < timeMin; i++) {
+			num = 0;
+			for (String subj : subjs) {
+				try {
+					num += getEmailsBySubject(subj).size();
+				} catch (MailosaurException e) {
+					logger.error("", e);
+				}
+			}
+			if (num < emailsAmount) {
+				try {
+					Thread.sleep(60000);
+				} catch (InterruptedException e) {
+					logger.error("", e);
+				}
+			} else {
+				break;
+			}
+		}
+		return num;
 	}
 
 	public void sendEmail(String subj, String mailMessage, File attach) throws AddressException, MessagingException {
