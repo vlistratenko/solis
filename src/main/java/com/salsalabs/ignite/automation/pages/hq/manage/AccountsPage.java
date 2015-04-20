@@ -17,7 +17,7 @@ public class AccountsPage extends HomePage{
 	Button inviteNewUserButton =  new ButtonImpl("//button[@ng-click='btnInviteUser()']", "Invite new user");
 	Table invitationsTable = new TableImpl("//table[last()]", "Pending Invitations");
 	TextBox inviteSearch = new TextBoxImpl("(//input[@placeholder='search...'])[last()]", "Search invite textbox");
-	Button inviteSearchBtn = new ButtonImpl("(//a[@ng-click='processing.search = true; doSearch();'])[last()]", "Search invite btn");
+	Button inviteSearchBtn = new ButtonImpl("(//*[contains(@ng-click,'doSearch()')])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
 		sleep(5);

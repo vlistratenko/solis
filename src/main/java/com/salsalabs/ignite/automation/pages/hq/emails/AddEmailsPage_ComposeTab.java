@@ -65,7 +65,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
 		TextBox inputLinkField = new TextBoxImpl("//input[@name='url']", "Input Link");
-		Button addLinkButton = new ButtonImpl("//button[contains(@ng-click,'insertLink')]", "Add link on the popup");
+		Button addLinkButton = new ButtonImpl("//*[contains(@ng-click,'insertLink')]", "Add link on the popup");
 		Button addExternal = new ButtonImpl("//a[.='An External Page']", "An External Page");
 		emailTemplate.type("Link: ");
 		switchDefaultContent();
