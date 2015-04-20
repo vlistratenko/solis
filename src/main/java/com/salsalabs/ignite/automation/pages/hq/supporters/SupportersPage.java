@@ -2,9 +2,11 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
@@ -17,7 +19,7 @@ public class SupportersPage extends AudiencePage {
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
 	Button doSearchButton = new ButtonImpl("//a[contains(@ng-click,'processing.search')]", "Do search");
 	Button openAddSupporterMenuButton = new ButtonImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/button", "Add Supporters");
-
+	
 	public SupportersAddPage openAddSupporterPage() {
 		if (feedBackDialogPanel.isDisplayed()) {
 			closeFeedbackDialog.click();
@@ -56,6 +58,18 @@ public class SupportersPage extends AudiencePage {
 		return this;
 		
 	}
+	
+	public void verifySupporterExists(String email, boolean exists) {
+		searchField.type(email);
+		doSearchButton.click();
+		sleep(10);
+		Label record = new LabelImpl("//*[contains(text(), '" + email + "')]", "Supporter in table");
+		if (exists) {
+			verifier.verifyFalse(record.isNotExists(), "Supporter NOT exists");
+		} else {
+			verifier.verifyTrue(record.isNotExists(), "Supporter exists");
+		}
+	}
 
 	public SupportersPage searchSupporter(String personEmail) {
 		searchField.type(personEmail);
@@ -70,7 +84,7 @@ public class SupportersPage extends AudiencePage {
 
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
-		supportersTable.clickInCell(1, 2, "span/span[@ng-click='editItem(item)']");
+		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		return new SupportersAddPage();
 	}
 	

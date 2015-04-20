@@ -115,3 +115,4 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 	}
 
 }
+
