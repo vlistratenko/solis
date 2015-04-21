@@ -14,7 +14,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class CustomFieldsPage extends ManagePage {
 
 	private Button createCFBtn = new ButtonImpl("//*[@id='customFieldsConfiguration']/div/ng-form/div/div/div[2]/div/div/button", "Create a Custom Field", true);
-	private Button toStep2Btn = new ButtonImpl("//*[@id='cf_form']/div[3]/span[1]/a[2]", "Continue to Step 2: Field Details »", true);
+	private Button toStep2Btn = new ButtonImpl("//*[@autotest-id='btn_next_step1_custom_field_create']", "Continue to Step 2: Field Details »", true);
 	private TextBox fieldNameTxtBox = new TextBoxImpl("//*[@id='cfnew_name']", "Field Name", true);
 	private Button toStep3Btn = new ButtonImpl("//*[@id='btnModalStep2']", "Continue to Step 3: Field Settings »", true);
 	private TextBox descriptionTxtBox = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[2]/div[2]/div/textarea", "Description", true);
