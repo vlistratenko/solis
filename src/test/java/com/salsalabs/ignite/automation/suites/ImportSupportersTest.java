@@ -31,10 +31,6 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	private List<CustomField> customFields = new ArrayList<CustomField>();
 	private String importName;
 	private String importStatusCompleted = "COMPLETED";
-	
-	public ImportSupportersTest() {
-		importName = "Import_" + CommonUtils.getUnicName();
-	}
 
 	/**
 	 * <b>Import of supporters with 2 custom fields (Text and Numeric).</b>
@@ -65,6 +61,7 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	 */
 	@Test(groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initImportWithCustomFieldsTest() {
+		importName = "Import_" + CommonUtils.getUnicName();
 		customFields.add(new CustomField(CustomFieldType.TextBox, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
 		customFields.add(new CustomField(CustomFieldType.Number, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
 		doLogin();
