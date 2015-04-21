@@ -18,7 +18,7 @@ public class CustomFieldsPage extends ManagePage {
 	private TextBox fieldNameTxtBox = new TextBoxImpl("//*[@id='cfnew_name']", "Field Name", true);
 	private Button toStep3Btn = new ButtonImpl("//*[@id='btnModalStep2']", "Continue to Step 3: Field Settings »", true);
 	private TextBox descriptionTxtBox = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[2]/div[2]/div/textarea", "Description", true);
-	private Button createFieldBtn = new ButtonImpl("//*[@id='cf_form']/div[3]/span[3]/a[3]", "Create Field! »", true);
+	private Button createFieldBtn = new ButtonImpl("//*[@autotest-id='btn_save_step3_custom_field_create']", "Create Field! »", true);
 	private TextBox cfValue = new TextBoxImpl("//*[@id='cf_form']/div[2]/div[3]/div[1]/div/div[2]/span/span/input", "Text", true);
 	private Button customFieldButton;
 	
