@@ -5,7 +5,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 
 public class SubscribeWidgetPage extends ActivitiesPage {
 	
-	Button createSubscribeWidgetButton = new ButtonImpl("//a[contains(text(), 'Create a Sign-up Form')]", "Create a Signup Form");
+	Button createSubscribeWidgetButton = new ButtonImpl("//*[@autotest-id='btn_create_subscribe_form_forms_dashboard']", "Create a Signup Form");
 
 	public AddSubscribeWidgetPage openAddSubscribeWidgetPage() {
 		createSubscribeWidgetButton.click();
