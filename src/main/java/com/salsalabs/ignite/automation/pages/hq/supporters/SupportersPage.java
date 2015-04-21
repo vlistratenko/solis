@@ -17,7 +17,7 @@ public class SupportersPage extends AudiencePage {
 	Button addSingleSupporterBtn = new ButtonImpl("//a[contains(text(), 'Add a Single Supporter')]", "Add a Single Supporter");
 	Table supportersTable = new TableImpl("//table-list/div[2]/div/div/table", "Table with supporters");
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
-	Button doSearchButton = new ButtonImpl("//a[contains(@ng-click,'processing.search')]", "Do search");
+	Button doSearchButton = new ButtonImpl("//*[@autotest-id='btn_search_list']", "Do search");
 	Button openAddSupporterMenuButton = new ButtonImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/button", "Add Supporters");
 	
 	public SupportersAddPage openAddSupporterPage() {
