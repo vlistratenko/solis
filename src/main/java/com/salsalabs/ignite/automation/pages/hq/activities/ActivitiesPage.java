@@ -14,7 +14,6 @@ public class ActivitiesPage extends HomePage {
 	Button fundraisingWidgetLink = new ButtonImpl("//a[.='Raise Money']", "Fundraising Widget");
 	Button subscribeWidgetLink = new ButtonImpl("//a[text()='Sign-Up Forms']", "Sign-Up Forms");
 	Button allActivitiesTab = new ButtonImpl("//a[text()='All Activities']", "All Activities");
-	Button signupFormsTab = new ButtonImpl("//a[text()='Sign-Up Forms']", "Sign-Up Forms");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
@@ -38,12 +37,6 @@ public class ActivitiesPage extends HomePage {
 	
 	public ActivitiesPage openAllActivitiesTab() {
 		allActivitiesTab.click();
-		sleep(2);
-		return this;
-	}
-	
-	public ActivitiesPage openSignupFormsTab() {
-		signupFormsTab.click();
 		sleep(2);
 		return this;
 	}
