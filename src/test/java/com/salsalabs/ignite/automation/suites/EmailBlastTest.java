@@ -133,6 +133,6 @@ public class EmailBlastTest extends SeleneseTestCase{
 			new EmailBlastDetailsPage().verifySplitTestResult(splitAmount, openAmount, clickAmount, unsubAmount, published, hardBounceAmount);
 		}
 		
-		makeScreenshot("Email KPI Success");
+		makeScreenshot("Email KPI Success. " + name);
 	}
 }
