@@ -22,7 +22,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public abstract class Browser {
 	static WebDriver driver;
-	static Logger logger;
+	protected static Logger logger;
 	protected static Verifier verifier = new Verifier();
 	int cTimeOut;
 	String elementName;

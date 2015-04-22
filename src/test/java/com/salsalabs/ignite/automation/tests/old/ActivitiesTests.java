@@ -24,17 +24,17 @@ public class ActivitiesTests extends SeleneseTestCase{
 		String widgetTitle = "Title " + CommonUtils.getUnicName();
 		LoginPage loginPage = new LoginPage();
 			
-		DonationWidget widget = loginPage.
+		DonationWidget widget = null;/*loginPage.
 		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 		openActivitiesPage().
 		openFundraisingWidgetPage().
 		openAddDonationWidgetPage().
-		createDonationWidgetSetupStep(widgetName, widgetDescription).
-		selectLayoutForDanationWidgetStep(widgetLayoutName).
-		createDonationWidgetDesignWidgetStep().
+		createForm(widgetName, widgetDescription).
+		selectLayoutStep(widgetLayoutName).
+		fillThirdStep().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		saveDonationWidgetLink().
-		openDonationWidget();
+		openDonationWidget();*/
 		
 		if (recurringDonation) {
 			CommonUtils.setProperty(PropertyName.RECURRING_WIDGET_NAME, widgetName);
@@ -194,9 +194,9 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openActivitiesPage().
 		openSubscribeWidgetsPage().
 		openAddSubscribeWidgetPage().
-		fillFieldsSubscribeWidgetStepOne(widgetName, widgetDescription).
-		selectLayoutForSubscribeWidgetStep(widgetLayoutName).
-		fillFieldsSubscribeWidgetStepTwo().
+		fillFieldsWidgetStepOne(widgetName, widgetDescription).
+		selectLayoutStep(widgetLayoutName).
+		fillFieldsWidgetStepTwo().
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		openSubscribeWidget().
 		backToSubscribeWidgetPage();

@@ -1,7 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import org.apache.commons.lang3.RandomUtils;
-
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Table;
@@ -12,26 +10,27 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
 
 public class ActivitiesPage extends HomePage {
-
-	protected String[] layouts = {"Hero", "Sidebar Right", "Hero Sidekick", "Newsletter", 
-			"Sidebar Hero Left", "Sidebar Left", "Sidebar Hero Right", "Basic"};
-	String widgetButtonText;
+	
 	Button emailBlastsLink = new ButtonImpl("//a[.='Manage Emails']", "Email blast"); 
 	Button fundraisingWidgetLink = new ButtonImpl("//a[@autotest-id='FUNDRAISE']", "Fundraising Widget");
 	Button subscribeWidgetLink = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
+	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
-	Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
-	Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	
 	public ActivitiesPage verifyURL() {
 		verifier.verifyTrue(getLocation().contains("activities"), "Current URL is not contains Activities");
 		return this;
+	}
+	
+	public PetitionsPage openPetitionsPage() {
+		petitionTab.click();
+		return new PetitionsPage();
 	}
 	
 	public FundraisingWidgetPage openFundraisingWidgetPage() {
@@ -73,15 +72,27 @@ public class ActivitiesPage extends HomePage {
 		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 2), widgetName, "Widget is not present in table (name)");
 		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 3), description, "Widget is not present in table (description)");
 	}
-
-	public AddSubscribeWidgetPage openSignupWidgetFromTable() {
+	
+	public <T> T openFormFromTable(Class<T> clazz) {
 		new ButtonImpl(activitiesTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
-		return new AddSubscribeWidgetPage();
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			logger.error("", e);
+		}
+		return null;
+	}
+	
+	public AddSubscribeWidgetPage openSignupWidgetFromTable() {
+		return openFormFromTable(AddSubscribeWidgetPage.class);
 	}
 	
 	public AddDonationWidgetPage openDonationsWidgetFromTable() {
-		new ButtonImpl(activitiesTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
-		return new AddDonationWidgetPage();
+		return openFormFromTable(AddDonationWidgetPage.class);
+	}
+	
+	public AddPetitionPage openPetitionFromTable() {
+		return openFormFromTable(AddPetitionPage.class);
 	}
 	
 	// try to remove and click Yes on confirmation dialog
@@ -91,7 +102,7 @@ public class ActivitiesPage extends HomePage {
 		verifier.verifyElementIsDisplayed(deleteButton);
 		deleteButton.click();
 		confirmDeletionBtn.click();
-		sleep(10);
+		sleep(5);
 	}
 	
 	// try to remove and click Cancel button on confirmation dialog
@@ -102,44 +113,5 @@ public class ActivitiesPage extends HomePage {
 		deleteButton.click();
 		rejectDeletionBtn.click();
 		sleep(2);
-	}
-	
-	public ActivitiesPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
-		if (link.contains(".ignite.")) {
-			link = link.replaceFirst(".ignite.", ".igniteaction.");
-		}
-		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html");
-		Button subscribeButton = new ButtonImpl("//input[@value='" + widgetButtonText + "']", widgetButtonText + " Button");
-		if (visibleForCm) {
-			verifier.verifyElementIsDisplayed(subscribeButton);
-		} else {
-			verifier.verifyElementIsNotDisplayed(subscribeButton);
-		}
-		this.deletecoockies();
-		this.refresh();
-		if (visibleForSupporter) {
-			verifier.verifyElementIsDisplayed(subscribeButton);
-		} else {
-			verifier.verifyElementIsNotDisplayed(subscribeButton);
-		}
-		this.closeWindow();
-		this.switchToWindow(primaryHandle);
-		return new ActivitiesPage();
-	}
-	
-	public void verifyFormLinkIsPresent(String expectedLink) {
-		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
-		verifier.verifyElementIsDisplayed(link);
-	}
-	
-	protected String chooseRandomLayout() {
-		return this.layouts[RandomUtils.nextInt(0, this.layouts.length)];
-	}
-	
-	public void makeWidgetPrivate() {
-		settingsButton.click();
-		makePrivateButton.click();
-		sleep(10);
 	}
 }

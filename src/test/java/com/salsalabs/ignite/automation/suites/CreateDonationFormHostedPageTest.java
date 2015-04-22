@@ -35,16 +35,16 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 	 * <li> Open Donation Forms tab
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (Donation Forms) and status is PUBLISHED and visibility is PUBLIC</b></font>
 	 * <li> Open in separated window link to form
-	 * <li> <font color="green"><b>Verify that form is visible to CM</b></font>
+	 * <li> <font color="green"><b>Verify that form is visible to CM (Verify all form elements are displayed)</b></font>
 	 * <li> Delete cookies and refresh page
-	 * <li> <font color="green"><b>Verify that form is visible to potential supporter</b></font>
+	 * <li> <font color="green"><b>Verify that form is visible to potential supporter (Verify all form elements are displayed)</b></font>
 	 * <li> Close window with form
 	 * <li> Open form editing by clicking on form in table
 	 * <li> Click on settings icon in the bottom of screen and click on Make it Private
 	 * <li> Open form by link in separated window
-	 * <li> <font color="green"><b>Verify that form is visible to CM</b></font>
+	 * <li> <font color="green"><b>Verify that form is visible to CM (Verify all form elements are displayed)</b></font>
 	 * <li> Delete cookies and refresh page
-	 * <li> <font color="green"><b>Verify that form is NOT visible to potential supporter</b></font>
+	 * <li> <font color="green"><b>Verify that form is NOT visible to potential supporter (Verify submit button is not displayed)</b></font>
 	 * <li> Close window with form
 	 * <li> Open Activities page --> All Activities
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (All Activities) and status is DRAFT</b></font>
@@ -58,9 +58,9 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 	 * <li><font color="green"><b>Verify that table do not contains record about form (Donation Forms)</b></font>
 	 * <li> Open in separate window 
 	 * <li> Open form by link in separated window
-	 * <li> <font color="green"><b>Verify that form is NOT visible to CM</b></font>
+	 * <li> <font color="green"><b>Verify that form is NOT visible to CM (Verify submit button is not displayed)</b></font>
 	 * <li> Delete cookies and refresh page
-	 * <li> <font color="green"><b>Verify that form is NOT visible to potential supporter</b></font>
+	 * <li> <font color="green"><b>Verify that form is NOT visible to potential supporter (Verify submit button is not displayed)</b></font>
 	 * <li> Close window with form
 	 * </ul>
 	 *  
@@ -72,13 +72,13 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 		String expectedLink = ("https://automatedtesting1." + SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name() + ".igniteaction.net/" + formName).toLowerCase();
 		doLoginAndOpenDonationForms();
 		// enter name and description
-		donationsAddPage.createDonationWidgetSetupStep(formName, formDescription);
+		donationsAddPage.createForm(formName, formDescription);
 		// choose layout
-		donationsAddPage.selectLayoutForDanationWidgetStep();
+		donationsAddPage.selectLayoutStep();
 		// leave default design
 		donationsAddPage.fillThirdStep();
 		// leave default settings and publish form
-		donationsAddPage.createDonationWidgetDesignWidgetStep();
+		donationsAddPage.publishForm();
 		// verify that link is present on page
 		donationsAddPage.verifyFormLinkIsPresent(expectedLink);
 		// verify that new widget is present in table in All Activities tab (Published state)
@@ -87,7 +87,7 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 		// verify that new widget present in table in Fundraising Forms tab (Published state)
 		activitiesPage.openFundraisingWidgetPage().verifyWidgetIsPresentInTableForms(formName, formDescription, "PUBLISHED", "PUBLIC");
 		// open widget link in new tab and ensure it visible for CM and supporter
-		activitiesPage = donationsAddPage.verifyWidgetVisible(expectedLink, true, true);
+		donationsAddPage.verifyWidgetVisible(expectedLink, true, true);
 		// click on widget in table to open it
 		donationsAddPage = activitiesPage.openDonationsWidgetFromTable();
 		// make widget private

@@ -109,7 +109,7 @@ public class SupporterSubscribeSignupFormTest extends SeleneseTestCase {
 	private void createSignupForm() {
 		addSignupFormsPage = homePage.openActivitiesPage().
 				openSubscribeWidgetsPage().openAddSubscribeWidgetPage();
-		addSignupFormsPage.createSignupForm(widgetName, widgetDescription);
+		addSignupFormsPage.createForm(widgetName, widgetDescription);
 	}
 	
 	private void createSupporter() {
