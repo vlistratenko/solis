@@ -3,7 +3,6 @@ package com.salsalabs.ignite.automation.suites;
 import org.testng.annotations.Test;
 
 import com.mailosaur.exception.MailosaurException;
-import com.mailosaur.model.Email;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
@@ -29,10 +28,12 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	 * <li> Login into existing organization
 	 * <li> Open settings page
 	 * <li> Switch to payment gateway creation page
-	 * <li> Fill specific field type options on step 1
-	 * <li> Fill name, description on step 2
-	 * <li> Click creation button on step 3
-	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
+	 * <li> Type gateway nickname, description, first name, last name, email and choose type of organization
+	 * <li> Click Create My Gateway button
+	 * <li> <font color="green"><b>Verify that email is received from WePay</b></font>
+	 * <li> <font color="green"><b>Verify that created account is listed on the page</b></font>
+	 * <li> Open WePay confirmation page from email
+	 * <li> <font color="green"><b>Verify that page contains button Grant Access</b></font>
 	 * </ul>
 	 * @throws MailosaurException 
 	 *  
@@ -49,7 +50,6 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
 		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
 		paymentGatewayPage = addWePayPage.createWePayAcount(nickname, "wePayDescr", addWePayPage.chooseRandomOrgType());
-//		Email e = emailClient.getEmailBySubject("Please confirm your ignite2 account");
 		paymentGatewayPage.verifyWePayEmail();
 		paymentGatewayPage.verifyCreatedAccountExists(nickname);
 		paymentGatewayPage.openWePayConfirmationPage();
