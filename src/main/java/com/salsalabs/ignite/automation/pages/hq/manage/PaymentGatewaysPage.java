@@ -4,11 +4,12 @@ import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
 public class PaymentGatewaysPage extends ManagePage {
 	
@@ -20,9 +21,9 @@ public class PaymentGatewaysPage extends ManagePage {
 		return new AddWePayPage();
 	}
 	
-	public PaymentGatewaysPage verifyCreatedAccountExists(String Nickname) {
-		verifier.verifyEquals(gateWayAccountsTable.getCellValue(0, 2), Nickname, "Wrong nickname in the first row", false);
-		verifier.verifyEquals(gateWayAccountsTable.isValueExists(Nickname)>0, true, "Nick name is not found");
+	public PaymentGatewaysPage verifyCreatedAccountExists(String nickname) {
+		Label label = new LabelImpl("//*[contains(text(), '" + nickname + "')]", "Label");
+		verifier.verifyElementIsDisplayed(label);
 		return this;
 	}
 
@@ -38,7 +39,7 @@ public class PaymentGatewaysPage extends ManagePage {
 		
 	}
 
-	public HomePage openWePayConfirmationPage() {
+	public PaymentGatewaysPage openWePayConfirmationPage() {
 		String activationLink = "";
 		Button wePayAccessButton = new ButtonImpl("//input[@value='Grant Access']", "Grant Access");
 		try {
@@ -46,9 +47,12 @@ public class PaymentGatewaysPage extends ManagePage {
 		} catch (MailosaurException e) {
 			e.printStackTrace();
 		}
-		open(activationLink);
+		String primaryHandle = this.getWindowHandle();
+		this.openInNewWindow(activationLink);
 		verifier.verifyElementIsVisible(wePayAccessButton);
-		open();
-		return new HomePage();
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return this;
 	}
+	
 }

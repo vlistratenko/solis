@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
+import org.apache.commons.lang3.RandomUtils;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -11,7 +13,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
 public class AddWePayPage extends HomePage{
-
+	String[] orgTypes = {"nonprofit", "personal", "business"};
 	TextBox nickName = new TextBoxImpl("//input[@name='nickname']", "NickName", true);
 	TextBox description = new TextBoxImpl("//textarea[@id='description']", "Description", true);
 	DropDown orgType = new DropDownImpl("//custom-select2[@data='organizationTypes']/div", "//custom-select2[@data='organizationTypes']/div/a", "Org type");//nonprofit
@@ -30,5 +32,9 @@ public class AddWePayPage extends HomePage{
 		submitButton.click();
 		sleep(10);
 		return new PaymentGatewaysPage();
+	}
+	
+	public String chooseRandomOrgType() {
+		return this.orgTypes[RandomUtils.nextInt(0, this.orgTypes.length)];
 	}
 }
