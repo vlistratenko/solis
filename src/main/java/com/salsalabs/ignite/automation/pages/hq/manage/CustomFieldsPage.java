@@ -61,9 +61,9 @@ public class CustomFieldsPage extends ManagePage {
 		Element delete = new ButtonImpl("//a[@autotest-id='delete_" + customFieldName + "']", "Delete");
 		delete.clickJS();
 		switchToAlert().accept();
-		sleep(6);
+		sleep(5);
 		Element field = new LabelImpl("//*[text()='" + customFieldName + "']", "");
-		verifier.verifyElementIsNotDisplayed(field);
+		verifier.verifyTrue(field.isNotExists(), "Custom field still exists");
 		return this;
 	}
 	
