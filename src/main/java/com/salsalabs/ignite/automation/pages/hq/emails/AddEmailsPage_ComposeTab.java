@@ -1,16 +1,12 @@
 package com.salsalabs.ignite.automation.pages.hq.emails;
 
 
-import org.openqa.selenium.Keys;
-
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.ContentEditTextBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
-import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 
@@ -19,7 +15,6 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	DropDown selectScheme = new DropDownImpl("//custom-select-scheme/div[@class='custom dropdown scheme']", "a", "Select Scheme");
 	TextBox subjectField = new ContentEditTextBoxImpl("//iframe[@id='subjectFrame']" ,"//*[@id='subjectId']", "Subject", true);
 	TextBox emailTemplate = new ContentEditTextBoxImpl("//iframe[@id='veframe']" ,"//div[@class='lead editable restricted paragraph']", "Email Template body", true);
-	//Table EmailTemplate = new TableImpl("//div[@class=\"content\"]/table", "Email Template body" );
 	Button addLinkButtonMenu = new ButtonImpl("//span[@title='Link']", "Add link on the menu");
 	Button PublishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
 	TextBox emailFromField = new TextBoxImpl("//input[@name='fromAddress']", "Email from");
@@ -65,7 +60,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
 		TextBox inputLinkField = new TextBoxImpl("//input[@name='url']", "Input Link");
-		Button addLinkButton = new ButtonImpl("//*[contains(@ng-click,'insertLink')]", "Add link on the popup");
+		Button addLinkButton = new ButtonImpl("//*[@autotest-id='btn_save_insert_external_link']", "Add link on the popup");
 		Button addExternal = new ButtonImpl("//a[.='An External Page']", "An External Page");
 		emailTemplate.type("Link: ");
 		switchDefaultContent();
