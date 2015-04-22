@@ -2,9 +2,14 @@ package com.salsalabs.ignite.automation.suites;
 
 import org.testng.annotations.Test;
 
+import com.mailosaur.exception.MailosaurException;
+import com.mailosaur.model.Email;
+import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.manage.AddWePayPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.PaymentGatewaysPage;
 
 /**
@@ -14,6 +19,7 @@ import com.salsalabs.ignite.automation.pages.hq.manage.PaymentGatewaysPage;
 public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	
 	private PaymentGatewaysPage paymentGatewayPage;
+	private AddWePayPage addWePayPage;
 	
 	/**
 	 * <b>Create Payment Gateway.</b>
@@ -28,12 +34,25 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	 * <li> Click creation button on step 3
 	 * <li> <font color="green"><b>Verify that custom field was created. Is listed on the page</b></font>
 	 * </ul>
+	 * @throws MailosaurException 
 	 *  
 	 */
 	@Test(groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testCreatePaymentGateway() {
+	public void testCreatePaymentGateway() throws MailosaurException {
+		String cmEmail = emailClient.getEmailBox("gateway" + CommonUtils.getUnicName());
+		String firstName = "FirstName";
+		String lastName = "LastName";
+		String nickname = "nickname_" + CommonUtils.getUnicName();
 		doLoginAndOpenPaymentGatewayPage();
-		
+		addWePayPage = paymentGatewayPage.openAddWePayPage();
+		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, cmEmail);
+		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
+		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
+		paymentGatewayPage = addWePayPage.createWePayAcount(nickname, "wePayDescr", addWePayPage.chooseRandomOrgType());
+//		Email e = emailClient.getEmailBySubject("Please confirm your ignite2 account");
+		paymentGatewayPage.verifyWePayEmail();
+		paymentGatewayPage.verifyCreatedAccountExists(nickname);
+		paymentGatewayPage.openWePayConfirmationPage();
 	}
 	
 	private void doLoginAndOpenPaymentGatewayPage() {
