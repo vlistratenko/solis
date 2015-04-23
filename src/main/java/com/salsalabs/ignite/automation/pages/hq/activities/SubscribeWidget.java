@@ -30,6 +30,21 @@ public class SubscribeWidget extends Browser{
 		refresh();
 	}
 	
+	public SubscribeWidget(boolean clean) {
+		if (clean) {
+			deletecoockies();
+			refresh();
+		}
+	}
+	
+	public void verifyWidgetElementsVisible(boolean visible){
+		if (visible) {
+			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox, subscribeButton);
+		} else {
+			verifier.verifyElementIsNotDisplayed(true, subscribeButton);
+		}
+	}
+	
 	public AddSubscribeWidgetPage backToSubscribeWidgetPage() {
 		closeWindow();
 		switchToWindow(CommonUtils.getProperty(PropertyName.CURRENT_WINDOW_HANDLE));

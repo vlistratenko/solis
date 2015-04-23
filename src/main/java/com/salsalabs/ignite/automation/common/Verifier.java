@@ -12,17 +12,25 @@ public class Verifier {
 	private static final Logger logger = SeleneseTestCase.logger;
 
 	public void verifyElementIsDisplayed(Element... element) {
+		verifyElementIsDisplayed(false, element);
+	}
+	
+	public void verifyElementIsDisplayed(boolean fail, Element... element) {
 		if (element != null) {
 			for (Element e : element) {
-				verifyTrue(e.isDisplayed(), e.getName() + " is not displayed.", false);
+				verifyTrue(e.isDisplayed(), e.getName() + " is not displayed.", fail);
 			}
 		}
 	}
 	
 	public void verifyElementIsNotDisplayed(Element... element) {
+		verifyElementIsNotDisplayed(false, element);
+	}
+	
+	public void verifyElementIsNotDisplayed(boolean fail, Element... element) {
 		if (element != null) {
 			for (Element e : element) {
-				verifyTrue(e.isNotDisplayed(), e.getName() + " still exists.", false);
+				verifyTrue(e.isNotDisplayed(), e.getName() + " still exists.", fail);
 			}
 		}
 	}

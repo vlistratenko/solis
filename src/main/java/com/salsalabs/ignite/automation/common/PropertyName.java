@@ -32,6 +32,7 @@ public interface PropertyName {
 	String ADMIN_PASSWORD = "Admin.Password";
 	String ASSETS_IMAGE_NAME = "assets.imageName";
 	String DONATION_WIDGET_LINK = "donationWidgetLink";
+	String PETITION_WIDGET_LINK = "petitionWidgetLink";
 	String SUBSCRIBED_SUPPORTER = "subscribedSupporter";
 	String SUBSCRIBE_WIDGET_LINK = "subscribeWidgetLink";
 	String ENVIRONMENT = "Environment";
