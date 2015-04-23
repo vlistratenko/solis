@@ -15,7 +15,7 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupporterSubscribeSignupFormTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/ImportSupportersTest.xml" />
-		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
+		<!-- <suite-file path="src/test/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" /> -->
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePetitionTest.xml" />
 	</suite-files>
 </suite>
