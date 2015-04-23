@@ -43,9 +43,23 @@ public class SubscribeWidget extends Browser{
 		}
 	}
 	
+	protected void verifyBasicElementsVisible(){
+		verifier.verifyElementIsDisplayed(true, 
+				personEmailField, 
+				personFNameField, 
+				personLNameField, 
+				personCityField, 
+				personZipField, 
+				personStatesSelectBox, 
+				fundraisingCheckBox, 
+				newsletterCheckBox, 
+				emailCheckBox);
+	}
+	
 	public void verifyWidgetElementsVisible(boolean visible){
 		if (visible) {
-			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox, subscribeButton);
+			verifyBasicElementsVisible();
+			verifier.verifyElementIsDisplayed(true, subscribeButton);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, subscribeButton);
 		}

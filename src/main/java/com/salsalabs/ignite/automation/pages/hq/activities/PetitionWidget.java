@@ -26,8 +26,8 @@ public class PetitionWidget extends SubscribeWidget {
 		if (visible) {
 			verifier.verifyElementIsDisplayed(true, signButton);
 			signButton.click();
-			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox,
-					fundraisingCheckBox, newsletterCheckBox, emailCheckBox, comment, displaySignatureCheckBox);
+			verifyBasicElementsVisible();
+			verifier.verifyElementIsDisplayed(true, comment, displaySignatureCheckBox);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, signButton);
 		}

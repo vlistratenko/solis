@@ -38,9 +38,18 @@ public class DonationWidget extends SubscribeWidget {
 	@Override
 	public void verifyWidgetElementsVisible(boolean visible){
 		if (visible) {
-			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox, donateButton,
-					recurringDonationCheckBox, donationAmountLabel, nameOnCardField,cardNumberField,cvvField,expiryMonthField,expiryYearField,
-					fundraisingCheckBox,newsletterCheckBox,emailCheckBox,personAddressLine1Field,personAddressLine2Field);
+			verifyBasicElementsVisible();
+			verifier.verifyElementIsDisplayed(true, 
+					donateButton, 
+					recurringDonationCheckBox, 
+					donationAmountLabel, 
+					nameOnCardField, 
+					cardNumberField, 
+					cvvField, 
+					expiryMonthField, 
+					expiryYearField, 
+					personAddressLine1Field, 
+					personAddressLine2Field);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, donateButton);
 		}
