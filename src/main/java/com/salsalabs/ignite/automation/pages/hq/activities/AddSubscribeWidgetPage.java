@@ -58,7 +58,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepTwo() {
 		toPageSettingsBtn.click();
-		sleep(10);
+		sleep(5);
 		return this;		
 	}
 	
