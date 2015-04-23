@@ -81,9 +81,15 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 	
-	public <T> T openWidget(Class<T> clazz) {
+	protected <T> T openWidget(Class<T> clazz) {
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
-		CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET_LINK, widgetLink.getAttribute("href"));
+		if (clazz.equals(SubscribeWidget.class)) {
+			CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET_LINK, widgetLink.getAttribute("href"));
+		} else if (clazz.equals(DonationWidget.class)) {
+			CommonUtils.setProperty(PropertyName.DONATION_WIDGET_LINK, widgetLink.getAttribute("href"));
+		} else if (clazz.equals(PetitionWidget.class)) {
+			CommonUtils.setProperty(PropertyName.PETITION_WIDGET_LINK, widgetLink.getAttribute("href"));
+		}
 		currentWindowHandle = getWindowHandle();
 		widgetLink.click();	
 		sleep(5);
@@ -142,6 +148,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 	
 	public void verifyFormLinkIsPresent(String expectedLink) {
 		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
-		verifier.verifyElementIsDisplayed(link);
+		verifier.verifyElementIsDisplayed(true, link);
 	}	
 }

@@ -8,6 +8,7 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 		openComposeStepButton = new ButtonImpl("//button[@id='btnCompose3']", "Compose");
 	}
 	
+	@Override
 	public AddPetitionPage selectLayoutStep() {
 		return (AddPetitionPage) selectLayoutStep("Basic");
 	}
@@ -16,5 +17,9 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	protected void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
 		new PetitionWidget(false).verifyWidgetElementsVisible(visibleForCm);
 		new PetitionWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
+	}
+	
+	public PetitionWidget openPetitionWidget() {
+		return openWidget(PetitionWidget.class);
 	}
 }
