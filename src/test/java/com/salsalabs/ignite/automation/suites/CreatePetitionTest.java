@@ -10,15 +10,14 @@ import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddPetitionPage;
 
 /**
- * <b>This test contains scenarios related to sign-up form creation (TestLink: TC16)</b>
- * @author a.hubachov
+ * <b>This test contains scenarios related to petition creation (TestLink: TC28)</b>
  */
 public class CreatePetitionTest extends SeleneseTestCase {
 	private AddPetitionPage addPetitionPage;
 	private ActivitiesPage activitiesPage;
 	
 	/**
-	 * <b>Create sign-up form.</b>
+	 * <b>Create petition.</b>
 	 * <p>
 	 * Steps:
 	 * <ul>
@@ -66,7 +65,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 *  
 	 */
 	@Test(groups = {"createAndPublishPetition"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testCreateAndPublishSignupForm() {
+	public void testCreateAndPublishPetition() {
 		doLoginAndOpenPetitionsPage();
 		String widgetName = "PetitionName_" + RandomStringUtils.randomAlphanumeric(5);
 		String widgetDescription = "PetitionDescription_" + RandomStringUtils.randomAlphanumeric(10);
@@ -94,7 +93,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		addPetitionPage.makeWidgetPrivate();
 		// open widget link in new tab and ensure it NOT visible
 		addPetitionPage.verifyWidgetVisible(expectedLink, true, false);
-		// open Activities menu item in left sidebar and check that signup form is present in table (Draft state)
+		// open Activities menu item in left sidebar and check that petition is present in table (Draft state)
 		activitiesPage = addPetitionPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Petition", widgetName, widgetDescription, "DRAFT");
 		// open Sign-Up Forms tab and check that our form is present in table too (Draft state)
@@ -103,7 +102,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		activitiesPage.removeWidgetSuccessfully();
 		// make sure it's not present in in table in All Activities tab
 		activitiesPage.verifyWidgetIsNotPresentInTableForms(widgetName, widgetDescription);
-		// make sure it's not present in table in Signup Forms tab
+		// make sure it's not present in table in Petitions tab
 		activitiesPage.openAllActivitiesTab().verifyActivityIsNotPresentInTableAllActivities(widgetName, widgetDescription);
 		// try to open widget in separate window
 		addPetitionPage.verifyWidgetVisible(expectedLink, false, false);
