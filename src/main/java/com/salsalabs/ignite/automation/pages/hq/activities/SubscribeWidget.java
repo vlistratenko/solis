@@ -4,10 +4,12 @@ import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.SelectBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
@@ -21,6 +23,10 @@ public class SubscribeWidget extends Browser{
 	TextBox personCityField = new TextBoxImpl("//input[@name='Address@Home@City']", "City", true);
 	TextBox personZipField = new TextBoxImpl("//input[@name='Address@Home@Zip']", "Zip", true);
 	SelectBox personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
+	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
+	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
+	CheckBox emailCheckBox = new CheckBoxImpl("//label[contains(text(), 'Email')]/preceding-sibling::input", "Email");
+	
 	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
 	
 	Label subscriptionIsSuccessMessage = new LabelImpl("//div[.='Thank you for your submission.']", "Subscription is success");
@@ -37,9 +43,23 @@ public class SubscribeWidget extends Browser{
 		}
 	}
 	
+	protected void verifyBasicElementsVisible(){
+		verifier.verifyElementIsDisplayed(true, 
+				personEmailField, 
+				personFNameField, 
+				personLNameField, 
+				personCityField, 
+				personZipField, 
+				personStatesSelectBox, 
+				fundraisingCheckBox, 
+				newsletterCheckBox, 
+				emailCheckBox);
+	}
+	
 	public void verifyWidgetElementsVisible(boolean visible){
 		if (visible) {
-			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox, subscribeButton);
+			verifyBasicElementsVisible();
+			verifier.verifyElementIsDisplayed(true, subscribeButton);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, subscribeButton);
 		}
