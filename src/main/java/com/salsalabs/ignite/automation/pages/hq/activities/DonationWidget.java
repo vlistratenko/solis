@@ -23,9 +23,6 @@ public class DonationWidget extends SubscribeWidget {
 	TextBox expiryMonthField = new TextBoxImpl("//input[@id='expiry_month']", "Expiry Month", true);
 	TextBox expiryYearField = new TextBoxImpl("//input[@id='expiry_year']", "Expiry Year", true);
 	
-	CheckBox FundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
-	CheckBox NewsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
-	CheckBox emailCheckBox = new CheckBoxImpl("//label[contains(text(), 'Email')]/preceding-sibling::input", "Email");
 	Button donateButton = new ButtonImpl("//input[@value='Donate!']", "Donate", true);
 	
 	Label donationIsSccessMessage = new LabelImpl("//div[.='Thank you for your donation!']", "Donation is success");
@@ -43,7 +40,7 @@ public class DonationWidget extends SubscribeWidget {
 		if (visible) {
 			verifier.verifyElementIsDisplayed(true, personEmailField, personFNameField, personLNameField, personCityField, personZipField, personStatesSelectBox, donateButton,
 					recurringDonationCheckBox, donationAmountLabel, nameOnCardField,cardNumberField,cvvField,expiryMonthField,expiryYearField,
-					FundraisingCheckBox,NewsletterCheckBox,emailCheckBox,personAddressLine1Field,personAddressLine2Field);
+					fundraisingCheckBox,newsletterCheckBox,emailCheckBox,personAddressLine1Field,personAddressLine2Field);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, donateButton);
 		}
@@ -93,8 +90,8 @@ public class DonationWidget extends SubscribeWidget {
 		expiryMonthField.type(expiryMonth);
 		expiryYearField.type(expiryYear);
 		
-		FundraisingCheckBox.check(isFundraising);
-		NewsletterCheckBox.check(isNewsletter);
+		fundraisingCheckBox.check(isFundraising);
+		newsletterCheckBox.check(isNewsletter);
 		emailCheckBox.check(isEmail);
 		
 		return this;

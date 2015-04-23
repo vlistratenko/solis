@@ -10,9 +10,6 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class PetitionWidget extends SubscribeWidget {
 	
 	Button signButton = new ButtonImpl("//input[@value='Sign Petition']", "Sign Petition", true);
-	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
-	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
-	CheckBox emailCheckBox = new CheckBoxImpl("//label[contains(text(), 'Email')]/preceding-sibling::input", "Email");
 	TextBox comment = new TextBoxImpl("//textarea[@id='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[name='field-showSignature']", "Display My Signature");
 	
