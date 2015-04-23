@@ -31,7 +31,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 * <li> <font color="green"><b>Verify that link of form is listed on the page</b></font>
 	 * <li> Open Activities page --> All Activities
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (All Activities) and status is PUBLISHED </b></font>
-	 * <li> Open Sign-Up Forms tab
+	 * <li> Open Petitions tab
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (Petitions) and status is PUBLISHED and visibility is PUBLIC</b></font>
 	 * <li> Open in separated window link to form
 	 * <li> <font color="green"><b>Verify that form is visible to CM (Verify all form elements are displayed)</b></font>
@@ -47,13 +47,13 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 * <li> Close window with form
 	 * <li> Open Activities page --> All Activities
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (All Activities) and status is DRAFT</b></font>
-	 * <li> Open Sign-Up Forms tab
+	 * <li> Open Petitions tab
 	 * <li> <font color="green"><b>Verify that record about the widget is on the top of the table (Petitions) and status is DRAFT and visibility is PRIVATE</b></font>
 	 * <li> Select the form in table
 	 * <li> <font color="green"><b>Verify that button for removing is appeared</b></font>
 	 * <li> Click on Remove button, confirm action in modal window
 	 * <li> <font color="green"><b>Verify that table do not contains record about form (All Activities)</b></font>
-	 * <li> Open Sign-Up Forms tab
+	 * <li> Open Petitions tab
 	 * <li><font color="green"><b>Verify that table do not contains record about form (Petitions)</b></font>
 	 * <li> Open in separate window 
 	 * <li> Open form by link in separated window
@@ -83,7 +83,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		// verify that new widget is present in table in All Activities tab (Published state)
 		activitiesPage = addPetitionPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Petition", widgetName, widgetDescription, "PUBLISHED");
-		// verify that new widget present in table in Signup Forms tab (Published state)
+		// verify that new widget present in table in Petitions tab (Published state)
 		activitiesPage.openPetitionsPage().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
 		// open widget link in new tab and ensure it visible for CM and supporter
 		addPetitionPage.verifyWidgetVisible(expectedLink, true, true);
@@ -96,7 +96,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		// open Activities menu item in left sidebar and check that petition is present in table (Draft state)
 		activitiesPage = addPetitionPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Petition", widgetName, widgetDescription, "DRAFT");
-		// open Sign-Up Forms tab and check that our form is present in table too (Draft state)
+		// open Petitions tab and check that our form is present in table too (Draft state)
 		activitiesPage.openPetitionsPage().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "DRAFT", "PRIVATE");
 		// remove widget
 		activitiesPage.removeWidgetSuccessfully();
