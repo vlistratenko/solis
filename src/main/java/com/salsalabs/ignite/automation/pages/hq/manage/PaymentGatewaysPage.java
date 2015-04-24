@@ -45,7 +45,7 @@ public class PaymentGatewaysPage extends ManagePage {
 		try {
 			String caption = "Please confirm your ignite account";
 			activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
-			if (activationLink.isEmpty() && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
+			if (activationLink == null && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
 				caption = "Please confirm your ignite2 account";
 			}
 		} catch (MailosaurException e) {
