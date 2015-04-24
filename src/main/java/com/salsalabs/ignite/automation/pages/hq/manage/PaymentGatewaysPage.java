@@ -44,10 +44,10 @@ public class PaymentGatewaysPage extends ManagePage {
 		Button wePayAccessButton = new ButtonImpl("//input[@value='Grant Access']", "Grant Access");
 		try {
 			String caption = "Please confirm your ignite account";
-			if (SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
+			activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
+			if (activationLink.isEmpty() && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
 				caption = "Please confirm your ignite2 account";
 			}
-			activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
 		} catch (MailosaurException e) {
 			e.printStackTrace();
 		}
