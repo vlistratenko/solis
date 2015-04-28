@@ -16,7 +16,7 @@ public class AccountsPage extends HomePage{
 
 	Button inviteNewUserButton =  new ButtonImpl("//button[@ng-click='btnInviteUser()']", "Invite new user");
 	Table invitationsTable = new TableImpl("//table[last()]", "Pending Invitations");
-	TextBox inviteSearch = new TextBoxImpl("//input[@placeholder='search...']", "Search invite textbox");
+	TextBox inviteSearch = new TextBoxImpl("(//input[@placeholder='search...'])[last()]", "Search invite textbox");
 	Button inviteSearchBtn = new ButtonImpl("(//*[@autotest-id='btn_search_list'])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
@@ -30,7 +30,7 @@ public class AccountsPage extends HomePage{
 		sleep(5);
 		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
 		inviteSearchBtn.click();
-		verifier.verifyTrue(invitationsTable.isValueExists(CommonUtils.getProperty(PropertyName.CM_EMAIL)) > 0, "User " + CommonUtils.getProperty(PropertyName.CM_EMAIL) + " was not found.");
+		verifier.verifyElementIsDisplayed(new LabelImpl("//span[contains(text(), '" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "')]", "Admin in table"));
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);
 		return this;
 	}
