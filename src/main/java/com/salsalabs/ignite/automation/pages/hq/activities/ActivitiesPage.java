@@ -19,7 +19,8 @@ public class ActivitiesPage extends HomePage {
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
-	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
+	Button menuDropDown = new ButtonImpl("//a[@ng-click='toggleActionsDropdown()']", "Actions");
+	Button deleteButton = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete menu item");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
 	
@@ -99,7 +100,7 @@ public class ActivitiesPage extends HomePage {
 	public void removeWidgetSuccessfully() {
 		sleep(2);
 		selectFirstWidget.check();
-		verifier.verifyElementIsDisplayed(deleteButton);
+		menuDropDown.click();
 		deleteButton.click();
 		confirmDeletionBtn.click();
 		sleep(5);
@@ -109,7 +110,7 @@ public class ActivitiesPage extends HomePage {
 	public void removeWidgetDiscard() {
 		sleep(2);
 		selectFirstWidget.check();
-		verifier.verifyElementIsDisplayed(deleteButton);
+		menuDropDown.click();
 		deleteButton.click();
 		rejectDeletionBtn.click();
 		sleep(2);
