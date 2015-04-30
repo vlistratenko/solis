@@ -17,8 +17,8 @@ public class ActivitiesPage extends HomePage {
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
-	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
-	CheckBox selectFirstWidget = new CheckBoxImpl("//table[contains(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
+	Table activitiesTable = new TableImpl("//table[starts-with(@id,'JColResizer')]", "Activities Table");
+	CheckBox selectFirstWidget = new CheckBoxImpl("//table[starts-with(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
