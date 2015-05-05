@@ -101,7 +101,6 @@ public class DonationWidget extends SubscribeWidget {
 		
 		fundraisingCheckBox.check(isFundraising);
 		newsletterCheckBox.check(isNewsletter);
-		emailCheckBox.check(isEmail);
 		
 		return this;
 	}
