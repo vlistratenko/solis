@@ -28,7 +28,7 @@ public class AccountsPage extends HomePage{
 	}
 
 	public AccountsPage verifyInvitationSent() {
-		sleep(5);
+		sleep(10);
 		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
 		inviteSearchBtn.click();
 		verifier.verifyElementIsDisplayed(new LabelImpl("//span[contains(text(), '" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "')]", "Admin in table"));
