@@ -14,9 +14,8 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	}
 	
 	@Override
-	protected void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
-		new PetitionWidget(false).verifyWidgetElementsVisible(visibleForCm);
-		new PetitionWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
+	protected SubscribeWidget newWidget(boolean clean) {
+		return new PetitionWidget(clean);
 	}
 	
 	public PetitionWidget openPetitionWidget() {

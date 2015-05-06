@@ -1,10 +1,13 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import java.util.Set;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -30,6 +33,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
 	protected Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	protected Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
+	protected Button previewButton = new ButtonImpl("//div[@ng-click='previewWidgetNoSave()']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
 	protected Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
@@ -125,9 +129,13 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 	
-	protected void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
-		new SubscribeWidget(false).verifyWidgetElementsVisible(visibleForCm);
-		new SubscribeWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
+	protected SubscribeWidget newWidget(boolean clean) {
+		return new SubscribeWidget(clean);
+	}
+	
+	private void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
+		newWidget(false).verifyWidgetElementsVisible(visibleForCm);
+		newWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
 	}
 
 	public void makeWidgetPrivate() {
@@ -159,4 +167,16 @@ public class AddSubscribeWidgetPage extends HomePage {
 		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
 		verifier.verifyElementIsDisplayed(true, link);
 	}	
+	
+	public AddSubscribeWidgetPage previewForm(){
+		settingsButton.click();
+		previewButton.click();
+		sleep(2);
+		String primaryHandle = this.getWindowHandle();
+		switchToPopupWindow(primaryHandle);
+		newWidget(false).verifyWidgetElementsVisible(true);
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return this;
+	}
 }

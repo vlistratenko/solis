@@ -10,7 +10,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddPetitionPage;
 
 /**
- * <b>This test contains scenarios related to petition creation (TestLink: TC28)</b>
+ * <b>This test contains scenarios related to petition creation (TestLink: TC28, TC29)</b>
  */
 public class CreatePetitionTest extends SeleneseTestCase {
 	private AddPetitionPage addPetitionPage;
@@ -74,6 +74,8 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
 		// select layout for form
 		addPetitionPage.selectLayoutStep();
+		//preview form
+		addPetitionPage.previewForm();
 		// leave default design and go to settings
 		addPetitionPage.fillFieldsWidgetStepTwo();
 		// leave default settings and publish form

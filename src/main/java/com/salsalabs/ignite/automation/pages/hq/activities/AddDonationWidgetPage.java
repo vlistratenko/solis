@@ -35,8 +35,7 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 	}
 	
 	@Override
-	protected void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
-		new DonationWidget(false).verifyWidgetElementsVisible(visibleForCm);
-		new DonationWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
+	protected SubscribeWidget newWidget(boolean clean) {
+		return new DonationWidget(clean);
 	}
 }
