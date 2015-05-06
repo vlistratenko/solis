@@ -665,11 +665,11 @@ abstract class ElementImpl implements Element {
 					if (isVisible) {
 						return true;
 					} else {
-						logger.debug("Element " + aIdLocator + " is present but is not visible");
+						logger.info("Element " + aIdLocator + " is present but is not visible");
 					}
 				} else {
 
-					logger.debug("Waiting for element " + aIdLocator + ". " + (aTime / 1000 - i) + " seconds left.");
+					logger.info("Waiting for element " + aIdLocator + ". " + (aTime / 1000 - i) + " seconds left.");
 
 					Thread.sleep(1000);
 					if (i == aTime / 1000 - 1) {
