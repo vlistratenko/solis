@@ -31,6 +31,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	protected Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
+	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
+	protected Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
 	
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -39,6 +41,13 @@ public class AddSubscribeWidgetPage extends HomePage {
 		openComposeStepButton.click();
 		sleep(5);
 		return this;		
+	}
+	
+	public void removeWidget() {
+		settingsButton.click();
+		deleteBtn.click();
+		confirmDeletionBtn.click();
+		sleep(3);
 	}
 	
 	protected String chooseRandomLayout() {

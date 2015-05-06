@@ -52,8 +52,7 @@ public class SubscribeWidget extends Browser{
 				personZipField, 
 				personStatesSelectBox, 
 				fundraisingCheckBox, 
-				newsletterCheckBox, 
-				emailCheckBox);
+				newsletterCheckBox);
 	}
 	
 	public void verifyWidgetElementsVisible(boolean visible){
