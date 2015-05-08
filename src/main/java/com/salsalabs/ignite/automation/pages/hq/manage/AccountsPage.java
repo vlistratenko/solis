@@ -17,7 +17,7 @@ public class AccountsPage extends HomePage{
 
 	Button inviteNewUserButton =  new ButtonImpl("//button[@ng-click='btnInviteUser()']", "Invite new user");
 	Table invitationsTable = new TableImpl("//table[last()]", "Pending Invitations");
-	TextBox inviteSearch = new TextBoxImpl("(//input[@placeholder='search...'])[last()]", "Search invite textbox");
+	TextBox inviteSearch = new TextBoxImpl("(//input[@placeholder='Search...'])[last()]", "Search invite textbox");
 	Button inviteSearchBtn = new ButtonImpl("(//*[@autotest-id='btn_search_list'])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
@@ -37,9 +37,10 @@ public class AccountsPage extends HomePage{
 	}
 	
 	public AccountsPage resendInvite(){
-		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
+		new TextBoxImpl("(//input[@placeholder='Search...'])[last()]", "Search invite textbox").type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
 		inviteSearchBtn.click();
-		invitationsTable.clickInCell(CommonUtils.getProperty(PropertyName.CM_EMAIL), "5", "div/span/a");
+		sleep(10);
+		new ButtonImpl("(//table[starts-with(@id,'JColResizer')])[last()]//tr[@class='ng-scope' and ./td[.//span[text()='" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "']]]//a[@class='ng-scope ng-isolate-scope']", "").click();
 		feedBackDialogPanel.waitElement(10);
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);
 		return this;

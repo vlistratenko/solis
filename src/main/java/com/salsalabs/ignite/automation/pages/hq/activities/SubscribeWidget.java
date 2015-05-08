@@ -25,7 +25,6 @@ public class SubscribeWidget extends Browser{
 	SelectBox personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
 	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
 	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
-	CheckBox emailCheckBox = new CheckBoxImpl("//label[contains(text(), 'Email')]/preceding-sibling::input", "Email");
 	
 	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
 	
@@ -52,8 +51,7 @@ public class SubscribeWidget extends Browser{
 				personZipField, 
 				personStatesSelectBox, 
 				fundraisingCheckBox, 
-				newsletterCheckBox, 
-				emailCheckBox);
+				newsletterCheckBox);
 	}
 	
 	public void verifyWidgetElementsVisible(boolean visible){

@@ -17,11 +17,11 @@ public class ActivitiesPage extends HomePage {
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
-	Table activitiesTable = new TableImpl("//table[starts-with(@id,'JColResizer')]", "Activities Table");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[starts-with(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
+	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	
 	public ActivitiesPage verifyURL() {
 		verifier.verifyTrue(getLocation().contains("activities"), "Current URL is not contains Activities");
@@ -98,20 +98,9 @@ public class ActivitiesPage extends HomePage {
 	// try to remove and click Yes on confirmation dialog
 	public void removeWidgetSuccessfully() {
 		sleep(2);
-		selectFirstWidget.check();
-		verifier.verifyElementIsDisplayed(deleteButton);
-		deleteButton.click();
-		confirmDeletionBtn.click();
-		sleep(5);
+		AddDonationWidgetPage addDonationPage = openDonationsWidgetFromTable();
+ 		sleep(5);
+		addDonationPage.removeWidget();
 	}
-	
-	// try to remove and click Cancel button on confirmation dialog
-	public void removeWidgetDiscard() {
-		sleep(2);
-		selectFirstWidget.check();
-		verifier.verifyElementIsDisplayed(deleteButton);
-		deleteButton.click();
-		rejectDeletionBtn.click();
-		sleep(2);
-	}
+
 }
