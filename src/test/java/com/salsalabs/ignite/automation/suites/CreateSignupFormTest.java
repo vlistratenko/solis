@@ -70,7 +70,6 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		doLoginAndOpenSignupFormsPage();
 		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
 		String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-		String expectedLink = ("https://automatedtesting1." + SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name() + ".igniteaction.net/" + widgetName).toLowerCase();
 		// fill title and description
 		addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
 		// select layout for form
@@ -80,20 +79,20 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		// leave default settings and publish form
 		addSignupFormsPage.publishForm();
 		// verify link is present on page
-		addSignupFormsPage.verifyFormLinkIsPresent(expectedLink);
+		addSignupFormsPage.verifyFormLinkIsPresent(widgetName);
 		// verify that new widget is present in table in All Activities tab (Published state)
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "PUBLISHED");
 		// verify that new widget present in table in Signup Forms tab (Published state)
 		activitiesPage.openSubscribeWidgetsPage().verifyWidgetIsPresentInTableForms(widgetName, widgetDescription, "PUBLISHED", "PUBLIC");
 		// open widget link in new tab and ensure it visible for CM and supporter
-		addSignupFormsPage.verifyWidgetVisible(expectedLink, true, true);
+		addSignupFormsPage.verifyWidgetVisible(true, true);
 		// click on widget in table to open it
 		addSignupFormsPage = activitiesPage.openSignupWidgetFromTable();
 		// make widget private
 		addSignupFormsPage.makeWidgetPrivate();
 		// open widget link in new tab and ensure it NOT visible
-		addSignupFormsPage.verifyWidgetVisible(expectedLink, true, false);
+		addSignupFormsPage.verifyWidgetVisible(true, false);
 		// open Activities menu item in left sidebar and check that signup form is present in table (Draft state)
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "DRAFT");
@@ -106,7 +105,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		// make sure it's not present in table in Signup Forms tab
 		activitiesPage.openAllActivitiesTab().verifyActivityIsNotPresentInTableAllActivities(widgetName, widgetDescription);
 		// try to open widget in separate window
-		addSignupFormsPage.verifyWidgetVisible(expectedLink, false, false);
+		addSignupFormsPage.verifyWidgetVisible(false, false);
  	}
 	
 	private void doLoginAndOpenSignupFormsPage() {

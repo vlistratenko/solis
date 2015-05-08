@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 
@@ -7,6 +8,10 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
 	Button goToStep3Btn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings >>");
+	
+	public AddDonationWidgetPage() {
+		linkProperty = PropertyName.DONATION_WIDGET_LINK;
+	}
 	
 	@Override
 	public AddDonationWidgetPage createForm(String widgetName, String widgetDescription) {

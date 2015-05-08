@@ -1,13 +1,10 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import java.util.Set;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -37,6 +34,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
 	protected Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
+	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
 	
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -95,18 +93,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 	
 	protected <T> T openWidget(Class<T> clazz) {
-		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
-		if (clazz.equals(SubscribeWidget.class)) {
-			CommonUtils.setProperty(PropertyName.SUBSCRIBE_WIDGET_LINK, widgetLink.getAttribute("href"));
-		} else if (clazz.equals(DonationWidget.class)) {
-			CommonUtils.setProperty(PropertyName.DONATION_WIDGET_LINK, widgetLink.getAttribute("href"));
-		} else if (clazz.equals(PetitionWidget.class)) {
-			CommonUtils.setProperty(PropertyName.PETITION_WIDGET_LINK, widgetLink.getAttribute("href"));
-		}
+		String link = CommonUtils.getProperty(linkProperty);
 		currentWindowHandle = getWindowHandle();
-		widgetLink.click();	
+		this.openInNewWindow(link);
 		sleep(5);
-		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		try {
 			return clazz.newInstance();
@@ -120,10 +110,21 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return openWidget(SubscribeWidget.class);
 	}
 	
-	public AddSubscribeWidgetPage verifyWidgetVisible(String link, boolean visibleForCm, boolean visibleForSupporter) {
+	public AddSubscribeWidgetPage verifyWidgetVisible(boolean visibleForCm, boolean visibleForSupporter) {
+		String link = CommonUtils.getProperty(linkProperty);
 		String primaryHandle = this.getWindowHandle();
-		this.openInNewWindow(link + "/index.html");
+		openInNewWindow(link);
 		verifyWidgetElements(visibleForCm, visibleForSupporter);
+		this.closeWindow();
+		this.switchToWindow(primaryHandle);
+		return this;
+	}
+	
+	public AddSubscribeWidgetPage verifyWidgetVisible(boolean visible) {
+		String link = CommonUtils.getProperty(linkProperty);
+		String primaryHandle = this.getWindowHandle();
+		openInNewWindow(link);
+		verifyWidgetElements(visible);
 		this.closeWindow();
 		this.switchToWindow(primaryHandle);
 		return this;
@@ -136,6 +137,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 	private void verifyWidgetElements(boolean visibleForCm, boolean visibleForSupporter) {
 		newWidget(false).verifyWidgetElementsVisible(visibleForCm);
 		newWidget(true).verifyWidgetElementsVisible(visibleForSupporter);
+	}
+	
+	private void verifyWidgetElements(boolean visible) {
+		newWidget(true).verifyWidgetElementsVisible(visible);
 	}
 
 	public void makeWidgetPrivate() {
@@ -163,9 +168,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 	
-	public void verifyFormLinkIsPresent(String expectedLink) {
-		Button link = new ButtonImpl("//a[@href='"+ expectedLink + "']", "Link");
-		verifier.verifyElementIsDisplayed(true, link);
+	public void verifyFormLinkIsPresent(String widgetName) {
+		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
+		verifier.verifyElementIsDisplayed(true, widgetLink);
+		CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
 	}	
 	
 	public AddSubscribeWidgetPage previewForm(){
