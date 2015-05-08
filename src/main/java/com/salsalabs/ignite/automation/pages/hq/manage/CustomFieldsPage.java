@@ -57,8 +57,10 @@ public class CustomFieldsPage extends ManagePage {
 	}
 	
 	public CustomFieldsPage deleteCustomField(String customFieldName) {
-		sleep(4);
 		Element delete = new ButtonImpl("//a[@autotest-id='delete_" + customFieldName + "']", "Delete");
+		if (delete.isNotExists()) {
+			delete = new ButtonImpl("//a[@autotest-id='delete_" + customFieldName.toLowerCase() + "']", "Delete");
+		}
 		delete.clickJS();
 		switchToAlert().accept();
 		sleep(5);
