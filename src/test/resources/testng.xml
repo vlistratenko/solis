@@ -4,7 +4,7 @@
 	<suite-files>
 		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastSendTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />
-		<!--
+		<!-- 
 		Temporary disabled due the problems with Zendesk
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupportRequestTest.xml" />
 		-->
