@@ -84,7 +84,7 @@ public class SupportersPage extends AudiencePage {
 
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
-		supportersTable.clickInCell(1, 2, "div");
+		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		return new SupportersAddPage();
 	}
 	
