@@ -21,7 +21,7 @@ public class AccountsPage extends HomePage{
 	Button inviteSearchBtn = new ButtonImpl("(//*[@autotest-id='btn_search_list'])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
-		sleep(5);
+		inviteNewUserButton.waitElement();
 		inviteNewUserButton.click();
 		return new CreateInvitePage();
 		
