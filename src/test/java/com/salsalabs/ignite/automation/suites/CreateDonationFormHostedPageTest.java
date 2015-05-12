@@ -92,7 +92,7 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 		// make widget private
 		donationsAddPage.makeWidgetPrivate();
 		// open widget link in new tab and ensure it NOT visible
-		donationsAddPage.verifyWidgetVisible(true, false);
+		donationsAddPage.verifyWidgetVisible(false);
 		// open Activities menu item in left sidebar and check that donation form is present in table (Draft state)
 		activitiesPage = donationsAddPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Fundraising Form", formName, formDescription, "DRAFT");
@@ -105,7 +105,7 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 		// make sure it's not present in table in Fundraising Forms tab
 		activitiesPage.openAllActivitiesTab().verifyActivityIsNotPresentInTableAllActivities(formName, formDescription);
 		// try to open widget in separate window
-		donationsAddPage.verifyWidgetVisible(false, false);
+		donationsAddPage.verifyWidgetVisible(false);
 	}
 	
 	private void doLoginAndOpenDonationForms() {

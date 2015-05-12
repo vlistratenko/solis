@@ -92,7 +92,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		// make widget private
 		addSignupFormsPage.makeWidgetPrivate();
 		// open widget link in new tab and ensure it NOT visible
-		addSignupFormsPage.verifyWidgetVisible(true, false);
+		addSignupFormsPage.verifyWidgetVisible(false);
 		// open Activities menu item in left sidebar and check that signup form is present in table (Draft state)
 		activitiesPage = addSignupFormsPage.openActivitiesPage().openAllActivitiesTab();
 		activitiesPage.verifyActivityIsPresentInTableAllActivities("Sign-up Form", widgetName, widgetDescription, "DRAFT");
@@ -105,7 +105,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		// make sure it's not present in table in Signup Forms tab
 		activitiesPage.openAllActivitiesTab().verifyActivityIsNotPresentInTableAllActivities(widgetName, widgetDescription);
 		// try to open widget in separate window
-		addSignupFormsPage.verifyWidgetVisible(false, false);
+		addSignupFormsPage.verifyWidgetVisible(false);
  	}
 	
 	private void doLoginAndOpenSignupFormsPage() {
