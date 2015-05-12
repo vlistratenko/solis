@@ -86,7 +86,7 @@ public class ImportAddPage extends ManagePage{
 		sleep(60);
 		Label label = new LabelImpl("//*[contains(text(), '" + IMPORT_DONE_LABEL + "')]", "Import done");
 		for (int i = 0; i < 10; i++) {
-			waitConditionBecomesTrueWithRefersh(label.isDisplayed(), 30);
+			waitConditionBecomesTrueWithRefersh(!label.isNotDisplayed(), 1);
 		}
 		return this;
 	}
