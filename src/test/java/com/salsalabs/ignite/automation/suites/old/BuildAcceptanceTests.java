@@ -256,8 +256,8 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		homePage.
 		openSettingsPage().
 		openAccountsPage().
-		openInviteNewUserPage().
-		inviteNewUser(cmEmail,
+		openInviteNewUserPage();
+		/*inviteNewUser(cmEmail,
 					  cmFirstName,
 					  cmLastName,
 					  cmContentAndMessagingRole1,
@@ -267,7 +267,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 					  cmDataAndAnalyticsRole2,
 					  cmDataAndAnalyticsRole3,
 					  cmAssetManagementRole1).
-		verifyInvitationSent();	
+		verifyInvitationSent();	*/
 		
 		CommonUtils.setProperty(PropertyName.CM_LOGIN, cmEmail);
 		CommonUtils.setProperty(PropertyName.CM_FIRST_NAME, cmFirstName);

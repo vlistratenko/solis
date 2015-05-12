@@ -25,6 +25,7 @@ public class SubscribeWidget extends Browser{
 	SelectBox personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
 	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
 	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
+	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
 	
 	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
 	

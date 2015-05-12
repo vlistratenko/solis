@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -13,53 +12,35 @@ public class CreateInvitePage {
 	TextBox emailField = new TextBoxImpl("//input[@id='invite_email']", "Email");
 	TextBox firstNameField = new TextBoxImpl("//input[@id='invite_firstName']", "First name");
 	TextBox lastNameField = new TextBoxImpl("//input[@id='invite_lastName']", "Last name");
-	Table contentAndMessagingTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[1]", "Content and Messaging permissions grid");
-	Table dataAndAnalyticsTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[2]", "Data And Analytics permissions grid");
-	Table assetManagementTable = new TableImpl("//form[@id='inviteForm']/div[2]/div/div[4]/div/table[3]", "Asset Management permissions grid");
+	Table listBuildingFormsTable = new TableImpl("//div[contains(@config,'listBuildingFormsConfig')]/div[@class='permissions-section-body']/table", "List Building forms");
+	Table fundraisingFormsTable = new TableImpl("//div[contains(@config,'fundraisingFormsConfig')]/div[@class='permissions-section-body']/table", "Fundraising forms");
+	Table donationManagementTable = new TableImpl("//div[contains(@config,'donationManagementConfig')]/div[@class='permissions-section-body']/table", "Donation Management");
+	Table messagingTable = new TableImpl("//div[contains(@config,'messagingConfig')]/div[@class='permissions-section-body']/table", "Messaging");
+	Table listManagementTable = new TableImpl("//div[contains(@config,'listManagementConfig')]/div[@class='permissions-section-body']/table", "List Management");
+	Table insightReportsTable = new TableImpl("//div[contains(@config,'insightReportsConfig')]/div[@class='permissions-section-body']/table", "Insight Reports");
+	Table applicationAdminTable = new TableImpl("//div[contains(@config,'applicationAdministrationConfig')]/div[@class='permissions-section-body']/table", "Application Administration");
 	Button saveInviteButton = new ButtonImpl("//button[@id='btnSendInvite']", "Save invite");
 	
 	public AccountsPage inviteNewUser(String cmEmail,
 			String cmFirstName,
 			String cmLastName,
-			String cmContentAndMessagingRole1,
-			String cmContentAndMessagingRole2,
-			String cmContentAndMessagingRole3,
-			String cmDataAndAnalyticsRole1,
-			String cmDataAndAnalyticsRole2,
-			String cmDataAndAnalyticsRole3,
-			String cmAssetManagementRole1) {
+			int cmListBuildingFormsRole, 
+			int cmFundraisingFormsRole, 
+			int cmDonationManagementRole, 
+			int cmMessagingRole, 
+			int cmListManagementRole, 
+			int cmInsightReportsRole,
+			int cmAppAdminRole) {
 		emailField.type(cmEmail);
 		firstNameField.type(cmFirstName);
 		lastNameField.type(cmLastName);
-		contentAndMessagingTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole1, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole1, ":")[1]
-				);
-		contentAndMessagingTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole2, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole2, ":")[1]
-				);
-		contentAndMessagingTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole3, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmContentAndMessagingRole3, ":")[1]
-				);
-		dataAndAnalyticsTable.scrollIntoView();
-		dataAndAnalyticsTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole1, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole1, ":")[1]
-				);
-		dataAndAnalyticsTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole2, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole2, ":")[1]
-				);
-		dataAndAnalyticsTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole3, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmDataAndAnalyticsRole3, ":")[1]
-				);
-		assetManagementTable.clickInCell(
-				CommonUtils.getArrayFromStringBySymbol(cmAssetManagementRole1, ":")[0],
-				CommonUtils.getArrayFromStringBySymbol(cmAssetManagementRole1, ":")[1]
-				);
+		listBuildingFormsTable.clickInCell(1, cmListBuildingFormsRole + 1, "div");
+		fundraisingFormsTable.clickInCell(1, cmFundraisingFormsRole + 1, "div");
+		donationManagementTable.clickInCell(1, cmDonationManagementRole + 1, "div");
+		messagingTable.clickInCell(1, cmMessagingRole + 1, "div");
+		listManagementTable.clickInCell(1, cmListManagementRole + 1, "div");
+		insightReportsTable.clickInCell(1, cmInsightReportsRole + 1, "div");
+		applicationAdminTable.clickInCell(1, cmAppAdminRole + 1, "div");
 		saveInviteButton.click();
 		return new AccountsPage();
 	}

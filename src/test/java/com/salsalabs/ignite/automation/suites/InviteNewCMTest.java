@@ -35,22 +35,22 @@ public class InviteNewCMTest extends SeleneseTestCase {
 	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class)
 	@Parameters({"cm.firstName",
 				 "cm.lastName",
-				 "cm.contentAndMessagingTable.role1",
-				 "cm.contentAndMessagingTable.role2",
-				 "cm.contentAndMessagingTable.role3",
-				 "cm.dataAndAnalyticsTable.role1",
-				 "cm.dataAndAnalyticsTable.role2",
-				 "cm.dataAndAnalyticsTable.role3",
-				 "cm.assetManagementTable.role1"})
-	public void inviteNewCM(  String cmFirstName,
-										 String cmLastName,
-										 String cmContentAndMessagingRole1,
-										 String cmContentAndMessagingRole2,
-										 String cmContentAndMessagingRole3,
-										 String cmDataAndAnalyticsRole1,
-										 String cmDataAndAnalyticsRole2,
-										 String cmDataAndAnalyticsRole3,
-										 String cmAssetManagementRole1) {
+				 "cm.listBuildingForms.role",
+				 "cm.fundraisingForms.role",
+				 "cm.donationManagement.role",
+				 "cm.messaging.role",
+				 "cm.listManagement.role",
+				 "cm.insightReports.role",
+				 "cm.appAdmin.role"})
+	public void inviteNewCM( String cmFirstName,
+							 String cmLastName,
+							 int cmListBuildingFormsRole, 
+							 int cmFundraisingFormsRole, 
+							 int cmDonationManagementRole, 
+							 int cmMessagingRole, 
+							 int cmListManagementRole, 
+							 int cmInsightReportsRole,
+							 int cmAppAdminRole) {
 		
 		String cmEmail = emailClient.getEmailBox("cm" + CommonUtils.getUnicName());
 		CommonUtils.setProperty(PropertyName.CM_EMAIL, cmEmail);
@@ -60,7 +60,7 @@ public class InviteNewCMTest extends SeleneseTestCase {
 		.openSettingsPage()
 		.openAccountsPage()
 		.openInviteNewUserPage()
-		.inviteNewUser(cmEmail, cmFirstName, cmLastName, cmContentAndMessagingRole1, cmContentAndMessagingRole2, cmContentAndMessagingRole3, cmDataAndAnalyticsRole1, cmDataAndAnalyticsRole2, cmDataAndAnalyticsRole3, cmAssetManagementRole1)
+		.inviteNewUser(cmEmail, cmFirstName, cmLastName, cmListBuildingFormsRole, cmFundraisingFormsRole, cmDonationManagementRole, cmMessagingRole, cmListManagementRole, cmInsightReportsRole, cmAppAdminRole)
 		.verifyInvitationSent();
 		
 		CommonUtils.setProperty(PropertyName.CM_LOGIN, cmEmail);

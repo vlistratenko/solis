@@ -6,14 +6,13 @@
 
 	<parameter name="cm.firstName" value="CMFirstNameAuto"></parameter>
 	<parameter name="cm.lastName" value="CMLastNameAuto"></parameter>
-	<parameter name="cm.contentAndMessagingTable.role1" value="1:5"></parameter>
-	<parameter name="cm.contentAndMessagingTable.role2" value="2:5"></parameter>
-	<parameter name="cm.contentAndMessagingTable.role3" value="3:5"></parameter>
-
-	<parameter name="cm.dataAndAnalyticsTable.role1" value="1:4"></parameter>
-	<parameter name="cm.dataAndAnalyticsTable.role2" value="2:4"></parameter>
-	<parameter name="cm.dataAndAnalyticsTable.role3" value="3:4"></parameter>
-	<parameter name="cm.assetManagementTable.role1" value="1:4"></parameter>
+	<parameter name="cm.listBuildingForms.role" value="4"></parameter>
+	<parameter name="cm.fundraisingForms.role" value="4"></parameter>
+	<parameter name="cm.donationManagement.role" value="3"></parameter>
+	<parameter name="cm.messaging.role" value="4"></parameter>
+	<parameter name="cm.listManagement.role" value="3"></parameter>
+	<parameter name="cm.insightReports.role" value="2"></parameter>
+	<parameter name="cm.appAdmin.role" value="2"></parameter>
 	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 
 

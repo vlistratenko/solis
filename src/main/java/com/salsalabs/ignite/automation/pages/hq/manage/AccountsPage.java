@@ -28,18 +28,21 @@ public class AccountsPage extends HomePage{
 	}
 
 	public AccountsPage verifyInvitationSent() {
-		sleep(5);
+		inviteSearch.waitElement(35);
 		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
 		inviteSearchBtn.click();
+		sleep(5);
 		verifier.verifyElementIsDisplayed(new LabelImpl("//span[contains(text(), '" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "')]", "Admin in table"));
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);
 		return this;
 	}
 	
 	public AccountsPage resendInvite(){
-		new TextBoxImpl("(//input[@placeholder='Search...'])[last()]", "Search invite textbox").type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
-		inviteSearchBtn.click();
-		sleep(10);
+		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
+		if (inviteSearchBtn.isVisible()) {
+			inviteSearchBtn.click();
+			sleep(5);
+		}
 		new ButtonImpl("(//table[starts-with(@id,'JColResizer')])[last()]//tr[@class='ng-scope' and ./td[.//span[text()='" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "']]]//a[@class='ng-scope ng-isolate-scope']", "").click();
 		feedBackDialogPanel.waitElement(10);
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);
