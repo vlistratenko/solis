@@ -89,7 +89,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 20, false);
 		
 		Map<String, List<Email>> emails = loginPage.openEmails(splitsAmount, openAmount);
-		loginPage.clickLinkInEmail(emails, splitsAmount, "http://salsalabs.com", clickAmount);
+		loginPage.clickLinkInEmail(emails, splitsAmount, "http://google.com", clickAmount);
 		loginPage.unsubscribeByEmail(emails, splitsAmount, unsubAmount);
 	}
 	
