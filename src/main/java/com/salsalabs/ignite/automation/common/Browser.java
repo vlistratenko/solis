@@ -265,8 +265,9 @@ public abstract class Browser {
 		if (emails.size() < amountOfEmails)
 			amountOfEmails = emails.size();
 		for (int i = 0; i < amountOfEmails; i++) {
-			client.clickLinkByText(emails.get(i), linkText);
-			logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+			if (client.clickLinkByText(emails.get(i), linkText)) {
+				logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+			}
 		}
 	}
 	
