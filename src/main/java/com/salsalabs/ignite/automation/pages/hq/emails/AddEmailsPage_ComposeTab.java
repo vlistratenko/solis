@@ -35,7 +35,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			addLink("salsalabs.com");
+			addLink("google.com");
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();

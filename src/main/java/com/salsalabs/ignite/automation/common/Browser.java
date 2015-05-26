@@ -1,6 +1,9 @@
 package com.salsalabs.ignite.automation.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
@@ -206,7 +209,7 @@ public abstract class Browser {
 		return new LoginPage();
 	}
 
-	public void openEmails(String subj, Integer amount) {
+	public List<Email> openEmails(String subj, Integer amount) {
 		EmailClient client = SeleneseTestCase.emailClient;
 		ArrayList<Email> emails = null;
 		try {
@@ -220,11 +223,13 @@ public abstract class Browser {
 			client.openEmail(emails.get(i));
 			logger.info("Email for " + emails.get(i).to[0].address + " was opened");
 		}
+		return emails;
 	}
 	
-	public void openEmails(Integer amountOfSplits, Integer amount) {
+	public Map<String, List<Email>> openEmails(Integer amountOfSplits, Integer amount) {
+		Map<String, List<Email>> emails = new HashMap<>();
 		if (amount == 0) {
-			return;
+			return emails;
 		}
 		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
 		for (int i = 1; i <= amountOfSplits; i++) {
@@ -234,11 +239,12 @@ public abstract class Browser {
 			} else {
 				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
 			}
-			openEmails(subj, amount / amountOfSplits);
+			emails.put(subj, openEmails(subj, amount / amountOfSplits));
 		}
+		return emails;
 	}
 	
-	public void clickLinkInEmail(Integer amountOfSplits, String linkText, Integer amountOfEmails) {
+	public void clickLinkInEmail(Map<String, List<Email>> emailMap, Integer amountOfSplits, String linkText, Integer amountOfEmails) {
 		if (amountOfEmails == 0) {
 			return;
 		}
@@ -250,27 +256,36 @@ public abstract class Browser {
 			} else {
 				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
 			}
-			clickLinkInEmail(subj, linkText, amountOfEmails / amountOfSplits);
+			clickLinkInEmail(emailMap, subj, linkText, amountOfEmails / amountOfSplits);
 		}
 	}
+	
+	public void clickLinkInEmail(Integer amountOfSplits, String linkText, Integer amountOfEmails){
+		clickLinkInEmail(null, amountOfSplits, linkText, amountOfEmails);
+	}
 
-	public void clickLinkInEmail(String subj, String linkText, Integer amountOfEmails) {
+	public void clickLinkInEmail(Map<String, List<Email>> emailMap, String subj, String linkText, Integer amountOfEmails) {
 		EmailClient client = SeleneseTestCase.emailClient;
-		ArrayList<Email> emails = null;
-		try {
-			emails = client.getEmailsBySubject(subj);
-		} catch (MailosaurException e) {
-			logger.error("", e);
+		List<Email> emails = null;
+		if (emailMap == null) {
+			try {
+				emails = client.getEmailsBySubject(subj);
+			} catch (MailosaurException e) {
+				logger.error("", e);
+			}
+		} else {
+			emails = emailMap.get(subj);
 		}
 		if (emails.size() < amountOfEmails)
 			amountOfEmails = emails.size();
 		for (int i = 0; i < amountOfEmails; i++) {
-			client.clickLinkByText(emails.get(i), linkText);
-			logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+			if (client.clickLinkByText(emails.get(i), linkText)) {
+				logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+			}
 		}
 	}
 	
-	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
+	public void unsubscribeByEmail(Map<String, List<Email>> emailMap, Integer amountOfSplits, Integer amountOfEmails) {
 		if (amountOfEmails == 0) {
 			return;
 		}
@@ -282,17 +297,25 @@ public abstract class Browser {
 			} else {
 				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
 			}
-			unsubscribeByEmail(subj, amountOfEmails / amountOfSplits);
+			unsubscribeByEmail(emailMap, subj, amountOfEmails / amountOfSplits);
 		}
 	}
 	
-	public void unsubscribeByEmail(String subj, Integer amountOfEmails) {
+	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
+		unsubscribeByEmail(null, amountOfSplits, amountOfEmails);
+	}
+	
+	public void unsubscribeByEmail(Map<String, List<Email>> emailMap, String subj, Integer amountOfEmails) {
 		EmailClient client = SeleneseTestCase.emailClient;
-		ArrayList<Email> emails = null;
-		try {
-			emails = client.getEmailsBySubject(subj);
-		} catch (MailosaurException e) {
-			logger.error("", e);
+		List<Email> emails = null;
+		if (emailMap == null) {
+			try {
+				emails = client.getEmailsBySubject(subj);
+			} catch (MailosaurException e) {
+				logger.error("", e);
+			}
+		} else {
+			emails = emailMap.get(subj);
 		}
 		if (emails.size() < amountOfEmails)
 			amountOfEmails = emails.size();

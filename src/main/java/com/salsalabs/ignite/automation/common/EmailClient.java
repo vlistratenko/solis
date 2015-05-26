@@ -174,17 +174,20 @@ public class EmailClient {
 		}
 	}
 
-	public void clickLinkByText(Email email, String text) {
+	public boolean clickLinkByText(Email email, String text) {
 		Link[] l = email.html.links;
+		boolean clicked = false;
 		for (int j = 0; j < 2; j++) {
 			if (l[j].text.equalsIgnoreCase(text)) {
 				try {
 					l[j].Click();
+					clicked = true;
 				} catch (IOException | MailosaurException e) {
 					logger.error("", e);
 				}
 			}
 		}
+		return clicked;
 	}
 
 	public String getLinkByText(Email email, String text) {
