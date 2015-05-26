@@ -1,8 +1,12 @@
 package com.salsalabs.ignite.automation.suites;
 
+import java.util.List;
+import java.util.Map;
+
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.mailosaur.model.Email;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
@@ -84,9 +88,9 @@ public class EmailBlastTest extends SeleneseTestCase{
 		new AddEmailsPage_PublishTab().
 		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 20, false);
 		
-		loginPage.openEmails(splitsAmount, openAmount);
-		loginPage.clickLinkInEmail(splitsAmount, "http://salsalabs.com", clickAmount);
-		loginPage.unsubscribeByEmail(splitsAmount, unsubAmount);
+		Map<String, List<Email>> emails = loginPage.openEmails(splitsAmount, openAmount);
+		loginPage.clickLinkInEmail(emails, splitsAmount, "http://salsalabs.com", clickAmount);
+		loginPage.unsubscribeByEmail(emails, splitsAmount, unsubAmount);
 	}
 	
 	/**
