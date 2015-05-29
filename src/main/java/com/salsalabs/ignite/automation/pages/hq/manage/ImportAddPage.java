@@ -26,16 +26,15 @@ import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFi
 public class ImportAddPage extends ManagePage{
 	Button importLink = new ButtonImpl("//a[@href='/#/audience/supporters/imports']", "Import link");
 	
-	//firs step
+	//first step
 	TextBox importNameField = new TextBoxImpl("//input[@id='name']", "Import Name", true);
 	TextBox importDescriptionField = new TextBoxImpl("//textarea[@id='description']", "Import description", false);
 	TextBox fileUpload = new TextBoxImpl("//input[@id='fileUpload']", "Logo", false);
-	Button nextStepButton = new ButtonImpl("//button[@id='btnSave1']", "Next: Import Settings >>");
+	Button nextStepButton = new ButtonImpl("//*[contains(@id, 'btnSave')]", "Next: Import Settings >>");
 	
 	//second step
 	TextBox importFromRowField = new TextBoxImpl("//input[@id='offset']", " My data starts on row", false);
 	Table mapTable = new TableImpl("//form[@id='importForm']/descendant::table", "Map");
-	Button dedupeButton = new ButtonImpl("//button[contains(@id, 'btnSave')]", "Match My Fields");
 	
 	//I'm done step
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
@@ -75,7 +74,7 @@ public class ImportAddPage extends ManagePage{
 				mapToField.selectByLabelJS(customFields.get(i - 1).getName());
 			}
 		}
-		dedupeButton.click();
+		nextStepButton.click();
 		sleep(5);
 		return this;
 	}
