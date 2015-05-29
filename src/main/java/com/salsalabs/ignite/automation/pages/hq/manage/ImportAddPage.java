@@ -57,6 +57,7 @@ public class ImportAddPage extends ManagePage{
 		} catch (FileNotFoundException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
+		sleep(5);
 		nextStepButton.click();
 		CommonUtils.setProperty(PropertyName.IMPORT_NAME, name);
 		sleep(2);
