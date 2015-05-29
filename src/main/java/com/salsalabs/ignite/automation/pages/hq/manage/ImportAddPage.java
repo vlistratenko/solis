@@ -30,7 +30,7 @@ public class ImportAddPage extends ManagePage{
 	TextBox importNameField = new TextBoxImpl("//input[@id='name']", "Import Name", true);
 	TextBox importDescriptionField = new TextBoxImpl("//textarea[@id='description']", "Import description", false);
 	TextBox fileUpload = new TextBoxImpl("//input[@id='fileUpload']", "Logo", false);
-	Button nextStepButton = new ButtonImpl("//button[@id='btnDoUpload']/*", "Match My Fields");
+	Button nextStepButton = new ButtonImpl("//button[@id='btnSave1']", "Next: Import Settings >>");
 	
 	//second step
 	TextBox importFromRowField = new TextBoxImpl("//input[@id='offset']", " My data starts on row", false);
@@ -40,16 +40,17 @@ public class ImportAddPage extends ManagePage{
 	//I'm done step
 	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
 	private int amountOfSupporters = 50;
-	private static final String IMPORT_DONE_LABEL = "Congrats! Your import is complete.";
+	private static final String IMPORT_DONE_LABEL = "Import Complete!";
+	private List<CustomField> customFields;
 	
 	public ImportAddPage fillFirstStep(String name, String description) {
 		return this.fillFirstStep(name, description, null);
 	}
 	
 	public ImportAddPage fillFirstStep(String name, String description, List<CustomField> customFields) {
+		this.customFields = customFields;  
 		importNameField.type(name);
 		importDescriptionField.type(description);
-		
 		fileUpload.setAttribute("class", "ng-pristine ng-valid");
 		fileUpload.scrollIntoView();
 		try {
@@ -57,7 +58,6 @@ public class ImportAddPage extends ManagePage{
 		} catch (FileNotFoundException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
-		
 		nextStepButton.click();
 		CommonUtils.setProperty(PropertyName.IMPORT_NAME, name);
 		sleep(2);
@@ -65,16 +65,15 @@ public class ImportAddPage extends ManagePage{
 	}
 	
 	public ImportAddPage fillSecondStep(String importFromRow) {
-		sleep(2);
+		sleep(10);
+		nextStepButton.click();
 		importFromRowField.type(importFromRow);
-		Integer amountOfFields = mapTable.getRowsCount();
-		
-		for (int i = 1; i <= amountOfFields; i++) {
-			String fieldName = mapTable.getCellValue(i, 1);
-			String pathToDropDown = mapTable.getPathToChildElement(i, 2, "div[contains(@class, 'custom dropdown')]");
-			DropDown mapToField = new DropDownImpl(pathToDropDown, pathToDropDown + "/a", "MapToField");
-			mapToField.selectByLabelJS(fieldName);
-			
+		if (customFields != null) {
+			for (int i = 1; i <= customFields.size(); i++) {
+				String pathToDropDown = "(//div[contains(@class, 'custom dropdown')])[" + (16 + i) + "]";
+				DropDown mapToField = new DropDownImpl(pathToDropDown, "MapToField");
+				mapToField.selectByLabelJS(customFields.get(i - 1).getName());
+			}
 		}
 		dedupeButton.click();
 		sleep(5);
