@@ -36,8 +36,6 @@ public class ImportAddPage extends ManagePage{
 	TextBox importFromRowField = new TextBoxImpl("//input[@id='offset']", " My data starts on row", false);
 	Table mapTable = new TableImpl("//form[@id='importForm']/descendant::table", "Map");
 	
-	//I'm done step
-	Button doneButton = new ButtonImpl("//button[@id='btnSave3']/*", "Done button");
 	private int amountOfSupporters = 50;
 	private static final String IMPORT_DONE_LABEL = "Import Complete!";
 	private List<CustomField> customFields;
@@ -81,7 +79,7 @@ public class ImportAddPage extends ManagePage{
 	}
 	
 	public ImportAddPage fillThirdStep() {
-		doneButton.click();
+		nextStepButton.click();
 		sleep(60);
 		Label label = new LabelImpl("//*[contains(text(), '" + IMPORT_DONE_LABEL + "')]", "Import done");
 		for (int i = 0; i < 10; i++) {
