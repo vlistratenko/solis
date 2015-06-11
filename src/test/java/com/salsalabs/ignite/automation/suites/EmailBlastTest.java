@@ -62,6 +62,8 @@ public class EmailBlastTest extends SeleneseTestCase{
 			CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
 		}
 		
+		String propertyPublished = splitsAmount > 1 ? PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS : PropertyName.AMOUNT_OF_PUBLISHED_EMAILS;
+		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin().
@@ -71,8 +73,8 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndGoForward(emailBlastName).
 		SelectEmailType().
 		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
-		addSupporters(emailOfSupporter, amountOfSupporters).
-		addSupporters("unex", hardBounceAmount).
+		addSupporters(emailOfSupporter, amountOfSupporters, propertyPublished).
+		addSupporters("unex", hardBounceAmount, propertyPublished).
 		openComposePage().
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
@@ -81,7 +83,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openMessagingPage().
 		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
 		
-		Integer published = Integer.valueOf(CommonUtils.getProperty(splitsAmount > 1 ? PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS : PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		Integer published = Integer.valueOf(CommonUtils.getProperty(propertyPublished));
 		if (published == amountOfSupporters) {
 			hardBounceAmount = 0;
 		}
