@@ -1,8 +1,12 @@
 package com.salsalabs.ignite.automation.suites;
 
+import java.util.List;
+import java.util.Map;
+
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.mailosaur.model.Email;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
@@ -58,6 +62,8 @@ public class EmailBlastTest extends SeleneseTestCase{
 			CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
 		}
 		
+		String propertyPublished = splitsAmount > 1 ? PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS : PropertyName.AMOUNT_OF_PUBLISHED_EMAILS;
+		
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin().
@@ -67,8 +73,8 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndGoForward(emailBlastName).
 		SelectEmailType().
 		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
-		addSupporters(emailOfSupporter, amountOfSupporters).
-		addSupporters("unex", hardBounceAmount).
+		addSupporters(emailOfSupporter, amountOfSupporters, propertyPublished).
+		addSupporters("unex", hardBounceAmount, propertyPublished).
 		openComposePage().
 		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
@@ -77,16 +83,16 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openMessagingPage().
 		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
 		
-		Integer published = Integer.valueOf(CommonUtils.getProperty(splitsAmount > 1 ? PropertyName.AMOUNT_OF_PUBLISHED_SPLIT_EMAILS : PropertyName.AMOUNT_OF_PUBLISHED_EMAILS));
+		Integer published = Integer.valueOf(CommonUtils.getProperty(propertyPublished));
 		if (published == amountOfSupporters) {
 			hardBounceAmount = 0;
 		}
 		new AddEmailsPage_PublishTab().
 		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 20, false);
 		
-		loginPage.openEmails(splitsAmount, openAmount);
-		loginPage.clickLinkInEmail(splitsAmount, "http://salsalabs.com", clickAmount);
-		loginPage.unsubscribeByEmail(splitsAmount, unsubAmount);
+		Map<String, List<Email>> emails = loginPage.openEmails(splitsAmount, openAmount);
+		loginPage.clickLinkInEmail(emails, splitsAmount, "http://google.com", clickAmount);
+		loginPage.unsubscribeByEmail(emails, splitsAmount, unsubAmount);
 	}
 	
 	/**

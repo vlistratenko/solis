@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.emails;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
@@ -33,7 +35,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		return this;
 	}
 	
-	public AddEmailsPage_ChooseAudienceTab addSupporters(String searchString, Integer amount) {
+	public AddEmailsPage_ChooseAudienceTab addSupporters(String searchString, Integer amount, String propertyName) {
 		if (amount==0) {
 			return this;
 		}
@@ -61,6 +63,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 			calculated = Integer.parseInt(calculatedLabel.getText().replace(" supporter(s)", "")) - delta;
 			num = amount - calculated;
 		} while (num > 0);
+		CommonUtils.setProperty(propertyName, new Integer(calculated + delta).toString());
 		return this;
 	}
 	

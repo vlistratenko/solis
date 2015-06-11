@@ -6,7 +6,7 @@
 	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
 	<parameter name="sendEmail.openAmount" value="4"></parameter>
 	<parameter name="sendEmail.amountOfSupporter" value="4"></parameter>
-	<parameter name="sendEmail.clickAmount" value="2"></parameter>
+	<parameter name="sendEmail.clickAmount" value="0"></parameter>
 	<parameter name="sendEmail.emailOfSupporter" value="supMan"></parameter>
 	<parameter name="sendEmail.percentageOfTestGroup" value="100"></parameter>
 	<parameter name="sendEmail.splitsAmount" value="1"></parameter>

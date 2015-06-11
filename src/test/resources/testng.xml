@@ -11,11 +11,11 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateDonationFormHostedPageTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSupporterManuallyTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSignupFormTest.xml" />
-		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/SupporterSubscribeSignupFormTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/ImportSupportersTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePetitionTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
 	</suite-files>
 </suite>
