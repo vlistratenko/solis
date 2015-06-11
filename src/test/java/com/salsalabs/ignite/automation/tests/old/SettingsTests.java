@@ -132,7 +132,7 @@ public class SettingsTests extends SeleneseTestCase{
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporterViaEMAIL", ""}, description = "")
 	public void unsubscribeSupporterByEmailTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 
-		Supporter supporter = new Supporter();
+		/*Supporter supporter = new Supporter();
 		supporter.setFinalEMAIL(emailClient.getEmailBox(CommonUtils.getUnicName()));
 		new HttpClient().login(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL), CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD)).
 			createSupporter(supporter.getSupporterJSON(supporter.getFinalEMAIL()));
@@ -166,7 +166,7 @@ public class SettingsTests extends SeleneseTestCase{
 		openSupportersPage().searchSupporter(supporter.getFinalEMAIL()).
 		openSupporterDetailsPage().
 		verifySupporterStatus("Unsubscribed");
-		CommonUtils.checkAndFail("unsubscribeSupporterByEmailTest");
+		CommonUtils.checkAndFail("unsubscribeSupporterByEmailTest");*/
 		
 	}
 	
