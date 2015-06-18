@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq;
 
-import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
@@ -108,20 +107,11 @@ public class LoginPage extends Browser{
 	}
 	
 	public String getInvitationUrl() {
-		try {
-			return SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion");
-		} catch (MailosaurException e) {
-			SeleneseTestCase.logger.error("", e);
-			return null;
-		}
+		return SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion");
 	}
 	
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {
-		try {
-			open(SeleneseTestCase.emailClient.getUnsubscribeLink(emailSubj));
-		} catch (MailosaurException e) {
-			e.printStackTrace();
-		}
+		open(SeleneseTestCase.emailClient.getUnsubscribeLink(emailSubj));
 		return new UnsubscribePage();
 	}
 	

@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.common;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +16,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
-import com.mailosaur.exception.MailosaurException;
-import com.mailosaur.model.Email;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -209,25 +206,21 @@ public abstract class Browser {
 		return new LoginPage();
 	}
 
-	public List<Email> openEmails(String subj, Integer amount) {
-		EmailClient client = SeleneseTestCase.emailClient;
-		ArrayList<Email> emails = null;
-		try {
-			emails = client.getEmailsBySubject(subj);
-		} catch (MailosaurException e) {
-			logger.error("", e);
-		}
+	public List<?> openEmails(String subj, Integer amount) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
+		emails = client.getEmailsBySubject(subj);
 		if (emails.size() < amount)
 			amount = emails.size();
 		for (int i = 0; i < amount; i++) {
 			client.openEmail(emails.get(i));
-			logger.info("Email for " + emails.get(i).to[0].address + " was opened");
+			logger.info("Email for " + client.getRecipient(emails.get(i)) + " was opened");
 		}
 		return emails;
 	}
 	
-	public Map<String, List<Email>> openEmails(Integer amountOfSplits, Integer amount) {
-		Map<String, List<Email>> emails = new HashMap<>();
+	public Map<String, List<?>> openEmails(Integer amountOfSplits, Integer amount) {
+		Map<String, List<?>> emails = new HashMap<>();
 		if (amount == 0) {
 			return emails;
 		}
@@ -244,7 +237,7 @@ public abstract class Browser {
 		return emails;
 	}
 	
-	public void clickLinkInEmail(Map<String, List<Email>> emailMap, Integer amountOfSplits, String linkText, Integer amountOfEmails) {
+	public void clickLinkInEmail(Map<String, List<?>> emailMap, Integer amountOfSplits, String linkText, Integer amountOfEmails) {
 		if (amountOfEmails == 0) {
 			return;
 		}
@@ -264,15 +257,11 @@ public abstract class Browser {
 		clickLinkInEmail(null, amountOfSplits, linkText, amountOfEmails);
 	}
 
-	public void clickLinkInEmail(Map<String, List<Email>> emailMap, String subj, String linkText, Integer amountOfEmails) {
-		EmailClient client = SeleneseTestCase.emailClient;
-		List<Email> emails = null;
+	public void clickLinkInEmail(Map<String, List<?>> emailMap, String subj, String linkText, Integer amountOfEmails) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
 		if (emailMap == null) {
-			try {
-				emails = client.getEmailsBySubject(subj);
-			} catch (MailosaurException e) {
-				logger.error("", e);
-			}
+			emails = client.getEmailsBySubject(subj);
 		} else {
 			emails = emailMap.get(subj);
 		}
@@ -280,12 +269,12 @@ public abstract class Browser {
 			amountOfEmails = emails.size();
 		for (int i = 0; i < amountOfEmails; i++) {
 			if (client.clickLinkByText(emails.get(i), linkText)) {
-				logger.info("Link in the email for " + emails.get(i).to[0].address + " was clicked");
+				logger.info("Link in the email for " + client.getRecipient(emails.get(i)) + " was clicked");
 			}
 		}
 	}
 	
-	public void unsubscribeByEmail(Map<String, List<Email>> emailMap, Integer amountOfSplits, Integer amountOfEmails) {
+	public void unsubscribeByEmail(Map<String, List<?>> emailMap, Integer amountOfSplits, Integer amountOfEmails) {
 		if (amountOfEmails == 0) {
 			return;
 		}
@@ -305,15 +294,11 @@ public abstract class Browser {
 		unsubscribeByEmail(null, amountOfSplits, amountOfEmails);
 	}
 	
-	public void unsubscribeByEmail(Map<String, List<Email>> emailMap, String subj, Integer amountOfEmails) {
-		EmailClient client = SeleneseTestCase.emailClient;
-		List<Email> emails = null;
+	public void unsubscribeByEmail(Map<String, List<?>> emailMap, String subj, Integer amountOfEmails) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
 		if (emailMap == null) {
-			try {
-				emails = client.getEmailsBySubject(subj);
-			} catch (MailosaurException e) {
-				logger.error("", e);
-			}
+			emails = client.getEmailsBySubject(subj);
 		} else {
 			emails = emailMap.get(subj);
 		}
@@ -321,7 +306,7 @@ public abstract class Browser {
 			amountOfEmails = emails.size();
 		for (int i = 0; i < amountOfEmails; i++) {
 			new LoginPage().openUnsubscribeLinkFromEmail(subj).
-			fillUnsubscribeForm(emails.get(i).to[0].address).
+			fillUnsubscribeForm(client.getRecipient(emails.get(i))).
 			clickUnsubscribeButton().
 			verifyUnsubscribeIsSuccesses();
 		}

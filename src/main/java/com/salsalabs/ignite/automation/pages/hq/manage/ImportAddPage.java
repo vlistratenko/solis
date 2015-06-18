@@ -116,7 +116,7 @@ public class ImportAddPage extends ManagePage{
 		for (int i = 1; i <= amount; i++) {
 			Supporter supporter = new Supporter();
 			if (i<=amountOfRealSupporters) {
-				supporter.setEmailDomain("." + SeleneseTestCase.emailClient.getMbox() + "@mailosaur.in");
+				supporter.setEmailDomain(SeleneseTestCase.emailClient.getEmailBox(""));
 			}else{
 				supporter.setEmailDomain("@devnull.test.ignite.net");
 			}

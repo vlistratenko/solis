@@ -29,11 +29,7 @@ public class PaymentGatewaysPage extends ManagePage {
 
 	public PaymentGatewaysPage verifyWePayEmail() {
 		Integer amounOfEmails = 0;
-		try {
-			amounOfEmails = SeleneseTestCase.emailClient.waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
-		} catch (MailosaurException e) {
-			SeleneseTestCase.logger.error("",e);
-		}
+		amounOfEmails = SeleneseTestCase.emailClient.waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
 		verifier.verifyEquals(amounOfEmails, 1, "Wrong amount of emails", false);
 		return this;
 		
@@ -42,14 +38,10 @@ public class PaymentGatewaysPage extends ManagePage {
 	public PaymentGatewaysPage openWePayConfirmationPage() {
 		String activationLink = "";
 		Button wePayAccessButton = new ButtonImpl("//input[@value='Grant Access']", "Grant Access");
-		try {
-			String caption = "Please confirm your ignite account";
-			activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
-			if ((activationLink == null || activationLink.isEmpty()) && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
-				caption = "Please confirm your ignite2 account";
-			}
-		} catch (MailosaurException e) {
-			e.printStackTrace();
+		String caption = "Please confirm your ignite account";
+		activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
+		if ((activationLink == null || activationLink.isEmpty()) && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
+			caption = "Please confirm your ignite2 account";
 		}
 		String primaryHandle = this.getWindowHandle();
 		this.openInNewWindow(activationLink);

@@ -3,7 +3,7 @@ package com.salsalabs.ignite.automation.pages.other;
 import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.EmailClient;
+import com.salsalabs.ignite.automation.common.MailosourEmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -61,11 +61,7 @@ public class Google extends Browser{
 		for (int i = 1; i <= amountOfSplits; i++) {
 			String subj = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT) + " Split " + i;
 			Integer amountEmails = null;
-			try {
-				amountEmails = SeleneseTestCase.emailClient.getEmailsBySubject(subj).size();
-			} catch (MailosaurException e) {
-				SeleneseTestCase.logger.error("",e);
-			}
+			amountEmails = SeleneseTestCase.emailClient.getEmailsBySubject(subj).size();
 			if ( ! CommonUtils.getProperty(PropertyName.ENVIRONMENT).equalsIgnoreCase("dev")) {
 				verifier.verifyEquals(amountEmails, amountEmailsInSplit, "Not all emails were delivered");
 			}else{
