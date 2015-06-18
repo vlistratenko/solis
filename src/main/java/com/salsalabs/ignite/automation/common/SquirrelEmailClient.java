@@ -197,6 +197,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 			Folder inbox = getFolder(Folder.READ_ONLY);
 			Message[] messages = inbox.getMessages();
 			for (String subj : subjects) {
+				logger.info("Try to find email with subject - " + subj);
 				msgs.addAll(Arrays.asList(inbox.search(new SubjectTerm(subj), messages)));
 			}
 		} catch (Exception ex) {
