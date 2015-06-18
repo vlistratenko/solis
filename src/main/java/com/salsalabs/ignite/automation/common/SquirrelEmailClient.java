@@ -144,13 +144,13 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		return getEmailsBySubjects(subjs);
 	}
 	
-	private Folder getFolder(){
+	private Folder getFolder(int status){
 		if (folder != null && folder.isOpen()) {
 			return folder;
 		}
 		try {
 			folder = getStore().getFolder("INBOX");
-			folder.open(Folder.READ_ONLY);
+			folder.open(status);
 		} catch (Exception ex) {
 			logger.error("", ex);
 		}
@@ -174,22 +174,28 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 
 	@Override
 	public void deleteAllEmails() {
+		Folder inbox = getFolder(Folder.READ_WRITE);
 		try {
-			Message[] messages = getFolder().getMessages();
+			Message[] messages = inbox.getMessages();
 			for (Message msg : messages) {
 				msg.setFlag(Flags.Flag.DELETED, true);
 			}
 		} catch (Exception ex) {
 			logger.error("", ex);
+		} finally {
+			try {
+				inbox.close(true);
+			} catch (MessagingException e) {
+				logger.error("", e);
+			}
 		}
 	}
 
 	private List<Message> getEmailsBySubjects(String[] subjects) {
 		List<Message> msgs = new ArrayList<>();
 		try {
-			Folder inbox = getFolder();
-			int count = inbox.getMessageCount();
-			Message[] messages = inbox.getMessages(count > 10 ? count - 10 : 0, count);
+			Folder inbox = getFolder(Folder.READ_ONLY);
+			Message[] messages = inbox.getMessages();
 			for (String subj : subjects) {
 				msgs.addAll(Arrays.asList(inbox.search(new SubjectTerm(subj), messages)));
 			}
