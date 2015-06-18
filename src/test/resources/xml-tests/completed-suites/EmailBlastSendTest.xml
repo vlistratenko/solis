@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="Create and send single email blast" parallel="false" thread-count="1">
 
-	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
 	<parameter name="sendEmail.openAmount" value="4"></parameter>
 	<parameter name="sendEmail.amountOfSupporter" value="4"></parameter>
-	<parameter name="sendEmail.clickAmount" value="0"></parameter>
+	<parameter name="sendEmail.clickAmount" value="2"></parameter>
 	<parameter name="sendEmail.emailOfSupporter" value="supMan"></parameter>
 	<parameter name="sendEmail.percentageOfTestGroup" value="100"></parameter>
 	<parameter name="sendEmail.splitsAmount" value="1"></parameter>

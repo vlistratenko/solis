@@ -20,14 +20,26 @@ public class Environment {
 		server = LocationOfServer.valueOf(sarverLocation);
 	}
 	
-	public EmailClient getEmailClient() {
+	public EmailClient<?> getMailosourEmailClient() {
 		switch (environment) {
 		case DEV:
-			return new EmailClient("6fe4a402");
+			return new MailosourEmailClient("6fe4a402");
 		case TEST:
-			return new EmailClient("612fb360");
+			return new MailosourEmailClient("612fb360");
 		case UAT:
-			return new EmailClient("d05ab35d");
+			return new MailosourEmailClient("d05ab35d");
+		}
+		return null;
+	}
+	
+	public EmailClient<?> getSquirrelEmailClient() {
+		switch (environment) {
+		case DEV:
+			return new SquirrelEmailClient("devauto");
+		case TEST:
+			return new SquirrelEmailClient("testauto");
+		case UAT:
+			return new SquirrelEmailClient("uatauto");
 		}
 		return null;
 	}

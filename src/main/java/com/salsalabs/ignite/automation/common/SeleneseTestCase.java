@@ -52,7 +52,7 @@ public class SeleneseTestCase {
 	public static boolean isDebugMode = false;
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
-	public static EmailClient emailClient;
+	public static EmailClient<?> emailClient;
 	
 	static {
 		System.setProperty("log4j.configurationFile", "log4j.xml");
@@ -72,7 +72,7 @@ public class SeleneseTestCase {
 			bpath = System.getProperty("USED_BROWSER");
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
-		emailClient = USED_ENVIRONMENT.getEmailClient();
+		emailClient = USED_ENVIRONMENT.getSquirrelEmailClient();
 		setAdminEmail();
 		emailClient.deleteAllEmails();
 		
@@ -85,7 +85,7 @@ public class SeleneseTestCase {
 	
 	private void setAdminEmail() {
 		String adminEmail = CommonUtils.getProperty(PropertyName.ADMIN_EMAIL_BASE);
-		adminEmail = emailClient.getEmailBox(adminEmail);
+		adminEmail = USED_ENVIRONMENT.getMailosourEmailClient().getEmailBox(adminEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, adminEmail);
 	}
 	
@@ -117,6 +117,7 @@ public class SeleneseTestCase {
 
 	@AfterTest(alwaysRun = true)
 	protected void stopTestOnDriver() throws Exception {
+		emailClient.closeConnection();
 		driver.manage().deleteAllCookies();
 		close();
 	}

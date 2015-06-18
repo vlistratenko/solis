@@ -73,7 +73,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		fillAllFieldsAndGoForward(emailBlastName).
 		SelectEmailType().
 		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
-		addSupporters(emailOfSupporter, amountOfSupporters, propertyPublished).
+		addSupporters(amountOfSupporters, propertyPublished).
 		addSupporters("unex", hardBounceAmount, propertyPublished).
 		openComposePage().
 		selectLayout("Basic").
@@ -90,7 +90,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		new AddEmailsPage_PublishTab().
 		verifyAmountOfEmails(published - hardBounceAmount, splitsAmount, 20, false);
 		
-		Map<String, List<Email>> emails = loginPage.openEmails(splitsAmount, openAmount);
+		Map<String, List<?>> emails = loginPage.openEmails(splitsAmount, openAmount);
 		loginPage.clickLinkInEmail(emails, splitsAmount, "http://google.com", clickAmount);
 		loginPage.unsubscribeByEmail(emails, splitsAmount, unsubAmount);
 	}

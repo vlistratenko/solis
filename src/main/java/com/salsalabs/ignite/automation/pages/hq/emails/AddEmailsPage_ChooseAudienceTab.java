@@ -2,6 +2,7 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
@@ -33,6 +34,10 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 			SelectedSegmentsOrSupporters.click();
 		}
 		return this;
+	}
+	
+	public AddEmailsPage_ChooseAudienceTab addSupporters(Integer amount, String propertyName) {
+		return addSupporters(SeleneseTestCase.emailClient.getEmailBox(""), amount, propertyName);
 	}
 	
 	public AddEmailsPage_ChooseAudienceTab addSupporters(String searchString, Integer amount, String propertyName) {
