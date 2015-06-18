@@ -174,13 +174,20 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 
 	@Override
 	public void deleteAllEmails() {
+		Folder inbox = getFolder();
 		try {
-			Message[] messages = getFolder().getMessages();
+			Message[] messages = inbox.getMessages();
 			for (Message msg : messages) {
 				msg.setFlag(Flags.Flag.DELETED, true);
 			}
 		} catch (Exception ex) {
 			logger.error("", ex);
+		} finally {
+			try {
+				inbox.close(true);
+			} catch (MessagingException e) {
+				logger.error("", e);
+			}
 		}
 	}
 
