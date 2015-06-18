@@ -189,7 +189,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		try {
 			Folder inbox = getFolder();
 			int count = inbox.getMessageCount();
-			Message[] messages = inbox.getMessages(count - 10, count);
+			Message[] messages = inbox.getMessages(count > 10 ? count - 10 : 0, count);
 			for (String subj : subjects) {
 				msgs.addAll(Arrays.asList(inbox.search(new SubjectTerm(subj), messages)));
 			}
