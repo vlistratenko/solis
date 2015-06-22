@@ -209,9 +209,9 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 	@Override
 	public void closeConnection(){
 		try {
-			if (folder != null)
+			if (folder != null && folder.isOpen())
 				folder.close(false);
-			if (store != null)
+			if (store != null && store.isConnected())
 				store.close();
 		} catch (Exception e) {
 			logger.error("", e);
