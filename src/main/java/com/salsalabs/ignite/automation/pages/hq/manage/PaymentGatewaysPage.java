@@ -1,6 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
 import com.mailosaur.exception.MailosaurException;
+import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
@@ -26,20 +27,28 @@ public class PaymentGatewaysPage extends ManagePage {
 		verifier.verifyElementIsDisplayed(label);
 		return this;
 	}
-
+	
 	public PaymentGatewaysPage verifyWePayEmail() {
+		return verifyWePayEmail(SeleneseTestCase.emailClient);
+	}
+
+	public PaymentGatewaysPage verifyWePayEmail(EmailClient<?> emailClient) {
 		Integer amounOfEmails = 0;
-		amounOfEmails = SeleneseTestCase.emailClient.waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
+		amounOfEmails = emailClient.waitForEmails("Please confirm your ignite account", 1, 10).getEmailsBySubject("Please confirm your ignite account").size();
 		verifier.verifyEquals(amounOfEmails, 1, "Wrong amount of emails", false);
 		return this;
 		
 	}
-
+	
 	public PaymentGatewaysPage openWePayConfirmationPage() {
+		return openWePayConfirmationPage(SeleneseTestCase.emailClient);
+	}
+
+	public PaymentGatewaysPage openWePayConfirmationPage(EmailClient<?> emailClient) {
 		String activationLink = "";
 		Button wePayAccessButton = new ButtonImpl("//input[@value='Grant Access']", "Grant Access");
 		String caption = "Please confirm your ignite account";
-		activationLink = SeleneseTestCase.emailClient.getURLByDomain(caption, "stage.wepay.com");
+		activationLink = emailClient.getURLByDomain(caption, "stage.wepay.com");
 		if ((activationLink == null || activationLink.isEmpty()) && SeleneseTestCase.USED_ENVIRONMENT.getEnvironment().name().equalsIgnoreCase("dev")) {
 			caption = "Please confirm your ignite2 account";
 		}
