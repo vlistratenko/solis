@@ -6,8 +6,9 @@ import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
-public class CreateInvitePage {
+public class CreateInvitePage extends HomePage {
 
 	TextBox emailField = new TextBoxImpl("//input[@id='invite_email']", "Email");
 	TextBox firstNameField = new TextBoxImpl("//input[@id='invite_firstName']", "First name");
@@ -42,6 +43,7 @@ public class CreateInvitePage {
 		insightReportsTable.clickInCell(1, cmInsightReportsRole + 1, "div");
 		applicationAdminTable.clickInCell(1, cmAppAdminRole + 1, "div");
 		saveInviteButton.click();
+		sleep(10);
 		return new AccountsPage();
 	}
 
