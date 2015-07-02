@@ -16,6 +16,7 @@ public class AddEmailsPage_SetupTab extends AddEmailsPage {
 		ReferenceNameField.type(emailBlastName);
 		DescriptionField.type("Descr");
 		ChooseAudienceButton.click();
+		sleep(10);
 		return new AddEmailsPage_ChooseAudienceTab();
 	}
 	
