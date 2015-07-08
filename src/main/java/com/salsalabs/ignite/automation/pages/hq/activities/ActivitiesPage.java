@@ -64,13 +64,17 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public void verifyActivityIsNotPresentInTableAllActivities(String handyReferenceName, String description) {
-		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 3), handyReferenceName, "Widget is not present in table (name)");
-		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 4), description, "Widget is not present in table (description)");
+		if (activitiesTable.getRowsCount() > 0) {
+			verifier.verifyNotEquals(activitiesTable.getCellValue(1, 3), handyReferenceName, "Widget is not present in table (name)");
+			verifier.verifyNotEquals(activitiesTable.getCellValue(1, 4), description, "Widget is not present in table (description)");
+		}
 	}
 	
 	public void verifyWidgetIsNotPresentInTableForms(String widgetName, String description) {
-		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 2), widgetName, "Widget is not present in table (name)");
-		verifier.verifyNotEquals(activitiesTable.getCellValue(1, 3), description, "Widget is not present in table (description)");
+		if (activitiesTable.getRowsCount() > 0) {
+			verifier.verifyNotEquals(activitiesTable.getCellValue(1, 2), widgetName, "Widget is not present in table (name)");
+			verifier.verifyNotEquals(activitiesTable.getCellValue(1, 3), description, "Widget is not present in table (description)");
+		}
 	}
 	
 	public <T> T openFormFromTable(Class<T> clazz) {
