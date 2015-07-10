@@ -45,7 +45,7 @@ public class SupportersAddPage extends HomePage{
 		supporterFaceBookField.type(supporter.getFacebook());
 		supporterTwitterField.type(supporter.getTwitter());
 		saveButton.click();
-		sleep(3);
+		sleep(10);
 		return new SupportersPage();
 	}
 	
