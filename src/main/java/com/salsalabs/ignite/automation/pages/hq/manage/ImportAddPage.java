@@ -57,7 +57,7 @@ public class ImportAddPage extends ManagePage{
 		} catch (FileNotFoundException e) {
 			SeleneseTestCase.logger.error("",e);
 		}
-		sleep(5);
+		sleep(10);
 		nextStepButton.click();
 		CommonUtils.setProperty(PropertyName.IMPORT_NAME, name);
 		sleep(2);
@@ -66,7 +66,6 @@ public class ImportAddPage extends ManagePage{
 	
 	public ImportAddPage fillSecondStep(String importFromRow) {
 		sleep(10);
-		nextStepButton.click();
 		importFromRowField.type(importFromRow);
 		if (customFields != null) {
 			for (int i = 1; i <= customFields.size(); i++) {
