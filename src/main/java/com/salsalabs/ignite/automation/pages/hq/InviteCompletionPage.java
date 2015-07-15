@@ -24,7 +24,7 @@ public class InviteCompletionPage extends Browser {
 	DropDown recoveryQuestionField2 = new DropDownImpl("//custom-select2[@out='fields.challengeQuestionTwo']/", "//custom-select2[@out='fields.challengeQuestionTwo']/descendant::a", "Recovery question two");
 	TextBox recoveryAnswerField2 = new TextBoxImpl("//form[@id='loginInvite']/descendant::input[@name='challengeAnswerTwo']", "Recovery answer two");
 	
-	Button createAccountButton = new ButtonImpl("//button[@ng-click='login_create_account_completion_submit(token,loginInvite,isTrial)']", "Create account");
+	Button createAccountButton = new ButtonImpl("//button[contains(@ng-click,'login_create_account_completion_submit')]", "Create account");
 	
 	
 	TextBox emailField = new TextBoxImpl("//input[@id='email']", "Email for General Questions", true);
