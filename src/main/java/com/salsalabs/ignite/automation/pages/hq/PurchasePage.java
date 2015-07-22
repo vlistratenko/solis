@@ -15,7 +15,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class PurchasePage extends Browser {
 
 	protected final static String[] sizes = { "up to 1,000 supporters", "up to 2,500 supporters", "up to 5,000 supporters" };
-	protected final static String[] billings = { "Bill me monthly", "Bill me quaterly", "Bill me annually" };
+	protected final static String[] billings = { "Good Value", "Better Value", "Best Value" };
 
 	DropDown selectListSize = new DropDownImpl("//custom-select2[@out='selectedListSize']", "//custom-select2[@out='selectedListSize']/div/a", "List Size");
 	TextBox cardNumberInput = new TextBoxImpl("//input[@id='cardNumber']", "Card Number");
