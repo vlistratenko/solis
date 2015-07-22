@@ -88,6 +88,7 @@ public class SeleneseTestCase {
 		adminEmail = USED_ENVIRONMENT.getMailosourEmailClient().getEmailBox(adminEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, adminEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, "11111111");
+		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, "automated_testing1");
 	}
 	
 	public static WebDriver getDriver() {
