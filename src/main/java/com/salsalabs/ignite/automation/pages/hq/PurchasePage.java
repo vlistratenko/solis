@@ -15,6 +15,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class PurchasePage extends Browser {
 
 	protected final static String[] sizes = { "up to 1,000 supporters", "up to 2,500 supporters", "up to 5,000 supporters" };
+	protected final static String[] billings = { "Bill me monthly", "Bill me quaterly", "Bill me annually" };
 
 	DropDown selectListSize = new DropDownImpl("//custom-select2[@out='selectedListSize']", "//custom-select2[@out='selectedListSize']/div/a", "List Size");
 	TextBox cardNumberInput = new TextBoxImpl("//input[@id='cardNumber']", "Card Number");
@@ -32,8 +33,8 @@ public class PurchasePage extends Browser {
 	}
 	
 	public PurchasePage chooseBillingType() {
-		Button chooseBillingType = new ButtonImpl("(//div[contains(@class,'price-tile-footer')])", "Billing Type");
-		chooseBillingType.addPath("[" + RandomUtils.nextInt(1, 4) + "]");
+		String type = billings[RandomUtils.nextInt(0, 3)];
+		Button chooseBillingType = new ButtonImpl("(//div[text()='" + type + "'])", "Billing Type: " + type);
 		chooseBillingType.click();
 		return this;
 	}
