@@ -12,19 +12,14 @@ public class HomePageAdmin extends Browser {
 	List organizationsMenu = new MenuBarImpl("//form[@id='mainform']", "Menu bar");
 	Button logOut = new ButtonImpl("//*[.='Logout']/ancestor-or-self::button", "Logout");
 	
-	public AddNewOrgPage openAddNewOrganizationPage() {
-		try{
+	public OrganizationsListPage openActiveOrganizationsPage() {
+		try {
 			organizationsMenu.selectByLabel("Organizations");
-			organizationsMenu.selectByLabel("New");
-		}catch  (Exception e) {
-			open(SeleneseTestCase.USED_ENVIRONMENT.getBaseAdminUrl() + "/protected/organization_new.xhtml");
+			organizationsMenu.selectByLabel("Active");
+		} catch (Exception e) {
+			open(SeleneseTestCase.USED_ENVIRONMENT.getBaseAdminUrl() + "/protected/organization_list.xhtml");
 		}
-		return new AddNewOrgPage();
-	}
-	
-	public OrganizationsListPage openOrganizationsList() {
-		SeleneseTestCase.bug.add("Open list with organizations");
-		organizationsMenu.selectByLabel("List");
+		sleep(5);
 		return new OrganizationsListPage();
 	}
 	

@@ -15,7 +15,7 @@ import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 
 public class BuildAcceptanceTests extends SeleneseTestCase {
 
-	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, enabled = true, groups = {"acceptanceTests.admin", "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({"createOrg.domainType",
 		"createOrg.orgName",
 		"createOrg.orgDescrption",
@@ -32,7 +32,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 						String status,
 						String featureList) {
 		
-		orgName = orgName + CommonUtils.getUnicName();
+		/*orgName = orgName + CommonUtils.getUnicName();
 		String orgAdminUserId = emailClient.getEmailBox(CommonUtils.getUnicName());
 		new LoginPageAdmin().
 			doSuccessLogin().
@@ -44,7 +44,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, orgAdminUserId);
 		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
 		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
-		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);
+		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);*/
 	}
 	
     @Test(retryAnalyzer=RetryAnalyzer.class, priority=20, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, dependsOnMethods="createOrgTest", description = "489:52:New Admin account was NOT confirmed")

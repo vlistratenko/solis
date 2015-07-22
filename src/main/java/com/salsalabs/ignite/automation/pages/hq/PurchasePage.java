@@ -1,62 +1,60 @@
 package com.salsalabs.ignite.automation.pages.hq;
 
-import java.util.Arrays;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
+import org.apache.commons.lang3.RandomUtils;
 
 import com.salsalabs.ignite.automation.common.Browser;
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.MailosourEmailClient;
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
+import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-//import com.salsalabs.ignite.automation.tests.BuyLicenseTest;
+import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class PurchasePage extends Browser {
 
-	Label priceLabel = new LabelImpl("//p[contains(text(),\"you'll be billed\")]/strong", "Label with price");
-	Label processingIconLabel = new LabelImpl("//p[contains(text(),\"you'll be billed\")]/strong/span[@class='']", "Processing icon");
-	Button paymentFrequencyRadioButton = new ButtonImpl("//*[contains(text(), 'frequency')]/ancestor::tr/descendant::*[contains(@class, 'custom radio')]", "payment Frequency");
+	protected final static String[] sizes = { "up to 1,000 supporters", "up to 2,500 supporters", "up to 5,000 supporters" };
+
+	DropDown selectListSize = new DropDownImpl("//custom-select2[@out='selectedListSize']", "//custom-select2[@out='selectedListSize']/div/a", "List Size");
+	TextBox cardNumberInput = new TextBoxImpl("//input[@id='cardNumber']", "Card Number");
+	TextBox cvvInput = new TextBoxImpl("//input[@id='cvv2']", "CVV2");
+	TextBox nameCardInput = new TextBoxImpl("//input[@name='nameOnCard']", "Card Name");
+	DropDown selectMonth = new DropDownImpl("//custom-select[@data='monthList']", "//custom-select[@data='monthList']/div/a", "Month");
+	DropDown selectYear = new DropDownImpl("//custom-select[@data='curYearList']", "//custom-select[@data='curYearList']/div/a", "Year");
+	Button purchase = new ButtonImpl("(//button[contains(@ng-click,'doPurchaseSubmit')])", "Purchase");
+	Label success = new LabelImpl("//p[contains(text(), 'Your credit card has been successfully charged. ')]", "Success");
 	
-	public PurchasePage verifyPriceExist(boolean sendEmails) {
-		priceLabel.highlight();
-		String price = priceLabel.getText();
-		String[] prices = {"$160", "$314", "$1188","$160.00", "$314.00", "$1,188.00"};
-		if (!Arrays.asList(prices).contains(price) && sendEmails) {
-			/*try {
-				SeleneseTestCase.emailClient.sendEmail("Wrong price", "Wrong price " + price, SeleneseTestCase.makeScreenshot("WrongPrice" + CommonUtils.getUnicName()));
-				//BuyLicenseTest.sendEmails = false;
-			} catch (MessagingException e) {
-				SeleneseTestCase.logger.error("",e);
-			}*/
-		}else if (Arrays.asList(prices).contains(price) && !sendEmails) {
-			/*try {
-				SeleneseTestCase.emailClient.sendEmail("Price is correct ", "Price is correct " + price, SeleneseTestCase.makeScreenshot("PriceIsCorrect" + CommonUtils.getUnicName()));
-				//BuyLicenseTest.sendEmails = true;
-			} catch (AddressException e) {
-				SeleneseTestCase.logger.error("",e);
-			} catch (MessagingException e) {
-				SeleneseTestCase.logger.error("",e);
-			}*/
-			
-		}
-		verifier.verifyFalse(price.equalsIgnoreCase("Loading"), "Price is not correct. " + price);
-		verifier.verifyTrue(processingIconLabel.waitForNotExists(30), "Processing icon is not hiden");
+	public PurchasePage selectListSize() {
+		selectListSize.selectByLabelJS(chooseRandomListSize());
+		sleep(5);
 		return this;
 	}
 	
-	/**
-	 * Accepted values Annual, Quarterly, Monthly
-	 * @param frequency
-	 * @return
-	 */
-	public PurchasePage selectPaymentFrequency(String frequency) {
-		paymentFrequencyRadioButton = new ButtonImpl("//*[contains(text(), '" + frequency + "')]/ancestor::tr/descendant::*[contains(@class, 'custom radio')]", "payment Frequency");
-		paymentFrequencyRadioButton.click();
-		sleep(10);
+	public PurchasePage chooseBillingType() {
+		Button chooseBillingType = new ButtonImpl("(//div[contains(@class,'price-tile-footer')])", "Billing Type");
+		chooseBillingType.addPath("[" + RandomUtils.nextInt(1, 4) + "]");
+		chooseBillingType.click();
 		return this;
+	}
+	
+	public PurchasePage enterCreditCardInfo(String cardNumber, String cvv, String name){
+		cardNumberInput.type(cardNumber);
+		cvvInput.type(cvv);
+		nameCardInput.type(name);
+		selectMonth.selectByLabelJS("01");
+		selectYear.selectByLabelJS("2020");
+		return this;
+	}
+	
+	public HomePage purchase(){
+		purchase.click();
+		sleep(10);
+		verifier.verifyElementIsDisplayed(true, success);
+		return new HomePage();
+	}
+
+	protected String chooseRandomListSize() {
+		return sizes[RandomUtils.nextInt(0, sizes.length)];
 	}
 }

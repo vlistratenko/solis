@@ -12,7 +12,7 @@ import com.salsalabs.ignite.automation.pages.admin.LoginPageAdmin;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class AdminTest extends SeleneseTestCase{
-	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, enabled = true, groups = {/*"acceptanceTests.admin",*/ "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, enabled = true, groups = {"acceptanceTests.admin", "dev", "test", "createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({ "admin.login",
      	"admin.password",     	
      	"createOrg.domainType",
@@ -30,7 +30,7 @@ public class AdminTest extends SeleneseTestCase{
 						String status,
 						String featureList){
 		
-		orgName = CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME);
+		/*orgName = CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME);
 		String orgAdminUserId = CommonUtils.getProperty(PropertyName.ADMIN_EMAIL);
 		
 		new LoginPageAdmin().
@@ -43,7 +43,7 @@ public class AdminTest extends SeleneseTestCase{
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, orgAdminUserId);
 		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
 		CommonUtils.setProperty(PropertyName.ADMIN_LAST_NAME, lastName);
-		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);
+		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, orgName);*/
 		return this;
 	}
 	

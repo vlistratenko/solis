@@ -52,6 +52,11 @@ public abstract class Browser {
 		return new LoginPage();
 	}
 	
+	public void verifyEmail(String subj) {
+		SeleneseTestCase.emailClient.waitForEmails(subj, 1, 15);
+		verifier.verifyTrue(SeleneseTestCase.emailClient.getEmailBySubject(subj) != null, "Email isn't received", true);
+	}
+	
 	protected void open(String url) {
 		url = url.replaceFirst("hq.uat.igniteaction.net", "hq.uat.ignite.net");
 		logger.info("Try to open URL - " + url);

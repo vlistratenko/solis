@@ -36,7 +36,6 @@ public class AddNewOrgPage extends HomePageAdmin{
 			String firstNameValue,
 			String lastNameValue,		
 			String statusValue,
-			String featureListValue,
 			boolean isSendEmails,
 			String classificationValue) {
 		SeleneseTestCase.bug.add("Create new org.");
@@ -53,7 +52,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 		PhoneNumber.type("23" + CommonUtils.getRandomNumericValueFixedLength(9));
 		statusType.selectByLabel(statusValue);
 		classificationType.selectByLabel(classificationValue);
-		crmID.type(CommonUtils.getUnicName());
+		crmID.type("13111111111");
 		createButton.click();
 		sleep(5);
 		return new OrganizationsListPage();

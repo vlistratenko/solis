@@ -44,9 +44,13 @@ public class Verifier {
 	}
 	
 	public void verifyElementIsNotVisible(Element... element) {
+		verifyElementIsNotVisible(false, element);
+	}
+	
+	public void verifyElementIsNotVisible(boolean fail, Element... element) {
 		if (element != null) {
 			for (Element e : element) {
-				verifyFalse(e.isVisible(), e.getName() + " still exists.", false);
+				verifyFalse(e.isVisible(), e.getName() + " still exists.", fail);
 			}
 		}
 	}

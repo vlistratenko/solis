@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Create New Org" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+
+	<test verbose="2" name="Create New Org FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+
+		<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
+		<parameter name="createOrg.orgName" value="AutoTest Org"></parameter>
+		<parameter name="createOrg.orgDescrption" value="AutoTest descr"></parameter>
+
+		<parameter name="createOrg.firstName" value="AutoTester"></parameter>
+		<parameter name="createOrg.lastName" value="AutoTesterov"></parameter>
+		<parameter name="createOrg.status" value="Trial"></parameter>
+		<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
+
+		<groups>
+			<run>
+				<include name="createAdmin" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.CreateNewOrgTest" />
+		</classes>
+	</test>
+</suite>

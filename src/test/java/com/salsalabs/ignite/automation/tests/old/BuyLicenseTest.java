@@ -18,7 +18,7 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=10, groups = {"BuyLicenseTest"}, description = "")
 	public void BuyLicense(String login, String password, String paymentFrequency) throws AddressException, MessagingException{
 		
-		for (int i = 0; i < 1000000000; i++) {
+		/*for (int i = 0; i < 1000000000; i++) {
 			PurchasePage page = new LoginPage(true).
 					doSuccessLogin(login, password).
 					clickBuyButton().
@@ -28,7 +28,7 @@ public class BuyLicenseTest extends SeleneseTestCase {
 				selectPaymentFrequency(freq).
 				verifyPriceExist(sendEmails);	
 			}
-		}		
+		}		*/
 			
 	}
 }

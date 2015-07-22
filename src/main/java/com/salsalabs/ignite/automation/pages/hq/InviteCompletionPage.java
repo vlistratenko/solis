@@ -34,7 +34,7 @@ public class InviteCompletionPage extends Browser {
 	TextBox zipField = new TextBoxImpl("//input[@id='zip']", "Zip", true);
 	DropDown statesField = new DropDownImpl("//custom-select2[@data='states']/div/ul/li", "//custom-select2[@data='states']/div/a", "States");
 	CheckBox acceptTermsOfService = new CheckBoxImpl("//input[@id='tosVersion']", "Terms");
-	Button saveButton = new ButtonImpl("//button[@ng-click=\"doSaveOrgInfo(orgForm,'communicate');\"]", "Save org account");
+	Button saveButton = new ButtonImpl("//button[contains(@ng-click,'doSaveOrgInfo')]", "Save org account");
 	
 	
 	//Design form
@@ -45,7 +45,7 @@ public class InviteCompletionPage extends Browser {
 	TextBox fromNameField = new TextBoxImpl("//input[@ng-model='settings.communication.emailDefaultFromName']", "From Name", true);
 	TextBox fromEmailField = new TextBoxImpl("//input[@ng-model='settings.communication.emailDefaultFromAddress']", "From Email", true);
 	TextBox replyToEmailField = new TextBoxImpl("//input[@ng-model='settings.communication.emailDefaultReplyto']", "Reply To email", true);
-	Button finishButton = new ButtonImpl("//button[@ng-click=\"processing.submitOrg=true;doSaveOrgDefaults(orgDefaultsForm);\"]", "Save account");
+	Button finishButton = new ButtonImpl("//button[contains(@ng-click,'doSaveOrgDefaults')]", "Save account");
 	
 	public HomePage completeInvite(String password) {
 		sleep(3);

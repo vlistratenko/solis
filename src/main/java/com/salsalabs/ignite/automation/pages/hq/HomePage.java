@@ -64,7 +64,7 @@ public class HomePage extends Browser{
 	TextBox fromNameConfigNewOrgPage = new TextBoxImpl("//input[@name='fromName']", "From Name", true); 
 	TextBox fromAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='fromAddress']", "From Address", true);
 	TextBox replyAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='replyAddress']", "Reply Address", true);
-	Button buyButton = new ButtonImpl("//a[@href='/#/purchase']", "Buy");
+	Button buyButton = new ButtonImpl("//a[contains(@ng-click,'goToBuyNow')]", "Buy");
 	Button dashboardButton = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard");
 	
 	public HomePage verifyUserNameDisplayed() {
@@ -135,6 +135,11 @@ public class HomePage extends Browser{
 		sleep(5);
 		return new PurchasePage();
 		
+	}
+	
+	public HomePage verifyBuyButtonIsNotDisplayed() {
+		verifier.verifyElementIsNotVisible(true, buyButton);
+		return this;
 	}
 	public HomePage configureNewOrg(String email, String zip, String city) {
 		sleep(10);
