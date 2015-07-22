@@ -32,7 +32,7 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	}
 
 	/**
-	 * <b>Create and send single/split email blast</b>
+	 * <b>Purchase Solis</b>
 	 * <p>
 	 * Steps:
 	 * <ul>
