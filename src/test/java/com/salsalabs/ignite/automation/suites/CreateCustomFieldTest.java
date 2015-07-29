@@ -34,7 +34,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createCustomField"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createCustomField"}, retryAnalyzer = RetryAnalyzer.class)
 	@Parameters({"cf.customFieldType"})
 	public void createCustomField(String cfType) {
 		CustomField cf = generateCustomField(cfType);
@@ -51,7 +51,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initAllCustomFieldsCreationTest() {
 		if (page == null) {
 			page = doLoginAndOpenCustomFieldPage();
@@ -75,7 +75,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createTextBoxCustomField() {
 		CustomField cf = generateCustomField(CustomFieldType.TextBox);
 		page.createCustomField(cf).deleteCustomField(cf);
@@ -98,7 +98,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createNumberCustomField() {
 		CustomField cf = generateCustomField(CustomFieldType.Number);
 		page.createCustomField(cf).deleteCustomField(cf);
@@ -121,7 +121,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createYesNoCustomField() {
 		CustomField cf = generateCustomField(CustomFieldType.YesNo);
 		page.createCustomField(cf).deleteCustomField(cf);
@@ -144,7 +144,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createDateTimeCustomField() {
 		CustomField cf = generateCustomField(CustomFieldType.DateTime);
 		page.createCustomField(cf).deleteCustomField(cf);
@@ -167,7 +167,7 @@ public class CreateCustomFieldTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAllCustomFields"}, dependsOnMethods = {"initAllCustomFieldsCreationTest"}, retryAnalyzer = RetryAnalyzer.class)
 	public void createSingleChoiceCustomField() {
 		CustomField cf = generateCustomField(CustomFieldType.SingleChoice);
 		page.createCustomField(cf).deleteCustomField(cf);

@@ -34,7 +34,7 @@ public class CreateSupporterManuallyTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createSupporterManually"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createSupporterManually"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateSupporterManually() {
 		doLoginAndOpenAddSupporterPage();
 		supporter = Supporter.generateSupporter();
