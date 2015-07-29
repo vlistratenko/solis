@@ -42,7 +42,7 @@ public class CreateNewOrgTest extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, userPassword);
 	}
 
-	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, priority = 30, groups = { "createAdmin" }, dependsOnMethods = "confirmAdminAccountTest")
+	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 30, groups = { "createAdmin" }, dependsOnMethods = "confirmAdminAccountTest")
 	public void loginAsNewSuperAdminTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.

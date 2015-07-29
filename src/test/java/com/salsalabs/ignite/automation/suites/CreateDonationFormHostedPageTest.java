@@ -65,7 +65,7 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, groups = {"createAndPublishDonationForm"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(groups = {"createAndPublishDonationForm"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateAndPublishDonationForm() {
 		String formName = "DonationFormName_" + RandomStringUtils.randomAlphanumeric(5);
 		String formDescription = "DonationFormDescription_" + RandomStringUtils.randomAlphanumeric(10);

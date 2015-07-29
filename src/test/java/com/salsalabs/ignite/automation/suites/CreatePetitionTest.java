@@ -47,7 +47,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, priority = 1, groups = {"createAndPublishPetition"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(priority = 1, groups = {"createAndPublishPetition"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateAndPublishPetition() {
 		new LoginPage().doSuccessLogin();
 		doLoginAndOpenPetitionsPage();
@@ -94,7 +94,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, priority = 2, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
+	@Test(priority = 2, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
 	public void testSignPetition() {
 		signPetition(true, true);
 	}
@@ -117,7 +117,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 *  
 	 */
 	
-	@Test(enabled = true, priority = 3, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
+	@Test(priority = 3, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
 	public void testAnonymousSignPetition() {
 		signPetition(false, true);
 	}
@@ -140,7 +140,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 *  
 	 */
 
-	@Test(enabled = true, priority = 4, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
+	@Test(priority = 4, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
 	public void testSignPetitionHideComment() {
 		signPetition(true, false);
 	}
@@ -178,7 +178,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 *  
 	 */
 	
-	@Test(enabled = true, priority = 5, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
+	@Test(priority = 5, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = {"testCreateAndPublishPetition"})
 	public void testPetitionVisibility() {
 		addPetitionPage.openActivitiesPage().openPetitionsPage();
 		// click on widget in table to open it

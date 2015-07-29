@@ -26,7 +26,7 @@ public class SupportRequestTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, groups = { "supportRequest" }, retryAnalyzer = RetryAnalyzer.class)
+	@Test(groups = { "supportRequest" }, retryAnalyzer = RetryAnalyzer.class)
 	public void openHelp() {
 		new LoginPage()
 		.doSuccessLogin()
@@ -45,7 +45,7 @@ public class SupportRequestTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, groups = { "supportRequest" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = { "openHelp" })
+	@Test(groups = { "supportRequest" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods = { "openHelp" })
 	public void submitSupportRequest() {
 		new HomePage()
 		.openSubmitRequestPage()

@@ -59,7 +59,7 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initImportWithCustomFieldsTest() {
 		importName = "Import_" + CommonUtils.getUnicName();
 		customFields.add(new CustomField(CustomFieldType.TextBox, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
@@ -96,7 +96,7 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(enabled = true, groups = {"importSupporters"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(groups = {"importSupporters"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testImportSupporters() {
 		importName = "Import_" + CommonUtils.getUnicName();
 		customFields = null;
