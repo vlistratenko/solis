@@ -49,7 +49,7 @@ public class SupporterSubscribeSignupFormTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"subscribeExistingSupporter"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"subscribeExistingSupporter"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testSubscribeByExistingSupporter() {
 		widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
 		widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
@@ -86,7 +86,7 @@ public class SupporterSubscribeSignupFormTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"subscribeNewSupporter"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"subscribeNewSupporter"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testSubscribeByNewSupporter() {
 		widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
 		widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);

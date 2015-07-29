@@ -32,7 +32,7 @@ public class InviteNewCMTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class)
+	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class, priority = 10, enabled = true)
 	@Parameters({"cm.firstName",
 				 "cm.lastName",
 				 "cm.listBuildingForms.role",
@@ -81,7 +81,7 @@ public class InviteNewCMTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"resendInvite"}, retryAnalyzer=RetryAnalyzer.class, dependsOnMethods = {"inviteNewCM"})
+	@Test(groups = {"resendInvite"}, retryAnalyzer=RetryAnalyzer.class, priority = 20, enabled = true)
 	public void resendInvitation() {
 		emailClient.deleteAllEmails();
 		new AccountsPage().resendInvite();
@@ -103,7 +103,7 @@ public class InviteNewCMTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class, dependsOnMethods = {"inviteNewCM","resendInvitation"})
+	@Test(groups = {"inviteCM", "resendInvite"}, retryAnalyzer=RetryAnalyzer.class, priority = 30, enabled = true)
 	@Parameters({"newuser.password"})
 	public void provisionNewCM(String userPassword) {
 		

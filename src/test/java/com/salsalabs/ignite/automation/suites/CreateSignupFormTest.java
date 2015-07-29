@@ -65,7 +65,7 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */
-	@Test(groups = {"createAndPublishSignupForm"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createAndPublishSignupForm"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateAndPublishSignupForm() {
 		doLoginAndOpenSignupFormsPage();
 		String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
