@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.PurchasePage;
 
 /**
  * <b>This test contains scenarios related to Purchasing Trial Organization (TestLink: TC12)</b>
@@ -23,10 +24,10 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	 *  
 	 */	
 	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 10, enabled = true, groups = { "buy" })
-	@Parameters({ "createOrg.domainType", "createOrg.orgName", "createOrg.orgDescrption", "createOrg.firstName", "createOrg.lastName", "createOrg.status", "newuser.password" })
-	public void createOrgTest(String domainType, String orgName, String orgDescrption, String firstName, String lastName, String status, String userPassword) {
+	@Parameters({ "createOrg.orgName", "createOrg.orgDescrption", "createOrg.firstName", "createOrg.lastName", "createOrg.status", "createOrg.product", "newuser.password" })
+	public void createOrgTest(String orgName, String orgDescrption, String firstName, String lastName, String status, String product, String userPassword) {
 		CreateNewOrgTest test = new CreateNewOrgTest();
-		test.createOrgTest(domainType, orgName, orgDescrption, firstName, lastName, status);
+		test.createOrgTest(orgName, orgDescrption, firstName, lastName, status, product);
 		test.confirmAdminAccountTest(userPassword);
 		test.loginAsNewSuperAdminTest();
 	}
@@ -51,12 +52,13 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	 *  
 	 */	
 	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 20, enabled = true, groups = { "buy" }, dependsOnMethods = "createOrgTest")
-	@Parameters({ "buy.cardNumber","buy.cvv","buy.name" })
-	public void buyNowTest(String cardNumber, String cvv, String name) {
-		new HomePage().clickBuyButton()
-		.selectListSize()
-		.chooseBillingType()
-		.enterCreditCardInfo(cardNumber, cvv, name)
+	@Parameters({ "createOrg.product", "buy.cardNumber","buy.cvv","buy.name" })
+	public void buyNowTest(String product, String cardNumber, String cvv, String name) {
+		PurchasePage page = new HomePage().clickBuyButton();
+		if (product.equalsIgnoreCase("Salsa Solis")) {
+			page.selectListSize().chooseBillingType();
+		}
+		page.enterCreditCardInfo(cardNumber, cvv, name)
 		.purchase()
 		.verifyBuyButtonIsNotDisplayed()
 		.verifyEmail("Here’s Your Solis Trial Link. Let’s get started.");

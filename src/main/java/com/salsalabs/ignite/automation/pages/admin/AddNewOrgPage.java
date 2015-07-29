@@ -27,9 +27,9 @@ public class AddNewOrgPage extends HomePageAdmin{
 	DropDown classificationType = new DropDownImpl("//div[@id='class_panel']", "//label[@id='class_label']", "Classification type");
 	Button sendEmailsTrue = new ButtonImpl("//input[@id='email:1']/ancestor::div[@class='ui-radiobutton ui-widget']//descendant::span", "Send emails");
 	Button sendEmailsFalse = new ButtonImpl("//input[@id='email:0']/ancestor::div[@class='ui-radiobutton ui-widget']//descendant::span", "Do not send emails");
+	DropDown productType = new DropDownImpl("(//div[contains(@class,'ui-selectonemenu')])[last()]", "(//label[contains(@class,'ui-selectonemenu-label')])[last()]", "Product type");
 	
-	
-	public OrganizationsListPage createNewOrg(String domainTypeValue,
+	public OrganizationsListPage createNewOrg(
 			String orgNameValue,
 			String orgDescrptionValue,
 			String orgAdminUserIdValue,
@@ -37,7 +37,8 @@ public class AddNewOrgPage extends HomePageAdmin{
 			String lastNameValue,		
 			String statusValue,
 			boolean isSendEmails,
-			String classificationValue) {
+			String classificationValue,
+			String product) {
 		SeleneseTestCase.bug.add("Create new org.");
 		if (isSendEmails) {
 			sendEmailsTrue.click();
@@ -53,6 +54,7 @@ public class AddNewOrgPage extends HomePageAdmin{
 		statusType.selectByLabel(statusValue);
 		classificationType.selectByLabel(classificationValue);
 		crmID.type("13111111111");
+		productType.selectByLabel(product);
 		createButton.click();
 		sleep(5);
 		return new OrganizationsListPage();

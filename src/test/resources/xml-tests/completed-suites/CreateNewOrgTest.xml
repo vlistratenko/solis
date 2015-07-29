@@ -13,6 +13,7 @@
 		<parameter name="createOrg.firstName" value="AutoTester"></parameter>
 		<parameter name="createOrg.lastName" value="AutoTesterov"></parameter>
 		<parameter name="createOrg.status" value="Trial"></parameter>
+		<parameter name="createOrg.product" value="Salsa Solis"></parameter>
 		<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 
 		<groups>

@@ -24,7 +24,7 @@ public class PurchasePage extends Browser {
 	DropDown selectMonth = new DropDownImpl("//custom-select[@data='monthList']", "//custom-select[@data='monthList']/div/a", "Month");
 	DropDown selectYear = new DropDownImpl("//custom-select[@data='curYearList']", "//custom-select[@data='curYearList']/div/a", "Year");
 	Button purchase = new ButtonImpl("(//button[contains(@ng-click,'doPurchaseSubmit')])", "Purchase");
-	Label success = new LabelImpl("//p[contains(text(), 'Your credit card has been successfully charged. ')]", "Success");
+	Label success = new LabelImpl("//p[contains(text(), 'Your credit card has been successfully charged')]", "Success");
 	
 	public PurchasePage selectListSize() {
 		selectListSize.selectByLabelJS(chooseRandomListSize());

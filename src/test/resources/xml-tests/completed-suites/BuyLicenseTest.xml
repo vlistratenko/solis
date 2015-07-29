@@ -2,23 +2,35 @@
 <suite name="Create New Org" parallel="false" thread-count="1">
 	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	
+	<parameter name="createOrg.orgName" value="AutoTest Org"></parameter>
+	<parameter name="createOrg.orgDescrption" value="AutoTest descr"></parameter>
 
-	<test verbose="2" name="Purchase Org FIREFOX" annotations="JDK">
+	<parameter name="createOrg.firstName" value="AutoTester"></parameter>
+	<parameter name="createOrg.lastName" value="AutoTesterov"></parameter>
+	<parameter name="createOrg.status" value="Trial"></parameter>
+	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
+
+	<parameter name="buy.cardNumber" value="4003830171874018"></parameter>
+	<parameter name="buy.cvv" value="123"></parameter>
+	<parameter name="buy.name" value="AutoTest Buy"></parameter>
+
+	<test verbose="2" name="Purchase SOLIS FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
-
-		<parameter name="createOrg.domainType" value="Custom Domain"></parameter>
-		<parameter name="createOrg.orgName" value="AutoTest Org"></parameter>
-		<parameter name="createOrg.orgDescrption" value="AutoTest descr"></parameter>
-
-		<parameter name="createOrg.firstName" value="AutoTester"></parameter>
-		<parameter name="createOrg.lastName" value="AutoTesterov"></parameter>
-		<parameter name="createOrg.status" value="Trial"></parameter>
-		<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
-		
-		<parameter name="buy.cardNumber" value="4003830171874018"></parameter>
-		<parameter name="buy.cvv" value="123"></parameter>
-		<parameter name="buy.name" value="AutoTest Buy"></parameter>
-
+		<parameter name="createOrg.product" value="Salsa Solis"></parameter>
+		<groups>
+			<run>
+				<include name="buy" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.BuyLicenseTest" />
+		</classes>
+	</test>
+	
+	<test verbose="2" name="Purchase FE FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<parameter name="createOrg.product" value="Salsa Solis: Fundraising"></parameter>
 		<groups>
 			<run>
 				<include name="buy" />

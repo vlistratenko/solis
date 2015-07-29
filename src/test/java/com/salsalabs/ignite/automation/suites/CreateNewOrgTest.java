@@ -14,8 +14,8 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 public class CreateNewOrgTest extends SeleneseTestCase {
 
 	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 10, enabled = true, groups = { "createAdmin" })
-	@Parameters({ "createOrg.domainType", "createOrg.orgName", "createOrg.orgDescrption", "createOrg.firstName", "createOrg.lastName", "createOrg.status" })
-	public void createOrgTest(String domainType, String orgName, String orgDescrption, String firstName, String lastName, String status) {
+	@Parameters({ "createOrg.orgName", "createOrg.orgDescrption", "createOrg.firstName", "createOrg.lastName", "createOrg.status", "createOrg.product" })
+	public void createOrgTest(String orgName, String orgDescrption, String firstName, String lastName, String status, String product) {
 
 		orgName = orgName + CommonUtils.getUnicName();
 		String orgAdminUserId = emailClient.getEmailBox(CommonUtils.getUnicName());
@@ -23,7 +23,7 @@ public class CreateNewOrgTest extends SeleneseTestCase {
 		doSuccessLogin().
 		openActiveOrganizationsPage().
 		clickCreateNewOrg().
-		createNewOrg(domainType, orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, true, "Internal-Test").
+		createNewOrg(orgName, orgDescrption, orgAdminUserId, firstName, lastName, status, true, "Internal-Test", product).
 		checkOrganizationExists(orgName);
 
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, orgAdminUserId);
