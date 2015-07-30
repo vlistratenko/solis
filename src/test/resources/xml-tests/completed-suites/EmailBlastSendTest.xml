@@ -13,7 +13,7 @@
 	<parameter name="sendEmail.hardBounceAmount" value="1"></parameter>
 	<parameter name="sendEmail.unsubscribeAmount" value="1"></parameter>
 
-	<test verbose="1" name="Create and send single email blast (FIREFOX)" annotations="JDK">
+	<test verbose="2" name="Create and send single email blast (FIREFOX)" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
@@ -25,7 +25,7 @@
 		</classes>
 	</test>
 	
-	<test verbose="1" name="Create and send split email blast (FIREFOX)" annotations="JDK">
+	<test verbose="2" name="Create and send split email blast (FIREFOX)" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<parameter name="sendEmail.splitsAmount" value="2"></parameter>
 		<parameter name="sendEmail.hardBounceAmount" value="0"></parameter>

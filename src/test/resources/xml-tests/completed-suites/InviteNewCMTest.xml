@@ -16,7 +16,7 @@
 	<parameter name="newuser.password" value="!QAZ2wsx"></parameter>
 
 
-	<test verbose="1" name="Provision new CM / Resend Invitation (FIREFOX)" annotations="JDK">
+	<test verbose="2" name="Provision new CM / Resend Invitation (FIREFOX)" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
