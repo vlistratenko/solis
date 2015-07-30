@@ -51,4 +51,6 @@ public interface Element {
 	void removeAttribute(String string);
 
 	boolean waitForNotExists(Integer timeOut);
+	
+	boolean waitForNotVisible(Integer timeOut);
 }

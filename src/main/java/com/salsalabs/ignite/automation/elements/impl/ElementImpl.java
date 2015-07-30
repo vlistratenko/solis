@@ -184,6 +184,18 @@ abstract class ElementImpl implements Element {
 	}
 	
 	@Override
+	public boolean waitForNotVisible(Integer timeOut) {
+		for (int i = 0; i < timeOut; i++) {
+			if (!isVisible()) {
+				break;
+			} else {
+				sleep(1);
+			}
+		}
+		return !isVisible();
+	}
+	
+	@Override
 	public String setAttribute(String attName, String attValue) {
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
