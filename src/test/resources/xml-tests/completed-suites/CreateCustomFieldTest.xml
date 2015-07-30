@@ -9,7 +9,7 @@
 	
 	<parameter name="cf.customFieldType" value="TextBox"></parameter>
 
-	<test verbose="1" name="Create Custom Field FIREFOX" annotations="JDK">
+	<test verbose="2" name="Create Custom Field FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
@@ -22,7 +22,7 @@
 	</test>
 	 -->
 	 
-	<test verbose="1" name="Create All Custom Fields FIREFOX" annotations="JDK">
+	<test verbose="2" name="Create All Custom Fields FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>
