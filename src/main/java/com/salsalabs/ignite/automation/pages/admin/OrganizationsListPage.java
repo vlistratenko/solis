@@ -38,7 +38,7 @@ public class OrganizationsListPage extends HomePageAdmin {
 		invites.click();
 		sleep(5);
 		sendInvite.click();
-		sending.waitForNotVisible(50);
+		sending.waitForNotVisible(120);
 		closeModal.click();
 		String text = infoSummary.getText();
 		open(text.substring(18, text.length()));
