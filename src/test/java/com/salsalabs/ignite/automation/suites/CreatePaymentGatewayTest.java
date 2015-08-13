@@ -43,7 +43,6 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	 */
 	@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreatePaymentGateway() throws MailosaurException {
-		EmailClient<?> mailosaur = SeleneseTestCase.USED_ENVIRONMENT.getMailosourEmailClient();
 		mailosaur.deleteAllEmails();
 		String cmEmail = mailosaur.getEmailBox("gateway" + CommonUtils.getUnicName());
 		String firstName = "FirstName";

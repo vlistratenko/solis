@@ -13,6 +13,9 @@ import com.salsalabs.ignite.automation.pages.hq.PurchasePage;
  *
  */
 public class BuyLicenseTest extends SeleneseTestCase {
+	
+	private static final String SUBJECT_NEW_INVOICE = "You have a new Solis invoice from Salsa Labs";
+	private static final String SUBJECT_PAYMENT_PROCESSED = "Your payment for Solis was successfully processed.";
 
 	/**
 	 * <b>Create Trial ORG
@@ -33,7 +36,7 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	}
 
 	/**
-	 * <b>Purchase Solis</b>
+	 * <b>Purchase Solis/FE</b>
 	 * <p>
 	 * Steps:
 	 * <ul>
@@ -54,14 +57,47 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 20, enabled = true, groups = { "buy" }, dependsOnMethods = "createOrgTest")
 	@Parameters({ "createOrg.product", "buy.cardNumber","buy.cvv","buy.name" })
 	public void buyNowTest(String product, String cardNumber, String cvv, String name) {
+		mailosaur.deleteAllEmails();
 		PurchasePage page = new HomePage().clickBuyButton();
 		if (product.equalsIgnoreCase("Salsa Solis")) {
 			page.selectListSize().chooseBillingType();
 		}
-		page.enterCreditCardInfo(cardNumber, cvv, name)
-		.purchase()
-		.verifyBuyButtonIsNotDisplayed()
-		.verifyEmail("Here’s Your Solis Trial Link. Let’s get started.");
+		page.enterCreditCardInfo(cardNumber, cvv, name).
+		purchase().
+		verifyBuyButtonIsNotDisplayed().
+		verifyEmail(mailosaur, SUBJECT_NEW_INVOICE).
+		verifyEmail(mailosaur, SUBJECT_PAYMENT_PROCESSED);
+	}
+	
+	/**
+	 * <b>Upgrade FE</b>
+	 * <p>
+	 * Steps:
+	 * <ul>
+	 * <li> Login into FE org
+	 * <li> Click on Upgrade
+	 * <li> Select random supporter list size
+	 * <li> Select random monthly billing cycle
+	 * <li> Click on submit button
+	 * <li> Observe the state of the account
+	 * <li> Observe the notification
+	 * <li> Verify purchase confirmation email
+	 * </ul>
+	 *  
+	 */	
+	@Test(retryAnalyzer = RetryAnalyzer.class, priority = 30, enabled = true, groups = { "upgrade" }, dependsOnMethods = "buyNowTest")
+	public void upgradeFETest() {
+		mailosaur.deleteAllEmails();
+		new HomePage().
+		logOut().
+		doSuccessLogin().
+		clickBuyButton().
+		selectListSize().
+		chooseBillingType().
+		purchase().
+		verifyBuyButtonIsNotDisplayed().
+		verifyEmail(mailosaur, SUBJECT_NEW_INVOICE).
+		verifyEmail(mailosaur, SUBJECT_PAYMENT_PROCESSED);
 	}
 
 }

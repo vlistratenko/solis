@@ -53,6 +53,7 @@ public class SeleneseTestCase {
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
 	public static EmailClient<?> emailClient;
+	public static EmailClient<?> mailosaur;
 	
 	static {
 		System.setProperty("log4j.configurationFile", "log4j.xml");
@@ -73,6 +74,7 @@ public class SeleneseTestCase {
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
 		emailClient = USED_ENVIRONMENT.getSquirrelEmailClient();
+		mailosaur = USED_ENVIRONMENT.getMailosourEmailClient();
 		setAdminEmail();
 		emailClient.deleteAllEmails();
 		
@@ -85,7 +87,7 @@ public class SeleneseTestCase {
 	
 	private void setAdminEmail() {
 		String adminEmail = CommonUtils.getProperty(PropertyName.ADMIN_EMAIL_BASE);
-		adminEmail = USED_ENVIRONMENT.getMailosourEmailClient().getEmailBox(adminEmail);
+		adminEmail = mailosaur.getEmailBox(adminEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, adminEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_PASSWORD, "11111111");
 		CommonUtils.setProperty(PropertyName.ADMIN_ORG_NAME, "automated_testing1");
