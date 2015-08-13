@@ -45,16 +45,22 @@ public abstract class Browser {
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl());
 	}
 
-	protected LoginPage logOut() {
+	public LoginPage logOut() {
 		deletecoockies();
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
 		sleep(5);
 		return new LoginPage();
 	}
 	
-	public void verifyEmail(String subj) {
-		SeleneseTestCase.emailClient.waitForEmails(subj, 1, 15);
-		verifier.verifyTrue(SeleneseTestCase.emailClient.getEmailBySubject(subj) != null, "Email isn't received", true);
+	public Browser verifyEmail(String subj) {
+		verifyEmail(SeleneseTestCase.emailClient, subj);
+		return this;
+	}
+	
+	public Browser verifyEmail(EmailClient<?> emailClient, String subj) {
+		emailClient.waitForEmails(subj, 1, 15);
+		verifier.verifyTrue(emailClient.getEmailBySubject(subj) != null, "Email isn't received", true);
+		return this;
 	}
 	
 	protected void open(String url) {

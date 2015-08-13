@@ -18,7 +18,8 @@ public class CreateNewOrgTest extends SeleneseTestCase {
 	public void createOrgTest(String orgName, String orgDescrption, String firstName, String lastName, String status, String product) {
 
 		orgName = orgName + CommonUtils.getUnicName();
-		String orgAdminUserId = emailClient.getEmailBox(CommonUtils.getUnicName());
+		mailosaur.deleteAllEmails();
+		String orgAdminUserId = mailosaur.getEmailBox(CommonUtils.getUnicName());
 		new LoginPageAdmin().
 		doSuccessLogin().
 		openActiveOrganizationsPage().
