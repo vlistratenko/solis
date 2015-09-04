@@ -57,10 +57,11 @@ public class LoginPage extends Browser{
 				CommonUtils.setProperty(PropertyName.CURRENT_FIRST_NAME, CommonUtils.getProperty(PropertyName.CM_FIRST_NAME));
 				CommonUtils.setProperty(PropertyName.CURRENT_LAST_NAME, CommonUtils.getProperty(PropertyName.CM_LAST_NAME));
 			}
-			sleep(10);
+			sleep(5);
 		}else{
 			new HomePage().dashboardTab.click();
 		}
+		endHelp.setImplicity(3);
 		if(!endHelp.isNotDisplayed()){
 			endHelp.click();
 		}
