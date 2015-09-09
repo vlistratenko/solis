@@ -59,7 +59,7 @@ public class BuyLicenseTest extends SeleneseTestCase {
 	public void buyNowTest(String product, String cardNumber, String cvv, String name) {
 		mailosaur.deleteAllEmails();
 		PurchasePage page = new HomePage().clickBuyButton();
-		if (product.equalsIgnoreCase("Salsa Solis")) {
+		if (!product.equalsIgnoreCase("Fundraising")) {
 			page.selectListSize().chooseBillingType();
 		}
 		page.enterCreditCardInfo(cardNumber, cvv, name).
