@@ -75,7 +75,6 @@ public class CreateSignupFormTest extends SeleneseTestCase {
 		// select layout for form
 		addSignupFormsPage.selectLayoutStep();
 		// leave default design and go to settings
-		addSignupFormsPage.fillFieldsWidgetStepTwo();
 		// leave default settings and publish form
 		addSignupFormsPage.publishForm();
 		// verify link is present on page

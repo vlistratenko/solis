@@ -195,8 +195,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		openSubscribeWidgetsPage().
 		openAddSubscribeWidgetPage().
 		fillFieldsWidgetStepOne(widgetName, widgetDescription).
-		selectLayoutStep(widgetLayoutName).
-		fillFieldsWidgetStepTwo().
+		selectLayoutStep(1).
 		hosteWidgetOnLocalPage(widgetTitle, true).
 		openSubscribeWidget().
 		backToSubscribeWidgetPage();

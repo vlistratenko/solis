@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Create Petition" parallel="false" thread-count="1">
-	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 
 	<test verbose="2" name="Create And Publish Petition FIREFOX" annotations="JDK">
