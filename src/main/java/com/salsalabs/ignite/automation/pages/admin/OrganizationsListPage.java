@@ -13,7 +13,7 @@ import com.salsalabs.ignite.automation.pages.hq.InviteCompletionPage;
 public class OrganizationsListPage extends HomePageAdmin {
 
 	Table organizationTable = new TableImpl("//table[@role='grid']", "Table with organizations");
-	SelectBox orgClassification = new SelectBoxImpl("//th[8]/select", "Classification");
+	SelectBox orgClassification = new SelectBoxImpl("//span[text()='Classification']/../select", "Classification");
 	Button createNewOrg = new ButtonImpl("//button[contains(@onclick,'orgNew')]", "Create New Org");
 	Button invites = new ButtonImpl("//button[contains(@id,'activeOrgTable:0')]/span[text()='Invites']", "Invites");
 	Button sendInvite = new ButtonImpl("//button[contains(@id,'adminTable:0')]/span[text()='Send Invitation']", "Send Invitation");
