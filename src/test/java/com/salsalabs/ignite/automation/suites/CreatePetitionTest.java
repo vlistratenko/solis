@@ -49,7 +49,6 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	 */
 	@Test(enabled = true, priority = 1, groups = {"createAndPublishPetition"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testCreateAndPublishPetition() {
-		new LoginPage().doSuccessLogin();
 		doLoginAndOpenPetitionsPage();
 		widgetName = "PetitionName_" + RandomStringUtils.randomAlphanumeric(5);
 		widgetDescription = "PetitionDescription_" + RandomStringUtils.randomAlphanumeric(10);
@@ -61,7 +60,6 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		//preview form
 		addPetitionPage.previewForm();
 		// leave default design and go to settings
-		addPetitionPage.fillFieldsWidgetStepTwo();
 		// leave default settings and publish form
 		addPetitionPage.publishForm();
 		// verify link is present on page

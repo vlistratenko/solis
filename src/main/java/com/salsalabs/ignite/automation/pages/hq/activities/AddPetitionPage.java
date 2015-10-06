@@ -3,14 +3,15 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 
 public class AddPetitionPage extends AddSubscribeWidgetPage {
 	
-	private Button configBtn = new ButtonImpl("//li[@id='formWidget']/span", "Config Button");
+	private Button configBtn = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]/../div[@handles-content-form]/div[@class='right']/span[@button-content-edit-form]", "Edit");
+	private Button goalTracker = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]", "Goal Tracker");
 	private Button publishImmediately = new ButtonImpl("//label[@for='publish-comment-immediately']", "Publish Immediately");
 	private Button allowHideComment = new ButtonImpl("//label[@for='petition-allow-hide-comment']", "Allow hide comment");
-	private Button nextBtn = new ButtonImpl("//*[contains(@autotest-id,'btn_next_petition_config')]", "Next");
-	private Button saveConfigBtn = new ButtonImpl("//*[@autotest-id='btn_save_petition_config_confirmation']", "Save");
+	private Button saveConfigBtn = new ButtonImpl("//*[@autotest-id='btn_save_form_config']", "Save");
 	
 	public AddPetitionPage() {
 		openComposeStepButton = new ButtonImpl("//button[@id='btnCompose3']", "Compose");
@@ -19,7 +20,7 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	
 	@Override
 	public AddPetitionPage selectLayoutStep() {
-		return (AddPetitionPage) selectLayoutStep("Basic");
+		return (AddPetitionPage) selectLayoutStep(3);
 	}
 	
 	@Override
@@ -32,14 +33,12 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	}
 	
 	public void  configPetition(){
+		goalTracker.click();
+		sleep(2);
 		configBtn.clickJS();
 		sleep(3);
 		publishImmediately.click();
 		allowHideComment.click();
-		nextBtn.click();
-		nextBtn.click();
-		nextBtn.click();
-		nextBtn.click();
 		saveConfigBtn.click();
 		sleep(5);
 	}

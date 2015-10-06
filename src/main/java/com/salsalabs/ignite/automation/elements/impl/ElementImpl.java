@@ -545,7 +545,8 @@ abstract class ElementImpl implements Element {
 		switchToFrame(elem);
 	}
 
-	protected void setFocus() {
+	@Override
+	public void focus() {
 		logger.debug("Try to set focus into element " + path);
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
