@@ -30,7 +30,7 @@
 	
 	<test verbose="2" name="Purchase FE FIREFOX" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
-		<parameter name="createOrg.product" value="Salsa Solis: Fundraising Element"></parameter>
+		<parameter name="createOrg.product"  value="Fundraising"></parameter>
 		<groups>
 			<run>
 				<include name="buy" />
