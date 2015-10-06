@@ -15,7 +15,6 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class PurchasePage extends Browser {
 
 	protected final static String[] sizes = { "up to 1,000 supporters", "up to 2,500 supporters", "up to 5,000 supporters" };
-	protected final static String[] billings = { "Good Value", "Better Value", "Best Value" };
 
 	DropDown selectListSize = new DropDownImpl("//custom-select2[@out='selectedListSize']", "//custom-select2[@out='selectedListSize']/div/a", "List Size");
 	TextBox cardNumberInput = new TextBoxImpl("//input[@id='cardNumber']", "Card Number");
@@ -33,8 +32,12 @@ public class PurchasePage extends Browser {
 	}
 	
 	public PurchasePage chooseBillingType() {
-		String type = billings[RandomUtils.nextInt(0, 3)];
-		Button chooseBillingType = new ButtonImpl("(//div[text()='" + type + "'])", "Billing Type: " + type);
+		int type = RandomUtils.nextInt(1, 4);
+		Button chooseBillingType = new ButtonImpl("(//a[contains(@ng-click,'setChosenProductFamily')])[" + type + "]", "Billing Type: " + type);
+		chooseBillingType.click();
+		type = RandomUtils.nextInt(1, 4);
+		sleep(5);
+		chooseBillingType = new ButtonImpl("(//a[contains(@ng-click,'setChosenProduct(')])[" + type + "]", "Billing Type: " + type);
 		chooseBillingType.click();
 		return this;
 	}
