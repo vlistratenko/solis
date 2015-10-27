@@ -59,7 +59,7 @@ public class PetitionWidget extends SubscribeWidget {
 		signButton.click();
 		sleep(3);
 		refresh();
-		verifyNewSignature(sup, commentText, displaySign, displayComment);
+	    verifyNewSignature(sup, commentText, displaySign, displayComment);
 		return this;
 	}
 	

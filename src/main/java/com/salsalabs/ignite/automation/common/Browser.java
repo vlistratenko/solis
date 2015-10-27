@@ -20,6 +20,7 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
+
 public abstract class Browser {
 	static WebDriver driver;
 	protected static Logger logger;
@@ -326,5 +327,7 @@ public abstract class Browser {
 	protected Alert switchToAlert() {
 		return driver.switchTo().alert();
 	}
+	
+
 
 }

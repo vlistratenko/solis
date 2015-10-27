@@ -32,7 +32,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
-	protected Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
+	protected Button confirmDeletionBtn = new ButtonImpl("	//button[@class='button tiny secondary ng-isolate-scope']", "Yes, delete already!");
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
 	
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
@@ -41,7 +41,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
 		sleep(5);
-		return this;		
+		return  this;		
 	}
 	
 	public void removeWidget() {
