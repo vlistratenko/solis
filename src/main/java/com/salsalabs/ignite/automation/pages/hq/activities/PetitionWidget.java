@@ -2,7 +2,6 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 
 
 import com.salsalabs.ignite.automation.common.Supporter;
-import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -13,7 +12,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class PetitionWidget extends SubscribeWidget {
 	
-	Button signButton = new ButtonImpl("//input[contains(@value,'Sign Petition')]", "Sign Petition", true);
+	ButtonImpl signButton = new ButtonImpl("//input[contains(@value,'Sign Petition')]", "Sign Petition", true);
 	TextBox comment = new TextBoxImpl("//textarea[@id='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
 	CheckBox displayCommentCheckBox = new CheckBoxImpl("//input[@name='field-showComment']", "Display My Comment");
@@ -42,22 +41,7 @@ public class PetitionWidget extends SubscribeWidget {
 			String commentText,
 			boolean displaySign,
 			boolean displayComment) {
-		signButton.click();
-		personEmailField.type(sup.getFinalEMAIL());
-		personFNameField.type(sup.getFirstName());
-		personLNameField.type(sup.getLastName());
-		personCityField.type(sup.getCity());
-		personZipField.type(sup.getZipCode());
-		personStatesSelectBox.selectByLabel(sup.getState());
-		comment.type(commentText);
-		if (!displaySign) {
-			displaySignatureCheckBox.changeState();
-		}
-		if(!displayComment){
-			displayCommentCheckBox.changeState();
-		}
-		signButton.click();
-		sleep(3);
+		signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
 		refresh();
 	    verifyNewSignature(sup, commentText, displaySign, displayComment);
 		return this;
@@ -77,6 +61,48 @@ public class PetitionWidget extends SubscribeWidget {
 		} else {
 			verifier.verifyEquals("Comment: " + commentText, signCom.getText());
 		}
+		return this;
+	}
+
+	public SubscribeWidget verifySignIsSuccesses() {
+		super.verifySubscriptionIsSuccesses();
+		return this;
+	}
+	
+	public PetitionWidget signPetitionWithOutChecking(Supporter sup,
+			String commentText,
+			boolean displaySign,
+			boolean displayComment) {
+		signButton.click();
+		personEmailField.type(sup.getFinalEMAIL());
+		personFNameField.type(sup.getFirstName());
+		personLNameField.type(sup.getLastName());
+		
+		if (sup.getCity().length()<1) {
+			sup.setCity("NewYork");
+		}
+		personCityField.type(sup.getCity());
+		
+		personZipField.type(sup.getZipCode());
+		
+		if (sup.getState().length()<1) {
+			sup.setState("NY");
+		}
+		if (sup.getState().length()==2) {
+			personStatesSelectBox.selectByValue(sup.getState());
+		}else if (sup.getState().length() > 2) {
+			personStatesSelectBox.selectByLabel(sup.getState());
+		}
+		
+		comment.type(commentText);
+		if (!displaySign) {
+			displaySignatureCheckBox.changeState();
+		}
+		if(!displayComment){
+			displayCommentCheckBox.changeState();
+		}
+		signButton.click();
+		sleep(3);
 		return this;
 	}
 }

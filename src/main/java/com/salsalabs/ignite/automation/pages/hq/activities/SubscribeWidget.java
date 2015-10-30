@@ -22,7 +22,7 @@ public class SubscribeWidget extends Browser{
 	TextBox personLNameField = new TextBoxImpl("//input[@name='PersonCensus@LastName']", "Last name", true);
 	TextBox personCityField = new TextBoxImpl("//input[@name='Address@Home@City']", "City", true);
 	TextBox personZipField = new TextBoxImpl("//input[@name='Address@Home@Zip']", "Zip", true);
-	SelectBox personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
+	SelectBoxImpl personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
 	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
 	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
 	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
@@ -81,12 +81,29 @@ public class SubscribeWidget extends Browser{
 			String personLName,
 			String personCity,
 			String personZip) {
+		fillSubscribeWidget(personEmail, personFName, personLName, personCity, personZip, "");
+		return this;
+		
+	}
+	
+	public SubscribeWidget fillSubscribeWidget(String personEmail,
+			String personFName,
+			String personLName,
+			String personCity,
+			String personZip,
+			String state) {
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);
 		personLNameField.type(personLName);
 		personCityField.type(personCity);
 		personZipField.type(personZip);
-		personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		}else{
+			personStatesSelectBox.selectByValue(state);
+		}
+		
 		subscribeButton.click();
 		return this;
 		

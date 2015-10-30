@@ -1,0 +1,75 @@
+Constituent Number,Title,First Name,Last or Org Name,Pet Type,Pet Name,Address Line 1,Address Line 2,City,State,Postal Code,Spouse Constituent Number,Spouse First Name,Spouse Title,Email Address
+800001,Mr.,John,Andrews,,,121 Fayette St.,Apt 2,Morgantown,WV,26505,800101,Susan,Mrs.,jandrews@here.net
+800003,Mrs.,Beverly,Brown,,,41579 Centennial Dr.,,Maricopa,AZ,85839,800102,Edward,Mr.,mckay@home.com
+800004,Mr.,Michael,Prince,,,1 Laurinda Drive,,Greensboro,NC,27455,800103,Sara,Mrs.,snprince@comm.com
+800005,Ms.,Cheryl,Short,,,3655 Catalina Drive,,Carlsbad,CA,92008,,,,short@telecomm.com
+800006,Mr.,Max,Donaldson,,,720 S. Loredo Circle,,Aurora,CO,80017,,,,md@smartguy.net
+800007,Ms.,Barbara,Emerson,,,6480 Weathervane Circle,Apt 307,San Diego,CA,92121,,,,babse@sd.net
+800008,Mr.,Mark,Michaels,,,34 Kinross Road,Apt 10,Brookline,MA,2146,800104,Kelly,Mrs.,MMKM@people.net
+800010,Mr.,Gordon,Maher,,,,,,,,800105,Morrie,Mr.,gordyshe@flowers.go
+800011,Mr.,Richard,Baire,,,1914 Pullman Lane,,Coeur D~Alene,ID,83814,800106,Sheila,Mrs.,2baires@places.net
+800012,Mrs.,Gretchen,Brodigan,chinchilla,Barney,18076 Chieftain Court,,San Diego,CA,92127,,,,gb@sd.net
+800015,Ms.,Roni,Richards,,,2749 S.E. 33rd Place,,Portland,OR,97202,,,,roni@portland.ore
+800016,Mr.,Ned,Hayden,,,80 Adams Street,#45,Milford,NH,3055,800108,Norma,Mrs.,N&N3@home.com
+800018,Mr.,Paul,Switch,,,1120 N. Nopal Street,,Santa Barbara,CA,94410,800110,Emily,Mrs.,stamps2@home.us
+800020,Mrs.,Leslie,Simmons,,,8277 Fountain Avenue,,West Hollywood,CA,90046,,,,blue@green.sea.org
+800022,Mrs.,Lynn,Cooper,,,461 Spring Valley Road,,West Mifflin,PA,15122,800112,Gerald,Mr.,chefski@starmail.net
+800023,Mr.,Robert,Roberts,,,116 Whitney Drive,,Cranberry,PA,16066,800113,Heidi,Mrs.,RRHR@together.pitt
+800025,Mr.,John,Epner,,,2030 S. 74th East Ave,,Tulsa,OK,74112,,,,Epner@tulsa.ok
+800026,Mr.,Mick,McGovern,,,2874 Union Road,Suite 20,Cheektowaga,NY,14227,800115,Betty,Mrs.,mjm@home.com
+800027,Mrs.,Sally,Rossi,,,14 Grant Street,,Eagle,CO,81631,800116,Greg,Mr.,sqr@green.com
+800029,Mr.,Benjamin,Hildreth,,,1123 S. Church Street,,Charlotte,NC,28203,800118,Lynn,Mrs.,Benji@charlottenc
+800031,Mr.,Jack,Buehl,,,200 Carillon Parkway,,St. Petersburg,FL,33716,800120,Debbie,Mrs.,jkbuehl@myhouse.com
+800032,Mr.,Joseph,Vento,,,666 5th Avenue,12B,New York,NY,10103,,,,vento@spirit.net
+800036,Dr.,Eugene,Howell,,,2001 Franks Road,,Winston-Salem,NC,27103,800123,Laura,Mrs.,howelle@mydoc.com
+800039,Mr.,James,Bennington,,,1101 Wood Sage Road,,Chapel Hill,NC,27516,800126,Pamela,Mrs.,JBB@school.org
+800044,Mr.,Dale,Hershey,,,6716 Corinne Street,,Carlsbad,CA,92009,800128,Janet,Mrs.,6717Corinne@orange.ca
+800045,Miss,Nancy,Lawrence,,,7 Robinhood Road,,Pittsburgh,PA,15220,,,,Nan@garden.go
+800046,Mr.,Max,Fuller,,,67 Fort Couch Road,,Bethel Park,PA,15102,800129,Amanda,Mrs.,Maxfuller@myemail.com
+800047,Miss,Mia,Frieburger,,,880 Osage Road,,Pittsburgh,PA,15243,,,,MF@email.net
+800048,Rev,Sam,Farrell,,,St. Margaret of Scotland,314 W. Englewood Ave,New Castle,PA,16105,,,,SMS@church.pray
+800049,Dr.,Alexander,Jones,,,5276 Redwood Road,,Columbus,OH,43229,800125,Karen,Mrs.,jonesd@email.com
+800051,Mrs.,Anne,Murray,,,465 Seaman Avenue,,Akron,OH,44305,800130,Stanley,Mr.,sj@my.comm
+800051,Mrs.,Anne,Murray,,,123 Main St,,Wexford,PA,15090,800130,Stanley,Mr.,sj@my.comm
+800052,Dr.,Burt,Birrell,,,20031 142nd Avenue NE,P.O. Box 7200,Woodinville,WA,98072,800131,Janet,Mrs.,birrellfamily.verizon.net
+800053,Mrs.,Linda,Gerardo,,,106 Edgar Lane,,Venetia,PA,15367,800132,Joseph,Mr.,blue@sunshine.rr.net
+800054,Mr.,Stuart,Treagust,,,1777 Sentry Parkway West,,Blue Bell,PA,19422,800133,Cathy,Mrs.,cathystu@email.me
+800055,Dr.,Anna,Binford,,,1300 Germaine Lane,,Bethel Park,PA,99999,800134,Ray,Dr.,dranna@medical.org
+800112,Mr.,Gerald,Cooper,,,461 Spring Valley Road,,West Mifflin,PA,26516,800022,Lynn,Mrs.,gbc@gmail.com
+800126,Mrs.,Pamela,Bennington,,,1101 Wood Sage Road,,Chapel Hill,NC,26530,800039,James,Mr.,pmb@zoom.com
+800129,Mrs.,Amanda,Fuller,,,67 Fort Couch Road,,Bethel Park,PA,26533,800046,Max,Mr.,amanda@yahoo.com
+800134,Dr.,Ray,Binford,,,1300 Germaine Lane,,Bethel Park,PA,26539,800055,Anna,Dr.,drb@upmc.com
+800134,Dr.,Ray,Binford,,,5437 Hospital Ave.,,Pittsburgh,PA,15213,800055,Anna,Dr.,drb@upmc.com
+800213,Mr.,George,Clooney,dog,Peaches,465 Bell Ave,,Los Angeles,CA,90048,,,,georgeburnett@sectioneight.com
+800213,Mr.,George,Clooney,dog,Peaches,4625 Hollywood Blvd,,Hollywood,CA,90069,,,,georgeburnett@sectioneight.com
+800213,Mr.,George,Clooney,dog,Peaches,Pinegate,Esher Park Avenue,Esher,SRY,KT10 9NX,,,,georgeburnett@sectioneight.com
+800214,,Benjamin,Lion,dog,Jake,10431 Perry Highway,Suite 300,Wexford,PA,15090,,,,info@towercare.com
+800238,Mr.,Nicholas,Clooney,bird,Rembrandt,132 Orchard Ave,,Gibsonia,PA,15044,800240,Nina,Mrs.,nclooney@famouskids.com
+800239,Sir,Thomas,Connery,fish,Jaws,146 Wilshire Blvd,,Los Angeles,CA,90048,,,,007@mi6.uk
+800239,Sir,Thomas,Connery,fish,Jaws,467 5th ave,Suite 7650,New York,NY,10027,,,,007@mi6.uk
+800242,Mrs.,Rebecca,Hendrickson,cat,Whiskers,564 Tumbleweed Dr.,,Death Valley,CA,92328,800243,Ralph,Mr.,RAH@thisplaceishot.net
+800243,Mr.,Ralph,Hendrickson,,,564 Tumble Weed Dr.,,Death Valley,CA,92328,800242,Rebecca,Mrs.,rhendrickson@deathvalleywelding.com
+800264,Mr.,Patrick,Papadakas,,,1320 Light Tree Ln,,Cranberry,PA,16066,,,,patp@hondaracing.com
+800288,Mr.,Tyrone,Carter,rabbit,Bruiser,1348 Clark St.,,Wexford,PA,15090,,,,freesaftey@steelers.com
+800288,Mr.,Tyrone,Carter,rabbit,Bruiser,4862 Sand St.,,Pampano Beach,FL,33060,,,,freesaftey@steelers.com
+800338,Rabbi,Murray,Schwartz,,,4679 Murray Ave,,Pittsburgh,PA,15217,,,,rabbischwartz@hotmail.com
+800338,Rabbi,Murray,Schwartz,,,2468 Scott St,,Pittsburgh,PA,15213,,,,rabbischwartz@hotmail.com
+800339,Mr.,Phillip,Schwarts,,,4578 Grove St,,Bradenton,FL,34210,,,,prs3@starmail.net
+800339,Mr.,Phillip,Schwarts,,,5784 Park Rd,,Bradenton,FL,34210,,,,prs3@starmail.net
+800363,Mr.,Phillip,Hellmuth,cat,Chip,62 Flush Blvd,,Madison,WI,53702,,,,straightflush@ultimatebet.com
+800364,Mr.,Doyle,Brunson,bird,Duece,157 Club Ave,,Longworth,TX,79543,,,,supersystem@sbcglobal.com
+800413,Dr.,Gregory,House,,,221 B Baker St.,,Plainsboro,NJ,8536,,,,ghouse@princetonplainsboro.org
+818816,,William,Gates,,,1836 73rd Ave,,Medina,WA,98039,818817,Melinda,Mrs.,bgates@microsoft.com
+818816,,William,Gates,,,One Microsoft Way,,Redmond,WA,98052,818817,Melinda,Mrs.,bgates@microsoft.com
+818892,Dr.,Bob,Smith,cat,Rooster,Grosvenor Gardens House,,London,N/A,Sw1w 0bs,818902,Mary,Mrs.,smithingit@smithworks.uk
+818952,Dr.,Scott,Graham,,,123 Main Street,,Pittsburgh,PA,15239,,,,sgraham@animalclinic.org
+818953,Dr.,Eve,Eden,,,1001 Charrington Manor Drive,,Pittsburgh,PA,15235,,,,eeden@animalclinic.org
+818954,Dr.,Gary,Saldana,,,303 Blue Lake Drive,,Mars,PA,16046,,,,gsaldana@animalclinic.org
+818956,,Alex,Smith,,,,,,,,,,,alex.smith@gmail.com
+818957,,Alicia,Kreigler,,,,,,,,,,,akreigler@noplace.net
+818958,,Mary Jane,Little,,,,,,,,,,,mj@toobusy.net
+818959,,Junior,McGee,,,,,,,,,,,jrmcgee@leaveitalone.org
+818977,,Mark,Rickard,,,,,,,,,,,mrickard@towercare.com
+819032,Mr.,Peter,Griffin,,,31 Spooner Street,,Quahog,RI,2949,,,,peter@griffin.com
+819058,Mr.,Roger,Moore,,,,,,,,,,,rogerm@bbc.uk
+819059,Mr.,Pierce,Brosnan,,,Governors House,,London,N/A,Sw1w 0bs,,,,Remminton.Steele@gmail.com

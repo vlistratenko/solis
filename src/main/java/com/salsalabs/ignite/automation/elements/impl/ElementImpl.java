@@ -91,7 +91,12 @@ abstract class ElementImpl implements Element {
 
 	@Override
 	public void changePath(String old, String newPath) {
-		this.path = this.path.replace(old, newPath);
+		if (old.equals("")) {
+			this.path = newPath;
+		}else{
+			this.path = this.path.replace(old, newPath);
+		}
+		
 	}
 
 	@Override

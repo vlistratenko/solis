@@ -12,6 +12,8 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
 
@@ -85,10 +87,7 @@ public class LoginPage extends Browser{
 	}
 	
 	public SubscribeWidget openSubscribeWidgetByLink() {
-		String currentWindowHandle = super.openInNewWindow(CommonUtils.getProperty(PropertyName.SUBSCRIBE_WIDGET_LINK));		
-		sleep(5);
-		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);		
-		return new SubscribeWidget();
+		return openSubscribeWidgetByLink(CommonUtils.getProperty(PropertyName.SUBSCRIBE_WIDGET_LINK));
 	}
 	
 	public LoginPage verifyValidationForFailLogin(String userName) {
@@ -115,6 +114,27 @@ public class LoginPage extends Browser{
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {
 		open(SeleneseTestCase.emailClient.getUnsubscribeLink(emailSubj));
 		return new UnsubscribePage();
+	}
+
+	public SubscribeWidget openSubscribeWidgetByLink(String string) {
+		String currentWindowHandle = super.openInNewWindow(string);		
+		sleep(3);
+		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);		
+		return new SubscribeWidget();
+	}
+	
+	public DonationWidget openDonationWidgetByLink(String string) {
+		String currentWindowHandle = super.openInNewWindow(string);		
+		sleep(5);
+		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);		
+		return new DonationWidget();
+	}
+	
+	public PetitionWidget openPetitionWidgetByLink(String string) {
+		String currentWindowHandle = super.openInNewWindow(string);		
+		sleep(5);
+		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);		
+		return new PetitionWidget();
 	}
 	
 }
