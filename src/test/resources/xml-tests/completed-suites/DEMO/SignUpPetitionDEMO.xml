@@ -6,7 +6,7 @@
 	<test verbose="1" name="Supporter Sign Petition Form FIREFOX" annotations="JDK" group-by-instances="true">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<parameter name="amount" value="100"></parameter>
-		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/testpetitionsvitalii"></parameter>
+		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/testpetitionsvitalii%https://organizationforinternationalchange.uat.igniteaction.net/letsdoitv%https://organizationforinternationalchange.uat.igniteaction.net/weneedyoursupport"></parameter>
 		<parameter name="login" value="vavramchuk@salsalabs.com"></parameter>
 		<parameter name="host" value="hq.uat.igniteaction.net"></parameter>
 		<groups>

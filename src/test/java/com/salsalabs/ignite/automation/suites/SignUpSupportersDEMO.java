@@ -116,11 +116,12 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 		logger.info("Amount of signs " + amountOfSigns);			
 		loginPage = new LoginPage(true);
 		Supporter tempSupporter = new Supporter();
-		
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
 		for (int j = 0; j < amountOfSigns; j++) {
+			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, 4)-1];
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			if (isExisted) {
-				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "" ).get(j);
+				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "UI,SUBSCRIPTION,TARGETED_LETTER,DONATION,IMPORT" ).get(j);
 			}else{
 				tempSupporter = Supporter.getSupporterWithRandomDataFromFile();
 			}				
