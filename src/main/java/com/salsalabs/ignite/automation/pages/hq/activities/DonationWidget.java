@@ -15,8 +15,13 @@ public class DonationWidget extends SubscribeWidget {
 	TextBox personAddressLine1Field = new TextBoxImpl("//input[@name='Address@Home@Line1']", "Address line 1", true);
 	TextBox personAddressLine2Field = new TextBoxImpl("//input[@name='Address@Home@Line2']", "Address line 2", true);
 	CheckBox recurringDonationCheckBox = new CheckBoxImpl("//div[contains(text(), 'Make this donation recurring')]/input", "Recurring Donation");
-	Label donationAmountLabel = new LabelImpl("//label[text()='$20.00']/preceding-sibling::input", "Donation amount");
-
+	LabelImpl donationAmountLabel = new LabelImpl("//label[text()='$20.00']/preceding-sibling::input", "Donation amount");
+	LabelImpl donationAmountLabelOneTime = new LabelImpl("//ul[@id='sli-oneTimeDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
+	LabelImpl donationAmountLabelRecuring = new LabelImpl("//ul[@id='sli-recurringDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
+	
+	TextBoxImpl donationAmountInput = new TextBoxImpl("//input[@id='donationAmtOtherAmt']", "Input for donation amount");
+	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@id='donationAmtROtherAmt']", "Input for recuring donation amount");
+	TextBoxImpl donationOneTimeAmountInput = new TextBoxImpl("//input[@id='donationAmtOtherAmt']", "Input for donation amount");
 	TextBox nameOnCardField = new TextBoxImpl("//input[@id='name_on_card']", "Name on Card", true);
 	TextBox cardNumberField = new TextBoxImpl("//input[@id='card_number']", "Card number", true);
 	TextBox cvvField = new TextBoxImpl("//input[@id='cvv']", "CVV", true);
@@ -25,7 +30,7 @@ public class DonationWidget extends SubscribeWidget {
 	
 	Button donateButton = new ButtonImpl("//input[@value='Donate!']", "Donate", true);
 	
-	Label donationIsSccessMessage = new LabelImpl("//div[.='Thank you for your donation!']", "Donation is success");
+	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
 	
 	public DonationWidget() {
 		super();
@@ -82,17 +87,65 @@ public class DonationWidget extends SubscribeWidget {
 			boolean isNewsletter,
 			boolean isEmail) 
 	{
+		fillDonationForm(personEmail, personFName, personLName, personAddressLine1, personAddressLine2, personCity, personZip, "", recurringDonation, donationAmount, nameOnCard, cardNumber, cvv, expiryMonth, expiryYear, isFundraising, isNewsletter, isEmail);
+		
+		return this;
+	}
+	
+	public DonationWidget fillDonationForm(String personEmail,
+			String personFName,
+			String personLName,
+			String personAddressLine1,
+			String personAddressLine2,
+			String personCity,
+			String personZip,
+			String state,
+			boolean recurringDonation,
+			String donationAmount,
+			String nameOnCard,
+			String cardNumber,
+			String cvv,
+			String expiryMonth,
+			String expiryYear,			
+			boolean isFundraising,
+			boolean isNewsletter,
+			boolean isEmail) 
+	{
+		
+		String[] donAmounts = new String[] {"5","10","15","20","25"};
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);
 		personLNameField.type(personLName);
 		personAddressLine1Field.type(personAddressLine1);
 		personAddressLine2Field.type(personAddressLine2);
+		if (personCity.length()<1) {
+			personCity = "New York";
+		}
 		personCityField.type(personCity);
 		personZipField.type(personZip);
-		personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		}else{
+			personStatesSelectBox.selectByValue(state);
+		}
+		
 		recurringDonationCheckBox.check(recurringDonation);
-		donationAmountLabel.changePath("$20", donationAmount);
-		donationAmountLabel.click();
+		
+		if (recurringDonation) {
+			donationAmountLabel.changePath("", donationAmountLabelRecuring.getPath());
+			donationAmountInput.changePath("", donationRecuringAmountInput.getPath());
+		}else{
+			donationAmountLabel.changePath("", donationAmountLabelOneTime.getPath());
+			donationAmountInput.changePath("", donationOneTimeAmountInput.getPath());
+		}
+		
+		if (donationAmount.equals("")) {
+			donationAmount = donAmounts[CommonUtils.getRandomValueNumericFromTo(0, donAmounts.length-1)];
+			donationAmountLabel.changePath("$20", donationAmount);
+			donationAmountLabel.click();
+		}else{
+			donationAmountInput.type(donationAmount);
+		}
 		nameOnCardField.type(nameOnCard);
 		cardNumberField.type(cardNumber);
 		cvvField.type(cvv);

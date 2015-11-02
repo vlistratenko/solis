@@ -12,10 +12,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.httpclient.HttpMethod;
 import org.apache.http.Header;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -45,40 +49,23 @@ public class HttpClient {
 	String host = "hq.test.ignite.net";
 	CloseableHttpClient httpClient = null;
     HttpPost httpost = null;
+    HttpGet httpget = null;
     CloseableHttpResponse response = null;
     ArrayList<String> JSONResponse = new ArrayList<String>();
 	
 	public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-  	
-    	SSLContextBuilder builder = new SSLContextBuilder();
-        builder.loadTrustMaterial(null, new TrustStrategy(){
-            public boolean isTrusted(X509Certificate[] chain, String authType)
-                    throws CertificateException {
-                    return true;
-                }
-            });
-        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
-
-
-        Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
-                .register("http", new PlainConnectionSocketFactory())
-                .register("https", sslsf)
-                .build();
-
-
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
-        cm.setMaxTotal(2000);
-        httpClient = HttpClients.custom()
-                .setSSLSocketFactory(sslsf)
-                .setConnectionManager(cm)
-                .build();
-        httpost = new HttpPost();
-        updateHeaders();
+		getConnection();
+	}
+ 
+	
+	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+	  	this.host = host;
+	  	getConnection();
 	}
 	
 	public HttpClient login(String userName, String pass) throws URISyntaxException, ClientProtocolException, IOException {
 		updateHeaders();
-		sendRequest("https://" + host + "/api/auth/login.json", "{\"header\":{},\"payload\":{\"username\":\"" + userName + "\",\"password\":\"" + pass + "\"}}");
+		sendPOSTRequest("https://" + host + "/api/auth/login.json", "{\"header\":{},\"payload\":{\"username\":\"" + userName + "\",\"password\":\"" + pass + "\"}}");
 		Header h = response.getHeaders("authToken")[0];
 		authToken = h.getValue();  
 		updateHeaders();
@@ -91,7 +78,7 @@ public class HttpClient {
 				}
 		 }
 		 String req =  "{\"header\":{},\"payload\":{\"organization\":[{\"id\":\"" + orgID + "\",\"name\":\"" + orgName + "\"}]}}"; 
-		 sendRequest("https://" + host + "/api/auth/login.json", req);
+		 sendPOSTRequest("https://" + host + "/api/auth/login.json", req);
 		 h = response.getHeaders("authToken")[0];
 		 authToken = h.getValue();
 		 updateHeaders();
@@ -117,7 +104,7 @@ public class HttpClient {
 	 */
 	public String createSupporter(JSONObject supp) {
 		try {
-			sendRequest("https://" + host + "/api/person/supporter", supp.toString());
+			sendPOSTRequest("https://" + host + "/api/person/supporter", supp.toString());
 	         for (String temp : JSONResponse) {
 	            	 try {
 						return jsonParser(temp, "payload.id").toString();
@@ -132,7 +119,37 @@ public class HttpClient {
 	}
 	
 	
-	private CloseableHttpResponse sendRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
+	public Map<Integer, Supporter> getSupporters(String source, Integer supAmount) throws JSONException {
+        Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
+		try {
+			sendGETRequest("https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING" + source);
+	        Integer amountOfSupporters = 0;
+
+	        for (String temp : JSONResponse) {
+	            	 try {
+	            		 amountOfSupporters = (Integer) jsonParser(temp, "payload.count");	            		 
+	         			for (int i = 0; i < amountOfSupporters; i++) {
+	         				Supporter sup = new Supporter();
+	         				sup.firstName = jsonParser(temp, "payload.supporters." + i + ".firstName").toString();
+	         				sup.lastorOrgName = jsonParser(temp, "payload.supporters." + i + ".lastName").toString();	         				
+	         				sup.postalCode = jsonParser(temp, "payload.supporters." + i + ".addresses.0.zip").toString();
+	         				sup.city = jsonParser(temp, "payload.supporters." + i + ".addresses.0.city").toString();
+	         				sup.state = jsonParser(temp, "payload.supporters." + i + ".addresses.0.state").toString();	    
+	         				sup.finalEMAIL = jsonParser(temp, "payload.supporters." + i + ".contacts.0.value").toString();
+	         				sup.source = jsonParser(temp, "payload.supporters." + i + ".source").toString();
+	         				data.put(i, sup);
+	         			}
+					} catch (JSONException e) {
+						logger.error("", e);
+					}
+	         }
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return data;
+	}
+	
+	private CloseableHttpResponse sendPOSTRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
 		SeleneseTestCase.logger.info("Try to send request to " + url);
 		SeleneseTestCase.logger.info("Data to send " + json);
 		JSONResponse.clear();
@@ -155,15 +172,41 @@ public class HttpClient {
         return 	response;	 
 	}
 	
+	private CloseableHttpResponse sendGETRequest(String url/*, String json*/) throws URISyntaxException, ClientProtocolException, IOException {
+		//HttpMethod
+		SeleneseTestCase.logger.info("Try to send request to " + url);
+		//SeleneseTestCase.logger.info("Data to send " + json);
+		JSONResponse.clear();
+		httpget.setURI(new URI(url)); 
+		//httget.
+		// StringEntity input = new StringEntity(json);
+        //input.setContentType("application/json");
+        //httget.setEntity(input);
+        response = httpClient.execute(httpget);
+        if (response.getStatusLine().getStatusCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + response.getStatusLine().getStatusCode());
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(
+                (response.getEntity().getContent())));
+        String output;
+        while ((output = br.readLine()) != null) {
+        	SeleneseTestCase.logger.info("Response: " + output);
+        	JSONResponse.add(output);
+        }
+        return 	response;	 
+	}
+	
 	private void updateHeaders() {
 		try {
-			httpost.removeHeaders("authToken");
+			httpost = new HttpPost();
+			httpget = new HttpGet();
 		} catch (Exception e) {
 			logger.error("", e);
 		}
 		httpost.addHeader("Connection", "keep-alive");
 		httpost.addHeader("content-type", "application/json");
-        httpost.addHeader("Referer", "https://hq.test.ignite.net/");
+        httpost.addHeader("Referer", "https://" + host + "/");
         httpost.addHeader("Accept-Language", "en-US,en;q=0.5");            
         httpost.addHeader("authToken", authToken);
         httpost.addHeader("Pragma", "no-cache");            
@@ -172,7 +215,18 @@ public class HttpClient {
         httpost.addHeader("Cache-Control", "no-cache");            
         httpost.addHeader("Accept-Encoding", "gzip, deflate");
         httpost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
-
+        
+        httpget.addHeader("Connection", "keep-alive");
+		httpget.addHeader("content-type", "application/json");
+        httpget.addHeader("Referer", "https://" + host + "/");
+        httpget.addHeader("Accept-Language", "en-US,en;q=0.5");            
+        httpget.addHeader("authToken", authToken);
+        httpget.addHeader("Pragma", "no-cache");            
+        httpget.addHeader("Accept", "application/json, text/plain, */*");
+        httpget.addHeader("Content-Type", "application/json; charset=UTF-8");
+        httpget.addHeader("Cache-Control", "no-cache");            
+        httpget.addHeader("Accept-Encoding", "gzip, deflate");
+        httpget.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
 	}
 	
 	static Object jsonParser(String jsonStr, String key) throws JSONException {
@@ -192,5 +246,33 @@ public class HttpClient {
 	        i++;
 	    }
 	    return temp;
+	}
+	
+	private void getConnection() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+	   	SSLContextBuilder builder = new SSLContextBuilder();
+        builder.loadTrustMaterial(null, new TrustStrategy(){
+            public boolean isTrusted(X509Certificate[] chain, String authType)
+                    throws CertificateException {
+                    return true;
+                }
+            });
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(builder.build());
+
+
+        Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("http", new PlainConnectionSocketFactory())
+                .register("https", sslsf)
+                .build();
+
+
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(registry);
+        cm.setMaxTotal(2000);
+        httpClient = HttpClients.custom()
+                .setSSLSocketFactory(sslsf)
+                .setConnectionManager(cm)
+                .build();
+        httpost = new HttpPost();
+        httpget = new HttpGet();
+        updateHeaders();
 	}
 }

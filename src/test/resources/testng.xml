@@ -14,5 +14,8 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePetitionTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/SignUpPetitionDEMO.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/SignUpSupporterDEMO.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/DonateSupporterDEMO.xml" />
 	</suite-files>
 </suite>
