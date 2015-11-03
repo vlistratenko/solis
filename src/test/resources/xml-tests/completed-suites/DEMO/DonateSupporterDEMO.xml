@@ -8,7 +8,7 @@
 		<parameter name="amount" value="100"></parameter>
 		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html"></parameter>
 		<parameter name="login" value="vavramchuk@salsalabs.com"></parameter>
-		<parameter name="host" value="hq.uat.igniteaction.net"></parameter>
+		<parameter name="host" value="hq.uat.ignite.net"></parameter>
 		<groups>
 			<run>
 				<include name="makeDonationRandom" />
