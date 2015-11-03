@@ -19,7 +19,7 @@ public class ActivitiesPage extends HomePage {
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[starts-with(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
-	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[2]", "Yes, delete already!");
+	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']//button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	

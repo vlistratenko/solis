@@ -14,7 +14,7 @@ import com.salsalabs.ignite.automation.pages.hq.AudiencePage;
 public class SupportersPage extends AudiencePage {
 
 	Button addSupporterButton = new ButtonImpl("//button[./span[text()='Add Supporters']]", "Add supporter");
-	Button addSingleSupporterBtn = new ButtonImpl("//a[contains(text(), 'Add a Single Supporter')]", "Add a Single Supporter");
+	Button addSingleSupporterBtn = new ButtonImpl("//a[contains(text(), 'Add a single supporter')]", "Add a Single Supporter");
 	Table supportersTable = new TableImpl("//table-list/div[2]/div/div/table", "Table with supporters");
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
 	Button doSearchButton = new ButtonImpl("//*[@autotest-id='btn_search_list']", "Do search");

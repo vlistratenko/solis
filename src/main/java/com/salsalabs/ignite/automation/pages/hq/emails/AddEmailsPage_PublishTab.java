@@ -15,7 +15,7 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 	DropDown TestPercentageList = new DropDownImpl("//custom-select2[@name='testPercentageList']", "//custom-select2[@name='testPercentageList']/descendant::a", "Test percentage list");
 	Label amountOfEmails = new LabelImpl("//p[contains(text(), 'This email will be sent to ')]/strong", "Amount Of Emails");
 	public AddEmailsPage_PublishTab fillAllFieldsAndPublish(Integer percentageOfTestGroup, Integer splitsAmount) {
-		selectTimeToSend("Immediately");
+		selectTimeToSend("Send now");
 		if (splitsAmount > 1) {
 			TestPercentageList.selectByLabelJS(percentageOfTestGroup.toString() + "%");
 		}

@@ -94,7 +94,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 		String link = CommonUtils.getProperty(linkProperty);
 		currentWindowHandle = getWindowHandle();
 		this.openInNewWindow(link);
-		sleep(5);
+		sleep(7);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		try {
 			return clazz.newInstance();
