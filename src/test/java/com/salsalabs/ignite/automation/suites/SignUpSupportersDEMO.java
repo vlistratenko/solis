@@ -5,12 +5,14 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
@@ -42,7 +44,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 	
 	@Parameters({"amount", "formURL", "login", "host"})
 	@Test(groups = {"makeDonationRandom"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testDonateByExistingSupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+	public void testDonateBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
 		
 		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
 		logger.info("Amount of donations " + amountOfDonations);
@@ -133,6 +135,69 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 			
 		}
 	}
+	
+	@Parameters({"amount", "formURL", "login", "host"})
+	@Test(groups = {"sendTL"}, retryAnalyzer = RetryAnalyzer.class)
+	public void testSendTL(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {		
+		int amountOfEmails = CommonUtils.getRandomValueNumericFromTo(1, amount);	
+		logger.info("Amount of letters " + amountOfEmails);			
+		loginPage = new LoginPage(true);
+		Supporter tempSupporter = new Supporter();
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
+		for (int j = 0; j < amountOfEmails; j++) {
+			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
+			Boolean isExisted = CommonUtils.getRandomBoolean();
+			if (isExisted) {
+				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "UI,SUBSCRIPTION,PETITION,DONATION,IMPORT" ).get(j);
+			}else{
+				tempSupporter = Supporter.getSupporterWithRandomDataFromFile();
+			}				
+			loginPage.
+			openTLWidgetByLink(formURL).
+			findLegistratorTLForm("10753 BLIX", "91602").
+			fillTLWidget("Mr", tempSupporter.finalEMAIL, tempSupporter.firstName, tempSupporter.lastorOrgName).
+			verifySubscriptionIsSuccesses().
+			backToLoginPage();
+			
+		}
+	}
+	
+	@Parameters({ "sendEmail.from", "login", "segmentName"})
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmailsEmailsAndClickIn" }, description = "")
+	public void sendEmailBlastTest(String emailFrom, String login, String segmentName) {
+		
+		String emailBlastName = "We need your help!!! Blast from " + CommonUtils.getTodayDate();
+		String emailSubject = emailBlastName;
+		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
+		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
+		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
+				
+		LoginPage loginPage = new LoginPage();
+		loginPage.
+		doSuccessLogin(login, "!QAZ2wsx").
+		openMessagingPage().
+		openEmailBlastsPage().
+		openAddEmailPage().
+		fillAllFieldsAndGoForward(emailBlastName).
+		SelectEmailType().
+		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
+		addSegment(segmentName).
+		openComposePage().
+		selectLayout(1).
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
+		fillAllFieldsAndPublish(100, 1).
+		openDashboard().
+		openMessagingPage().
+		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
+		
+		Integer openAmount = CommonUtils.getRandomValueNumericFromTo(1, Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
+		Integer clickAmount = CommonUtils.getRandomValueNumericFromTo(1, openAmount);
+		Integer unsubAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
+		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
+		loginPage.clickLinkInEmail(emails, 1, "http://google.com", clickAmount);		
+		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
+	}
+	
 
 	
 	

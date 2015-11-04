@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Create and send single email blast and click links" parallel="false" thread-count="1">
+
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
+
+	<test verbose="2" name="Create and send single email blast and click links (FIREFOX)" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<parameter name="login" value="vavramchuk@salsalabs.com"></parameter>
+		<parameter name="segmentName"value="emailsFromIgniteUAT"></parameter>
+		<groups>
+			<run>
+				<include name="email.sendEmailsEmailsAndClickIn" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.SignUpSupportersDEMO" />
+		</classes>
+	</test>
+</suite>
