@@ -25,7 +25,7 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	
 	@Override
 	public AddPetitionPage selectLayoutStep() {
-		return (AddPetitionPage)  selectLayoutStep(5);
+		return (AddPetitionPage)  selectLayoutStep(4);
 	}
 	
 	@Override
