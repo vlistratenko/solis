@@ -3,7 +3,7 @@
 <suite name="Supporter Make Donation" parallel="instances" thread-count="1">
 	<parameter name="USED_ENVIRONMENT" value="UAT"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
-	<test verbose="1" name="Donate one time Form FIREFOX" annotations="JDK" group-by-instances="true">
+	<test verbose="1" name="Supporter Make Donation FIREFOX" annotations="JDK" group-by-instances="true">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<parameter name="amount" value="100"></parameter>
 		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html"></parameter>
