@@ -29,6 +29,11 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	}
 	
 	@Override
+	public AddPetitionPage selectLayoutStep(String type) {
+		return (AddPetitionPage)  super.selectLayoutStep(type);
+	}
+	
+	@Override
 	protected SubscribeWidget newWidget(boolean clean) {
 		return new PetitionWidget(clean);
 	}

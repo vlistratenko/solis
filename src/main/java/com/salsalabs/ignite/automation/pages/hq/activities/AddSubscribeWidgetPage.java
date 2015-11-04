@@ -179,4 +179,12 @@ public class AddSubscribeWidgetPage extends HomePage {
 		switchDefaultContent();
 		return this;
 	}
+
+	public AddSubscribeWidgetPage selectLayoutStep(String type) {
+		  Button lay = new ButtonImpl("(//img[@alt ='"+ type +"'])", type );  
+		  lay.click();
+		  composeButton.click();
+		  sleep(10);
+		  return this;
+	}
 }

@@ -22,6 +22,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 
 	String widgetName;
 	String widgetDescription;
+	public final String LAYOUT_SIDEBAR = "Sidebar layout";
 
 	/**
 	 * <b>Create petition.</b>
@@ -62,7 +63,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		// fill title and description
 		addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
 		// select layout for form
-		addPetitionPage.selectLayoutStep();
+		addPetitionPage.selectLayoutStep(LAYOUT_SIDEBAR);
 		
 		// configure petition: selecting "allow commenting" and "Publish comments immediately  checkboxes"
 		addPetitionPage.configPetition();
