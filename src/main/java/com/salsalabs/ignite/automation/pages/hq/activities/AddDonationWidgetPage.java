@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
-	Button goToStep3Btn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings >>");
+	Button btnPublish = new ButtonImpl("//button[@id='btnPublish']", "Publish This Form >>");
 	
 	public AddDonationWidgetPage() {
 		linkProperty = PropertyName.DONATION_WIDGET_LINK;
@@ -25,7 +25,7 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 	
 	// Go to settings of form
 	public AddDonationWidgetPage fillThirdStep() {
-		goToStep3Btn.click();
+		btnPublish.click();
 		sleep(5);
 		return this;
 	}
