@@ -72,6 +72,12 @@ abstract class ElementImpl implements Element {
 		logger.info("Click on " + elementName);
 		clickByTABKey(path);
 	}
+	
+	@Override
+	public void clickByENTERKey() {
+		logger.info(" Click on " + elementName + " and press ENTER button afterwards ");
+		clickByENTERKey(path);
+	}
 
 	@Override
 	public void click() {
@@ -288,6 +294,24 @@ abstract class ElementImpl implements Element {
 			}
 		}
 
+	}
+	
+	protected void clickByENTERKey(String locator) {
+		logger.debug(" Click on < " + locator + " >. ");
+		waitObject(locator, 10 * cTimeOut);
+		try {
+			sendKeys(locator, Keys.ENTER);
+		} catch (Exception e) {
+			if (isRequeired) {
+				e.printStackTrace();
+				throw new ElementNotFoundException(elementName, "xpath", locator);
+			} else {
+				logger.error(e.getMessage());
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 	protected void sendKeys(String locator, Keys key) {

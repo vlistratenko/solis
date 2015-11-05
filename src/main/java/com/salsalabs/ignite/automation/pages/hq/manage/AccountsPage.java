@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
-
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -30,7 +29,7 @@ public class AccountsPage extends HomePage{
 	public AccountsPage verifyInvitationSent() {
 		inviteSearch.waitElement(60);
 		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
-		inviteSearchBtn.click();
+		inviteSearch.clickByENTERKey();
 		sleep(5);
 		verifier.verifyElementIsDisplayed(new LabelImpl("//span[contains(text(), '" + CommonUtils.getProperty(PropertyName.CM_EMAIL) + "')]", "Admin in table"));
 		verifier.verifyNotEquals(new LoginPage().getInvitationUrl(), null, "Invitation link hasn't been sent", true);

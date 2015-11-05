@@ -29,6 +29,8 @@ public interface Element {
 	void clickJS();
 
 	void clickByTABKey();
+	
+	void clickByENTERKey();
 
 	boolean waitElement();
 	

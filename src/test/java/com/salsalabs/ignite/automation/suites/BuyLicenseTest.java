@@ -14,8 +14,8 @@ import com.salsalabs.ignite.automation.pages.hq.PurchasePage;
  */
 public class BuyLicenseTest extends SeleneseTestCase {
 	
-	private static final String SUBJECT_NEW_INVOICE = "You have a new Solis invoice from Salsa Labs";
-	private static final String SUBJECT_PAYMENT_PROCESSED = "Your payment for Solis was successfully processed.";
+	private static final String SUBJECT_NEW_INVOICE = "You have a new invoice from Salsa Labs";
+	private static final String SUBJECT_PAYMENT_PROCESSED = "Your payment to Salsalabs was successfully processed.";
 
 	/**
 	 * <b>Create Trial ORG
