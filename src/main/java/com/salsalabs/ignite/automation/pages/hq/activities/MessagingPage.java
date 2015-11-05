@@ -8,6 +8,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.emails.AddSocialPostsPage;
 import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastsPage;
 
 
@@ -32,6 +33,11 @@ public class MessagingPage extends HomePage {
 	public EmailBlastsPage openEmailBlastsPage() {
 		emailTab.click();
 		return new EmailBlastsPage();
+	}
+	
+	public AddSocialPostsPage openSocialPostsPage() {
+		socialTab.click();
+		return new AddSocialPostsPage();
 	}
 	
 	public MessagingPage openAllActivitiesTab() {
