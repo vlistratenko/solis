@@ -1,27 +1,66 @@
 package com.salsalabs.ignite.automation.common;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Supporter {
-	private String finalEMAIL = "";
+	public String finalEMAIL = "";
 	private String cPhone = "32165498765";
-	private String city = "CityT";
 	private String emailDomain = "@devnull.test.ignite.net";
 	private String importedEmail = "importedsup";
 	private String subscribedEmail = "subscribedsup";
 	private String manuallEmail = "munuallysup";
 	private String facebook = "fbv";
-	private String firstName = "Tester";
 	private String home_Phone = "98765432112";
-	private String lastName = "Testerov";
 	private String preferredLanguage = "English (United States)";
-	private String state = "NY";
 	private String twitter = "twv";
 	private String zipCode = "20147";
-	private String addressLine1 = "Street line1";
-	private String addressLine2 = "Street line2 ";
 	private String middleName = "MName";
+	
+	public String constituentNumber = "",
+			title = "",
+			firstName = "",
+			lastorOrgName = "",
+			petType = "",
+			petName = "",
+			addressLine1 = "",
+			addressLine2 = "",
+			city = "",
+			state = "",
+			postalCode = "",
+			spouseConstituentNumber = "",
+			spouseFirstName = "",
+			spouseTitle = "";
+	public String source;
+	
+	/*map for fields in the file*/
+	private static Integer CONSTITUENTNUMBER = 0,
+			TITLE = 1,
+			FIRSTNAME = 2,
+			LASTORORGNAME = 3,
+			PETTYPE = 4,
+			PETNAME = 5,
+			ADDRESSLINE1 = 6,
+			ADDRESSLINE2 = 7,
+			CITY = 8,
+			STATE = 9,
+			POSTALCODE = 10,
+			SPOUSECONSTITUENTNUMBER = 11,
+			SPOUSEFIRSTNAME = 12,
+			SPOUSETITLE = 13,
+			EMAILADDRESS = 14;
 	
 	public static Supporter generateSupporter() {
 		Supporter result = new Supporter();
@@ -120,11 +159,11 @@ public class Supporter {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastorOrgName;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastorOrgName = lastName;
 	}
 
 	public String getPreferredLanguage() {
@@ -184,10 +223,79 @@ public class Supporter {
 	}
 
 	public JSONObject getSupporterJSON(String email) throws JSONException {
-		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName + "\",\"lastName\":\"" + lastName + "\",\"language\":\"en-US\",\"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
+		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName + "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\",\"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
 				+ "\"},{\"type\":\"MessagingEmail\",\"value\":\"" + email + "\",\"status\":\"OptedIn\"},{\"type\":\"SocialFacebook\",\"value\":\"" + facebook + "\"},{\"type\":\"SocialTwitter\",\"value\":\"" + twitter
 				+ "\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\"" + addressLine1 + "\",\"line2\":\"" + addressLine2 + "\",\"city\":\"" + city + "\",\"state\":\"" + state + "\",\"zip\":\""
 				+ zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
 		return new JSONObject(j);
+	}
+
+	public static Map<Integer, Supporter> getSupportersFromFile() {
+		String filename = new File("all living with spouses and email.csv").getAbsolutePath();		
+		Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
+		int i = 0;
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(filename));
+			String line;
+			while ((line = in.readLine()) != null){
+				Supporter sup = new Supporter();
+				String[] fields = line.split(",");
+				for (int j = 0; j < fields.length; j++) {
+					sup.constituentNumber = fields[CONSTITUENTNUMBER];
+					sup.title = fields[TITLE];
+					sup.firstName = fields[FIRSTNAME];
+					sup.lastorOrgName = fields[LASTORORGNAME];
+					sup.petType = fields[PETTYPE];
+					sup.petName = fields[PETNAME];
+					sup.addressLine1 = fields[ADDRESSLINE1];
+					sup.addressLine2 = fields[ADDRESSLINE2];
+					sup.city = fields[CITY];
+					sup.state = fields[STATE];
+					sup.postalCode = fields[POSTALCODE];
+					sup.spouseConstituentNumber = fields[SPOUSECONSTITUENTNUMBER];
+					sup.spouseFirstName = fields[SPOUSEFIRSTNAME];
+					sup.spouseTitle = fields[SPOUSETITLE];
+					sup.finalEMAIL = fields[EMAILADDRESS];
+				}
+				
+				data.put(i, sup);
+				
+				i++;
+			}
+			in.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+	
+	public Map<Integer, Supporter> getSupportersFromSystem(String host, String login, String pass, Integer amountOfSupporters, String source) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+		 return new HttpClient(host).
+				login(login, pass).
+				getSupporters(source, amountOfSupporters);
+		
+	}
+	
+	public static Supporter getSupporterWithRandomDataFromFile() {
+		Map<Integer, Supporter> data = getSupportersFromFile();
+		Supporter sup = new Supporter();
+		
+		sup.constituentNumber = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).constituentNumber;
+		sup.title = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).title;
+		sup.firstName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).firstName;
+		sup.lastorOrgName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).lastorOrgName;
+		sup.petType = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).petType;
+		sup.petName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).petName;
+		sup.addressLine1 = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).addressLine1;
+		sup.addressLine2 = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).addressLine2;
+		sup.city = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).city;
+		sup.state = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).state;
+		sup.postalCode = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).postalCode;
+		sup.spouseConstituentNumber = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseConstituentNumber;
+		sup.spouseFirstName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseFirstName;
+		sup.spouseTitle = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseTitle;
+		sup.finalEMAIL = sup.firstName + "." + sup.lastorOrgName + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net";
+		return sup;
 	}
 }

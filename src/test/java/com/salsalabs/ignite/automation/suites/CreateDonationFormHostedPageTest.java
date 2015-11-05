@@ -76,8 +76,6 @@ public class CreateDonationFormHostedPageTest extends SeleneseTestCase {
 		donationsAddPage.selectLayoutStep();
 		// leave default design
 		donationsAddPage.fillThirdStep();
-		// leave default settings and publish form
-		donationsAddPage.publishForm();
 		// verify that link is present on page
 		donationsAddPage.verifyFormLinkIsPresent(formName);
 		// verify that new widget is present in table in All Activities tab (Published state)

@@ -72,7 +72,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
 		SelectEmailType().
-		selectAudienceType(" Selected segments of your list, or specific supporters").//(""Entire list ").
+		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSupporters(amountOfSupporters, propertyPublished).
 		addSupporters("unex", hardBounceAmount, propertyPublished).
 		openComposePage().

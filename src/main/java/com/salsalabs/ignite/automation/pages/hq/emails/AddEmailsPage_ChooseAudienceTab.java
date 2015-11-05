@@ -20,8 +20,8 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button EntireList = new ButtonImpl("//span[contains(@ng-class, 'sendToAllSelected')]", "Entire list");
 	Button SelectedSegmentsOrSupporters  = new ButtonImpl("//span[contains(@ng-class, '!blast.sendToAllSelected')]", " Selected segments of your list, or specific supporters");
 	Button ComposeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
-	
-	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add some additional folks to this blast?')]/following-sibling::div/descendant::input", "Manually add supporters");
+	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add')]/following-sibling::div/descendant::input", "Manually add supporters");
+	DropDownImpl addSegmentField = new DropDownImpl("//p[contains(text(), 'see the segment')]/following-sibling::div/descendant::a", "Add segment");
 	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[@class='result fade-out ng-scope'])[last()]", "Supporters item in the search result", false);
 	Button calculateAudience = new ButtonImpl("//span[contains(text(),'Calculate')]", "Calculate Audience Reach");
 	Label calculatedLabel = new LabelImpl("//span[@ng-show='blast.reachTotal>=0']", "Calculated Audience");
@@ -30,7 +30,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		if (type.trim().equalsIgnoreCase("Entire list")) {
 			EntireList.click();
 		}
-		if (type.trim().equalsIgnoreCase(" Selected segments of your list, or specific supporters")) {
+		if (type.trim().equalsIgnoreCase("Selected segments of your list, or specific supporters")) {
 			SelectedSegmentsOrSupporters.click();
 		}
 		return this;
@@ -80,6 +80,25 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	public AddEmailsPage_ComposeTab openComposePage() {
 		ComposeButton.click();
 		return new AddEmailsPage_ComposeTab();
+	}
+	
+	public AddEmailsPage_ChooseAudienceTab addSegment(String searchString) {
+
+		addSegmentField.click();
+		sleep(3);
+		LabelImpl segmentItem = new LabelImpl("//table/descendant::td[contains(text(), '" + searchString + "')]", "Segment " + searchString + " item");
+		while (segmentItem.isNotExists()) {
+			new ButtonImpl("//a[contains(text(),'Load next')]", "Load next segments");
+			
+		}
+		segmentItem.click();
+		if (calculateAudience.isVisible()) {
+			calculateAudience.click();
+			sleep(2);
+		}
+		
+		CommonUtils.setProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS, calculatedLabel.getText().replace(" supporter(s)", ""));
+		return this;
 	}
 	
 }

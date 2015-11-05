@@ -94,7 +94,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 		String link = CommonUtils.getProperty(linkProperty);
 		currentWindowHandle = getWindowHandle();
 		this.openInNewWindow(link);
-		sleep(5);
+		sleep(7);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		try {
 			return clazz.newInstance();
@@ -178,5 +178,13 @@ public class AddSubscribeWidgetPage extends HomePage {
 		newWidget(false).verifyWidgetElementsVisible(true);
 		switchDefaultContent();
 		return this;
+	}
+
+	public AddSubscribeWidgetPage selectLayoutStep(String type) {
+		  Button lay = new ButtonImpl("(//img[@alt ='"+ type +"'])", type );  
+		  lay.click();
+		  composeButton.click();
+		  sleep(10);
+		  return this;
 	}
 }

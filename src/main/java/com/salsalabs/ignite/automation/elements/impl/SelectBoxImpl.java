@@ -3,6 +3,7 @@ package com.salsalabs.ignite.automation.elements.impl;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import com.salsalabs.ignite.automation.elements.SelectBox;
 
@@ -35,11 +36,21 @@ public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 		logger.info("Select value by index" + index + " in the " + elementName);
 		super.select(path, index);
 	}
+	
+	public void selectByValue(String value) {
+		logger.info("Select value by value" + value + " in the " + elementName);
+		if (value.length()>1) {			
+			new Select(super.findElementByXpath(path)).selectByValue(value);
+		}
+		
+	}
 
 	@Override
 	public void selectByLabel(String value) {
 		logger.info("Select value by label " + value + " in the " + elementName);
-		super.select(path, value);
+		if (value.length()>1) {
+			super.select(path, value);	
+		}
 		
 	}
 	

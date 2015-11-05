@@ -298,6 +298,15 @@ public class CommonUtils {
 		}
 		return Integer.toString(val);
 	}
+	
+	public static Integer getRandomValueNumericFromTo(Integer intMinValue, Integer intMaxValue) {
+		Random randomGenerator = new Random();
+		Integer val = 0;
+		while (val <= intMinValue) {
+			val = randomGenerator.nextInt(intMaxValue);
+		}
+		return val;
+	}
 
 	public static String getRandomNumericValueFixedLength(Integer len) {
 		String s = "";
@@ -305,6 +314,11 @@ public class CommonUtils {
 			s = s + getRandomValueFromTo(0, 9, 0);
 		}
 		return s;
+	}
+	
+	public static Boolean getRandomBoolean() {
+		Random rnd = new Random();
+		return rnd.nextBoolean();
 	}
 
 	// returns array from string. Use : as symbol
