@@ -76,8 +76,10 @@ public class InviteCompletionPage extends Browser {
 		tertiaryColorField.type("#343BB0");
 		fromNameField.type(CommonUtils.getProperty(PropertyName.ADMIN_FIRST_NAME) + " " + CommonUtils.getProperty(PropertyName.ADMIN_LAST_NAME));
 		fromEmailField.type(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL));
-		replyToEmailField.type(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL));		
-		finishButton.click();		
+		replyToEmailField.type(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL));	
+		sleep(2);
+		finishButton.click();	
+		sleep(2);
 		return new HomePage();
 	}
 	
