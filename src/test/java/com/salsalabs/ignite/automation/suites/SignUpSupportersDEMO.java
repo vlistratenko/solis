@@ -85,7 +85,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=DONATION" );
 				int ind = CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1);
 				loginPage.
-				openDonationWidgetByLink("https://orgname3281ec647c99mailosaurin.test.igniteaction.net/fundraising1").
+				openDonationWidgetByLink(formURL).
 				fillDonationForm(sup.get(ind).getFinalEMAIL(),
 						sup.get(ind).getFirstName(),
 						sup.get(ind).getLastName(),
