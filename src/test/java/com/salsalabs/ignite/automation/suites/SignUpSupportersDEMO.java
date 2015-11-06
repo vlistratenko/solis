@@ -27,7 +27,9 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 	public void testSubscribeNewSupporter(Integer amount, String formURL) {		
 		loginPage = new LoginPage(true);
 		int amountOfSupporters = CommonUtils.getRandomValueNumericFromTo(1, amount);
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
 		for (int j = 1; j < amountOfSupporters; j++) {
+			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 			Supporter sup = Supporter.getSupporterWithRandomDataFromFile();
 			loginPage.
 			openSubscribeWidgetByLink(formURL).
@@ -49,7 +51,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
 		logger.info("Amount of donations " + amountOfDonations);
 		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();
-		
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
 		loginPage = new LoginPage(true);
 		for (int j = 0; j < amountOfDonations; j++) {
 			Boolean isExisted = CommonUtils.getRandomBoolean();
@@ -58,6 +60,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "UI,SUBSCRIPTION,PETITION,TARGETED_LETTER," );
 				String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
 						lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				loginPage.
 				openDonationWidgetByLink(formURL).
 				fillDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
@@ -84,6 +87,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 			}else{
 				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=DONATION" );
 				int ind = CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1);
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				loginPage.
 				openDonationWidgetByLink(formURL).
 				fillDonationForm(sup.get(ind).getFinalEMAIL(),
@@ -120,7 +124,7 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 		Supporter tempSupporter = new Supporter();
 		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
 		for (int j = 0; j < amountOfSigns; j++) {
-			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, 4)-1];
+			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			if (isExisted) {
 				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "UI,SUBSCRIPTION,TARGETED_LETTER,DONATION,IMPORT" ).get(j);
