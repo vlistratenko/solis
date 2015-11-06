@@ -191,6 +191,9 @@ public class Supporter {
 	}
 
 	public String getZipCode() {
+		if (!postalCode.equals("")) {
+			return postalCode;
+		}
 		return zipCode;
 	}
 
