@@ -23,8 +23,8 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 	LoginPage loginPage;
 	
 	@Parameters({"amount", "formURL"})
-	@Test(groups = {"subscribeNewSupporter"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testSubscribeNewSupporter(Integer amount, String formURL) {		
+	@Test(groups = {"testSubscribeDEMOSupporter"}, retryAnalyzer = RetryAnalyzer.class)
+	public void testSubscribeDEMOSupporter(Integer amount, String formURL) {		
 		loginPage = new LoginPage(true);
 		int amountOfSupporters = CommonUtils.getRandomValueNumericFromTo(1, amount);
 		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");

@@ -29,7 +29,7 @@ public class SubscribeWidget extends Browser{
 	
 	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
 	
-	Label subscriptionIsSuccessMessage = new LabelImpl("//*[contains(.,'Thank')]", "Subscription is success");
+	Label subscriptionIsSuccessMessage = new LabelImpl("//h1[contains(.,'Thank You!')]", "Subscription is success");
 
 	public SubscribeWidget() {
 		deletecoockies();
@@ -111,7 +111,7 @@ public class SubscribeWidget extends Browser{
 	
 	public SubscribeWidget verifySubscriptionIsSuccesses() {
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(subscriptionIsSuccessMessage.isDisplayed(), 10)) {
+			if (waitConditionBecomesTrue(subscriptionIsSuccessMessage.isVisible(), 10)) {
 				break;
 			}
 		}

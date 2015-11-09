@@ -9,7 +9,7 @@
 		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/followas"></parameter>
 		<groups>
 			<run>
-				<include name="subscribeNewSupporter" />
+				<include name="testSubscribeDEMOSupporter" />
 			</run>
 		</groups>
 		<classes>
