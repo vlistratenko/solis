@@ -18,7 +18,7 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
-public class SignUpSupportersDEMO extends SeleneseTestCase {
+public class CreateDEMOData extends SeleneseTestCase {
 	
 	LoginPage loginPage;
 	
@@ -200,6 +200,12 @@ public class SignUpSupportersDEMO extends SeleneseTestCase {
 		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
 		loginPage.clickLinkInEmail(emails, 1, "http://google.com", clickAmount);		
 		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
+	}
+	
+	@Parameters({ "sendEmail.from", "login", "segmentName"})
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "createSocialPostDEMOTest" }, description = "")
+	public void createSocialPostDEMOTest(String emailFrom, String login, String segmentName) {
+		
 	}
 	
 
