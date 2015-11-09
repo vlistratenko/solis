@@ -15,7 +15,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="com.salsalabs.ignite.automation.suites.CreateDEMOData" />
+			<class name="com.salsalabs.ignite.automation.suites.SignUpSupportersDEMO" />
 		</classes>
 	</test>
 </suite>

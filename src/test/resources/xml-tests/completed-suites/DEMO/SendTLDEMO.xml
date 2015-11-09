@@ -5,7 +5,7 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<test verbose="1" name="Supporter send TL FIREFOX" annotations="JDK" group-by-instances="true">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
-		<parameter name="amount" value="100"></parameter>
+		<parameter name="amount" value="3"></parameter>
 		<parameter name="formURL" value="https://organizationforinternationalchange.uat.igniteaction.net/letssavethetreesv"></parameter>
 		<parameter name="login" value="vavramchuk@salsalabs.com"></parameter>
 		<parameter name="host" value="hq.uat.ignite.net"></parameter>
@@ -15,7 +15,7 @@
 			</run>
 		</groups>
 		<classes>
-			<class name="com.salsalabs.ignite.automation.suites.CreateDEMOData" />
+			<class name="com.salsalabs.ignite.automation.suites.SignUpSupportersDEMO" />
 		</classes>
 	</test>
 </suite>
