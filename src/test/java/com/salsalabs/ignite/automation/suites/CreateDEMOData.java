@@ -18,7 +18,7 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
-public class SignUpSupportersDEMO extends SeleneseTestCase {
+public class CreateDEMOData extends SeleneseTestCase {
 	
 	LoginPage loginPage;
 	
