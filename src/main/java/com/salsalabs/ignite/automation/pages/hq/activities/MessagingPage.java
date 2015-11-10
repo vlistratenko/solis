@@ -46,10 +46,29 @@ public class MessagingPage extends HomePage {
 		return this;
 	}
 	
-	public void verifyActivityIsPresentInTableAllActivities(String type, String handyReferenceName) {
+	public MessagingPage verifyActivityIsPresentInTableAllActivities(String type, String handyReferenceName) {
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 2), type, "Widget is not present in table (type)");
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 3), handyReferenceName, "Widget is not present in table (name)");
 		SeleneseTestCase.logger.info("Activity Status is " + activitiesTable.getCellValue(1, 5));
+		return this;
+	}
+	
+	/**
+	 * Wait for expected status with refreshing each 10 second n times
+	 * @param expectedStatus
+	 * @param n
+	 * @return
+	 */
+	public MessagingPage waitForStatus(String expectedStatus, Integer n) {
+		for (int i = 0; i < n; i++) {
+			if (waitConditionBecomesTrue(activitiesTable.getCellValue(1, 5).equalsIgnoreCase(expectedStatus), 10)) {
+				return this;
+			}else{
+				refresh();
+			}
+		}
+		logger.warn("Status was not changed");
+		return this;
 	}
 	
 	public void verifyActivityIsPresentInTableAllActivities(String type, String handyReferenceName, String description, String status) {

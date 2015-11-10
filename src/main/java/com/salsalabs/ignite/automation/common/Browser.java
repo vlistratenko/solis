@@ -221,7 +221,7 @@ public abstract class Browser {
 	public List<?> openEmails(String subj, Integer amount) {
 		EmailClient<?> client = SeleneseTestCase.emailClient;
 		List<?> emails = null;
-		emails = client.getEmailsBySubject(subj);
+		emails = client.waitForEmails(subj, amount, 10).getEmailsBySubject(subj);
 		if (emails.size() < amount)
 			amount = emails.size();
 		for (int i = 0; i < amount; i++) {

@@ -191,7 +191,7 @@ public class HttpClient {
                 (response.getEntity().getContent())));
         String output;
         while ((output = br.readLine()) != null) {
-        	SeleneseTestCase.logger.info("Response: " + output);
+        	//SeleneseTestCase.logger.info("Response: " + output);
         	JSONResponse.add(output);
         }
         return 	response;	 
