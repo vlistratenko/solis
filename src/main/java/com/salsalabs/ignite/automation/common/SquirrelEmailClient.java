@@ -199,7 +199,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 			for (String subj : subjects) {
 				logger.info("Try to find email with subject - " + subj);
 				msgs.addAll(Arrays.asList(inbox.search(new SubjectTerm(subj), messages)));
-				logger.info(msgs.size() + "emails with subject - " + subj + "were found");
+				logger.info(msgs.size() + " emails with subject - " + subj + " were found");
 			}
 		} catch (Exception ex) {
 			logger.error("", ex);

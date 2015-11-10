@@ -192,7 +192,8 @@ public class CreateDEMOData extends SeleneseTestCase {
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().
-		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName);
+		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName).
+		waitForStatus("COMPLETED", 6);
 		
 		Integer openAmount = CommonUtils.getRandomValueNumericFromTo(1, Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
 		Integer clickAmount = CommonUtils.getRandomValueNumericFromTo(1, openAmount);
