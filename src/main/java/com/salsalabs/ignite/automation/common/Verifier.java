@@ -84,6 +84,7 @@ public class Verifier {
 	}
 
 	public void verifyEquals(Object actual, Object expected, String message, boolean fail) {
+		message = message.replace(".", "_");
 		logger.debug("Check equality of two objects. ");
 		try {
 			Assert.assertEquals(actual, expected);
