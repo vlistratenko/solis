@@ -51,4 +51,8 @@ public class ManagePage  extends HomePage{
 		return new CustomFieldsPage();
 	}
 
+	public SocialMediaAccountsPage switchToAddSocialPostsPage() {
+		switchToDropDown.selectByLabelJS("Social Media Accounts");
+		return new SocialMediaAccountsPage();
+	}
 }
