@@ -1,11 +1,11 @@
 package com.salsalabs.ignite.automation.suites;
 
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.emails.AddSocialPostsPage;
-
 
 public class CreateSocialPostTest extends SeleneseTestCase {
 	
@@ -27,19 +27,19 @@ public class CreateSocialPostTest extends SeleneseTestCase {
 	 * </ul>
 	 *  
 	 */	
-	
-	private AddSocialPostsPage addSocialPostPage = new AddSocialPostsPage();
-		
+
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "social" }, description = "")
-	public void loginAndCreateSocialPost() {
-		doLoginAndOpenDonationForms();
-		addSocialPostPage.
+	@Parameters({"twitterUser", "twitterPassword", "facebookUser", "facebookPassword", "fileName"})
+	public void loginAndCreateSocialPost(String twitterUser, String twitterPassword, String facebookUser, String facebookPassword, String fileName) {
+		new LoginPage().
+		doSuccessLogin().
+		openMessagingPage().
+		openSocialPostsPage().
 		createNewSocialPost().
 		fillBasics().
-		chooseMediaTypeAndUseLink(true, true);
-	}
-	
-	private void doLoginAndOpenDonationForms() {
-		addSocialPostPage = new LoginPage().doSuccessLogin().openMessagingPage().openSocialPostsPage();
+		addSocialMediaAccounts(twitterUser, twitterPassword, facebookUser, facebookPassword).
+		chooseMedia(true, true). //first booleans is twitter, second is facebook
+		choosePostTypeAndPost(fileName). //if no arguments are passed then link is used
+		removeSocialMediaAccounts(); 
 	}
 }
