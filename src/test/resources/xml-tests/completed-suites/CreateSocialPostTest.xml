@@ -4,6 +4,11 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<test verbose="2" name="Create Twitter Social Post" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<parameter name="twitterUser" value="autotesttwitter.ec647c99@mailosaur.in"></parameter>
+		<parameter name="twitterPassword" value="qwerty123~"></parameter>
+		<parameter name="facebookUser" value="autotestfb.ec647c99@mailosaur.in"></parameter>
+		<parameter name="facebookPassword" value="qwerty123~"></parameter>
+		<parameter name="fileName" value="9.jpg"></parameter>
 		<groups>
 			<run>
 				<include name="social" />
