@@ -23,6 +23,7 @@ public class SocialMediaAccountsPage extends ManagePage {
 		sleep(3);
 		switchToWindow(mainContext);
 		addAccount.click();
+		sleep(3);
 		selectFB.click();
 		switchToPopupWindow(mainContext);
 		new TwitterAndFBAuthorization().authorizeFacebook(facebookUsername, facebookPassword);

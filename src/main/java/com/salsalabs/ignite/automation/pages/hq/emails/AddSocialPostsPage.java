@@ -17,7 +17,7 @@ public class AddSocialPostsPage extends HomePage{
 	private Button addItButton = new ButtonImpl("//button[@autotest-id='btn_save_insert_external_link']", "Add it!");
 	private Button extPageTab = new ButtonImpl("//a[contains(text(), 'An External Page')]", "An External Page tab");
 	private Button chooseALinkButton = new ButtonImpl("//button[contains(text(), 'Choose a link')]", "Choose a link");
-	private Button publishButton = new ButtonImpl("//button[@id='btnPublish']", "Next: Schedule This Post");
+	private Button publishButton = new ButtonImpl("//button[@id='btnPublish']", "Next: Schedule This Post >>");
 	private Button publishMessage = new ButtonImpl("//button[@id='btnpublishMessage']", "Next: Send it!");
 	private Button btnCompose = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Post »");
 	private Button imgButton = new ButtonImpl("//a[contains(text(), 'Choose an Image')]", "Choose an Image");
@@ -31,7 +31,7 @@ public class AddSocialPostsPage extends HomePage{
 	private String postName = "SocialPost_" + RandomStringUtils.randomAlphanumeric(5);
 	private String postDescription = "Description_" + RandomStringUtils.randomAlphanumeric(10);
 	private String postContent = "PostContent_" + RandomStringUtils.randomAlphanumeric(20);
-	private Button uploadThisImage = new ButtonImpl("//button[contains(text(), 'Upload This Image')]", "Save");
+	private Button uploadThisImage = new ButtonImpl("//button[contains(text(), 'Upload This Image')]", "Upload this image");
 	
 	public AddSocialPostsPage createNewSocialPost() {
 		addSocialPost.click();
@@ -82,10 +82,10 @@ public class AddSocialPostsPage extends HomePage{
 		addImages.click();
 		fileField.uploadAssetsImage("images\\" + fileName, fileName);
 		uploadThisImage.click();
-		sleep(5);
+		sleep(12);
 		publishButton.click();
+		sleep(3);
 		publishMessage.click();
-		sleep(5);
 		return new AddSocialPostsPage();
 	}
 
@@ -99,8 +99,8 @@ public class AddSocialPostsPage extends HomePage{
 	}
 
 	public AddSocialPostsPage removeSocialMediaAccounts() {
+		sleep(7);
 		new ManagePage().openSettingsPage().switchToAddSocialPostsPage().removeTwitterAndFacebook();
 		return new AddSocialPostsPage();
 	}
-
 }
