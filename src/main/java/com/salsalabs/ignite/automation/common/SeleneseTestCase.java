@@ -97,7 +97,7 @@ public class SeleneseTestCase {
         return driverThread.get();
     }
 
-	public void startTestOnDriver(String bpath, String testURL) throws Exception {
+	public WebDriver startTestOnDriver(String bpath, String testURL) throws Exception {
 		final DriverType desiredDriver = determineEffectiveDriverType(bpath);
 
 		driverThread = new ThreadLocal<WebDriver>() {
@@ -109,6 +109,7 @@ public class SeleneseTestCase {
 			}
 		};
 		driver = getDriver();
+		return driver;
 	}
 	
 	protected void beforeTest() {

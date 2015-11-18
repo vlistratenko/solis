@@ -27,6 +27,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
 
 public class SquirrelEmailClient extends Browser implements EmailClient<Message> {
 
@@ -328,5 +329,12 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		}
 
 		return null;
+	}
+	
+
+	@Override
+	public void setDriver(WebDriver driver) {
+		// TODO Auto-generated method stub
+		Browser.driver = driver;
 	}
 }

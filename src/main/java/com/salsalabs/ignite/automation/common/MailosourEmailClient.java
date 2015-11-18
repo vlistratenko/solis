@@ -33,6 +33,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 
 import com.mailosaur.MailboxApi;
 import com.mailosaur.exception.MailosaurException;
@@ -344,4 +345,10 @@ public class MailosourEmailClient implements EmailClient<Email> {
 	
 	@Override
 	public void closeConnection() {	}
+
+	@Override
+	public void setDriver(WebDriver driver) {
+		// TODO Auto-generated method stub
+		
+	}
 }

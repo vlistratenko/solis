@@ -2,6 +2,8 @@ package com.salsalabs.ignite.automation.common;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 public interface EmailClient<T> {
 	
 	String getEmailBox(String name);
@@ -31,4 +33,6 @@ public interface EmailClient<T> {
 	String getRecipient(Object email);
 
 	void closeConnection();
+	
+	void setDriver(WebDriver driver);
 }
