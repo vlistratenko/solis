@@ -116,41 +116,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyURL();
 	}
 	
-	@Parameters({"segmentName",
-				 "addIncludeRule",
-				 "addExcludeRule",
-				 "criteriaForExcludeSupporterManually",
-				 "criteriaForAddSupporterManually"})
-	
-	@Test(retryAnalyzer=RetryAnalyzer.class, priority=70, groups = {"acceptanceTests.user", "qa"},  description = "516:59:Segment was NOT created.")
-	public void createCustomSegmentTest(String segmentName,
-							            String addIncludeRule,
-							            String addExcludeRule,
-							            String criteriaForExcludeSupporterManually,
-							            String criteriaForAddSupporterManually){
-		
-		segmentName = segmentName + CommonUtils.getUnicName();
-		///////
-		LoginPage loginPage = new LoginPage();
-		loginPage.
-		doSuccessLogin(CommonUtils.getProperty(PropertyName.ADMIN_EMAIL),  CommonUtils.getProperty(PropertyName.ADMIN_PASSWORD));
-		//////
-		HomePage homePage = new HomePage();
-		
-		homePage.
-		openAudiencePage().
-		openSegmentsPage().
-		openAddSegmentPage().
-		createNewCustomSegment(segmentName,
-						       addIncludeRule,
-						       addExcludeRule,
-						       criteriaForExcludeSupporterManually,
-						       criteriaForAddSupporterManually).
-		checkSegmentsExists(segmentName);
-		CommonUtils.setProperty("segmentName", segmentName);
-	
-	}
-	
+
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=80, groups = {"acceptanceTests.user", "dev"}, dependsOnMethods="creteSegmentTest",  description = "521:60:Alert for egment was NOT found.")
 	public void verifyMessagesInAlertsTest() {
 		loginAsNewSuperAdminTest();
@@ -309,27 +275,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		verifyLinksInSideBarTest();
 	}
 	
-	@Parameters({"segmentName",
-				"segmentTag",
-				"addIncludeRule",
-				"addExcludeRule",
-				"criteriaForExcludeSupporterManually",
-				"criteriaForAddSupporterManually"})
-	
-	@Test(retryAnalyzer=RetryAnalyzer.class, priority=18, groups = {"acceptanceTests.user"}, dependsOnMethods="loginAsNewCMTest")
-	public void creteSegmentTestAsCM(String segmentName,
-								     String segmentTag,
-								     String addIncludeRule,
-								     String addExcludeRule,
-								     String criteriaForExcludeSupporterManually,
-								     String criteriaForAddSupporterManually) {
-		createCustomSegmentTest(segmentName, 
-						     	addIncludeRule, 
-						     	addExcludeRule, 
-						     	criteriaForExcludeSupporterManually, 
-						     	criteriaForAddSupporterManually);
-	
-	}
+
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=180, groups = {"acceptanceTests.user"}, dependsOnMethods="creteSegmentTestAsCM")
 	public void verifyMessagesInAlertsTestAsCM() {

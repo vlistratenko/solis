@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.javadoc;
+/*package com.salsalabs.ignite.automation.javadoc;
 
 import com.sun.tools.doclets.standard.Standard;
 
@@ -10,3 +10,4 @@ public class Doclet extends Standard{
 			    }
 	 
 }
+*/
