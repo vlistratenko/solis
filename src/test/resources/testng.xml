@@ -20,5 +20,6 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSocialPostTest.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateSegmentTEst.xml" />
 	</suite-files>
 </suite>

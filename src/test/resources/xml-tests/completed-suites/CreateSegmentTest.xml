@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Create Supporter Manually" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	
+	 <parameter name="segmentName" value="SegmentName"></parameter>
+	<parameter name="addIncludeRule" value="Organize:Email Address:CONTAINS:@mailosaur.in:1"></parameter>
+	<parameter name="addExcludeRule" value="Organize:City:CONTAINS:City:2"></parameter>
+	<parameter name="criteriaForExcludeSupporterManually" value="admin"></parameter>
+	<parameter name="criteriaForAddSupporterManually" value="sup"></parameter>
+ 
+	 
+	<test verbose="2" name="Create Segment  FIREFOX" annotations="JDK">
+		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
+		<groups>
+		
+		
+			<run>
+				<include name="createSegment"/>
+			</run>
+		</groups> 
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.CreateSegmentTest" />
+		</classes>
+	</test>
+	
+</suite>
