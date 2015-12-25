@@ -6,5 +6,6 @@
 		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/SignUpPetitionDEMO.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/SignUpSupporterDEMO.xml" />
 		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/DonateSupporterDEMO.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/DEMO/SendTLDEMO.xml" />
 	</suite-files>
 </suite>

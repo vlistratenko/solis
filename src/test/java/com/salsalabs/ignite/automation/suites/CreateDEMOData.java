@@ -1,4 +1,5 @@
 package com.salsalabs.ignite.automation.suites;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -196,8 +197,8 @@ public class CreateDEMOData extends SeleneseTestCase {
 		waitForStatus("COMPLETED", 6);
 		
 		Integer openAmount = CommonUtils.getRandomValueNumericFromTo(1, Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
-		Integer clickAmount = CommonUtils.getRandomValueNumericFromTo(1, openAmount);
-		Integer unsubAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
+		Integer clickAmount = 5;//CommonUtils.getRandomValueNumericFromTo(1, openAmount);
+		Integer unsubAmount = 5;//CommonUtils.getRandomValueNumericFromTo(1, 10);
 		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
 		loginPage.clickLinkInEmail(emails, 1, "http://google.com", clickAmount);		
 		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);

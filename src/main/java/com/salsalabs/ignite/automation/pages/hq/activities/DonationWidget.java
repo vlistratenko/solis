@@ -9,6 +9,7 @@ import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
+import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class DonationWidget extends SubscribeWidget {
@@ -19,14 +20,14 @@ public class DonationWidget extends SubscribeWidget {
 	LabelImpl donationAmountLabelOneTime = new LabelImpl("//ul[@id='sli-oneTimeDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
 	LabelImpl donationAmountLabelRecuring = new LabelImpl("//ul[@id='sli-recurringDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
 	
-	TextBoxImpl donationAmountInput = new TextBoxImpl("//input[@id='donationAmtOtherAmt']", "Input for donation amount");
-	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@id='donationAmtROtherAmt']", "Input for recuring donation amount");
-	TextBoxImpl donationOneTimeAmountInput = new TextBoxImpl("//input[@id='donationAmtOtherAmt']", "Input for donation amount");
-	TextBox nameOnCardField = new TextBoxImpl("//input[@id='name_on_card']", "Name on Card", true);
-	TextBox cardNumberField = new TextBoxImpl("//input[@id='card_number']", "Card number", true);
-	TextBox cvvField = new TextBoxImpl("//input[@id='cvv']", "CVV", true);
-	TextBox expiryMonthField = new TextBoxImpl("//input[@id='expiry_month']", "Expiry Month", true);
-	TextBox expiryYearField = new TextBoxImpl("//input[@id='expiry_year']", "Expiry Year", true);
+	TextBoxImpl donationAmountInput = new TextBoxImpl("//input[@id='customOneTime']", "Input for donation amount");
+	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@id='customRecurringAmount']", "Input for recuring donation amount");
+	TextBoxImpl donationOneTimeAmountInput = new TextBoxImpl("//input[@name='customOneTime']", "Input for donation amount");
+	TextBox nameOnCardField = new TextBoxImpl("//input[@name='name_on_card']", "Name on Card", true);
+	TextBox cardNumberField = new TextBoxImpl("//input[@name='card_number']", "Card number", true);
+	TextBox cvvField = new TextBoxImpl("//input[@name='cvv']", "CVV", true);
+	SelectBoxImpl expiryMonthField = new SelectBoxImpl("//select[@name='expiry_month']", "Expiry Month");
+	SelectBoxImpl expiryYearField = new SelectBoxImpl("//select[@name='expiry_year']", "Expiry Year");
 	
 	Button donateButton = new ButtonImpl("//input[@value='Donate!']", "Donate", true);
 	
@@ -149,8 +150,8 @@ public class DonationWidget extends SubscribeWidget {
 		nameOnCardField.type(nameOnCard);
 		cardNumberField.type(cardNumber);
 		cvvField.type(cvv);
-		expiryMonthField.type(expiryMonth);
-		expiryYearField.type(expiryYear);
+		expiryMonthField.selectByLabel(expiryMonth);
+		expiryYearField.selectByLabel(expiryYear);
 		
 		fundraisingCheckBox.check(isFundraising);
 		newsletterCheckBox.check(isNewsletter);
