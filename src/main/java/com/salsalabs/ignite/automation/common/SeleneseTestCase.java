@@ -49,7 +49,7 @@ public class SeleneseTestCase {
 	public static int cTimeOut = 1000;
 	public static WebDriver driver;
 	public static Logger logger;
-	public static boolean isDebugMode = true;
+	public static boolean isDebugMode = false;
 	protected boolean createIssues = false;
 	public static ArrayList<String> bug = new ArrayList<String>();
 	public static EmailClient<?> emailClient;
