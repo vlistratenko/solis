@@ -49,7 +49,7 @@ public class SocialMediaAccountsPage extends ManagePage {
 		sleep(3);
 		driver.get(modifyUrl(urlFb));
 		sleep(15);
-		driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL,"w");;
+		driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL,"w");
 	}
 	
 	public void removeTwitterAndFacebook() {
