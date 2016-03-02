@@ -17,7 +17,7 @@ public class AddSocialPostsPage extends HomePage{
 	private Button addItButton = new ButtonImpl("//button[@autotest-id='btn_save_insert_external_link']", "Add it!");
 	private Button extPageTab = new ButtonImpl("//a[contains(text(), 'An External Page')]", "An External Page tab");
 	private Button chooseALinkButton = new ButtonImpl("//button[contains(text(), 'Choose a link')]", "Choose a link");
-	private Button publishButton = new ButtonImpl("//button[@id='btnPublish']", "Next: Schedule This Post >>");
+	private Button publishButton = new ButtonImpl("//span[contains(text(), 'Next: Schedule This Post')]", "Next: Schedule This Post >>");
 	private Button publishMessage = new ButtonImpl("//button[@id='btnpublishMessage']", "Next: Send it!");
 	private Button btnCompose = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Post »");
 	private Button imgButton = new ButtonImpl("//a[contains(text(), 'Choose an Image')]", "Choose an Image");
@@ -48,7 +48,7 @@ public class AddSocialPostsPage extends HomePage{
 	}
 	
 	public AddSocialPostsPage chooseMedia(boolean twitter, boolean facebook) {
-		sleep(3);
+		sleep(5);
 		if (twitter) selectTwitter.click();
 		if (facebook) selectFacebook.click();
 		return new AddSocialPostsPage();
@@ -82,7 +82,7 @@ public class AddSocialPostsPage extends HomePage{
 		addImages.click();
 		fileField.uploadAssetsImage("images\\" + fileName, fileName);
 		uploadThisImage.click();
-		sleep(12);
+		sleep(20);
 		publishButton.click();
 		sleep(3);
 		publishMessage.click();
