@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.other;
 
+import java.util.concurrent.TimeUnit;
+
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -19,12 +21,14 @@ public class TwitterAndFBAuthorization extends Browser {
 		twitterUsername.type(username);
 		twitterPassword.type(password);
 		loginTwitter.click();
+		sleep(120);
 	}
 	
 	public void authorizeFacebook(String username, String password) {
 		facebookUsername.type(username);
 		facebookPassword.type(password);
 		loginFacebook.click();
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 	
 }
