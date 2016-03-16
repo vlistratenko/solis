@@ -18,10 +18,10 @@ public class DonationWidget extends SubscribeWidget {
 	CheckBox recurringDonationCheckBox = new CheckBoxImpl("//div[contains(text(), 'Make this donation recurring')]/input", "Recurring Donation");
 	LabelImpl donationAmountLabel = new LabelImpl("//label[text()='$20.00']/preceding-sibling::input", "Donation amount");
 	LabelImpl donationAmountLabelOneTime = new LabelImpl("//ul[@id='sli-oneTimeDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
-	LabelImpl donationAmountLabelRecuring = new LabelImpl("//ul[@id='sli-recurringDonationAmounts']/descendant::label[text()='$20.00']/preceding-sibling::input", "Donation amount");
+	LabelImpl donationAmountLabelRecuring = new LabelImpl("//ul[@id='sli-recurringDonationAmounts']/descendant::label[text()='$20.00']", "Donation amount");
 	
-	TextBoxImpl donationAmountInput = new TextBoxImpl("//input[@id='customOneTime']", "Input for donation amount");
-	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@id='customRecurringAmount']", "Input for recuring donation amount");
+	TextBoxImpl donationAmountInput = new TextBoxImpl("//input[@name='customOneTime']", "Input for donation amount");
+	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@name='customRecurringAmount']", "Input for recuring donation amount");
 	TextBoxImpl donationOneTimeAmountInput = new TextBoxImpl("//input[@name='customOneTime']", "Input for donation amount");
 	TextBox nameOnCardField = new TextBoxImpl("//input[@name='name_on_card']", "Name on Card", true);
 	TextBox cardNumberField = new TextBoxImpl("//input[@name='card_number']", "Card number", true);
@@ -153,8 +153,8 @@ public class DonationWidget extends SubscribeWidget {
 		expiryMonthField.selectByLabel(expiryMonth);
 		expiryYearField.selectByLabel(expiryYear);
 		
-		fundraisingCheckBox.check(isFundraising);
-		newsletterCheckBox.check(isNewsletter);
+		//fundraisingCheckBox.check(isFundraising);
+		//newsletterCheckBox.check(isNewsletter);
 		
 		return this;
 	}

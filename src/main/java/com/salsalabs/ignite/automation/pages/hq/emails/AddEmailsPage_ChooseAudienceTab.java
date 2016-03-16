@@ -15,7 +15,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	
-	DropDown selectEmailType = new DropDownImpl("//span[.='Choose...']/ancestor::custom-select3", "//span[.='Choose...']/parent::a", "Email type");
+	
 	
 	Button EntireList = new ButtonImpl("//span[contains(@ng-class, 'sendToAllSelected')]", "Entire list");
 	Button SelectedSegmentsOrSupporters  = new ButtonImpl("//span[contains(@ng-class, '!blast.sendToAllSelected')]", " Selected segments of your list, or specific supporters");
@@ -71,11 +71,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		CommonUtils.setProperty(propertyName, new Integer(calculated + delta).toString());
 		return this;
 	}
-	
-	public AddEmailsPage_ChooseAudienceTab SelectEmailType() {
-		selectEmailType.selectByLabelJS("Newsletter");
-		return this;
-	}
+
 	
 	public AddEmailsPage_ComposeTab openComposePage() {
 		ComposeButton.click();
@@ -84,6 +80,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	
 	public AddEmailsPage_ChooseAudienceTab addSegment(String searchString) {
 
+		addSegmentField.scrollIntoView();
 		addSegmentField.click();
 		sleep(3);
 		LabelImpl segmentItem = new LabelImpl("//table/descendant::td[contains(text(), '" + searchString + "')]", "Segment " + searchString + " item");

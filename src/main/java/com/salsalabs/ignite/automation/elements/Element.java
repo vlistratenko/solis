@@ -57,4 +57,5 @@ public interface Element {
 	boolean waitForNotVisible(Integer timeOut);
 
 	void focus();
+
 }

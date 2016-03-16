@@ -184,7 +184,6 @@ public class CreateDEMOData extends SeleneseTestCase {
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
-		SelectEmailType().
 		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSegment(segmentName).
 		openComposePage().

@@ -190,6 +190,11 @@ public class Supporter {
 		this.twitter = twitter;
 	}
 
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	
 	public String getZipCode() {
 		return zipCode;
 	}

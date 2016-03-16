@@ -18,4 +18,9 @@ public class LabelImpl extends ElementImpl implements Label {
 		logger.info("Text is " + super.getText(path));
 		return super.getText(path);
 	}
+	
+	public void moveToElement() {
+		logger.info("Move to " + elementName);
+		super.moveToElement(path);
+	}
 }
