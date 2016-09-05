@@ -12,7 +12,8 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class PetitionWidget extends SubscribeWidget {
 	
-	ButtonImpl signButton = new ButtonImpl("//input[contains(@value,'Sign Petition')]", "Sign Petition", true);
+	ButtonImpl expandPetitionFormButton = new ButtonImpl("//input[@type='submit']", "Expand Petition Form", true);
+	ButtonImpl signButton = new ButtonImpl("//button[@type='submit']", "Sign Petition", true);
 	TextBox comment = new TextBoxImpl("//textarea[@id='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
 	CheckBox displayCommentCheckBox = new CheckBoxImpl("//input[@name='field-showComment']", "Display My Comment");
@@ -73,7 +74,7 @@ public class PetitionWidget extends SubscribeWidget {
 			String commentText,
 			boolean displaySign,
 			boolean displayComment) {
-		signButton.click();
+		expandPetitionFormButton.click();
 		personEmailField.type(sup.getFinalEMAIL());
 		personFNameField.type(sup.getFirstName());
 		personLNameField.type(sup.getLastName());
@@ -101,6 +102,7 @@ public class PetitionWidget extends SubscribeWidget {
 		if(!displayComment){
 			displayCommentCheckBox.changeState();
 		}
+		sleep(3);
 		signButton.click();
 		sleep(3);
 		return this;

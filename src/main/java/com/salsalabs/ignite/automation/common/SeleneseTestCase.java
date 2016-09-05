@@ -73,8 +73,8 @@ public class SeleneseTestCase {
 			bpath = System.getProperty("USED_BROWSER");
 		}
 		USED_ENVIRONMENT = new Environment(TestEnv, locationServer);
-		emailClient = USED_ENVIRONMENT.getSquirrelEmailClient();
-		mailosaur = USED_ENVIRONMENT.getMailosourEmailClient();
+		emailClient = USED_ENVIRONMENT.getSquirrelEmailClient();//getMailosourEmailClient();//
+		mailosaur = USED_ENVIRONMENT.getSquirrelEmailClient();//getMailosourEmailClient();
 		setAdminEmail();
 		emailClient.deleteAllEmails();
 		

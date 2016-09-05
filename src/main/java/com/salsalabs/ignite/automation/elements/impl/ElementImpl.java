@@ -375,8 +375,9 @@ abstract class ElementImpl implements Element {
 	}
 
 	protected void type(String locator, String value) {
-		clearTextField(locator);
+		
 		if (value != "") {
+			clearTextField(locator);
 			waitObject(locator, cTimeOut * 30);
 			try {
 				findElementByXpath(locator).sendKeys(value);

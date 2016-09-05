@@ -48,7 +48,7 @@ public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 	@Override
 	public void selectByLabel(String value) {
 		logger.info("Select value by label " + value + " in the " + elementName);
-		if (value.length()>1) {
+		if (value.length()>0) {
 			super.select(path, value);	
 		}
 		

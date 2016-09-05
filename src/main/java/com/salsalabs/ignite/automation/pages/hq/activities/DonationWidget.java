@@ -29,9 +29,10 @@ public class DonationWidget extends SubscribeWidget {
 	SelectBoxImpl expiryMonthField = new SelectBoxImpl("//select[@name='expiry_month']", "Expiry Month");
 	SelectBoxImpl expiryYearField = new SelectBoxImpl("//select[@name='expiry_year']", "Expiry Year");
 	
-	Button donateButton = new ButtonImpl("//input[@value='Donate!']", "Donate", true);
+	Button donateButton = new ButtonImpl("//button[@type='submit']", "Donate", true);
 	
 	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
+	Boolean isEvent = false;
 	
 	public DonationWidget() {
 		super();
@@ -93,6 +94,8 @@ public class DonationWidget extends SubscribeWidget {
 		return this;
 	}
 	
+	
+	
 	public DonationWidget fillDonationForm(String personEmail,
 			String personFName,
 			String personLName,
@@ -117,7 +120,11 @@ public class DonationWidget extends SubscribeWidget {
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);
 		personLNameField.type(personLName);
+		if (personAddressLine1.length()<1) {
+			personAddressLine1 = "TestV address";
+		}
 		personAddressLine1Field.type(personAddressLine1);
+		
 		personAddressLine2Field.type(personAddressLine2);
 		if (personCity.length()<1) {
 			personCity = "New York";
@@ -129,8 +136,9 @@ public class DonationWidget extends SubscribeWidget {
 		}else{
 			personStatesSelectBox.selectByValue(state);
 		}
-		
-		recurringDonationCheckBox.check(recurringDonation);
+		if (!isEvent) {
+			recurringDonationCheckBox.check(recurringDonation);
+		}		
 		
 		if (recurringDonation) {
 			donationAmountLabel.changePath("", donationAmountLabelRecuring.getPath());

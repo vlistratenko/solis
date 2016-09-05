@@ -17,7 +17,7 @@ public class TLWidget extends SubscribeWidget{
 	TextBox zipField = new TextBoxImpl("//input[@name='tl-zipauth-zip']", "Zip", true);
 	TextBox homePhoneField = new TextBoxImpl("//input[@name='PersonContact@HomePhone@Value']", "Home phone", true);
 	ButtonImpl findMyLeadersButton = new ButtonImpl("//input[@type='submit']", "Find My Leaders");
-	ButtonImpl sendButton = new ButtonImpl("//input[@value='Send!']", "Find My Leaders");
+	ButtonImpl sendButton = new ButtonImpl("//button[@type='submit']", "Find My Leaders");
 	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
 	SelectBoxImpl personTitleSelectBox = new SelectBoxImpl("//select[@name='PersonCensus@TITLE']", "Title");
 	
@@ -47,7 +47,7 @@ public class TLWidget extends SubscribeWidget{
 		personFNameField.type(personFName);
 		personLNameField.type(personLName);
 		homePhoneField.type("123-123-1234");
-
+		sleep(3);
 		sendButton.click();
 		return this;
 		

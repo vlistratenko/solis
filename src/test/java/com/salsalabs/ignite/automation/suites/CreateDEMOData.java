@@ -1,5 +1,5 @@
 package com.salsalabs.ignite.automation.suites;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -18,6 +18,7 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 
 public class CreateDEMOData extends SeleneseTestCase {
 	
@@ -203,7 +204,98 @@ public class CreateDEMOData extends SeleneseTestCase {
 		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
 	}
 	
-
+	@Parameters({"amount", "formURL", "login", "host"})
+	@Test(groups = {"submitEventRandom"}, retryAnalyzer = RetryAnalyzer.class)
+	public void testSubmitEventBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+		
+		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
+		logger.info("Amount of donations " + amountOfDonations);
+		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
+		loginPage = new LoginPage(true);
+		for (int j = 0; j < amountOfDonations; j++) {
+			Boolean isExisted = CommonUtils.getRandomBoolean();
+			Boolean isWithTickets = CommonUtils.getRandomBoolean();
+			logger.info("Is event with registration - " + isWithTickets);
+			if (!isExisted) {
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "UI,SUBSCRIPTION,PETITION,TARGETED_LETTER," );
+				String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
+						lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
+				EventWidget eventWidgetPage = loginPage.
+				openEventWidgetByLink(formURL);
+				
+				if (!isWithTickets) {
+					eventWidgetPage.
+					openEventRegistrationPage().
+					fillEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							fname,
+							lname);					
+				}else{
+					eventWidgetPage.openDonationPage();
+				}
+				
+				eventWidgetPage.
+				fillEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+					fname,
+					lname,
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getCity(),
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getZipCode(),
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getState(),
+					CommonUtils.getRandomNumericValueFixedLength(2),
+					fname + " " + lname,
+					"4111111111111111",
+					"180",
+					"01",
+					"2018",
+					true,
+					true,
+					true).
+				clickDonationButton().
+				verifyEventSubscrIsSuccesses().
+				backToLoginPage();
+			}else{
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=DONATION" );
+				int ind = CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1);
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
+				
+				
+				EventWidget eventWidgetPage = loginPage.
+						openEventWidgetByLink(formURL);
+				if (!isWithTickets) {
+					eventWidgetPage.
+					openEventRegistrationPage().
+					fillEventRegistrationForm(sup.get(ind).getFinalEMAIL(),
+							sup.get(ind).getFirstName(),
+							sup.get(ind).getLastName());					
+				}else{
+					eventWidgetPage.openDonationPage();
+				}
+				
+				eventWidgetPage.
+				fillEventDonationForm(sup.get(ind).getFinalEMAIL(),
+						sup.get(ind).getFirstName(),
+						sup.get(ind).getLastName(),
+						sup.get(ind).addressLine1,
+						sup.get(ind).getCity(),
+						sup.get(ind).getZipCode(),
+						sup.get(ind).getState(),
+						CommonUtils.getRandomNumericValueFixedLength(2),
+						sup.get(ind).getFirstName() + " " + sup.get(ind).getLastName(),
+						"4111111111111111",
+						"180",
+						"01",
+						"2018",
+						true,
+						true,
+						true).
+				clickDonationButton().
+				verifyEventSubscrIsSuccesses().
+				backToLoginPage();
+			}
+		}
+	}
 	
 	
 	

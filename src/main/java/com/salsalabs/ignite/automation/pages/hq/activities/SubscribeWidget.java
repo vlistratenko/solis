@@ -6,7 +6,6 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.SelectBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
@@ -27,7 +26,7 @@ public class SubscribeWidget extends Browser{
 	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
 	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
 	
-	Button subscribeButton = new ButtonImpl("//input[@value='Subscribe!']", "Subscribe", true);
+	Button subscribeButton = new ButtonImpl("//button[.='Subscribe!']", "Subscribe", true);
 	
 	Label subscriptionIsSuccessMessage = new LabelImpl("//h1[contains(.,'Thank You!')]", "Subscription is success");
 
@@ -103,7 +102,7 @@ public class SubscribeWidget extends Browser{
 		}else{
 			personStatesSelectBox.selectByValue(state);
 		}
-		
+		sleep(3);
 		subscribeButton.click();
 		return this;
 		
