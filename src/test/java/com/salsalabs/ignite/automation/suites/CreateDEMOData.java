@@ -128,6 +128,10 @@ public class CreateDEMOData extends SeleneseTestCase {
 		for (int j = 0; j < amountOfSigns; j++) {
 			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 			Boolean isExisted = CommonUtils.getRandomBoolean();
+			String comment = "Test comment";
+			if (CommonUtils.getRandomBoolean()) {
+				comment = "";
+			}
 			if (isExisted) {
 				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "&source=IMPORT,UI,SUBSCRIBE,FUNDRAISE,TARGETED_LETTER,TICKETED_EVENT,API," ).get(j);
 			}else{
@@ -135,7 +139,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			}				
 			loginPage.
 			openPetitionWidgetByLink(formURL).
-			signPetitionWithOutChecking(tempSupporter, "Test comment", true, true).
+			signPetitionWithOutChecking(tempSupporter, comment, true, true).
 			verifySignIsSuccesses().
 			backToLoginPage();
 			
