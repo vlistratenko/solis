@@ -59,7 +59,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			Boolean isRequring = CommonUtils.getRandomBoolean();
 			if (!isExisted) {
-				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "UI,SUBSCRIPTION,PETITION,TARGETED_LETTER," );
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=IMPORT,UI,SUBSCRIBE,PETITION,TARGETED_LETTER,API," );
 				String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
 						lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
@@ -87,7 +87,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				verifyDonationIsSuccesses().
 				backToLoginPage();
 			}else{
-				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=DONATION" );
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=FUNDRAISE,TICKETED_EVENT," );
 				int ind = CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1);
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				loginPage.
@@ -129,7 +129,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			if (isExisted) {
-				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "UI,SUBSCRIPTION,TARGETED_LETTER,DONATION,IMPORT" ).get(j);
+				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "&source=IMPORT,UI,SUBSCRIBE,FUNDRAISE,TARGETED_LETTER,TICKETED_EVENT,API," ).get(j);
 			}else{
 				tempSupporter = Supporter.getSupporterWithRandomDataFromFile();
 			}				
@@ -154,7 +154,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			if (isExisted) {
-				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "UI,SUBSCRIPTION,PETITION,DONATION,IMPORT" ).get(j);
+				tempSupporter = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amount, "&source=IMPORT,UI,SUBSCRIBE,FUNDRAISE,PETITION,TICKETED_EVENT,API," ).get(j);
 			}else{
 				tempSupporter = Supporter.getSupporterWithRandomDataFromFile();
 			}				
@@ -218,7 +218,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			Boolean isWithTickets = CommonUtils.getRandomBoolean();
 			logger.info("Is event with registration - " + isWithTickets);
 			if (!isExisted) {
-				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "UI,SUBSCRIPTION,PETITION,TARGETED_LETTER," );
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=IMPORT,UI,SUBSCRIBE,PETITION,TARGETED_LETTER,API," );
 				String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
 						lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
@@ -256,7 +256,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				verifyEventSubscrIsSuccesses().
 				backToLoginPage();
 			}else{
-				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=DONATION" );
+				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=FUNDRAISE,TICKETED_EVENT," );
 				int ind = CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1);
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				
