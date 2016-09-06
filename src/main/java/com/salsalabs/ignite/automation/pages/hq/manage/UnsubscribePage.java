@@ -4,22 +4,26 @@ import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class UnsubscribePage extends Browser{
 	
 	TextBox emailField = new TextBoxImpl("//input[@name='PersonContact@Email@Value']", "Email");
-	Button unsubscribeButton = new ButtonImpl("//input[@value='Unsubscribe']", "Unsubscribe");
+	Button unsubscribeButton = new ButtonImpl("//button[@type='submit']", "Manage Subscription");
 	Label unsubscribeIsSuccesLabel = new LabelImpl("//div[@class='result']", "Unsubscribe is success message");
 	Label introductoryTextLabel = new LabelImpl("//form/p[2]", "Introductory text");
+	CheckBox unsubscrCheckBox = new CheckBoxImpl("//div[contains(@class, 'contact-types')]/descendant::input", "Unsabscribe");
 	
 	public UnsubscribePage fillUnsubscribeForm(String personEmail) 
 	{
 		emailField.type(personEmail);
+		unsubscrCheckBox.click();
 		sleep(2);
 		return this;
 	}

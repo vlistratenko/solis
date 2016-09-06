@@ -91,6 +91,7 @@ public abstract class Browser {
 	protected void refresh() {
 		logger.info("Try to refresh the page");
 		driver.navigate().refresh();
+		logger.info("Page is refreshed");
 	}
 
 	protected void close() {

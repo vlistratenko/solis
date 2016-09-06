@@ -160,7 +160,7 @@ public class MailosourEmailClient implements EmailClient<Email> {
 	@Override
 	public String getUnsubscribeLink(String emailSubj) {
 		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
-		return getLinkByText(e, "unsubscribe");
+		return getLinkByText(e, "Manage Subscription");
 	}
 
 	@Override

@@ -223,7 +223,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 	@Override
 	public String getUnsubscribeLink(String emailSubj) {
 		Message e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
-		return getLinkByText(e, "Unsubscribe");
+		return getLinkByText(e, "Manage Subscription");
 	}
 
 	@Override
