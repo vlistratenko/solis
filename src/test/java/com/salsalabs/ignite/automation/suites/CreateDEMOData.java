@@ -176,7 +176,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "email.sendEmailsEmailsAndClickIn" }, description = "")
 	public void sendEmailBlastTest(String emailFrom, String login, String segmentName) {
 		
-		String emailBlastName = "We need your help!!! Blast from " + CommonUtils.getTodayDate();
+		String emailBlastName = "We need your help!!! Blast from " + CommonUtils.getTodayDate() + " " + CommonUtils.getRandomNumericValueFixedLength(5);
 		String emailSubject = emailBlastName;
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
