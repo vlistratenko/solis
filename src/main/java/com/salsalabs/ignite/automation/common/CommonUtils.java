@@ -31,7 +31,7 @@ public class CommonUtils {
 	public static Map<String, String> stanParam = new HashMap<String, String>();
 	static Properties props = new Properties();
 	static Properties issuesList = new Properties();
-	static String propFileName = "src/test/resources/properties.prop";
+	static String propFileName = "src/main/resources/properties.prop";
 	private static final Logger logger = SeleneseTestCase.logger;
 
 	// Check, if one of checks is fail, then fail test

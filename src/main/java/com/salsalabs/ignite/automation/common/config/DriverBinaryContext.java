@@ -3,7 +3,7 @@ package com.salsalabs.ignite.automation.common.config;
 
 class DriverBinaryContext {
 
-    private static final String ROOT_FOLDER = System.getProperty("binaryRootFolder",System.getProperty("user.dir")+"/src/test/resources/selenium_standalone_binaries");
+    private static final String ROOT_FOLDER = System.getProperty("binaryRootFolder",System.getProperty("user.dir")+"/src/main/resources/selenium_standalone_binaries");
     private final DriverType driverType;
     private final SystemArchitecture systemArchitecture;
     private final OperatingSystem operatingSystem;

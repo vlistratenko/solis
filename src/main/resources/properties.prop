@@ -1,15 +1,15 @@
 #AUTOMATICALLY GENERATED
-#Mon Sep 05 06:11:53 EEST 2016
+#Tue Nov 08 22:14:41 EET 2016
 amountOfSupporters=1
 current.Password=\!QAZ2wsx
 assets.username=neworg1.03eed056@mailosaur.in
 segmentName=SegmentName20140807142703
 oneTimeWidgetName=AutoWidgetName20150210122352
 planName=BuildAcceptanceTest
-currentWindowHandle={93c5b790-883c-40ac-91ec-c98b5b9b8eb5}
+currentWindowHandle=CDwindow-40268ed7-7558-4a9e-bb98-daa735d0fe72
 imageName=Image
 emailSplitBlastName=TestV20160120160346
-emailBlastName=We need your help\!\!\! Blast from 09.05.2016
+emailBlastName=We need your help\!\!\! Blast from 11.08.2016 77827
 amountOfPablishedEmails=4
 ldap.login=solisqa
 CM.lastName=CMLastNameAuto
@@ -21,7 +21,7 @@ current.lastName=CMLastNameAuto
 emailSplitsSubject=TestVAuto20160120160346
 Admin.orgName=automated_testing1
 ldap.password=Salsa123\!
-emailSubject=We need your help\!\!\! Blast from 09.05.2016
+emailSubject=We need your help\!\!\! Blast from 11.08.2016 77827
 maxRetryCount=2
 >>>>>>>=refs/heads/master
 CM.Login=cm20150617172642@example.ignite.net
@@ -34,7 +34,7 @@ assets.imageName=image2.jpg
 donationWidgetLink=https\://autotestv2org20150305140225.test.igniteaction.net/autowidgetname20150305140457
 petitionWidgetLink=https\://automatedtesting1.dev.igniteaction.net/petitionname_ov83u
 subscribedSupporter=emailforsub20150210125100.4441b2bf@mailosaur.in
-amountOfPublishedEmails=274
+amountOfPublishedEmails=560
 Environment=UAT
 subscribeWidgetLink=https\://autotestv2org20150210123444.test.igniteaction.net/autowidgetname20150210124740
 ImportName=Import_20150618122626

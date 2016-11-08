@@ -1,0 +1,11 @@
+<suite name="Tests" parallel="false" thread-count="2">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<suite-files>
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/EmailBlastSendTestAndClicksDEMO.xml" />
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SignUpPetitionDEMO.xml" />
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SignUpSupporterDEMO.xml" />
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/DonateSupporterDEMO.xml" />
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SendTLDEMO.xml" />
+	</suite-files>
+</suite>
