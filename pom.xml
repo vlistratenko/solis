@@ -7,7 +7,7 @@
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <threads>1</threads>
-        <standalone.binary.root.folder>${project.basedir}/src/test/resources/selenium_standalone_binaries</standalone.binary.root.folder>
+        <standalone.binary.root.folder>${project.basedir}/src/main/resources/selenium_standalone_binaries</standalone.binary.root.folder>
         <remote>false</remote>
         <seleniumGridURL/>
         <platform/>
@@ -37,7 +37,7 @@
 						<USED_BROWSER>${browser}</USED_BROWSER>
 					</systemPropertyVariables>
 					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+						<suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
@@ -203,8 +203,8 @@
                         <version>1.0.5</version>
                         <configuration>
                             <rootStandaloneServerDirectory>${standalone.binary.root.folder}</rootStandaloneServerDirectory>
-                            <downloadedZipFileDirectory>${project.basedir}/src/test/resources/selenium_standalone_zips</downloadedZipFileDirectory>
-                            <customRepositoryMap>${project.basedir}/src/test/resources/RepositoryMap.xml</customRepositoryMap>
+                            <downloadedZipFileDirectory>${project.basedir}/src/main/resources/selenium_standalone_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>${project.basedir}/src/main/resources/RepositoryMap.xml</customRepositoryMap>
                         </configuration>
                         <executions>
                             <execution>
