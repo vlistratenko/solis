@@ -14,10 +14,10 @@ import static com.salsalabs.ignite.automation.common.config.SystemArchitecture.A
 
 public class DriverBinaryMapper {
     private static final Map<DriverBinaryContext, String> binaryLocation = new HashMap<DriverBinaryContext, String>() {{
-        put(binaryFor(CHROME, WINDOWS, ARCHITECTURE_64_BIT), binaryPath("/windows/googlechrome/64bit/2.14/chromedriver.exe"));
+        put(binaryFor(CHROME, WINDOWS, ARCHITECTURE_64_BIT), binaryPath("/windows/googlechrome/64bit/chromedriver.exe"));
         put(binaryFor(CHROME, MAC, ARCHITECTURE_64_BIT), binaryPath("/osx/googlechrome/64bit/2.14/chromedriver"));
         put(binaryFor(CHROME, LINUX, ARCHITECTURE_64_BIT), binaryPath("/linux/googlechrome/64bit/2.14/chromedriver"));
-        put(binaryFor(CHROME, WINDOWS, ARCHITECTURE_32_BIT), binaryPath("/windows/googlechrome/32bit/2.14/chromedriver.exe"));
+        put(binaryFor(CHROME, WINDOWS, ARCHITECTURE_32_BIT), binaryPath("/windows/googlechrome/32bit/chromedriver.exe"));
         put(binaryFor(CHROME, MAC, ARCHITECTURE_32_BIT), binaryPath("/osx/googlechrome/32bit/2.14/chromedriver"));
         put(binaryFor(CHROME, LINUX, ARCHITECTURE_32_BIT), binaryPath("/linux/googlechrome/32bit/2.14/chromedriver"));
         put(binaryFor(DriverType.PHANTOMJS, WINDOWS, ARCHITECTURE_64_BIT), binaryPath("/windows/phantomjs/64bit/2.0.0/phantomjs.exe"));

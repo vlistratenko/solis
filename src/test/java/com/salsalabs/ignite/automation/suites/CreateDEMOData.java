@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.Environment;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
@@ -50,7 +51,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	@Test(groups = {"makeDonationRandom"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testDonateBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
 		
-		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
+		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1,amount);	
 		logger.info("Amount of donations " + amountOfDonations);
 		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();
 		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
@@ -178,6 +179,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 		
 		String emailBlastName = "We need your help!!! Blast from " + CommonUtils.getTodayDate() + " " + CommonUtils.getRandomNumericValueFixedLength(5);
 		String emailSubject = emailBlastName;
+		String host = new Environment("UAT", "LOCAL").getBaseTestUrl().replace("https://", "");
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
 		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
@@ -193,7 +195,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 		addSegment(segmentName).
 		openComposePage().
 		selectLayout(1).
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html").
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().
@@ -203,9 +205,12 @@ public class CreateDEMOData extends SeleneseTestCase {
 		Integer openAmount = CommonUtils.getRandomValueNumericFromTo(1, Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
 		Integer clickAmount = CommonUtils.getRandomValueNumericFromTo(1, openAmount);
 		Integer unsubAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
+		Integer conversionAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
 		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
-		loginPage.clickLinkInEmail(emails, 1, "http://google.com", clickAmount);		
+		loginPage.clickLinkInEmail(emails, 1, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", clickAmount);		
 		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
+		
+		loginPage.clickLinkInEmailAndFillDonationForm(emails, emailSubject, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", conversionAmount, login, host);
 	}
 	
 	@Parameters({"amount", "formURL", "login", "host"})

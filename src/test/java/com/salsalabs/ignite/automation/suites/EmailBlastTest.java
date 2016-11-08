@@ -76,7 +76,7 @@ public class EmailBlastTest extends SeleneseTestCase{
 		addSupporters("unex", hardBounceAmount, propertyPublished).
 		openComposePage().
 		selectLayout(1).
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount).
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount, "google.com").
 		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount).
 		openDashboard().
 		openMessagingPage().

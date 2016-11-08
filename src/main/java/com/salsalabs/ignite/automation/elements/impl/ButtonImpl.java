@@ -1,5 +1,9 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 
@@ -40,5 +44,9 @@ public class ButtonImpl extends ElementImpl implements Button {
 	public String getLabel() {
 		logger.info("Label for " + elementName + " was returned.");
 		return super.getText(path);
+	}
+	
+	public List<WebElement> getAllButtons() {
+		return super.findElementsByXpath(path);
 	}
 }

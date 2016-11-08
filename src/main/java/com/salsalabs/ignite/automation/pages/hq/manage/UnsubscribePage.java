@@ -45,7 +45,7 @@ public class UnsubscribePage extends Browser{
 			}
 		}
 		verifier.verifyEquals(unsubscribeIsSuccesLabel.isDisplayed(), true, "Message that unsubscibe success, is not displayed");
-		sleep(30);
+		sleep(10);
 		return this;
 	}
 	

@@ -302,6 +302,9 @@ public class CommonUtils {
 	public static Integer getRandomValueNumericFromTo(Integer intMinValue, Integer intMaxValue) {
 		Random randomGenerator = new Random();
 		Integer val = 0;
+		if (intMaxValue <= intMinValue) {
+			return intMinValue;
+		}
 		while (val <= intMinValue) {
 			val = randomGenerator.nextInt(intMaxValue);
 		}

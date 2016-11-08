@@ -77,4 +77,14 @@ public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 		logger.info("Get list of select options from the " + elementName);
 		return super.getSelectOptions(path);
 	}
+	
+	public String[] getListOfOptions() {
+		List<WebElement> elem = getSelectOptions(path);
+		String[] items = new String[elem.size()];
+		for (int i = 0; i < items.length; i++) {
+			items[i]=elem.get(i).getText();
+			
+		}
+		return items;
+	}
 }

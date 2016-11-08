@@ -27,7 +27,10 @@ public enum DriverType implements DriverSetup {
 
     FIREFOX {
         public DesiredCapabilities getDesiredCapabilities() {
-            return DesiredCapabilities.firefox();
+        	System.setProperty("webdriver.gecko.driver", DriverBinaryContext.binaryPath("/windows/marionette/64bit/geckodriver.exe"));
+        	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);;
+        	return capabilities;
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {

@@ -37,12 +37,12 @@ public class HomePage extends Browser{
 	Label orglabel = new LabelImpl(userlabel.getPath() + "/span[text()='" + CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + "']", "Drop with organization name");
 	
 	//left navigation bar
-	Button audienceTab = new ButtonImpl("//a[@href='/#/audience']", "Audience tab");
-	Button activitiesTab = new ButtonImpl("//a[@href='/#/activities']", "Activities tab");
-	Button messagingTab = new ButtonImpl("//a[@href='/#/messaging']", "Messaging tab");
-	Button donationTab = new ButtonImpl("//a[@href='/#/insight/donations']", "Donations tab");
-	Button dashboardTab = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard tab");
-	Button assetsTab = new ButtonImpl ("//a[@href='/#/assets']", "Assets tab");
+	Button audienceTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/audience/supporters']", "Audience tab");
+	Button activitiesTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/activities']", "Activities tab");
+	Button messagingTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/messaging']", "Messaging tab");
+	Button donationTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/insight/donations']", "Donations tab");
+	Button dashboardTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/dashboard']", "Dashboard tab");
+	Button assetsTab = new ButtonImpl ("//nav[@id='sideNav']/descendant::a[@href='/#/assets']", "Assets tab");
 	
 	//Top navigation bar
 	Button settingsTab = new ButtonImpl("//div[contains(@class, 'hide-for-small')]/descendant::a[@title='Manage']", "Manage page");

@@ -61,7 +61,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 			Element img = itr.next();
 			String primaryHandle = this.getWindowHandle();
 			String src = img.attr("src");
-			if (!src.contains("logo")) {
+			if (!src.contains("logo") && !src.equalsIgnoreCase("")) {
 				this.openInNewWindow(src);
 				this.closeWindow();
 				this.switchToWindow(primaryHandle);
@@ -178,8 +178,12 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		Folder inbox = getFolder(Folder.READ_WRITE);
 		try {
 			Message[] messages = inbox.getMessages();
+			logger.info("Deleting emails. Total emails " + messages.length);
+			int i = messages.length;
 			for (Message msg : messages) {
 				msg.setFlag(Flags.Flag.DELETED, true);
+				i--;
+				logger.info("Emails left " + i);				
 			}
 		} catch (Exception ex) {
 			logger.error("", ex);
@@ -337,4 +341,6 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		// TODO Auto-generated method stub
 		Browser.driver = driver;
 	}
+
+
 }

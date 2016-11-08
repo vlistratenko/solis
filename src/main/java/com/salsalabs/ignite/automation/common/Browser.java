@@ -1,11 +1,23 @@
 package com.salsalabs.ignite.automation.common;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.mail.Message;
+
 import org.apache.logging.log4j.Logger;
+import org.json.JSONException;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -19,6 +31,7 @@ import org.testng.Assert;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.suites.CreateDEMOData;
 
 
 public abstract class Browser {
@@ -227,7 +240,7 @@ public abstract class Browser {
 			amount = emails.size();
 		for (int i = 0; i < amount; i++) {
 			client.openEmail(emails.get(i));
-			logger.info("Email for " + client.getRecipient(emails.get(i)) + " was opened");
+			logger.info("Email for " + client.getRecipient(emails.get(i)) + " was opened." + i + " of " + amount);
 		}
 		return emails;
 	}
@@ -266,6 +279,22 @@ public abstract class Browser {
 		}
 	}
 	
+	public void openDonationFormAndSubmitItInEmail(Map<String, List<?>> emailMap, Integer amountOfSplits, String linkText, Integer amountOfEmails) {
+		if (amountOfEmails == 0) {
+			return;
+		}
+		String subjBase = CommonUtils.getProperty(PropertyName.EMAIL_SPLIT_SUBJECT);
+		for (int i = 1; i <= amountOfSplits; i++) {
+			String subj;
+			if (amountOfSplits > 1) {
+				subj = subjBase + " Split " + i;
+			} else {
+				subj = CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT);
+			}
+			clickLinkInEmail(emailMap, subj, linkText, amountOfEmails / amountOfSplits);
+		}
+	}
+	
 	public void clickLinkInEmail(Integer amountOfSplits, String linkText, Integer amountOfEmails){
 		clickLinkInEmail(null, amountOfSplits, linkText, amountOfEmails);
 	}
@@ -286,6 +315,31 @@ public abstract class Browser {
 			}
 		}
 	}
+	
+	public void clickLinkInEmailAndFillDonationForm(Map<String, List<?>> emailMap, String subj, String linkText, Integer amountOfEmails, String login, String host) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
+		if (emailMap == null) {
+			emails = client.getEmailsBySubject(subj);
+		} else {
+			emails = emailMap.get(subj);
+		}
+		if (emails.size() < amountOfEmails)
+			amountOfEmails = emails.size();
+		for (int i = 0; i < amountOfEmails; i++) {
+			String mainWindowhandle = getWindowHandle();
+			String link = client.getLinkByText(emails.get(i), linkText);
+			try {
+				new CreateDEMOData().testDonateBySupporter(1, link, login, host);
+			} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | JSONException
+					| URISyntaxException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.switchToWindow(mainWindowhandle);
+		}
+	}
+	
 	
 	public void unsubscribeByEmail(Map<String, List<?>> emailMap, Integer amountOfSplits, Integer amountOfEmails) {
 		if (amountOfEmails == 0) {

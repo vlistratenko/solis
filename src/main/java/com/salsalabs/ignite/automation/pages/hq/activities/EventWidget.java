@@ -17,8 +17,9 @@ public class EventWidget extends DonationWidget {
 	Label eventSubsrIsSccessMessage = new LabelImpl("//h3[.='Thank You!']", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
+	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
-	
+	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
 	public EventWidget() {
 		super();
 	}
@@ -52,12 +53,12 @@ public class EventWidget extends DonationWidget {
 	public EventWidget fillEventRegistrationForm(String personEmail, String personFName, String personLName){
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		ticketsQtySelectBox.selectByLabel("1");
-		registrationButton.click();
+		nextButton.click();
 		sleep(3);
 		eventPersonEmailField.type(personEmail);
 		eventPersonFNameField.type(personFName);
 		eventPersonLNameField.type(personLName);
-		donateButton.click();
+		checkoutButton.click();
 		sleep(3);
 		switchDefaultContent();
 		return this;

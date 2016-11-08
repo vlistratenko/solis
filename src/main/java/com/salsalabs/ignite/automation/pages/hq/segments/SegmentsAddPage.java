@@ -1,14 +1,20 @@
 package com.salsalabs.ignite.automation.pages.hq.segments;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Panel;
+import com.salsalabs.ignite.automation.elements.SelectBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
+import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class SegmentsAddPage extends SegmentsPage{
@@ -25,6 +31,14 @@ public class SegmentsAddPage extends SegmentsPage{
 	Button searchAddSupporterManuallyButton = new ButtonImpl("//h2[contains(text(),'Add these')]/ancestor::div[@class='large-6 columns']//div[@class='audience-search ng-isolate-scope']//button", "Add manually search button");
 	TextBox serachExcludeSupporterManuallyField = new TextBoxImpl("//h2[contains(text(),'add')]/following::div//input", "Manually add supporter search field");
 	Button searchExcludeSupporterManuallyButton = new ButtonImpl("//h2[contains(text(),'add')]/ancestor::div[@class='large-6 columns']//div[@class='audience-search ng-isolate-scope']//button", "Add manually search button");
+	
+	ButtonImpl expendExtivityTypeDropDown = new ButtonImpl("//multi-select[1]/descendant::span", "Expand activity types");
+	ButtonImpl activityItems = new ButtonImpl("//ul[@class='dropdown-list']/li/a", "Activity items");
+	ButtonImpl expandActivityDropDown = new ButtonImpl("//multi-select[2]/descendant::span", "Activities");
+	SelectBox selectOperation = new SelectBoxImpl("//select[@name='operation']", "Select operation");
+	SelectBox selectDateOperation = new SelectBoxImpl("//select[@name='dateOperation']", "Select operation");
+	SelectBox selectOption = new SelectBoxImpl("//select[@name='option']", "Select operation");
+	SelectBox valueSingleOption = new SelectBoxImpl("//select[@name='valueSingleOption']", "Single Option operation");
 	
 	public SegmentsPage createNewCustomSegment(String segmentName,
 			                                   String addIncludeRule,
@@ -153,6 +167,54 @@ public class SegmentsAddPage extends SegmentsPage{
 		sleep(4);
 	}
 	
+	public String[] getListOfAvailableActivityTypeItems() {
+		sleep(5);
+		expendExtivityTypeDropDown.click();
+		sleep(3);
+		List<WebElement> items = ((ButtonImpl) activityItems).getAllButtons();
+		String[] itemsLabels = new String[items.size()];
+		for (int i = 0; i < items.size(); i++) {
+			itemsLabels[i] = items.get(i).getText();
+			if (!itemsLabels[i].equalsIgnoreCase("Groupsxzcxzc")) {
+				items.get(i).click();
+				sleep(10);
+				
+				expandActivityDropDown.click();
+				sleep(3);
+				List<WebElement> items2 = ((ButtonImpl) activityItems).getAllButtons();
+				String[] itemsLabels2 = new String[items2.size()];
+				for (int j = 0; j < items2.size(); j++) {
+					itemsLabels2[j] = items2.get(j).getText();
+					System.err.println(/*"-------------" + */itemsLabels2[j]);
+					/*items2.get(j).click();
+					sleep(10);
+					try {
+						echoArray(((SelectBoxImpl) selectOperation).getListOfOptions());
+						echoArray(((SelectBoxImpl) selectDateOperation).getListOfOptions());
+						echoArray(((SelectBoxImpl) selectOption).getListOfOptions());
+						echoArray(((SelectBoxImpl) valueSingleOption).getListOfOptions());
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					expandActivityDropDown.click();
+					sleep(3);
+					items2 = ((ButtonImpl) activityItems).getAllButtons();*/
+				}
+				expendExtivityTypeDropDown.click();
+				sleep(5);
+				
+			}			
+			System.err.println("-----------------" + itemsLabels[i]);
+			items = ((ButtonImpl) activityItems).getAllButtons();
+		}
+		return itemsLabels;
+	}
+	
+	private void echoArray(String[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			System.err.println(arr[i]);
+		}
+	}
 	
 	
 }

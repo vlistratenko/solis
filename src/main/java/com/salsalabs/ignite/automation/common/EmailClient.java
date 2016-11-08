@@ -35,4 +35,5 @@ public interface EmailClient<T> {
 	void closeConnection();
 	
 	void setDriver(WebDriver driver);
+
 }

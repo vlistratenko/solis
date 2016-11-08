@@ -31,7 +31,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button saveContent = new ButtonImpl("//a[contains(text(),'Save Content')]", "Save Content");
 	
 	
-	public AddEmailsPage_PublishTab fillAllFieldsAndGoForward(String subj, String emailFrom, Integer splitsAmount) {
+	public AddEmailsPage_PublishTab fillAllFieldsAndGoForward(String subj, String emailFrom, Integer splitsAmount, String link) {
 		if (splitsAmount < 1) splitsAmount = 1;
 		addSplit(splitsAmount);
 		for (int i = 1; i <= splitsAmount; i++) {
@@ -44,7 +44,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			addLink("google.com");
+			addLink(link);
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
@@ -73,6 +73,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		textElementContent.type("Link: ");
 		switchDefaultContent();
 		addLinkButtonMenu.click();
+		sleep(5);
 		addExternalLink.click();
 		inputLinkField.type(link);
 		addLinkButton.click();		

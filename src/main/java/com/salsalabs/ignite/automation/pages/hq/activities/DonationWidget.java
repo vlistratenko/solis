@@ -28,9 +28,8 @@ public class DonationWidget extends SubscribeWidget {
 	TextBox cvvField = new TextBoxImpl("//input[@name='cvv']", "CVV", true);
 	SelectBoxImpl expiryMonthField = new SelectBoxImpl("//select[@name='expiry_month']", "Expiry Month");
 	SelectBoxImpl expiryYearField = new SelectBoxImpl("//select[@name='expiry_year']", "Expiry Year");
-	
 	Button donateButton = new ButtonImpl("//button[@type='submit']", "Donate", true);
-	
+
 	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
 	Boolean isEvent = false;
 	

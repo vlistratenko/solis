@@ -28,7 +28,7 @@ public class LoginPage extends Browser{
 	Button 		LearnMoreLink = new ButtonImpl("//a[contains(text(), 'Learn more')]", "Learn more link");
 	Label 		InvalidEmailAddressOrPasswordValidationLabel = new LabelImpl("//*[text()=\"We can't find the email address and password combo you entered. Please try again.\"]", "Invalid email address or password, please try again message");
 	Label 		EmailAddressandPasswordIsRequiredValidationLabel = new LabelImpl("//*[contains(text(),'An email address and password is required to sign in.')]", "An email address and password is required to sign in message");
-	Button      endHelp = new ButtonImpl("//div[@class='inmplayer-popover-button-end']", "End");
+	Button      endHelp = new ButtonImpl("//div[@class='inmplayer-popover-button-end inmplayer-button']", "End");
 	
 	public LoginPage(){
 	}
@@ -147,6 +147,10 @@ public class LoginPage extends Browser{
 		String currentWindowHandle = super.openInNewWindow(string);		
 		sleep(5);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);	
+	}
+	
+	public void open(String url) {
+		super.open(url);
 	}
 	
 }
