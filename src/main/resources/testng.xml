@@ -8,6 +8,7 @@
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/DonateSupporterDEMO.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SendTLDEMO.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/submitEventDEMO.xml" />
+		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/submitp2pEventDEMO.xml" />
 		<!-- suite-file path="src/main/resources/xml-tests/completed-suites/BuyLicenseTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/EmailBlastSendTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />

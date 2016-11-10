@@ -20,6 +20,7 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 
 public class CreateDEMOData extends SeleneseTestCase {
 	
@@ -302,6 +303,117 @@ public class CreateDEMOData extends SeleneseTestCase {
 				clickDonationButton().
 				verifyEventSubscrIsSuccesses().
 				backToLoginPage();
+			}
+		}
+	}
+	
+	@Parameters({"amount", "formURL", "login", "host"})
+	@Test(groups = {"submitp2pEventRandom"}, retryAnalyzer = RetryAnalyzer.class)
+	public void testSubmitp2pEventBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+		
+		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
+		logger.info("Amount of donations " + amountOfDonations);
+		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();
+		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
+		loginPage = new LoginPage(true);
+		for (int j = 0; j < amountOfDonations; j++) {
+			sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=IMPORT,UI,SUBSCRIBE,PETITION,TARGETED_LETTER,API," );
+			String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
+					lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
+			Boolean isFundraiser = CommonUtils.getRandomBoolean();
+			Boolean isWithTickets = CommonUtils.getRandomBoolean();//if false and isFundraiser is false then it = donation only
+			logger.info("Is event with registration - " + isWithTickets);
+			if (!isFundraiser) {
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
+				Eventp2pWidget eventp2pWidgetPage = loginPage.
+				openp2pEventWidgetByLink(formURL);
+				
+				if (isWithTickets) {
+					eventp2pWidgetPage.
+					openp2pEventRegistrationPage().
+					selectFundraiserCheckBox(isFundraiser).
+					selectQtyOfAttendee().
+					clickNextButtonOnRegistrationTypesPage().
+					fillp2pEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							fname,
+							lname).
+					clickCheckOutButton();					
+				}else{
+					eventp2pWidgetPage.
+					openp2pDonationPage();
+				}
+				
+				eventp2pWidgetPage.
+				fillp2pEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+					fname,
+					lname,
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getCity(),
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getZipCode(),
+					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getState(),
+					CommonUtils.getRandomNumericValueFixedLength(2),
+					fname + " " + lname,
+					"4111111111111111",
+					"180",
+					"01",
+					"2018",
+					true,
+					true,
+					true).
+				clickDonationButton().
+				verifyEventSubscrIsSuccesses().
+				backToLoginPage();
+			}else{
+				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
+				Eventp2pWidget eventp2pWidgetPage = loginPage.
+						openp2pEventWidgetByLink(formURL);
+				if (!isWithTickets) {
+					eventp2pWidgetPage.
+					openp2pEventRegistrationPage().
+					selectFundraiserCheckBox(isFundraiser).
+					clickNextButtonOnRegistrationTypesPage().
+					fillFundraiserSignInForm(fname,
+							lname,
+							fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							"!QAZ2wsx", 
+							"!QAZ2wsx").
+					clickCheckOutButton();					
+				}else{
+					eventp2pWidgetPage.
+					openp2pEventRegistrationPage().
+					selectFundraiserCheckBox(isFundraiser).
+					selectQtyOfAttendee().
+					clickNextButtonOnRegistrationTypesPage().
+					fillFundraiserSignInForm(fname,
+							lname,
+							fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							"!QAZ2wsx", 
+							"!QAZ2wsx").
+					fillp2pEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+									fname,
+									lname).
+					clickCheckOutButton();	
+					}
+				eventp2pWidgetPage.
+				fillp2pEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+						fname,
+						lname,
+						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
+						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getCity(),
+						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getZipCode(),
+						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).getState(),
+						CommonUtils.getRandomNumericValueFixedLength(2),
+						fname + " " + lname,
+						"4111111111111111",
+						"180",
+						"01",
+						"2018",
+						true,
+						true,
+						true).
+					clickDonationButton().
+					verifyEventSubscrIsSuccesses().
+					backToLoginPage();				
 			}
 		}
 	}

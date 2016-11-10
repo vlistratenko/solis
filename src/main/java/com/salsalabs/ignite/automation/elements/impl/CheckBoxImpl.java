@@ -18,8 +18,15 @@ public class CheckBoxImpl extends ElementImpl implements CheckBox {
 	
 	@Override
 	public void check(boolean isCheck) {
-		logger.info(elementName + " was checked.");
+		logger.info("Trying to check " + elementName);
 		super.check(path, isCheck);	
+		logger.info(elementName + " was checked.");
+	}
+	
+	public void checkForInput(boolean isCheck) {
+		logger.info("Trying to check " + elementName);
+		super.check(path, isCheck);	
+		logger.info(elementName + " was checked.");
 	}
 
 	@Override

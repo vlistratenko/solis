@@ -14,6 +14,7 @@ import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.TLWidget;
@@ -131,6 +132,11 @@ public class LoginPage extends Browser{
 	public EventWidget openEventWidgetByLink(String string) {
 		openWidget(string);			
 		return new EventWidget();
+	}
+	
+	public Eventp2pWidget openp2pEventWidgetByLink(String string) {
+		openWidget(string);			
+		return new Eventp2pWidget();
 	}
 	
 	public PetitionWidget openPetitionWidgetByLink(String string) {
