@@ -58,6 +58,8 @@ abstract class ElementImpl implements Element {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView();", element);
 	}
+	
+	
 
 	@Override
 	public void clickJS() {

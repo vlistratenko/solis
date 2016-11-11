@@ -23,7 +23,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button addSplitButton = new ButtonImpl("//a[.='+']", "Add split");
 	Button SplitTab = new ButtonImpl("//form[@id='emailblastform']/descendant::a[contains(text(),'Split')]", "Split tab");
 	Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
-	Label firstContentElement = new LabelImpl("(//div[contains(@class,'content-render-wrapper')])[1]", "Element");
+	LabelImpl firstContentElement = new LabelImpl("(//div[contains(@class,'content-render-wrapper')])[1]", "Element");
 	Button firstEditBtn = new ButtonImpl("(//span[@button-content-edit-text])[1]", "Edit");
 	TextBox inputLinkField = new TextBoxImpl("//input[@class='cke_dialog_ui_input_text']", "Input Link");
 	Button addLinkButton = new ButtonImpl("//a[contains(@class,'cke_dialog_ui_button_ok')]", "Add link on the popup");
@@ -66,6 +66,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	}
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
+		firstContentElement.scrollIntoViewAndDown();
 		firstContentElement.moveToElement();//scrollIntoView();
 		firstContentElement.highlight();
 		firstContentElement.click();
