@@ -12,7 +12,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class PetitionWidget extends SubscribeWidget {
 	
-	ButtonImpl expandPetitionFormButton = new ButtonImpl("//input[@type='submit']", "Expand Petition Form", true);
+	ButtonImpl expandPetitionFormButton = new ButtonImpl("//button[@type='submit']", "Expand Petition Form", true);
 	ButtonImpl signButton = new ButtonImpl("//button[@type='submit']", "Sign Petition", true);
 	TextBox comment = new TextBoxImpl("//textarea[@id='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
