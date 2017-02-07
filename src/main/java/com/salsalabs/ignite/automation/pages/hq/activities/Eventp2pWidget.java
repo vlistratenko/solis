@@ -32,7 +32,7 @@ public class Eventp2pWidget extends EventWidget {
 	TextBox fundraiserEmailField = new TextBoxImpl("//input[@id='user_email']", "Fundraiser Email", true);
 	TextBox fundraiserPasswordField = new TextBoxImpl("//input[@id='user_password']", "Fundraiser Password", true);
 	TextBox fundraiserPasswordConfirmationField = new TextBoxImpl("//input[@id='user_password_confirmation']", "Fundraiser Password confirmation", true);
-	Button submitFundraiserRegistration = new ButtonImpl("//input[@value='Next']", "Submit fundraiser registration", true);
+	Button submitFundraiserRegistration = new ButtonImpl("//a[.='Next']", "Submit fundraiser registration", true);
 	TextBox fundraiserPageNameField = new TextBoxImpl("//input[@id='fundraiser_stub_name']", "Fundraiser page name", true);
 	TextBox fundraiserGoalField = new TextBoxImpl("//input[@id='fundraiser_stub_goal_amount']", "Fundraiser goal", true);
 	Button withTeam = new ButtonImpl("//input[@id='yes_join_team']", "With team");
