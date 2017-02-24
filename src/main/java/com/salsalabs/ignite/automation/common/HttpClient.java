@@ -54,13 +54,13 @@ public class HttpClient {
     ArrayList<String> JSONResponse = new ArrayList<String>();
 	
 	public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-		getConnection();
+		//getConnection();
 	}
  
 	
 	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
 	  	this.host = host;
-	  	getConnection();
+	  	//getConnection();
 	}
 	
 	public HttpClient login(String userName, String pass) throws URISyntaxException, ClientProtocolException, IOException {
@@ -150,6 +150,12 @@ public class HttpClient {
 	}
 	
 	private CloseableHttpResponse sendPOSTRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
+		try {
+			getConnection();
+		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SeleneseTestCase.logger.info("Try to send request to " + url);
 		SeleneseTestCase.logger.info("Data to send " + json);
 		JSONResponse.clear();
@@ -169,19 +175,28 @@ public class HttpClient {
         	SeleneseTestCase.logger.info("Response: " + output);
         	JSONResponse.add(output);
         }
+		httpClient.close();
         return 	response;	 
 	}
 	
 	private CloseableHttpResponse sendGETRequest(String url/*, String json*/) throws URISyntaxException, ClientProtocolException, IOException {
 		//HttpMethod
+		try {
+			getConnection();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		SeleneseTestCase.logger.info("Try to send request to " + url);
-		//SeleneseTestCase.logger.info("Data to send " + json);
+		SeleneseTestCase.logger.info("Token to send " + httpget.getHeaders("authToken")[0]);
 		JSONResponse.clear();
 		httpget.setURI(new URI(url)); 
-		//httget.
-		// StringEntity input = new StringEntity(json);
-        //input.setContentType("application/json");
-        //httget.setEntity(input);
         response = httpClient.execute(httpget);
         if (response.getStatusLine().getStatusCode() != 200) {
             throw new RuntimeException("Failed : HTTP error code : "
@@ -194,6 +209,7 @@ public class HttpClient {
         	//SeleneseTestCase.logger.info("Response: " + output);
         	JSONResponse.add(output);
         }
+		httpClient.close();
         return 	response;	 
 	}
 	
@@ -216,17 +232,31 @@ public class HttpClient {
         httpost.addHeader("Accept-Encoding", "gzip, deflate");
         httpost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
         
+        
+       /* Connection: keep-alive
+        Referer: https://hq.uat.ignite.net/
+        Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3
+        authToken: Lsd5VonRzgNkKjdZfPiuSkr-mu544i4de-PtlIubSTHbNhcSb2MlsCMFVeQGsGJWRTQyfbMOIuTCIu0XJxZ_ngxchpEcnussPS8WNaL_SDYFG0CiJsc_0uhmtbz_KNVcwLgTZdvGra_RmHDy4wyFHJEmqK6xx0vscUGMb_b9ue-RenN6PQlULqECzC2Te5LE5szHAW_nzIf7vPCpn63-m4M2LWYU29CXaXCcuwT47naUItMqCBuHMsgRXOMSqs6c
+        Accept-Encoding: gzip, deflate, br
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0
+        Accept: application/json, text/plain, 
+        Host: hq.uat.ignite.net*/
         httpget.addHeader("Connection", "keep-alive");
-		httpget.addHeader("content-type", "application/json");
         httpget.addHeader("Referer", "https://" + host + "/");
-        httpget.addHeader("Accept-Language", "en-US,en;q=0.5");            
+        httpget.addHeader("Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3"); 
         httpget.addHeader("authToken", authToken);
+        httpget.addHeader("Accept-Encoding", "gzip, deflate, br");
+        httpget.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0");
+        httpget.addHeader("Accept", "application/json, text/plain,");
+        httpget.addHeader("Host", host);
+        
+        
+		/*httpget.addHeader("content-type", "application/json");
         httpget.addHeader("Pragma", "no-cache");            
-        httpget.addHeader("Accept", "application/json, text/plain, */*");
         httpget.addHeader("Content-Type", "application/json; charset=UTF-8");
-        httpget.addHeader("Cache-Control", "no-cache");            
-        httpget.addHeader("Accept-Encoding", "gzip, deflate");
-        httpget.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
+        httpget.addHeader("Cache-Control", "no-cache");*/            
+        
+        
 	}
 	
 	static Object jsonParser(String jsonStr, String key) throws JSONException {
@@ -271,8 +301,8 @@ public class HttpClient {
                 .setSSLSocketFactory(sslsf)
                 .setConnectionManager(cm)
                 .build();
-        httpost = new HttpPost();
-        httpget = new HttpGet();
+        //httpost = new HttpPost();
+        //httpget = new HttpGet();
         updateHeaders();
 	}
 }
