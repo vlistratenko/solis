@@ -13,8 +13,8 @@ import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class TLWidget extends SubscribeWidget{
-	TextBox addressField = new TextBoxImpl("//input[@name='tl-zipauth-street']", "Street Number and Name", true);
-	TextBox zipField = new TextBoxImpl("//input[@name='tl-zipauth-zip']", "Zip", true);
+	TextBox addressField = new TextBoxImpl("//input[@name='field-address-line1']", "Street Number and Name", true);
+	TextBox zipField = new TextBoxImpl("//input[@name='field-address-zip']", "Zip", true);
 	TextBox homePhoneField = new TextBoxImpl("//input[@name='PersonContact@HomePhone@Value']", "Home phone", true);
 	ButtonImpl findMyLeadersButton = new ButtonImpl("//input[@type='submit']", "Find My Leaders");
 	ButtonImpl sendButton = new ButtonImpl("//button[@type='submit']", "Find My Leaders");

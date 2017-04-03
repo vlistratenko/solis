@@ -14,7 +14,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class UnsubscribePage extends Browser{
 	
-	TextBox emailField = new TextBoxImpl("//input[@name='PersonContact@Email@Value']", "Email");
+	TextBox emailField = new TextBoxImpl("//input[@name='field-email-address']", "Email");
 	Button unsubscribeButton = new ButtonImpl("//button[@type='submit']", "Manage Subscription");
 	Label unsubscribeIsSuccesLabel = new LabelImpl("//div[@class='result']", "Unsubscribe is success message");
 	Label introductoryTextLabel = new LabelImpl("//form/p[2]", "Introductory text");

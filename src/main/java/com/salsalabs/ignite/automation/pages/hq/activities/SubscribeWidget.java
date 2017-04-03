@@ -16,12 +16,12 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
 public class SubscribeWidget extends Browser{
 
-	TextBox personEmailField = new TextBoxImpl("//input[@name='PersonContact@Email@Value']", "Email", true);
-	TextBox personFNameField = new TextBoxImpl("//input[@name='PersonCensus@FirstName']", "First name", true);
-	TextBox personLNameField = new TextBoxImpl("//input[@name='PersonCensus@LastName']", "Last name", true);
-	TextBox personCityField = new TextBoxImpl("//input[@name='Address@Home@City']", "City", true);
-	TextBox personZipField = new TextBoxImpl("//input[@name='Address@Home@Zip']", "Zip", true);
-	SelectBoxImpl personStatesSelectBox = new SelectBoxImpl("//select[@name='Address@Home@State']", "States");
+	TextBox personEmailField = new TextBoxImpl("//input[@name='field-contact-email']", "Email", true);
+	TextBox personFNameField = new TextBoxImpl("//input[@name='field-person-firstname']", "First name", true);
+	TextBox personLNameField = new TextBoxImpl("//input[@name='field-person-lastname']", "Last name", true);
+	TextBox personCityField = new TextBoxImpl("//input[@name='field-address-city']", "City", true);
+	TextBox personZipField = new TextBoxImpl("//input[@name='field-address-zip']", "Zip", true);
+	SelectBoxImpl personStatesSelectBox = new SelectBoxImpl("//select[@name='field-address-state']", "States");
 	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
 	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
 	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
