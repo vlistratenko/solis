@@ -16,8 +16,8 @@ public class TLWidget extends SubscribeWidget{
 	TextBox addressField = new TextBoxImpl("//input[@name='field-address-line1']", "Street Number and Name", true);
 	TextBox zipField = new TextBoxImpl("//input[@name='field-address-zip']", "Zip", true);
 	TextBox homePhoneField = new TextBoxImpl("//input[@name='PersonContact@HomePhone@Value']", "Home phone", true);
-	ButtonImpl findMyLeadersButton = new ButtonImpl("//input[@type='submit']", "Find My Leaders");
-	ButtonImpl sendButton = new ButtonImpl("//button[@type='submit']", "Find My Leaders");
+	ButtonImpl findMyLeadersButton = new ButtonImpl("//button[@type='submit']", "Find My Leaders");
+	ButtonImpl sendButton = new ButtonImpl("//button[@type='submit']", "Send button");
 	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
 	SelectBoxImpl personTitleSelectBox = new SelectBoxImpl("//select[@name='PersonCensus@TITLE']", "Title");
 	
