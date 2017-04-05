@@ -33,12 +33,12 @@ public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 
 	@Override
 	public void selectByIndex(int index) {
-		logger.info("Select value by index" + index + " in the " + elementName);
+		logger.info("Select by index " + index + " in the " + elementName);
 		super.select(path, index);
 	}
 	
 	public void selectByValue(String value) {
-		logger.info("Select value by value" + value + " in the " + elementName);
+		logger.info("Select by value " + value + " in the " + elementName);
 		if (value.length()>1) {			
 			new Select(super.findElementByXpath(path)).selectByValue(value);
 		}

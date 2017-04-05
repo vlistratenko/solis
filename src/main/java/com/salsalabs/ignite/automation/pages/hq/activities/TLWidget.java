@@ -29,23 +29,33 @@ public class TLWidget extends SubscribeWidget{
 	
 	
 	
-	public TLWidget findLegistratorTLForm(String personAddressLine1, String personZip) 
+	public TLWidget findLegistratorTLForm(String personAddressLine1,
+			String personZip,
+			String personEmail,
+			String personFName,
+			String personLName, 
+			String personCity, 
+			String state) 
 	{		
-		addressField.type("10753 BLIX");
-		zipField.type("91602");
+		addressField.type(personAddressLine1);
+		personEmailField.type(personEmail);
+		personFNameField.type(personFName);
+		personLNameField.type(personLName);
+		personCityField.type(personCity);
+		personZipField.type(personZip);
+		
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		}else{
+			personStatesSelectBox.selectByValue(state);
+		}
 		clickFindButton();
 		sleep(3);
 		return this;
 	}
 	
-	public SubscribeWidget fillTLWidget(String title,
-			String personEmail,
-			String personFName,
-			String personLName) {
-		personTitleSelectBox.selectByValue(title);
-		personEmailField.type(personEmail);
-		personFNameField.type(personFName);
-		personLNameField.type(personLName);
+	public SubscribeWidget fillTLWidget(String title) {
+		personTitleSelectBox.selectByValue(title);		
 		//homePhoneField.type("123-123-1234");
 		sleep(3);
 		sendButton.click();

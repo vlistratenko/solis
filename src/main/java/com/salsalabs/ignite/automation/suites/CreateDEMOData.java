@@ -166,8 +166,8 @@ public class CreateDEMOData extends SeleneseTestCase {
 			}				
 			loginPage.
 			openTLWidgetByLink(formURL).
-			findLegistratorTLForm("10753 BLIX", "91602").
-			fillTLWidget("Mr", tempSupporter.finalEMAIL, tempSupporter.firstName, tempSupporter.lastorOrgName).
+			findLegistratorTLForm("10753 BLIX", "91602", tempSupporter.finalEMAIL, tempSupporter.firstName,  tempSupporter.lastorOrgName, "North holliwood", "CA").
+			fillTLWidget("Mr").
 			verifySubscriptionIsSuccesses().
 			backToLoginPage();
 			
