@@ -22,14 +22,20 @@ public class TableImpl extends ElementImpl implements Table {
 	@Override
 	public void clickInCell(int row, int col, String tag) {
 		logger.info(elementName + " was clicked in cell, row " + row + " and column " + col);
-		String pathEl = path + "/tbody/descendant::tr[" + row + "]/td[" + col + "]/" + tag;
+		if (!tag.equals("")) {
+			tag = "/" + tag;
+		}
+		String pathEl = path + "/tbody/descendant::tr[" + row + "]/td[" + col + "]" + tag;
 		super.click(pathEl.replace("[0]", ""));
 	}
 
 	@Override
 	public void sendKeysInCell(int row, int col, String tag, String key) {
 		logger.info(elementName + " was clicked in cell, row " + row + " and column " + col);
-		String pathEl = path + "/descendant::tr[" + row + "]/td[" + col + "]/" + tag;
+		if (!tag.equals("")) {
+			tag = "/" + tag;
+		}
+		String pathEl = path + "/descendant::tr[" + row + "]/td[" + col + "]" + tag;
 		super.sendKeys(pathEl.replace("[0]", ""), key);
 	}
 
