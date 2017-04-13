@@ -629,7 +629,8 @@ abstract class ElementImpl implements Element {
 
 	}
 
-	protected List<WebElement> findElementsByXpath(String xpath) {
+	@Override
+	public List<WebElement> findElementsByXpath(String xpath) {
 		setImplicity(30);
 		List<WebElement> l = findElementsByXpathWithOutWait(xpath);
 		setImplicity(defaultTimeOut);

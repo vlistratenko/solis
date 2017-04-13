@@ -22,7 +22,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button ComposeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
 	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add')]/following-sibling::div/descendant::input", "Manually add supporters");
 	DropDownImpl addSegmentField = new DropDownImpl("//p[contains(text(), 'Find groups and add them here!')]/following-sibling::div/descendant::a", "Add segment");
-	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[@class='result fade-out ng-scope'])[last()]", "Supporters item in the search result", false);
+	Button suppirtersItemInTheSearchButton = new ButtonImpl("//tr[@class='result fade-out'][last()]", "Supporters item in the search result", false);
 	Button calculateAudience = new ButtonImpl("//span[contains(text(),'Calculate')]", "Calculate Audience Reach");
 	Label calculatedLabel = new LabelImpl("//span[@ng-show='blast.reachTotal>=0']", "Calculated Audience");
 	
