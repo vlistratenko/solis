@@ -23,12 +23,51 @@ import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 
 public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
+	//list of customfields in the email (37 in total)
+	public String mergeFieldZipCode = "";
+	public String mergeFieldTypeOfMostRecentDonation = "";
+	public String mergeFieldTotalPetitionSignatures = "";
+	public String mergeFieldTitle = "";
+	public String mergeFieldSupporterSince = "";
+	public String mergeFieldSuffix = "";
+	public String mergeFieldSubscriptionDate = "";
+	public String mergeFieldSubscriptionChangeDate = "";
+	public String mergeFieldStateSenateDistrict = "";
+	public String mergeFieldStateHouseDistrict = "";
+	public String mergeFieldState = "";
+	public String mergeFieldOrganizationName = "";
+	public String mergeFieldOrgZip = "";
+	public String mergeFieldOrgState = "";
+	public String mergeFieldOrgPhone = "";
+	public String mergeFieldOrgEmail = "";
+	public String mergeFieldOrgCity = "";
+	public String mergeFieldOrgAddressLine2 = "";
+	public String mergeFieldOrgAddressLine1 = "";
+	public String mergeFieldNumber = "";
+	public String mergeFieldMiddleName = "";
+	public String mergeFieldLifetimeNumberofDonations = "";
+	public String mergeFieldLifetimeGivingAmount = "";
+	public String mergeFieldLastPetitionSignatureDate = "";
+	public String mergeFieldLastName = "";
+	public String mergeFieldLargestDonationAmount = "";
+	public String mergeFieldFirstPetitionSignatureDate = "";
+	public String mergeFieldFirstName = "";
+	public String mergeFieldFederalHouseDistrict = "";
+	public String mergeFieldEmailAddress = "";
+	public String mergeFieldDateOfMostRecentDonation = "";
+	public String mergeFieldCity = "";
+	public String mergeFieldCellPhone = "";
+	public String mergeFieldAverageDonationAmount = "";
+	public String mergeFieldAmountOfMostRecentDonation = "";
+	public String mergeFieldAddressline2 = "";
+	public String mergeFieldAddressline1 = "";
+	
 	
 	LoginPage loginPage;
 	
 	@Parameters({ "sendEmail.from", "login", "segmentName"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "email.verifyAllMergeFields" }, description = "")
-	public void sendEmailBlastTest(String emailFrom, String login, String segmentName) {
+	public void VerifyMergeFieldsInTheEmailTest(String emailFrom, String login, String segmentName) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
 		
 		String emailBlastName = "Merge fields testing!!! Blast from " + CommonUtils.getTodayDate() + " " + CommonUtils.getRandomNumericValueFixedLength(5);
 		String emailSubject = emailBlastName;
@@ -49,22 +88,18 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		openComposePage().
 		selectLayout(1).
 		AddAllMergeFields().
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html").
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "").
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().
 		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName).
-		waitForStatus("COMPLETED", 6);
+		waitForStatus("COMPLETED", 6).
+		verifyMergeFieldsInTheEmail();
 		
-		Integer openAmount = CommonUtils.getRandomValueNumericFromTo(1, Integer.parseInt(CommonUtils.getProperty(PropertyName.AMOUNT_OF_PUBLISHED_EMAILS)));
-		Integer clickAmount = CommonUtils.getRandomValueNumericFromTo(1, openAmount);
-		Integer unsubAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
-		Integer conversionAmount = CommonUtils.getRandomValueNumericFromTo(1, 10);
-		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
-		loginPage.clickLinkInEmail(emails, 1, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", clickAmount);		
-		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
+		CommonUtils.checkAndFail("VerifyMergeFieldsInTheEmailTest");
 		
-		///loginPage.clickLinkInEmailAndFillDonationForm(emails, emailSubject, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", conversionAmount, login, host);
+		//
+		
 	}
 		
 }

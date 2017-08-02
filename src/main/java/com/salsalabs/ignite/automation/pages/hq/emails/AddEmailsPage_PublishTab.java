@@ -14,14 +14,15 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 	Button SendNowButton = new ButtonImpl("//button[@id='btnPublish']", "Send Now button");
 	DropDown TestPercentageList = new DropDownImpl("//custom-select2[@name='testPercentageList']", "//custom-select2[@name='testPercentageList']/descendant::a", "Test percentage list");
 	Label amountOfEmails = new LabelImpl("//p[contains(text(), 'This email will be sent to ')]/strong", "Amount Of Emails");
+	Label confirmationMessage = new LabelImpl("//p[contains(text(), 'Congratulations')]", "Confirmation that blast is published");
 	public AddEmailsPage_PublishTab fillAllFieldsAndPublish(Integer percentageOfTestGroup, Integer splitsAmount) {
 		selectTimeToSend("Send now");
 		if (splitsAmount > 1) {
 			TestPercentageList.selectByLabelJS(percentageOfTestGroup.toString() + "%");
 		}
-		sleep(5);
+		SendNowButton.waitElement(10);
 		SendNowButton.click();
-		sleep(3);
+		confirmationMessage.waitElement(10);
 		return new AddEmailsPage_PublishTab();
 	}
 	

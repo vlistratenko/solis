@@ -18,7 +18,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	DropDown selectScheme = new DropDownImpl("//custom-select-scheme/div[@class='custom dropdown scheme']", "a", "Select Scheme");
 	TextBox subjectField = new ContentEditTextBoxImpl("//iframe[contains(@title,'subjectCkEditor')]" ,"//*[@contenteditable='true']", "Subject", true);
-	TextBox textElementContent = new ContentEditTextBoxImpl("//iframe[contains(@title,'ckeditor')]" ,"//*[@contenteditable='true']", "Email Template body", true);
+	ContentEditTextBoxImpl textElementContent = new ContentEditTextBoxImpl("//iframe[contains(@title,'ckeditor')]" ,"//*[@contenteditable='true']", "Email Template body", true);
 	Button addLinkButtonMenu = new ButtonImpl("//a[@title='Link']", "Add link on the menu");
 	Button addMergeFieldButtonMenu = new ButtonImpl("//a[@title='Insert a merge field']", "Insert a merge field");
 	Button PublishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
@@ -35,7 +35,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	Table mergeFildsList = new TableImpl("//table[@id='fieldResults']", "List with merge fields");
 	Button okButton = new ButtonImpl("//div[.='Insert a merge field']/ancestor::table/descendant::td [contains(@id, 'cke_dialog_footer')]/descendant::a[@title='OK']/span", "Save merge field");
-	
+	TextBox defaultTextField = new TextBoxImpl("//label[contains(text(), 'field empty')]/../descendant::input", "Default text");
 	
 	public AddEmailsPage_PublishTab fillAllFieldsAndGoForward(String subj, String emailFrom, Integer splitsAmount, String link) {
 		if (splitsAmount < 1) splitsAmount = 1;
@@ -50,7 +50,10 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			addLink(link);
+			if (!link.equals("")) {
+				addLink(link);
+			}
+			
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
@@ -61,16 +64,27 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		firstContentElement.moveToElement();//scrollIntoView();
 		firstContentElement.highlight();
 		firstContentElement.click();
-		firstEditBtn.click();sleep(5);
+		firstEditBtn.click();
+		sleep(5);
 		//textElementContent.click();
 		switchDefaultContent();
 		addMergeFieldButtonMenu.click();
-		sleep(5);
-		mergeFildsList.clickInCell(1, 1, "");
-		System.err.println(mergeFildsList.getRowsCount());
-		okButton.highlight();
-		okButton.click();
-		sleep(5);
+		mergeFildsList.waitElement(10);//sleep(5);
+		int fieldsCount = mergeFildsList.getRowsCount();
+		for (int i = 1; i <= fieldsCount; i++) {
+			mergeFildsList.waitElement(10);
+			mergeFildsList.clickInCell(i, 1, "");
+			defaultTextField.type(mergeFildsList.getCellValue(i, 1));
+			okButton.highlight();
+			okButton.click();
+			textElementContent.sendENTERKey();
+			if (i < fieldsCount) {
+				addMergeFieldButtonMenu.click();
+			}			
+		}
+		saveContent.waitElement(10);
+		saveContent.click();
+		//PublishButton.click();
 		return this;
 	}
 	
