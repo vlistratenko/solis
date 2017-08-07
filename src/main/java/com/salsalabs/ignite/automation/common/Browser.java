@@ -357,6 +357,15 @@ public abstract class Browser {
 		}
 	}
 	
+	public String  getEmailBody(String subj) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
+		emails = client.getEmailsBySubject(subj);
+		String msg = client.getEmailBody(emails.get(0));
+		return msg;
+		
+	}
+	
 	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
 		unsubscribeByEmail(null, amountOfSplits, amountOfEmails);
 	}

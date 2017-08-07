@@ -2,15 +2,14 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.Supporter;
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.TextBox;
+import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 public class SupportersAddPage extends HomePage{
 
@@ -28,7 +27,8 @@ public class SupportersAddPage extends HomePage{
 	Label supporterStatusRadio = new LabelImpl("//span[@class='subscription custom radio checked']/ancestor::label", "Status");
 	Label supporterStatusLabel = new LabelImpl("//p[.='Unsubscribed']", "Status");
 	Button saveButton = new ButtonImpl("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
-	
+	Label supporterSubscriptions = new LabelImpl("//a[text()='Subscription']", "Subscription tab");
+
 	public SupportersPage createNewSupporter() {
 		return createNewSupporter(Supporter.generateSupporter());
 	}
@@ -79,5 +79,27 @@ public class SupportersAddPage extends HomePage{
 		verifier.verifyEquals(tempElement.getText(), status, "Wrong status", false);
 		return new SupportersPage();
 	}
-	
+
+	public SupportersPage verifySupporterSubscriptionTopics(String topic, String supporterEmail) {
+		supporterSubscriptions.click();
+
+		Element subscriptionItemsLabels = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[1]", "Topics");
+		Element subscriptionItemsStatusesOptedIn = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[2]/span", "Topics");
+		Element subscriptionItemsStatusesOptedOut = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[3]/span", "Topics");
+
+		java.util.List<WebElement> topicListLabels = subscriptionItemsLabels.findElementsByXpath(subscriptionItemsLabels.getPath());
+		java.util.List<WebElement> topicListStatusesOptedIn = subscriptionItemsStatusesOptedIn.findElementsByXpath(subscriptionItemsStatusesOptedIn.getPath());
+		java.util.List<WebElement> topicListStatusesOptedOut = subscriptionItemsStatusesOptedOut.findElementsByXpath(subscriptionItemsStatusesOptedOut.getPath());
+
+		for (int i = 0; i < topicListLabels.size(); i++) {
+			if (topicListLabels.get(i).getText().equals(topic)) {
+				Assert.assertEquals("Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedIn.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_IN'");
+				Assert.assertEquals("Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedIn.get(i).getAttribute("class"), "icon-checkmark2");
+			} else {
+				Assert.assertEquals("Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedOut.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_OUT'");
+				Assert.assertEquals("Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedOut.get(i).getAttribute("class"), "icon-blocked");
+			}
+		}
+		return new SupportersPage();
+	}
 }

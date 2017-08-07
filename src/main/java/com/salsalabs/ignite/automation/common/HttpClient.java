@@ -59,7 +59,7 @@ public class HttpClient {
  
 	
 	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-	  	this.host = host;
+	  	this.host = host.replace("https://", "");
 	  	//getConnection();
 	}
 	
@@ -149,6 +149,48 @@ public class HttpClient {
 		return data;
 	}
 	
+	public Supporter getSupporterByEmail(String email) throws JSONException {
+		Supporter sup = new Supporter();
+		try {
+			sendGETRequest("https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+			String temp = JSONResponse.get(0);
+			String id = jsonParser(temp, "payload.supporters.0.id").toString();
+			SeleneseTestCase.logger.info("Supporter ID: " + id);
+			sendGETRequest("https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
+			temp = JSONResponse.get(0);
+        	 try { 				
+ 				sup.firstName = jsonParser(temp, "payload.firstName").toString();
+ 				sup.lastorOrgName = jsonParser(temp, "payload.lastName").toString();
+ 				sup.prefix = jsonParser(temp, "payload.prefix").toString();
+ 				sup.middleName = jsonParser(temp, "payload.middleName").toString();
+ 				sup.suffix = jsonParser(temp, "payload.suffix").toString();
+ 				sup.language = jsonParser(temp, "payload.language").toString();
+ 				sup.birthDate = jsonParser(temp, "payload.birthDate").toString();
+ 				
+ 				JSONArray contacts = (JSONArray) jsonParser(temp, "payload.contacts");
+ 				sup.finalEMAIL  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "MessagingEmail") + ".value").toString();
+ 				sup.phoneCell  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneCell") + ".value").toString();
+ 				sup.socialFacebook  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "SocialFacebook") + ".value").toString();
+ 				sup.phoneHome  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneHome") + ".value").toString();
+ 				sup.phoneWork  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneWork") + ".value").toString();
+ 				sup.linkedin  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "LINKEDIN") + ".value").toString();
+ 				sup.socialTwitter  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "SocialTwitter") + ".value").toString();
+ 			    sup.addressLine1  = jsonParser(temp, "payload.addresses.0.line1").toString();
+ 			    sup.addressLine2  = jsonParser(temp, "payload.addresses.0.line2").toString();
+ 			    sup.city  = jsonParser(temp, "payload.addresses.0.city").toString();
+ 			    sup.state  = jsonParser(temp, "payload.addresses.0.state").toString();
+ 			    sup.postalCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
+ 			    
+			} catch (JSONException e) {
+				logger.error("", e);
+			}
+	         
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return sup;
+	}
+	
 	private CloseableHttpResponse sendPOSTRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
 		try {
 			getConnection();
@@ -194,7 +236,7 @@ public class HttpClient {
 			e.printStackTrace();
 		}
 		SeleneseTestCase.logger.info("Try to send request to " + url);
-		SeleneseTestCase.logger.info("Token to send " + httpget.getHeaders("authToken")[0]);
+		//SeleneseTestCase.logger.info("Token to send " + httpget.getHeaders("authToken")[0]);
 		JSONResponse.clear();
 		httpget.setURI(new URI(url)); 
         response = httpClient.execute(httpget);
@@ -202,11 +244,12 @@ public class HttpClient {
             throw new RuntimeException("Failed : HTTP error code : "
                     + response.getStatusLine().getStatusCode());
         }
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(
                 (response.getEntity().getContent())));
         String output;
         while ((output = br.readLine()) != null) {
-        	//SeleneseTestCase.logger.info("Response: " + output);
+        	SeleneseTestCase.logger.info("Response: " + output);
         	JSONResponse.add(output);
         }
 		httpClient.close();
@@ -305,4 +348,20 @@ public class HttpClient {
         //httpget = new HttpGet();
         updateHeaders();
 	}
+	
+	private Integer findArrayElementNumberByValue(JSONArray jsonArray, String value) {
+		for (int j = 0; j < ((JSONArray) jsonArray).length(); j++) {
+			try {
+				if (jsonArray.get(j).toString().contains(value)){
+					return j;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	
+	
 }

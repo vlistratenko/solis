@@ -31,6 +31,8 @@ public interface EmailClient<T> {
 	String getURLByEndWord(String emailSubj, String word);
 	
 	String getRecipient(Object email);
+	
+	String getEmailBody(Object email);
 
 	void closeConnection();
 	

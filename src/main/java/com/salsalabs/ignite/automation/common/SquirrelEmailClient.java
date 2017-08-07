@@ -238,7 +238,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String getURLByDomain(String emailSubj, String domain) {
 		Message e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
@@ -269,6 +269,17 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 			return ((InternetAddress) ((Message) email).getAllRecipients()[0]).getAddress();
 		} catch (MessagingException e) {
 			logger.error("", e);
+		}
+		return null;
+	}
+	
+	@Override
+	public String getEmailBody(Object email) {
+		try {
+			return ((Message) email).getContent().toString();
+		} catch (IOException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -17,17 +17,29 @@ import org.json.JSONObject;
 
 public class Supporter {
 	public String finalEMAIL = "";
-	private String cPhone = "32165498765";
-	private String emailDomain = "@devnull.test.ignite.net";
-	private String importedEmail = "importedsup";
-	private String subscribedEmail = "subscribedsup";
-	private String manuallEmail = "munuallysup";
-	private String facebook = "fbv";
-	private String home_Phone = "98765432112";
-	private String preferredLanguage = "English (United States)";
-	private String twitter = "twv";
-	private String zipCode = "20147";
-	private String middleName = "MName";
+	public String cPhone = "32165498765";
+	public String emailDomain = "@devnull.test.ignite.net";
+	public String importedEmail = "importedsup";
+	public String subscribedEmail = "subscribedsup";
+	public String manuallEmail = "munuallysup";
+	public String facebook = "fbv";
+	public String home_Phone = "98765432112";
+	public String preferredLanguage = "English (United States)";
+	public String twitter = "twv";
+	public String zipCode = "20147";
+	public String middleName = "MName";
+	public String prefix = "";
+	public String suffix = "";
+	public String language = "";
+	public String birthDate  = "";
+	public String phoneCell = "";
+	public String socialFacebook = "";
+	public String phoneHome = "";
+	public String phoneWork = "";
+	public String linkedin = "";
+	public String socialTwitter = "";
+	
+
 	
 	public String constituentNumber = "",
 			title = "",
@@ -279,6 +291,13 @@ public class Supporter {
 		 return new HttpClient(host).
 				login(login, pass).
 				getSupporters(source, amountOfSupporters);
+		
+	}
+	
+	public Supporter getSupporterFromSystemByEmail(String email, String host, String login, String pass) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+		 return new HttpClient(host).
+				login(login, pass).
+				getSupporterByEmail(email);
 		
 	}
 	

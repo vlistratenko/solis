@@ -2,6 +2,8 @@ package com.salsalabs.ignite.automation.elements;
 
 import org.openqa.selenium.WebElement;
 
+import java.util.*;
+
 public interface Element {
 
 	boolean isVisible();
@@ -57,5 +59,7 @@ public interface Element {
 	boolean waitForNotVisible(Integer timeOut);
 
 	void focus();
+
+	java.util.List<WebElement> findElementsByXpath(String xpath);
 
 }

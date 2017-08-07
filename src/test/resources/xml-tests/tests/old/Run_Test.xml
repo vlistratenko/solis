@@ -1,16 +1,19 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
-<suite name="Post" parallel="false" thread-count="1">
-  	<parameter name="USED_BROWSER" value="FIREFOX"></parameter>//IEFIREFOX
-  	<!--parameter name="TestLink" value="https://admin.test.ignite.net"></parameter!-->
-   	
-    	
-  	
-  	<test verbose="2" name="post" annotations="JDK" >
-    	<parameter name="login" value="vavramchuk+adminv1@salsalabs.com"></parameter>
-     	<parameter name="password" value="Avitalik3124"></parameter>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test parallel" parallel="classes" thread-count="2">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 
-     	<classes>
-      		<class name="JustForTestingOfCode.Test2"/>
-    	</classes>
-  	</test>   
- </suite>
+	<test verbose="2" name="Test parallel" annotations="JDK">
+		<parameter name="USED_BROWSER" value="CHROME"></parameter>
+		<groups>
+			<run>
+				<include name="ttt" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.TestParallel" />
+			<class name="com.salsalabs.ignite.automation.suites.TestParallel2" />
+		</classes>
+	</test>	
+</suite>
