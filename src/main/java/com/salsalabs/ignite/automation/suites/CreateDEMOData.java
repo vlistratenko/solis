@@ -195,7 +195,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSegment(segmentName).
 		openComposePage().
-		selectLayout(1).
+		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html").
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().

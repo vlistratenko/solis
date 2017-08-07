@@ -86,7 +86,7 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
 		addSegment(segmentName).
 		openComposePage().
-		selectLayout(1).
+		selectLayout("Basic").
 		AddAllMergeFields().
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "").
 		fillAllFieldsAndPublish(100, 1).

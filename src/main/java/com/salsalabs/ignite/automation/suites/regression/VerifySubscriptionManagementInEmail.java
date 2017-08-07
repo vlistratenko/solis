@@ -38,7 +38,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
                 selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
                 addSupporters(emailAddress, 1, "").
                 openComposePage().
-                selectLayout(1).
+                selectLayout("Basic").
                 fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, null).
                 fillAllFieldsAndPublish(100, 1);
         String currentUrl = getDriver().getCurrentUrl();

@@ -150,7 +150,7 @@ public class BuildAcceptanceTests extends SeleneseTestCase {
 		fillAllFieldsAndGoForward(emailBlastName).
 		selectAudienceType("Entire list ").
 		openComposePage().
-		selectLayout(4).
+		selectLayout("Basic").
 		fillAllFieldsAndGoForward(emailSubject, emailFrom, splitsAmount, "google.com").
 		fillAllFieldsAndPublish(percentageOfTestGroup, splitsAmount);
 		
