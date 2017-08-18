@@ -93,7 +93,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
 		sleep(10);
-		Button lay = new ButtonImpl("(//strong[.='" + layout + "']/ancestor::div[@class='layout_item']/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
+		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
 		lay.click();
 		composeButton.click();
 		sleep(10);
