@@ -50,7 +50,6 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			if (link != null) addLink(link);
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
@@ -101,19 +100,21 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	}
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
-		firstContentElement.scrollIntoViewAndDown();
-		firstContentElement.moveToElement();//scrollIntoView();
-		firstContentElement.highlight();
-		firstContentElement.click();
-		firstEditBtn.click();
-		textElementContent.type("Link: ");
-		switchDefaultContent();
-		addLinkButtonMenu.click();
-		sleep(5);
-		addExternalLink.click();
-		inputLinkField.type(link);
-		addLinkButton.click();		
-		saveContent.click();
+		if (!link.equalsIgnoreCase("")){
+			firstContentElement.scrollIntoViewAndDown();
+			firstContentElement.moveToElement();//scrollIntoView();
+			firstContentElement.highlight();
+			firstContentElement.click();
+			firstEditBtn.click();
+			textElementContent.type("Link: ");
+			switchDefaultContent();
+			addLinkButtonMenu.click();
+			sleep(5);
+			addExternalLink.click();
+			inputLinkField.type(link);
+			addLinkButton.click();		
+			saveContent.click();
+		}
 		return this;
 	}
 	
