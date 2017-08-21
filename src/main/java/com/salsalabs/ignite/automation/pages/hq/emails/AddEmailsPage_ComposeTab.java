@@ -50,7 +50,6 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-			if (link != null) addLink(link);
 		}		
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
@@ -93,7 +92,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
 		sleep(10);
-		Button lay = new ButtonImpl("(//strong[.='" + layout + "']/ancestor::div[@class='layout_item']/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
+		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
 		lay.click();
 		composeButton.click();
 		sleep(10);
@@ -101,19 +100,21 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	}
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
-		firstContentElement.scrollIntoViewAndDown();
-		firstContentElement.moveToElement();//scrollIntoView();
-		firstContentElement.highlight();
-		firstContentElement.click();
-		firstEditBtn.click();
-		textElementContent.type("Link: ");
-		switchDefaultContent();
-		addLinkButtonMenu.click();
-		sleep(5);
-		addExternalLink.click();
-		inputLinkField.type(link);
-		addLinkButton.click();		
-		saveContent.click();
+		if (!link.equalsIgnoreCase("")){
+			firstContentElement.scrollIntoViewAndDown();
+			firstContentElement.moveToElement();//scrollIntoView();
+			firstContentElement.highlight();
+			firstContentElement.click();
+			firstEditBtn.click();
+			textElementContent.type("Link: ");
+			switchDefaultContent();
+			addLinkButtonMenu.click();
+			sleep(5);
+			addExternalLink.click();
+			inputLinkField.type(link);
+			addLinkButton.click();		
+			saveContent.click();
+		}
 		return this;
 	}
 	
