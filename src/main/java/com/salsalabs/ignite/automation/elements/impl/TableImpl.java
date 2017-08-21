@@ -152,4 +152,8 @@ public class TableImpl extends ElementImpl implements Table {
 	public int isValueExists(String value) {
 		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size();
 	}
+	
+	public boolean isValueExistsInTable(String value) {
+		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size() > 0;
+	}
 }

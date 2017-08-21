@@ -33,5 +33,7 @@ public interface Table extends Element {
 	int isValueExists(String source);
 
 	List<String> getHeaders();
+	
+	public boolean isValueExistsInTable(String value);
 
 }

@@ -11,6 +11,7 @@ public class ManagePage  extends HomePage{
 	Button manageImportsButton = new ButtonImpl("//a[@href='/#/settings/imports']", "Settings of imports");
 	Button manageAccountsButton = new ButtonImpl("//a[@href='/#/settings/accounts']", "Settings of  accounts");
 	Button manageConfigurationButton = new ButtonImpl("//a[@href='/#/settings']", "Settings of configuration");
+	Button manageCustomTargetsButton = new ButtonImpl("//*[@id='settingsDropdown']//a[contains(text(), 'Custom Targets')]", "Custom Targets");
 	DropDown switchToDropDown = new DropDownImpl("//ul[@id='settingsDropdown']/li", "//button[contains(@ng-click, 'changeSettingDropdown')]", "Switch To");
 	
 	public AccountsPage openAccountsPage() {
@@ -34,6 +35,11 @@ public class ManagePage  extends HomePage{
 		
 		verifier.verifyEquals(getLocation().contains("settings"), true, "Current URL does not contains settings");
 		return this;
+	}
+	
+	public CustomTargetsPage switchToCustomTargetsPage() {
+	   switchToDropDown.selectByLabelJS("Custom Targets");
+	   return new CustomTargetsPage();
 	}
 	
 	public PaymentGatewaysPage switchToPaymentGatewaysPage() {
