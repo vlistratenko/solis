@@ -50,9 +50,18 @@ public class ManagePage  extends HomePage{
 		switchToDropDown.selectByLabelJS("Custom Fields");
 		return new CustomFieldsPage();
 	}
-
+	
+	public MessageTopicsPage switchToMessageTopicsPage() {
+		switchToDropDown.selectByLabelJS("Message Topics");
+		return new MessageTopicsPage();
+	}
+	
+	
 	public SocialMediaAccountsPage switchToAddSocialPostsPage() {
 		switchToDropDown.selectByLabelJS("Social Media Accounts");
 		return new SocialMediaAccountsPage();
 	}
+	
+
+	
 }

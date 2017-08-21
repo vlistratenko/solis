@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
 <suite name="Verify merge fields in the email" parallel="false" thread-count="1">
 
-	<parameter name="USED_ENVIRONMENT" value="DEV"></parameter>
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="login" value="2712.3e41c646@mailosaur.in"></parameter>
 	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
