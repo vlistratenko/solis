@@ -1,7 +1,9 @@
 package com.salsalabs.ignite.automation.suites.regression;
  
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
@@ -27,12 +29,13 @@ public class CustomTargetsTest extends SeleneseTestCase {
      * <li> Select to display 250 items per page
      * <li> <font color="green"><b>Verify whether custom target is present in the table</b></font>
      */
-    
+	
+	@Parameters("login")
     @Test(enabled = true, priority = 1, groups = {"createAndDeleteCustomTarget"}, retryAnalyzer = RetryAnalyzer.class)
-    public void createCustomTarget() {
+    public void createCustomTarget(String login) {
         LoginPage lp = new LoginPage();
         CustomTargetsPage ct = new CustomTargetsPage();
-        ct = lp.doSuccessLogin()
+        ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
                 .clickAddCustomTargetButton()
@@ -65,12 +68,13 @@ public class CustomTargetsTest extends SeleneseTestCase {
      * <li> Click on same existing custom target
      * <li> <font color="green"><b>Verify whether fields' values which were specified during updated are still on place</b></font>
      */
-    
+	
+	@Parameters("login")
     @Test(enabled = true, priority = 2, groups = {"createAndDeleteCustomTarget"}, dependsOnMethods = {"createCustomTarget"}, retryAnalyzer = RetryAnalyzer.class)
-    public void editCustomTarget() {
+    public void editCustomTarget(String login) {
         LoginPage lp = new LoginPage();
         CustomTargetsPage ct = new CustomTargetsPage();
-        ct = lp.doSuccessLogin()
+        ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
                 .showAllCustomTargets()
@@ -111,12 +115,13 @@ public class CustomTargetsTest extends SeleneseTestCase {
      * <li> Click on Delete --> Confirm deletion
      * <li> <font color="green"><b>Verify whether custom target is deleted from the table</b></font>
      */
-    
+	
+	@Parameters("login")
     @Test(enabled = true, priority = 3, groups = {"createAndDeleteCustomTarget"}, dependsOnMethods = {"editCustomTarget"}, retryAnalyzer = RetryAnalyzer.class )
-    public void deleteCustomTarget() {
+    public void deleteCustomTarget(String login) {
         LoginPage lp = new LoginPage();
         CustomTargetsPage ct = new CustomTargetsPage();
-        ct = lp.doSuccessLogin()
+        ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
                 .showAllCustomTargets()
