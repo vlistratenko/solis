@@ -28,12 +28,13 @@ public class ResetPasswordTest extends SeleneseTestCase {
      * <ul>
      * <li> Go to login page
      * <li> Click on 'I forgot' link
-     * <li> Specify your org email address >> Click on Reset My Password button!
-     * <li> Go to email box, find password recovery email and click on the link
+     * <li> Specify CM email address >> Click on 'Reset My Password' button
+     * <li> Go to CM email box, find password recovery email and click on the password reset link
      * <li> Specify new password, fill in 'retype' password and security question fields
-     * <li> Click on Let's go! button
+     * <li> Click on 'Let's go!' button
      * <li> Go to login page
      * <li> <font color="green"><b>Verify whether you're able to login with new password</b></font>
+	 * <li> <font color="green"><b>Verify that password reset confirmation email is delivered</b></font>
      */
 	
 	@Parameters({"login", "emailsAmount", "emailSubject", "password"})
