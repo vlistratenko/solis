@@ -46,7 +46,7 @@ public class HttpClient {
 	String authToken = "";
 	String orgID = "";
 	String orgName = "";
-	String host = "hq.test.ignite.net";
+	String host = "hq.test.igniteaction.net";
 	CloseableHttpClient httpClient = null;
     HttpPost httpost = null;
     HttpGet httpget = null;
@@ -254,6 +254,34 @@ public class HttpClient {
         }
 		httpClient.close();
         return 	response;	 
+	}
+	
+	public Map<String, String> getListOfSocialPages(){
+		Map network = new HashMap();
+		try {
+			sendGETRequest("https://" + host + "/api/organization/"+orgID);
+			
+			
+			for (String temp : JSONResponse){
+				try {
+					network.put("facebook", jsonParser(temp, "payload.socialNetworkPages.0.link").toString());
+					network.put("twitter", jsonParser(temp, "payload.socialNetworkPages.1.link").toString());
+					network.put("instagram", jsonParser(temp, "payload.socialNetworkPages.2.link").toString());
+					network.put("pinterest", jsonParser(temp, "payload.socialNetworkPages.3.link").toString());
+					network.put("youTube", jsonParser(temp, "payload.socialNetworkPages.4.link").toString());
+					network.put("linkedin", jsonParser(temp, "payload.socialNetworkPages.5.link").toString());
+					network.put("tumbler", jsonParser(temp, "payload.socialNetworkPages.6.link").toString());
+							
+				} catch (JSONException e) {
+					logger.error("", e);
+				}
+			}
+			
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return network;
+		
 	}
 	
 	private void updateHeaders() {

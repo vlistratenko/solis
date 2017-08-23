@@ -62,6 +62,11 @@ public class ManagePage  extends HomePage{
 		return new MessageTopicsPage();
 	}
 	
+	public SocialMediaPages switchToAddSocialMediaPage() {
+		switchToDropDown.selectByLabelJS("Social Media Pages");
+		return new SocialMediaPages();
+	}
+	
 	
 	public SocialMediaAccountsPage switchToAddSocialPostsPage() {
 		switchToDropDown.selectByLabelJS("Social Media Accounts");

@@ -2,6 +2,9 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
@@ -18,7 +21,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected String currentWindowHandle;
 	protected TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
 	protected TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget Description");
-	protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnCompose']", "Compose");
+	protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Compose");
 	protected Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Compose");
 	protected Button openPublishStepButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
 	protected CheckBox iNeedHostedPageCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
@@ -180,11 +183,14 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage selectLayoutStep(String type) {
-		  Button lay = new ButtonImpl("(//img[@alt ='"+ type +"'])", type );  
+	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
+		sleep(10);
+		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
 		  lay.click();
 		  composeButton.click();
 		  sleep(10);
 		  return this;
 	}
+		
+
 }

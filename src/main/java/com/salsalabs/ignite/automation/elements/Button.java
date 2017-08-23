@@ -8,4 +8,5 @@ public interface Button extends Element {
 	String getLabel();
 
 	void onClick();
+	
 }
