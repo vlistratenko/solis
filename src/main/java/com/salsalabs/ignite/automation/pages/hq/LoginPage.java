@@ -30,6 +30,12 @@ public class LoginPage extends Browser{
 	Label 		InvalidEmailAddressOrPasswordValidationLabel = new LabelImpl("//*[text()=\"We can't find the email address and password combo you entered. Please try again.\"]", "Invalid email address or password, please try again message");
 	Label 		EmailAddressandPasswordIsRequiredValidationLabel = new LabelImpl("//*[contains(text(),'An email address and password is required to sign in.')]", "An email address and password is required to sign in message");
 	Button      endHelp = new ButtonImpl("//div[@class='inmplayer-popover-button-end inmplayer-button']", "End");
+	Button		iForgotPassword = new ButtonImpl("//label/*[contains(text(),'I forgot')]", "I forgot password button");
+	Button		resetMyPassword = new ButtonImpl("//*[contains(text(),'Password!')]/ancestor::button", "Reset my password button");
+	TextBox		newPassword = new TextBoxImpl("//*[@id='login_fp_new_password']", "New password text field");
+	TextBox		retypeNewPassword = new TextBoxImpl("//*[@id='login_fp_new_password_confirm']", "Retype new password text field");
+	TextBox		securityQuestion = new TextBoxImpl("//p/following-sibling::input", "Security question text field");
+	Button		confirmSendingResetPassword = new ButtonImpl("//*[@id='loginResetPasswordForm']//button[1]", "Let's go! button");
 	
 	public LoginPage(){
 	}
@@ -84,6 +90,41 @@ public class LoginPage extends Browser{
 		return doSuccessLogin(userName, password);
 	}
 	
+	public LoginPage clickIForgotPasswordLink(){
+		iForgotPassword.click();
+		return this;
+	}
+	
+	public LoginPage specifyEmailAddress(String emailAddress) {
+		LoginField.type(emailAddress);
+		return this;
+	}
+
+	public LoginPage specifyNewRecoveryPassword(String password) {
+		newPassword.type(password);
+		return this;
+	}
+
+	public LoginPage retypeNewRecoveryPassword(String password) {
+		retypeNewPassword.type(password);
+		return this;
+	}
+
+	public LoginPage specifySequrityQuestionAnswer(String sequrityQuestionAnswer) {
+		securityQuestion.type(sequrityQuestionAnswer);
+		return this;
+	}
+	
+	public LoginPage clickResetMyPasswordButton(){
+		resetMyPassword.click();
+		return this;
+	}
+
+	public LoginPage confirmResetPassword(){
+		confirmSendingResetPassword.click();
+		return this;
+	}
+	
 	public LoginPage openPage() {
 		super.open();
 		return this;
@@ -109,9 +150,18 @@ public class LoginPage extends Browser{
 		open(getInvitationUrl());
 		return new InviteCompletionPage();
 	}
+
+	public LoginPage openPasswordRecoveryPage() {
+		open(getPasswordRecoveryUrl());
+		return this;
+	}
 	
 	public String getInvitationUrl() {
 		return SeleneseTestCase.emailClient.getURLByEndWord(CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + " has invited you to Salsa Solis. Let's get started.", "completion");
+	}
+
+	public String getPasswordRecoveryUrl() {
+		return SeleneseTestCase.emailClient.getURLByEndWord("Recovering your password.", "rcv");
 	}
 	
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {

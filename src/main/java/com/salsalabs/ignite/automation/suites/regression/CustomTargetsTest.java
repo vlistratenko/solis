@@ -3,7 +3,6 @@ package com.salsalabs.ignite.automation.suites.regression;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
@@ -52,7 +51,8 @@ public class CustomTargetsTest extends SeleneseTestCase {
                 .clickOnCreateCustomTargetButton()
                 .showAllCustomTargets();
         
-        Assert.assertEquals(ct.getTableWithCustomTargets().isValueExistsInTable(CommonUtils.getProperty("customTargetEmailAddress")), true);
+        Assert.assertEquals(ct.getTableWithCustomTargets().isValueExistsInTable(CommonUtils.getProperty("customTargetEmailAddress")), true,
+                "Created custom target is not found in the table with targets");
     }
     
     /**
@@ -93,14 +93,14 @@ public class CustomTargetsTest extends SeleneseTestCase {
                 .showAllCustomTargets()
                 .clickOnCustomTargetByEmail(CommonUtils.getProperty("customTargetEmailAddress"));
         
-        Assert.assertEquals(CommonUtils.getProperty("customTargetFirstName").equals(ct.getFirstNameFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetLastName").equals(ct.getLastNameFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetTitle").equals(ct.getTitleFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetEmailAddress").equals(ct.getEmailAddressFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetCity").equals(ct.getCityFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetZip").equals(ct.getZipCodeFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetFbAccount").equals(ct.getFacebookAccountFieldValue()), true);
-        Assert.assertEquals(CommonUtils.getProperty("customTargetTwitterAccount").equals(ct.getTwitterAccountFieldValue()), true);
+        Assert.assertEquals(CommonUtils.getProperty("customTargetFirstName").equals(ct.getFirstNameFieldValue()), true, "First Name field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetLastName").equals(ct.getLastNameFieldValue()), true, "Last Name field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetTitle").equals(ct.getTitleFieldValue()), true, "Title field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetEmailAddress").equals(ct.getEmailAddressFieldValue()), true, "Email address field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetCity").equals(ct.getCityFieldValue()), true, "City field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetZip").equals(ct.getZipCodeFieldValue()), true, "ZIP field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetFbAccount").equals(ct.getFacebookAccountFieldValue()), true, "FB account field value is other than the one which was specify during form editing");
+        Assert.assertEquals(CommonUtils.getProperty("customTargetTwitterAccount").equals(ct.getTwitterAccountFieldValue()), true, "Twitter field value is other than the one which was specify during form editing");
     }
     
     /**
@@ -129,6 +129,6 @@ public class CustomTargetsTest extends SeleneseTestCase {
                 .clickOnDeleteAction()
                 .confirmCustomTargetDeletion();                
         
-        Assert.assertEquals(ct.getTableWithCustomTargets().isValueExistsInTable(CommonUtils.getProperty("customTargetEmailAddress")), false);
+        Assert.assertEquals(ct.getTableWithCustomTargets().isValueExistsInTable(CommonUtils.getProperty("customTargetEmailAddress")), false, "Deleted custom target is found in the table of custom targets");
     }
 }

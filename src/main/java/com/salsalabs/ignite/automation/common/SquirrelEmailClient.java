@@ -37,7 +37,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 
 	private static final Logger logger = SeleneseTestCase.logger;
 	
-	private String user = "qaignite";
+	private String user = "testauto";
 	private String domain = "@example.ignite.net";
 	
 	private Folder folder;
