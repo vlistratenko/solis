@@ -1,177 +1,183 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.salsalabs.ignite</groupId>
-	<artifactId>ignite-test-automation</artifactId>
-	<version>1</version>
-	<properties>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.salsalabs.ignite</groupId>
+    <artifactId>ignite-test-automation</artifactId>
+    <version>1</version>
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <threads>1</threads>
-        <standalone.binary.root.folder>${project.basedir}/src/test/resources/selenium_standalone_binaries</standalone.binary.root.folder>
+        <standalone.binary.root.folder>${project.basedir}/src/main/resources/selenium_standalone_binaries</standalone.binary.root.folder>
         <remote>false</remote>
         <seleniumGridURL/>
         <platform/>
     </properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.2</version>
-				<inherited>true</inherited>
-				<configuration>
-					<systemPropertyVariables>
-						<USED_ENVIRONMENT>${environment}</USED_ENVIRONMENT>
-						<USED_SERVER>${server}</USED_SERVER>
-						<USED_ADMIN_USER>${adminLogin}</USED_ADMIN_USER>
-						<USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
-						<USED_BROWSER>${browser}</USED_BROWSER>
-					</systemPropertyVariables>
-					<suiteXmlFiles>
-						<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.saucelabs</groupId>
-			<artifactId>sauce_testng</artifactId>
-			<version>2.1.13</version>
-		</dependency>
-		<dependency>
-			<groupId>com.mailosaur</groupId>
-			<artifactId>mailosaur-java</artifactId>
-			<version>1.0.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>LATEST</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>6.7</version>
-			
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>2.45.0</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.dbunit</groupId>
-			<artifactId>dbunit</artifactId>
-			<version>2.4.9</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-   <!--      <dependency>
-			  <groupId>com.sun</groupId>
-			  <artifactId>tools</artifactId>
-			  <version>1.6.0</version>
-			  <scope>system</scope>
-			  <systemPath>${java.home}/../lib/tools.jar</systemPath>
-		</dependency> -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-		<dependency>
-			<groupId>br.eti.kinoshita</groupId>
-			<artifactId>testlink-java-api</artifactId>
-			<version>1.9.8-1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.httpcomponents</groupId>
-					<artifactId>httpcore</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.httpcomponents</groupId>
-					<artifactId>httpclient</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-simple</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
-			<version>1.4.01</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>13.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>net.lightbody.bmp</groupId>
-			<artifactId>browsermob-proxy</artifactId>
-			<version>2.0-beta-9</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.seleniumhq.selenium</groupId>
-					<artifactId>selenium-api</artifactId>
-				</exclusion>
-
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.3.6</version>
-		</dependency>
-		<dependency>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.2</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <systemPropertyVariables>
+                        <USED_ENVIRONMENT>${environment}</USED_ENVIRONMENT>
+                        <USED_SERVER>${server}</USED_SERVER>
+                        <USED_ADMIN_USER>${adminLogin}</USED_ADMIN_USER>
+                        <USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
+                        <USED_BROWSER>${browser}</USED_BROWSER>
+                    </systemPropertyVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.saucelabs</groupId>
+            <artifactId>sauce_testng</artifactId>
+            <version>2.1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mailosaur</groupId>
+            <artifactId>mailosaur-java</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.52.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.7</version>
+            
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>2.45.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>2.23</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+              <groupId>com.sun</groupId>
+              <artifactId>tools</artifactId>
+              <version>1.6.0</version>
+              <scope>system</scope>
+              <systemPath>${java.home}/../lib/tools.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>br.eti.kinoshita</groupId>
+            <artifactId>testlink-java-api</artifactId>
+            <version>1.9.8-1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpcore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>13.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-proxy</artifactId>
+            <version>2.0-beta-9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-api</artifactId>
+                </exclusion>
+ 
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.detro.ghostdriver</groupId>
             <artifactId>phantomjsdriver</artifactId>
             <version>1.1.0</version>
@@ -182,8 +188,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
-	</dependencies>
-	<profiles>
+    </dependencies>
+    <profiles>
         <profile>
             <id>selenium-tests</id>
             <activation>
@@ -197,8 +203,8 @@
                         <version>1.0.5</version>
                         <configuration>
                             <rootStandaloneServerDirectory>${standalone.binary.root.folder}</rootStandaloneServerDirectory>
-                            <downloadedZipFileDirectory>${project.basedir}/src/test/resources/selenium_standalone_zips</downloadedZipFileDirectory>
-                            <customRepositoryMap>${project.basedir}/src/test/resources/RepositoryMap.xml</customRepositoryMap>
+                            <downloadedZipFileDirectory>${project.basedir}/src/main/resources/selenium_standalone_zips</downloadedZipFileDirectory>
+                            <customRepositoryMap>${project.basedir}/src/main/resources/RepositoryMap.xml</customRepositoryMap>
                         </configuration>
                         <executions>
                             <execution>
@@ -237,28 +243,28 @@
                                 <include>**/*WebDriver.java</include>
                             </includes>
                         </configuration>
-					</plugin>
-					
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.2</version>
-						<configuration>
-							<doclet>com.salsalabs.ignite.automation.javadoc.Doclet</doclet>
-							<docletPath>${project.basedir}\target\classes\</docletPath>
-							<excludePackageNames>
-								com.salsalabs.ignite.automation.suites.old:*:com.salsalabs.ignite.automation.tests.old:*
-							</excludePackageNames>	
-						<!-- 
-							<reportOutputDirectory>C:/myoutput</reportOutputDirectory>
-							<destDir>myapidocs</destDir>	
-						-->																			
-						</configuration>
-					</plugin>
+                    </plugin>
+                    
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.2</version>
+                        <configuration>
+                            <doclet>com.salsalabs.ignite.automation.javadoc.Doclet</doclet>
+                            <docletPath>${project.basedir}\target\classes\</docletPath>
+                            <excludePackageNames>
+                                com.salsalabs.ignite.automation.suites.old:*:com.salsalabs.ignite.automation.tests.old:*
+                            </excludePackageNames>    
+                        <!-- 
+                            <reportOutputDirectory>C:/myoutput</reportOutputDirectory>
+                            <destDir>myapidocs</destDir>    
+                        -->                                                                            
+                        </configuration>
+                    </plugin>
     
                 </plugins>
             </build>
         </profile>
     </profiles>
-
+ 
 </project>
