@@ -37,7 +37,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button okButton = new ButtonImpl("//div[.='Insert a merge field']/ancestor::table/descendant::td [contains(@id, 'cke_dialog_footer')]/descendant::a[@title='OK']/span", "Save merge field");
 	TextBox defaultTextField = new TextBoxImpl("//label[contains(text(), 'field empty')]/../descendant::input", "Default text");
 	
-	public AddEmailsPage_PublishTab fillAllFieldsAndGoForward(String subj, String emailFrom, Integer splitsAmount, String link) {
+	public AddEmailsPage_PublishTab fillAllFieldsAndGoForward(String subj, String emailFrom, Integer splitsAmount) {
 		if (splitsAmount < 1) splitsAmount = 1;
 		addSplit(splitsAmount);
 		for (int i = 1; i <= splitsAmount; i++) {

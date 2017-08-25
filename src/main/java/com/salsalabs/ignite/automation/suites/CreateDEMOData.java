@@ -196,7 +196,8 @@ public class CreateDEMOData extends SeleneseTestCase {
 		addSegment(segmentName).
 		openComposePage().
 		selectLayout("Basic").
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html").
+		addLink("organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html").
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().

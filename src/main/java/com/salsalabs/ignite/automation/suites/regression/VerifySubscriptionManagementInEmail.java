@@ -39,7 +39,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
                 addSupporters(emailAddress, 1, "").
                 openComposePage().
                 selectLayout("Basic").
-                fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, null).
+                fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
                 fillAllFieldsAndPublish(100, 1);
         String currentUrl = getDriver().getCurrentUrl();
         getDriver().get(SeleneseTestCase.emailClient.getUnsubscribeLink(emailSubject));

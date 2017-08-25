@@ -47,8 +47,8 @@ public class UnsubscribePage extends Browser{
 	}
 	
 	public UnsubscribePage verifyUnsubscribeIsSuccesses() {
-		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(unsubscribeIsSuccesLabel.isDisplayed(), 10)) {
+		for (int i = 0; i < 15; i++) {
+			if (waitConditionBecomesTrue(unsubscribeIsSuccesLabel.isDisplayed(), 1)) {
 				break;
 			}
 		}

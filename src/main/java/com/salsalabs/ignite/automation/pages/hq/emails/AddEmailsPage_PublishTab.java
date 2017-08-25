@@ -35,6 +35,7 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 	public void selectTimeToSend(String timeToSend) {
 		Button timeToSendButton = new ButtonImpl("//label[contains(text(), '" + timeToSend + "')]", "Select time to send");
 		timeToSendButton.waitElement();
+		timeToSendButton.scrollIntoView();
 		timeToSendButton.click();
 	}
 	

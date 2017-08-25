@@ -89,7 +89,7 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		selectLayout("Basic").
 		addLink("").		
 		AddAllMergeFields().
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1, "").
+		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().
