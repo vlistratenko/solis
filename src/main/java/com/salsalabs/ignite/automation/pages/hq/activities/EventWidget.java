@@ -20,7 +20,7 @@ public class EventWidget extends DonationWidget {
 	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
 	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
-	Button submitButton = new ButtonImpl("//button[@type='Submit']", "Submit", true);
+	Button submitButton = new ButtonImpl("//button[@type='submit']", "Submit", true);
 	
 	public EventWidget() {
 		super();
