@@ -39,6 +39,15 @@ public class DonationsDetailsPage extends DonationsPage {
 		}
 		return this;
 	}
+	
+	public DonationsDetailsPage verifyDonationAmmountAndFee(String amount, String fee) {	
+		sleep(2);
+		donationsTable.scrollIntoView();
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Amount"), amount, "Wrong amount", false);
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Fees Paid By Supporter"), fee, "Wrong amount", false);
+		return this;
+	}
+	
 
 	public DonationsDetailsPage refundDonation(boolean recurringDonation) {
 		if (!recurringDonation) {

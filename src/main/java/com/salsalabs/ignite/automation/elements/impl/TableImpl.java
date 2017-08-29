@@ -69,14 +69,25 @@ public class TableImpl extends ElementImpl implements Table {
 
 	@Override
 	public String getCellValue(int row, String headerName) {
-		return getCellValue(row, getColumnNumberByHeader(headerName));
+		return getCellValue(row, getColumnNumberByHeaderUsingGetClickableHeadersMethod(headerName));
+	}
+	
+	@Override
+	public String getCellValueUsingAllHeadersMethod(int row, String headerName) {
+		return getCellValue(row, getColumnNumberByHeaderUsingGetAllHeadersMethod(headerName));
 	}
 
 	@Override
-	public Integer getColumnNumberByHeader(String header) {
-
-		return this.getHeaders().indexOf(header) + 1;
+	public Integer getColumnNumberByHeaderUsingGetAllHeadersMethod(String header) {
+		return this.getAllHeaders().indexOf(header) + 1;
 	}
+	
+	@Override
+	public Integer getColumnNumberByHeaderUsingGetClickableHeadersMethod(String header) {
+		return this.getClickableHeaders().indexOf(header) + 1;
+	}
+	
+	
 
 	@Override
 	public Integer getRowsCount() {
@@ -132,8 +143,26 @@ public class TableImpl extends ElementImpl implements Table {
 	 * @return
 	 */
 	@Override
-	public List<String> getHeaders() {
+	public List<String> getAllHeaders() {
+		Iterator<WebElement> columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::*").iterator();
+		if (!columns.hasNext()) {
+			columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::*").iterator();
+		}
 
+		ArrayList<String> headers = new ArrayList<String>();
+		while (columns.hasNext()) {
+			WebElement column = columns.next();
+		//	if (!column.getText().equals("") && !headers.contains(column.getText())) {
+			if (!headers.contains(column.getText())) {
+				headers.add(column.getText());
+			}
+			
+		}
+		return headers;
+	}
+	
+	@Override
+	public List<String> getClickableHeaders() {
 		Iterator<WebElement> columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::a").iterator();
 		if (!columns.hasNext()) {
 			columns = findElementsByXpath(path + "/thead/tr/th/descendant-or-self::*").iterator();
@@ -145,6 +174,7 @@ public class TableImpl extends ElementImpl implements Table {
 			if (!column.getText().equals("") && !headers.contains(column.getText())) {
 				headers.add(column.getText());
 			}
+			
 		}
 		return headers;
 	}
@@ -156,4 +186,6 @@ public class TableImpl extends ElementImpl implements Table {
 	public boolean isValueExistsInTable(String value) {
 		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size() > 0;
 	}
+
+	
 }

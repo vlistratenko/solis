@@ -29,7 +29,7 @@ public class MessageTopicsPage extends ManagePage {
 			messageTopicInput.type(topic);
 		}
 		addButton.click();
-		sleep(3);
+		sleep(5);
 
 		return new MessageTopicsPage();
 	}

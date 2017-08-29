@@ -25,7 +25,7 @@ public class Dispatcher extends Browser{
 	
 	public String getValueFromLogs(String columnName, String textForGettingRowNumber) {
 		Integer romN = logsTable.getRowsNumberByValue(textForGettingRowNumber);
-		Integer colN = logsTable.getColumnNumberByHeader(columnName);
+		Integer colN = logsTable.getColumnNumberByHeaderUsingGetAllHeadersMethod(columnName);
 		return logsTable.getCellValue(romN, colN);		
 	}
 	
