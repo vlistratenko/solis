@@ -12,7 +12,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 public class FeeCalculationTest extends SeleneseTestCase {
 	
 	@Parameters({"fundraisingFormUrlWepay" , "expectedVisaFeeValue" , "expectedMasterCardFeeValue"  , "expectedMAmexFeeValue"})
-	@Test(enabled = false,  retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
+	@Test(enabled = true,  retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
 	public void verifyFeeCaclucationDonationFormWepay(String widgetUrlwepayForm, String expectedVisaFeeValue, String expectedMasterCardFeeValue, String expectedMAmexFeeValue){
 		
 		String email = RandomStringUtils.randomAlphabetic(5) + "@uatauto.ignite.net";
@@ -35,7 +35,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 	}
 	
 	@Parameters({"fundraisingFormUrlCardConnect" , "expectedVisaFeeValueCardConnect" , "expectedMasterCardFeeValueCardConnect"  , "expectedMAmexFeeValueCardConnect"})
-	@Test(enabled = false, retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
 	public void verifyFeeCaclucationDonationFormCardConnect(String widgetUrlCardConnectForm, String expectedVisaFeeValueCardConnect, String expectedMasterCardFeeValueCardConnect, String expectedMAmexFeeValueCardConnect){
 		
 		String email = RandomStringUtils.randomAlphabetic(5) + "@uatauto.ignite.net";
