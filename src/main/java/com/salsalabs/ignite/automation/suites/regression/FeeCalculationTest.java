@@ -72,7 +72,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 		fillTheFirstStepOfTheDonationForm(isRecurring, false).
 		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL").
 		fillTheThirdStepOfTheDonationForm("5496198584584769" , "123" , "11" , "2021").
-		clickDonationButton();
+		clickDonationButtonNewForms();
 		lp.doSuccessLogin( login , passward).
 		openDonationsPage().
 		verifyDonationRecordInTable(expectedAmountWithFee, "Charge", isRecurring, widgetName, supporterFirstname + " " +supporterLastname).

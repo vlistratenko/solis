@@ -248,11 +248,21 @@ public class DonationWidget extends SubscribeWidget {
 		verifier.verifyEquals(checkoutSummaryTable.getCellValue(4, 1), correctFeevalue, "Fee value for" + cardType + " in the Purchase summary table is incorrect" , true);
 		return this;
 	}
-	
-	
 
-	
+	/*
+	 * Do not uodate this method. It uses for old form only!!!
+	 * 
+	 */
 	public DonationWidget clickDonationButton() {
+		donateButton.click();
+		sleep(3);
+		return this;
+	}
+	
+	/*
+	 * For all new forms, use this method
+	 */
+	public DonationWidget clickDonationButtonNewForms() {
 		donateNewFormButton.click();
 		sleep(4);
 		return this;
