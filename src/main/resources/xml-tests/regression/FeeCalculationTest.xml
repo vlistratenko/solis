@@ -8,24 +8,10 @@
 		annotations="JDK">
 		<parameter name="USED_BROWSER" value="CHROME"></parameter>
 		<parameter name="login" value="2712.3e41c646@mailosaur.in"></parameter>
-			<parameter name="Passward" value="!QAZ2wsx"></parameter>
+		<parameter name="Passward" value="!QAZ2wsx"></parameter>
 		<parameter name="fundraisingFormUrlWepay" value="https://testvco68e.test.igniteaction.net/fundraiserwepaytest/index.html"></parameter>
 		<parameter name="fundraisingFormUrlCardConnect" value="https://testvco2712.test.igniteaction.net/merchantfeecalculation/index.html"></parameter>
 		<parameter name="widgenName" value="MerchantFeeCalculation"></parameter>
-		
-		<parameter name="expectedVisaFeeValue" value="$2.56"></parameter>
-		<parameter name="expectedMasterCardFeeValue" value="$2.56"></parameter>
-		<parameter name="expectedMAmexFeeValue" value="$3.62"></parameter>
-		
-		<parameter name="expectedFeeValueForAllCardTypesCardConnect" value="$3.18"></parameter>
-		
-		<parameter name="expectedVisaFeeValueCardConnect" value="$3.18"></parameter>
-		<parameter name="expectedMasterCardFeeValueCardConnect" value="$3.18"></parameter>
-		<parameter name="expectedMAmexFeeValueCardConnect" value="$3.18"></parameter>
-		<parameter name="expectedFeeValueCardConnect" value="$103.18"></parameter>
-		
-		
-		
 		<groups>
 			<run>
 				<include name="feeCalculation" />
