@@ -249,7 +249,10 @@ public class HttpClient {
                 (response.getEntity().getContent())));
         String output;
         while ((output = br.readLine()) != null) {
-        	SeleneseTestCase.logger.info("Response: " + output.substring(0, 3000));
+        	SeleneseTestCase.logger.debug("Response: " + output);
+        	String infoOutput = output;
+        	if (infoOutput.length() > 3000)infoOutput = infoOutput.substring(0, 3000);
+        	SeleneseTestCase.logger.info("Response: " + infoOutput);
         	JSONResponse.add(output);
         }
 		httpClient.close();
