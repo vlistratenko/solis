@@ -240,7 +240,15 @@ public class Supporter {
 	}
 
 	public JSONObject getSupporterJSON(String email) throws JSONException {
-		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName + "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\",\"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
+		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName + "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\", \"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
+				+ "\"},{\"type\":\"MessagingEmail\",\"value\":\"" + email + "\",\"status\":\"OptedIn\"},{\"type\":\"SocialFacebook\",\"value\":\"" + facebook + "\"},{\"type\":\"SocialTwitter\",\"value\":\"" + twitter
+				+ "\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\"" + addressLine1 + "\",\"line2\":\"" + addressLine2 + "\",\"city\":\"" + city + "\",\"state\":\"" + state + "\",\"zip\":\""
+				+ zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
+		return new JSONObject(j);
+	}
+	
+	public JSONObject getSupporterJSONWithExternalId(String email, String externalSystemId) throws JSONException {
+		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName + "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\",\"externalSystemId\":\"" + externalSystemId + "\" , \"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
 				+ "\"},{\"type\":\"MessagingEmail\",\"value\":\"" + email + "\",\"status\":\"OptedIn\"},{\"type\":\"SocialFacebook\",\"value\":\"" + facebook + "\"},{\"type\":\"SocialTwitter\",\"value\":\"" + twitter
 				+ "\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\"" + addressLine1 + "\",\"line2\":\"" + addressLine2 + "\",\"city\":\"" + city + "\",\"state\":\"" + state + "\",\"zip\":\""
 				+ zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
