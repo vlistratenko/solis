@@ -9,9 +9,10 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
+//old  not working assets tests, need to be removed
 public class AddAssetImageTest extends SeleneseTestCase {
 	
-	@Parameters({"imageToUpload"})
+	/*@Parameters({"imageToUpload"})
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class, groups={"qa2"})
 	public void addNewAssetImage(String imageToUpload) {
@@ -46,9 +47,9 @@ public class AddAssetImageTest extends SeleneseTestCase {
 		LoginPage page = new LoginPage();
 		page.doSuccessLogin(CommonUtils.getProperty(PropertyName.ASSETS_USERNAME), CommonUtils.getProperty(PropertyName.ASSETS_PASSWORD)).
 		openAssetsPage().
-		deleteImage(imageToDelete).
+		searchAndDeleteImage(imageToDelete).
 		verifyImageIsDeleted(imageToDelete);
 		
-	}
+	}*/
 
 }
