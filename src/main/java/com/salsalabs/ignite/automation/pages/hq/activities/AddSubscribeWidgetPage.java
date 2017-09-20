@@ -187,6 +187,12 @@ public class AddSubscribeWidgetPage extends HomePage {
 		sleep(10);
 		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
 		  lay.click();
+		  waitConditionBecomesTrue(composeButton.isDisplayed(),  5);
+		  if(composeButton.isDisplayed()){
+			  composeButton.click();
+		  }else{
+			  waitConditionBecomesTrue(composeButton.isDisplayed(),  5);
+		  }
 		  composeButton.click();
 		  sleep(10);
 		  return this;
