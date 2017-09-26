@@ -151,6 +151,7 @@ public class DonationWidget extends SubscribeWidget {
 	public DonationWidget fillTheFirstStepOfTheDonationForm(String amount, boolean recurringChecbox,
 			boolean feeCheckBox) {
 		if (recurringChecbox) {
+			verifier.verifyElementIsDisplayed(true, recurringDonationCheckBoxMultiSpepForm);
 			recurringDonationCheckBoxMultiSpepForm.check();
 			donationAmountInput.changePath("//input[@name='customOneTime']", "//input[@name='customRecurringAmount']");
 		}

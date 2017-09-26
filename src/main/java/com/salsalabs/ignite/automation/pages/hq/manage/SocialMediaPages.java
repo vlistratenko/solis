@@ -5,6 +5,11 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.openqa.selenium.support.ui.Wait;
+
+import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DragableElement;
@@ -12,6 +17,7 @@ import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DragableElementImp;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddPetitionPage;
 //import com.thoughtworks.selenium.webdriven.commands.WaitForCondition;
 
 public class SocialMediaPages  extends ManagePage{
@@ -51,10 +57,18 @@ public class SocialMediaPages  extends ManagePage{
 		 tumblrPageInputField.type(Tumbler);
 		 savePageButton.click();
 		 sleep(2);
-		 waitConditionBecomesTrue(configurationSavedPopUp.isNotDisplayed(), 3);
-		 if (configurationSavedPopUp.isDisplayed()) {
+		 for(int i = 0  ; i<3; i ++){
+			if( waitConditionBecomesTrue(configurationSavedPopUp.isNotDisplayed(), 3)){
+				 if (configurationSavedPopUp.isDisplayed()) {
+					 configurationSavedPopUpCloseUp.click();
+				 }		
+				break;
+			} 
+		 }
+		 if(configurationSavedPopUpCloseUp.isDisplayed()){
 			 configurationSavedPopUpCloseUp.click();
-		 }		 
+		 }
+		
 		 return this;
 	 }
 	 
