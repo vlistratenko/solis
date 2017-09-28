@@ -3,11 +3,15 @@ package com.salsalabs.ignite.automation.pages.hq.manage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.tools.ant.taskdefs.WaitFor;
+import org.openqa.selenium.WebElement;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -27,6 +31,9 @@ public class CustomFieldsPage extends ManagePage {
 
 	private Button createCFBtn = new ButtonImpl("//button[contains (text(), 'Supporter Custom ')]",
 			"Create a Supporter Custom Field Button", true);
+	private Button createActivityCFBtn = new ButtonImpl("//span[contains(text(), ' Create an Activity')]/parent::button",
+			"Create a Supporter Custom Field Button", true);
+	
 	private Button nextFieldDetails = new ButtonImpl("//*[@autotest-id='btn_next_step1_custom_field_create']",
 			"Next: Field Details » »", true);
 	private TextBox fieldName = new TextBoxImpl("//*[@id='name']", "Field Name", true);
@@ -51,7 +58,37 @@ public class CustomFieldsPage extends ManagePage {
 	private Button cancelButton = new ButtonImpl("//button[contains(text() , 'Cancel')]", "Cancel Button");
 	Button closeModalWindowButton = new ButtonImpl("//a[@class='f-dropdown-close']", "Close Dialog Message BUtton");
 	private Button customFieldButton;
+	private Button activityCustomFields = new ButtonImpl("//a[contains(text(), 'Activity Custom Fields')]",
+			"Create a Supporter Custom Field Button", true);
+	private Button feedbackMessage = new ButtonImpl("	//div[@class='feedback-message']",	"Feedback message");
 
+
+	public CustomFieldsPage openActivittiesCustomFieldsTab() {
+		activityCustomFields.clickJS();
+		sleep(1);
+		return this;
+	}
+	
+	public CustomFieldsPage selectActivityCustomField(String activityName) {
+		if(!createActivityCFBtn.isDisplayed()){
+			waitConditionBecomesTrue(createActivityCFBtn.isDisplayed(), 4);
+		}
+		createActivityCFBtn.scrollIntoView();
+		sleep(2);
+		if(feedbackMessage.isDisplayed()){
+			Button closeModalWindowButton = new ButtonImpl("//a[@class='close']", "Close Dialog Message BUtton");
+			if(closeModalWindowButton.isDisplayed()){
+				closeModalWindowButton.click();
+			}
+			sleep(2);
+		}
+		
+		createActivityCFBtn.clickJS();
+		Button form = new ButtonImpl("//a[contains(text(), '"+activityName+"')]",	" Custom Field with type + " + activityName , true);
+		form.click();
+		return this;
+	}
+	
 	public void createCustomField(String customFieldType) {
 		createCustomField(CustomFieldType.valueOf(customFieldType));
 	}
@@ -60,8 +97,13 @@ public class CustomFieldsPage extends ManagePage {
 		return this.createCustomField(new CustomField(cfType, cfType.name() + "_" + CommonUtils.getUnicName()));
 	}
 
-	public CustomFieldsPage createCustomField(CustomField customField) {
+	public CustomFieldsPage clickCreatesupporterCustomFieldButton(){
 		createCFBtn.clickJS();
+		return this;
+	}
+	
+	
+	public CustomFieldsPage createCustomField(CustomField customField) {
 		CustomFieldType cfType = customField.getType();
 		customFieldButton = new ButtonImpl(cfType.getXpath(), cfType.name(), true);
 		customFieldButton.clickJS();
@@ -89,12 +131,17 @@ public class CustomFieldsPage extends ManagePage {
 
 	public CustomFieldsPage deleteCustomField(String customFieldName) {
 		CheckBox select = new CheckBoxImpl(
-				"//table//tbody/tr/td[@title='" + customFieldName + "']/preceding-sibling:: td/input", "Delete");
+				"//table//tbody/tr/td[contains(@title, '"+ customFieldName+"')]/preceding-sibling:: td/input", "Delete");
 		if (!select.isDisplayed()) {
 			waitConditionBecomesTrue(select.isDisplayed(), 4);
 		}
 		select.scrollIntoView();
-		select.check();
+		List<WebElement> checkboxs =  select.findElementsByXpath("//table//tbody/tr/td[contains(@title, '"+ customFieldName+"')]/preceding-sibling:: td/input");
+		for (WebElement webElement : checkboxs) {
+			if(!webElement.isSelected()){
+				webElement.click();
+			}	
+		}
 		waitConditionBecomesTrue(actionsDropDownLink.isDisplayed(), 4);
 		actionsDropDownLink.clickJS();
 		deleteButton.click();
@@ -232,6 +279,8 @@ public class CustomFieldsPage extends ManagePage {
 		 verifier.verifyElementIsDisplayed(singleChoiceOption3AfterEditing);
 		return this;
 	}
+	
+
 	
 
 	public static class CustomField {
