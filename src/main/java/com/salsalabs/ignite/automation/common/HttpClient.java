@@ -136,6 +136,7 @@ public class HttpClient {
 	         				sup.city = jsonParser(temp, "payload.supporters." + i + ".addresses.0.city").toString();
 	         				sup.state = jsonParser(temp, "payload.supporters." + i + ".addresses.0.state").toString();	    
 	         				sup.finalEMAIL = jsonParser(temp, "payload.supporters." + i + ".contacts.0.value").toString();
+	         				sup.finalEMAIL = sup.finalEMAIL.replace("ignite.net", "igniteaction.net");
 	         				sup.source = jsonParser(temp, "payload.supporters." + i + ".source").toString();
 	         				data.put(i, sup);
 	         			}

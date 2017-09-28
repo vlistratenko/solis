@@ -33,7 +33,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 
 	private static final String innerImapHost = "ignite-mailstore1.ignite.net";
 	private static final String password = "ignite";
-	private static final String suffix = ".ignite.net";
+	private static final String suffix = ".igniteaction.net";
 
 	private static final Logger logger = SeleneseTestCase.logger;
 	

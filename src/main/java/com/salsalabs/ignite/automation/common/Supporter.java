@@ -327,7 +327,7 @@ public class Supporter {
 		sup.spouseConstituentNumber = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseConstituentNumber;
 		sup.spouseFirstName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseFirstName;
 		sup.spouseTitle = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).spouseTitle;
-		sup.finalEMAIL = sup.firstName + "." + sup.lastorOrgName + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net";
+		sup.finalEMAIL = sup.firstName + "." + sup.lastorOrgName + CommonUtils.getRandomNumericValueFixedLength(4) + SeleneseTestCase.emailClient.getEmailBox("");
 		return sup;
 	}
 }
