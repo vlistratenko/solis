@@ -312,8 +312,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	@Test(groups = {"submitp2pEventRandom"}, retryAnalyzer = RetryAnalyzer.class)
 	public void testSubmitp2pEventBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
 		
-		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
-		logger.info("Amount of donations " + amountOfDonations);
+		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);
 		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();
 		String urls[] = CommonUtils.getArrayFromStringBySymbol(formURL, "%");
 		loginPage = new LoginPage(true);
@@ -323,7 +322,14 @@ public class CreateDEMOData extends SeleneseTestCase {
 					lname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).lastorOrgName;
 			Boolean isFundraiser = CommonUtils.getRandomBoolean();
 			Boolean isWithTickets = CommonUtils.getRandomBoolean();//if false and isFundraiser is false then it = donation only
-			logger.info("Is event with registration - " + isWithTickets);
+			logger.info("Test data:");
+			logger.info("Amount of donations " + amountOfDonations);
+			if (!isFundraiser && !isWithTickets) {
+				logger.info("This is Donation only submition");
+			}else{
+				logger.info("Is event with fundraiser creation - " + isFundraiser);
+				logger.info("Is event with registration - " + isWithTickets);
+			}
 			if (!isFundraiser) {
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				Eventp2pWidget eventp2pWidgetPage = loginPage.
