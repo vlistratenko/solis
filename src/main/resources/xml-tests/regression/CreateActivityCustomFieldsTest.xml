@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Create Custom Field" parallel="false" thread-count="1">
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_BROWSER" value="CHROME"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="login" value="autoTest.74580786@mailosaur.in"></parameter>
+	<parameter name="Passward" value="!QAZ2wsx"></parameter>
+	<test verbose="2" name="Create All Activity  Custom Fields FIREFOX"
+		annotations="JDK">
+		<groups>
+			<run>
+				<include name="CreateAllActivityCustomFields" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="com.salsalabs.ignite.automation.suites.regression.CreateActivityCustomFieldsTest" />
+		</classes>
+	</test>
+
+</suite>
