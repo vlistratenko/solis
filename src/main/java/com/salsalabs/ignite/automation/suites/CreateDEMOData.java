@@ -239,7 +239,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				if (!isWithTickets) {
 					eventWidgetPage.
 					openEventRegistrationPage().
-					fillEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+					fillEventRegistrationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 							fname,
 							lname);					
 				}else{
@@ -247,7 +247,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				}
 				
 				eventWidgetPage.
-				fillEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+				fillEventDonationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 					fname,
 					lname,
 					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
@@ -341,7 +341,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 					selectFundraiserCheckBox(isFundraiser).
 					selectQtyOfAttendee().
 					clickNextButtonOnRegistrationTypesPage().
-					fillp2pEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+					fillp2pEventRegistrationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 							fname,
 							lname).
 					clickCheckOutButton();					
@@ -351,7 +351,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				}
 				
 				eventp2pWidgetPage.
-				fillp2pEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+				fillp2pEventDonationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 					fname,
 					lname,
 					sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
@@ -381,7 +381,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 					clickNextButtonOnRegistrationTypesPage().
 					fillFundraiserSignInForm(fname,
 							lname,
-							fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 							"!QAZ2wsx", 
 							"!QAZ2wsx").
 					clickCheckOutButton();					
@@ -393,16 +393,16 @@ public class CreateDEMOData extends SeleneseTestCase {
 					clickNextButtonOnRegistrationTypesPage().
 					fillFundraiserSignInForm(fname,
 							lname,
-							fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+							SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 							"!QAZ2wsx", 
 							"!QAZ2wsx").
-					fillp2pEventRegistrationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+					fillp2pEventRegistrationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 									fname,
 									lname).
 					clickCheckOutButton();	
 					}
 				eventp2pWidgetPage.
-				fillp2pEventDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+				fillp2pEventDonationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 						fname,
 						lname,
 						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
