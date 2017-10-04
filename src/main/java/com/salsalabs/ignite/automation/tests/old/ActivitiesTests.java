@@ -237,8 +237,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 				supporter.getCity(),				
 				supporter.getZipCode(),
 				supporter.getFacebook(),
-				supporter.getTwitter(),
-				"Subscribed");
+				supporter.getTwitter());
 				CommonUtils.setProperty(PropertyName.SUBSCRIBED_SUPPORTER, supporterEmail);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}

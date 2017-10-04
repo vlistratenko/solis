@@ -196,7 +196,6 @@ public class CreateActivityCustomFieldsTest extends SeleneseTestCase {
 	}
 	
 	
-	
 
 	private CustomField generateCustomField(CustomFieldType customFieldType, String activityTypeUnickName) {
 		return new CustomField(customFieldType, customFieldType.name() + "_" + CommonUtils.getUnicName() + " " + activityTypeUnickName);

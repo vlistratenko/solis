@@ -11,6 +11,8 @@ import java.util.Random;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.tools.ant.taskdefs.WaitFor;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.openqa.selenium.WebElement;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
@@ -61,7 +63,6 @@ public class CustomFieldsPage extends ManagePage {
 	private Button activityCustomFields = new ButtonImpl("//a[contains(text(), 'Activity Custom Fields')]",
 			"Create a Supporter Custom Field Button", true);
 	private Button feedbackMessage = new ButtonImpl("	//div[@class='feedback-message']",	"Feedback message");
-
 
 	public CustomFieldsPage openActivittiesCustomFieldsTab() {
 		activityCustomFields.clickJS();
@@ -152,6 +153,42 @@ public class CustomFieldsPage extends ManagePage {
 		verifier.verifyTrue(field.isNotExists(), "Custom field still exists");
 		return this;
 	}
+	
+	public JSONObject getTextBoxCustomFieldJson(String type, String cfName) throws JSONException{
+		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"supporterCustomFieldds\",\"dataType\":\"TEXT\",\"controlType\":\"INPUT\","
+				+ "\"ghostText\":\"\",\"defaultValue\":\"\","
+				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{\"minValue\":0,\"maxValue\":256,\"textValidation\":\"ANY_CHARACTER\"}}}";
+		return new JSONObject(json);
+				
+	}
+	
+	public JSONObject getSingleChoiceCustomFieldJson(String type, String cfName) throws JSONException{
+		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"111\",\"dataType\":\"TEXT\",\"controlType\":\"RADIO\",\"controlOrientation\":\"VERTICAL\","
+				+ "\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[{\"value\":\"\",\"label\":\"No Selection\"},{\"value\":\"1choice\",\"label\":\"1choice\"},"
+				+ "{\"value\":\"2choice\",\"label\":\"2choice\"}],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
+		return new JSONObject(json);			
+	}
+	
+	public JSONObject getDateCustomFieldJson(String type, String cfName) throws JSONException{
+		String json = " {\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"dateTime1\",\"dataType\":\"DATE\",\"controlType\":\"DATE\",\"ghostText\":\"\",\"defaultValue\":\"\","
+				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
+		return new JSONObject(json);			
+	}
+	
+	public JSONObject getBoleanCustomFieldJson(String type, String cfName) throws JSONException{
+		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"Description\",\"dataType\":\"BOOLEAN\",\"controlType\":\"RADIO\",\"controlOrientation\":\"HORIZONTAL\",\"ghostText\":\"\","
+				+ "\"defaultValue\":true,\"valueLabels\":[{\"value\":true,\"label\":\"True\"},{\"value\":false,\"label\":\"False\"}],\"activityType\":\"\",\"type\":\""+type+"\"}}";
+		return new JSONObject(json);			
+	}
+	
+	public JSONObject getNumberCustomFieldJson(String type, String cfName) throws JSONException{
+		String json = "	{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"Number111\",\"dataType\":\"NUMBER\",\"controlType\":\"INPUT\",\"ghostText\":\"numberGhostText\",\"defaultValue\":\"\","
+				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
+		return new JSONObject(json);			
+	}
+	
+	
+	
 
 	private void constructSingleChoiceOptions() {
 		String[] singlechoiceOptions = { "1", "2", "3" };
@@ -281,7 +318,6 @@ public class CustomFieldsPage extends ManagePage {
 	}
 	
 
-	
 
 	public static class CustomField {
 		private CustomFieldType type;

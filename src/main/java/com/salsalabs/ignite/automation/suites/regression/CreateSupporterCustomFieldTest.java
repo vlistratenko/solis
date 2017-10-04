@@ -22,7 +22,10 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 			page = doLoginAndOpenCustomFieldPage(login, passward );
 		}
 		CustomField cf = generateCustomField(cfType);
-		page.createCustomField(cf).deleteCustomField(cf);
+		page.
+		clickCreatesupporterCustomFieldButton().
+		createCustomField(cf).
+		deleteCustomField(cf);
 	}
 
 
@@ -34,6 +37,7 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 		}
 		CustomField cf = generateCustomField(CustomFieldType.TextBox);
 		page.
+		clickCreatesupporterCustomFieldButton().
 		createCustomField(cf).
 		deleteCustomField(cf);
 	}
@@ -47,7 +51,10 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 		}
 
 		CustomField cf = generateCustomField(CustomFieldType.Number);
-		page.createCustomField(cf).deleteCustomField(cf);
+		page.
+		clickCreatesupporterCustomFieldButton().
+		createCustomField(cf).
+		deleteCustomField(cf);
 	}
 
 	@Parameters({ "login", "Passward" })
@@ -57,7 +64,9 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 			page = doLoginAndOpenCustomFieldPage(login, passward );
 		}
 		CustomField cf = generateCustomField(CustomFieldType.YesNo);
-		page.createCustomField(cf).deleteCustomField(cf);
+		page.clickCreatesupporterCustomFieldButton().
+		createCustomField(cf).
+		deleteCustomField(cf);
 	}
 
 
@@ -69,6 +78,7 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 		}
 		CustomField cf = generateCustomField(CustomFieldType.DateTime);
 		page.
+		clickCreatesupporterCustomFieldButton().
 		createCustomField(cf).
 		deleteCustomField(cf);
 	}
@@ -82,6 +92,7 @@ public class CreateSupporterCustomFieldTest extends SeleneseTestCase {
 		}
 		CustomField cf = generateCustomField(CustomFieldType.SingleChoice);
 		page.
+		clickCreatesupporterCustomFieldButton().
 		createCustomField(cf).
 		deleteCustomField(cf);
 	}

@@ -1,42 +1,77 @@
 package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
+import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
-public class SupportersAddPage extends HomePage{
+public class SupportersAddPage extends HomePage {
 
 	TextBox supporterEmailField = new TextBoxImpl("//input[@name='MessagingEmail']", "Supporter email");
+	TextBox supporterExternalId = new TextBoxImpl("//input[@name='externalSystemId']", "Supporter External id");
+	TextBox supporterBirthDateField = new TextBoxImpl("//input[@name='birthDate']", "Supporter Birthdate");
 	TextBox supporterFirstNameField = new TextBoxImpl("//input[@name='first_name']", "Supporter first name");
-	TextBox supporterLastNameField = new TextBoxImpl("//input[@name='last_name']","Supporter last name");
-	TextBox supporterPhoneField = new TextBoxImpl  ("//input[@name='phone']", "Phone");
+	TextBox supporterLastNameField = new TextBoxImpl("//input[@name='last_name']", "Supporter last name");
+	TextBox supporterMiddleName = new TextBoxImpl("//input[@name='middle_name']", "Supporter middle name");
+	TextBox supporterPhoneField = new TextBoxImpl("//input[@name='phone']", "Phone");
 	TextBox supporterStreetField = new TextBoxImpl("//input[@name='line1']", "Street");
 	TextBox supporterCityField = new TextBoxImpl("//input[@name='city']", "City");
-	DropDown supporterStatesField = new DropDownImpl("//custom-select2[@data='states']/div/ul/li", "//custom-select2[@data='states']/div/a", "States");
+	DropDown supporterStatesField = new DropDownImpl("//custom-select2[@data='states']/div/ul/li",	"//custom-select2[@data='states']/div/a", "States");
 	TextBox supporterZipField = new TextBoxImpl("//input[@name='zip']", "Zip");
 	TextBox supporterFaceBookField = new TextBoxImpl("//input[@id='SocialFacebook']", "FaceBook");
 	TextBox supporterTwitterField = new TextBoxImpl("//input[@id='SocialTwitter']", "Twitter");
-	TextBox supporterGooglePlusField  = new TextBoxImpl("//input[@id='SocialGooglePlus']", "GooglePlus");
-	Label supporterStatusRadio = new LabelImpl("//span[@class='subscription custom radio checked']/ancestor::label", "Status");
+	TextBox supporterLnField = new TextBoxImpl("//input[@id='SocialLinkedIn']", "Twitter");
+	TextBox supporterGooglePlusField = new TextBoxImpl("//input[@id='SocialGooglePlus']", "GooglePlus");
+	Label supporterStatusRadio = new LabelImpl("//span[@class='subscription custom radio checked']/ancestor::label","Status");
 	Label supporterStatusLabel = new LabelImpl("//p[.='Unsubscribed']", "Status");
 	Button saveButton = new ButtonImpl("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
 	Label supporterSubscriptions = new LabelImpl("//a[text()='Subscription']", "Subscription tab");
+	Table supporterTable = new TableImpl("//table", "Supporter Table");
+	Button customFieldAccordion = new ButtonImpl("//h2[@ng-click='toggleAccordion(customFields)']","Custom  Fields Accordion Button");
+	Button doneCalendarButton = new ButtonImpl("//button[contains(text(), 'Done')]", "Done calenard button   Button");
+
+	LocalDate date = LocalDate.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	String dateValue = date.format(formatter);
+	String supportercustomFieldtextBoxValue = "textBoxValue";
+	String supportercustomFieldNumberBoxValue = "777";
+	final String customFiledType = "PERSON";
 
 	public SupportersPage createNewSupporter() {
 		return createNewSupporter(Supporter.generateSupporter());
 	}
-	
+
 	public SupportersPage createNewSupporter(Supporter supporter) {
 		supporterEmailField.type(supporter.getFinalEMAIL());
+		supporterExternalId.type(supporter.getExternalId());
+		supporterBirthDateField.type(supporter.getBirthdate());
+		if (doneCalendarButton.isDisplayed()) {
+			doneCalendarButton.click();
+			sleep(1);
+		}
 		supporterFirstNameField.type(supporter.getFirstName());
 		supporterLastNameField.type(supporter.getLastName());
+		supporterMiddleName.type(supporter.getMiddleName());
 		supporterPhoneField.type(supporter.getcPhone());
 		supporterStreetField.type(supporter.getAddressLine1());
 		supporterCityField.type(supporter.getCity());
@@ -44,13 +79,99 @@ public class SupportersAddPage extends HomePage{
 		supporterZipField.type(supporter.getZipCode());
 		supporterFaceBookField.type(supporter.getFacebook());
 		supporterTwitterField.type(supporter.getTwitter());
+		supporterLnField.type(supporter.getLinkedin());
 		saveButton.click();
-		sleep(10);
+		for (int i = 0; i < 3; i++) {
+			if (waitConditionBecomesTrue(supporterTable.isDisplayed(), 5))
+				;
+			break;
+		}
 		return new SupportersPage();
 	}
-	
-	public SupportersPage verifySupporterData(String email, String fName, String lName, String phone, String addressLine1,
-			String city, String zipCode, String faceBook, String twitter, String status) {
+
+	public SupportersPage createNewSupporterWithCustomFields(String login, String passward, Supporter supporter,
+			String texBoxCustomFieldName, String dateCustomFieldName, String numberCustomFieldName,
+			String singleChoiceCustomFieldName, String yesNoCustomFieldName)
+			throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException,
+			URISyntaxException, IOException, JSONException {
+		TextBox textBoxCf = new TextBoxImpl("//input[@name='" + texBoxCustomFieldName + "']", "Text Box custom Field");
+		TextBox dateCf = new TextBoxImpl("//input[@name='" + dateCustomFieldName + "']", "Date custom Field");
+		TextBox numberCf = new TextBoxImpl("//input[@name='" + numberCustomFieldName + "']", "Number  custom Field");
+
+		// firstLetter is capitalized on a Supporter Details Page
+		String singleChoice = singleChoiceCustomFieldName.substring(0, 1).toUpperCase()
+				+ singleChoiceCustomFieldName.substring(1);
+		Button singleChoiceCF = new ButtonImpl(
+				"//label[contains(text(), '" + singleChoice
+						+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., '2choice')]",
+				"Single Choice   custom Field");
+		String booleanOption = yesNoCustomFieldName.substring(0, 1).toUpperCase() + yesNoCustomFieldName.substring(1);
+		Button yesNoCf = new ButtonImpl(
+				"//label[contains(text(), '" + booleanOption
+						+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., 'False')]",
+				"Yes No   custom Field");
+
+		if (textBoxCf.isNotExists() & dateCf.isNotExists() & numberCf.isNotExists() & singleChoiceCF.isNotExists()
+				& yesNoCf.isNotExists()) {
+			CustomFieldsPage customFieldsPage = new CustomFieldsPage();
+			new HttpClient().login(login, passward)
+					.createCustomField(	customFieldsPage.getTextBoxCustomFieldJson(customFiledType, texBoxCustomFieldName))
+					.createCustomField(customFieldsPage.getSingleChoiceCustomFieldJson(customFiledType,singleChoiceCustomFieldName))
+					.createCustomField(customFieldsPage.getDateCustomFieldJson(customFiledType, dateCustomFieldName))
+					.createCustomField(customFieldsPage.getBoleanCustomFieldJson(customFiledType, yesNoCustomFieldName))
+					.createCustomField(	customFieldsPage.getNumberCustomFieldJson(customFiledType, numberCustomFieldName));
+			refresh();
+			waitConditionBecomesTrue(supporterEmailField.isDisplayed(), 5);
+		}
+
+		supporterEmailField.type(supporter.getFinalEMAIL());
+		supporterExternalId.type(supporter.getExternalId());
+		supporterBirthDateField.type(supporter.getBirthdate());
+		if (doneCalendarButton.isDisplayed()) {
+			doneCalendarButton.click();
+			sleep(1);
+		}
+		supporterFirstNameField.type(supporter.getFirstName());
+		supporterLastNameField.type(supporter.getLastName());
+		supporterMiddleName.type(supporter.getMiddleName());
+		supporterPhoneField.type(supporter.getcPhone());
+		supporterStreetField.type(supporter.getAddressLine1());
+		supporterCityField.type(supporter.getCity());
+		supporterStatesField.selectByID(CommonUtils.getRandomValueFromTo(1, 5, 0));
+		supporterZipField.type(supporter.getZipCode());
+		supporterFaceBookField.type(supporter.getFacebook());
+		supporterTwitterField.type(supporter.getTwitter());
+		supporterLnField.type(supporter.getLinkedin());
+		if (customFieldAccordion.isDisplayed()) {
+			customFieldAccordion.scrollIntoView();
+			customFieldAccordion.click();
+			textBoxCf.scrollIntoView();
+			textBoxCf.type(supportercustomFieldtextBoxValue);
+			dateCf.scrollIntoView();
+			dateCf.type(dateValue);
+			if (doneCalendarButton.isDisplayed()) {
+				doneCalendarButton.click();
+				sleep(1);
+			}
+			numberCf.scrollIntoView();
+			numberCf.type(supportercustomFieldNumberBoxValue);
+			singleChoiceCF.scrollIntoView();
+			singleChoiceCF.click();
+			yesNoCf.scrollIntoView();
+			yesNoCf.click();
+		}
+
+		saveButton.click();
+		for (int i = 0; i < 3; i++) {
+			if (waitConditionBecomesTrue(supporterTable.isDisplayed(), 5))
+				;
+			break;
+		}
+		return new SupportersPage();
+	}
+
+	public SupportersAddPage verifySupporterData(String email, String fName, String lName, String phone,
+			String addressLine1, String city, String zipCode, String faceBook, String twitter) {
 		verifier.verifyEquals(supporterEmailField.getValue().contains(email), true, "Wrong email", false);
 		verifier.verifyEquals(supporterFirstNameField.getValue().contains(fName), true, "Wrong firstname", false);
 		verifier.verifyEquals(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
@@ -60,15 +181,45 @@ public class SupportersAddPage extends HomePage{
 		verifier.verifyEquals(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verifier.verifyEquals(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verifier.verifyEquals(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
-		verifySupporterStatus(status);
-		return new SupportersPage();
+		return new SupportersAddPage();
 	}
-	
+
+	public SupportersAddPage verifySupporterCustomFieldData(String externalId, String supporterDateOfBirth,
+			String middleName, String linkedin, String texBoxCustomFieldName, String dateCustomFieldName,
+			String numberCustomFieldName, String yesNoCustomFieldName, String singleChoiceCustomFieldName) {
+		// some of the  non-custom fields were included in this method verification in order not to break the old verifySupporterData() method which is used in multiple places
+		verifier.verifyEquals(supporterExternalId.getValue().contains(externalId), true, "Wrong External ID", false);
+		verifier.verifyEquals(supporterBirthDateField.getValue().contains(supporterDateOfBirth), true,
+				"Wrong BirthDate field", false);
+		verifier.verifyEquals(supporterMiddleName.getValue().contains(middleName), true, "Wrong Middle name", false);
+		verifier.verifyEquals(supporterLnField.getValue().contains(linkedin), true, "Wrong Middle name", false);
+		if (customFieldAccordion.isDisplayed()) {
+			customFieldAccordion.scrollIntoView();
+			customFieldAccordion.click();
+			verifier.verifyEquals(supporterLnField.getValue().contains(linkedin), true, "Wrong Middle name", false);
+			TextBox textBoxCf = new TextBoxImpl("//input[@name='" + texBoxCustomFieldName + "']",	"Text Box custom Field");
+			verifier.verifyEquals(textBoxCf.getValue().contains(supportercustomFieldtextBoxValue), true, "Wrong Text Box Custom Field Value");
+			TextBox dateCf = new TextBoxImpl("//input[@name='" + dateCustomFieldName + "']", "Date custom Field");
+			verifier.verifyEquals(dateCf.getValue().contains(dateValue), true, "Wrong Text Box Custom Field Value");
+			TextBox numberCf = new TextBoxImpl("//input[@name='" + numberCustomFieldName + "']", "Number  custom Field");
+			verifier.verifyEquals(numberCf.getValue().contains(supportercustomFieldNumberBoxValue), true,
+					"Wrong Number Custom Field Value");
+			String booleanOption = yesNoCustomFieldName.substring(0, 1).toUpperCase()+ yesNoCustomFieldName.substring(1);
+			TextBox yesNoCf = new TextBoxImpl(	"//label[contains(text(), '" + booleanOption
+							+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., 'False')]","Yes No   custom Field");
+			verifier.verifyEquals(yesNoCf.isNotExists(), false, "Wrong yesNO Custom Field Value");
+			String singleChoice = singleChoiceCustomFieldName.substring(0, 1).toUpperCase()+ singleChoiceCustomFieldName.substring(1);
+			Button singleChoiceCF = new ButtonImpl("//label[contains(text(), '" + singleChoice+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., '2choice')]",	"Single Choice   custom Field");
+			verifier.verifyEquals(singleChoiceCF.isNotExists(), false, "Wrong Single Choice Custom Field Value");
+		}
+		return new SupportersAddPage();
+	}
+
 	public SupportersPage verifySupporterStatus(String status) {
 		Label tempElement;
 		if (status.equalsIgnoreCase("Unsubscribed")) {
 			tempElement = supporterStatusLabel;
-		}else{
+		} else {
 			tempElement = supporterStatusRadio;
 		}
 		for (int i = 0; i < 10; i++) {
@@ -83,21 +234,39 @@ public class SupportersAddPage extends HomePage{
 	public SupportersPage verifySupporterSubscriptionTopics(String topic, String supporterEmail) {
 		supporterSubscriptions.click();
 
-		Element subscriptionItemsLabels = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[1]", "Topics");
-		Element subscriptionItemsStatusesOptedIn = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[2]/span", "Topics");
-		Element subscriptionItemsStatusesOptedOut = new LabelImpl("//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[3]/span", "Topics");
+		Element subscriptionItemsLabels = new LabelImpl(
+				"//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[1]", "Topics");
+		Element subscriptionItemsStatusesOptedIn = new LabelImpl(
+				"//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[2]/span", "Topics");
+		Element subscriptionItemsStatusesOptedOut = new LabelImpl(
+				"//*[@ng-repeat='channel in supporter.contentChannelStatus']/td[3]/span", "Topics");
 
-		java.util.List<WebElement> topicListLabels = subscriptionItemsLabels.findElementsByXpath(subscriptionItemsLabels.getPath());
-		java.util.List<WebElement> topicListStatusesOptedIn = subscriptionItemsStatusesOptedIn.findElementsByXpath(subscriptionItemsStatusesOptedIn.getPath());
-		java.util.List<WebElement> topicListStatusesOptedOut = subscriptionItemsStatusesOptedOut.findElementsByXpath(subscriptionItemsStatusesOptedOut.getPath());
+		java.util.List<WebElement> topicListLabels = subscriptionItemsLabels
+				.findElementsByXpath(subscriptionItemsLabels.getPath());
+		java.util.List<WebElement> topicListStatusesOptedIn = subscriptionItemsStatusesOptedIn
+				.findElementsByXpath(subscriptionItemsStatusesOptedIn.getPath());
+		java.util.List<WebElement> topicListStatusesOptedOut = subscriptionItemsStatusesOptedOut
+				.findElementsByXpath(subscriptionItemsStatusesOptedOut.getPath());
 
 		for (int i = 0; i < topicListLabels.size(); i++) {
 			if (topicListLabels.get(i).getText().equals(topic)) {
-				Assert.assertEquals("Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedIn.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_IN'");
-				Assert.assertEquals("Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedIn.get(i).getAttribute("class"), "icon-checkmark2");
+				Assert.assertEquals(
+						"Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText()
+								+ ". Supporter: " + supporterEmail,
+						topicListStatusesOptedIn.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_IN'");
+				Assert.assertEquals(
+						"Message topic must have SUBSCRIBED status, topic name: " + topicListLabels.get(i).getText()
+								+ ". Supporter: " + supporterEmail,
+						topicListStatusesOptedIn.get(i).getAttribute("class"), "icon-checkmark2");
 			} else {
-				Assert.assertEquals("Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedOut.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_OUT'");
-				Assert.assertEquals("Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText() + ". Supporter: " + supporterEmail, topicListStatusesOptedOut.get(i).getAttribute("class"), "icon-blocked");
+				Assert.assertEquals(
+						"Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText()
+								+ ". Supporter: " + supporterEmail,
+						topicListStatusesOptedOut.get(i).getAttribute("ng-show"), "channel.contactStatus=='OPTED_OUT'");
+				Assert.assertEquals(
+						"Message topic must have UNSUSBCRIBED status, topic name: " + topicListLabels.get(i).getText()
+								+ ". Supporter: " + supporterEmail,
+						topicListStatusesOptedOut.get(i).getAttribute("class"), "icon-blocked");
 			}
 		}
 		return new SupportersPage();

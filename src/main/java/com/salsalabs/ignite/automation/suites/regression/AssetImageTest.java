@@ -4,7 +4,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -17,7 +16,8 @@ public class AssetImageTest extends SeleneseTestCase {
 
 		LoginPage page = new LoginPage();
 		page.doSuccessLogin(login, passward).
-		openAssetsPage().clickAddAnAssetButton().
+		openAssetsPage().
+		clickAddAnAssetButton().
 		uploadImageByName(imageToUpload).
 		verifyNewImageIsUploaded(imageToUpload);
 

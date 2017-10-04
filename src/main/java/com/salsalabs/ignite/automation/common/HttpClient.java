@@ -261,7 +261,7 @@ public class HttpClient {
 	}
 	
 	public Map<String, String> getListOfSocialPages(){
-		Map network = new HashMap();
+		Map<String, String> network = new HashMap();
 		try {
 			sendGETRequest("https://" + host + "/api/organization/"+orgID);
 			
@@ -286,6 +286,16 @@ public class HttpClient {
 		}
 		return network;
 		
+	}
+	
+	public HttpClient createCustomField(JSONObject customField){
+		try {
+			sendPOSTRequest("https://" + host + "/api/customField", customField.toString());
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return this;
+	
 	}
 	
 	private void updateHeaders() {
