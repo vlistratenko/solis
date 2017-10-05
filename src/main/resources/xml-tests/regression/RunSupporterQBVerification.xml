@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Check supporter QueryBuilder" parallel="false" thread-count="1">
+
+    <parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+    <parameter name="USED_SERVER" value="LOCAL"></parameter>
+    <parameter name="login" value="olauta+ta3@salsalabs.com"></parameter>
+    <parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
+    <parameter name="password" value="qwerty"></parameter>
+
+    <test verbose="2" name="Verify QB (FIREFOX)" annotations="JDK">
+        <parameter name="USED_BROWSER" value="CHROME"></parameter>
+        <groups>
+            <run>
+                <include name="qb" />
+            </run>
+        </groups>
+        <classes>
+            <class name="com.salsalabs.ignite.automation.suites.regression.SupporterQBTest" />
+        </classes>
+    </test>
+</suite>
