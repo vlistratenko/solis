@@ -1,0 +1,93 @@
+{
+  "id": "dfa0f65e-8664-4e79-9ec4-72eeddceafe4",
+  "timestamp": "2017-10-05T08:58:39.262Z",
+  "header":    {
+    "processingTime": 282,
+    "serverId": "test-hqapp2.ignite.net"
+  },
+  "payload":    {
+    "total": 6,
+    "offset": 0,
+    "activities":       [
+      {
+        "activityId": "092faded-f6b0-41d8-a860-162ee6dd9562",
+        "activityFormName": "petitionwithcomments",
+        "activityFormId": "fac51442-affc-4446-9833-2e063a2542cd",
+        "supporterId": "88fe2db2-270a-4b32-8e77-b131f147f167",
+        "activityDate": "2016-06-16T12:36:31.920Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T12:36:49.958Z",
+        "customFieldValues": [],
+        "comment": "3gsd",
+        "moderationState": "DONT_DISPLAY",
+        "displaySignaturePublicly": true,
+        "displayCommentPublicly": true
+      },
+      {
+        "activityId": "0bf20d88-630a-4dc6-bd9a-744bebed85ae",
+        "activityFormName": "petitionwithoutcomments",
+        "activityFormId": "927ed841-3deb-4fd3-95b9-53afd6de06eb",
+        "supporterId": "72c208aa-c117-42e2-8785-596f3cc0a8ad",
+        "activityDate": "2016-06-16T12:22:04.435Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T12:22:23.332Z",
+        "customFieldValues": [],
+        "displaySignaturePublicly": true
+      },
+      {
+        "activityId": "2f7b38d1-a38a-4aea-8275-d53b5abb4a9b",
+        "activityFormName": "petitionwithcomments",
+        "activityFormId": "fac51442-affc-4446-9833-2e063a2542cd",
+        "supporterId": "a3f66ced-3e37-4a68-a3ca-c2596fc368ac",
+        "activityDate": "2016-06-16T13:00:06.310Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T13:00:22.128Z",
+        "customFieldValues": [],
+        "comment": "pending comment",
+        "moderationState": "PENDING",
+        "displaySignaturePublicly": true,
+        "displayCommentPublicly": true
+      },
+      {
+        "activityId": "9b7e76b1-044a-44a6-befa-cf37d9fa7d70",
+        "activityFormName": "petitionnosignatures",
+        "activityFormId": "f5c08999-8987-49ab-848c-9f91c14f3dfe",
+        "supporterId": "77fe826e-2eee-4f80-aa88-5252ba3ed964",
+        "activityDate": "2016-06-16T13:07:31.302Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T13:07:49.916Z",
+        "customFieldValues": [],
+        "displaySignaturePublicly": false
+      },
+      {
+        "activityId": "b6e15c25-6f73-4892-a220-11f935424c74",
+        "activityFormName": "petitionnosignatures",
+        "activityFormId": "f5c08999-8987-49ab-848c-9f91c14f3dfe",
+        "supporterId": "00c00de1-a9fc-4606-8bca-4ffa440582d9",
+        "activityDate": "2016-06-16T13:06:55.234Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T13:07:11.027Z",
+        "customFieldValues": [],
+        "comment": "dont show comment",
+        "moderationState": "DONT_DISPLAY",
+        "displaySignaturePublicly": true,
+        "displayCommentPublicly": false
+      },
+      {
+        "activityId": "bc444cbf-9e4a-41c3-aad0-a14f21e45509",
+        "activityFormName": "petitionwithcomments",
+        "activityFormId": "fac51442-affc-4446-9833-2e063a2542cd",
+        "supporterId": "72c208aa-c117-42e2-8785-596f3cc0a8ad",
+        "activityDate": "2016-06-16T12:31:02.427Z",
+        "activityType": "PETITION",
+        "lastModified": "2016-06-16T12:31:15.434Z",
+        "customFieldValues": [],
+        "comment": "custom comment hidden",
+        "moderationState": "DISPLAY",
+        "displaySignaturePublicly": true,
+        "displayCommentPublicly": true
+      }
+    ],
+    "count": 6
+  }
+}

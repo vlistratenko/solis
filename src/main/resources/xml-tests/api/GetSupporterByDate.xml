@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ApiTests" verbose="1">
+    <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
+    <parameter name="AUTH_TOKEN"
+               value="rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZEhC-JrLA0lEoHevmUhpbkuExlYD4E7x6JRwM1ibw8crkO0BYEnNVoU_wtODiJY8ig"></parameter>
+    <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->
+    <!--<parameter name="ENV" value="https://hq.salsalabs.org/"></parameter>-->
+    <test name="Supporters">
+        <classes>
+            <class name="com.salsalabs.ignite.automation.suites.api.GetSupporterByDate"/>
+        </classes>
+    </test>
+</suite>

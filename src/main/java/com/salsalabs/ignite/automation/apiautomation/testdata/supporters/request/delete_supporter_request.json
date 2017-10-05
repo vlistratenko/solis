@@ -1,0 +1,9 @@
+{
+  "payload": {
+    "supporters": [{
+      "supporterId": "${#TestCase#supporterId}"
+    }
+
+    ]
+  }
+}

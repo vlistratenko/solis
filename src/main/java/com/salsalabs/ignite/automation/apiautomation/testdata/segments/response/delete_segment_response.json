@@ -1,0 +1,16 @@
+{
+  "id": "5e119000-630e-4e6a-b0e7-d5a0c801ad77",
+  "timestamp": "2017-10-04T11:12:53.610Z",
+  "header":    {
+    "processingTime": 68,
+    "serverId": "test-hqapp1.ignite.net"
+  },
+  "payload":    {
+    "segments": [      {
+      "segmentId": "273af500-265a-4255-8fb8-f03fb7d67370",
+      "totalMembers": 0,
+      "result": "DELETED"
+    }],
+    "count": 1
+  }
+}

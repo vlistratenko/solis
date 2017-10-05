@@ -1,0 +1,227 @@
+{
+  "id": "5f805e63-52fb-4622-b43b-853e06139867",
+  "timestamp": "2017-10-05T09:55:37.823Z",
+  "header":    {
+    "processingTime": 295,
+    "serverId": "test-hqapp1.ignite.net"
+  },
+  "payload":    {
+    "total": 4,
+    "offset": 0,
+    "activities":       [
+      {
+        "activityId": "98c3d67c-2c94-4528-82e8-376baf718133",
+        "activityFormName": "Event name",
+        "activityFormId": "30a24b7f-950e-4a1a-8947-bc6634d940cd",
+        "supporterId": "a3f66ced-3e37-4a68-a3ca-c2596fc368ac",
+        "activityDate": "2016-06-21T14:58:13.548Z",
+        "activityType": "TICKETED_EVENT",
+        "lastModified": "2016-06-21T15:00:23.261Z",
+        "customFieldValues": [],
+        "donationId": "83bc03c7-dcb3-4341-bf34-23fe64a6163a",
+        "totalReceivedAmount": 25,
+        "oneTimeAmount": 25,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "************1111",
+        "accountExpiration": "2023-01-31T05:00:00.000Z",
+        "accountProvider": "visa",
+        "paymentProcessorName": "mechant services gateway name",
+        "wasImported": false,
+        "transactions": [            {
+          "transactionId": "d2e16fd3-0771-4dab-a6b7-ddea65e77bb9",
+          "reasonId": "77d121a6-090f-457b-9c62-33dbc927244b",
+          "type": "CHARGE",
+          "reason": "EVENT_TICKET",
+          "date": "2016-06-21T15:00:08.214Z",
+          "amount": 25,
+          "deductibleAmount": 0,
+          "feesPaid": 0,
+          "gatewayTransactionId": "173134039494",
+          "gatewayAuthorizationCode": "PPS062"
+        }],
+        "activityResult": "TICKETS_ONLY",
+        "tickets": [            {
+          "ticketId": "77d121a6-090f-457b-9c62-33dbc927244b",
+          "ticketName": "paid ticket",
+          "transactionId": "d2e16fd3-0771-4dab-a6b7-ddea65e77bb9",
+          "ticketStatus": "VALID",
+          "ticketCost": 25,
+          "deductibleAmount": 0,
+          "questions": [               {
+            "id": "704",
+            "question": "questin 1?",
+            "answer": "true"
+          }],
+          "attendees": [               {
+            "attendeeId": "9bb7a862-67f1-4918-ac2b-7ad60ab69f06",
+            "firstName": "test15g",
+            "type": "GUEST",
+            "status": "REGISTERED",
+            "lastName": "tesst15g",
+            "email": "te3st15g.druzey1a@mailosaur.in",
+            "adressLine1": "test address",
+            "city": "test",
+            "state": "FL",
+            "phone": "123-123-1234",
+            "currentSupporterId": "acd39727-41ba-42c0-8e69-39ec67457735",
+            "isCurrentSupporter": false,
+            "lastModified": "2016-06-21T15:00:22.985Z",
+            "questions": []
+          }],
+          "lastModified": "2016-06-21T15:00:22.999Z"
+        }]
+      },
+      {
+        "activityId": "9ca9099e-1532-4dd7-81da-cf364d8e6483",
+        "activityFormName": "Event name",
+        "activityFormId": "30a24b7f-950e-4a1a-8947-bc6634d940cd",
+        "supporterId": "a9125fe2-9c33-44e6-a9e9-4a5fe9103841",
+        "activityDate": "2016-06-21T14:57:28.666Z",
+        "activityType": "TICKETED_EVENT",
+        "lastModified": "2016-06-21T14:57:44.484Z",
+        "customFieldValues": [],
+        "activityResult": "TICKETS_ONLY",
+        "tickets": [            {
+          "ticketId": "3b39d8ef-acca-4a58-bc0c-dcbcb7c0ae12",
+          "ticketName": "free ticket",
+          "ticketStatus": "VALID",
+          "ticketCost": 0,
+          "deductibleAmount": 0,
+          "questions": [               {
+            "id": "703",
+            "question": "questin 1?",
+            "answer": "true"
+          }],
+          "attendees": [               {
+            "attendeeId": "83fba889-660d-4d7a-92c7-2008458037ea",
+            "firstName": "test1",
+            "type": "PURCHASER",
+            "status": "REGISTERED",
+            "lastName": "dfgf",
+            "email": "tdest.druzey1a@mailosaur.in",
+            "adressLine1": "test address",
+            "adressLine2": "asd",
+            "city": "test",
+            "state": "KS",
+            "phone": "123-123-1234",
+            "currentSupporterId": "a9125fe2-9c33-44e6-a9e9-4a5fe9103841",
+            "isCurrentSupporter": true,
+            "lastModified": "2016-06-21T14:57:44.097Z",
+            "questions": []
+          }],
+          "lastModified": "2016-06-21T14:57:44.130Z"
+        }]
+      },
+      {
+        "activityId": "f941fe97-16e9-4a97-bab4-51487f9fd6e2",
+        "activityFormName": "Event name",
+        "activityFormId": "30a24b7f-950e-4a1a-8947-bc6634d940cd",
+        "supporterId": "60aa89c0-84e9-4264-9d50-5031ec313220",
+        "activityDate": "2016-06-21T14:59:26.420Z",
+        "activityType": "TICKETED_EVENT",
+        "lastModified": "2016-06-21T15:01:39.404Z",
+        "customFieldValues": [],
+        "donationId": "bcee5e6a-dbb9-48d1-86f2-a29a071ed64a",
+        "totalReceivedAmount": 35,
+        "oneTimeAmount": 35,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "************1117",
+        "accountExpiration": "2023-08-31T04:00:00.000Z",
+        "accountProvider": "discover",
+        "paymentProcessorName": "mechant services gateway name",
+        "wasImported": false,
+        "transactions":             [
+          {
+            "transactionId": "67b2f56e-f3c0-408a-9014-025511e848f7",
+            "type": "CHARGE",
+            "reason": "DONATION",
+            "date": "2016-06-21T15:01:27.089Z",
+            "amount": 10,
+            "deductibleAmount": 10,
+            "feesPaid": 0,
+            "gatewayTransactionId": "173109039567",
+            "gatewayAuthorizationCode": "PPS099"
+          },
+          {
+            "transactionId": "c26de28e-e05a-472b-a013-cbc040232eb5",
+            "reasonId": "a9a47aae-2d8d-406e-be64-b76a61baf2ee",
+            "type": "CHARGE",
+            "reason": "EVENT_TICKET",
+            "date": "2016-06-21T15:01:27.283Z",
+            "amount": 25,
+            "deductibleAmount": 0,
+            "feesPaid": 0,
+            "gatewayTransactionId": "173109039567[1]",
+            "gatewayAuthorizationCode": "PPS099"
+          }
+        ],
+        "activityResult": "DONATION_AND_TICKETS",
+        "tickets": [            {
+          "ticketId": "a9a47aae-2d8d-406e-be64-b76a61baf2ee",
+          "ticketName": "paid ticket",
+          "transactionId": "c26de28e-e05a-472b-a013-cbc040232eb5",
+          "ticketStatus": "VALID",
+          "ticketCost": 25,
+          "deductibleAmount": 0,
+          "questions": [               {
+            "id": "705",
+            "question": "questin 1?",
+            "answer": "true"
+          }],
+          "attendees": [               {
+            "attendeeId": "132daea7-2ea5-4416-8e5d-347d76d9e0f5",
+            "firstName": "test1",
+            "type": "GUEST",
+            "status": "REGISTERED",
+            "lastName": "sdf",
+            "email": "tesst.druzey1a@mailosaur.in",
+            "adressLine1": "test address",
+            "city": "test",
+            "state": "AZ",
+            "phone": "123-123-1234",
+            "currentSupporterId": "452bdfda-f1e7-4192-b4c9-4bc6408f31e7",
+            "isCurrentSupporter": true,
+            "lastModified": "2016-06-21T15:01:39.137Z",
+            "questions": []
+          }],
+          "lastModified": "2016-06-21T15:01:39.154Z"
+        }]
+      },
+      {
+        "activityId": "fd2b988b-3a1e-43ac-b54e-f921fa4c5f14",
+        "activityFormName": "Event name",
+        "activityFormId": "30a24b7f-950e-4a1a-8947-bc6634d940cd",
+        "supporterId": "452bdfda-f1e7-4192-b4c9-4bc6408f31e7",
+        "activityDate": "2016-06-21T14:58:42.609Z",
+        "activityType": "TICKETED_EVENT",
+        "lastModified": "2016-06-21T15:00:24.881Z",
+        "customFieldValues": [],
+        "donationId": "eb2db083-2d0f-4346-94b2-823bbb5ddc79",
+        "totalReceivedAmount": 13,
+        "oneTimeAmount": 13,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "************1111",
+        "accountExpiration": "2023-01-31T05:00:00.000Z",
+        "accountProvider": "visa",
+        "paymentProcessorName": "mechant services gateway name",
+        "wasImported": false,
+        "transactions": [            {
+          "transactionId": "7c96c786-350b-462c-936f-5066cecbc8c6",
+          "type": "CHARGE",
+          "reason": "DONATION",
+          "date": "2016-06-21T15:00:24.867Z",
+          "amount": 13,
+          "deductibleAmount": 13,
+          "feesPaid": 0,
+          "gatewayTransactionId": "173107039523",
+          "gatewayAuthorizationCode": "PPS097"
+        }],
+        "activityResult": "DONATION_ONLY"
+      }
+    ],
+    "count": 4
+  }
+}
