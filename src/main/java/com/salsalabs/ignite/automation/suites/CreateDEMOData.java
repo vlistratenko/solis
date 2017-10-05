@@ -60,6 +60,10 @@ public class CreateDEMOData extends SeleneseTestCase {
 		for (int j = 0; j < amountOfDonations; j++) {
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			Boolean isRequring = CommonUtils.getRandomBoolean();
+			logger.info("Test data:");
+			logger.info("Amount of donations " + amountOfDonations);
+			logger.info("Is existed supporter - " + isExisted);
+			logger.info("Is requring donations - " + isRequring);
 			if (!isExisted) {
 				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=IMPORT,UI,SUBSCRIBE,PETITION,TARGETED_LETTER,API," );
 				String fname = sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size())).firstName,
@@ -67,7 +71,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				formURL = urls[CommonUtils.getRandomValueNumericFromTo(0, urls.length+1)-1];
 				loginPage.
 				openDonationWidgetByLink(formURL).
-				fillDonationForm(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4) + "@uatauto.ignite.net",
+				fillDonationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 						fname,
 						lname,
 						sup.get(CommonUtils.getRandomValueNumericFromTo(0, sup.size()-1)).addressLine1,
@@ -227,6 +231,9 @@ public class CreateDEMOData extends SeleneseTestCase {
 		for (int j = 0; j < amountOfDonations; j++) {
 			Boolean isExisted = CommonUtils.getRandomBoolean();
 			Boolean isWithTickets = CommonUtils.getRandomBoolean();
+			logger.info("Test data:");
+			logger.info("Amount of donations " + amountOfDonations);
+			logger.info("Is existed supporter - " + isExisted);
 			logger.info("Is event with registration - " + isWithTickets);
 			if (!isExisted) {
 				sup = new Supporter().getSupportersFromSystem(host, login, "!QAZ2wsx", amountOfDonations, "&source=IMPORT,UI,SUBSCRIBE,PETITION,TARGETED_LETTER,API," );

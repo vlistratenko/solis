@@ -1,8 +1,6 @@
 package com.salsalabs.ignite.automation.pages.donation;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;
