@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Verify merge fields in the email" parallel="false" thread-count="1">
+
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+
+	
+
+	<test verbose="2" name="Verify merge fields in the email (FIREFOX)" annotations="JDK">
+		<parameter name="USED_BROWSER" value="CHROME"></parameter>
+			<parameter name="login" value="2712.3e41c646@mailosaur.in"></parameter>
+			<parameter name="Passward" value="!QAZ2wsx"></parameter>
+			<parameter name="facebookAccount" value="https://www.facebook.com/profile.php?id=100014040091246"></parameter>
+			<parameter name="twitterAccount" value="https://twitter.com/KirilGolovin"></parameter>
+			<parameter name="instagramAccount" value="https://www.instagram.com/phuket_guide/"></parameter>
+			<parameter name="pinterestAccount" value="https://www.pinterest.com/autotestpintres/"></parameter>
+			<parameter name="youTubeAccount" value="https://www.youtube.com/user/RBCSINC"></parameter>
+			<parameter name="linkedinAccount" value="https://www.linkedin.com/in/salsa-salsa-0ab7bb118/"></parameter>
+			<parameter name="tumblerAccount" value="https://autotesterov.tumblr.com/"></parameter>
+		<groups>
+			<run>
+				<include name="settings.SocialMediaPages" />
+			</run>
+		</groups>
+		<classes>
+			<class name="com.salsalabs.ignite.automation.suites.regression.SocialMediaPagesTest" />
+		</classes>
+	</test>
+</suite>

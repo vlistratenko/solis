@@ -33,11 +33,11 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 
 	private static final String innerImapHost = "ignite-mailstore1.ignite.net";
 	private static final String password = "ignite";
-	private static final String suffix = ".ignite.net";
+	private static final String suffix = ".igniteaction.net";
 
 	private static final Logger logger = SeleneseTestCase.logger;
 	
-	private String user = "qaignite";
+	private String user = "testauto";
 	private String domain = "@example.ignite.net";
 	
 	private Folder folder;
@@ -238,7 +238,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		}
 		return null;
 	}
-
+	
 	@Override
 	public String getURLByDomain(String emailSubj, String domain) {
 		Message e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
@@ -269,6 +269,17 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 			return ((InternetAddress) ((Message) email).getAllRecipients()[0]).getAddress();
 		} catch (MessagingException e) {
 			logger.error("", e);
+		}
+		return null;
+	}
+	
+	@Override
+	public String getEmailBody(Object email) {
+		try {
+			return ((Message) email).getContent().toString();
+		} catch (IOException | MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

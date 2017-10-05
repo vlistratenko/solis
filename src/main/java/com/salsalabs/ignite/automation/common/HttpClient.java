@@ -46,7 +46,7 @@ public class HttpClient {
 	String authToken = "";
 	String orgID = "";
 	String orgName = "";
-	String host = "hq.test.ignite.net";
+	String host = "hq.test.igniteaction.net";
 	CloseableHttpClient httpClient = null;
     HttpPost httpost = null;
     HttpGet httpget = null;
@@ -59,7 +59,7 @@ public class HttpClient {
  
 	
 	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-	  	this.host = host;
+	  	this.host = host.replace("https://", "");
 	  	//getConnection();
 	}
 	
@@ -136,6 +136,7 @@ public class HttpClient {
 	         				sup.city = jsonParser(temp, "payload.supporters." + i + ".addresses.0.city").toString();
 	         				sup.state = jsonParser(temp, "payload.supporters." + i + ".addresses.0.state").toString();	    
 	         				sup.finalEMAIL = jsonParser(temp, "payload.supporters." + i + ".contacts.0.value").toString();
+	         				sup.finalEMAIL = sup.finalEMAIL.replace("ignite.net", "igniteaction.net");
 	         				sup.source = jsonParser(temp, "payload.supporters." + i + ".source").toString();
 	         				data.put(i, sup);
 	         			}
@@ -147,6 +148,48 @@ public class HttpClient {
 			logger.error("", e);
 		}
 		return data;
+	}
+	
+	public Supporter getSupporterByEmail(String email) throws JSONException {
+		Supporter sup = new Supporter();
+		try {
+			sendGETRequest("https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+			String temp = JSONResponse.get(0);
+			String id = jsonParser(temp, "payload.supporters.0.id").toString();
+			SeleneseTestCase.logger.info("Supporter ID: " + id);
+			sendGETRequest("https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
+			temp = JSONResponse.get(0);
+        	 try { 				
+ 				sup.firstName = jsonParser(temp, "payload.firstName").toString();
+ 				sup.lastorOrgName = jsonParser(temp, "payload.lastName").toString();
+ 				sup.prefix = jsonParser(temp, "payload.prefix").toString();
+ 				sup.middleName = jsonParser(temp, "payload.middleName").toString();
+ 				sup.suffix = jsonParser(temp, "payload.suffix").toString();
+ 				sup.language = jsonParser(temp, "payload.language").toString();
+ 				sup.birthDate = jsonParser(temp, "payload.birthDate").toString();
+ 				
+ 				JSONArray contacts = (JSONArray) jsonParser(temp, "payload.contacts");
+ 				sup.finalEMAIL  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "MessagingEmail") + ".value").toString();
+ 				sup.phoneCell  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneCell") + ".value").toString();
+ 				sup.socialFacebook  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "SocialFacebook") + ".value").toString();
+ 				sup.phoneHome  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneHome") + ".value").toString();
+ 				sup.phoneWork  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "PhoneWork") + ".value").toString();
+ 				sup.linkedin  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "LINKEDIN") + ".value").toString();
+ 				sup.socialTwitter  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "SocialTwitter") + ".value").toString();
+ 			    sup.addressLine1  = jsonParser(temp, "payload.addresses.0.line1").toString();
+ 			    sup.addressLine2  = jsonParser(temp, "payload.addresses.0.line2").toString();
+ 			    sup.city  = jsonParser(temp, "payload.addresses.0.city").toString();
+ 			    sup.state  = jsonParser(temp, "payload.addresses.0.state").toString();
+ 			    sup.postalCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
+ 			    
+			} catch (JSONException e) {
+				logger.error("", e);
+			}
+	         
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return sup;
 	}
 	
 	private CloseableHttpResponse sendPOSTRequest(String url, String json) throws URISyntaxException, ClientProtocolException, IOException {
@@ -194,7 +237,7 @@ public class HttpClient {
 			e.printStackTrace();
 		}
 		SeleneseTestCase.logger.info("Try to send request to " + url);
-		SeleneseTestCase.logger.info("Token to send " + httpget.getHeaders("authToken")[0]);
+		//SeleneseTestCase.logger.info("Token to send " + httpget.getHeaders("authToken")[0]);
 		JSONResponse.clear();
 		httpget.setURI(new URI(url)); 
         response = httpClient.execute(httpget);
@@ -202,15 +245,57 @@ public class HttpClient {
             throw new RuntimeException("Failed : HTTP error code : "
                     + response.getStatusLine().getStatusCode());
         }
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(
                 (response.getEntity().getContent())));
         String output;
         while ((output = br.readLine()) != null) {
-        	//SeleneseTestCase.logger.info("Response: " + output);
+        	SeleneseTestCase.logger.debug("Response: " + output);
+        	String infoOutput = output;
+        	if (infoOutput.length() > 3000)infoOutput = infoOutput.substring(0, 3000);
+        	SeleneseTestCase.logger.info("Response: " + infoOutput);
         	JSONResponse.add(output);
         }
 		httpClient.close();
         return 	response;	 
+	}
+	
+	public Map<String, String> getListOfSocialPages(){
+		Map<String, String> network = new HashMap();
+		try {
+			sendGETRequest("https://" + host + "/api/organization/"+orgID);
+			
+			
+			for (String temp : JSONResponse){
+				try {
+					network.put("facebook", jsonParser(temp, "payload.socialNetworkPages.0.link").toString());
+					network.put("twitter", jsonParser(temp, "payload.socialNetworkPages.1.link").toString());
+					network.put("instagram", jsonParser(temp, "payload.socialNetworkPages.2.link").toString());
+					network.put("pinterest", jsonParser(temp, "payload.socialNetworkPages.3.link").toString());
+					network.put("youTube", jsonParser(temp, "payload.socialNetworkPages.4.link").toString());
+					network.put("linkedin", jsonParser(temp, "payload.socialNetworkPages.5.link").toString());
+					network.put("tumbler", jsonParser(temp, "payload.socialNetworkPages.6.link").toString());
+							
+				} catch (JSONException e) {
+					logger.error("", e);
+				}
+			}
+			
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return network;
+		
+	}
+	
+	public HttpClient createCustomField(JSONObject customField){
+		try {
+			sendPOSTRequest("https://" + host + "/api/customField", customField.toString());
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return this;
+	
 	}
 	
 	private void updateHeaders() {
@@ -305,4 +390,20 @@ public class HttpClient {
         //httpget = new HttpGet();
         updateHeaders();
 	}
+	
+	private Integer findArrayElementNumberByValue(JSONArray jsonArray, String value) {
+		for (int j = 0; j < ((JSONArray) jsonArray).length(); j++) {
+			try {
+				if (jsonArray.get(j).toString().contains(value)){
+					return j;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	
+	
 }

@@ -3,8 +3,10 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
@@ -12,7 +14,9 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 public class EmailBlastsPage extends HomePage{
 	Button addEmailButton = new ButtonImpl("//button[@ng-click='createEmail()']", "Create email");
 	Table emailsTable = new TableImpl("//table/descendant::a[text()='Reference Name']/ancestor::table", "Table with emails");
-	Button emailNameLink = new ButtonImpl("//span[text()='" + CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME) + "']", "Email blast link");
+	Button emailNameLink = new ButtonImpl("//span[text()='" + CommonUtils.getProperty(PropertyName.EMAIL_BLAST_NAME) + "']", "Email blast link"); 
+	DropDown selectEmailType = new DropDownImpl("//label[contains(text(),'Message Topic ')]/parent::div/descendant::custom-select3", "//label[contains(text(),'Message Topic ')]/parent::div/descendant::custom-select3/div/a", "Email type");
+	
 	
 	public AddEmailsPage_SetupTab openAddEmailPage() {
 		
@@ -40,6 +44,9 @@ public class EmailBlastsPage extends HomePage{
 	public EmailBlastDetailsPage openEmailBlastDetailsPage() {
 		emailNameLink.click();
 		return new EmailBlastDetailsPage();
-		
 	}
+	
+	
+	
+	
 }

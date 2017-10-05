@@ -1,6 +1,7 @@
 <suite name="Tests" parallel="false" thread-count="2">
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<suite-files>
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SignUpSupporterDEMO.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/EmailBlastSendTestAndClicksDEMO.xml" />
@@ -22,6 +23,7 @@
 		<suite-file path="src/main/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSocialPostTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSegmentTEst.xml" /> -->
+		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSegmentTEst.xml" />
+		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomTarget.xml" /> -->
 	</suite-files>
 </suite>

@@ -17,6 +17,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
 
 abstract class ElementImpl implements Element {
@@ -783,4 +784,7 @@ abstract class ElementImpl implements Element {
 		}
 
 	}
+	
+	
+	
 }

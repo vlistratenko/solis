@@ -19,6 +19,9 @@ public class SupportersPage extends AudiencePage {
 	TextBox searchField = new TextBoxImpl("//input[@name='query']", "Search");
 	Button doSearchButton = new ButtonImpl("//*[@autotest-id='btn_search_list']", "Do search");
 	Button openAddSupporterMenuButton = new ButtonImpl("//*[@id='dashboard']/div[2]/div/div/div/div[3]/div[1]/div[2]/div/button", "Add Supporters");
+	TextBox loadingSpinner = new TextBoxImpl("//div[@class='loading_spinner page']']", "Loading spinner ");
+	
+
 	
 	public SupportersAddPage openAddSupporterPage() {
 		if (feedBackDialogPanel.isDisplayed()) {
@@ -35,6 +38,7 @@ public class SupportersPage extends AudiencePage {
 		verifier.verifyEquals(supportersTable.getCellValue(1, 4), supporter.getLastName(), "Supporter was not created (last name)");
 		verifier.verifyEquals(supportersTable.getCellValue(1, 5), supporter.getCity(), "Supporter was not created (city)");
 		verifier.verifyEquals(supportersTable.getCellValue(1, 7), supporter.getZipCode(), "Supporter was not created (zip code)");
+		verifier.verifyEquals(supportersTable.getCellValue(1, 8), "Manually Added", "Supporter has the wrong source");
 		return this;
 	}
 	
@@ -85,6 +89,7 @@ public class SupportersPage extends AudiencePage {
 	public SupportersAddPage openSupporterDetailsPage() {
 		sleep(3);
 		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
+		sleep(2);
 		return new SupportersAddPage();
 	}
 	

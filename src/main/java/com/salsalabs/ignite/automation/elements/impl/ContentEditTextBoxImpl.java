@@ -18,5 +18,16 @@ public class ContentEditTextBoxImpl extends TextBoxImpl {
 		switchToDefaultContent();
 
 	}
+	
+	public void sendENTERKey() {
+		logger.info(" Click on " + elementName + " and press ENTER button afterwards ");
+		switchToFrame(findElementByXpath(iframeXpath));
+		waitElement(10);
+		highlight(path);
+		sendKeys(path, Keys.ARROW_LEFT);
+		sendKeys(path, Keys.ENTER);
+		sendKeys(path, Keys.ARROW_UP);
+		switchToDefaultContent();
+	}
 
 }

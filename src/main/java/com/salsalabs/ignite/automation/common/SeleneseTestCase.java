@@ -76,7 +76,7 @@ public class SeleneseTestCase {
 		emailClient = USED_ENVIRONMENT.getSquirrelEmailClient();//getMailosourEmailClient();//
 		mailosaur = USED_ENVIRONMENT.getSquirrelEmailClient();//getMailosourEmailClient();
 		setAdminEmail();
-		emailClient.deleteAllEmails();
+		//emailClient.deleteAllEmails();
 		
 		if (USED_ENVIRONMENT.getServer().equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());

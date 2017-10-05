@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.donation;
 
+import java.time.LocalDate;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;
@@ -37,6 +38,48 @@ public class DonationsDetailsPage extends DonationsPage {
 		if (recurringDonation) {
 			verifier.verifyElementIsDisplayed(cancelAllLink);
 		}
+		return this;
+	}
+	
+	public DonationsDetailsPage verifyDonationAmmountAndFee(String amount, String fee) {	
+		sleep(2);
+		donationsTable.scrollIntoView();
+		sleep(1);
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Amount"), amount, "Wrong amount", false);
+		verifier.verifyEquals(donationsTable.getCellValue(1, "Fees Paid By Supporter"), fee, "Wrong amount", false);
+		return this;
+	}
+	
+	public DonationsDetailsPage verifyNumberOfYearRecurringInstallmentsInTheTable (int providedRandomYear) {	
+		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.scrollIntoView();
+		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
+		logger.info("Number of Found rows in the table" + " " + listOFRows);
+		int calculateTheExpectedRowsInTheTable =  providedRandomYear- LocalDate.now().getYear();
+		String expectedValue = String.valueOf(calculateTheExpectedRowsInTheTable);
+		logger.info("Number of Expected  rows" + " "+ expectedValue);
+		verifier.verifyEquals(listOFRows, expectedValue , "Number of rows for recurring donations listed in the donations tables is incorrect" , true);
+		return this;
+	}
+	
+	public DonationsDetailsPage verifyNumberOfMonthlyRecurringInstallmentsInTheTable (int providedYear , int providedMonth) {	
+		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.scrollIntoView();
+		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
+		logger.info("Number of Found rows on the Table" + " " + listOFRows);
+		int totalRecurringMonthInstallmentsInTheTable = 0;
+		if (LocalDate.now().getYear() < providedYear) {
+			int remainingMonthChargesCurrentYear = 12 - LocalDate.now().getMonth().getValue() + 1;
+			int numberOfYearsWithoutCurrentYear = providedYear - LocalDate.now().getYear();
+			int numberOfInstallmentsAfterCurrentYear = numberOfYearsWithoutCurrentYear * 12 - (12 - providedMonth);
+			totalRecurringMonthInstallmentsInTheTable = remainingMonthChargesCurrentYear
+					+ numberOfInstallmentsAfterCurrentYear;
+		} else {
+			totalRecurringMonthInstallmentsInTheTable = 12 - providedMonth + 1;
+		}
+		String expectedValue = String.valueOf(totalRecurringMonthInstallmentsInTheTable);
+		logger.info("Number of Expected  rows" + " "+ expectedValue);
+		verifier.verifyEquals(listOFRows, expectedValue , "Number of rows for recurring donations listed in the donations tables is incorrect" , true);
 		return this;
 	}
 

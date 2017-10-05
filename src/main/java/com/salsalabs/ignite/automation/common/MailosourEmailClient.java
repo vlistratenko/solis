@@ -351,4 +351,10 @@ public class MailosourEmailClient implements EmailClient<Email> {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String getEmailBody(Object email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

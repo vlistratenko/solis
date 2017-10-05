@@ -66,8 +66,7 @@ public class SettingsTests extends SeleneseTestCase{
 		new Supporter().getCity(),
 		new Supporter().getZipCode(),
 		new Supporter().getFacebook(),
-		new Supporter().getTwitter(),
-		"Subscribed");
+		new Supporter().getTwitter());
 	}
 	
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
@@ -102,8 +101,7 @@ public class SettingsTests extends SeleneseTestCase{
 				supporter.getCity(),
 				supporter.getZipCode(),
 				supporter.getFacebook(),
-				supporter.getTwitter(),
-		"Unsubscribed");
+				supporter.getTwitter());
 		CommonUtils.checkAndFail("unsubscribeSupporterTest");
 		
 	}

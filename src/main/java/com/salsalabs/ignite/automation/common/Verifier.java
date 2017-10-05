@@ -112,4 +112,21 @@ public class Verifier {
 			}
 		}
 	}
+	
+	public void verifyContains(String main, String sub, String message, boolean fail) {
+		message = message.replace(".", "_");
+		logger.debug("Checking that " + main + " contains " + sub);
+		try {
+			Assert.assertEquals(main.contains(sub), true);
+			SeleneseTestCase.bug.add("Success " + ". Expected [" + main + "] contains [" + sub + "]");
+		} catch (AssertionError e) {
+			if (fail) {
+				throw new AssertionFailedError(message + " - " + e.getMessage());
+			} else {
+				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + main + "] does not contain [" + sub + "]");
+				logger.error("Verification error: " + message + " - " + e.getMessage());
+				CommonUtils.setParam("testResult", "fail");
+			}
+		}
+	}
 }

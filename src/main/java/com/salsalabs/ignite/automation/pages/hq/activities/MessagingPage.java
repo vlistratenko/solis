@@ -1,6 +1,18 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
+import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Table;
@@ -8,6 +20,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.emails.AddSocialPostsPage;
 import com.salsalabs.ignite.automation.pages.hq.emails.EmailBlastsPage;
 
@@ -105,5 +118,54 @@ public class MessagingPage extends HomePage {
 		deleteButton.click();
 		rejectDeletionBtn.click();
 		sleep(2);
+	}
+	
+	public MessagingPage verifyMergeFieldsInTheEmail() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+		String emailBody = new LoginPage().getEmailBody(CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT));		
+		Supporter sup = new Supporter().
+				getSupporterFromSystemByEmail("supporterformergefieldstesting@testauto.ignite.net",
+												SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(),
+												CommonUtils.getProperty(PropertyName.CURRENT_LOGIN),
+												CommonUtils.getProperty(PropertyName.CURRENT_PASSWORD));
+		//verify supporters merge fields
+		verifier.verifyContains(emailBody, sup.postalCode, "Supporter's zip is not found in the email", false);
+		//mergeFieldTypeOfMostRecentDonation
+		//mergeFieldTotalPetitionSignatures
+		verifier.verifyContains(emailBody, sup.title, "Supporter's zip is not found in the email", false);
+		//mergeFieldSupporterSince
+		verifier.verifyContains(emailBody, sup.suffix, "Supporter's zip is not found in the email", false);
+		//mergeFieldSubscriptionDate
+		//mergeFieldSubscriptionChangeDate
+		//mergeFieldStateSenateDistrict
+		//mergeFieldStateHouseDistrict
+		verifier.verifyContains(emailBody, sup.state, "Supporter's zip is not found in the email", false);
+		//mergeFieldOrganizationName
+		//mergeFieldOrgZip
+		//mergeFieldOrgState
+		//mergeFieldOrgPhone
+		//mergeFieldOrgEmail
+		//mergeFieldOrgCity
+		//mergeFieldOrgAddressLine2
+		//mergeFieldOrgAddressLine1
+		//mergeFieldNumber
+		verifier.verifyContains(emailBody, sup.middleName, "Supporter's zip is not found in the email", false);
+		//mergeFieldLifetimeNumberofDonations
+		//mergeFieldLifetimeGivingAmount
+		//mergeFieldLastPetitionSignatureDate
+		verifier.verifyContains(emailBody, sup.lastorOrgName, "Supporter's zip is not found in the email", false);
+		//mergeFieldLargestDonationAmount
+		//mergeFieldFirstPetitionSignatureDate
+		verifier.verifyContains(emailBody, sup.firstName, "Supporter's zip is not found in the email", false);
+		//mergeFieldFederalHouseDistrict
+		verifier.verifyContains(emailBody, sup.finalEMAIL, "Supporter's zip is not found in the email", false);
+		//mergeFieldDateOfMostRecentDonation
+		verifier.verifyContains(emailBody, sup.city, "Supporter's zip is not found in the email", false);
+		verifier.verifyContains(emailBody, sup.phoneCell, "Supporter's zip is not found in the email", false);
+		//mergeFieldAverageDonationAmount
+		//mergeFieldAmountOfMostRecentDonation
+		verifier.verifyContains(emailBody, sup.addressLine1, "Supporter's zip is not found in the email", false);
+		verifier.verifyContains(emailBody, sup.addressLine1, "Supporter's zip is not found in the email", false);
+		return this;
+		
 	}
 }

@@ -17,9 +17,13 @@ public interface Table extends Element {
 	String getCellValue(int row, int col);
 
 	String getCellValue(int row, String headerName);
+	
+	String getCellValueUsingAllHeadersMethod(int row, String headerName);
 
-	Integer getColumnNumberByHeader(String header);
-
+	Integer getColumnNumberByHeaderUsingGetAllHeadersMethod(String header);
+	
+	Integer getColumnNumberByHeaderUsingGetClickableHeadersMethod(String header);
+	
 	Integer getRowsCount();
 
 	Integer getColsCount();
@@ -32,6 +36,10 @@ public interface Table extends Element {
 
 	int isValueExists(String source);
 
-	List<String> getHeaders();
+	List<String> getAllHeaders();
+	
+	List<String> getClickableHeaders();
+	
+	public boolean isValueExistsInTable(String value);
 
 }

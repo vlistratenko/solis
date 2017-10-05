@@ -54,7 +54,8 @@ public class TextBoxImpl extends ElementImpl implements TextBox {
 		logger.info("Trying to upload to Assets image called " + imageName);
 		File image = new File(filePath);
 		if (image.exists()) {
-			setAttribute("class", "ng ng-valid ng-dirty");
+			//setAttribute("class", "ng ng-valid ng-dirty");
+			setAttribute("class", "text");
 			type(image.getAbsolutePath());
 			logger.info("Image called " + imageName + " is being uploaded to Assets");
 		} else {
