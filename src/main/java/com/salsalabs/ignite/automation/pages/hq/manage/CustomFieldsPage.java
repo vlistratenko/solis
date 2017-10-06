@@ -316,33 +316,191 @@ public class CustomFieldsPage extends ManagePage {
 		 verifier.verifyElementIsDisplayed(singleChoiceOption3AfterEditing);
 		return this;
 	}
-	
 
+	/**
+	 * Returns CustomFieldAPIGenerator object. {@link CustomFieldAPIGenerator} decorator allows to build supporter and activity custom fields of desired configuration.
+	 * Used for creating custom fields via API only.
+	 * @param  customFieldName  custom field reference name
+	 * @param  customFieldDescription custom field description
+	 * @return      the object of CustomFieldAPIGenerator
+	 * @see         CustomFieldAPIGenerator
+	 */
+
+	public static CustomFieldsPage.CustomFieldAPIGenerator getCustomFieldApiGenerator (String customFieldName, String customFieldDescription) {
+		return new CustomFieldsPage.CustomFieldAPIGenerator (customFieldName, customFieldDescription);
+	}
+
+	/**
+	 * Returns CustomField object build using {@link CustomFieldAPIGenerator}. This object is assigned all possible custom fields properties.
+	 * @param  customFieldAPIGenerator  object of {@link CustomFieldAPIGenerator}
+	 * @return      the object of CustomField
+	 * @see         CustomFieldAPIGenerator
+	 */
+
+	public static CustomFieldsPage.CustomField createCustomField (CustomFieldAPIGenerator customFieldAPIGenerator) {
+		return new CustomField (customFieldAPIGenerator);
+	}
+
+	/**
+	 * CustomField is static nested class which reflects custom field object.
+	 * This class contains all fields which describe properties of custom fields of all types.
+	 * Object of this class consums {@link CustomFieldAPIGenerator} object as parameter in order to initialize fields.
+	 */
 
 	public static class CustomField {
 		private CustomFieldType type;
 		private String name;
+		private String descriptionApi;
+		private String dataTypeApi;
+		private String controlTypeApi;
+		private String ghostTextApi;
+		private int textFieldMinLengthValueApi;
+		private int textFieldMaxLengthValueApi;
+		private String textFieldValidationApi;
+		private String yesNoFieldcontrolOrientationApi;
+		private String defaultValueApi;
+		private String[] yesNoFieldValueLabelsApi;
+		private String[] singleChoiceFieldValueLabelsApi;
+		private String minDateApi;
+		private String maxDateApi;
+		private String minTimeApi;
+		private String maxTimeApi;
 
 		public CustomField(CustomFieldType type, String name) {
 			this.type = type;
 			this.name = name;
 		}
 
+		/**
+		 * CustomField constructor with {@link CustomFieldAPIGenerator} parameter.
+		 * {@link CustomFieldAPIGenerator} object should have all neccessary fields configured.
+		 */
+
+		public CustomField(CustomFieldAPIGenerator customFieldGenerator) {
+			this.name = customFieldGenerator.name;
+			this.descriptionApi = customFieldGenerator.descriptionApi;
+			this.dataTypeApi = customFieldGenerator.dataTypeApi;
+			this.controlTypeApi = customFieldGenerator.controlTypeApi;
+			this.ghostTextApi = customFieldGenerator.ghostTextApi;
+			this.textFieldMaxLengthValueApi = customFieldGenerator.textFieldMaxLengthValueApi;
+			this.textFieldMinLengthValueApi = customFieldGenerator.textFieldMinLengthValueApi;
+			this.textFieldValidationApi = customFieldGenerator.textFieldValidationApi;
+			this.yesNoFieldcontrolOrientationApi = customFieldGenerator.yesNoFieldControlOrientationApi;
+			this.defaultValueApi = customFieldGenerator.defaultValueApi;
+			this.yesNoFieldValueLabelsApi = customFieldGenerator.yesNoFieldValueLabelsApi;
+			this.singleChoiceFieldValueLabelsApi = customFieldGenerator.singleChoiceFieldValueLabelsApi;
+			this.minDateApi = customFieldGenerator.minDateApi;
+			this.maxDateApi = customFieldGenerator.maxDateApi;
+			this.minTimeApi = customFieldGenerator.minTimeApi;
+			this.maxTimeApi = customFieldGenerator.maxTimeApi;
+		}
+
+		/**
+		 * Returns custom field type
+		 * @return      type of the custom field
+		 */
+
 		public CustomFieldType getType() {
 			return type;
 		}
 
+		/**
+		 * Returns custom field name
+		 * @return      name of the custom field
+		 */
+
 		public String getName() {
 			return name;
 		}
+
+		/**
+		 * Returns JSONObject object of Supporter custom field which should be created.
+		 * It will be consumed by {@link com.salsalabs.ignite.automation.common.HttpClient#createCustomField(JSONObject)}
+		 * @param  customFieldType  type of custom field that should be created. Should be selected among {@link CustomFieldType} enum options
+		 * @return      json object of supporter custom field
+		 * @see         CustomFieldType
+		 */
+
+		public JSONObject createSupporterCustomFieldViaApiJsonObject(CustomFieldType customFieldType) throws JSONException {
+			String type = customFieldType.name().toLowerCase();
+			String json = "";
+
+			switch (type) {
+				case ("textbox"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"" + this.dataTypeApi +
+						"\",\"controlType\":\"" + this.controlTypeApi + "\",\"ghostText\":\"" + this.ghostTextApi +
+						"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{\"minValue\":" + this.textFieldMinLengthValueApi +
+						",\"maxValue\":" + this.textFieldMaxLengthValueApi + ",\"textValidation\":\"" + this.textFieldValidationApi + "\"}}}"; break;
+				case ("number"): json = "{\"header\":{},\"payload\":{\"name\":\""+ this.name + "\",\"description\":\"" + this.descriptionApi +
+						"\",\"dataType\":\"NUMBER\",\"controlType\":\"INPUT\",\"ghostText\":\"" + this.ghostTextApi +
+						"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{}}}"; break;
+				case ("yesno"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi +
+						"\",\"dataType\":\"BOOLEAN\",\"controlType\":\"RADIO\",\"controlOrientation\":\"" + this.yesNoFieldcontrolOrientationApi +
+						"\",\"ghostText\":\"\",\"defaultValue\":" + this.defaultValueApi + ",\"valueLabels\":[{\"value\":true,\"label\":\"" +
+						this.yesNoFieldValueLabelsApi[0] + "\"},{\"value\":false,\"label\":\"" + this.yesNoFieldValueLabelsApi[1] + "\"}],\"activityType\":\"\",\"type\":\"PERSON\"}}"; break;
+				case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
+						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{\"minDate\":\"" +
+						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;
+				case ("singlechoice"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"TEXT\",\"controlType\":\"" + this.controlTypeApi +
+						"\",\"controlOrientation\":\"VERTICAL\",\"ghostText\":\"\",\"defaultValue\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\",\"valueLabels\":[{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[0] +
+						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\"},{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[1] + "\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[1] +
+						"\"}],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{}}}"; break;
+			}
+			System.out.println(json);
+			return new JSONObject(json);
+
+		}
+
+		/**
+		 * Returns JSONObject object of activity custom field which should be created.
+		 * It will be consumed by {@link com.salsalabs.ignite.automation.common.HttpClient#createCustomField(JSONObject)}
+		 * @param  customFieldType  type of custom field that should be created. Should be selected among {@link CustomFieldType} enum options
+		 * @param  activityType  type of activity this custom field should be created for. Expected values are "SUBSCRIBE", "FUNDRAISE", "PETITION", "TICKETED_EVENT", "TARGETED_LETTER", "P2P_EVENT"
+		 * @return      json object of activity custom field
+		 * @see         CustomFieldType
+		 */
+
+		public JSONObject createActivityCustomFieldViaApiJsonObject(CustomFieldType customFieldType, String activityType) throws JSONException {
+			String type = customFieldType.name().toLowerCase();
+			String json = "";
+
+			switch (type) {
+				case ("textbox"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi +
+						"\",\"dataType\":\"" + this.dataTypeApi + "\",\"controlType\":\"" + this.controlTypeApi + "\",\"ghostText\":\"" + this.ghostTextApi +
+						"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{\"minValue\":\"" +
+						this.textFieldMinLengthValueApi + "\",\"maxValue\":" + this.textFieldMaxLengthValueApi + ",\"textValidation\":\"" + this.textFieldValidationApi +
+						"\"}}}"; break;
+				case ("number"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi +
+						"\",\"dataType\":\"NUMBER\",\"controlType\":\"INPUT\",\"ghostText\":\"" + this.ghostTextApi +
+						"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{}}}"; break;
+				case ("yesno"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi +
+						"\",\"dataType\":\"BOOLEAN\",\"controlType\":\"RADIO\",\"controlOrientation\":\"" + this.yesNoFieldcontrolOrientationApi +
+						"\",\"ghostText\":\"\",\"defaultValue\":" + this.defaultValueApi +
+						",\"valueLabels\":[{\"value\":true,\"label\":\"" + this.yesNoFieldValueLabelsApi[0] + "\"},{\"value\":false,\"label\":\"" +
+						this.yesNoFieldValueLabelsApi[1] + "\"}],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\"}}"; break;
+				case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
+						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{\"minDate\":\"" +
+						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;
+				case ("singlechoice"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"TEXT\",\"controlType\":\"" + this.controlTypeApi +
+						"\",\"controlOrientation\":\"VERTICAL\",\"ghostText\":\"\",\"defaultValue\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\",\"valueLabels\":[{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[0] +
+						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\"},{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[1] +
+						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[1] + "\"}],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{}}}"; break;
+			}
+			System.out.println(json); return new JSONObject(json);
+
+		}
+
 	}
 
+	/**
+	 * Enum contains types of available custom fields.
+	 */
+
 	public enum CustomFieldType {
-		TextBox("//p[contains(text(), 'Text Box')]/ancestor::a", "Ghost Text"), Number(
-				"//p[contains(text(), 'Number')]/ancestor::a",
-				"Ghost Number Text"), YesNo("//p[contains(text(), 'Yes')]/ancestor::a", null), DateTime(
-						"//p[contains(text(), 'Date')]/ancestor::a",
-						null), SingleChoice("//p[contains(text(), 'Single')]/ancestor::a", null);
+		TextBox("//p[contains(text(), 'Text Box')]/ancestor::a", "Ghost Text"),
+		Number("//p[contains(text(), 'Number')]/ancestor::a", "Ghost Number Text"),
+		YesNo("//p[contains(text(), 'Yes')]/ancestor::a", null),
+		DateTime("//p[contains(text(), 'Date')]/ancestor::a",null),
+		SingleChoice("//p[contains(text(), 'Single')]/ancestor::a", null);
 
 		private String xpath;
 		private String ghostText;
@@ -361,4 +519,204 @@ public class CustomFieldsPage extends ManagePage {
 		}
 	}
 
-}
+	/**
+	 * Class used to configure properties of custom field  which will be created via API.
+	 * Includes all possible properties for all types of supporter and activity custom fields.
+	 * Object of this class with pre-set properties should be used as parameter of {@link CustomField#createCustomField(CustomFieldType)} method
+	 */
+
+	public static class CustomFieldAPIGenerator {
+		private String name;
+		private String descriptionApi;
+		private String controlTypeApi = "";
+		private String ghostTextApi = "";
+		private String defaultValueApi = "";
+		private String dataTypeApi = "";
+		private int textFieldMinLengthValueApi = 0;
+		private int textFieldMaxLengthValueApi = 0;
+		private String textFieldValidationApi = "";
+		private String yesNoFieldControlOrientationApi = "";
+		private String[] yesNoFieldValueLabelsApi = new String[2];
+		private String[] singleChoiceFieldValueLabelsApi = new String[2];
+		private String minDateApi = "";
+		private String maxDateApi = "";
+		private String minTimeApi = "";
+		private String maxTimeApi = "";
+
+		/**
+		 * CustomFieldAPIGenerator object.
+		 * @param name custom field reference name
+		 * @param descriptionApi custom field description
+		 */
+
+		public CustomFieldAPIGenerator(String name, String descriptionApi) {
+			this.name = name;
+			this.descriptionApi = descriptionApi;
+		}
+
+		/**
+		 * Sets maxDate value of {@link CustomFieldType#DateTime} field.
+		 * @param maxDateApi max date value. Should be specified according to "mm/dd/yyyy" format and should be later than {@link CustomFieldAPIGenerator#minDateApi}. Example: 09/15/2017
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setDateFieldMaxDateApi(String maxDateApi) {
+			this.maxDateApi = maxDateApi;
+			return this;
+		}
+
+		/**
+		 * Sets minDate value of {@link CustomFieldType#DateTime} field.
+		 * @param minDateApi min date value. Should be specified according to "mm/dd/yyyy" format and should be earlier than {@link CustomFieldAPIGenerator#maxDateApi}. Example: 09/15/2017
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setDateFieldMinDateApi(String minDateApi) {
+			this.minDateApi = minDateApi;
+			return this;
+		}
+
+		/**
+		 * Sets minTime value of {@link CustomFieldType#DateTime} field.
+		 * @param minTimeApi min time value. Should be specified according to "hh:mm am/pm" format and should be earlier than {@link CustomFieldAPIGenerator#maxTimeApi}. Example: 10:30pm
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setDateFieldMinTimeApi(String minTimeApi) {
+			this.minTimeApi = minTimeApi;
+			return this;
+		}
+
+		/**
+		 * Sets maxTime value of {@link CustomFieldType#DateTime} field.
+		 * @param maxTimeApi max time value. Should be specified according to "hh:mm am/pm" format and should be later than {@link CustomFieldAPIGenerator#minTimeApi}. Example: 10:30pm
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setDateFieldMaxTimeApi(String maxTimeApi) {
+			this.maxTimeApi = maxTimeApi;
+			return this;
+		}
+
+		/**
+		 * Sets orientation of {@link CustomFieldType#YesNo} field.
+		 * @param yesNoFieldControlOrientationApi yesNo custom field orientation. Expected values are "HORIZONTAL" and "VERTICAL"
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setYesNoFieldControlOrientationApi(String yesNoFieldControlOrientationApi) {
+			this.yesNoFieldControlOrientationApi = yesNoFieldControlOrientationApi;
+			return this;
+		}
+
+		/**
+		 * Sets values label of {@link CustomFieldType#SingleChoice} field.
+		 * Current implementation allows to specify only 2 values of Single choice field.
+		 * @param value1 labels to be used for Single choice custom field. These may be any values.
+		 * @param value2 labels to be used for Single choice custom field. These may be any values.
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setSingleChoiceFieldValueLabelsApi(String value1, String value2) {
+			this.singleChoiceFieldValueLabelsApi[0] = value1; this.singleChoiceFieldValueLabelsApi[1] = value2;
+			return this;
+		}
+
+		/**
+		 * Sets default value of {@link CustomFieldType#SingleChoice} or {@link CustomFieldType#YesNo} fields.
+		 * For other fields types this property value is static and does not need to be configured separately.
+		 * @param defaultValue field default value. Should be any value available in the list of field options
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setDefaultValue(String defaultValue){
+			this.defaultValueApi = defaultValue;
+			return this;
+		}
+
+		/**
+		 * Sets field ghost text of {@link CustomFieldType#TextBox} and {@link CustomFieldType#Number} fields.
+		 * For other fields types this property value is static and does not need to be configured separately.
+		 * @param ghostText field ghost text
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setGhostText(String ghostText){
+			this.ghostTextApi = ghostText;
+			return this;
+		}
+
+		/**
+		 * Sets control type only for {@link CustomFieldType#TextBox}, {@link CustomFieldType#SingleChoice} and {@link CustomFieldType#DateTime} fields.
+		 * For other fields types this property value is static and does not need to be configured separately.
+		 * <p>
+		 * {@link CustomFieldType#TextBox} field expected values are "INPUT" and "TEXTAREA". In first case field length is limited to 256 characters and 'dataType' property is automatically assigned "TEXT".
+		 * In the second case field length is limited to 2000 characters and 'dataType' property is automatically assigned "TEXTAREA" value.
+		 * <p>
+		 * {@link CustomFieldType#SingleChoice} field expected values are "SELECT" and "RADIO"
+		 * <p>
+		 * {@link CustomFieldType#DateTime} field expected values are "DATE" and "DATETIME"
+		 * @param controlTypeApi control type
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setControlType(String controlTypeApi){
+			this.controlTypeApi = controlTypeApi;
+			this.dataTypeApi = controlTypeApi.equals("INPUT") ? "TEXT" : "TEXTAREA";
+			return this;
+		}
+
+		/**
+		 * Sets field max length of {@link CustomFieldType#TextBox} field.
+		 * Accepts any value from 0 to 256 if {@link CustomFieldAPIGenerator#setControlType(String)} is "INPUT"
+		 * Accepts any value from 0 to 2000 if {@link CustomFieldAPIGenerator#setControlType(String)} is "TEXTAREA"
+		 * @param textFieldMaxLengthValueApi max length
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setTextFieldMaxLengthValue(int textFieldMaxLengthValueApi){
+			this.textFieldMaxLengthValueApi = textFieldMaxLengthValueApi;
+			return this;
+		}
+
+		/**
+		 * Sets field min length of {@link CustomFieldType#TextBox} field.
+		 * Accepts any value from 0 to 256 if {@link CustomFieldAPIGenerator#setControlType(String)} is "INPUT"
+		 * Accepts any value from 0 to 2000 if {@link CustomFieldAPIGenerator#setControlType(String)} is "TEXTAREA"
+		 * @param textFieldMinLengthValueApi min length
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setTextFieldMinLengthValue(int textFieldMinLengthValueApi){
+			this.textFieldMinLengthValueApi = textFieldMinLengthValueApi;
+			return this;
+		}
+
+		/**
+		 * Sets validation type of {@link CustomFieldType#TextBox} field
+		 * @param textFieldValidationApi type of validation. Accepted values are ALPHA_ONLY, ANY_CHARACTER, ALPHA_NUMERIC
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setTextFieldValidationValue(String textFieldValidationApi){
+			this.textFieldValidationApi = textFieldValidationApi;
+			return this;
+		}
+
+		/**
+		 * Sets values label of {@link CustomFieldType#YesNo} field.
+		 * @param yesNoFieldValueLabelsApi labels to be used for Yes/No custom field. Expected values are "yesno' AND "truefalse"
+		 * @return CustomFieldAPIGenerator object
+		 */
+
+		public CustomFieldAPIGenerator setYesNoFieldValueLabelsApi(String yesNoFieldValueLabelsApi) {
+			if (yesNoFieldValueLabelsApi.equalsIgnoreCase("yesno")) {this.yesNoFieldValueLabelsApi[0] = "Yes"; this.yesNoFieldValueLabelsApi[1] = "No";} else {
+				this.yesNoFieldValueLabelsApi[0] = "True"; this.yesNoFieldValueLabelsApi[1] = "False";
+			}
+			return this;
+		}
+
+	}
+	}
+
+

@@ -117,7 +117,22 @@ public class HttpClient {
 		}
 		return "";
 	}
-	
+
+	public String createCustomFields(JSONObject customFieldObject) {
+		try {
+			sendPOSTRequest("https://" + host + "/api/customField", customFieldObject.toString());
+			for (String temp : JSONResponse) {
+				try {
+					return jsonParser(temp, "payload.id").toString();
+				} catch (JSONException e) {
+					logger.error("", e);
+				}
+			}
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return "";
+	}
 	
 	public Map<Integer, Supporter> getSupporters(String source, Integer supAmount) throws JSONException {
         Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
@@ -287,7 +302,7 @@ public class HttpClient {
 		return network;
 		
 	}
-	
+
 	public HttpClient createCustomField(JSONObject customField){
 		try {
 			sendPOSTRequest("https://" + host + "/api/customField", customField.toString());
@@ -295,9 +310,9 @@ public class HttpClient {
 			logger.error("", e);
 		}
 		return this;
-	
+
 	}
-	
+
 	private void updateHeaders() {
 		try {
 			httpost = new HttpPost();
