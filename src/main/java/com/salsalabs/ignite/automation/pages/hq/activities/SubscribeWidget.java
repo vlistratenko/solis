@@ -22,11 +22,9 @@ public class SubscribeWidget extends Browser{
 	TextBox personCityField = new TextBoxImpl("//input[@name='field-address-city']", "City", true);
 	TextBox personZipField = new TextBoxImpl("//input[@name='field-address-zip']", "Zip", true);
 	SelectBoxImpl personStatesSelectBox = new SelectBoxImpl("//select[@name='field-address-state']", "States");
-	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
-	CheckBox newsletterCheckBox = new CheckBoxImpl("//div[contains(text(), 'Newsletter')]/input", "Newsletter");
 	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
 	
-	Button subscribeButton = new ButtonImpl("//button[.='Subscribe!']", "Subscribe", true);
+	Button subscribeButton = new ButtonImpl("//a[@data-ignite-submit-button='data-ignite-submit-button']", "Subscribe", true);
 	
 	Label subscriptionIsSuccessMessage = new LabelImpl("//h1[contains(.,'Thank You!')]", "Subscription is success");
 
@@ -49,9 +47,8 @@ public class SubscribeWidget extends Browser{
 				personLNameField, 
 				personCityField, 
 				personZipField, 
-				personStatesSelectBox, 
-				fundraisingCheckBox, 
-				newsletterCheckBox);
+				personStatesSelectBox 
+				);
 	}
 	
 	public void verifyWidgetElementsVisible(boolean visible){

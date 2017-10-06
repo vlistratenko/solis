@@ -13,10 +13,12 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class PetitionWidget extends SubscribeWidget {
 	
 	ButtonImpl expandPetitionFormButton = new ButtonImpl("//button[@type='submit']", "Expand Petition Form", true);
-	ButtonImpl signButton = new ButtonImpl("//button[@type='submit']", "Sign Petition", true);
-	TextBox comment = new TextBoxImpl("//textarea[@id='field-comment']", "Comment textbox");
+	ButtonImpl signButton = new ButtonImpl("//a[@data-ignite-submit-button='data-ignite-submit-button']", "Sign Petition", true);
+	TextBox comment = new TextBoxImpl("//textarea[@name='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
 	CheckBox displayCommentCheckBox = new CheckBoxImpl("//input[@name='field-showComment']", "Display My Comment");
+	//Label signatureBlock = new LabelImpl("(//div[contains(text(), 'Signatures')]", "Signature Block");
+	
 	
 	public PetitionWidget() {
 		super();
@@ -30,9 +32,8 @@ public class PetitionWidget extends SubscribeWidget {
 	public void verifyWidgetElementsVisible(boolean visible){
 		if (visible) {
 			verifier.verifyElementIsDisplayed(true, signButton);
-			signButton.click();
 			verifyBasicElementsVisible();
-			verifier.verifyElementIsDisplayed(true, comment, displaySignatureCheckBox);
+			verifier.verifyElementIsDisplayed(true, comment, displaySignatureCheckBox , displayCommentCheckBox);
 		} else {
 			verifier.verifyElementIsNotDisplayed(true, signButton);
 		}
@@ -55,8 +56,8 @@ public class PetitionWidget extends SubscribeWidget {
 		Label signName = new LabelImpl("(//div[@class='sli-signature'])[1]/div[@class='sli-signature-name']", "Signature Name");
 		Label signLoc = new LabelImpl("(//div[@class='sli-signature'])[1]/div[@class='sli-signature-location']", "Signature Location");
 		Label signCom = new LabelImpl("(//div[@class='sli-signature'])[1]/div[@class='sli-signature-comment']", "SIgnature Comment");
-		verifier.verifyEquals(displaySign ? sup.getFirstName() + " " + sup.getLastName() : "Anonymous", signName.getText());
-		verifier.verifyEquals((sup.getCity() + ", " + sup.getState()).toUpperCase(), signLoc.getText());
+		verifier.verifyEquals(displaySign ? sup.getFirstName() + " " + sup.getLastName() : "Anonymous", signName.getText().replace("Name: ", ""));
+		verifier.verifyEquals((sup.getCity() + ", " + sup.getState()).toUpperCase(), signLoc.getText().replace("LOCATION: ", ""));
 		if (!displayComment) {
 			verifier.verifyElementIsNotDisplayed(signCom);
 		} else {
@@ -74,7 +75,6 @@ public class PetitionWidget extends SubscribeWidget {
 			String commentText,
 			boolean displaySign,
 			boolean displayComment) {
-		expandPetitionFormButton.click();
 		personEmailField.type(sup.getFinalEMAIL());
 		personFNameField.type(sup.getFirstName());
 		personLNameField.type(sup.getLastName());

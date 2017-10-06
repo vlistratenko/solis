@@ -23,7 +23,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget Description");
 	protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Compose");
 	protected Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Compose");
-	protected Button openPublishStepButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
+	protected Button openPublishStepButton = new ButtonImpl("//button[@title='Next: Publish This Form']", "Publish");
 	protected CheckBox iNeedHostedPageCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	protected CheckBox iNeedWidgetCodeCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
 	protected TextBox titleField = new TextBoxImpl("//input[@ng-model='widget.page.title']", "Title");
@@ -35,7 +35,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
-	protected Button confirmDeletionBtn = new ButtonImpl("	//button[@class='button tiny secondary ng-isolate-scope']", "Yes, delete already!");
+	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
+	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
+	
+	
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
 	
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
@@ -73,6 +76,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage publishForm() {
 		openPublishStepButton.click();
 		sleep(5);
+		for(int i = 0; i <3; i++){
+			if(waitConditionBecomesTrue(nextResultButton.isDisplayed(), 5));
+			break;
+		}
+		
 		return this;
 	}
 	
@@ -194,6 +202,20 @@ public class AddSubscribeWidgetPage extends HomePage {
 			  waitConditionBecomesTrue(composeButton.isDisplayed(),  5);
 		  }
 		  composeButton.click();
+		  sleep(10);
+		  return this;
+	}
+	
+	public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
+		sleep(10);
+		Button nextAutoresponder = new ButtonImpl("//button[@title='Next: Autoresponders']" , "Next Autoresponder Step");
+		  waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
+		  if(nextAutoresponder.isDisplayed()){
+			  nextAutoresponder.click();
+		  }else{
+			  waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
+		  }
+		  nextAutoresponder.click();
 		  sleep(10);
 		  return this;
 	}

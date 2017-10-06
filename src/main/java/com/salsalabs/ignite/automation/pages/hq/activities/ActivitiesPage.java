@@ -50,6 +50,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public void verifyActivityIsPresentInTableAllActivities(String type, String handyReferenceName, String description, String status) {
+		waitConditionBecomesTrue(activitiesTable.isDisplayed(), 5);
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 2), type, "Widget is not present in table (type)");
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 3), handyReferenceName, "Widget is not present in table (name)");
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 4), description, "Widget is not present in table (description)");
@@ -57,6 +58,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public void verifyWidgetIsPresentInTableForms(String widgetName, String description, String status, String visibility) {
+		waitConditionBecomesTrue(activitiesTable.isDisplayed(), 5);
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 2), widgetName, "Widget is not present in table (name)");
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 3), description, "Widget is not present in table (description)");
 		verifier.verifyEquals(activitiesTable.getCellValue(1, 4), status, "Widget is not present in table (status)");
@@ -78,6 +80,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public <T> T openFormFromTable(Class<T> clazz) {
+		activitiesTable.scrollIntoView();
 		new ButtonImpl(activitiesTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		try {
 			return clazz.newInstance();

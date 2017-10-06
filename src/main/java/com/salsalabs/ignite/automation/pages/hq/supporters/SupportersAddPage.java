@@ -49,6 +49,9 @@ public class SupportersAddPage extends HomePage {
 	Table supporterTable = new TableImpl("//table", "Supporter Table");
 	Button customFieldAccordion = new ButtonImpl("//h2[@ng-click='toggleAccordion(customFields)']","Custom  Fields Accordion Button");
 	Button doneCalendarButton = new ButtonImpl("//button[contains(text(), 'Done')]", "Done calenard button   Button");
+	Button subscribtionTab = new ButtonImpl("//a[contains(text(), 'Subscription')]", "Subscription tab Button");
+	
+	
 
 	LocalDate date = LocalDate.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -216,6 +219,8 @@ public class SupportersAddPage extends HomePage {
 	}
 
 	public SupportersPage verifySupporterStatus(String status) {
+		subscribtionTab.scrollIntoView();
+		subscribtionTab.click();
 		Label tempElement;
 		if (status.equalsIgnoreCase("Unsubscribed")) {
 			tempElement = supporterStatusLabel;
@@ -223,7 +228,7 @@ public class SupportersAddPage extends HomePage {
 			tempElement = supporterStatusRadio;
 		}
 		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrueWithRefersh(tempElement.getText().equalsIgnoreCase(status), 30)) {
+			if (waitConditionBecomesTrueWithRefersh(tempElement.getText().equalsIgnoreCase(status), 10)) {
 				break;
 			}
 		}
