@@ -102,9 +102,9 @@ public class SupportersAddPage extends HomePage{
 		}
 		return new SupportersPage();
 	}
-	
-	public SupportersPage verifySupporterData(String email, String fName, String lName, String phone, String addressLine1,
-			String city, String zipCode, String faceBook, String twitter, String status) {
+
+	public SupportersAddPage verifySupporterData(String email, String fName, String lName, String phone,
+												 String addressLine1, String city, String zipCode, String faceBook, String twitter) {
 		verifier.verifyEquals(supporterEmailField.getValue().contains(email), true, "Wrong email", false);
 		verifier.verifyEquals(supporterFirstNameField.getValue().contains(fName), true, "Wrong firstname", false);
 		verifier.verifyEquals(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
@@ -114,8 +114,7 @@ public class SupportersAddPage extends HomePage{
 		verifier.verifyEquals(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verifier.verifyEquals(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verifier.verifyEquals(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
-		verifySupporterStatus(status);
-		return new SupportersPage();
+		return new SupportersAddPage();
 	}
 
 	public SupportersAddPage goToSubscriptionTab(){
