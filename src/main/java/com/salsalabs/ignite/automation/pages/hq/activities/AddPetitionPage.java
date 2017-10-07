@@ -23,7 +23,8 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	private Button saveConfigBtn = new ButtonImpl("//*[@autotest-id='btn_save_form_config']", "Save");
 	private Button publishCommentsImmediately = new ButtonImpl(
 			"//div[@class='large-5 columns end']//label[@class='ng-binding']//span", "Publish Immediately");
-	
+	private Button configBtn = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]/../div[@handles-content-form]/div[@class='right']/span[@button-content-edit-form]", "Edit");
+	private Button goalTracker = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]", "Goal Tracker");
 
 	public AddPetitionPage() {
 		openComposeStepButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Compose");
@@ -58,6 +59,17 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 		this.widgetName = formUrl;
 		return this.openPetitionWidget();
 		
+	}
+
+	public void  configPetition(){
+		goalTracker.click();
+		sleep(2);
+		configBtn.clickJS();
+		sleep(3);
+		publishImmediately.click();
+		allowHideComment.click();
+		saveConfigBtn.click();
+		sleep(5);
 	}
 	
 	
