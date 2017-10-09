@@ -143,7 +143,8 @@ public class CustomFieldsPage extends ManagePage {
 				webElement.click();
 			}	
 		}
-		waitConditionBecomesTrue(actionsDropDownLink.isDisplayed(), 4);
+		waitConditionBecomesTrue(!actionsDropDownLink.isNotExists(), 4);
+		actionsDropDownLink.scrollIntoView();
 		actionsDropDownLink.clickJS();
 		deleteButton.click();
 		waitConditionBecomesTrue(confirmDeleteButton.isDisplayed(), 4);
