@@ -89,6 +89,7 @@ public class HomePage extends Browser{
 	}
 	
 	public MessagingPage openMessagingPage() {
+		messagingTab.scrollIntoView();
 		messagingTab.click();
 		return new MessagingPage();
 	}
@@ -100,6 +101,7 @@ public class HomePage extends Browser{
 	}
 	
 	public ManagePage openSettingsPage() {
+		settingsTab.scrollIntoView();
 		settingsTab.click();
 		return new ManagePage();
 		
