@@ -23,7 +23,7 @@ public class DonationsPage extends HomePage{
 	
 	public DonationsPage verifyDonationRecordInTable(String amount, String status, boolean type, String source, String supporter) {	
 		for (int i = 0; i < 15; i++) {
-			if (waitConditionBecomesTrueWithRefersh(donationsTable.isValueExists(source)>0, 60)) {
+			if (waitConditionBecomesTrueWithRefersh(donationsTable.isValueExists(source)>0, 30)) {
 				break;
 			}
 		}
@@ -95,12 +95,11 @@ public class DonationsPage extends HomePage{
 	}
 	
 	public DonationsPage findTransactionByAmmount(String ammount){
-		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		sleep(25);
 		waitConditionBecomesTrue(searchTransactionInput.isDisplayed(), 4);
-		sleep(2);
 		searchTransactionInput.type(ammount);
 		searchButton.click();
-		sleep(3);
+		sleep(5);
 		return this;
 	}
 	

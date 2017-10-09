@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
@@ -15,6 +16,11 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddSubscribeWidgetPage extends HomePage {
 	protected String widgetName;
@@ -23,7 +29,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget Description");
 	protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Compose");
 	protected Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Compose");
-	protected Button openPublishStepButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
+	protected Button openPublishStepButton = new ButtonImpl("//button[@title='Next: Publish This Form']", "Publish");
 	protected CheckBox iNeedHostedPageCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==true')]", " I need a hosted page");
 	protected CheckBox iNeedWidgetCodeCheckBox = new CheckBoxImpl("//span[contains(@ng-class, 'useHostedPage==false')]", " I need a hosted page");
 	protected TextBox titleField = new TextBoxImpl("//input[@ng-model='widget.page.title']", "Title");
@@ -35,9 +41,14 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
-	protected Button confirmDeletionBtn = new ButtonImpl("	//button[@class='button tiny secondary ng-isolate-scope']", "Yes, delete already!");
-	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
+	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
+	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
 	
+	
+	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
+	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
+	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
+
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName); 
@@ -73,8 +84,25 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage publishForm() {
 		openPublishStepButton.click();
 		sleep(5);
+		for(int i = 0; i <3; i++){
+			if(waitConditionBecomesTrue(nextResultButton.isDisplayed(), 5));
+			break;
+		}
+		
 		return this;
 	}
+
+    public AddSubscribeWidgetPage publishFromAutoresponders() {
+        fluentWaitForElementPresenceIgnoringExceptions(publishFromAutorespondersTab.getPath());
+        publishFromAutorespondersTab.click();
+        return this;
+    }
+
+    public AddSubscribeWidgetPage goToAutorespondersTab() {
+        fluentWaitForElementPresenceIgnoringExceptions(toAutoresponders.getPath());
+        toAutoresponders.click();
+        return this;
+    }
 	
 	public AddSubscribeWidgetPage hosteWidgetOnLocalPage(String widgetTitle, boolean isHostedOnLocalPage) {
 		if (isHostedOnLocalPage) {
@@ -197,6 +225,55 @@ public class AddSubscribeWidgetPage extends HomePage {
 		  sleep(10);
 		  return this;
 	}
-		
+
+	public AddSubscribeWidgetPage dropOneColumnRow(){
+		new SignupFormElements().performDrop(SignupFormElements.VE.ONECOLUMN);
+		return this;
+	}
+
+	public AddSubscribeWidgetPage dropVEFormElement(){
+		new SignupFormElements().performDrop(SignupFormElements.VE.FORM);
+		return this;
+	}
+
+	public AddSubscribeWidgetPage dropVETextElement(){
+		new SignupFormElements().performDrop(SignupFormElements.VE.TEXT);
+		return this;
+	}
+
+	public AddSubscribeWidgetPage dropVEFormFieldElement(){
+		new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
+		return this;
+	}
+
+	public FormFieldConfigurationPage editVEField(String fieldName){
+		new SignupFormElements().performEdit(SignupFormElements.VE.FORM_FIELD, fieldName);
+		return new FormFieldConfigurationPage();
+	}
+
+	public AddSubscribeWidgetPage selectBlankLayout() {
+		fluentWaitForElementPresenceIgnoringExceptions("//*[@id='activityForm']/descendant::*[contains(text(),'Blank')]/../../../../..");
+		sleep(5);
+		Button lay = new ButtonImpl("//*[@id='activityForm']/descendant::*[contains(text(),'Blank')]/../../../../..", "Blank layout icon");
+		lay.click();
+		composeButton.click();
+		sleep(5);
+		return this;
+	}
+
+
+    public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
+        sleep(10);
+        Button nextAutoresponder = new ButtonImpl("//button[@title='Next: Autoresponders']" , "Next Autoresponder Step");
+        waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
+        if(nextAutoresponder.isDisplayed()){
+            nextAutoresponder.click();
+        }else{
+            waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
+        }
+        nextAutoresponder.click();
+        sleep(10);
+        return this;
+    }
 
 }

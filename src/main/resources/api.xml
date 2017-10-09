@@ -1,0 +1,8 @@
+<suite name="ApiTests" parallel="false" thread-count="1">
+    <suite-files>
+        <suite-file path="src/main/resources/xml-tests/api/ActivitesReadAndMetricsTest.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/GetSupporterByDate.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/SegmentCrudAndMetrics.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/SupporterCrudAndMetrics.xml" />
+    </suite-files>
+</suite>

@@ -231,8 +231,10 @@ public class CustomTargetsPage extends ManagePage {
  
     public CustomTargetsPage clickOnCustomTargetByEmail(
             String customTargetEmailAddress) {
-        new ButtonImpl("//span[contains(text(), '" + customTargetEmailAddress + "')]/..",
-                "Custom Target email address value").onClick();
+        Button ct = new ButtonImpl("//span[contains(text(), '" + customTargetEmailAddress + "')]/..",
+                "Custom Target email address value");
+        fluentWaitForElementPresenceIgnoringExceptions(ct.getPath());
+        ct.onClick();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

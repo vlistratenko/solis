@@ -1,0 +1,15 @@
+{
+  "id": "007db1a4-53f0-45f1-8ef2-18bf30bfdce9",
+  "timestamp": "2017-10-02T13:48:33.879Z",
+  "header":    {
+    "processingTime": 110,
+    "serverId": "prod-hqapp1.prod.ignite.net"
+  },
+  "payload":    {
+    "supporters": [      {
+      "supporterId": "49473c0a-43c1-4a18-b326-b7e5b7894815",
+      "result": "DELETED"
+    }],
+    "count": 1
+  }
+}

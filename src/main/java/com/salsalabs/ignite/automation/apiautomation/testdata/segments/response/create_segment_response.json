@@ -1,0 +1,19 @@
+{
+  "id": "97597e43-afc9-4e8d-a91e-0dea96a8ce5b",
+  "timestamp": "2017-10-03T11:53:15.174Z",
+  "header":    {
+    "processingTime": 45,
+    "serverId": "prod-hqapp1.prod.ignite.net"
+  },
+  "payload":    {
+    "segments": [      {
+      "segmentId": "273af500-265a-4255-8fb8-f03fb7d67370",
+      "name": "segment2",
+      "description": "segment11",
+      "totalMembers": 0,
+      "result": "ADDED",
+      "externalSystemId": "xxxxx2"
+    }],
+    "count": 1
+  }
+}

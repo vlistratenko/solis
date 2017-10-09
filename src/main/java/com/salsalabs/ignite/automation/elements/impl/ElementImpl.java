@@ -20,7 +20,7 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
 
-abstract class ElementImpl implements Element {
+public abstract class ElementImpl implements Element {
 	String path;
 	WebDriver driver;
 	Logger logger;
@@ -46,6 +46,22 @@ abstract class ElementImpl implements Element {
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 		elementName = name;
 		isRequeired = isReq;
+	}
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public String getElementName() {
+		return elementName;
+	}
+
+	public String getElementPath() {
+		return path;
 	}
 
 	@Override

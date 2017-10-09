@@ -16,19 +16,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.base.Function;
+import com.salsalabs.ignite.automation.elements.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.apache.xerces.dom.ElementImpl;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeTest;
@@ -122,9 +122,9 @@ public class SeleneseTestCase {
 
 	@AfterTest(alwaysRun = true)
 	protected void stopTestOnDriver() throws Exception {
-		emailClient.closeConnection();
+		/*emailClient.closeConnection();
 		driver.manage().deleteAllCookies();
-		close();
+		close();*/
 	}
 
 	protected void beforeClass() {
@@ -244,5 +244,4 @@ public class SeleneseTestCase {
 		caps.setCapability("record_snapshot", "false");
 		SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
 	}
-
 }

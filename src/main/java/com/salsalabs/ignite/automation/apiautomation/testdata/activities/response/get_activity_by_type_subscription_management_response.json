@@ -1,0 +1,23 @@
+{
+  "id": "11371457-af52-4ef8-a38e-c02c8059f4cb",
+  "timestamp": "2017-10-05T09:16:24.266Z",
+  "header": {
+    "processingTime": 46,
+    "serverId": "test-hqapp1.ignite.net"
+  },
+  "payload": {
+    "total": 1,
+    "offset": 0,
+    "activities": [
+      {
+        "activityId": "5c5f41b0-5754-44ab-8cb1-2eb890ca59e1",
+        "supporterId": "2dca1793-bc81-4a46-a4f4-d46015bee9d5",
+        "activityDate": "2016-06-21T13:02:06.944Z",
+        "activityType": "SUBSCRIPTION_MANAGEMENT",
+        "lastModified": "2016-06-21T13:02:08.983Z",
+        "customFieldValues": []
+      }
+    ],
+    "count": 1
+  }
+}

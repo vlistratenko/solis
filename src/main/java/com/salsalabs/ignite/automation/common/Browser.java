@@ -5,11 +5,8 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.mail.Message;
 
@@ -18,14 +15,14 @@ import org.json.JSONException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 
 import com.salsalabs.ignite.automation.elements.Button;
@@ -386,6 +383,25 @@ public abstract class Browser {
 			clickUnsubscribeButton().
 			verifyUnsubscribeIsSuccesses();
 		}
+	}
+
+	public void fluentWaitForElementPresenceIgnoringExceptions(final String locator){
+		ArrayList<Class <? extends Throwable>> exceptionsList = new ArrayList<>();
+		exceptionsList.add(NoSuchElementException.class);
+		exceptionsList.add(ElementNotVisibleException.class);
+		exceptionsList.add(StaleElementReferenceException.class);
+		exceptionsList.add(InvalidElementStateException.class);
+		long waitingTime = 30;
+		long pollingInterval = 500;
+		Wait<WebDriver> wait = new FluentWait<>(driver)
+				.withTimeout(waitingTime, TimeUnit.SECONDS)
+				.pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
+				.ignoreAll(exceptionsList)
+				.withMessage("Fluent wait of " + waitingTime + " seconds with " + pollingInterval +
+						" milliseconds polling interval was unable to locate element with locator " + locator);
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 	}
 	
 	protected Alert switchToAlert() {

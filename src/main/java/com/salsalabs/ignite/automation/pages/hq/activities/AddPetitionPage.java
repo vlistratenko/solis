@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 
 public class AddPetitionPage extends AddSubscribeWidgetPage {
 
-	private Button configBtn = new ButtonImpl("//div[@class='right']//span[@button-content-edit-form]", "Edit");
+
 	private Button publishImmediately = new ButtonImpl("//label[@for='publish-comment-immediately']",
 			"Publish Immediately");
 	private Button allowHideComment = new ButtonImpl("//label[@for='petition-allow-hide-comment']",
@@ -23,7 +23,8 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	private Button saveConfigBtn = new ButtonImpl("//*[@autotest-id='btn_save_form_config']", "Save");
 	private Button publishCommentsImmediately = new ButtonImpl(
 			"//div[@class='large-5 columns end']//label[@class='ng-binding']//span", "Publish Immediately");
-	
+	private Button configBtn = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]/../div[@handles-content-form]/div[@class='right']/span[@button-content-edit-form]", "Edit");
+	private Button goalTracker = new ButtonImpl("//div[contains(@class, 'goalTrackerBlock')]", "Goal Tracker");
 
 	public AddPetitionPage() {
 		openComposeStepButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Compose");
@@ -39,6 +40,11 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	public AddPetitionPage selectLayoutStep(String type) {
 		return (AddPetitionPage) super.selectLayoutStep(type);
 	}
+	
+	@Override
+	public AddPetitionPage proceedToTheNextAutoresponderStep() {
+		return (AddPetitionPage) super.proceedToTheNextAutoresponderStep();
+	}
 
 	@Override
 	protected SubscribeWidget newWidget(boolean clean) {
@@ -48,16 +54,27 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 	public PetitionWidget openPetitionWidget() {
 		return openWidget(PetitionWidget.class);
 	}
+	
+	public PetitionWidget openPetitionWidget(String formUrl) {
+		this.widgetName = formUrl;
+		return this.openPetitionWidget();
+		
+	}
 
-	public void configPetition() {
+	public void  configPetition(){
+		goalTracker.click();
 		sleep(2);
 		configBtn.clickJS();
 		sleep(3);
+		publishImmediately.click();
 		allowHideComment.click();
-		publishCommentsImmediately.click();
 		saveConfigBtn.click();
 		sleep(5);
 	}
+	
+	
+
+	
 
 	
 

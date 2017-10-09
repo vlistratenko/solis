@@ -5,10 +5,9 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="login" value="olauta+ta3@salsalabs.com"></parameter>
 	<parameter name="sendEmail.from" value="info@salsalabs.com"></parameter>
-	<parameter name="segmentName" value="MergeFieldsTesting_doNOTtouch"></parameter>
 	<parameter name="password" value="qwerty"></parameter>
 
-	<test verbose="2" name="Verify merge fields in the email (FIREFOX)" annotations="JDK">
+	<test verbose="2" name="Verify subscription managements via email unsub link (FIREFOX)" annotations="JDK">
 		<parameter name="USED_BROWSER" value="FIREFOX"></parameter>
 		<groups>
 			<run>

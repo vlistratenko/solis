@@ -87,7 +87,11 @@ public class SupportersPage extends AudiencePage {
 	}
 
 	public SupportersAddPage openSupporterDetailsPage() {
+		
 		sleep(3);
+		if(supportersTable.isDisplayed()){
+			supportersTable.scrollIntoView();
+		}
 		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
 		sleep(2);
 		return new SupportersAddPage();

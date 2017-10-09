@@ -1,0 +1,163 @@
+{
+  "id": "f5fd2895-77d8-4331-ae5b-0cd0048952a5",
+  "timestamp": "2017-10-05T09:16:46.016Z",
+  "header": {
+    "processingTime": 80,
+    "serverId": "test-hqapp1.ignite.net"
+  },
+  "payload": {
+    "total": 3,
+    "offset": 0,
+    "activities": [
+      {
+        "activityId": "09e22b50-60fd-42be-9b79-08f45699a1bd",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "72c208aa-c117-42e2-8785-596f3cc0a8ad",
+        "activityDate": "2016-06-21T09:53:30.602Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.283Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "activityId": "6ddf8ca7-5308-4fee-b206-a8cdadb97a6a",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "b0beb85c-467e-49f6-8b80-459364652228",
+        "activityDate": "2016-06-21T09:52:26.445Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.267Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 2",
+            "subject": "subject 2",
+            "message": "brad james + adding a comment 2",
+            "additionalComment": "custom comment",
+            "targets": [
+              {
+                "targetId": "f403c527-4890-4bc2-baae-80a64c9b95b4",
+                "targetName": "Brad James Sherman",
+                "targetTitle": "California District 30",
+                "politicalParty": "Democratic Party",
+                "targetType": "Federal House",
+                "state": "California",
+                "districtId": "CA30",
+                "districtName": "California District 30",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          },
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "activityId": "abccf154-4301-418b-aae5-4f7861332237",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "6bee2428-e622-4004-b9c9-26d4b56e99d2",
+        "activityDate": "2016-06-21T09:52:56.376Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.276Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 3",
+            "subject": "subject 3",
+            "message": "natalie broussard + change letter 3 changed custom text",
+            "targets": [
+              {
+                "targetId": "91bdd5bf-0bf7-4d1e-afec-2cebbce9d072",
+                "targetName": "Natalie Broussard",
+                "targetTitle": "Iberia Parish Council - Council Member",
+                "politicalParty": "Republican Party",
+                "targetType": "US County",
+                "state": "Louisiana",
+                "districtId": "22045",
+                "districtName": "District 10",
+                "role": "Legislative Member",
+                "department": "Legislature",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          },
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "count": 3
+  }
+}
