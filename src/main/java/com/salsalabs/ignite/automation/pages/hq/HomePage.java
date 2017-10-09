@@ -1,23 +1,9 @@
 package com.salsalabs.ignite.automation.pages.hq;
 
 
-import java.util.Set;
-
-import com.salsalabs.ignite.automation.common.Browser;
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.Environment;
-import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.Panel;
-import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.common.*;
+import com.salsalabs.ignite.automation.elements.*;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.donation.DonationsPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.MessagingPage;
@@ -25,6 +11,8 @@ import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskPage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskSubmitRequestPage;
+
+import java.util.Set;
 
 public class HomePage extends Browser{
 	
@@ -35,7 +23,8 @@ public class HomePage extends Browser{
 			CommonUtils.getProperty(PropertyName.CURRENT_LAST_NAME) +"']"
 			, "Drop with user name");
 	Label orglabel = new LabelImpl(userlabel.getPath() + "/span[text()='" + CommonUtils.getProperty(PropertyName.ADMIN_ORG_NAME) + "']", "Drop with organization name");
-	
+	DropDownImpl orgLabelDropDown = new DropDownImpl(".//*[@id='account-info-drop']", "Drop with organization name");
+
 	//left navigation bar
 	Button audienceTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/audience/supporters']", "Audience tab");
 	Button activitiesTab = new ButtonImpl("//nav[@id='sideNav']/descendant::a[@href='/#/activities']", "Activities tab");
@@ -201,6 +190,11 @@ public class HomePage extends Browser{
 	public HomePage openDashboard() {
 		dashboardButton.click();
 		return new HomePage();
+	}
+
+	public MyProfilePage openMyProfilePage() {
+		orgLabelDropDown.selectByLabel("My profile");
+		return new MyProfilePage();
 	}
 	
 }

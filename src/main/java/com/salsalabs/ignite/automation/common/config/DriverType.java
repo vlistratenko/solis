@@ -1,19 +1,14 @@
 package com.salsalabs.ignite.automation.common.config;
 
-import static com.salsalabs.ignite.automation.common.config.DriverBinaryMapper.configureBinary;
-import static com.salsalabs.ignite.automation.common.config.DriverBinaryMapper.getBinaryPath;
-import static com.salsalabs.ignite.automation.common.config.OperatingSystem.getOperatingSystem;
-import static com.salsalabs.ignite.automation.common.config.SystemArchitecture.getSystemArchitecture;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
@@ -21,7 +16,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+
+import static com.salsalabs.ignite.automation.common.config.DriverBinaryMapper.configureBinary;
+import static com.salsalabs.ignite.automation.common.config.DriverBinaryMapper.getBinaryPath;
+import static com.salsalabs.ignite.automation.common.config.OperatingSystem.getOperatingSystem;
+import static com.salsalabs.ignite.automation.common.config.SystemArchitecture.getSystemArchitecture;
 
 public enum DriverType implements DriverSetup {
 
@@ -29,7 +31,11 @@ public enum DriverType implements DriverSetup {
         public DesiredCapabilities getDesiredCapabilities() {
         	System.setProperty("webdriver.gecko.driver", DriverBinaryContext.binaryPath("/windows/marionette/64bit/geckodriver.exe"));
         	DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);;
+            LoggingPreferences logs = new LoggingPreferences();
+            logs.enable(LogType.BROWSER, Level.SEVERE);
+            capabilities.setCapability(CapabilityType.LOGGING_PREFS, logs);
+        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
         	return capabilities;
         }
 
