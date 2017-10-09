@@ -3,10 +3,6 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -16,11 +12,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddSubscribeWidgetPage extends HomePage {
 	protected String widgetName;

@@ -11,8 +11,14 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
 
 public class EventWidget extends DonationWidget {
+	
+	Label donorsList = new LabelImpl(
+			"//div[contains(@class, 'sli-donor-list-results')]/descendant::div[.='$amountToReplace.00']/preceding-sibling::div[@class='sli-donor-name']",
+			"");
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
 	TextBox eventPersonLNameField = new TextBoxImpl("//input[contains(@id,'last_name')]", "Event attendees Last name", true);
 	TextBox eventPersonEmailField = new TextBoxImpl("//input[contains(@id,'email')]", "Event attendees Email", true);
@@ -70,6 +76,10 @@ public class EventWidget extends DonationWidget {
 		return this;
 	}
 	
+	/*
+	 * Method for event donation forms
+	 * Requiring is false
+	 */
 	public EventWidget fillEventDonationForm(String personEmail,
 			String personFName,
 			String personLName,
@@ -88,7 +98,61 @@ public class EventWidget extends DonationWidget {
 			boolean isEmail) 
 	{
 		isEvent = true;
-		fillDonationForm(personEmail, personFName, personLName, personAddressLine1, "", personCity, personZip, personState, false, donationAmount, nameOnCard, cardNumber, cvv, expiryMonth, expiryYear, isFundraising, isNewsletter, isEmail);
+		fillDonationForm(personEmail,
+				personFName,
+				personLName,
+				personAddressLine1,
+				"",
+				personCity,
+				personZip,
+				personState,
+				false,
+				donationAmount,
+				nameOnCard,
+				cardNumber,
+				cvv,
+				expiryMonth,
+				expiryYear,
+				isFundraising,
+				isNewsletter,
+				isEmail);
+		isEvent = false;
+		return this;
+	}
+	
+	public EventWidget fillEventDonationForm(String personEmail,
+			String personFName,
+			String personLName,
+			String personAddressLine1,
+			String personCity,
+			String personZip,
+			String personState,
+			String donationAmount,
+			String nameOnCard,
+			String cardNumber,
+			String cvv,
+			String expiryMonth,
+			String expiryYear) 
+	{
+		isEvent = true;
+		fillDonationForm(personEmail,
+				personFName,
+				personLName,
+				personAddressLine1,
+				"",
+				personCity,
+				personZip,
+				personState,
+				false,
+				donationAmount,
+				nameOnCard,
+				cardNumber,
+				cvv,
+				expiryMonth,
+				expiryYear,
+				false	,
+				false,
+				false);
 		isEvent = false;
 		return this;
 	}
@@ -104,5 +168,16 @@ public class EventWidget extends DonationWidget {
 	public EventWidget clickSubmitButton() {
 		submitButtonNew.clickJS();
 		return this;
+	}
+	
+	public EventWidget checkDisplayDonationAnonymouslyOption(boolean isChecked) {
+		displayDonationAnonymouslyOptionCheckBox.check(isChecked);
+		return this;
+	}
+	
+	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount) {
+		donorsList.changePath("amountToReplace", donationAmount);
+		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
+		
 	}
 }

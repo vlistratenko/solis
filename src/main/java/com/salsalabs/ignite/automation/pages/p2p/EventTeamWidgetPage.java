@@ -1,10 +1,9 @@
-package com.salsalabs.ignite.automation.suites.regression;
+package com.salsalabs.ignite.automation.pages.p2p;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 
 public class EventTeamWidgetPage extends EventWidget {
@@ -17,8 +16,7 @@ public class EventTeamWidgetPage extends EventWidget {
 	Label teamDonationIsSccessMessage = new LabelImpl("//span[contains(.,'Thank You!')]", "Team donation is success");
 	
 	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount, String expectedValue) {
-		donorsList.changePath("amountToReplace", donationAmount);
-		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
+		super.verifyNameForLastDonotByDonationAmount(donorName, donationAmount);
 		
 	}
 	
@@ -50,11 +48,7 @@ public class EventTeamWidgetPage extends EventWidget {
 		isEvent = false;
 		return this;
 	}
-	
-	public EventTeamWidgetPage checkDisplayDonationAnonymouslyOption(boolean isChecked) {
-		displayDonationAnonymouslyOptionCheckBox.check(isChecked);
-		return this;
-	}
+
 	
 	public EventTeamWidgetPage clickSubmitTeamDonationForm() {
 		submitTeamDonationButton.clickJS();
@@ -69,5 +63,14 @@ public class EventTeamWidgetPage extends EventWidget {
 		}
 		verifier.verifyElementIsDisplayed(teamDonationIsSccessMessage);
 		return this;
+	}
+	
+	public EventTeamWidgetPage checkDisplayDonationAnonymouslyOption(boolean isChecked) {
+		super.checkDisplayDonationAnonymouslyOption(isChecked);
+		return this;
+	}
+	
+	public void verifyNameForLastDonorByDonationAmount(String donorName, String donationAmount, String expectedValue) {
+		super.verifyNameForLastDonotByDonationAmount(donorName, donationAmount);
 	}
 }

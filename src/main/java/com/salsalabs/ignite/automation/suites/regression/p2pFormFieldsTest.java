@@ -7,13 +7,14 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.EventFundraiserWidgetPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_EventPageTab;
+import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
+import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
+import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 
 
 /**
- * <b>This test contains scenarios related to Email Blast Sending (TestLink: TC18, TC19, TC20, TC21)</b>
+ * 
  *
  */
 public class p2pFormFieldsTest extends SeleneseTestCase{
@@ -21,7 +22,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	LoginPage loginPage;
 	
 	@Parameters({ "login", "password"})
-	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "2p2p.formFields.createFormWithAnonymous" }, description = "")
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "skip_p2p.formFields.createFormWithAnonymous" }, description = "")
 	public void createp2pForm(String login, String pass) {
 		loginPage = new LoginPage(true); 
 		
@@ -56,7 +57,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	 * formURL = p2p form URL
 	 */
 	@Parameters({ "formURL"})
-	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "2p2p.formFields.Anonymous" }, description = "")
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.Anonymous" }, description = "")
 	public void varifyAnonimusOptionOnExistedForm(String formURL) {
 
 		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
@@ -99,14 +100,14 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		eventp2pWidgetPage.open(formURL);
 		
 		eventp2pWidgetPage.
-		clickFundraiserLinkInLeaderboard(CommonUtils.getParam(PropertyName.LAST_FUNDRAISER_NAME)).
-		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);
+		findFundraiserViaSearchFieldAndClick(CommonUtils.getParam(PropertyName.LAST_FUNDRAISER_NAME)).
+		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);
 		
 		eventp2pWidgetPage.open(formURL);
 		
 		eventp2pWidgetPage.
-		clickTeamLinkInLeaderboard(CommonUtils.getParam(PropertyName.LAST_TEAM_NAME)).
-		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);
+		findTeamViaSearchFieldAndClick(CommonUtils.getParam(PropertyName.LAST_TEAM_NAME)).
+		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);
 		
 	}	
 	
@@ -147,7 +148,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 			eventFundraiserWidgetPage.open(formURL);
 		
 		eventFundraiserWidgetPage.
-		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);		
+		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);		
 	}
 	
 	/**
@@ -189,6 +190,43 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		eventTeamWidgetPage.
 		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);		
 	}
+	
+/*
+	*//**
+	 * This test requires event form with "Display my donation anonymously" option
+	 * formURL = event form URL
+	 *//*
+	@Parameters({ "eventFormURL"})
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "event.formFields.AnonymousForEventPage" }, description = "")
+	public void varifyAnonimusOptionOnExistedFormForEvent(String formURL) {
+
+		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
+		loginPage = new LoginPage(true);
+		EventWidget eventWidgetPage = loginPage.
+				openEventWidgetByLink(formURL).
+				openDonationPage().
+				fillEventDonationForm(SeleneseTestCase.emailClient.getEmailBox("Anonimus" + CommonUtils.getRandomNumericValueFixedLength(4)),
+						"Tester",
+						"Anonimus",
+						"10753 blix",
+						"North holliwood",
+						"91602",
+						"CA",
+						donationAmount,
+						"Tester Testerov",
+						"4111111111111111",
+						"180",
+						"01",
+						"2022").		
+		checkDisplayDonationAnonymouslyOption(true).
+		clickSubmitButton();
+		eventWidgetPage.verifyDonationIsSuccesses();	
+		
+		eventWidgetPage.open(formURL);
+		
+		eventWidgetPage.
+		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);		
+	}*/
 	
 	
 }

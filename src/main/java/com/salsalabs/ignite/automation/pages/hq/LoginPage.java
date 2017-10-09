@@ -13,14 +13,14 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.TLWidget;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
-import com.salsalabs.ignite.automation.suites.regression.EventTeamWidgetPage;
+import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
+import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
+import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 
 public class LoginPage extends Browser{
 

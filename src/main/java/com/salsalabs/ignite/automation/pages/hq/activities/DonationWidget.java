@@ -50,7 +50,7 @@ public class DonationWidget extends SubscribeWidget {
 	Button nextButton = new ButtonImpl("//a[contains(text(), 'Next')]", "Next Button");
 	Table checkoutSummaryTable = new TableImpl("//table[@class='sli-checkout-summary-table']", "CheckoutSummaryTable");
 
-	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
+	Label donationIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Donation is success");
 	protected Boolean isEvent = false;
 
 	public DonationWidget() {
@@ -96,6 +96,62 @@ public class DonationWidget extends SubscribeWidget {
 			String personAddressLine1, String personAddressLine2, String personCity, String personZip, String state,
 			boolean recurringDonation, String donationAmount, String nameOnCard, String cardNumber, String cvv,
 			String expiryMonth, String expiryYear, boolean isFundraising, boolean isNewsletter, boolean isEmail) {
+
+		String[] donAmounts = new String[] { "5", "10", "15", "20", "25" };
+		personEmailField.type(personEmail);
+		personFNameField.type(personFName);
+		personLNameField.type(personLName);
+		if (personAddressLine1.length() < 1) {
+			personAddressLine1 = "TestV address";
+		}
+		personAddressLine1Field.type(personAddressLine1);
+
+		personAddressLine2Field.type(personAddressLine2);
+		if (personCity.length() < 1) {
+			personCity = "New York";
+		}
+		personCityField.type(personCity);
+		personZipField.type(personZip);
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		} else {
+			personStatesSelectBox.selectByValue(state);
+		}
+		if (!isEvent) {
+			recurringDonationCheckBox.check(recurringDonation);
+		}
+
+		if (recurringDonation) {
+			donationAmountLabel.changePath("", donationAmountLabelRecuring.getPath());
+			donationAmountInput.changePath("", donationRecuringAmountInput.getPath());
+		} else {
+			donationAmountLabel.changePath("", donationAmountLabelOneTime.getPath());
+			donationAmountInput.changePath("", donationOneTimeAmountInput.getPath());
+		}
+
+		if (donationAmount.equals("")) {
+			donationAmount = donAmounts[CommonUtils.getRandomValueNumericFromTo(0, donAmounts.length - 1)];
+			donationAmountLabel.changePath("$20", donationAmount);
+			donationAmountLabel.click();
+		} else {
+			donationAmountInput.type(donationAmount);
+		}
+		nameOnCardField.type(nameOnCard);
+		cardNumberField.type(cardNumber);
+		cvvField.type(cvv);
+		expiryMonthField.selectByLabel(expiryMonth);
+		expiryYearField.selectByLabel(expiryYear);
+
+		// fundraisingCheckBox.check(isFundraising);
+		// newsletterCheckBox.check(isNewsletter);
+
+		return this;
+	}
+	
+	public DonationWidget fillDonationForm(String personEmail, String personFName, String personLName,
+			String personAddressLine1, String personAddressLine2, String personCity, String personZip, String state,
+			boolean recurringDonation, String donationAmount, String nameOnCard, String cardNumber, String cvv,
+			String expiryMonth, String expiryYear) {
 
 		String[] donAmounts = new String[] { "5", "10", "15", "20", "25" };
 		personEmailField.type(personEmail);

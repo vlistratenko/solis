@@ -1,10 +1,10 @@
-package com.salsalabs.ignite.automation.pages.hq.activities;
+package com.salsalabs.ignite.automation.pages.p2p;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.suites.regression.EventTeamWidgetPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 
 public class EventFundraiserWidgetPage extends EventWidget {
 
@@ -15,10 +15,8 @@ public class EventFundraiserWidgetPage extends EventWidget {
 	Button submitFundrDonationButton = new ButtonImpl("//a[.='Donate Now']", "Donate Now", true);
 	Label fundraiserDonationIsSccessMessage = new LabelImpl("//span[contains(.,'Thank You!')]", "Fundraiser donation is success");
 	
-	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount, String expectedValue) {
-		donorsList.changePath("amountToReplace", donationAmount);
-		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
-		
+	public void verifyNameForLastDonorByDonationAmount(String donorName, String donationAmount, String expectedValue) {
+		super.verifyNameForLastDonotByDonationAmount(donorName, donationAmount);
 	}
 	
 	

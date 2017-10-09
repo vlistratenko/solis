@@ -20,7 +20,7 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
+import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 
 public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 	//list of customfields in the email (37 in total)

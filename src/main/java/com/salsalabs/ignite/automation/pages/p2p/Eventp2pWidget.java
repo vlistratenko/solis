@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.pages.hq.activities;
+package com.salsalabs.ignite.automation.pages.p2p;
 
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
@@ -15,6 +15,8 @@ import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TabsImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 
 public class Eventp2pWidget extends EventWidget {
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
@@ -42,6 +44,11 @@ public class Eventp2pWidget extends EventWidget {
 	TextBox teamName = new TextBoxImpl("//input[@id='fundraiser_stub_team_name']", "Team goal");
 	Button fundraiserPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Fundraiser link ");
 	Button teamPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Team link ");
+	
+	TextBox searchFundriserField = new TextBoxImpl("//label[.='Find a Fundraiser']/following::input", "Find a Fundraiser field");
+	TextBox searchFundriserButton = new TextBoxImpl("//label[.='Find a Fundraiser']/following::span[.='Search']", "Search a Fundraiser button");
+	TextBox searchTeamField = new TextBoxImpl("//label[.='Find a Team']/following::input", "Find a Team field");
+	TextBox searchTeamButton= new TextBoxImpl("//label[.='Find a Team']/following::span[.='Search']", "Search a Team button");
 	
 	Tabs leaderboardTab = new TabsImpl("//div[@ignite-p2p-leaderboard='ignite-p2p-leaderboard']", "Leaderboard tabs element");
 	
@@ -232,11 +239,31 @@ public class Eventp2pWidget extends EventWidget {
 		return new EventFundraiserWidgetPage();
 	}
 	
-	public EventFundraiserWidgetPage clickTeamLinkInLeaderboard (String fundraiserFLname) {
+	public EventFundraiserWidgetPage findFundraiserViaSearchFieldAndClick (String fundraiserFLname) {
+		searchFundriserField.scrollIntoView();
+		searchFundriserField.type(fundraiserFLname);
+		searchFundriserButton.click();
+		fundraiserPageLink.changePath("textforreplasment", fundraiserFLname);
+		fundraiserPageLink.waitElement(10);
+		fundraiserPageLink.click();
+		return new EventFundraiserWidgetPage();
+	}
+	
+	public EventTeamWidgetPage clickTeamLinkInLeaderboard (String fundraiserFLname) {
 		selectLeaderboardTab("Top Teams");
 		teamPageLink.changePath("textforreplasment", fundraiserFLname);
 		teamPageLink.click();
-		return new EventFundraiserWidgetPage();
+		return new EventTeamWidgetPage();
+	}
+	
+	public EventTeamWidgetPage findTeamViaSearchFieldAndClick (String teamName) {
+		searchTeamField.scrollIntoView();
+		searchTeamField.type(teamName);
+		searchTeamButton.click();
+		teamPageLink.changePath("textforreplasment", teamName);
+		teamPageLink.waitElement(10);
+		teamPageLink.click();
+		return new EventTeamWidgetPage();
 	}
 	
 

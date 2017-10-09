@@ -10,7 +10,7 @@
 		<suite-file path="src/main/resources/xml-tests/regression/ResetPassword.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/RunVerifyMergeFieldsInTheEmail.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/RunVerifySubscriptionManagementInEmail.xml" />
-		<suite-file path="src/main/resources/xml-tests/SocailMediaPagesTest.xml" />
-		
+		<suite-file path="src/main/resources/xml-tests/regression/SocailMediaPagesTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/p2pFormFieldsTest.xml" />		
 	</suite-files>
 </suite>
