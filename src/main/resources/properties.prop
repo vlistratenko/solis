@@ -1,29 +1,22 @@
 #AUTOMATICALLY GENERATED
-#Fri Oct 06 13:06:18 EEST 2017
+#Fri Oct 06 17:48:47 EEST 2017
 current.firstName=0
-schoiceFieldName=schoice8030
 CM.firstName=0
 current.lastName=0
-emailSubject=Merge fields testing\!\!\! Blast from 08.23.2017 24254
-yesNoFieldName=yesNo4073
+emailSubject=We need your help\!\!\! Blast from 10.05.2017 61152
 amountOfPublishedEmails=1
 planName=false
-petitionWidgetLink=https\://autotestorgqa.test.igniteaction.net/petitionname_smpo5
-emailBlastName=Merge fields testing\!\!\! Blast from 08.23.2017 24254
+emailBlastName=We need your help\!\!\! Blast from 10.05.2017 61152
 Admin.lastName=0
 Admin.emailBase=0
 Environment=TEST
 Admin.email=0@testauto.igniteaction.net
 updateTC=false
 Admin.orgName=automated_testing1
-textFieldName=text2968
 maxRetryCount=2
 current.Password=qwerty
-numberFieldName=number3783
-currentWindowHandle=CDwindow-e6099509-b64e-49a0-8b94-bab7c4e45f11
-dateFieldName=date8373
 emailFrom=info@salsalabs.com
-current.Login=olauta+ta3@salsalabs.com
+current.Login=olauta+fullwoutp2pc2c@salsalabs.com
 Admin.firstName=0
 buildVersion=false
 Admin.Password=11111111

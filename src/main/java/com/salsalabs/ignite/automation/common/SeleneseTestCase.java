@@ -1,43 +1,34 @@
 package com.salsalabs.ignite.automation.common;
 
-import static com.salsalabs.ignite.automation.common.config.DriverType.determineEffectiveDriverType;
+import com.salsalabs.ignite.automation.common.Environment.LocationOfServer;
+import com.salsalabs.ignite.automation.common.config.DriverType;
+import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.*;
+import org.testng.annotations.Optional;
 
-import java.awt.Toolkit;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import com.google.common.base.Function;
-import com.salsalabs.ignite.automation.elements.Element;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.xerces.dom.ElementImpl;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-
-import com.salsalabs.ignite.automation.common.Environment.LocationOfServer;
-import com.salsalabs.ignite.automation.common.config.DriverType;
+import static com.salsalabs.ignite.automation.common.config.DriverType.determineEffectiveDriverType;
 
 @Listeners({ TestListener.class, RetryTestListener.class })
 public class SeleneseTestCase {
@@ -243,5 +234,10 @@ public class SeleneseTestCase {
 		caps.setCapability("record_network", "true");
 		caps.setCapability("record_snapshot", "false");
 		SeleneseTestCase.driver = new RemoteWebDriver(new URL("http://" + login + ":u5d0be5af7471cff@hub.crossbrowsertesting.com:80/wd/hub"), caps);
+	}
+
+	protected List<LogEntry> getJsConsoleErrors() {
+		if (driver instanceof FirefoxDriver) return driver.manage().logs().get(LogType.BROWSER).getAll();
+		throw new UnsupportedOperationException("JS console errors retrieval available for firefox driver only");
 	}
 }
