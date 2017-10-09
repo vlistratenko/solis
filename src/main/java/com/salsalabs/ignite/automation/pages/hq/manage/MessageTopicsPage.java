@@ -49,6 +49,7 @@ public class MessageTopicsPage extends ManagePage {
 		List<WebElement> topics = listOfTopics.findElementsByXpath(listOfTopics.getPath());
 		int row = topics.size() ;
 		Button icon  = new ButtonImpl(".//table[@class='no-table-styles normal-font-size']/tbody/descendant::tr["+ row +"]/td[1]/span" , "TrashIcon");
+		icon.scrollIntoView();
 		icon.moveAndClick();
 		sleep(2);
 		return new MessageTopicsPage();
