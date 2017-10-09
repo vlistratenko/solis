@@ -47,4 +47,6 @@ public interface PropertyName {
 	String SUBSCRIBE_WIDGET = "subscribeWidget";
 	String CM_FIRST_NAME = "CM.firstName";
 	String MAX_RETRY_COUNT = "maxRetryCount";
+	String LAST_FUNDRAISER_NAME = "fundraiserName";
+	String LAST_TEAM_NAME = "teamName";
 }
