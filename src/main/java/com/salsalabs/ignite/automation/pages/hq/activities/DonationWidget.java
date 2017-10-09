@@ -180,6 +180,7 @@ public class DonationWidget extends SubscribeWidget {
 			personCity = "New York";
 		}
 		personStatesSelectBox.selectByValue("AL");
+		nextButton.scrollIntoView();
 		nextButton.click();
 		return this;
 	}
