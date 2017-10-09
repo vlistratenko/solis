@@ -51,7 +51,7 @@ public class DonationWidget extends SubscribeWidget {
 	Table checkoutSummaryTable = new TableImpl("//table[@class='sli-checkout-summary-table']", "CheckoutSummaryTable");
 
 	Label donationIsSccessMessage = new LabelImpl("//h1[.='Thank You!']", "Donation is success");
-	Boolean isEvent = false;
+	protected Boolean isEvent = false;
 
 	public DonationWidget() {
 		super();

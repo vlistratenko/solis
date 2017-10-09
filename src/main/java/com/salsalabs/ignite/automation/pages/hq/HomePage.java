@@ -67,6 +67,14 @@ public class HomePage extends Browser{
 	Button buyButton = new ButtonImpl("//a[contains(@ng-click,'goToBuyNow')]", "Buy");
 	Button dashboardButton = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard");
 	
+	public HomePage(int delay){
+		settingsTab.waitElement(delay);
+	}
+	
+	public HomePage(){
+		
+	}
+	
 	public HomePage verifyUserNameDisplayed() {
 		verifier.verifyElementIsDisplayed(userlabel);
 		return this;

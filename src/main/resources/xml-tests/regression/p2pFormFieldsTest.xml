@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Verify form fields for p2p" parallel="false"
+	thread-count="1">
+
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<test verbose="2" name="Verify form fields for p2p (FIREFOX)"
+		annotations="JDK">
+		<parameter name="USED_BROWSER" value="CHROME"></parameter>
+		<parameter name="login" value="823.3e41c646@mailosaur.in"></parameter>
+		<parameter name="password" value="!QAZ2wsx"></parameter>
+		<parameter name="formURL" value="https://testvco823.test.igniteaction.net/p2pform20171005184832/index.html"></parameter>
+		<parameter name="fundraiserFormURL" value="https://testvco823.test.igniteaction.net/p2pform20171005184832/p/testeranonimus20171006144447/index.html"></parameter>
+		<parameter name="teamFormURL" value="https://testvco823.test.igniteaction.net/p2pform20171005184832/t/testeranonimusteam20171009113833/index.html"></parameter>
+		<groups>
+			<run>
+				<include name="p2p.formFields.*" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="com.salsalabs.ignite.automation.suites.regression.p2pFormFieldsTest" />
+		</classes>
+	</test>
+</suite>

@@ -199,7 +199,7 @@ public class CommonUtils {
 
 	public static String getTodayDateDependsOnBrowser(String browser, Integer addDays) {
 		String separator = getDatesSeparator(browser);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd" + separator + "MM" + separator + "yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM" + separator + "dd" + separator + "yyyy");
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DATE, addDays);

@@ -7,16 +7,18 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.p2p.p2psPage;
 
 
 public class ActivitiesPage extends HomePage {
-	
+	String linkToThePage = "https://hq.uat.ignite.net/#/activities";
 	Button emailBlastsLink = new ButtonImpl("//a[.='Manage Emails']", "Email blast"); 
 	Button fundraisingWidgetLink = new ButtonImpl("//a[@autotest-id='FUNDRAISE']", "Fundraising Widget");
 	Button subscribeWidgetLink = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
+	Button p2pTab = new ButtonImpl("//a[@autotest-id='P2P_EVENT']", "Petitions");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[starts-with(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']//button[2]", "Yes, delete already!");
@@ -47,6 +49,11 @@ public class ActivitiesPage extends HomePage {
 		allActivitiesTab.click();
 		sleep(2);
 		return this;
+	}
+	
+	public p2psPage openP2PPage() {
+		p2pTab.click();
+		return new p2psPage();
 	}
 	
 	public void verifyActivityIsPresentInTableAllActivities(String type, String handyReferenceName, String description, String status) {

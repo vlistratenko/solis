@@ -77,7 +77,7 @@ public abstract class Browser {
 		return this;
 	}
 	
-	protected void open(String url) {
+	public void open(String url) {
 		url = url.replaceFirst("hq.uat.igniteaction.net", "hq.uat.ignite.net");
 		logger.info("Try to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);

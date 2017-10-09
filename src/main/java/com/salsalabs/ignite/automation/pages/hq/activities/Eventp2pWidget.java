@@ -2,16 +2,18 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
-import com.salsalabs.ignite.automation.elements.Element;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.SelectBox;
+import com.salsalabs.ignite.automation.elements.Tabs;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.TabsImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 
 public class Eventp2pWidget extends EventWidget {
@@ -38,6 +40,10 @@ public class Eventp2pWidget extends EventWidget {
 	Button withTeam = new ButtonImpl("//input[@id='yes_join_team']", "With team");
 	Button withoutTeam = new ButtonImpl("//input[@id='no_join_team']", "With team");
 	TextBox teamName = new TextBoxImpl("//input[@id='fundraiser_stub_team_name']", "Team goal");
+	Button fundraiserPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Fundraiser link ");
+	Button teamPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Team link ");
+	
+	Tabs leaderboardTab = new TabsImpl("//div[@ignite-p2p-leaderboard='ignite-p2p-leaderboard']", "Leaderboard tabs element");
 	
 	public Eventp2pWidget() {
 		super();
@@ -87,7 +93,7 @@ public class Eventp2pWidget extends EventWidget {
 	}
 	
 	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
-			String fundraiserPassword, String fundraiserPasswordConfirmation) {		
+			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {		
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		createFundraiserAccountButton.click();
 		fundraiserFNameField.waitElement(5);
@@ -97,18 +103,39 @@ public class Eventp2pWidget extends EventWidget {
 		fundraiserPasswordField.type(fundraiserPassword);
 		fundraiserPasswordConfirmationField.type(fundraiserPasswordConfirmation);
 		submitFundraiserRegistration.click();
-		Boolean isWithTeam = CommonUtils.getRandomBoolean();
-		fundraiserPageNameField.type(fundraiserFName + "." + fundraiserLName + CommonUtils.getUnicName());
+		CommonUtils.setParam("fundraiserName", fundraiserFName + "." + fundraiserLName + CommonUtils.getUnicName());
+		fundraiserPageNameField.type(CommonUtils.getParam(PropertyName.LAST_FUNDRAISER_NAME));
 		fundraiserGoalField.type("1000");
 		if (isWithTeam) {
 			withTeam.click();
-			teamName.type(fundraiserFName + "." + fundraiserLName + "Team." + CommonUtils.getUnicName());
+			CommonUtils.setParam("teamName", fundraiserFName + "." + fundraiserLName + "Team." + CommonUtils.getUnicName());
+			teamName.type(CommonUtils.getParam(PropertyName.LAST_TEAM_NAME));
 		}else{
 			withoutTeam.click();
 		}
 		sleep(3);
 		switchDefaultContent();
 		return this;
+	}
+	
+	/**
+	 * This method fill Fundraiser form with random selection "Create team" option
+	 * @param fundraiserFName
+	 * @param fundraiserLName
+	 * @param fundraiserEmail
+	 * @param fundraiserPassword
+	 * @param fundraiserPasswordConfirmation
+	 * @return
+	 */
+	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
+			String fundraiserPassword, String fundraiserPasswordConfirmation) {		
+
+		return fillFundraiserSignInForm(fundraiserFName,
+				fundraiserLName,
+				fundraiserEmail,
+				fundraiserPassword,
+				fundraiserPasswordConfirmation,
+				CommonUtils.getRandomBoolean());
 	}
 	
 	public Eventp2pWidget fillp2pEventRegistrationForm(String personEmail, String personFName, String personLName){
@@ -187,4 +214,30 @@ public class Eventp2pWidget extends EventWidget {
 		super.clickDonationButton();
 		return this;
 	}
+	
+	public Eventp2pWidget checkDisplayDonationAnonymouslyOption(boolean isChecked) {
+		displayDonationAnonymouslyOptionCheckBox.check(isChecked);
+		return this;
+	}
+	
+	public Eventp2pWidget selectLeaderboardTab(String tabLabel) {
+		leaderboardTab.selectTab(tabLabel);
+		return this;
+	}
+	
+	public EventFundraiserWidgetPage clickFundraiserLinkInLeaderboard (String fundraiserFLname) {
+		selectLeaderboardTab("Top Individuals");
+		fundraiserPageLink.changePath("textforreplasment", fundraiserFLname);
+		fundraiserPageLink.click();
+		return new EventFundraiserWidgetPage();
+	}
+	
+	public EventFundraiserWidgetPage clickTeamLinkInLeaderboard (String fundraiserFLname) {
+		selectLeaderboardTab("Top Teams");
+		teamPageLink.changePath("textforreplasment", fundraiserFLname);
+		teamPageLink.click();
+		return new EventFundraiserWidgetPage();
+	}
+	
+
 }

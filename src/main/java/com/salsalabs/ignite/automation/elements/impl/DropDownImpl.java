@@ -39,15 +39,12 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		logger.info("Select value by label " + value + " in the " + elementName);
 		WebElement el = findElementByXpath(extendButtonPath);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
-		scrollIntoView();
+		//scrollIntoView();
 		click(extendButtonPath);
 		this.getChildItemByLabel(value).scrollIntoView();
 		this.getChildItemByLabel(value).click();
 
 	}
-	
-	
-	
 
 	@Override
 	public void selectByLabelJS(String value) {

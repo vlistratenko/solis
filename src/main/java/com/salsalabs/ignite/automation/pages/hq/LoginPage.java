@@ -13,12 +13,14 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.Eventp2pWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.TLWidget;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
+import com.salsalabs.ignite.automation.suites.regression.EventTeamWidgetPage;
 
 public class LoginPage extends Browser{
 
@@ -69,11 +71,13 @@ public class LoginPage extends Browser{
 				CommonUtils.setProperty(PropertyName.CURRENT_LAST_NAME, CommonUtils.getProperty(PropertyName.CM_LAST_NAME));
 			}
 		}
-		endHelp.setImplicity(3);
-		if(!endHelp.isNotDisplayed()){
-			endHelp.click();
-		}
-		return new HomePage();
+		if (SeleneseTestCase.USED_ENVIRONMENT.getServer().name().equalsIgnoreCase("uat")) {
+			endHelp.setImplicity(3);
+			if(!endHelp.isNotDisplayed()){
+				endHelp.click();
+			}
+		}		
+		return new HomePage(10);
 	}
 	
 	public LoginPage doFailLogin(String userName, String password) {
@@ -187,6 +191,16 @@ public class LoginPage extends Browser{
 	public Eventp2pWidget openp2pEventWidgetByLink(String string) {
 		openWidget(string);			
 		return new Eventp2pWidget();
+	}
+	
+	public EventFundraiserWidgetPage openp2pEventFundraiserWidgetByLink(String string) {
+		openWidget(string);			
+		return new EventFundraiserWidgetPage();
+	}
+	
+	public EventTeamWidgetPage openp2pEventTeamWidgetByLink(String string) {
+		openWidget(string);			
+		return new EventTeamWidgetPage();
 	}
 	
 	public PetitionWidget openPetitionWidgetByLink(String string) {

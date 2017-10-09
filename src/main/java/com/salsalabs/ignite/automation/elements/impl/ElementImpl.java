@@ -281,6 +281,24 @@ abstract class ElementImpl implements Element {
 		}
 
 	}
+	
+	protected void clickJS(String locator) {
+		logger.debug("Click on < " + locator + " >.");		
+		try {
+			WebElement element = findElementByXpath(locator);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", element);
+		} catch (Exception e) {
+			if (isRequeired) {
+				e.printStackTrace();
+				throw new ElementNotFoundException(elementName, "xpath", locator);
+			} else {
+				logger.error(e.getMessage());
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 	protected void clickByTABKey(String locator) {
 		logger.debug("Click on < " + locator + " >.");
