@@ -104,7 +104,7 @@ public class Environment {
 		case TEST: {
 			switch (server) {
 			case LOCAL:
-				TESTURL = "https://hq.test.igniteaction.net";
+				TESTURL = "https://hq.test.ignite.net";
 				break;
 			case REMOTE:
 				TESTURL = "https://10.16.0.69";

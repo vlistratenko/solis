@@ -1,18 +1,16 @@
 package com.salsalabs.ignite.automation.suites;
 
-import org.testng.annotations.Test;
-
 import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.EmailClient;
-import com.salsalabs.ignite.automation.common.Environment;
-import com.salsalabs.ignite.automation.common.MailosourEmailClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.manage.AddCardConnectPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.AddWePayPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.PaymentGatewaysPage;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 /**
  * <b>This test contains scenarios related to payment gateway creation (TestLink: TC22)</b>
@@ -22,7 +20,8 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	
 	private PaymentGatewaysPage paymentGatewayPage;
 	private AddWePayPage addWePayPage;
-	
+	private AddCardConnectPage addCardConnectPage;
+
 	/**
 	 * <b>Create Payment Gateway.</b>
 	 * <p>
@@ -41,14 +40,15 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	 * @throws MailosaurException 
 	 *  
 	 */
-	@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testCreatePaymentGateway() throws MailosaurException {
+	/*@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
+	@Parameters({ "login", "password" })
+	public void testCreateWePayPaymentGateway(String login, String password) throws MailosaurException {
 		mailosaur.deleteAllEmails();
 		String cmEmail = mailosaur.getEmailBox("gateway" + CommonUtils.getUnicName());
 		String firstName = "FirstName";
 		String lastName = "LastName";
 		String nickname = "nickname_" + CommonUtils.getUnicName();
-		doLoginAndOpenPaymentGatewayPage();
+		doLoginAndOpenPaymentGatewayPage(login, password);
 		addWePayPage = paymentGatewayPage.openAddWePayPage();
 		CommonUtils.setProperty(PropertyName.ADMIN_EMAIL, cmEmail);
 		CommonUtils.setProperty(PropertyName.ADMIN_FIRST_NAME, firstName);
@@ -57,9 +57,22 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 		paymentGatewayPage.verifyWePayEmail(mailosaur);
 		paymentGatewayPage.verifyCreatedAccountExists(nickname);
 		paymentGatewayPage.openWePayConfirmationPage(mailosaur);
+	}*/
+
+	@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
+	@Parameters({ "login", "password" })
+	public void testCreateCardConnectPaymentGateway(String login, String password) throws MailosaurException {
+		mailosaur.deleteAllEmails();
+		String nickname = "nickname_" + CommonUtils.getUnicName();
+		doLoginAndOpenPaymentGatewayPage(login, password);
+		addCardConnectPage = paymentGatewayPage.openAddCardConnectPage();
+		paymentGatewayPage = addCardConnectPage.createCardConnectAcount(nickname, "descr", addCardConnectPage.chooseRandomOrgType());
+		paymentGatewayPage.verifyWePayEmail(mailosaur);
+		paymentGatewayPage.verifyCreatedAccountExists(nickname);
+		paymentGatewayPage.openWePayConfirmationPage(mailosaur);
 	}
 	
-	private void doLoginAndOpenPaymentGatewayPage() {
-		paymentGatewayPage = new LoginPage().doSuccessLogin().openSettingsPage().switchToPaymentGatewaysPage();
+	private void doLoginAndOpenPaymentGatewayPage(String login, String password) {
+		paymentGatewayPage = new LoginPage().doSuccessLogin(login, password).openSettingsPage().switchToPaymentGatewaysPage();
 	}
 }

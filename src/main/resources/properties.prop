@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Fri Oct 06 17:48:47 EEST 2017
+#Tue Oct 10 15:12:07 EEST 2017
 current.firstName=0
 CM.firstName=0
 current.lastName=0
@@ -7,17 +7,17 @@ emailSubject=We need your help\!\!\! Blast from 10.05.2017 61152
 amountOfPublishedEmails=1
 planName=false
 emailBlastName=We need your help\!\!\! Blast from 10.05.2017 61152
-Admin.lastName=0
+Admin.lastName=LastName
 Admin.emailBase=0
 Environment=TEST
-Admin.email=0@testauto.igniteaction.net
+Admin.email=gateway20171010151114@testauto.igniteaction.net
 updateTC=false
 Admin.orgName=automated_testing1
 maxRetryCount=2
-current.Password=qwerty
+current.Password=\!QAZ2wsx
 emailFrom=info@salsalabs.com
-current.Login=olauta+fullwoutp2pc2c@salsalabs.com
-Admin.firstName=0
+current.Login=2712.3e41c646@mailosaur.in
+Admin.firstName=FirstName
 buildVersion=false
 Admin.Password=11111111
 CM.lastName=0
