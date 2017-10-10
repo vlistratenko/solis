@@ -35,9 +35,10 @@
                         <USED_ADMIN_USER>${adminLogin}</USED_ADMIN_USER>
                         <USED_ADMIN_PASS>${adminPass}</USED_ADMIN_PASS>
                         <USED_BROWSER>${browser}</USED_BROWSER>
+                        <USED_TESTSUITE>${testSuite}</USED_TESTSUITE>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/main/resources/${testSuite}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
