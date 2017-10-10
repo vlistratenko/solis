@@ -37,7 +37,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			Supporter sup = Supporter.getSupporterWithRandomDataFromFile();
 			loginPage.
 			openSubscribeWidgetByLink(formURL).
-			fillSubscribeWidget(sup.getFinalEMAIL(),
+			fillSubscribeWidgetOldForms(sup.getFinalEMAIL(),
 				sup.getFirstName(),
 				sup.getLastName(),
 				sup.getCity(),
@@ -145,7 +145,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 			}				
 			loginPage.
 			openPetitionWidgetByLink(formURL).
-			signPetitionWithOutChecking(tempSupporter, comment, true, true).
+			signPetitionWithOutCheckingOldForms(tempSupporter, comment, true, true).
 			verifySignIsSuccesses().
 			backToLoginPage();
 			

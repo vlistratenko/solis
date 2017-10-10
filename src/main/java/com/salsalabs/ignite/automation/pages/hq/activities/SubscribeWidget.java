@@ -53,7 +53,7 @@ public class SubscribeWidget extends Browser{
 	CheckBox emailCheckBox = new CheckBoxImpl("//input[contains(@class, 'Email')]", "Email");
 	
 	Button subscribeButton = new ButtonImpl("//a[@data-ignite-submit-button='data-ignite-submit-button']", "Subscribe", true);
-	
+	Button subscribeButtonOld = new ButtonImpl("//button[.='Subscribe!']", "Subscribe", true);
 	Label subscriptionIsSuccessMessage = new LabelImpl("//h1[contains(.,'Thank You!')]", "Subscription is success");
 
 	public SubscribeWidget() {
@@ -129,6 +129,29 @@ public class SubscribeWidget extends Browser{
 		}
 		sleep(3);
 		subscribeButton.click();
+		return this;
+		
+	}
+	
+	public SubscribeWidget fillSubscribeWidgetOldForms(String personEmail,
+			String personFName,
+			String personLName,
+			String personCity,
+			String personZip,
+			String state) {
+		personEmailField.type(personEmail);
+		personFNameField.type(personFName);
+		personLNameField.type(personLName);
+		personCityField.type(personCity);
+		personZipField.type(personZip);
+		
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		}else{
+			personStatesSelectBox.selectByValue(state);
+		}
+		sleep(3);
+		subscribeButtonOld.click();
 		return this;
 		
 	}

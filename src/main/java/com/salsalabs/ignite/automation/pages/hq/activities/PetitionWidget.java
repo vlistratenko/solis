@@ -107,4 +107,12 @@ public class PetitionWidget extends SubscribeWidget {
 		sleep(3);
 		return this;
 	}
+	
+	public PetitionWidget signPetitionWithOutCheckingOldForms(Supporter sup,
+			String commentText,
+			boolean displaySign,
+			boolean displayComment) {
+		expandPetitionFormButton.click();
+		return signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
+	}
 }
