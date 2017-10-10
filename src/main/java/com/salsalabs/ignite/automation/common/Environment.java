@@ -107,7 +107,7 @@ public class Environment {
 				TESTURL = "https://hq.test.igniteaction.net";
 				break;
 			case REMOTE:
-				TESTURL = "https://10.16.0.69";
+				TESTURL = "https://hq.test.ignite.net";//"https://10.16.0.69";
 				break;
 			}
 		}
