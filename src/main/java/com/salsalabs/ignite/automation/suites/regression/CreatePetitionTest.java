@@ -86,49 +86,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		verifyNewSignature(sup, comment, true, false);
 	}
 
-	/**
-	 * <b>Unpublishing and deleting petition.</b>
-	 * <p>
-	 * Steps:
-	 * <ul>
-	 * <li>Open Petitions tab
-	 * <li>Open form editing by clicking on form in table
-	 * <li>Click on settings icon in the bottom of screen and click on Make it
-	 * Private
-	 * <li>Open form by link in separated window
-	 * <li><font color="green"><b>Verify that form is visible to CM (Verify all
-	 * form elements are displayed)</b></font>
-	 * <li>Delete cookies and refresh page
-	 * <li><font color="green"><b>Verify that form is NOT visible to potential
-	 * supporter (Verify submit button is not displayed)</b></font>
-	 * <li>Close window with form
-	 * <li>Open Activities page --> All Activities
-	 * <li><font color="green"><b>Verify that record about the widget is on the
-	 * top of the table (All Activities) and status is DRAFT</b></font>
-	 * <li>Open Petitions tab
-	 * <li><font color="green"><b>Verify that record about the widget is on the
-	 * top of the table (Petitions) and status is DRAFT and visibility is
-	 * PRIVATE</b></font>
-	 * <li>Select the form in table
-	 * <li><font color="green"><b>Verify that button for removing is
-	 * appeared</b></font>
-	 * <li>Click on Remove button, confirm action in modal window
-	 * <li><font color="green"><b>Verify that table do not contains record about
-	 * form (All Activities)</b></font>
-	 * <li>Open Petitions tab
-	 * <li><font color="green"><b>Verify that table do not contains record about
-	 * form (Petitions)</b></font>
-	 * <li>Open in separate window
-	 * <li>Open form by link in separated window
-	 * <li><font color="green"><b>Verify that form is NOT visible to CM (Verify
-	 * submit button is not displayed)</b></font>
-	 * <li>Delete cookies and refresh page
-	 * <li><font color="green"><b>Verify that form is NOT visible to potential
-	 * supporter (Verify submit button is not displayed)</b></font>
-	 * <li>Close window with form
-	 * </ul>
-	 * 
-	 */
+
 	@Parameters({ "login", "passward" ,"widget" })
 	@Test(enabled = true, priority = 5, groups = {
 			"createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods ="createAndPublishPetitionTest")

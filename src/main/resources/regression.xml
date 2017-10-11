@@ -3,6 +3,12 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<suite-files>
+		<suite-file path="src/main/resources/xml-tests/regression/AssetImageTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreateActivityCustomFieldsTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreateSupporterCustomFieldTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreateSupporterManuallyTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/DonationImportTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreatePetitionTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/CreateCustomTarget.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/FeeCalculationTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/MessageTopicTest.xml" />

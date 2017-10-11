@@ -15,6 +15,7 @@ public class PetitionsPage extends ActivitiesPage {
 	Button actionsButton = new ButtonImpl("//a[contains(text(), 'Actions')]", "Actions Comments");
 	Button approvedCommentsTab = new ButtonImpl("//a[contains(text(),'Approved')]", "Actions Comments tab");
 	Button rejectCommentsTab = new ButtonImpl("//a[contains(text(),'Rejected ')]", "Rejected Comments tab");
+	Table tableComments =new TableImpl("table", "Moderate Comments Table");
 
 	public AddPetitionPage openAddPetitionPage() {
 		createPetitionButton.click();
@@ -27,7 +28,7 @@ public class PetitionsPage extends ActivitiesPage {
 	}
 
 	public PetitionsPage verifyCommentInTheTable(String formName, String comment, Supporter sup) {
-		fluentWaitForElementPresenceIgnoringExceptions("//table");
+		tableComments.waitForNotExists(5);
 		verifier.verifyTrue(moderateCommentTable.isValueExists(formName) > 0,
 				"Petition  item with source " + formName + "is not found");
 		verifier.verifyEquals(moderateCommentTable.getCellValueUsingAllHeadersMethod(1, "Comments"), comment,
