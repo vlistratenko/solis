@@ -13,7 +13,7 @@ public class AddCardConnectPage extends HomePage{
 	String[] orgTypes = {"US Dollar", "Canadian Dollar"};
 	TextBox nickName = new TextBoxImpl("//input[@name='nickname']", "NickName", true);
 	TextBox description = new TextBoxImpl("//textarea[@id='description']", "Description", true);
-	DropDown currency = new DropDownImpl("//custom-select2[@data='currecyCodes']/div", "//custom-select2[@data='currecyCodes']/div/a", "Currency code");//nonprofit
+	DropDown currency = new DropDownImpl("//custom-select2[@data='currencyCodes']/div", "//custom-select2[@data='currencyCodes']/div/a", "Currency code");//nonprofit
 	TextBox merchantId = new TextBoxImpl("//input[@name='merchantId']", "Merchant ID", true);
 	TextBox doesBusinsessAs = new TextBoxImpl("//input[@name='dbaTitle']", "Does Business As", true);
 	Button submitButton = new ButtonImpl("//button[@id='btnSubmit']", "Create My Gateway");

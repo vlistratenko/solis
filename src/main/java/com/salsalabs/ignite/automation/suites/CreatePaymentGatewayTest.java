@@ -40,7 +40,7 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	 * @throws MailosaurException 
 	 *  
 	 */
-	/*@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
+	@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
 	@Parameters({ "login", "password" })
 	public void testCreateWePayPaymentGateway(String login, String password) throws MailosaurException {
 		mailosaur.deleteAllEmails();
@@ -57,19 +57,16 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 		paymentGatewayPage.verifyWePayEmail(mailosaur);
 		paymentGatewayPage.verifyCreatedAccountExists(nickname);
 		paymentGatewayPage.openWePayConfirmationPage(mailosaur);
-	}*/
+	}
 
 	@Test(enabled = true, groups = {"createPaymentGateway"}, retryAnalyzer = RetryAnalyzer.class)
 	@Parameters({ "login", "password" })
 	public void testCreateCardConnectPaymentGateway(String login, String password) throws MailosaurException {
-		mailosaur.deleteAllEmails();
 		String nickname = "nickname_" + CommonUtils.getUnicName();
 		doLoginAndOpenPaymentGatewayPage(login, password);
 		addCardConnectPage = paymentGatewayPage.openAddCardConnectPage();
-		paymentGatewayPage = addCardConnectPage.createCardConnectAcount(nickname, "descr", addCardConnectPage.chooseRandomOrgType());
-		paymentGatewayPage.verifyWePayEmail(mailosaur);
+		paymentGatewayPage = addCardConnectPage.createCardConnectAcount(nickname, "descr", addCardConnectPage.chooseRandomCurrency());
 		paymentGatewayPage.verifyCreatedAccountExists(nickname);
-		paymentGatewayPage.openWePayConfirmationPage(mailosaur);
 	}
 	
 	private void doLoginAndOpenPaymentGatewayPage(String login, String password) {
