@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq.manage;
 
-import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.EmailClient;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
@@ -20,6 +19,11 @@ public class PaymentGatewaysPage extends ManagePage {
 	public AddWePayPage openAddWePayPage() {
 		addPaymentGateways.selectByLabelJS("WePay");
 		return new AddWePayPage();
+	}
+
+	public AddCardConnectPage openAddCardConnectPage() {
+		addPaymentGateways.selectByLabelJS("Merchant Services");
+		return new AddCardConnectPage();
 	}
 	
 	public PaymentGatewaysPage verifyCreatedAccountExists(String nickname) {
