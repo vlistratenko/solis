@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Tue Oct 10 15:12:07 EEST 2017
+#Wed Oct 11 14:21:37 EEST 2017
 current.firstName=0
 CM.firstName=0
 current.lastName=0
@@ -10,11 +10,12 @@ emailBlastName=We need your help\!\!\! Blast from 10.05.2017 61152
 Admin.lastName=LastName
 Admin.emailBase=0
 Environment=TEST
-Admin.email=gateway20171010151114@testauto.igniteaction.net
+Admin.email=0@testauto.igniteaction.net
 updateTC=false
 Admin.orgName=automated_testing1
 maxRetryCount=2
 current.Password=\!QAZ2wsx
+currentWindowHandle=CDwindow-c2c551c4-87bd-4812-b03b-d8ba097392ca
 emailFrom=info@salsalabs.com
 current.Login=2712.3e41c646@mailosaur.in
 Admin.firstName=FirstName
