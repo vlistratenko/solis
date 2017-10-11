@@ -117,6 +117,15 @@ public class SeleneseTestCase {
 		driver.manage().deleteAllCookies();
 		close();*/
 	}
+	
+	@AfterSuite(alwaysRun = true)
+	protected void closeAllWindowsExcept() throws Exception {
+		for(String handle : driver.getWindowHandles()) {
+	            driver.switchTo().window(handle);
+	            logger.info(driver.getCurrentUrl() + "  is Going to be closed wne the suite is completed");
+	            driver.close();
+	    }
+	}
 
 	protected void beforeClass() {
 
