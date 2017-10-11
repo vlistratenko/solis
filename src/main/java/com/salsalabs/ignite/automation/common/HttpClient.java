@@ -364,17 +364,22 @@ public class HttpClient {
 	    Object temp = null;
 	    Object json = new JSONObject(jsonStr);
 	    String[] keys = key.split("[.]");
-	    while (i < keys.length) {
+	    try {
+			while (i < keys.length) {
 
-	        if (json instanceof JSONArray) {
-	            int index = Integer.parseInt(keys[i]);
-	            temp = ((JSONArray) json).get(index);
-	        } else if (json instanceof JSONObject) {
-	            temp = ((JSONObject) json).get(keys[i]);
-	        }
-	        json = temp;
-	        i++;
-	    }
+				if (json instanceof JSONArray) {
+					int index = Integer.parseInt(keys[i]);
+					temp = ((JSONArray) json).get(index);
+				} else if (json instanceof JSONObject) {
+					temp = ((JSONObject) json).get(keys[i]);
+				}
+				json = temp;
+				i++;
+			}
+		} catch (JSONException e) {
+	    	e.printStackTrace();
+	    	temp = "";
+		}
 	    return temp;
 	}
 	
