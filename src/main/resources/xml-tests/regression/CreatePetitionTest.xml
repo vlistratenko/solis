@@ -7,6 +7,12 @@
 	<parameter name="login" value="autoTest.74580786@mailosaur.in"></parameter>
 	<parameter name="passward" value="!QAZ2wsx"></parameter>
 	<parameter name="widget" value="https://autotestorgqa.test.igniteaction.net/petitionautotest/index.html"></parameter>
+	<parameter name="widgenName" value="PetitionAutotest"></parameter>
+	<parameter name="widgetforCommentsURl" value="https://autotestorgqa.test.igniteaction.net/petitionautomationtest/index.html"></parameter>
+	<parameter name="widgetforCommentsName" value="PetitionAutomationTest"></parameter>
+	
+	
+	
 	<test verbose="2" name="Create And Publish Petition Chrome"
 		annotations="JDK">
 	
