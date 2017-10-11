@@ -45,7 +45,6 @@ public class PetitionWidget extends SubscribeWidget {
 			boolean displayComment) {
 		signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
 		refresh();
-	    verifyNewSignature(sup, commentText, displaySign, displayComment);
 		return this;
 	}
 	
