@@ -47,7 +47,7 @@ public class EmailKPI_Suite extends SeleneseTestCase{
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=40, groups = {"settings.import"}, description = "", dependsOnGroups={"createAdmin"})
 	public void importSupportersTest() {
 		
-		new SettingsTests().importSupportersTest();
+	//	new SettingsTests().importSupportersTest();
 	}
 	
 	@Parameters({ "createSupporter.amount"})

@@ -1,12 +1,21 @@
 package com.salsalabs.ignite.automation.suites;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.AlertsPage;
@@ -31,7 +40,7 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	private List<CustomField> customFields = new ArrayList<CustomField>();
 	private String importName;
 	private String importStatusCompleted = "COMPLETED";
-
+	private final String customFiledType = "PERSON";
 	/**
 	 * <b>Import of supporters with 2 custom fields (Text and Numeric).</b>
 	 * <p>
@@ -57,19 +66,48 @@ public class ImportSupportersTest extends SeleneseTestCase {
 	 * <li> Remove each new custom field
 	 * <li> <font color="green"><b>Verify that custom field removed. It's not listed on the page</b></font>
 	 * </ul>
+	 * @throws JSONException 
+	 * @throws IOException 
+	 * @throws URISyntaxException 
+	 * @throws KeyStoreException 
+	 * @throws NoSuchAlgorithmException 
+	 * @throws ClientProtocolException 
+	 * @throws KeyManagementException 
 	 *  
 	 */
+	@Parameters({"login" , "Passward" })
 	@Test(enabled = true, groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
-	public void initImportWithCustomFieldsTest() {
+	 
+	
+	public void initImportWithCustomFieldsTest(String login, String Passward, String texBoxCustomFieldName, String singleChoiceCustomFieldName, String dateCustomFieldName , String yesNoCustomFieldName, String numberCustomFieldName) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
+		new HttpClient().
+		login(login, Passward)
+	     .createCustomField(	customFieldsPage.getTextBoxCustomFieldJson(customFiledType, texBoxCustomFieldName))
+	     .createCustomField(customFieldsPage.getSingleChoiceCustomFieldJson(customFiledType,singleChoiceCustomFieldName))
+	     .createCustomField(customFieldsPage.getDateCustomFieldJson(customFiledType, dateCustomFieldName))
+	     .createCustomField(customFieldsPage.getBoleanCustomFieldJson(customFiledType, yesNoCustomFieldName))
+	     .createCustomField(	customFieldsPage.getNumberCustomFieldJson(customFiledType, numberCustomFieldName));
+		
+		CustomField textBox = generateCustomField(CustomFieldType.TextBox, texBoxCustomFieldName);
+		CustomField dateTime = generateCustomField(CustomFieldType.DateTime , dateCustomFieldName);
+		CustomField singleChoice = generateCustomField(CustomFieldType.SingleChoice, singleChoiceCustomFieldName);
+		CustomField yesNO = generateCustomField(CustomFieldType.YesNo , yesNoCustomFieldName);
+		CustomField number = generateCustomField(CustomFieldType.Number, numberCustomFieldName);
+		customFields.add(textBox);
+		customFields.add(dateTime);
+		customFields.add(singleChoice);
+		customFields.add(yesNO);
+		customFields.add(number);
+		
+		
 		importName = "Import_" + CommonUtils.getUnicName();
-		customFields.add(new CustomField(CustomFieldType.TextBox, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
-		customFields.add(new CustomField(CustomFieldType.Number, "CustomField_" + RandomStringUtils.randomAlphabetic(3)));
-		doLogin();
-		createCustomFields();
-		openImportsPageFromCustomFieldsPage();
-		doImport();
-		importPage.verifyStatusOfImport(importName, importStatusCompleted);
-		removeCustomFields();
+	
+		openImportsPageFromCustomFieldsPage(login, Passward );
+		importPage.hitImportListOFSupportersButton().
+		fillFirstStep(importName, "ImportDescription" , customFields);
+		
+		//importPage.verifyStatusOfImport(importName, importStatusCompleted);
+	//	removeCustomFields();
 //		openAlertsPage();
 //		alertsPage.verifyImportAlerts(importName);
 	}
@@ -102,16 +140,16 @@ public class ImportSupportersTest extends SeleneseTestCase {
 		customFields = null;
 		doLogin();
 		openImportsPage();
-		doImport();
+		//doImport();
 		importPage.verifyStatusOfImport(importName, importStatusCompleted);
 	}
 	
-	private void doImport() {
+	/*private void doImport() {
 		ImportAddPage importAddPage = importPage.startNewImport();
 		importAddPage.fillFirstStep(importName, "description", customFields);
 		importAddPage.fillSecondStep("2").fillThirdStep();
 		importPage = importAddPage.openImportPage();
-	}
+	}*/
 	
 	private void doLogin() {
 		homePage = new LoginPage().doSuccessLogin();
@@ -124,8 +162,13 @@ public class ImportSupportersTest extends SeleneseTestCase {
 		}
 	}
 	
-	private void openImportsPageFromCustomFieldsPage() {
-		importPage = customFieldsPage.openAudiencePage().openImportPage();
+	private CustomField generateCustomField(CustomFieldType customFieldType, String customFieldName) {
+		return new CustomField(customFieldType, customFieldName);
+	}
+
+	
+	private void openImportsPageFromCustomFieldsPage(String userName, String password) {
+		importPage = new LoginPage().doSuccessLogin(userName, password).openAudiencePage().openImportPage();
 	}
 	
 	private void openImportsPage() {
