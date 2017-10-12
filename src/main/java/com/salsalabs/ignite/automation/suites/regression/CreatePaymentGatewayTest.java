@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.suites;
+package com.salsalabs.ignite.automation.suites.regression;
 
 import com.mailosaur.exception.MailosaurException;
 import com.salsalabs.ignite.automation.common.CommonUtils;

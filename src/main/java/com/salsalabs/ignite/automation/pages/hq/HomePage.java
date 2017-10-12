@@ -204,5 +204,10 @@ public class HomePage extends Browser{
 		orgLabelDropDown.selectByLabel("My profile");
 		return new MyProfilePage();
 	}
+	public MyAccountPage openMyAccountPage() {
+		orgLabelDropDown.selectByLabel("My account");
+		return new MyAccountPage();
+	}
+
 	
 }
