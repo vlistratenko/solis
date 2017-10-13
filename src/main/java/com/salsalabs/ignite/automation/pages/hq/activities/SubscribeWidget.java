@@ -54,7 +54,7 @@ public class SubscribeWidget extends Browser{
 	
 	Button subscribeButton = new ButtonImpl("//a[@data-ignite-submit-button='data-ignite-submit-button']", "Subscribe", true);
 	Button subscribeButtonOld = new ButtonImpl("//button[.='Subscribe!']", "Subscribe", true);
-	Label subscriptionIsSuccessMessage = new LabelImpl("//h1[contains(.,'Thank You!')]", "Subscription is success");
+	Label subscriptionIsSuccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Subscription is success");
 
 	public SubscribeWidget() {
 		deletecoockies();

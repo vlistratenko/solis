@@ -14,6 +14,7 @@ public class PetitionWidget extends SubscribeWidget {
 	
 	ButtonImpl expandPetitionFormButton = new ButtonImpl("//button[@type='submit']", "Expand Petition Form", true);
 	ButtonImpl signButton = new ButtonImpl("//a[@data-ignite-submit-button='data-ignite-submit-button']", "Sign Petition", true);
+	ButtonImpl signButtonOld = new ButtonImpl("//button[@type='submit']", "Sign Petition", true);
 	TextBox comment = new TextBoxImpl("//textarea[@name='field-comment']", "Comment textbox");
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
 	CheckBox displayCommentCheckBox = new CheckBoxImpl("//input[@name='field-showComment']", "Display My Comment");
@@ -44,6 +45,7 @@ public class PetitionWidget extends SubscribeWidget {
 			boolean displaySign,
 			boolean displayComment) {
 		signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
+		clickOnSignPetitionButton();
 		refresh();
 		return this;
 	}
@@ -101,9 +103,6 @@ public class PetitionWidget extends SubscribeWidget {
 		if(!displayComment){
 			displayCommentCheckBox.changeState();
 		}
-		sleep(3);
-		signButton.click();
-		sleep(3);
 		return this;
 	}
 	
@@ -112,6 +111,21 @@ public class PetitionWidget extends SubscribeWidget {
 			boolean displaySign,
 			boolean displayComment) {
 		expandPetitionFormButton.click();
-		return signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
+		signPetitionWithOutChecking(sup, commentText, displaySign, displayComment);
+		return clickOnSignPetitionButtonOldForms();
+	}
+	
+	public PetitionWidget clickOnSignPetitionButton() {
+		sleep(3);
+		signButton.click();
+		sleep(3);
+		return this;
+	}
+	
+	public PetitionWidget clickOnSignPetitionButtonOldForms() {
+		sleep(3);
+		signButtonOld.click();
+		sleep(3);
+		return this;
 	}
 }
