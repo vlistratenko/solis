@@ -33,7 +33,7 @@ public class Supporter {
 	public String prefix = "";
 	public String suffix = "";
 	public String language = "";
-	public String birthDate = "";
+	public String birthDate  = "";
 	public String phoneCell = "";
 	public String socialFacebook = "";
 	public String phoneHome = "";
@@ -42,8 +42,7 @@ public class Supporter {
 	public String socialTwitter = "";
 	public String externalID = "";
 	public String dateOfBirth = "";
-
-	
+	public Map<String, String> allCustomFields = new HashMap<>();
 
 	public String constituentNumber = "", title = "", firstName = "", lastorOrgName = "", petType = "", petName = "",
 			addressLine1 = "", addressLine2 = "", city = "", state = "", postalCode = "", spouseConstituentNumber = "",
@@ -88,14 +87,18 @@ public class Supporter {
 		this.finalEMAIL = finalEMAIL;
 	}
 
+	public Map<String, String> getAllCustomFields() {
+		return this.allCustomFields;
+	}
+
 	public String getExternalId() {
 		return externalID;
 	}
-	
+
 	public void setExternalID(String externalID) {
 		this.externalID = externalID;
 	}
-	
+
 	public String getBirthdate() {
 		return dateOfBirth;
 	}
@@ -159,11 +162,11 @@ public class Supporter {
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
-	
+
 	public String getLinkedin() {
 		return linkedin;
 	}
-	
+
 	public void setLinkedin(String linkedin) {
 		this.linkedin = linkedin;
 	}
@@ -219,7 +222,7 @@ public class Supporter {
 	public String getPostalCode() {
 		return postalCode;
 	}
-
+	
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -252,6 +255,10 @@ public class Supporter {
 		this.middleName = middleName;
 	}
 
+	public String getCustomFieldValue(String customFieldName) {
+		return getAllCustomFields().get(customFieldName);
+	}
+
 	public JSONObject getSupporterJSON(String email) throws JSONException {
 		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName
 				+ "\",\"lastName\":\"" + lastorOrgName
@@ -264,7 +271,7 @@ public class Supporter {
 				+ "\",\"zip\":\"" + zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
 		return new JSONObject(j);
 	}
-
+	
 	public JSONObject getSupporterJSONWithExternalId(String email, String externalSystemId) throws JSONException {
 		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName
 				+ "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\",\"externalSystemId\":\""
@@ -279,13 +286,13 @@ public class Supporter {
 	}
 
 	public static Map<Integer, Supporter> getSupportersFromFile() {
-		String filename = new File("all living with spouses and email.csv").getAbsolutePath();
+		String filename = new File("all living with spouses and email.csv").getAbsolutePath();		
 		Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
 		int i = 0;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filename));
 			String line;
-			while ((line = in.readLine()) != null) {
+			while ((line = in.readLine()) != null){
 				Supporter sup = new Supporter();
 				String[] fields = line.split(",");
 				for (int j = 0; j < fields.length; j++) {
@@ -305,13 +312,13 @@ public class Supporter {
 					sup.spouseTitle = fields[SPOUSETITLE];
 					sup.finalEMAIL = fields[EMAILADDRESS];
 				}
-
+				
 				data.put(i, sup);
-
+				
 				i++;
 			}
 			in.close();
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -331,11 +338,11 @@ public class Supporter {
 		return new HttpClient(host).login(login, pass).getSupporterByEmail(email);
 
 	}
-
+	
 	public static Supporter getSupporterWithRandomDataFromFile() {
 		Map<Integer, Supporter> data = getSupportersFromFile();
 		Supporter sup = new Supporter();
-
+		
 		sup.constituentNumber = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).constituentNumber;
 		sup.title = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).title;
 		sup.firstName = data.get(CommonUtils.getRandomValueNumericFromTo(0, data.size())).firstName;

@@ -1,9 +1,12 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
+import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.ElementImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -26,8 +29,14 @@ public class VEElements extends ElementImpl {
         elementsVe.click();
         getLogger().info("Elements menu was clicked");
         WebElement source = findElementByXpath(getElementPath());
-        WebElement target = findElementByXpath("//div[@class='render-container-wrapper']");
-        action.clickAndHold(source).moveToElement(target).release().perform();
+        WebElement target = findElementByXpath("(//div[@class='render-container-wrapper'])[2]");
+         try {
+            new ButtonImpl("//div[@class='render-container-wrapper']", "TEST").scrollIntoView();
+            action.clickAndHold(source).moveToElement(target).release().perform();}
+        catch (StaleElementReferenceException e) {
+            target = findElementByXpath("(//div[@class='render-container-wrapper'])[2]");
+            action.clickAndHold(source).moveToElement(target).release().perform();
+        }
         getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
     }
 

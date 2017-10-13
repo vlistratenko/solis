@@ -9,13 +9,13 @@ import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 
 public class ImportPage extends ManagePage{
 
-	Button addImportButton = new ButtonImpl("//button[@ng-click='addImport()']", "Create Your Import");
+	Button addImportButton = new ButtonImpl("//button[contains(text(), 'Import List')]", "Import List of Supporters BUtton");
 	Table tableWithImports = new TableImpl("//table[contains(@id, 'JColResizer2')]", "Table with imports");
 	
 	public static final String IMPORT_STARTED = "Heads up! We started to import %s.";
 	public static final String IMPORT_FINISHED = "Good news! We finished importing %s.";
 	
-	public ImportAddPage startNewImport() {
+	public ImportAddPage hitImportListOFSupportersButton() {
 		addImportButton.click();
 		return new ImportAddPage();
 	}

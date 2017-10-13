@@ -39,7 +39,7 @@ public class SettingsTests extends SeleneseTestCase{
 		openWePayConfirmationPage();
 	}
 	
-
+/*
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.import", ""}, description = "")
 	public void importSupportersTest() {
 		
@@ -67,9 +67,9 @@ public class SettingsTests extends SeleneseTestCase{
 		new Supporter().getZipCode(),
 		new Supporter().getFacebook(),
 		new Supporter().getTwitter());
-	}
+	}*/
 	
-	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
+	/*@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"settings.unsubscribeSupporter", ""}, description = "")
 	public void unsubscribeSupporterTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		String introductoryText = "Message edited by Auto script";
 		Supporter supporter = new Supporter();
@@ -105,7 +105,7 @@ public class SettingsTests extends SeleneseTestCase{
 		CommonUtils.checkAndFail("unsubscribeSupporterTest");
 		
 	}
-	
+	*/
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=13, groups = {"settings.unsubscribeUnexistedSupporterTest", ""}, description = "")
 	public void unsubscribeUnexistedSupporterTest(){
 		Supporter supporter = new Supporter();

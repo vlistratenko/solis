@@ -112,10 +112,11 @@ public class ImportAddPage extends ManagePage{
 		
 		for (int i = 1; i <= amount; i++) {
 			Supporter supporter = new Supporter();
+			Supporter.generateSupporter();
 			if (i<=amountOfRealSupporters) {
 				supporter.setEmailDomain(SeleneseTestCase.emailClient.getEmailBox(""));
 			}else{
-				supporter.setEmailDomain("@devnull.test.ignite.net");
+				supporter.setEmailDomain(".74580786@mailosaur.in");
 			}
 			supporter.setImportedEmail(supporter.getImportedEmail() + i + supporter.getEmailDomain());//".3e41c646@mailosaur.in";//"@salsalabs.com";//"@devnull.test.ignite.net";
 			if (!unexistedDomain && i >= amountOfRealSupporters) {

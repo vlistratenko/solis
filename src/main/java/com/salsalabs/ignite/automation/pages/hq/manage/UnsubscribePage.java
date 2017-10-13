@@ -3,22 +3,25 @@ package com.salsalabs.ignite.automation.pages.hq.manage;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.elements.*;
-import com.salsalabs.ignite.automation.elements.List;
+import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Label;
+import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class UnsubscribePage extends Browser{
 	
 	TextBox emailField = new TextBoxImpl("//input[@name='field-email-address']", "Email");
 	Button unsubscribeButton = new ButtonImpl("//button[@type='submit']", "Update Subscription");
 	Label unsubscribeIsSuccesLabel = new LabelImpl("//div[@class='result']", "Unsubscribe is success message");
-	Label introductoryTextLabel = new LabelImpl("//form/p[2]", "Introductory text");
+	Label introductoryTextLabel = new LabelImpl("//div[contains(@class, 'sorry')]", "Introductory text");
 	CheckBox unsubscrCheckBox = new CheckBoxImpl("//div[contains(@class, 'contact-types')]/descendant::input", "Unsabscribe");
 	CheckBox messageTopics = new CheckBoxImpl("//*[@class='sli-channel-type']", "Message topics");
 	CheckBox messageTopicsInputs = new CheckBoxImpl("//*[@class='sli-channel-type']/input", "Message topics");
@@ -42,7 +45,8 @@ public class UnsubscribePage extends Browser{
 	}
 	
 	public UnsubscribePage verifyInroductoryText(String message) {
-		verifier.verifyEquals(introductoryTextLabel.getText(), message, "Wrong Introductory message", false);
+		unsubscrCheckBox.check();
+		verifier.verifyEquals(introductoryTextLabel.getText(), message, "Wrong Introductory message", true);
 		return this;
 	}
 	

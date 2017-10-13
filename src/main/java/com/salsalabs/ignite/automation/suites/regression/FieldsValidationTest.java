@@ -1,9 +1,6 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.HttpClient;
-import com.salsalabs.ignite.automation.common.RetryAnalyzer;
-import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import com.salsalabs.ignite.automation.common.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
@@ -14,7 +11,9 @@ import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersAddPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.tools.ant.taskdefs.condition.Http;
 import org.json.JSONException;
+import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -23,7 +22,10 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 public class FieldsValidationTest extends SeleneseTestCase {
 
@@ -39,7 +41,7 @@ public class FieldsValidationTest extends SeleneseTestCase {
                                                String activityDateTimeCustomFieldName, String activityNumberCustomFieldName, String activityYesNoCustomFieldName,
                                                String activitySingleChoiceCustomFieldName, String activityTextBoxCustomFieldName){
 
-        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+      String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
         String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
         String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
 
@@ -47,8 +49,8 @@ public class FieldsValidationTest extends SeleneseTestCase {
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator(supporterDateTimeCustomFieldName, "FieldDescription").
                 setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2017").
-                setDateFieldMaxDateApi("09/15/2018").
+                setDateFieldMinDateApi("09/15/2000").
+                setDateFieldMaxDateApi("09/15/2030").
                 setDateFieldMinTimeApi("10:30pm").
                 setDateFieldMaxTimeApi("11:30pm"));
 
@@ -74,7 +76,7 @@ public class FieldsValidationTest extends SeleneseTestCase {
                 getCustomFieldApiGenerator(supporterYesNoCustomFieldName, "FieldDescription").
                 setYesNoFieldControlOrientationApi("VERTICAL").
                 setDefaultValue("true").
-                setYesNoFieldValueLabelsApi("YesNo"));
+                setYesNoFieldValueLabelsApi("truefalse"));
 
         CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator(activityDateTimeCustomFieldName, "FieldDescription").
@@ -98,7 +100,7 @@ public class FieldsValidationTest extends SeleneseTestCase {
                 getCustomFieldApiGenerator(activityYesNoCustomFieldName, "FieldDescription").
                 setYesNoFieldControlOrientationApi("VERTICAL").
                 setDefaultValue("true").
-                setYesNoFieldValueLabelsApi("YesNo"));
+                setYesNoFieldValueLabelsApi("truefalse"));
 
         CustomFieldsPage.CustomField activityTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator(activityTextBoxCustomFieldName, "FieldDescription").
@@ -159,27 +161,28 @@ public class FieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.dropVEFormElement();
       //  addSignupFormsPage.dropVEFormFieldElement();
 
-        new FormFieldConfigurationPage().dropFormFieldByName(supporterTextBoxCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationPage().dropFormFieldByName(supporterNumberCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(activityTextBoxCustomFieldName).saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(activityNumberCustomFieldName).saveFieldConfiguration();
         new FormFieldConfigurationPage().dropFormFieldByName(supporterSingleChoiceCustomFieldName).saveFieldConfiguration();
         new FormFieldConfigurationPage().dropFormFieldByName(supporterYesNoCustomFieldName).saveFieldConfiguration();
-        new FormFieldConfigurationPage().dropFormFieldByName(supporterDateTimeCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationPage().dropFormFieldByName(activityTextBoxCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationPage().dropFormFieldByName(activityNumberCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(supporterDateTimeCustomFieldName).saveFieldConfiguration();
         new FormFieldConfigurationPage().dropFormFieldByName(activitySingleChoiceCustomFieldName).saveFieldConfiguration();
         new FormFieldConfigurationPage().dropFormFieldByName(activityYesNoCustomFieldName).saveFieldConfiguration();
-        new FormFieldConfigurationPage().dropFormFieldByName(activityDateTimeCustomFieldName).markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(activityDateTimeCustomFieldName).saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(supporterTextBoxCustomFieldName).saveFieldConfiguration();
+        new FormFieldConfigurationPage().dropFormFieldByName(supporterNumberCustomFieldName).saveFieldConfiguration();
 
-        new FormFieldConfigurationPage().dropAllSupporterFieldsOnFormAndMarkAsRequired();
+        //new FormFieldConfigurationPage().dropAllSupporterFieldsOnFormAndMarkAsRequired();
 
         addSignupFormsPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("Address, line 1").markFieldAsRequired().saveFieldConfiguration();
 
-        //new FormFieldConfigurationPage().dropAllSupporterFieldsOnForm();
+        new FormFieldConfigurationPage().dropAllSupporterFieldsOnForm();
 
         addSignupFormsPage.goToAutorespondersTab();
+
         addSignupFormsPage.publishFromAutoresponders();
 
         try {
@@ -199,23 +202,30 @@ public class FieldsValidationTest extends SeleneseTestCase {
         new SubscribeWidget().fillSubscribeWidgetAllSupporterAndCustomFields(supporterEmail, "personFName","personLName","personCity","20008",
                 "UA-63", "addressLine1", "addressLine2", "Male", "777-777-7777","personMName",
                 "en-US", "suffixValue", "titleValue","777-777-7777","777-777-7777","UA","09/11/2017",
-                "supporterTextBoxCustomFieldValue", "13", "10/11/2017 07:08 am",
-                "activityTextBoxCustomFieldValue","13","10/11/2017 07:08 am");
+                "supporterTextBoxCustomFieldValue", "13", "10/11/2017 01:30 am",
+                "activityTextBoxCustomFieldValue","13","10/11/2017 01:30 am");
 
- /*       new LoginPage().doSuccessLogin(login, password).openAudiencePage().openSupportersPage();
-        new SupportersPage().clickFirstTopSuppor();
-        new SupportersAddPage().verifyEmailAndMiddleName(); //TODO: get fields values using API & verify then
+        try {
+            Supporter sup = new HttpClient("https://hq.test.igniteaction.net").login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
 
-        CustomFieldsPage.CustomField dateTimeField = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("DATEtS111313", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2017").
-                setDateFieldMaxDateApi("09/15/2018").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));*/
+            Assert.assertEquals(sup.getCustomFieldValue("supporterYesNoCustomField"),CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
+        } /*catch (JSONException e) {
+            e.printStackTrace();
+        }*/ catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-
-
+        // Assert.assertEquals(sup.);
 
 
     }
