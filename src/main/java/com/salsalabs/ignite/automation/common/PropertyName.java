@@ -49,4 +49,5 @@ public interface PropertyName {
 	String MAX_RETRY_COUNT = "maxRetryCount";
 	String LAST_FUNDRAISER_NAME = "fundraiserName";
 	String LAST_TEAM_NAME = "teamName";
+	String SUPPORTER_EMAIL = "SupporterEmail";
 }

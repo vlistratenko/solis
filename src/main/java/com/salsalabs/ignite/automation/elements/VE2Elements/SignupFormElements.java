@@ -1,6 +1,6 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-public class SignupFormElements extends GeneralFormsElements {
+public class SignupFormElements extends GeneralFormsElements<SignupFormElements> {
 
     public enum VE {
         TEXT,
@@ -23,8 +23,11 @@ public class SignupFormElements extends GeneralFormsElements {
         RSIDEBAR,
         HEADER,
         FOOTER;}
+    
+    
 
-    public SignupFormElements performDrop(VE el) {
+
+/*    public SignupFormElements performDrop(VE el) {
         super.drop(el);
         return new SignupFormElements();
     }
@@ -32,6 +35,7 @@ public class SignupFormElements extends GeneralFormsElements {
     public SignupFormElements performEdit(VE el, String fieldLabel) {
         super.edit(el, fieldLabel);
         return new SignupFormElements();
-    }
+    }*/
+
 
 }

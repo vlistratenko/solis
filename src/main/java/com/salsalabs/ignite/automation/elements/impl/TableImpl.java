@@ -187,5 +187,8 @@ public class TableImpl extends ElementImpl implements Table {
 		return findElementsByXpath(path + "/descendant::*[contains(text(), '" + value + "')]").size() > 0;
 	}
 
+	public void clickOnCellByValue(String value) {
+		click(path + "/descendant::*[contains(text(), '" + value + "')]");
+	}
 	
 }

@@ -22,34 +22,44 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	LoginPage loginPage;
 	
 	@Parameters({ "login", "password"})
-	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "skip_p2p.formFields.createFormWithAnonymous" }, description = "")
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.createFormWithAnonymous" }, description = "")
 	public void createp2pForm(String login, String pass) {
 		loginPage = new LoginPage(true); 
 		
 		loginPage.
 		doSuccessLogin(login, pass).
-		open("https://hq.test.igniteaction.net/#/activities/widgets/p2p/cf85b860-fc7c-4913-9608-3795c225d530?tab=compose");
-//		openActivitiesPage().
-//		openP2PPage().
-//		openCreateNewp2pForm().
-//		fillSetupStepAndGoNext("p2p form " + CommonUtils.getUnicName(),
-//				"p2p form " + CommonUtils.getUnicName(),
-//							CommonUtils.getTodayDateDependsOnBrowser(""),
-//							"8:30am",
-//							CommonUtils.getTodayDateDependsOnBrowser("", 30),
-//							"7:00pm",
-//							"(GMT-06:00) Central Time",
-//							true).
-//		fillRegistrationStepAndGoNext("p2p registration " + CommonUtils.getUnicName(),
-//				true,
-//				"10",
-//				"5").
-//		clickContinueButton().
-//		clickContinueButton().
-//		clickNextButton().
-//		selectLayoutAndClickNext("Basic").
-		new AddP2PPage_EventPageTab().openCheckoutSubTab().
-		addFormField();
+		//open("https://hq.test.igniteaction.net/#/activities/widgets/p2p/cf85b860-fc7c-4913-9608-3795c225d530?tab=compose").
+		openActivitiesPage().
+		openP2PPage().
+		openCreateNewp2pForm().
+		fillSetupStepAndGoNext("p2p form " + CommonUtils.getUnicName(),
+				"p2p form " + CommonUtils.getUnicName(),
+							CommonUtils.getTodayDateDependsOnBrowser(""),
+							"8:30am",
+							CommonUtils.getTodayDateDependsOnBrowser("", 30),
+							"7:00pm",
+							"(GMT-06:00) Central Time",
+							true).
+		fillRegistrationStepAndGoNext("p2p registration " + CommonUtils.getUnicName(),
+				true,
+				"10",
+				"5").
+		clickContinueButton().
+		clickContinueButton().
+		clickNextButton().
+		selectLayoutAndClickNext("Blank").
+		openEventPageSubTab().
+			dropOneColumnRow().
+			dropVETextElement().
+		openRegistrationSubTab().
+			dropOneColumnRow().
+			dropVETextElement().
+		openCheckoutSubTab().
+			dropOneColumnRow().
+			dropVEFormElement().
+		openConfirmationViewSubTab().
+			dropOneColumnRow().
+			dropVETextElement().clickNextButton();
 	}
 	
 	/**

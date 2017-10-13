@@ -1,9 +1,9 @@
 package com.salsalabs.ignite.automation.pages.hq.emails;
 
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
@@ -17,7 +17,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	DropDown selectScheme = new DropDownImpl("//custom-select-scheme/div[@class='custom dropdown scheme']", "a", "Select Scheme");
-	TextBox subjectField = new ContentEditTextBoxImpl("//iframe[contains(@title,'subjectCkEditor')]" ,"//*[@contenteditable='true']", "Subject", true);
+	ContentEditTextBoxImpl subjectField = new ContentEditTextBoxImpl("//iframe[contains(@title,'subjectCkEditor')]" ,"//*[@contenteditable='true']", "Subject", true);
 	ContentEditTextBoxImpl textElementContent = new ContentEditTextBoxImpl("//iframe[contains(@title,'ckeditor')]" ,"//*[@contenteditable='true']", "Email Template body", true);
 	Button addLinkButtonMenu = new ButtonImpl("//a[@title='Link']", "Add link on the menu");
 	Button addMergeFieldButtonMenu = new ButtonImpl("//a[@title='Insert a merge field']", "Insert a merge field");
@@ -33,7 +33,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button addExternalLink = new ButtonImpl("//a[.='An External Page']", "An External Page");
 	Button saveContent = new ButtonImpl("//a[contains(text(),'Save Content')]", "Save Content");
 	
-	Table mergeFildsList = new TableImpl("//table[@id='fieldResults']", "List with merge fields");
+	TableImpl mergeFildsList = new TableImpl("//div[@role='dialog' and not(contains(@style,'display: none'))]/descendant::table[@id='fieldResults']", "List with merge fields");
 	Button okButton = new ButtonImpl("//div[.='Insert a merge field']/ancestor::table/descendant::td [contains(@id, 'cke_dialog_footer')]/descendant::a[@title='OK']/span", "Save merge field");
 	TextBox defaultTextField = new TextBoxImpl("//label[contains(text(), 'field empty')]/../descendant::input", "Default text");
 	
@@ -55,11 +55,11 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		return new AddEmailsPage_PublishTab();
 	}
 	
-	public AddEmailsPage_ComposeTab AddAllMergeFields() {
+	public AddEmailsPage_ComposeTab AddAllMergeFieldsIntoBody() {
 		firstContentElement.scrollIntoViewAndDown();
 		firstContentElement.moveToElement();//scrollIntoView();
 		firstContentElement.highlight();
-		firstContentElement.click();
+		firstContentElement.clickJS();
 		firstEditBtn.click();
 		sleep(5);
 		//textElementContent.click();
@@ -80,7 +80,35 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		}
 		saveContent.waitElement(10);
 		saveContent.click();
-		//PublishButton.click();
+		return this;
+	}
+	
+	public AddEmailsPage_ComposeTab AddAllMergeFieldsIntoSubject(String[] fields) {
+		subjectField.type("Auto");
+		subjectField.scrollFrameIntoViewAndDown();
+		subjectField.switchToFrame();
+		subjectField.highlight();
+		subjectField.click();
+		subjectField.switchToDefault();
+		
+		addMergeFieldButtonMenu.click();
+		mergeFildsList.waitElement(10);//sleep(5);
+		for (int i = 0; i < fields.length; i++) {
+			mergeFildsList.waitElement(10);
+			mergeFildsList.clickOnCellByValue(fields[i]);
+			defaultTextField.type(fields[i]);
+			okButton.highlight();
+			okButton.click();
+			subjectField.switchToFrame();
+			subjectField.highlight();
+			subjectField.click();
+			subjectField.switchToDefault();
+			if (i < fields.length-1) {
+				addMergeFieldButtonMenu.click();
+			}			
+		}
+
+		
 		return this;
 	}
 	

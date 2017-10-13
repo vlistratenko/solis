@@ -121,12 +121,14 @@ public class MessagingPage extends HomePage {
 	}
 	
 	public MessagingPage verifyMergeFieldsInTheEmail() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
-		String emailBody = new LoginPage().getEmailBody(CommonUtils.getProperty(PropertyName.EMAIL_SUBJECT));		
+		String emailBody = new LoginPage().getEmailBodyByRecipient(CommonUtils.getProperty(PropertyName.SUPPORTER_EMAIL));	
+		String emailSubj = new LoginPage().getEmailSubjByRecipient(CommonUtils.getProperty(PropertyName.SUPPORTER_EMAIL));	
 		Supporter sup = new Supporter().
 				getSupporterFromSystemByEmail("supporterformergefieldstesting@testauto.ignite.net",
 												SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(),
 												CommonUtils.getProperty(PropertyName.CURRENT_LOGIN),
 												CommonUtils.getProperty(PropertyName.CURRENT_PASSWORD));
+		
 		//verify supporters merge fields
 		verifier.verifyContains(emailBody, sup.postalCode, "Supporter's zip is not found in the email", false);
 		//mergeFieldTypeOfMostRecentDonation

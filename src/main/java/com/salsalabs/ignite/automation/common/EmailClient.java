@@ -19,6 +19,8 @@ public interface EmailClient<T> {
 	int waitForEmails(String[] subjs, Integer emailsAmount, Integer timeMin);
 
 	List<T> getEmailsBySubject(String subject);
+	
+	List<T> getEmailsByRecipient(String subject);
 
 	void deleteAllEmails();
 
@@ -33,6 +35,8 @@ public interface EmailClient<T> {
 	String getRecipient(Object email);
 	
 	String getEmailBody(Object email);
+	
+	String getEmailSubj(Object email);
 
 	void closeConnection();
 	

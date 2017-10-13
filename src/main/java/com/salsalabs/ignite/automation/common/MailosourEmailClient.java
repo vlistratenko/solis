@@ -96,9 +96,23 @@ public class MailosourEmailClient implements EmailClient<Email> {
 
 		return new MailboxApi(mbox, apikey);
 	}
-
-	public Email[] getEmailsByRecipient(String rec) throws MailosaurException {
-		return getClient().getEmailsByRecipient(rec);
+	
+	@Override
+	public List<Email> getEmailsByRecipient(String rec) {
+		SeleneseTestCase.logger.info("Try to find email with recipient - " + rec);
+		ArrayList<Email> result = new ArrayList<Email>();
+		Email[] emails;
+		try {
+			emails = getClient().getEmailsByRecipient(rec);
+			for (int i = 0; i < emails.length; i++) {
+				result.add(emails[i]);
+			}
+		} catch (MailosaurException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -355,6 +369,11 @@ public class MailosourEmailClient implements EmailClient<Email> {
 	@Override
 	public String getEmailBody(Object email) {
 		// TODO Auto-generated method stub
-		return null;
+		return ((Email)email).text.body;
+	}
+
+	@Override
+	public String getEmailSubj(Object email) {
+		return ((Email)email).subject;
 	}
 }

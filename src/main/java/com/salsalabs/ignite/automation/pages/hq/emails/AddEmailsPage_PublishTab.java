@@ -24,7 +24,7 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 		}
 		SendNowButton.waitElement(10);
 		SendNowButton.click();
-		confirmationMessage.waitElement(10);
+		confirmationMessage.waitElement(30);
 		return new AddEmailsPage_PublishTab();
 	}
 	

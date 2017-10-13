@@ -1,12 +1,22 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-public class GeneralFormsElements {
+public class GeneralFormsElements<T> {
 
     VEElements element = null;
+    
+    public enum veRows {
+        ONECOLUMN,
+        TWOCOLUMN,
+        THREECOLUMN,
+        FOURCOLUMN,
+        LSIDEBAR,
+        RSIDEBAR,
+        HEADER,
+        FOOTER;}
 
     GeneralFormsElements(){}
 
-    GeneralFormsElements drop(Enum<?> ve) {
+    public T performDrop(Enum<?> ve) {
         String value = ve.name();
         switch (value) {
             case "TEXT": {element = new Text("//*[contains(text(),'Text')]", "Text element"); element.drop(); break;}
@@ -35,13 +45,13 @@ public class GeneralFormsElements {
             RSIDEBAR,
             HEADER,
             FOOTER;*/
-        } return new GeneralFormsElements();
+        } return (T) this;
     }
 
-    GeneralFormsElements edit(Enum<?> ve, String fieldName) {
+    public T performEdit(Enum<?> ve, String fieldName) {
         String value = ve.name();
         switch (value) {
             case "FORM_FIELD": {element = new FormField("//label[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", "Form Field element"); element.edit(fieldName); break;}
-        } return new GeneralFormsElements();
+        } return (T)this;
     }
 }

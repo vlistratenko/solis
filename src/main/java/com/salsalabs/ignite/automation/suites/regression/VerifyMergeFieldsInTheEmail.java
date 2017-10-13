@@ -75,7 +75,8 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
 		CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
 		CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
-				
+		
+		String[] supporterFieldsForVerificationInSubj = {"Title", "Zip Code", "Org Zip", "supporterDateTimeCustomField", "supporterSingleChoiceCustomField", "supporterTextBoxCustomField"};	
 		LoginPage loginPage = new LoginPage();
 		loginPage.
 		doSuccessLogin(login, "!QAZ2wsx").
@@ -83,18 +84,20 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		openEmailBlastsPage().
 		openAddEmailPage().
 		fillAllFieldsAndGoForward(emailBlastName).
-		selectAudienceType("Selected segments of your list, or specific supporters").//(""Entire list ").
-		addSegment(segmentName).
+		selectAudienceType("Selected segments of your list, or specific supporters").
+		addSupporters("supporterformergefieldstesting@testauto.ignite.net", 1, PropertyName.SUPPORTER_EMAIL).//(""Entire list ").
+		//addSegment(segmentName).
 		openComposePage().
 		selectLayout("Basic").
-		addLink("").		
-		AddAllMergeFields().
-		fillAllFieldsAndGoForward(emailSubject, emailFrom, 1).
+		addLink("").
+		AddAllMergeFieldsIntoSubject(supporterFieldsForVerificationInSubj).
+		AddAllMergeFieldsIntoBody().
+		fillAllFieldsAndGoForward("", emailFrom, 1).
 		fillAllFieldsAndPublish(100, 1).
 		openDashboard().
 		openMessagingPage().
 		verifyActivityIsPresentInTableAllActivities("Email", emailBlastName).
-		waitForStatus("COMPLETED", 6).
+		waitForStatus("COMPLETED", 12).
 		verifyMergeFieldsInTheEmail();
 		
 		CommonUtils.checkAndFail("VerifyMergeFieldsInTheEmailTest");

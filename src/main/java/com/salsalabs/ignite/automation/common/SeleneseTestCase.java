@@ -113,9 +113,9 @@ public class SeleneseTestCase {
 
 	@AfterTest(alwaysRun = true)
 	protected void stopTestOnDriver() throws Exception {
-		/*emailClient.closeConnection();
+		emailClient.closeConnection();
 		driver.manage().deleteAllCookies();
-		close();*/
+		close();
 	}
 
 	protected void beforeClass() {

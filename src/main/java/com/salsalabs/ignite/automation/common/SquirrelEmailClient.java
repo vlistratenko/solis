@@ -10,16 +10,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.activation.DataHandler;
+import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
+import javax.mail.search.RecipientStringTerm;
+import javax.mail.search.RecipientTerm;
 import javax.mail.search.SubjectTerm;
 
 import org.apache.logging.log4j.Logger;
@@ -212,6 +216,22 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 		return msgs;
 	}
 	
+	private List<Message> getEmailsByRecipient(String[] recipients) {
+		List<Message> msgs = new ArrayList<>();
+		try {
+			Folder inbox = getFolder(Folder.READ_ONLY);
+			Message[] messages = inbox.getMessages();
+			for (String recipient : recipients) {
+				logger.info("Try to find email with recipient - " + recipient);
+				msgs.addAll(Arrays.asList(inbox.search(new RecipientStringTerm(RecipientType.TO, recipient), messages)));
+				logger.info(msgs.size() + " emails with recipient - " + recipient + " were found");
+			}
+		} catch (Exception ex) {
+			logger.error("", ex);
+		}
+		return msgs;
+	}
+	
 	@Override
 	public void closeConnection(){
 		try {
@@ -351,6 +371,23 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 	public void setDriver(WebDriver driver) {
 		// TODO Auto-generated method stub
 		Browser.driver = driver;
+	}
+
+	@Override
+	public List<Message> getEmailsByRecipient(String recipient) {
+		String[] rec = new String[] { recipient };
+		return getEmailsBySubjects(rec);
+	}
+
+	@Override
+	public String getEmailSubj(Object email) {
+		try {
+			return ((Message) email).getSubject();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

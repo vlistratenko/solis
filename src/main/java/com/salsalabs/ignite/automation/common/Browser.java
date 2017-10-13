@@ -356,6 +356,24 @@ public abstract class Browser {
 		
 	}
 	
+	public String  getEmailBodyByRecipient(String recipient) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
+		emails = client.getEmailsByRecipient(recipient);
+		String msg = client.getEmailBody(emails.get(0));
+		return msg;
+		
+	}
+	
+	public String  getEmailSubjByRecipient(String recipient) {
+		EmailClient<?> client = SeleneseTestCase.emailClient;
+		List<?> emails = null;
+		emails = client.getEmailsByRecipient(recipient);
+		String msg = client.getEmailBody(emails.get(0));
+		return msg;
+		
+	}
+	
 	public void unsubscribeByEmail(Integer amountOfSplits, Integer amountOfEmails) {
 		unsubscribeByEmail(null, amountOfSplits, amountOfEmails);
 	}

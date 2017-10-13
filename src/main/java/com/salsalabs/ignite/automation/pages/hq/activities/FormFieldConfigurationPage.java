@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormFieldConfigurationPage extends Browser {
+public class FormFieldConfigurationPage extends HomePage {
 
     Button saveButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[2]","Save Content button for field configuration");
     Button cancelButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[1]","Cancel button of fields configuration modal window");

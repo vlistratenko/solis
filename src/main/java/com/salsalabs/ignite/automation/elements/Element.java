@@ -2,7 +2,6 @@ package com.salsalabs.ignite.automation.elements;
 
 import org.openqa.selenium.WebElement;
 
-import java.util.*;
 
 public interface Element {
 
@@ -21,6 +20,8 @@ public interface Element {
 	void changePath(String old, String newPath);
 
 	void scrollIntoView();
+	
+	void scrollIntoViewAndDown();
 
 	void addPath(String pathToAdd);
 

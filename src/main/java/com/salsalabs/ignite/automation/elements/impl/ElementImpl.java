@@ -48,6 +48,12 @@ public abstract class ElementImpl implements Element {
 		isRequeired = isReq;
 	}
 
+	public void scrollIntoViewAndDown() {
+		scrollIntoView();
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("window.scrollBy(0,-150);", "");
+	}
+	
 	public WebDriver getDriver() {
 		return driver;
 	}
@@ -641,8 +647,12 @@ public abstract class ElementImpl implements Element {
 		if (elem.size() == 1) {
 			return driver.findElement(By.xpath(locator));
 		} else {
+			logger.info("More then one element were found. Elements: " + elem.size() + " Path:" + locator);
 			for (int i = 0; i < elem.size(); i++) {
 				if (elem.get(i).isDisplayed()) {
+					if (driver instanceof JavascriptExecutor) {
+						((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", elem.get(i));
+					}
 					return elem.get(i);
 				}
 			}
@@ -806,7 +816,7 @@ public abstract class ElementImpl implements Element {
 	}
 
 	protected boolean isNotDisplayed(String path) {
-		return findElementsByXpath(path).size() == 0;
+		return findElementsByXpathWithOutWait(path).size() == 0;
 	}
 
 	protected boolean waitConditionBecomesTrue(boolean condition, int timeOut) {

@@ -1,8 +1,5 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-
 import com.salsalabs.ignite.automation.elements.Label;
 
 public class LabelImpl extends ElementImpl implements Label {
@@ -27,9 +24,5 @@ public class LabelImpl extends ElementImpl implements Label {
 		super.moveToElement(path);
 	}
 	
-	public void scrollIntoViewAndDown() {
-		super.scrollIntoView();
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("window.scrollBy(0,-150);", "");
-	}
+
 }

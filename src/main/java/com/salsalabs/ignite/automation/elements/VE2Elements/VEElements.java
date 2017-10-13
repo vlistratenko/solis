@@ -26,7 +26,7 @@ public class VEElements extends ElementImpl {
         elementsVe.click();
         getLogger().info("Elements menu was clicked");
         WebElement source = findElementByXpath(getElementPath());
-        WebElement target = findElementByXpath("//div[@class='content-render-wrapper']");
+        WebElement target = findElementByXpath("//div[@class='render-container-wrapper']");
         action.clickAndHold(source).moveToElement(target).release().perform();
         getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
     }
