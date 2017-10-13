@@ -1,16 +1,15 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -19,6 +18,7 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
+import org.openqa.selenium.support.ui.Wait;
 
 public abstract class ElementImpl implements Element {
 	String path;
@@ -818,7 +818,30 @@ public abstract class ElementImpl implements Element {
 		}
 
 	}
-	
+
+	public void fluentWaitForElementPresenceIgnoringExceptions(final String locator){
+		ArrayList<Class <? extends Throwable>> exceptionsList = new ArrayList<>();
+		exceptionsList.add(NoSuchElementException.class);
+		exceptionsList.add(ElementNotVisibleException.class);
+		exceptionsList.add(StaleElementReferenceException.class);
+		exceptionsList.add(InvalidElementStateException.class);
+		long waitingTime = 30;
+		long pollingInterval = 500;
+		Wait<WebDriver> wait = new FluentWait<>(driver)
+				.withTimeout(waitingTime, TimeUnit.SECONDS)
+				.pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
+				.ignoreAll(exceptionsList)
+				.withMessage("Fluent wait of " + waitingTime + " seconds with " + pollingInterval +
+						" milliseconds polling interval was unable to locate element with locator " + locator);
+
+		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until element" +
+				"is present and clickable");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+	}
+
+
+
 	
 	
 }

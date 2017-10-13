@@ -30,6 +30,7 @@ public class FormFieldConfigurationPage extends Browser {
     public ArrayList<String> getAllSupporterFieldsNames(){
         ArrayList<String> supporterFieldNames = new ArrayList<>();
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
+        fluentWaitForElementPresenceIgnoringExceptions("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]");
         List<WebElement> elements = driver.findElements(By.xpath("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]"));
         for (WebElement element : elements) {
             supporterFieldNames.add(element.getText().trim());
@@ -38,7 +39,7 @@ public class FormFieldConfigurationPage extends Browser {
     }
 
     public FormFieldConfigurationPage dropFormFieldByName(String fieldName){
-        Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*[@class=\"text-right\"]//span[2]","Add field button");
+        Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*[@class=\"text-right\"]//span[2]","Add field button of " + fieldName + " in form field configuration modal window");
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
         if(addFieldButton.isDisplayed()) addFieldButton.click();
         return this;

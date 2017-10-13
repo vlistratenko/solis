@@ -164,7 +164,31 @@ public class HttpClient {
 		}
 		return data;
 	}
-	
+
+	public Map<String, String> getAllSupporterCustomFields(String supporterEmail){
+		Map<String, String> supporterCustomFields = new HashMap<>();
+		try {
+			sendGETRequest("https://" + host + "/api/search/supporters?criteria=" + supporterEmail + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+			String temp = JSONResponse.get(0);
+			String id = jsonParser(temp, "payload.supporters.0.id").toString();
+			SeleneseTestCase.logger.info("Supporter ID: " + id);
+			sendGETRequest("https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
+			temp = JSONResponse.get(0);
+			try {
+				JSONArray customFields = (JSONArray) jsonParser(temp, "payload.customFields");
+				for(int i = 0; i < customFields.length(); i++) {
+					supporterCustomFields.put(jsonParser(temp, "payload.customFields." + i + ".fieldDefinition.name").toString(),
+							jsonParser(temp, "payload.customFields." + i + ".value").toString());
+				}
+			} catch (JSONException e) {
+				logger.error("", e);
+			}
+		} catch (URISyntaxException | IOException | JSONException e) {
+			logger.error("", e);
+		}
+		return supporterCustomFields;
+	}
+
 	public Supporter getSupporterByEmail(String email) throws JSONException {
 		Supporter sup = new Supporter();
 		try {
@@ -196,6 +220,7 @@ public class HttpClient {
  			    sup.city  = jsonParser(temp, "payload.addresses.0.city").toString();
  			    sup.state  = jsonParser(temp, "payload.addresses.0.state").toString();
  			    sup.postalCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
+ 			    sup.allCustomFields = getAllSupporterCustomFields(sup.getFinalEMAIL());
  			    
 			} catch (JSONException e) {
 				logger.error("", e);
@@ -377,7 +402,6 @@ public class HttpClient {
 				i++;
 			}
 		} catch (JSONException e) {
-	    	e.printStackTrace();
 	    	temp = "";
 		}
 	    return temp;

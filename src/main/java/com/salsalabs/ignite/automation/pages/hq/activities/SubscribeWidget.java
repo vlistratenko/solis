@@ -201,8 +201,8 @@ public class SubscribeWidget extends Browser{
 		activityDateTimeCustomField.type(activityDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("activityDateTimeCustomFieldValue", activityDateTimeCustomFieldValue);
 		supporterSingleChoiceCustomField.click(); CommonUtils.setProperty("supporterSingleChoiceCustomFieldValue", "value1");
 		activitySingleChoiceCustomField.click(); CommonUtils.setProperty("activitySingleChoiceCustomFieldValue", "value1");
-		supporterYesNoCustomField.click(); CommonUtils.setProperty("supporterYesNoCustomFieldValue", "Yes");
-		activityYesNoCustomField.click(); CommonUtils.setProperty("activityYesNoCustomFieldValue", "Yes");
+		supporterYesNoCustomField.click(); CommonUtils.setProperty("supporterYesNoCustomFieldValue", "True");
+		activityYesNoCustomField.click(); CommonUtils.setProperty("activityYesNoCustomFieldValue", "True");
 		keepMeInformedCheckbox.check();
 		confirmationCheckbox.check();
 
