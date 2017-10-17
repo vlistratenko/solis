@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormFieldConfigurationPage extends HomePage {
+public class FormFieldConfigurationModalWindow extends HomePage {
 
     Button saveButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[2]","Save Content button for field configuration");
     Button cancelButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[1]","Cancel button of fields configuration modal window");
@@ -22,7 +22,7 @@ public class FormFieldConfigurationPage extends HomePage {
 
     private static List<String> supporterFieldsNames = new ArrayList<>();
 
-    public FormFieldConfigurationPage(){
+    public FormFieldConfigurationModalWindow(){
         if(supporterFieldsNames.isEmpty()) supporterFieldsNames = getAllSupporterFieldsNames();
 
     }
@@ -38,14 +38,14 @@ public class FormFieldConfigurationPage extends HomePage {
         return supporterFieldNames;
     }
 
-    public FormFieldConfigurationPage dropFormFieldByName(String fieldName){
+    public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
         Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*[@class=\"text-right\"]//span[2]","Add field button of " + fieldName + " in form field configuration modal window");
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
         if(addFieldButton.isDisplayed()) addFieldButton.click();
         return this;
     }
 
-    public FormFieldConfigurationPage markFieldAsRequired(){
+    public FormFieldConfigurationModalWindow markFieldAsRequired(){
         if(requiredCheckbox.isDisplayed()){
             if(!requiredCheckbox.isChecked()) requiredCheckbox.check();}
         return this;
@@ -56,7 +56,7 @@ public class FormFieldConfigurationPage extends HomePage {
         return (T) new HomePage();
     }
 
-    public FormFieldConfigurationPage closeFieldConfigurationModalWindow(){
+    public FormFieldConfigurationModalWindow closeFieldConfigurationModalWindow(){
         cancelButton.click();
         return this;
     }

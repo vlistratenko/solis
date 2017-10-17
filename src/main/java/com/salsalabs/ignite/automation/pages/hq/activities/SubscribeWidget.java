@@ -14,6 +14,13 @@ import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class SubscribeWidget extends Browser{
 
 	TextBox addressLine1Field = new TextBoxImpl("//input[@name='field-address-line1']", "Address Line 1 text field");
@@ -166,6 +173,21 @@ public class SubscribeWidget extends Browser{
 		return this;
 	}
 
+	public String parseDateTimeValueToMatchHqResponse(String dateTimeValue) {
+		String dateTime;
+		DateTimeFormatter hqDateTimeFieldFormatterOut = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		try {
+			DateTimeFormatter customFieldFormatterOut = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a");
+			LocalDateTime customFieldLocalDateTime = LocalDateTime.parse(dateTimeValue.toUpperCase(), customFieldFormatterOut);
+			dateTime = customFieldLocalDateTime.minusHours(3).format(hqDateTimeFieldFormatterOut).trim();
+		} catch (DateTimeParseException e) {
+			DateTimeFormatter publicFormBirthDateFieldDateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+			LocalDate birthFieldDate = LocalDate.parse(dateTimeValue, publicFormBirthDateFieldDateFormat);
+			LocalDateTime birthDateField = LocalDateTime.of(birthFieldDate, LocalTime.MIDNIGHT);
+			dateTime = birthDateField.minusDays(1).format(hqDateTimeFieldFormatterOut).trim();
+		} return dateTime;
+	}
+
 	public void clickCalendarDoneButton(){
 		if(calendarDoneButton.isDisplayed()) calendarDoneButton.click();
 	}
@@ -175,10 +197,11 @@ public class SubscribeWidget extends Browser{
 																		  String title, String workPhone, String cellPhone, String country, String dateOfBirth, String supporterTextBoxCustomFieldValue, String supporterNumberCustomFieldValue,
 																		  String supporterDateTimeCustomFieldValue, String activityTextBoxCustomFieldValue, String activityNumberCustomFieldValue, String activityDateTimeCustomFieldValue) {
 
+		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
 		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
-		countryField.selectByValue(country); CommonUtils.setProperty("country", "Ukraine");
+		countryField.selectByValue(country); CommonUtils.setProperty("country", "UA");
 		personCityField.type(personCity); CommonUtils.setProperty("personCity", personCity);
 		personZipField.type(personZip); CommonUtils.setProperty("personZip", personZip);
 		addressLine1Field.type(addressLine1); CommonUtils.setProperty("addressLine1", addressLine1);
@@ -189,13 +212,14 @@ public class SubscribeWidget extends Browser{
 		titleField.type(title); CommonUtils.setProperty("title", title);
 		workPhoneField.type(workPhone); CommonUtils.setProperty("workPhone", workPhone);
 		cellPhoneField.type(cellPhone); CommonUtils.setProperty("cellPhone", cellPhone);
-		dateOfBirthField.type(dateOfBirth); clickCalendarDoneButton(); CommonUtils.setProperty("dateOfBirth", dateOfBirth);
-		personStatesSelectBox.selectByValue(state); CommonUtils.setProperty("state", "Kharkivs'ka Oblast'");
+		//dateOfBirthField.type(dateOfBirth); clickCalendarDoneButton(); CommonUtils.setProperty("dateOfBirth", dateOfBirth);
+		dateOfBirthField.type(dateOfBirth); clickCalendarDoneButton(); CommonUtils.setProperty("dateOfBirth", parseDateTimeValueToMatchHqResponse(dateOfBirth));
+		personStatesSelectBox.selectByValue(state); CommonUtils.setProperty("state", "UA-63");
 		genderSelectBox.selectByValue(gender); CommonUtils.setProperty("gender", "Male");
 		preferredLanguageSelectBox .selectByValue(language);
 		supporterTextBoxCustomField.type(supporterTextBoxCustomFieldValue); CommonUtils.setProperty("supporterTextBoxCustomFieldValue", supporterTextBoxCustomFieldValue);
 		supporterNumberCustomField.type(supporterNumberCustomFieldValue); CommonUtils.setProperty("supporterNumberCustomFieldValue", supporterNumberCustomFieldValue);
-		supporterDateTimeCustomField.type(supporterDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("supporterDateTimeCustomFieldValue", supporterDateTimeCustomFieldValue);
+		supporterDateTimeCustomField.type(supporterDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("supporterDateTimeCustomFieldValue", parseDateTimeValueToMatchHqResponse(supporterDateTimeCustomFieldValue));
 		activityTextBoxCustomField.type(activityTextBoxCustomFieldValue); CommonUtils.setProperty("activityTextBoxCustomFieldValue", activityTextBoxCustomFieldValue);
 		activityNumberCustomField.type(activityNumberCustomFieldValue); CommonUtils.setProperty("activityNumberCustomFieldValue", activityNumberCustomFieldValue);
 		activityDateTimeCustomField.type(activityDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("activityDateTimeCustomFieldValue", activityDateTimeCustomFieldValue);

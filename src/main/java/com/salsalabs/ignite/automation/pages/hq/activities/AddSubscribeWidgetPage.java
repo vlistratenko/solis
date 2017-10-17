@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.common.HttpClient;
+import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
@@ -12,6 +14,14 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.json.JSONException;
+import org.testng.Assert;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
@@ -245,21 +255,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public FormFieldConfigurationPage editVEField(String fieldName){
+	public FormFieldConfigurationModalWindow editVEField(String fieldName){
 		new SignupFormElements().performEdit(SignupFormElements.VE.FORM_FIELD, fieldName);
-		return new FormFieldConfigurationPage();
+		return new FormFieldConfigurationModalWindow();
 	}
-
-	public AddSubscribeWidgetPage selectBlankLayout() {
-		fluentWaitForElementPresenceIgnoringExceptions("//*[@id='activityForm']/descendant::*[contains(text(),'Blank')]/../../../../..");
-		sleep(5);
-		Button lay = new ButtonImpl("//*[@id='activityForm']/descendant::*[contains(text(),'Blank')]/../../../../..", "Blank layout icon");
-		lay.click();
-		composeButton.click();
-		sleep(5);
-		return this;
-	}
-
 
     public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
         sleep(10);
@@ -274,5 +273,45 @@ public class AddSubscribeWidgetPage extends HomePage {
         sleep(10);
         return this;
     }
+
+	public void verifySubmittedFieldsArePresentInSupporterDetails(String host, String login, String password) {
+				try {
+			Supporter sup = new HttpClient(host).login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
+
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterTextBoxCustomField"), CommonUtils.getProperty("supporterTextBoxCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterNumberCustomField"), CommonUtils.getProperty("supporterNumberCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterDateTimeCustomField"), CommonUtils.getProperty("supporterDateTimeCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
+			verifier.verifyEquals(sup.getFinalEMAIL(), CommonUtils.getProperty("personEmail").toLowerCase());
+			verifier.verifyEquals(sup.getFirstName(), CommonUtils.getProperty("personFName"));
+			verifier.verifyEquals(sup.getLastName(), CommonUtils.getProperty("personLName"));
+			verifier.verifyEquals(sup.getCountry(), CommonUtils.getProperty("country"));
+			verifier.verifyEquals(sup.getCity(), CommonUtils.getProperty("personCity"));
+			verifier.verifyEquals(sup.getZipCode(), CommonUtils.getProperty("personZip"));
+			verifier.verifyEquals(sup.getAddressLine1(), CommonUtils.getProperty("addressLine1"));
+			verifier.verifyEquals(sup.getAddressLine2(), CommonUtils.getProperty("addressLine2"));
+			verifier.verifyEquals(sup.getPhoneHome(), CommonUtils.getProperty("homePhone"));
+			verifier.verifyEquals(sup.getMiddleName(),CommonUtils.getProperty("personMName"));
+			verifier.verifyEquals(sup.getSuffix(),CommonUtils.getProperty("suffix"));
+			verifier.verifyEquals(sup.getTitle(),CommonUtils.getProperty("title"));
+			verifier.verifyEquals(sup.getPhoneWork(),CommonUtils.getProperty("workPhone"));
+			verifier.verifyEquals(sup.getPhoneCell(),CommonUtils.getProperty("cellPhone"));
+			verifier.verifyEquals(sup.getDateOfBirth(),CommonUtils.getProperty("dateOfBirth"));
+			verifier.verifyEquals(sup.getState(),CommonUtils.getProperty("state"));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

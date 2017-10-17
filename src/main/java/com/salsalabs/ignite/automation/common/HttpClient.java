@@ -220,6 +220,8 @@ public class HttpClient {
  			    sup.city  = jsonParser(temp, "payload.addresses.0.city").toString();
  			    sup.state  = jsonParser(temp, "payload.addresses.0.state").toString();
  			    sup.postalCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
+ 			    sup.country  = jsonParser(temp, "payload.addresses.0.country").toString();
+ 			    sup.zipCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
  			    sup.allCustomFields = getAllSupporterCustomFields(sup.getFinalEMAIL());
  			    
 			} catch (JSONException e) {

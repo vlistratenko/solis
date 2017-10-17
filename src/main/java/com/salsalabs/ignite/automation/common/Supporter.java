@@ -19,16 +19,19 @@ import org.json.JSONObject;
 
 public class Supporter {
 	public String finalEMAIL = "";
-	public String cPhone = "32165498765";
+	//public String cPhone = "32165498765";
+	public String cPhone = "";
 	public String emailDomain = "@devnull.test.ignite.net";
 	public String importedEmail = "importedsup";
 	public String subscribedEmail = "subscribedsup";
 	public String manuallEmail = "munuallysup";
 	public String facebook = "fbv";
-	public String home_Phone = "98765432112";
+	public String home_Phone = "";
+	//public String home_Phone = "98765432112";
 	public String preferredLanguage = "English (United States)";
 	public String twitter = "twv";
-	public String zipCode = "20147";
+	//public String zipCode = "20147";
+	public String zipCode = "";
 	public String middleName = "MName";
 	public String prefix = "";
 	public String suffix = "";
@@ -42,11 +45,22 @@ public class Supporter {
 	public String socialTwitter = "";
 	public String externalID = "";
 	public String dateOfBirth = "";
+	public String country = "";
 	public Map<String, String> allCustomFields = new HashMap<>();
-
-	public String constituentNumber = "", title = "", firstName = "", lastorOrgName = "", petType = "", petName = "",
-			addressLine1 = "", addressLine2 = "", city = "", state = "", postalCode = "", spouseConstituentNumber = "",
-			spouseFirstName = "", spouseTitle = "";
+	public String constituentNumber = "";
+	public String title = "";
+	public String firstName = "";
+	public String lastorOrgName = "";
+	public String petType = "";
+	public String petName = "";
+	public String addressLine1 = "";
+	public String addressLine2 = "";
+	public String city = "";
+	public String state = "";
+	public String postalCode = "";
+	public String spouseConstituentNumber = "";
+	public String spouseFirstName = "";
+	public String spouseTitle = "";
 	public String source;
 
 	/* map for fields in the file */
@@ -82,6 +96,20 @@ public class Supporter {
 	public String getFinalEMAIL() {
 		return finalEMAIL;
 	}
+
+	public String getPhoneWork() {return phoneWork;}
+
+	public String getPhoneCell() {return phoneCell;}
+
+	public String getPhoneHome() {return phoneHome;}
+
+	public String getDateOfBirth() {return this.birthDate;}
+
+	public String getCountry(){return this.country;}
+
+	public String getTitle() {return prefix;}
+
+	public String getSuffix(){return this.suffix;}
 
 	public void setFinalEMAIL(String finalEMAIL) {
 		this.finalEMAIL = finalEMAIL;
