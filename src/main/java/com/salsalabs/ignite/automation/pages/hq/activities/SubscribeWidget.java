@@ -173,6 +173,11 @@ public class SubscribeWidget extends Browser{
 		return this;
 	}
 
+	public SubscribeWidget clickOnSubmitFormButton(){
+		subscribeButton.click();
+		return this;
+	}
+
 	public String parseDateTimeValueToMatchHqResponse(String dateTimeValue) {
 		String dateTime;
 		DateTimeFormatter hqDateTimeFieldFormatterOut = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");

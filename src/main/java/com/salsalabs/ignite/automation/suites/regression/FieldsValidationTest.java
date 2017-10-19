@@ -121,8 +121,23 @@ public class FieldsValidationTest extends SeleneseTestCase {
         }
     }
 
+    /**
+     * <b>Create and submit Signup form with all available non-required fields</b>
+     * <p>
+     * Steps:
+     * <ul>
+     * <li> Pre-create custom fields of all types (if not created already). This includes all supporter custom fields and all activity Signup form-specific custom fields
+     * <li> Login > Open Activities page > Open Signup forms page > Click on Create Signup form
+     * <li> Specify form name and description > Select Blank layout > Drop One-column row element > Drop VE form element
+     * <li> Drop on the layout all pre-created custom fields
+     * <li> Drop on the layout all available supporter fields
+     * <li> Go to Autoresponders > Publish form > Go to form public URL
+     * <li> Fill in all fields > Submit the form
+     * <li> <font color="green"><b>Verify whether created supporter contains all fields values that have been specified when submitting the form</b></font>
+     */
+
     @Parameters({"login","password"})
-    @Test(enabled = true, groups = {"val"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled = false, groups = {"val"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormNonRequiredFields(String login, String password){
 
       String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -180,37 +195,32 @@ public class FieldsValidationTest extends SeleneseTestCase {
                 "10/11/2017 01:30 am");
 
         addSignupFormsPage.verifySubmittedFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
-
-
     }
 
-/*
     @Parameters({"login","password"})
     @Test(groups = {"val"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormAllRequiredFields(String login, String password){
 
         String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
         String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
 
         addSignupFormsPage = new LoginPage().doSuccessLogin(login, password).openActivitiesPage().openSubscribeWidgetsPage().openAddSubscribeWidgetPage();
         addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
         addSignupFormsPage.selectLayoutStep("Blank");
         addSignupFormsPage.dropOneColumnRow();
         addSignupFormsPage.dropVEFormElement();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("activitySingleChoiceCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("activityYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
 
-        //new FormFieldConfigurationPage().dropAllSupporterFieldsOnFormAndMarkAsRequired();
-        new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
+        new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnFormAndMarkAsRequired();
         addSignupFormsPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
@@ -219,50 +229,11 @@ public class FieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        new SubscribeWidget().fillSubscribeWidgetAllSupporterAndCustomFields(
-                supporterEmail,
-                "personFName",
-                "personLName",
-                "personCity",
-                "20008",
-                "UA-63",
-                "addressLine1",
-                "addressLine2",
-                "Male",
-                "777-777-7777",
-                "personMName",
-                "en-US",
-                "suffixValue",
-                "titleValue",
-                "777-777-7777",
-                "777-777-7777",
-                "UA",
-                "09/11/2017",
-                "supporterTextBoxCustomFieldValue",
-                "13",
-                "10/11/2017 01:30 am",
-                "activityTextBoxCustomFieldValue",
-                "13",
-                "10/11/2017 01:30 am");
+        new SubscribeWidget().clickOnSubmitFormButton();
 
-        try {
-            Supporter sup = new HttpClient("https://hq.test.igniteaction.net").login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
+        //verify errors are displayed
 
-            Assert.assertEquals(sup.getCustomFieldValue("supporterYesNoCustomField"),CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
-*/
+
 
 }
