@@ -73,15 +73,11 @@ public class Supporter {
 		String unicID = CommonUtils.getRandomValue(100000, 0);
 		result.setFinalEMAIL(SeleneseTestCase.emailClient.getEmailBox("supman" + unicID));
 		result.setExternalID(unicID);
-		LocalDate date = LocalDate.now();
-		date = date.minusYears(20);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		String dateOfbirthValue = date.format(formatter);
-		result.setDateOfBirth(dateOfbirthValue);
+		result.setDateOfBirth(CommonUtils.generateDateOFBirthValue());
 		result.setFirstName("Tester" + unicID);
 		result.setLastName("Testerov" + unicID);
 		result.setMiddleName("TestMiddleName");
-		result.setcPhone("23" + CommonUtils.getRandomNumericValueFixedLength(9));
+		result.setcPhone(CommonUtils.getRandomNumericValueFixedLength(11));
 		result.setCity("New York");
 		result.setState("New York");
 		result.setAddressLine1("350 5th Ave" );

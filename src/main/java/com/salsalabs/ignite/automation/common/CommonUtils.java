@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -136,6 +138,20 @@ public class CommonUtils {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd '_' HH-mm-ss");
 		return dateFormat.format(new Date());
 	}
+	
+	public static String createTodayDateString() {
+		LocalDate date = LocalDate.now();
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		return date.format(formatter);
+	}
+	
+	public static String generateDateOFBirthValue() {
+		LocalDate date = LocalDate.now();
+		date = date.minusYears(20);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		return date.format(formatter);
+	}
+	
 
 	public static String addDaysToCurrentDate(Integer days) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
