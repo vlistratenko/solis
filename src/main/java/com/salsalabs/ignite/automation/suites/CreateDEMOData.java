@@ -221,7 +221,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	
 	@Parameters({"amount", "formURL", "login", "host"})
 	@Test(groups = {"submitEventRandom"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testSubmitEventBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+	public void testSubmitEventBySupporter(Integer amount, String formURL, String login, String host) throws Exception {
 		
 		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);	
 		logger.info("Amount of donations " + amountOfDonations);
@@ -317,7 +317,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	
 	@Parameters({"amount", "formURL", "login", "host"})
 	@Test(groups = {"submitp2pEventRandom"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testSubmitp2pEventBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+	public void testSubmitp2pEventBySupporter(Integer amount, String formURL, String login, String host) throws Exception {
 		
 		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1, amount);
 		Map<Integer, Supporter> sup = new HashMap<Integer, Supporter>();

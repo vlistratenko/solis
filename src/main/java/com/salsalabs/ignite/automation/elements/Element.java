@@ -38,6 +38,8 @@ public interface Element {
 	boolean waitElement();
 	
 	boolean waitElement(int seconds);
+	
+	void waitElementWithFail(int seconds) throws Exception;
 
 	String getName();
 
