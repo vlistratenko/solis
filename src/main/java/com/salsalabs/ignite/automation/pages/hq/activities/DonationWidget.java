@@ -110,7 +110,10 @@ public class DonationWidget extends SubscribeWidget {
 		if (personCity.length() < 1) {
 			personCity = "New York";
 		}
-		personCityField.type(personCity);
+		personCityField.type(personCity);		
+		if (personZip.length() < 1) {
+			personZip = "91602";
+		}
 		personZipField.type(personZip);
 		if (state.equals("")) {
 			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
