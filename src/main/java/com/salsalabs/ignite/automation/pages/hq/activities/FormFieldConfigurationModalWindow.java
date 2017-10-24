@@ -39,7 +39,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
-        Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*[@class=\"text-right\"]//span[2]","Add field button of " + fieldName + " in form field configuration modal window");
+        Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of " + fieldName + " in form field configuration modal window");
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
         if(addFieldButton.isDisplayed()) addFieldButton.click();
         return this;

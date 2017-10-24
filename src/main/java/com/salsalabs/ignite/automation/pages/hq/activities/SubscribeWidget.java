@@ -240,4 +240,36 @@ public class SubscribeWidget extends Browser{
 		return this;
 	}
 
+	public boolean isValidationMessageFieldRequiresValueDisplayed(String fieldName){
+				Label fieldLabel = new LabelImpl("Label of " + fieldName + " field", "//label[contains(text(), '" + fieldName + "')]//following-sibling::*[@data-fv-validator='notEmpty']");
+				return fieldLabel.isDisplayed() ? true : false;
+			}
+
+			public void verifyValidationMessageFieldRequireValueDisplayedForAllEmptyFields(){
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityNumberCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterNumberCustomField"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Country"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Home Phone"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Middle Name"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Preferred Language"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Suffix"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Title"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Work Phone"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Email Address"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("First Name"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Last Name"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 1"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("City"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("State"), "'This field requires a value' validation message is not displayed");
+				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Zip Code"), "'This field requires a value' validation message is not displayed");
+			}
+
 }

@@ -20,7 +20,7 @@ public class GeneralFormsElements<T> {
         String value = ve.name();
         switch (value) {
             case "TEXT": {element = new Text("//*[contains(text(),'Text')]", "Text element"); element.drop(); break;}
-            case "FORM_FIELD": {element = new FormField("//*[contains(text(),'Form Field')]", "Form Field element"); element.drop(); break;}
+            case "FORM_FIELD": {element = new FormField("//*[@class='icon-insert-template']//*[.='Form Field']", "Form Field element"); element.drop(); break;}
             case "ONECOLUMN": {element = new OneColumnRow("//*[contains(text(),'1-Column')]", "One column Row element"); element.drop(); break;}
             case "FORM": {element = new Form("//span[.='Form']", "Form element"); element.drop(); break;}
            /*

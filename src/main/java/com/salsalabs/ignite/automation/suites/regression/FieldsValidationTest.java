@@ -229,9 +229,9 @@ public class FieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        new SubscribeWidget().clickOnSubmitFormButton();
-
-        //verify errors are displayed
+        SubscribeWidget widget = new SubscribeWidget();
+        widget.clickOnSubmitFormButton();
+        widget.verifyValidationMessageFieldRequireValueDisplayedForAllEmptyFields();
 
     }
 
