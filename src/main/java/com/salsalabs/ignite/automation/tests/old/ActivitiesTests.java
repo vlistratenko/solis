@@ -204,7 +204,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 		CommonUtils.checkAndFail("subscribeSupporterTest");
 	}
 	
-	@Parameters({"supporter.email"})
+	/*@Parameters({"supporter.email"})
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=10, groups = {"activities.subscribeSupporter"}, description = "", dependsOnMethods = {"createSubscribeWidget"})
 	public void subscribeSupporterTest(@Optional("") String supporterEmail) 
 	{	
@@ -240,7 +240,7 @@ public class ActivitiesTests extends SeleneseTestCase{
 				supporter.getTwitter());
 				CommonUtils.setProperty(PropertyName.SUBSCRIBED_SUPPORTER, supporterEmail);
 		CommonUtils.checkAndFail("subscribeSupporterTest");
-	}
+	}*/
 
 
 }
