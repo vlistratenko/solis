@@ -40,12 +40,12 @@ public class CreateSupporterManuallyTest  extends SeleneseTestCase{
 				supporter.getCity(),				
 				supporter.getZipCode(),
 				supporter.getFacebook(),
-				supporter.getTwitter()).
-		verifySupporterCustomFieldData(
+				supporter.getTwitter(), 
 				supporter.getExternalId(),
 				supporter.getBirthdate(),
 				supporter.getMiddleName(), 
-				supporter.getLinkedin(), 
+				supporter.getLinkedin()).
+		verifySupporterCustomFieldData(
 				textBoxCfName, 
 				dateCfname, 
 				numberBoxCfName ,

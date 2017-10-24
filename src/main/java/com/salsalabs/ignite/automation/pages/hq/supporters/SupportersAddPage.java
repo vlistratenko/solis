@@ -103,8 +103,8 @@ public class SupportersAddPage extends HomePage{
 		return new SupportersPage();
 	}
 
-	public SupportersAddPage verifySupporterData(String email, String fName, String lName, String phone,
-												 String addressLine1, String city, String zipCode, String faceBook, String twitter) {
+	public SupportersAddPage verifySupporterData(String email, String fName, String lName, String phone, String addressLine1, String city, String zipCode, String faceBook, String twitter , String externalId, String supporterDateOfBirth,
+                           String middleName, String linkedin) {
 		verifier.verifyEquals(supporterEmailField.getValue().contains(email), true, "Wrong email", false);
 		verifier.verifyEquals(supporterFirstNameField.getValue().contains(fName), true, "Wrong firstname", false);
 		verifier.verifyEquals(supporterLastNameField.getValue().contains(lName), true, "Wrong last name", false);
@@ -114,6 +114,10 @@ public class SupportersAddPage extends HomePage{
 		verifier.verifyEquals(supporterZipField.getValue(), zipCode, "Wrong zip", false);
 		verifier.verifyEquals(supporterFaceBookField.getValue(), faceBook, "Wrong FaceBook", false);
 		verifier.verifyEquals(supporterTwitterField.getValue(), twitter, "Wrong Twitter", false);
+        verifier.verifyEquals(supporterExternalId.getValue().contains(externalId), true, "Wrong External ID", false);
+        verifier.verifyEquals(supporterBirthDateField.getValue().contains(supporterDateOfBirth), true, "Wrong BirthDate field", false);
+        verifier.verifyEquals(supporterMiddleName.getValue().contains(middleName), true, "Wrong Middle name", false);
+        verifier.verifyEquals(supporterLnField.getValue().contains(linkedin), true, "Wrong Middle name", false);
 		return new SupportersAddPage();
 	}
 
@@ -128,19 +132,12 @@ public class SupportersAddPage extends HomePage{
 				subscribedRadioButton.getAttribute("class").equalsIgnoreCase("subscription custom radio checked")) ? "Subscribed" : "Unsubscribed";
 	}
 
-    public SupportersAddPage verifySupporterCustomFieldData(String externalId, String supporterDateOfBirth,
-                                                            String middleName, String linkedin, String texBoxCustomFieldName, String dateCustomFieldName,
+    public SupportersAddPage verifySupporterCustomFieldData( String texBoxCustomFieldName, String dateCustomFieldName,
                                                             String numberCustomFieldName, String yesNoCustomFieldName, String singleChoiceCustomFieldName) {
-        // some of the  non-custom fields were included in this method verification in order not to break the old verifySupporterData() method which is used in multiple places
-        verifier.verifyEquals(supporterExternalId.getValue().contains(externalId), true, "Wrong External ID", false);
-        verifier.verifyEquals(supporterBirthDateField.getValue().contains(supporterDateOfBirth), true,
-                "Wrong BirthDate field", false);
-        verifier.verifyEquals(supporterMiddleName.getValue().contains(middleName), true, "Wrong Middle name", false);
-        verifier.verifyEquals(supporterLnField.getValue().contains(linkedin), true, "Wrong Middle name", false);
+ 
         if (customFieldAccordion.isDisplayed()) {
             customFieldAccordion.scrollIntoView();
             customFieldAccordion.click();
-            verifier.verifyEquals(supporterLnField.getValue().contains(linkedin), true, "Wrong Middle name", false);
             TextBox textBoxCf = new TextBoxImpl("//input[@name='" + texBoxCustomFieldName + "']",	"Text Box custom Field");
             verifier.verifyEquals(textBoxCf.getValue().contains(supportercustomFieldtextBoxValue), true, "Wrong Text Box Custom Field Value");
             TextBox dateCf = new TextBoxImpl("//input[@name='" + dateCustomFieldName + "']", "Date custom Field");
