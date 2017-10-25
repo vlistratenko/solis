@@ -69,10 +69,11 @@ public class SupportersAddPage extends HomePage {
 	Button doneCalendarButton = new ButtonImpl("//button[contains(text(), 'Done')]", "Done calenard button   Button");
 	Button subscribtionTab = new ButtonImpl("//a[contains(text(), 'Subscription')]", "Subscription tab Button");
 
-	String dateValue = CommonUtils.createTodayDateString();
-	String supportercustomFieldtextBoxValue = RandomStringUtils.randomAlphabetic(5);
-	String supportercustomFieldNumberBoxValue = CommonUtils.getRandomNumericValueFixedLength(5);
-	private String boleanOptionValue = "False";
+	public static String supportercustomFielddDateValue = CommonUtils.createTodayDateString();
+	public static String supportercustomFieldtextBoxValue = RandomStringUtils.randomAlphabetic(5);
+	public static String supportercustomFieldNumberBoxValue = CommonUtils.getRandomNumericValueFixedLength(5);
+	public static String boleanOptionValue = "False";
+	public static String singleChoiceValue = "2choice";
 	final String customFiledType = "PERSON";
 
 	public SupportersPage createNewSupporter() {
@@ -140,7 +141,7 @@ public class SupportersAddPage extends HomePage {
 	}
 
 	public SupportersAddPage verifySupporterCustomFieldData(String texBoxCustomFieldName, String dateCustomFieldName,
-			String numberCustomFieldName, String yesNoCustomFieldName, String singleChoiceCustomFieldName) {
+			String numberCustomFieldName, String yesNoCustomFieldName, String singleChoiceCustomFieldName , String supportercustomFieldtextBoxValue , String dateValue, String numberValue, String booleanValue, String singleChoiceValue) {
 
 		if (customFieldAccordion.isDisplayed()) {
 			customFieldAccordion.scrollIntoView();
@@ -158,40 +159,6 @@ public class SupportersAddPage extends HomePage {
 			String booleanOption = yesNoCustomFieldName.substring(0, 1).toUpperCase()
 					+ yesNoCustomFieldName.substring(1);
 			TextBox yesNoCf = new TextBoxImpl("//label[contains(text(), '" + booleanOption
-					+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., '" + boleanOptionValue
-					+ "')]", "Yes No  custom Field");
-			verifier.verifyEquals(yesNoCf.isNotExists(), false, "Wrong yesNO Custom Field Value");
-			String singleChoice = singleChoiceCustomFieldName.substring(0, 1).toUpperCase()
-					+ singleChoiceCustomFieldName.substring(1);
-			Button singleChoiceCF = new ButtonImpl(
-					"//label[contains(text(), '" + singleChoice
-							+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., '2choice')]",
-					"Single Choice   custom Field");
-			verifier.verifyEquals(singleChoiceCF.isNotExists(), false, "Wrong Single Choice Custom Field Value");
-		}
-		return new SupportersAddPage();
-	}
-
-	public SupportersAddPage verifyCustomFieldDataForImportedSupporter(String texBoxCustomFieldName,
-			String dateCustomFieldName, String numberCustomFieldName, String yesNoCustomFieldName,
-			String singleChoiceCustomFieldName, String supportercustomFieldtextBoxValue , String dateValue, String numberValue, String booleanValue, String singleChoiceValue) {
-
-		if (customFieldAccordion.isDisplayed()) {
-			customFieldAccordion.scrollIntoView();
-			customFieldAccordion.click();
-			TextBox textBoxCf = new TextBoxImpl("//input[@name='" + texBoxCustomFieldName + "']",
-					"Text Box custom Field");
-			verifier.verifyEquals(textBoxCf.getValue().contains(supportercustomFieldtextBoxValue), true,
-					"Wrong Text Box Custom Field Value");
-			TextBox dateCf = new TextBoxImpl("//input[@name='" + dateCustomFieldName + "']", "Date custom Field");
-			verifier.verifyEquals(dateCf.getValue().contains(dateValue), true, "Wrong Text Box Custom Field Value");
-			TextBox numberCf = new TextBoxImpl("//input[@name='" + numberCustomFieldName + "']",
-					"Number  custom Field");
-			verifier.verifyEquals(numberCf.getValue().contains(numberValue), true,
-					"Wrong Number Custom Field Value");
-			String booleanOption = yesNoCustomFieldName.substring(0, 1).toUpperCase()
-					+ yesNoCustomFieldName.substring(1);
-			TextBox yesNoCf = new TextBoxImpl("//label[contains(text(), '" + booleanOption
 					+ "')]/ancestor::div[contains(@on, 'fieldDefinition')]//p[contains(., '" + booleanValue
 					+ "')]", "Yes No  custom Field");
 			verifier.verifyEquals(yesNoCf.isNotExists(), false, "Wrong yesNO Custom Field Value");
@@ -205,6 +172,7 @@ public class SupportersAddPage extends HomePage {
 		}
 		return new SupportersAddPage();
 	}
+
 
 	public SupportersPage verifyEmailAndMiddleName() {
 		verifier.verifyEquals(supporterEmailField.getValue(), CommonUtils.getProperty("personEmail").toLowerCase());
@@ -334,7 +302,7 @@ public class SupportersAddPage extends HomePage {
 			textBoxCf.scrollIntoView();
 			textBoxCf.type(supportercustomFieldtextBoxValue);
 			dateCf.scrollIntoView();
-			dateCf.type(dateValue);
+			dateCf.type(supportercustomFielddDateValue);
 			if (doneCalendarButton.isDisplayed()) {
 				doneCalendarButton.click();
 				sleep(1);

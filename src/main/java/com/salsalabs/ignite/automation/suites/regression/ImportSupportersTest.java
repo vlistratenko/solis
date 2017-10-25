@@ -17,10 +17,13 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ImportAddPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ImportPage;
+import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersAddPage;
+import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomField;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage.CustomFieldType;
 
@@ -63,8 +66,20 @@ public class ImportSupportersTest  extends SeleneseTestCase{
 		fillSecondStep("2").
 		fillThirdStep();
 		importPage.verifyStatusOfImport(importName, importStatusCompleted);
-	
+		openSupporterDetailsPage().
+		verifySupporterCustomFieldData(
+				customFieldTextName, 
+				customFieldSDatedName, 
+				customFieldNumberName,
+				customFieldBoleanName,
+				customFieldSingleChoiceName, 
+				ImportAddPage.textBoxMappingValue , 
+				ImportAddPage.dateTimePMappingValue, 
+				ImportAddPage.numberMappingValue,
+				ImportAddPage.boleanOptionValue, 
+				ImportAddPage.singleChoiceMappingValue);
 	}
+	
 	
 	private CustomField generateCustomField(CustomFieldType customFieldType, String customFieldName) {
 		return new CustomField(customFieldType, customFieldName);
@@ -74,5 +89,14 @@ public class ImportSupportersTest  extends SeleneseTestCase{
 		importPage = new LoginPage().doSuccessLogin(userName, password).openAudiencePage().openImportPage();
 	}
 	
-
+	private SupportersAddPage openSupporterDetailsPage() {
+		new HomePage().
+		openAudiencePage();
+		new SupportersPage().openSupporterDetailsPage();
+		return new SupportersAddPage();
+	}
+	
 }
+	
+
+

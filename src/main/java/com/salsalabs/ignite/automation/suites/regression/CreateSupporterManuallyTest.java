@@ -50,7 +50,13 @@ public class CreateSupporterManuallyTest  extends SeleneseTestCase{
 				dateCfname, 
 				numberBoxCfName ,
 				yesNoCfName, 
-				sChoiceCfName);
+				sChoiceCfName, 
+				SupportersAddPage.supportercustomFieldtextBoxValue, 
+				SupportersAddPage.supportercustomFielddDateValue, 
+				SupportersAddPage.supportercustomFieldNumberBoxValue,
+				SupportersAddPage.boleanOptionValue,
+				SupportersAddPage.singleChoiceValue
+				);
 	}
 	
 	private void doLoginAndOpenAddSupporterPage(String login , String passward) {
