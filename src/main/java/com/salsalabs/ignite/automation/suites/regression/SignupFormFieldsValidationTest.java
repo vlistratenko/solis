@@ -19,13 +19,13 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
 
-public class FieldsValidationTest extends SeleneseTestCase {
+public class SignupFormFieldsValidationTest extends SeleneseTestCase {
 
     private AddSubscribeWidgetPage addSignupFormsPage;
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
 
     @Parameters({"login","password"})
-    @BeforeSuite(alwaysRun = true)
+    //@BeforeSuite(alwaysRun = true)
     public void generateCustomFieldsViaAPI(ITestContext context, String login, String password){
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
@@ -122,14 +122,13 @@ public class FieldsValidationTest extends SeleneseTestCase {
     }
 
     /**
-     * <b>Create and submit Signup form with all available non-required fields</b>
+     * <b>Create and submit Signup form with all supporter non-required fields</b>
      * <p>
      * Steps:
      * <ul>
      * <li> Pre-create custom fields of all types (if not created already). This includes all supporter custom fields and all activity Signup form-specific custom fields
      * <li> Login > Open Activities page > Open Signup forms page > Click on Create Signup form
      * <li> Specify form name and description > Select Blank layout > Drop One-column row element > Drop VE form element
-     * <li> Drop on the layout all pre-created custom fields
      * <li> Drop on the layout all available supporter fields
      * <li> Go to Autoresponders > Publish form > Go to form public URL
      * <li> Fill in all fields > Submit the form
@@ -137,8 +136,8 @@ public class FieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = false, groups = {"val"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitSignupFormNonRequiredFields(String login, String password){
+    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitSignupFormSupporterNonRequiredFields(String login, String password){
 
       String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
       String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
@@ -153,22 +152,12 @@ public class FieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.dropOneColumnRow();
         addSignupFormsPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        formFieldConfigurationModal.dropFormFieldByName("activityTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("activityNumberCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("activitySingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("activityYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("activityDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
         formFieldConfigurationModal.dropAllSupporterFieldsOnForm();
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        new SubscribeWidget().fillSubscribeWidgetAllSupporterAndCustomFields(
+        new SubscribeWidget().fillSubscribeWidgetAllSupporterFields(
                 supporterEmail,
                 "personFName",
                 "personLName",
@@ -186,7 +175,60 @@ public class FieldsValidationTest extends SeleneseTestCase {
                 "777-777-7777",
                 "777-777-7777",
                 "UA",
-                "09/11/2017",
+                "09/11/2017");
+
+        addSignupFormsPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
+    }
+
+    /**
+     * <b>Create and submit Signup form with all custom non-required fields</b>
+     * <p>
+     * Steps:
+     * <ul>
+     * <li> Pre-create custom fields of all types (if not created already). This includes all supporter custom fields and all activity Signup form-specific custom fields
+     * <li> Login > Open Activities page > Open Signup forms page > Click on Create Signup form
+     * <li> Specify form name and description > Select Blank layout > Drop One-column row element > Drop VE form element
+     * <li> Drop on the layout all available pre-created custom fields
+     * <li> Go to Autoresponders > Publish form > Go to form public URL
+     * <li> Fill in all fields > Submit the form
+     * <li> <font color="green"><b>Verify whether created supporter contains all fields values that have been specified when submitting the form</b></font>
+     */
+
+    @Parameters({"login","password"})
+    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitSignupFormCustomNonRequiredFields(String login, String password){
+
+        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+
+        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openSubscribeWidgetsPage()
+                .openAddSubscribeWidgetPage();
+        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
+        addSignupFormsPage.selectLayoutStep("Blank");
+        addSignupFormsPage.dropOneColumnRow();
+        addSignupFormsPage.dropVEFormElement();
+        formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activitySingleChoiceCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityYesNoCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+        addSignupFormsPage.goToAutorespondersTab();
+        addSignupFormsPage.publishFromAutoresponders();
+        addSignupFormsPage.openSubscribeWidget();
+
+        new SubscribeWidget().fillSubscribeWidgetAllCustomFields(
+                supporterEmail,
+                "personFName",
+                "personLName",
                 "supporterTextBoxCustomFieldValue",
                 "13",
                 "10/11/2017 01:30 am",
@@ -194,21 +236,82 @@ public class FieldsValidationTest extends SeleneseTestCase {
                 "13",
                 "10/11/2017 01:30 am");
 
-        addSignupFormsPage.verifySubmittedFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
+        addSignupFormsPage.verifySubmittedCustomFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
     }
 
+    /**
+     * <b>Create and submit Signup form with all supporter required fields</b>
+     * <p>
+     * Steps:
+     * <ul>
+     * <li> Login > Open Activities page > Open Signup forms page > Click on Create Signup form
+     * <li> Specify form name and description > Select Blank layout > Drop One-column row element > Drop VE form element
+     * <li> Drop on the layout all available supporter fields and mark them as required
+     * <li> Go to Autoresponders > Publish form > Go to form public URL
+     * <li> Click on Submit button
+     * <li> <font color="green"><b>Verify whether validation messages appears and prompts to fill in required fields</b></font>
+     */
+
     @Parameters({"login","password"})
-    @Test(groups = {"val"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitSignupFormAllRequiredFields(String login, String password){
+    @Test(enabled = true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitSignupFormRequiredEmptySupporterFields(String login, String password){
 
         String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
         String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
 
-        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password).openActivitiesPage().openSubscribeWidgetsPage().openAddSubscribeWidgetPage();
+        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openSubscribeWidgetsPage()
+                .openAddSubscribeWidgetPage();
         addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
         addSignupFormsPage.selectLayoutStep("Blank");
         addSignupFormsPage.dropOneColumnRow();
         addSignupFormsPage.dropVEFormElement();
+        formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
+        addSignupFormsPage.editVEField("Address, line 1").markFieldAsRequired().saveFieldConfiguration();
+        addSignupFormsPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
+        addSignupFormsPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
+        addSignupFormsPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropAllSupporterFieldsOnFormAndMarkAsRequired();
+        addSignupFormsPage.goToAutorespondersTab();
+        addSignupFormsPage.publishFromAutoresponders();
+        addSignupFormsPage.openSubscribeWidget();
+
+        SubscribeWidget signupForm = addSignupFormsPage.openSubscribeWidget();
+        signupForm.clickOnSubmitFormButton().
+                verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
+    }
+
+    /**
+     * <b>Create and submit Signup form with all custom required fields</b>
+     * <p>
+     * Steps:
+     * <ul>
+     * <li> Pre-create custom fields of all types (if not created already). This includes all supporter custom fields and all activity Signup form-specific custom fields
+     * <li> Login > Open Activities page > Open Signup forms page > Click on Create Signup form
+     * <li> Specify form name and description > Select Blank layout > Drop One-column row element > Drop VE form element
+     * <li> Drop on the layout all available pre-created custom fields and mark them as required
+     * <li> Go to Autoresponders > Publish form > Go to form public URL
+     * <li> Click on Submit button
+     * <li> <font color="green"><b>Verify whether validation messages appears and prompts to fill in required fields</b></font>
+     */
+
+    @Parameters({"login","password"})
+    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitSignupFormRequiredEmptyCustomFields(String login, String password){
+
+        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+
+        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openSubscribeWidgetsPage()
+                .openAddSubscribeWidgetPage();
+        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
+        addSignupFormsPage.selectLayoutStep("Blank");
+        addSignupFormsPage.dropOneColumnRow();
+        addSignupFormsPage.dropVEFormElement();
+        formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
@@ -219,21 +322,11 @@ public class FieldsValidationTest extends SeleneseTestCase {
         new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-
-        new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnFormAndMarkAsRequired();
-        addSignupFormsPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
-        addSignupFormsPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
-        addSignupFormsPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
-        addSignupFormsPage.editVEField("Address, line 1").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
-        addSignupFormsPage.openSubscribeWidget();
+        SubscribeWidget signupForm = addSignupFormsPage.openSubscribeWidget();
 
-        SubscribeWidget widget = new SubscribeWidget();
-        widget.clickOnSubmitFormButton();
-        widget.verifyValidationMessageFieldRequireValueDisplayedForAllEmptyFields();
-
+        signupForm.clickOnSubmitFormButton().
+                verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
     }
-
-
 }

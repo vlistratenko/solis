@@ -174,6 +174,7 @@ public class SubscribeWidget extends Browser{
 	}
 
 	public SubscribeWidget clickOnSubmitFormButton(){
+		subscribeButton.scrollIntoView();
 		subscribeButton.click();
 		return this;
 	}
@@ -197,10 +198,34 @@ public class SubscribeWidget extends Browser{
 		if(calendarDoneButton.isDisplayed()) calendarDoneButton.click();
 	}
 
-	public SubscribeWidget fillSubscribeWidgetAllSupporterAndCustomFields(String personEmail, String personFName, String personLName, String personCity, String personZip,
-																		  String state, String addressLine1, String addressLine2, String gender, String homePhone, String personMName, String language, String suffix,
-																		  String title, String workPhone, String cellPhone, String country, String dateOfBirth, String supporterTextBoxCustomFieldValue, String supporterNumberCustomFieldValue,
+	public SubscribeWidget fillSubscribeWidgetAllCustomFields(String personEmail, String personFName, String personLName, String supporterTextBoxCustomFieldValue, String supporterNumberCustomFieldValue,
 																		  String supporterDateTimeCustomFieldValue, String activityTextBoxCustomFieldValue, String activityNumberCustomFieldValue, String activityDateTimeCustomFieldValue) {
+
+		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
+		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
+		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
+		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
+		supporterTextBoxCustomField.type(supporterTextBoxCustomFieldValue); CommonUtils.setProperty("supporterTextBoxCustomFieldValue", supporterTextBoxCustomFieldValue);
+		supporterNumberCustomField.type(supporterNumberCustomFieldValue); CommonUtils.setProperty("supporterNumberCustomFieldValue", supporterNumberCustomFieldValue);
+		supporterDateTimeCustomField.type(supporterDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("supporterDateTimeCustomFieldValue", parseDateTimeValueToMatchHqResponse(supporterDateTimeCustomFieldValue));
+		activityTextBoxCustomField.type(activityTextBoxCustomFieldValue); CommonUtils.setProperty("activityTextBoxCustomFieldValue", activityTextBoxCustomFieldValue);
+		activityNumberCustomField.type(activityNumberCustomFieldValue); CommonUtils.setProperty("activityNumberCustomFieldValue", activityNumberCustomFieldValue);
+		activityDateTimeCustomField.type(activityDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("activityDateTimeCustomFieldValue", activityDateTimeCustomFieldValue);
+		supporterSingleChoiceCustomField.click(); CommonUtils.setProperty("supporterSingleChoiceCustomFieldValue", "value1");
+		activitySingleChoiceCustomField.click(); CommonUtils.setProperty("activitySingleChoiceCustomFieldValue", "value1");
+		supporterYesNoCustomField.click(); CommonUtils.setProperty("supporterYesNoCustomFieldValue", "True");
+		activityYesNoCustomField.click(); CommonUtils.setProperty("activityYesNoCustomFieldValue", "True");
+
+		sleep(3);
+		subscribeButton.scrollIntoView();
+		subscribeButton.click();
+		return this;
+	}
+
+	public SubscribeWidget fillSubscribeWidgetAllSupporterFields(String personEmail, String personFName, String personLName, String personCity, String personZip,
+																 String state, String addressLine1, String addressLine2, String gender, String homePhone,
+																 String personMName, String language, String suffix, String title, String workPhone,
+																 String cellPhone, String country, String dateOfBirth) {
 
 		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
@@ -222,54 +247,54 @@ public class SubscribeWidget extends Browser{
 		personStatesSelectBox.selectByValue(state); CommonUtils.setProperty("state", "UA-63");
 		genderSelectBox.selectByValue(gender); CommonUtils.setProperty("gender", "Male");
 		preferredLanguageSelectBox .selectByValue(language);
-		supporterTextBoxCustomField.type(supporterTextBoxCustomFieldValue); CommonUtils.setProperty("supporterTextBoxCustomFieldValue", supporterTextBoxCustomFieldValue);
-		supporterNumberCustomField.type(supporterNumberCustomFieldValue); CommonUtils.setProperty("supporterNumberCustomFieldValue", supporterNumberCustomFieldValue);
-		supporterDateTimeCustomField.type(supporterDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("supporterDateTimeCustomFieldValue", parseDateTimeValueToMatchHqResponse(supporterDateTimeCustomFieldValue));
-		activityTextBoxCustomField.type(activityTextBoxCustomFieldValue); CommonUtils.setProperty("activityTextBoxCustomFieldValue", activityTextBoxCustomFieldValue);
-		activityNumberCustomField.type(activityNumberCustomFieldValue); CommonUtils.setProperty("activityNumberCustomFieldValue", activityNumberCustomFieldValue);
-		activityDateTimeCustomField.type(activityDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("activityDateTimeCustomFieldValue", activityDateTimeCustomFieldValue);
-		supporterSingleChoiceCustomField.click(); CommonUtils.setProperty("supporterSingleChoiceCustomFieldValue", "value1");
-		activitySingleChoiceCustomField.click(); CommonUtils.setProperty("activitySingleChoiceCustomFieldValue", "value1");
-		supporterYesNoCustomField.click(); CommonUtils.setProperty("supporterYesNoCustomFieldValue", "True");
-		activityYesNoCustomField.click(); CommonUtils.setProperty("activityYesNoCustomFieldValue", "True");
 		keepMeInformedCheckbox.check();
 		confirmationCheckbox.check();
 
 		sleep(3);
+		subscribeButton.scrollIntoView();
 		subscribeButton.click();
 		return this;
 	}
 
-	public boolean isValidationMessageFieldRequiresValueDisplayed(String fieldName){
-				Label fieldLabel = new LabelImpl("Label of " + fieldName + " field", "//label[contains(text(), '" + fieldName + "')]//following-sibling::*[@data-fv-validator='notEmpty']");
-				return fieldLabel.isDisplayed() ? true : false;
-			}
 
-			public void verifyValidationMessageFieldRequireValueDisplayedForAllEmptyFields(){
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityNumberCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterNumberCustomField"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Country"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Home Phone"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Middle Name"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Preferred Language"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Suffix"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Title"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Work Phone"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Email Address"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("First Name"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Last Name"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 1"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("City"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("State"), "'This field requires a value' validation message is not displayed");
-				verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Zip Code"), "'This field requires a value' validation message is not displayed");
-			}
+	public boolean isValidationMessageFieldRequiresValueDisplayed(String fieldName){
+		Label fieldLabel;
+		if(fieldName.toLowerCase().contains("checkbox")) {
+			fieldLabel = new LabelImpl("//*[@type='checkbox']/following-sibling::*[@data-fv-validator='notEmpty']", "Label of Confirmation checkbox" );
+		} else {
+			fieldLabel = new LabelImpl("//label[contains(text(), '" + fieldName + "')]//following-sibling::*[@data-fv-validator='notEmpty']", "Label of " + fieldName + " field" );
+		}
+		return fieldLabel.isDisplayed() ? true : false;
+	}
+
+	public void verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields(){
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Country"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Home Phone"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Middle Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Preferred Language"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Suffix"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Title"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Work Phone"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Email Address"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("First Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Last Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 1"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("City"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("State"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Zip Code"), "'This field requires a value' validation message is not displayed");
+	}
+
+	public void verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields(){
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityNumberCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterNumberCustomField"), "'This field requires a value' validation message is not displayed");
+	}
 
 }

@@ -11,11 +11,11 @@
         <parameter name="password" value="!QAZ2wsx"></parameter>
     <groups>
             <run>
-                <include name="val" />
+                <include name="signupFormFieldsValidation" />
             </run>
         </groups>
         <classes>  
-            <class name="com.salsalabs.ignite.automation.suites.regression.FieldsValidationTest" />
+            <class name="com.salsalabs.ignite.automation.suites.regression.SignupFormFieldsValidationTest" />
         </classes>
     </test>
 </suite>

@@ -1,14 +1,19 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.google.sitebricks.client.Web;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
+import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -24,14 +29,13 @@ public class FormFieldConfigurationModalWindow extends HomePage {
 
     public FormFieldConfigurationModalWindow(){
         if(supporterFieldsNames.isEmpty()) supporterFieldsNames = getAllSupporterFieldsNames();
-
     }
 
     public ArrayList<String> getAllSupporterFieldsNames(){
         ArrayList<String> supporterFieldNames = new ArrayList<>();
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
         fluentWaitForElementPresenceIgnoringExceptions("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]");
-        List<WebElement> elements = driver.findElements(By.xpath("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]"));
+        List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
         for (WebElement element : elements) {
             supporterFieldNames.add(element.getText().trim());
         } closeFieldConfigurationModalWindow();
@@ -46,6 +50,11 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow markFieldAsRequired(){
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if(requiredCheckbox.isDisplayed()){
             if(!requiredCheckbox.isChecked()) requiredCheckbox.check();}
         return this;

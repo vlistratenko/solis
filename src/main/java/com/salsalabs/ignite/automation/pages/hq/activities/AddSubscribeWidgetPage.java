@@ -240,19 +240,19 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage dropVETextElement(){
-		new SignupFormElements().performDrop(SignupFormElements.VE.TEXT);
-		return this;
-	}
-
-	public AddSubscribeWidgetPage dropVEFormFieldElement(){
-		new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-		return this;
-	}
-
 	public FormFieldConfigurationModalWindow editVEField(String fieldName){
 		new SignupFormElements().performEdit(SignupFormElements.VE.FORM_FIELD, fieldName);
 		return new FormFieldConfigurationModalWindow();
+	}
+
+	public AddSubscribeWidgetPage deleteAllEmptyFormFields(){
+		deleteFormField("empty");
+		return this;
+	}
+
+	public AddSubscribeWidgetPage deleteFormField(String fieldName){
+		new SignupFormElements().performDelete(SignupFormElements.VE.FORM_FIELD, fieldName);
+		return this;
 	}
 
     public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
@@ -269,15 +269,9 @@ public class AddSubscribeWidgetPage extends HomePage {
         return this;
     }
 
-	public void verifySubmittedFieldsArePresentInSupporterDetails(String host, String login, String password) {
-				try {
+	public void verifySubmittedSupporterFieldsArePresentInSupporterDetails(String host, String login, String password) {
+		try {
 			Supporter sup = new HttpClient(host).login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
-
-			verifier.verifyEquals(sup.getCustomFieldValue("supporterTextBoxCustomField"), CommonUtils.getProperty("supporterTextBoxCustomFieldValue"));
-			verifier.verifyEquals(sup.getCustomFieldValue("supporterNumberCustomField"), CommonUtils.getProperty("supporterNumberCustomFieldValue"));
-			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
-			verifier.verifyEquals(sup.getCustomFieldValue("supporterDateTimeCustomField"), CommonUtils.getProperty("supporterDateTimeCustomFieldValue"));
-			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
 			verifier.verifyEquals(sup.getFinalEMAIL(), CommonUtils.getProperty("personEmail").toLowerCase());
 			verifier.verifyEquals(sup.getFirstName(), CommonUtils.getProperty("personFName"));
 			verifier.verifyEquals(sup.getLastName(), CommonUtils.getProperty("personLName"));
@@ -294,6 +288,30 @@ public class AddSubscribeWidgetPage extends HomePage {
 			verifier.verifyEquals(sup.getPhoneCell(),CommonUtils.getProperty("cellPhone"));
 			verifier.verifyEquals(sup.getDateOfBirth(),CommonUtils.getProperty("dateOfBirth"));
 			verifier.verifyEquals(sup.getState(),CommonUtils.getProperty("state"));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void verifySubmittedCustomFieldsArePresentInSupporterDetails(String host, String login, String password) {
+				try {
+			Supporter sup = new HttpClient(host).login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
+
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterTextBoxCustomField"), CommonUtils.getProperty("supporterTextBoxCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterNumberCustomField"), CommonUtils.getProperty("supporterNumberCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterDateTimeCustomField"), CommonUtils.getProperty("supporterDateTimeCustomFieldValue"));
+			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

@@ -15,4 +15,9 @@ public class FormField extends VEElements {
         super.edit(fieldName);
     }
 
+    @Override
+    public void deleteFormField(String fieldName){
+        super.deleteFormField(fieldName);
+    }
+
 }
