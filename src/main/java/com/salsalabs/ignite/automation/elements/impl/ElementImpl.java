@@ -116,8 +116,12 @@ public abstract class ElementImpl implements Element {
 	}
 	
 	@Override
-	public boolean waitElement(int seconds) {
+	public boolean waitElement(int seconds){
 		return waitObject(path, seconds * 1000);
+	}
+	
+	public void waitElementWithFail(int seconds) throws Exception{
+		waitObjectAndFail(path, seconds * 1000);
 	}
 
 	@Override

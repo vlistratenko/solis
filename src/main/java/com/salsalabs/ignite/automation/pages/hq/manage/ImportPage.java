@@ -34,4 +34,6 @@ public class ImportPage extends ManagePage{
 		verifier.verifyEquals(status.getText(), importStatus, "Wrong import status");
 		return this;		
 	}
+	
+	
 }

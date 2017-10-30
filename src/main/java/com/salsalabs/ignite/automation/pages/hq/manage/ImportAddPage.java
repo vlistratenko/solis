@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -45,11 +46,12 @@ public class ImportAddPage extends ManagePage{
 	Table mapTable = new TableImpl("//form[@id='importForm']/descendant::table", "Map");
 	
 	private List<CustomField> customFields;
-	private String textBoxMappingValue= RandomStringUtils.randomAlphabetic(5);
-	private String numberMappingValue= 	CommonUtils.getRandomNumericValueFixedLength(5);
-	private String singleChoiceMappingValue= "1choice";
-	private String dateTimePMappingValue =CommonUtils.createTodayDateString();
-	private String boleanOptionValue ="False";
+	public static  String textBoxMappingValue= RandomStringUtils.randomAlphabetic(5);
+	public static  String numberMappingValue= 	CommonUtils.getRandomNumericValueFixedLength(5);
+	public static  String singleChoiceMappingValue= "1choice";
+	public static  String dateTimePMappingValue =CommonUtils.createTodayDateString();
+	public static  String  boleanOptionValue ="False";
+	
 	
 	public ImportAddPage fillFirstStep(String name, String description) {
 		return this.fillFirstStep(name, description, null);
@@ -73,7 +75,7 @@ public class ImportAddPage extends ManagePage{
 			}
 		nextStepButton.click();
 		CommonUtils.setProperty(PropertyName.IMPORT_NAME, name);
-		sleep(2);
+		sleep(2); 
 		return this;
 	}
 	
@@ -125,7 +127,7 @@ public class ImportAddPage extends ManagePage{
 	}
 	
 	public ImportAddPage fillThirdStep() {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i<6  ; i++) {
 			if(waitConditionBecomesTrue(backMapsFields.isDisplayed(), 5)){
 				break;
 				}

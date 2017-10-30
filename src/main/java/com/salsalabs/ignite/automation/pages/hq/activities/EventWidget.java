@@ -40,12 +40,8 @@ public class EventWidget extends DonationWidget {
 		super(clean);
 	}
 
-	public DonationWidget verifyEventSubscrIsSuccesses() {
-		for (int i = 0; i < 10; i++) {
-			if (waitConditionBecomesTrue(eventSubsrIsSccessMessage.isDisplayed(), 10)) {
-				break;
-			}
-		}
+	public DonationWidget verifyEventSubscrIsSuccesses() throws Exception {
+		eventSubsrIsSccessMessage.waitElementWithFail(10);
 		verifier.verifyElementIsDisplayed(eventSubsrIsSccessMessage);
 		return this;
 	}
@@ -158,7 +154,7 @@ public class EventWidget extends DonationWidget {
 	}
 	
 	public EventWidget clickDonationButton() {
-		submitButton.click();
+		submitButton.clickJS();
 		return this;
 	}
 	

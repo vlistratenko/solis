@@ -65,10 +65,11 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	/**
 	 * This test requires p2p form with "Display my donation anonymously" option
 	 * formURL = p2p form URL
+	 * @throws Exception 
 	 */
 	@Parameters({ "formURL"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.Anonymous" }, description = "")
-	public void varifyAnonimusOptionOnExistedForm(String formURL) {
+	public void varifyAnonimusOptionOnExistedForm(String formURL) throws Exception {
 
 		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
 		//CommonUtils.setParam("fundraiserName", "Tester.Anonimus20171006144447");

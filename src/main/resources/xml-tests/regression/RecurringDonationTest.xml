@@ -9,9 +9,9 @@
 		<parameter name="USED_BROWSER" value="CHROME"></parameter>
 		<parameter name="login" value="2712.3e41c646@mailosaur.in"></parameter>
 		<parameter name="Passward" value="!QAZ2wsx"></parameter>
-		<parameter name="fundraisingFormYearlyRecurring" value="https://testvco2712.test.igniteaction.net/recurringyearly/index.html"></parameter>
+		<parameter name="fundraisingFormYearlyRecurring" value="https://testvco2712.test.igniteaction.net/recurringyearlycopy1/index.html"></parameter>
 		<parameter name="fundraisingFormMonthlyRecurring" value="https://testvco2712.test.igniteaction.net/monthlyrecurring/index.html"></parameter>
-		<parameter name="widgetNameYearly" value="RecurringYearly"></parameter>
+		<parameter name="widgetNameYearly" value="RecurringYearlyCardConnectForm"></parameter>
 			<parameter name="widgetNameMonthly" value="MonthLyRecurring"></parameter>
 		<groups>
 			<run>
