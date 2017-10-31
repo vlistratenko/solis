@@ -23,7 +23,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
 
     Button saveButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[2]","Save Content button for field configuration");
     Button cancelButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[1]","Cancel button of fields configuration modal window");
-    CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox']","Checkbox to mark fields as required");
+    CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
 
     private static List<String> supporterFieldsNames = new ArrayList<>();
 

@@ -15,7 +15,7 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.json.JSONException;
-import org.testng.Assert;
+import org.openqa.selenium.TimeoutException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -46,10 +46,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
 	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
 	protected Button saveButtonInAutoresponders = new ButtonImpl("//*[@id='btnSave-autoresponders']", "Save button in Autoresponders page");
-	
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
 	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
 	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
+	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -98,6 +98,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 
         fluentWaitForElementPresenceIgnoringExceptions(publishFromAutorespondersTab.getPath());
         publishFromAutorespondersTab.click();
+        try {
+			fluentWaitForElementPresenceIgnoringExceptions(closeFeedbackWindowButton.getPath());
+		} catch (TimeoutException e) {}
+		closeFeedbackWindowButton.clickJS();
         return this;
     }
 

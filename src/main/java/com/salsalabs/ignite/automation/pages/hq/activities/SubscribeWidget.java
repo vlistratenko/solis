@@ -228,6 +228,7 @@ public class SubscribeWidget extends Browser{
 																 String cellPhone, String country, String dateOfBirth) {
 
 		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
+		confirmationCheckbox.check();
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
 		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
@@ -248,7 +249,6 @@ public class SubscribeWidget extends Browser{
 		genderSelectBox.selectByValue(gender); CommonUtils.setProperty("gender", "Male");
 		preferredLanguageSelectBox .selectByValue(language);
 		keepMeInformedCheckbox.check();
-		confirmationCheckbox.check();
 
 		sleep(3);
 		subscribeButton.scrollIntoView();

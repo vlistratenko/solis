@@ -25,7 +25,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
 
     @Parameters({"login","password"})
-    //@BeforeSuite(alwaysRun = true)
+    @BeforeSuite(alwaysRun = true)
     public void generateCustomFieldsViaAPI(ITestContext context, String login, String password){
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
@@ -136,7 +136,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormSupporterNonRequiredFields(String login, String password){
 
       String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -157,7 +157,8 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        new SubscribeWidget().fillSubscribeWidgetAllSupporterFields(
+        SubscribeWidget signupForm1 = new SubscribeWidget();
+        signupForm1.fillSubscribeWidgetAllSupporterFields(
                 supporterEmail,
                 "personFName",
                 "personLName",
@@ -195,7 +196,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormCustomNonRequiredFields(String login, String password){
 
         String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -225,7 +226,8 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        new SubscribeWidget().fillSubscribeWidgetAllCustomFields(
+        SubscribeWidget signupForm2 = new SubscribeWidget();
+        signupForm2.fillSubscribeWidgetAllCustomFields(
                 supporterEmail,
                 "personFName",
                 "personLName",
@@ -253,7 +255,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormRequiredEmptySupporterFields(String login, String password){
 
         String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -277,8 +279,8 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
 
-        SubscribeWidget signupForm = addSignupFormsPage.openSubscribeWidget();
-        signupForm.clickOnSubmitFormButton().
+        SubscribeWidget signupForm3 = addSignupFormsPage.openSubscribeWidget();
+        signupForm3.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
     }
 
@@ -297,7 +299,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = false, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormRequiredEmptyCustomFields(String login, String password){
 
         String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -324,9 +326,9 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
-        SubscribeWidget signupForm = addSignupFormsPage.openSubscribeWidget();
 
-        signupForm.clickOnSubmitFormButton().
+        SubscribeWidget signupForm4 = addSignupFormsPage.openSubscribeWidget();
+        signupForm4.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
     }
 }
