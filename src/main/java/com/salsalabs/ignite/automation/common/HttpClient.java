@@ -164,6 +164,26 @@ public class HttpClient {
 		}
 		return data;
 	}
+	
+	public int getNumberOfSupportersInOrg() throws JSONException {
+		Integer amountOfSupporters = 0;
+		try {
+			sendGETRequest("https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+	        
+
+	        for (String temp : JSONResponse) {
+	            	 try {
+	            		 amountOfSupporters = (Integer) jsonParser(temp, "payload.count");	            		 
+	         			
+					} catch (JSONException e) {
+						logger.error("", e);
+					}
+	         }
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return amountOfSupporters;
+	}
 
 	public Map<String, String> getAllSupporterCustomFields(String supporterEmail){
 		Map<String, String> supporterCustomFields = new HashMap<>();
