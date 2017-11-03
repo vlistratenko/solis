@@ -5,6 +5,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.manage.ImportPage;
 import com.salsalabs.ignite.automation.pages.hq.segments.SegmentsPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupporterQBPage;
+import com.salsalabs.ignite.automation.pages.hq.supporters.SupporterQueryBuilderPage;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 
 public class AudiencePage extends HomePage{
@@ -38,6 +39,11 @@ public class AudiencePage extends HomePage{
 	public SupporterQBPage openSupporterQBPage() {
 		qbbutton.click();
 		return new SupporterQBPage();
+	}
+	
+	public SupporterQueryBuilderPage openSupporterQueryBuilderPage() {
+		qbbutton.click();
+		return new SupporterQueryBuilderPage();
 	}
 	
 }
