@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" [ <!ENTITY lt "&#60;"> <!ENTITY gt "&#62;"> <!ENTITY quot "&#34;"> <!ENTITY amp "&#38;">]>
+<suite name="Supporter Qb Test" parallel="false"
+	thread-count="1">
+
+	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
+	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<test verbose="2" name="Verify Supporter query builder rules"
+		annotations="JDK">
+		<parameter name="USED_BROWSER" value="CHROME"></parameter>
+		<parameter name="login" value="qb_auto.74580786@mailosaur.in"></parameter>
+		<parameter name="Passward" value="Gnusmas_1"></parameter>
+		<groups>
+			<run>
+				<include name="SupporterFields" />
+			</run>
+		</groups>
+		<classes>
+			<class
+				name="com.salsalabs.ignite.automation.suites.regression.SupporterQueryBuilderTest" />
+		</classes>
+	</test>
+</suite>
