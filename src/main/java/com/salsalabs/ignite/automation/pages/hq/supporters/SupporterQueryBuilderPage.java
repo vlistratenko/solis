@@ -117,12 +117,15 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 	}
 
 	public SupporterQueryBuilderPage checkShowResultButtonIsDisplayed() {
-		if(!showResultsButton.isDisplayed()){
+		if(showResultsButton.isNotExists()){
 			sleep(2);
 		}
-		verifier.verifyElementIsDisplayed(true, showResultsButton);
-		return this;
+	if(showResultsButton.isNotExists()){
+		logger.info("Tests failed because  Show Results button does not displays despite the fact that all rules are selected");
+		 throw new AssertionError("Show Result buttons does not display");
 	}
+	return this;
+	} 
 	
 	public SupporterQueryBuilderPage clickShowTheResults() {
 		showResultsButton.click();
