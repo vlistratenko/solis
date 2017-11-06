@@ -65,4 +65,6 @@ public interface Element {
 
 	java.util.List<WebElement> findElementsByXpath(String xpath);
 
+	void fluentWaitForElementPresenceIgnoringExceptions();
+
 }

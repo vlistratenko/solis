@@ -833,7 +833,27 @@ public abstract class ElementImpl implements Element {
 
 	}
 
-	public void fluentWaitForElementPresenceIgnoringExceptions(final String locator){
+	public void fluentWaitForElementPresenceIgnoringExceptions(int waitingTime){
+		ArrayList<Class <? extends Throwable>> exceptionsList = new ArrayList<>();
+		exceptionsList.add(NoSuchElementException.class);
+		exceptionsList.add(ElementNotVisibleException.class);
+		exceptionsList.add(StaleElementReferenceException.class);
+		exceptionsList.add(InvalidElementStateException.class);
+		long pollingInterval = 500;
+		Wait<WebDriver> wait = new FluentWait<>(driver)
+				.withTimeout(waitingTime, TimeUnit.SECONDS)
+				.pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
+				.ignoreAll(exceptionsList)
+				.withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
+						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
+
+		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
+				"is present and clickable");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
+	}
+
+	public void fluentWaitForElementPresenceIgnoringExceptions(){
 		ArrayList<Class <? extends Throwable>> exceptionsList = new ArrayList<>();
 		exceptionsList.add(NoSuchElementException.class);
 		exceptionsList.add(ElementNotVisibleException.class);
@@ -845,13 +865,13 @@ public abstract class ElementImpl implements Element {
 				.withTimeout(waitingTime, TimeUnit.SECONDS)
 				.pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
 				.ignoreAll(exceptionsList)
-				.withMessage("Fluent wait of " + waitingTime + " seconds with " + pollingInterval +
-						" milliseconds polling interval was unable to locate element with locator " + locator);
+				.withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
+						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
 
-		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until element" +
+		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
 				"is present and clickable");
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
 
 
