@@ -34,7 +34,8 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     public ArrayList<String> getAllSupporterFieldsNames(){
         ArrayList<String> supporterFieldNames = new ArrayList<>();
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-        fluentWaitForElementPresenceIgnoringExceptions("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]");
+        Button addSupporterButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Add supporter button");
+        addSupporterButton.fluentWaitForElementPresenceIgnoringExceptions();
         List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
         for (WebElement element : elements) {
             supporterFieldNames.add(element.getText().trim());

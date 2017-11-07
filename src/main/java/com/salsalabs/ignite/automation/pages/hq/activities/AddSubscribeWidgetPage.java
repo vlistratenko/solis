@@ -95,24 +95,23 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage publishFromAutoresponders() {
-
-        fluentWaitForElementPresenceIgnoringExceptions(publishFromAutorespondersTab.getPath());
+		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions();
         publishFromAutorespondersTab.click();
         try {
-			fluentWaitForElementPresenceIgnoringExceptions(closeFeedbackWindowButton.getPath());
+        	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
 		} catch (TimeoutException e) {}
 		closeFeedbackWindowButton.clickJS();
         return this;
     }
 
 	public AddSubscribeWidgetPage clickSaveInAutorespondersTab() {
-		fluentWaitForElementPresenceIgnoringExceptions(saveButtonInAutoresponders.getPath());
+		saveButtonInAutoresponders.fluentWaitForElementPresenceIgnoringExceptions();
 		saveButtonInAutoresponders.click();
 		return this;
 	}
 
     public AddSubscribeWidgetPage goToAutorespondersTab() {
-        fluentWaitForElementPresenceIgnoringExceptions(toAutoresponders.getPath());
+		toAutoresponders.fluentWaitForElementPresenceIgnoringExceptions();
         toAutoresponders.click();
         return this;
     }
@@ -226,9 +225,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
 		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
-		fluentWaitForElementPresenceIgnoringExceptions(lay.getPath());
+		lay.fluentWaitForElementPresenceIgnoringExceptions();
 		lay.click();
-		fluentWaitForElementPresenceIgnoringExceptions(composeButton.getPath());
+		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
 		sleep(10);
 	    return this;

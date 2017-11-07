@@ -67,4 +67,6 @@ public interface Element {
 
 	void fluentWaitForElementPresenceIgnoringExceptions();
 
+	void fluentWaitForElementPresenceIgnoringExceptions(int waitingTime);
+
 }

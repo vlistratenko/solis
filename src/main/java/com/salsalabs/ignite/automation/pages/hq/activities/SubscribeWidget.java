@@ -201,7 +201,7 @@ public class SubscribeWidget extends Browser{
 	public SubscribeWidget fillSubscribeWidgetAllCustomFields(String personEmail, String personFName, String personLName, String supporterTextBoxCustomFieldValue, String supporterNumberCustomFieldValue,
 																		  String supporterDateTimeCustomFieldValue, String activityTextBoxCustomFieldValue, String activityNumberCustomFieldValue, String activityDateTimeCustomFieldValue) {
 
-		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
+		personEmailField.fluentWaitForElementPresenceIgnoringExceptions();
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
 		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
@@ -227,7 +227,7 @@ public class SubscribeWidget extends Browser{
 																 String personMName, String language, String suffix, String title, String workPhone,
 																 String cellPhone, String country, String dateOfBirth) {
 
-		fluentWaitForElementPresenceIgnoringExceptions(personEmailField.getPath());
+		personEmailField.fluentWaitForElementPresenceIgnoringExceptions();
 		confirmationCheckbox.check();
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
