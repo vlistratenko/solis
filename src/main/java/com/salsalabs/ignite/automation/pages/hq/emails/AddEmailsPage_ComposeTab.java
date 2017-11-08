@@ -3,15 +3,10 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.ContentEditTextBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.TableImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
+import org.openqa.selenium.JavascriptExecutor;
 
 
 public class AddEmailsPage_ComposeTab extends AddEmailsPage{
@@ -23,6 +18,8 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button addMergeFieldButtonMenu = new ButtonImpl("//a[@title='Insert a merge field']", "Insert a merge field");
 	Button PublishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
 	TextBox emailFromField = new TextBoxImpl("//input[@name='fromAddress']", "Email from");
+	TextBox fromNameField = new TextBoxImpl("//input[@name='fromName']", "From name");
+	TextBox replyToEmailField = new TextBoxImpl("//input[@name='replyAddress']", "Reply address");
 	Button addSplitButton = new ButtonImpl("//a[.='+']", "Add split");
 	Button SplitTab = new ButtonImpl("//form[@id='emailblastform']/descendant::a[contains(text(),'Split')]", "Split tab");
 	Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
@@ -124,5 +121,18 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			addSplitButton.click();
 			sleep(10);
 		}
+	}
+
+	public void checkEmailDefaults(String fromName, String fromEmailAddress, String replyEmailAddress) {
+		sleep(2);
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#emailblastform > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(7) > div > div:nth-child(1) > div:nth-child(2) > hq-input-validation > div > div > div > span:nth-child(1) > input').value"),
+				fromEmailAddress);
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#emailblastform > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(7) > div > div:nth-child(1) > div:nth-child(1) > validation-message > div > span > input').value"),
+				fromName);
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#emailblastform > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(7) > div > div:nth-child(2) > div > validation-message > div > span > input').value"),
+				replyEmailAddress);
 	}
 }

@@ -73,6 +73,10 @@ public class ManagePage  extends HomePage{
 		return new SocialMediaAccountsPage();
 	}
 
+	public EmailDefaultsPage switchToEmailDefaultsPagePage() {
+		switchToDropDown.selectByLabelJS("Email Defaults");
+		return new EmailDefaultsPage();
+	}
 
 
 }
