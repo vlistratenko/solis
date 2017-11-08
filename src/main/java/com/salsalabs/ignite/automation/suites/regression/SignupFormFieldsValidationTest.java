@@ -61,7 +61,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
                 setYesNoFieldValueLabelsApi("truefalse"));
 
         CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("activityDateTimeCustomField", "FieldDescription").
+                getCustomFieldApiGenerator("signupActivityDateTimeCustomField", "FieldDescription").
                 setControlType("DATETIME").
                 setDateFieldMinDateApi("09/15/2017").
                 setDateFieldMaxDateApi("09/15/2018").
@@ -69,23 +69,23 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
                 setDateFieldMaxTimeApi("11:30pm"));
 
         CustomFieldsPage.CustomField activityNumberCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("activityNumberCustomField", "FieldDescription").
+                getCustomFieldApiGenerator("signupActivityNumberCustomField", "FieldDescription").
                 setControlType("INPUT"));
 
         CustomFieldsPage.CustomField activitySingleChoiceCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("activitySingleChoiceCustomField", "FieldDescription").
+                getCustomFieldApiGenerator("signupActivitySingleChoiceCustomField", "FieldDescription").
                 setControlType("RADIO").
                 setSingleChoiceFieldValueLabelsApi("value1", "value2").
                 setDefaultValue("value1"));
 
         CustomFieldsPage.CustomField activityYesNoCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("activityYesNoCustomField", "FieldDescription").
+                getCustomFieldApiGenerator("signupActivityYesNoCustomField", "FieldDescription").
                 setYesNoFieldControlOrientationApi("VERTICAL").
                 setDefaultValue("true").
                 setYesNoFieldValueLabelsApi("truefalse"));
 
         CustomFieldsPage.CustomField activityTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
-                getCustomFieldApiGenerator("activityTextBoxCustomField", "FieldDescription").
+                getCustomFieldApiGenerator("signupActivityTextBoxCustomField", "FieldDescription").
                 setControlType("INPUT").
                 setGhostText("activityTextBoxCustomField").
                 setTextFieldMinLengthValue(3).
@@ -136,7 +136,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled = true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormSupporterNonRequiredFields(String login, String password){
 
       String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
@@ -212,14 +212,14 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.dropOneColumnRow();
         addSignupFormsPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityTextBoxCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityNumberCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activitySingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivitySingleChoiceCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityYesNoCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityDateTimeCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
         addSignupFormsPage.goToAutorespondersTab();
@@ -314,14 +314,14 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.dropOneColumnRow();
         addSignupFormsPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activitySingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("activityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivitySingleChoiceCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityYesNoCustomField").saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.goToAutorespondersTab();

@@ -46,13 +46,13 @@ public class SubscribeWidget extends Browser{
 	TextBox supporterTextBoxCustomField = new TextBoxImpl("//*[contains(text(),'supporterTextBox')]/following-sibling::input", "Supporter Text box custom field");
 	TextBox supporterNumberCustomField = new TextBoxImpl("//*[contains(text(),'supporterNumber')]/following-sibling::input", "Supporter Number custom field");
 	TextBox supporterDateTimeCustomField = new TextBoxImpl("//*[contains(text(),'supporterDateTime')]/following-sibling::input", "Supporter Date Time custom field");
-	TextBox activityTextBoxCustomField = new TextBoxImpl("//*[contains(text(),'activityTextBox')]/following-sibling::input", "Activity Text box custom field");
-	TextBox activityNumberCustomField = new TextBoxImpl("//*[contains(text(),'activityNumber')]/following-sibling::input", "Activity Number custom field");
-	TextBox activityDateTimeCustomField = new TextBoxImpl("//*[contains(text(),'activityDateTime')]/following-sibling::input", "Activity Date Time custom field");
+	TextBox activityTextBoxCustomField = new TextBoxImpl("//*[contains(text(),'ActivityTextBox')]/following-sibling::input", "Activity Text box custom field");
+	TextBox activityNumberCustomField = new TextBoxImpl("//*[contains(text(),'ActivityNumber')]/following-sibling::input", "Activity Number custom field");
+	TextBox activityDateTimeCustomField = new TextBoxImpl("//*[contains(text(),'ActivityDateTime')]/following-sibling::input", "Activity Date Time custom field");
 	Button supporterSingleChoiceCustomField = new ButtonImpl("//*[contains(text(),'supporterSingleChoice')]/following-sibling::*//label[1]","Supporter single choice custom field value");
-	Button activitySingleChoiceCustomField = new ButtonImpl("//*[contains(text(),'activitySingleChoice')]/following-sibling::*//label[1]","Activity single choice custom field value");
+	Button activitySingleChoiceCustomField = new ButtonImpl("//*[contains(text(),'ActivitySingleChoice')]/following-sibling::*//label[1]","Activity single choice custom field value");
 	Button supporterYesNoCustomField = new ButtonImpl("//*[contains(text(),'supporterYesNo')]/following-sibling::*//label[1]","Supporter Yes/No custom field value");
-	Button activityYesNoCustomField = new ButtonImpl("//*[contains(text(),'activityYesNo')]/following-sibling::*//label[1]","Activity Yes/No custom field value");
+	Button activityYesNoCustomField = new ButtonImpl("//*[contains(text(),'ActivityYesNo')]/following-sibling::*//label[1]","Activity Yes/No custom field value");
 	Button calendarDoneButton = new ButtonImpl("//*[@id='ui-datepicker-div']//button[.='Done']","Calendar Done button");
 
 	CheckBox fundraisingCheckBox = new CheckBoxImpl("//div[contains(text(), 'Fundraising')]/input", "Fundraising");
@@ -289,10 +289,10 @@ public class SubscribeWidget extends Browser{
 	}
 
 	public void verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields(){
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityNumberCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("ActivityTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("ActivityNumberCustomField"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("activityDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("ActivityDateTimeCustomField"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterNumberCustomField"), "'This field requires a value' validation message is not displayed");
 	}

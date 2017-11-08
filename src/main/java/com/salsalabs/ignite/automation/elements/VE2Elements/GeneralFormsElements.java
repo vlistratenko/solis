@@ -5,14 +5,8 @@ public class GeneralFormsElements<T> {
     VEElements element = null;
     
     public enum veRows {
-        ONECOLUMN,
-        TWOCOLUMN,
-        THREECOLUMN,
-        FOURCOLUMN,
-        LSIDEBAR,
-        RSIDEBAR,
-        HEADER,
-        FOOTER;}
+        ONECOLUMN
+    }
 
     GeneralFormsElements(){}
 

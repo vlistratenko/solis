@@ -869,7 +869,7 @@ public abstract class ElementImpl implements Element {
 						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
 
 		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
-				"is present and clickable");
+				" is present and clickable");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
