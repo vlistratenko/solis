@@ -20,5 +20,6 @@
 		<suite-file path="src/main/resources/xml-tests/regression/SocailMediaPagesTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/p2pFormFieldsTest.xml" />	
 		<suite-file path="src/main/resources/xml-tests/regression/ImportSupportersTest.xml" />		
+		<suite-file path="src/main/resources/xml-tests/regression/EmailDefaultsTest.xml" />
 	</suite-files>
 </suite>
