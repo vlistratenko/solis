@@ -57,14 +57,12 @@ public class VEElements extends ElementImpl {
         WebElement target;
         try {
             target = findElementByXpath("(//div[@class='render-container-wrapper'])[2]");
-            new ButtonImpl("(//div[@class='render-container-wrapper'])[2]", "TEST").scrollIntoView();
+            new ButtonImpl("(//div[@class='render-container-wrapper'])[2]", "Draggable area").scrollIntoView();
             action.clickAndHold(source).moveToElement(target).release().perform();
-             System.out.println("TRY block");
         } catch (StaleElementReferenceException | ElementNotFoundException e) {
-            new ButtonImpl("(//div[@class='content-render-wrapper'])[2]", "TEST").scrollIntoView();
+            new ButtonImpl("(//div[@class='content-render-wrapper'])[2]", "Draggable area").scrollIntoView();
             target = findElementByXpath("(//div[@class='content-render-wrapper'])[2]");
             action.clickAndHold(source).moveToElement(target).release().perform();
-            System.out.println("CATCH block");
         }
         getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
     }
@@ -72,7 +70,7 @@ public class VEElements extends ElementImpl {
     //Use for Rows
     public void dragAndDropOnEmptyLayout() {
         Actions action = new Actions(getDriver());
-       Button elementsVe = new ButtonImpl("//button[contains(@title,  'Sectional Elements')]", "Rows Tab");
+        Button elementsVe = new ButtonImpl("//button[contains(@title,  'Sectional Elements')]", "Rows Tab");
         elementsVe.scrollIntoView();
         elementsVe.click();
         getLogger().info("Rows menu was clicked");
