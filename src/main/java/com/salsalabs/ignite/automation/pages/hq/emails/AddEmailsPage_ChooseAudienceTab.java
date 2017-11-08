@@ -4,7 +4,6 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
@@ -22,7 +21,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 	Button ComposeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
 	TextBox addSupportersField = new TextBoxImpl("//p[contains(text(), 'Want to add')]/following-sibling::div/descendant::input", "Manually add supporters");
 	DropDownImpl addSegmentField = new DropDownImpl("//p[contains(text(), 'Find groups and add them here!')]/following-sibling::div/descendant::a", "Add segment");
-	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[@ng-repeat='item in searchResults'])[last()]", "Supporters item in the search result", false);
+	Button suppirtersItemInTheSearchButton = new ButtonImpl("(//tr[@class='result fade-out'])[last()]", "Supporters item in the search result", false);
 	Button calculateAudience = new ButtonImpl("//span[contains(text(),'Calculate')]", "Calculate Audience Reach");
 	Label calculatedLabel = new LabelImpl("//span[@ng-show='blast.reachTotal>=0']", "Calculated Audience");
 	
@@ -49,6 +48,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		
 		int delta = 0, calculated = 0, num = amount;
 		if (calculateAudience.isVisible()) {
+			calculateAudience.scrollIntoView();
 			calculateAudience.click();
 			sleep(2);
 		}
@@ -63,7 +63,8 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 				suppirtersItemInTheSearchButton.click();
 				sleep(1);
 			}
-			calculateAudience.clickJS();
+			calculateAudience.scrollIntoView();
+            calculateAudience.clickJS();
 			sleep(2);
 			calculated = Integer.parseInt(calculatedLabel.getText().replace(" supporter(s)", "")) - delta;
 			num = amount - calculated;
@@ -91,7 +92,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 		segmentItem.click();
 		calculateAudience.waitElement(10);
 		if (calculateAudience.isVisible()) {
-			calculateAudience.clickJS();
+            calculateAudience.clickJS();
 			sleep(2);
 		}
 		
