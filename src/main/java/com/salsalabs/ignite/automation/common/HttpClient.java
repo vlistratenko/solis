@@ -53,9 +53,9 @@ public class HttpClient {
     CloseableHttpResponse response = null;
     ArrayList<String> JSONResponse = new ArrayList<String>();
 	
-	public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+	/*public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
 		//getConnection();
-	}
+	}*/
  
 	
 	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {

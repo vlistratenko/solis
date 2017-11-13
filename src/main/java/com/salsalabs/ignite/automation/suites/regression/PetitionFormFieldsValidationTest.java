@@ -9,7 +9,7 @@ import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONException;
 import org.testng.ITestContext;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -25,7 +25,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
 
     @Parameters({"login","password"})
-    @BeforeSuite(alwaysRun = true)
+    @BeforeGroups(groups = {"petitionFormFieldsValidation"})
     public void generateCustomFieldsViaAPI(ITestContext context, String login, String password){
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
@@ -94,7 +94,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
         try {
             try {
-                HttpClient httpClient = new HttpClient().login(login, password);
+                HttpClient httpClient = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password);
                 httpClient.createCustomField(supporterTextBoxCustomFieldConfig.createSupporterCustomFieldViaApiJsonObject(CustomFieldsPage.CustomFieldType.TextBox));
                 httpClient.createCustomField(supporterNumberCustomFieldConfig.createSupporterCustomFieldViaApiJsonObject(CustomFieldsPage.CustomFieldType.Number));
                 httpClient.createCustomField(supporterYesNoCustomFieldConfig.createSupporterCustomFieldViaApiJsonObject(CustomFieldsPage.CustomFieldType.YesNo));

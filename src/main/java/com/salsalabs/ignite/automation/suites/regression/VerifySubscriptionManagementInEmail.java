@@ -27,7 +27,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
         CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
         CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
         CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
-        new HttpClient().login(login, password).createSupporter(new Supporter().getSupporterJSON(emailAddress));
+        new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password).createSupporter(new Supporter().getSupporterJSON(emailAddress));
         LoginPage loginPage = new LoginPage();
         loginPage.
                 doSuccessLogin(login, password).

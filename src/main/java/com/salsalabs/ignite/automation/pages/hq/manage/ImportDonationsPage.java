@@ -137,7 +137,7 @@ public class ImportDonationsPage extends HomePage {
 
 		supporter.setFinalEMAIL(CommonUtils.getUnicName() + ".74580786@mailosaur.in");
 		try {
-			new HttpClient().login(login, passward)
+			new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, passward)
 					.createSupporter(supporter.getSupporterJSONWithExternalId(supporter.getFinalEMAIL(), externalId));
 		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | URISyntaxException
 				| IOException | JSONException e) {
