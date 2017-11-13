@@ -72,7 +72,7 @@ public class SeleneseTestCase {
 		if (USED_ENVIRONMENT.getServer().equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		} else {
-			startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
+			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());//startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
 		}
 	}
 	
