@@ -20,7 +20,6 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 	boolean updateTC = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC, "false"));
 	String planName = CommonUtils.getProperty(PropertyName.PLAN_NAME, "false");
 	String buildName = CommonUtils.getProperty(PropertyName.BUILD_VERSION, "false");
-	GoogleDriveClient gd = new GoogleDriveClient();
 	
 	// Run when class ends
 	@Override
@@ -47,6 +46,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			steps = steps + " \n   " + (i + 1) + ". " + bug.get(i);
 		}
 		if (updateTC && result.getMethod().getDescription() != null) {
+			GoogleDriveClient gd = new GoogleDriveClient();
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
 			//Reporter.log("Execution failed. " + ids[2]);
 			try {
@@ -77,6 +77,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 		if (updateTC && result.getMethod().getDescription() != null) {
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
 			try {
+				GoogleDriveClient gd = new GoogleDriveClient();
 				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.SKIPPED, gd.getSheetIdByTitle(ids[0]), null);
 
 			} catch (NumberFormatException e) {
@@ -107,6 +108,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			
 			try {
 				//updateTestLinkTC(ExecutionStatus.PASSED, ids[0], ids[1], null, ids[2].replace(" NOT", ""));
+				GoogleDriveClient gd = new GoogleDriveClient();
 				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.PASS, gd.getSheetIdByTitle(ids[0]), null);
 
 				
