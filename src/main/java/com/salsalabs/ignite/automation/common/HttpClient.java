@@ -37,6 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
+
 
 
 public class HttpClient {
@@ -352,7 +354,8 @@ public class HttpClient {
 
 	public HttpClient createCustomField(JSONObject customField){
 		try {
-			sendPOSTRequest("https://" + host + "/api/customField", customField.toString());
+			CloseableHttpResponse resp = sendPOSTRequest("https://" + host + "/api/customField", customField.toString());
+            logger.info("Response status code is " + resp.getStatusLine().getStatusCode());
 		} catch (URISyntaxException | IOException e) {
 			logger.error("", e);
 		}
