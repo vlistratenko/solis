@@ -5,11 +5,13 @@ import com.google.sitebricks.client.Web;
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
@@ -21,8 +23,8 @@ import java.util.List;
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
-    Button saveButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[2]","Save Content button for field configuration");
-    Button cancelButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[1]","Cancel button of fields configuration modal window");
+    Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
+    Button cancelButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[1]","Cancel button of fields configuration modal window");
     CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
 
     private static List<String> supporterFieldsNames = new ArrayList<>();
@@ -34,7 +36,8 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     public ArrayList<String> getAllSupporterFieldsNames(){
         ArrayList<String> supporterFieldNames = new ArrayList<>();
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-        fluentWaitForElementPresenceIgnoringExceptions("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]");
+        Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+        supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
         List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
         for (WebElement element : elements) {
             supporterFieldNames.add(element.getText().trim());

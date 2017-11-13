@@ -40,7 +40,7 @@ public class SocialMediaPagesTest extends SeleneseTestCase {
 		openPetitionsPage().
 		openAddPetitionPage().
 		fillFieldsWidgetStepOne(widgetName, widgetDescription).
-		selectLayoutStep("Basic");
+		selectLayoutStep("Hero");
 		new SocialMediaPages().
 		dragFollowElementIntoTheVisualEditor().
 		verifySocialPagesInsideFollowelementAreDisabled().

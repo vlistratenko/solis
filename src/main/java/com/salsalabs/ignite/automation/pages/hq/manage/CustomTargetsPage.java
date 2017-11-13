@@ -233,7 +233,7 @@ public class CustomTargetsPage extends ManagePage {
             String customTargetEmailAddress) {
         Button ct = new ButtonImpl("//span[contains(text(), '" + customTargetEmailAddress + "')]/..",
                 "Custom Target email address value");
-        fluentWaitForElementPresenceIgnoringExceptions(ct.getPath());
+        ct.fluentWaitForElementPresenceIgnoringExceptions();
         ct.onClick();
         try {
             Thread.sleep(2000);

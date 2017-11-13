@@ -91,6 +91,7 @@ public class HomePage extends Browser{
 	
 	public ActivitiesPage openActivitiesPage() {
 		sleep(4);
+		activitiesTab.scrollIntoView();
 		activitiesTab.click();
 		return new ActivitiesPage();
 		

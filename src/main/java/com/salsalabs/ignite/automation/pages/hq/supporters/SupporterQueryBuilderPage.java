@@ -35,11 +35,10 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 		if (deleteRuleButton.isDisplayed()) {
 			deleteRuleButton.click();
 		}
-		//sleep(2);
 		DropDown firstRule = new DropDownImpl("//ul[@class='dropdown-list']/li",
 				"//*[contains(text(),'Please select one')]", "First Rule DropdownList");
 		if (firstRule.isNotExists()) {
-			fluentWaitForElementPresenceIgnoringExceptions("//*[contains(text(),'Please select one')]");
+			firstRule.fluentWaitForElementPresenceIgnoringExceptions();
 		}
 		firstRule.selectByLabel(firstLevelRule);
 		return this;
@@ -117,16 +116,19 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 	}
 
 	public SupporterQueryBuilderPage checkShowResultButtonIsDisplayed() {
-		if(!showResultsButton.isDisplayed()){
+		if(showResultsButton.isNotExists()){
 			sleep(2);
 		}
-		verifier.verifyElementIsDisplayed(true, showResultsButton);
-		return this;
+	if(showResultsButton.isNotExists()){
+		logger.info("Tests failed because  Show Results button does not displays despite the fact that all rules are selected");
+		 throw new AssertionError("Show Result buttons does not display");
 	}
+	return this;
+	} 
 	
 	public SupporterQueryBuilderPage clickShowTheResults() {
 		showResultsButton.click();
-		fluentWaitForElementPresenceIgnoringExceptions("//button[@class='button primary']");
+		showResultsButton.fluentWaitForElementPresenceIgnoringExceptions();
 		return this;
 	}
 	
