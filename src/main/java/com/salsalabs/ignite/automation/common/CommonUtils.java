@@ -505,5 +505,18 @@ public class CommonUtils {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public static void getListOfFilesInFolder() {
+		File folder = new File("d:/workspace/IgniteTestAutomation/src/main/resources/xml-tests/regression/");
+		File[] listOfFiles = folder.listFiles();
+
+	    for (int i = 0; i < listOfFiles.length; i++) {
+	      if (listOfFiles[i].isFile()) {
+	        System.out.println("<suite-file path=\"src/main/resources/xml-tests/regression/" + listOfFiles[i].getName() + "\" />");
+	      } else if (listOfFiles[i].isDirectory()) {
+	        System.out.println("Directory " + listOfFiles[i].getName());
+	      }
+	    }
+	}
 
 }

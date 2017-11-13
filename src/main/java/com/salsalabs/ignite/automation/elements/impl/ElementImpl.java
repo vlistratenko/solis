@@ -644,7 +644,7 @@ public abstract class ElementImpl implements Element {
 			if (SeleneseTestCase.isDebugMode) {
 				elem = findElementsByXpath(locator);
 			} else {
-				throw new ElementNotFoundException("Element was not found", "xpath", locator);
+				throw new ElementNotFoundException(elementName, "xpath", locator);
 			}
 		}
 

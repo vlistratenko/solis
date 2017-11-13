@@ -3,22 +3,29 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<suite-files>
-		<suite-file path="src/main/resources/xml-tests/regression/SignupFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/AssetImageTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/CreateActivityCustomFieldsTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreateCustomTarget.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreatePaymentGatewayTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/CreatePetitionTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/CreateSupporterCustomFieldTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/CreateSupporterManuallyTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/DonationImportTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/regression/CreatePetitionTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/regression/CreateCustomTarget.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/FeeCalculationTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/ImportSupportersTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/MessageTopicTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/MyAccountVerificationTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/MyProfileVerificationTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/p2pFormFieldsTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/RecurringDonationTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/ResetPassword.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/RunPermissionGridAvailabilityTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/RunSupporterQBVerification.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/RunVerifyMergeFieldsInTheEmail.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/RunVerifySubscriptionManagementInEmail.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/SignupFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/SocailMediaPagesTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/regression/p2pFormFieldsTest.xml" />	
-		<suite-file path="src/main/resources/xml-tests/regression/ImportSupportersTest.xml" />		
+		<suite-file path="src/main/resources/xml-tests/regression/SubscriptionManagementTest.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/SupporterQueryBuilderTest.xml" />	
 	</suite-files>
 </suite>
