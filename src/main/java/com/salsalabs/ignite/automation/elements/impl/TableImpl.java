@@ -26,7 +26,7 @@ public class TableImpl extends ElementImpl implements Table {
 			tag = "/" + tag;
 		}
 		String pathEl = path + "/tbody/descendant::tr[" + row + "]/td[" + col + "]" + tag;
-		super.click(pathEl.replace("[0]", ""));
+		super.clickJS(pathEl.replace("[0]", ""));
 	}
 
 	@Override
