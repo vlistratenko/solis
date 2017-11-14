@@ -67,4 +67,8 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		logger.info("Select value by label " + value + " in the " + elementName + " and wait");
 		super.selectAndWait(path, value);
 	}
+	
+	public void waitForElementPresence() {		
+		super.waitObject(extendButtonPath, 30000);
+	}
 }

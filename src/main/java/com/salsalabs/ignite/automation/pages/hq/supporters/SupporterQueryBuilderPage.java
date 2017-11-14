@@ -35,10 +35,10 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 		if (deleteRuleButton.isDisplayed()) {
 			deleteRuleButton.click();
 		}
-		DropDown firstRule = new DropDownImpl("//ul[@class='dropdown-list']/li",
+		DropDownImpl firstRule = new DropDownImpl("//ul[@class='dropdown-list']/li",
 				"//*[contains(text(),'Please select one')]", "First Rule DropdownList");
 		if (firstRule.isNotExists()) {
-			firstRule.fluentWaitForElementPresenceIgnoringExceptions();
+			firstRule.waitForElementPresence();
 		}
 		firstRule.selectByLabel(firstLevelRule);
 		return this;
