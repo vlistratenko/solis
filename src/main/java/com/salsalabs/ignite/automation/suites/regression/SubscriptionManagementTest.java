@@ -14,7 +14,7 @@ public class SubscriptionManagementTest extends SeleneseTestCase {
 
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "settings.subscriptionManagement" })
-    public void sendEmailBlastTest(String login, String password) {
+    public void subscriptionManagementTest(String login, String password) {
         UnsubscribeSettingsPage unsubscribeSettingsPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openSettingsPage().

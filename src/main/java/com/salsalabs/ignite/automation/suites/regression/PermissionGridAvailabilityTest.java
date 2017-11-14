@@ -15,7 +15,7 @@ public class PermissionGridAvailabilityTest extends SeleneseTestCase {
 
     @Parameters({ "org1.login", "org2.login", "org3.login", "org4.login", "org5.login", "org6.login", "org7.login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "administration.verifyPermissionGrid" })
-    public void sendEmailBlastTest(String org1, String org2, String org3, String org4,  String org5,  String org6,
+    public void permissionGridAvailabilityTest(String org1, String org2, String org3, String org4,  String org5,  String org6,
                                    String org7, String password) {
         List<String> orgs = Arrays.asList(new String[]{org1, org2, org3, org4, org5, org6, org7});
 
