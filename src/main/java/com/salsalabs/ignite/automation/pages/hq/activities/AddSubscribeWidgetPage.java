@@ -95,7 +95,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage publishFromAutoresponders() {
-		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions();
+		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions(60);
         publishFromAutorespondersTab.click();
         try {
         	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
