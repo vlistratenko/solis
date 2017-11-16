@@ -64,15 +64,15 @@
             </version>
         </driver>
         <driver id="marionette">
-            <version id="0.16.1">
+            <version id="0.19.1">
                 <bitrate sixtyfourbit="true">
-                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-win64.zip</filelocation>
-                    <hash>f49aa6de084ce82b546868992b646e57e3bf3de8</hash>
+                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-win64.zip</filelocation>
+                    <hash>1d6a7ade773f98b3b5a15ace3b6a06b1ad97a8f1</hash>
                     <hashtype>sha1</hashtype>
                 </bitrate>
                 <bitrate thirtytwobit="true">
-                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-win32.zip</filelocation>
-                    <hash>37b75297a9c316226bf3814d9908b044e21b43a3</hash>
+                    <filelocation>https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-win32.zip</filelocation>
+                    <hash>74258f5c73a8fce66fbc3ecd622dae890f1e475a</hash>
                     <hashtype>sha1</hashtype>
                 </bitrate>
             </version>
