@@ -23,6 +23,7 @@ public class UnsubscribeSettingsPage extends ManagePage {
 
 	public UnsubscribePage openUnsubscribePage() {
 		String currentWindowHandle = getWindowHandle();
+		unsubscribeLink.scrollIntoView();
 		unsubscribeLink.click();
 		switchToPopupWindow(currentWindowHandle);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
