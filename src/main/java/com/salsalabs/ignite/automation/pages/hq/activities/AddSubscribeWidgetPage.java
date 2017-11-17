@@ -95,7 +95,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage publishFromAutoresponders() {
-		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions(60);
+		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions(120);
         publishFromAutorespondersTab.click();
         try {
         	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
@@ -111,7 +111,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage goToAutorespondersTab() {
-		toAutoresponders.fluentWaitForElementPresenceIgnoringExceptions();
+		toAutoresponders.fluentWaitForElementPresenceIgnoringExceptions(60);
         toAutoresponders.click();
         return this;
     }
