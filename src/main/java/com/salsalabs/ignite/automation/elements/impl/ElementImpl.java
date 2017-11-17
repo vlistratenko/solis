@@ -107,7 +107,7 @@ public abstract class ElementImpl implements Element {
 	@Override
 	public void click() {
 		logger.info("Click on " + elementName);
-		click(path);
+		clickJS(path);
 	}
 
 	@Override
