@@ -22,7 +22,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
     public void sendEmailBlastTest(String emailFrom, String login, String password) throws InterruptedException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, JSONException, IOException, URISyntaxException {
         String messageTopic;
         String emailBlastName = CommonUtils.getRandomNumericValueFixedLength(10);
-        String emailAddress = CommonUtils.getRandomNumericValueFixedLength(10) + "@testauto.ignite.net";
+        String emailAddress = SeleneseTestCase.emailClient.getEmailBox(CommonUtils.getRandomNumericValueFixedLength(10));
         String emailSubject = emailBlastName;
         CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
         CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
