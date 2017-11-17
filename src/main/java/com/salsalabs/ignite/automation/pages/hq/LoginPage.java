@@ -165,7 +165,8 @@ public class LoginPage extends Browser{
 	}
 
 	public String getPasswordRecoveryUrl() {
-		return SeleneseTestCase.emailClient.getURLByEndWord("Recovering your password.", "rcv");
+		String url = SeleneseTestCase.emailClient.getURLByEndWord("Recovering your password.", "rcv");
+		 return SeleneseTestCase.USED_ENVIRONMENT.getServer().name().equals("REMOTE") ? url.replace("igniteaction","ignite") : url;
 	}
 	
 	public UnsubscribePage openUnsubscribeLinkFromEmail(String emailSubj) {
