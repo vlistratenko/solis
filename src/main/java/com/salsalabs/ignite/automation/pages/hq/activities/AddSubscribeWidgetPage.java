@@ -262,12 +262,7 @@ public class AddSubscribeWidgetPage extends HomePage {
     public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
         sleep(10);
         Button nextAutoresponder = new ButtonImpl("//button[@title='Next: Autoresponders']" , "Next Autoresponder Step");
-        waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
-        if(nextAutoresponder.isDisplayed()){
-            nextAutoresponder.click();
-        }else{
-            waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
-        }
+        nextAutoresponder.waitElement(20);
         nextAutoresponder.click();
         sleep(10);
         return this;
