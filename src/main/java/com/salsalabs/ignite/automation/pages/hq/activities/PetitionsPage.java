@@ -24,6 +24,7 @@ public class PetitionsPage extends ActivitiesPage {
 
 	public PetitionsPage openModerateComments() {
 		moderateComments.click();
+		moderateCommentTable.waitElement(10);
 		return new PetitionsPage();
 	}
 
@@ -60,11 +61,12 @@ public class PetitionsPage extends ActivitiesPage {
 	}
 
 	public PetitionsPage clickTheApprovedCommentsTab() {
-		for (int i = 0; i < 3; i++) {
+		/*for (int i = 0; i < 3; i++) {
 			if (waitConditionBecomesTrue(tableComments.isDisplayed(), 4)) {
 				break;
 			}
-		}
+		}*/
+		tableComments.waitElement(10);
 		approvedCommentsTab.scrollIntoView();
 		approvedCommentsTab.click();
 		return this;
