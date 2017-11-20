@@ -28,7 +28,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	@Test(enabled = true, priority = 6, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class)
 	public void createAndPublishPetitionTest(String login , String pass) {
 		doLoginAndOpenPetitionsPage(login , pass);
-		String widgetName = "PName_" + RandomStringUtils.randomAlphanumeric(10);
+		widgetName = "PName_" + RandomStringUtils.randomAlphanumeric(10);
 		widgetDescription = "PDesc_" + RandomStringUtils.randomAlphanumeric(10);
 		
 		addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription).
