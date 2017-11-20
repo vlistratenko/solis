@@ -129,7 +129,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	
 	@Parameters({ "login", "passward", "widget" , "widgenName"})
 	@Test(enabled = true, priority = 5, groups = {
-			"createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class)
+			"createAndPublishPetition", "rejectCommentsTest" }, retryAnalyzer = RetryAnalyzer.class)
 	public void rejectCommentsTest(String login, String pass , String widget, String widgenName) {
 		String comment = "Comment_" + RandomStringUtils.randomAlphanumeric(5);
 		Supporter sup = Supporter.generateSupporter();
