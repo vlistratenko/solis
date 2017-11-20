@@ -56,7 +56,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		verifyNewSignature(sup, comment, true, true);
 		doLoginAndOpenSupportersPage(login , pass).
 		verifySupporterOnTopOfTableByEmail(sup).
-		openSupporterDetailsPage().
+		openSupporterDetailsPage(sup.finalEMAIL).
 		verifySupporterStatus("Subscribed");
 		
 	}

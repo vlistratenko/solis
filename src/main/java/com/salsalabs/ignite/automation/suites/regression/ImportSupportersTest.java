@@ -92,7 +92,7 @@ public class ImportSupportersTest  extends SeleneseTestCase{
 	private SupportersAddPage openSupporterDetailsPage() {
 		new HomePage().
 		openAudiencePage();
-		new SupportersPage().openSupporterDetailsPage();
+		new SupportersPage().openSupporterDetailsPageFirstRow();
 		return new SupportersAddPage();
 	}
 	
