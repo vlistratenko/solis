@@ -22,6 +22,9 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
 
     private AddSubscribeWidgetPage addSignupFormsPage;
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
+    String widgetName;
+    String widgetDescription;
+    String supporterEmail;
 
     @Parameters({"login","password"})
     @BeforeGroups(groups = {"signupFormFieldsValidation"})
@@ -120,6 +123,22 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         }
     }
 
+    @Parameters({"login","password"})
+    @BeforeMethod(groups = {"signupFormFieldsValidation"})
+    public void loginAndGoToSignupFormComposeTab(String login, String password){
+        widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openSubscribeWidgetsPage()
+                .openAddSubscribeWidgetPage();
+        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
+        addSignupFormsPage.selectLayoutStep("Blank");
+        addSignupFormsPage.dropOneColumnRow();
+        addSignupFormsPage.dropVEFormElement();
+    }
+
     /**
      * <b>Create and submit Signup form with all supporter non-required fields</b>
      * <p>
@@ -137,19 +156,6 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
     @Parameters({"login","password"})
     @Test(enabled = true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormSupporterNonRequiredFields(String login, String password){
-
-      String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-      String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-      String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-
-        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openSubscribeWidgetsPage()
-                .openAddSubscribeWidgetPage();
-        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addSignupFormsPage.selectLayoutStep("Blank");
-        addSignupFormsPage.dropOneColumnRow();
-        addSignupFormsPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         formFieldConfigurationModal.dropAllSupporterFieldsOnForm();
         addSignupFormsPage.goToAutorespondersTab();
@@ -197,19 +203,6 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitSignupFormCustomNonRequiredFields(String login, String password){
-
-        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-
-        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openSubscribeWidgetsPage()
-                .openAddSubscribeWidgetPage();
-        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addSignupFormsPage.selectLayoutStep("Blank");
-        addSignupFormsPage.dropOneColumnRow();
-        addSignupFormsPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityTextBoxCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityNumberCustomField").saveFieldConfiguration();
@@ -255,19 +248,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
 
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitSignupFormRequiredEmptySupporterFields(String login, String password){
-
-        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-
-        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openSubscribeWidgetsPage()
-                .openAddSubscribeWidgetPage();
-        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addSignupFormsPage.selectLayoutStep("Blank");
-        addSignupFormsPage.dropOneColumnRow();
-        addSignupFormsPage.dropVEFormElement();
+    public void testCreatePublishSubmitSignupFormRequiredEmptySupporterFields(){
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         addSignupFormsPage.editVEField("Address, line 1").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
@@ -299,19 +280,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
 
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"signupFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitSignupFormRequiredEmptyCustomFields(String login, String password){
-
-        String widgetName = "SubscribeWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "SubscribeWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-
-        addSignupFormsPage = new LoginPage().doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openSubscribeWidgetsPage()
-                .openAddSubscribeWidgetPage();
-        addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addSignupFormsPage.selectLayoutStep("Blank");
-        addSignupFormsPage.dropOneColumnRow();
-        addSignupFormsPage.dropVEFormElement();
+    public void testCreatePublishSubmitSignupFormRequiredEmptyCustomFields(){
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("signupActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();

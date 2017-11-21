@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONException;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,9 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
     private AddPetitionPage addPetitionPage;
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
+    String widgetName;
+    String widgetDescription;
+    String supporterEmail;
 
     @Parameters({"login","password"})
     @BeforeGroups(groups = {"petitionFormFieldsValidation"})
@@ -121,6 +125,23 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         }
     }
 
+    @Parameters({"login","password"})
+    @BeforeMethod(groups = {"petitionFormFieldsValidation"})
+    public void loginAndGoToSignupFormComposeTab(String login, String password){
+        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addPetitionPage = new LoginPage()
+                .doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openPetitionsPage()
+                .openAddPetitionPage();
+        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                .selectLayoutStep("Blank");
+        addPetitionPage.dropOneColumnRow();
+        addPetitionPage.dropVEFormElement();
+    }
+
     /**
      * <b>Create and submit Petition form with all supporter non-required fields</b>
      * <p>
@@ -138,26 +159,11 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
     @Parameters({"login","password"})
     @Test(enabled = true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitPetitionFormSupporterNonRequiredFields(String login, String password){
-
-        String widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-
-        addPetitionPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openPetitionsPage()
-                .openAddPetitionPage();
-        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
-        .selectLayoutStep("Blank");
-        addPetitionPage.dropOneColumnRow();
-        addPetitionPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         formFieldConfigurationModal.dropAllSupporterFieldsOnForm();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
-
         SubscribeWidget petitionForm1 = new SubscribeWidget();
         petitionForm1.fillSubscribeWidgetAllSupporterFields(
                 supporterEmail,
@@ -178,7 +184,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
                 "777-777-7777",
                 "UA",
                 "09/11/2017");
-
         addPetitionPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net", login, password);
     }
 
@@ -199,20 +204,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitPetitionFormCustomNonRequiredFields(String login, String password){
-
-        String widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        String supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-
-        addPetitionPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openPetitionsPage()
-                .openAddPetitionPage();
-        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addPetitionPage.selectLayoutStep("Blank");
-        addPetitionPage.dropOneColumnRow();
-        addPetitionPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityTextBoxCustomField").saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityNumberCustomField").saveFieldConfiguration();
@@ -227,7 +218,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
-
         SubscribeWidget petitionForm2 = new SubscribeWidget();
         petitionForm2.fillSubscribeWidgetAllCustomFields(
                 supporterEmail,
@@ -239,7 +229,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
                 "activityTextBoxCustomFieldValue",
                 "13",
                 "10/11/2017 01:30 am");
-
         addPetitionPage.verifySubmittedCustomFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
     }
 
@@ -258,20 +247,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitPetitionFormRequiredEmptySupporterFields(String login, String password){
-
-        String widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-
-        addPetitionPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openPetitionsPage()
-                .openAddPetitionPage();
-        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addPetitionPage.selectLayoutStep("Blank");
-        addPetitionPage.dropOneColumnRow();
-        addPetitionPage.dropVEFormElement();
+    public void testCreatePublishSubmitPetitionFormRequiredEmptySupporterFields(){
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         addPetitionPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
@@ -280,7 +256,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
-
         SubscribeWidget petitionForm3 = addPetitionPage.openSubscribeWidget();
         petitionForm3.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
@@ -302,20 +277,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
     @Parameters({"login","password"})
     @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitPetitionFormRequiredEmptyCustomFields(String login, String password){
-
-        String widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        String widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-
-        addPetitionPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openPetitionsPage()
-                .openAddPetitionPage();
-        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-        addPetitionPage.selectLayoutStep("Blank");
-        addPetitionPage.dropOneColumnRow();
-        addPetitionPage.dropVEFormElement();
+    public void testCreatePublishSubmitPetitionFormRequiredEmptyCustomFields(){
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
@@ -329,7 +291,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
-
         SubscribeWidget petitionForm4 = addPetitionPage.openSubscribeWidget();
         petitionForm4.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
