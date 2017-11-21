@@ -4,6 +4,8 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.MyProfilePage;
+
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -24,7 +26,7 @@ public class PermissionGridAvailabilityTest extends SeleneseTestCase {
             MyProfilePage myProfilePage = loginPage.doSuccessLogin(login, password).openMyProfilePage();
 
             Assert.assertTrue(myProfilePage.checkIfElementsExistOnPage());
-            Assert.assertTrue(getJsConsoleErrors().isEmpty());
+           	Assert.assertTrue(getJsConsoleErrors().isEmpty());
             loginPage.logOut();
         }
     }
