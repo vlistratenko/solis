@@ -67,6 +67,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		int fieldsCount = mergeFildsList.getRowsCount();
 		for (int i = 1; i <= fieldsCount; i++) {
 			mergeFildsList.waitElement(10);
+			mergeFildsList.scrollCellintoViewByValue(mergeFildsList.getCellValue(i, 1));
 			mergeFildsList.clickInCell(i, 1, "");
 			defaultTextField.type(mergeFildsList.getCellValue(i, 1));
 			okButton.highlight();
@@ -93,6 +94,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		mergeFildsList.waitElement(10);//sleep(5);
 		for (int i = 0; i < fields.length; i++) {
 			mergeFildsList.waitElement(10);
+			mergeFildsList.scrollCellintoViewByValue(fields[i]);
 			mergeFildsList.clickOnCellByValue(fields[i]);
 			defaultTextField.type(fields[i]);
 			okButton.highlight();

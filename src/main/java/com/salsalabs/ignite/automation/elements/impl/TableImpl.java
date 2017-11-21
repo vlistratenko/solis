@@ -193,4 +193,8 @@ public class TableImpl extends ElementImpl implements Table {
 		click(path + "/descendant::*[contains(text(), '" + value + "')]");
 	}
 	
+	public void scrollCellintoViewByValue(String value) {
+		scrollIntoView(path + "/descendant::*[contains(text(), '" + value + "')]");
+	}
+	
 }

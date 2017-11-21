@@ -81,6 +81,7 @@ public abstract class ElementImpl implements Element {
 	}
 	
 	public void scrollIntoView(String pathL) {
+		logger.info("Scroll element " + elementName + " into view");
 		WebElement element = findElementByXpath(pathL);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView();", element);
