@@ -55,7 +55,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
                 openAudiencePage().
                 openSupportersPage().
                 searchSupporter(emailAddress).
-                openSupporterDetailsPage().
+                openSupporterDetailsPageFirstRow().
                 verifySupporterSubscriptionTopics(messageTopic, emailAddress);
     }
 

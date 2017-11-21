@@ -77,16 +77,19 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void scrollIntoView() {
-		WebElement element = findElementByXpath(path);
+		scrollIntoView(path);
+	}
+	
+	public void scrollIntoView(String pathL) {
+		WebElement element = findElementByXpath(pathL);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView();", element);
 	}
 	
-	
 
 	@Override
 	public void clickJS() {
-		logger.info("Click on " + elementName);
+		logger.info("Click by JS on " + elementName);
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -107,7 +110,7 @@ public abstract class ElementImpl implements Element {
 	@Override
 	public void click() {
 		logger.info("Click on " + elementName);
-		clickJS(path);
+		click(path);
 	}
 
 	@Override

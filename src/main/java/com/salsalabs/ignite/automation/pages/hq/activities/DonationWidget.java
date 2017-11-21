@@ -213,7 +213,9 @@ public class DonationWidget extends SubscribeWidget {
 			verifier.verifyElementIsDisplayed(true, recurringDonationCheckBoxMultiSpepForm);
 			recurringDonationCheckBoxMultiSpepForm.check();
 			donationAmountInput.changePath("//input[@name='customOneTime']", "//input[@name='customRecurringAmount']");
+			donationAmountInput.waitElement(10);
 		}
+		donationAmountInput.click();
 		donationAmountInput.type(amount);
 		sleep(2);
 		if (feeCheckBox) {

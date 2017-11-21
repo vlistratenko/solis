@@ -61,7 +61,7 @@ public class DonationsPage extends HomePage{
 		donationsTable.clickInCell(
 				donationsTable.getRowsNumberByValue(widgetName), 
 				donationsTable.getColumnNumberByHeaderUsingGetAllHeadersMethod("Source"),
-				"/span");
+				"descendant::span");
 		return new DonationsDetailsPage();
 	}
 	
