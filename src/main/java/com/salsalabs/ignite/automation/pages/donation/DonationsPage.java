@@ -56,7 +56,7 @@ public class DonationsPage extends HomePage{
 	}
 
 	public DonationsDetailsPage openDonation(String widgetName) {
-		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.waitElement(10); 
 		donationsTable.scrollIntoView();
 		donationsTable.clickInCell(
 				donationsTable.getRowsNumberByValue(widgetName), 
