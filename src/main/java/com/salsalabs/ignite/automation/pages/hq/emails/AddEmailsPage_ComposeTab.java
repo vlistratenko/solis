@@ -1,10 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.emails;
 
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
-import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +14,8 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	ContentEditTextBoxImpl subjectField = new ContentEditTextBoxImpl("//iframe[contains(@title,'subjectCkEditor')]" ,"//*[@contenteditable='true']", "Subject", true);
 	ContentEditTextBoxImpl textElementContent = new ContentEditTextBoxImpl("//iframe[contains(@title,'ckeditor')]" ,"//*[@contenteditable='true']", "Email Template body", true);
 	Button addLinkButtonMenu = new ButtonImpl("//a[@title='Link']", "Add link on the menu");
-	Button addMergeFieldButtonMenu = new ButtonImpl("//a[@title='Insert a merge field']", "Insert a merge field");
+	Button addBodyMergeFieldButtonMenu = new ButtonImpl("//div[@id='textEditModal']/descendant::a[@title='Insert a merge field']", "Insert a body merge field");
+	Button addSubjectMergeFieldButtonMenu = new ButtonImpl("//div[@id='cke_subjectCkEditor']/descendant::a[@title='Insert a merge field']", "Insert a subject merge field");
 	Button PublishButton = new ButtonImpl("//button[@id='btnPublish']", "Publish");
 	TextBox emailFromField = new TextBoxImpl("//input[@name='fromAddress']", "Email from");
 	TextBox fromNameField = new TextBoxImpl("//input[@name='fromName']", "From name");
@@ -62,7 +61,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		sleep(5);
 		//textElementContent.click();
 		switchDefaultContent();
-		addMergeFieldButtonMenu.click();
+		addBodyMergeFieldButtonMenu.click();
 		mergeFildsList.waitElement(10);//sleep(5);
 		int fieldsCount = mergeFildsList.getRowsCount();
 		for (int i = 1; i <= fieldsCount; i++) {
@@ -74,7 +73,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			okButton.click();
 			textElementContent.sendENTERKey();
 			if (i < fieldsCount) {
-				addMergeFieldButtonMenu.click();
+				addBodyMergeFieldButtonMenu.click();
 			}			
 		}
 		saveContent.waitElement(10);
@@ -90,7 +89,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		subjectField.click();
 		subjectField.switchToDefault();
 		
-		addMergeFieldButtonMenu.click();
+		addSubjectMergeFieldButtonMenu.click();
 		mergeFildsList.waitElement(10);//sleep(5);
 		for (int i = 0; i < fields.length; i++) {
 			mergeFildsList.waitElement(10);
@@ -104,7 +103,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			subjectField.click();
 			subjectField.switchToDefault();
 			if (i < fields.length-1) {
-				addMergeFieldButtonMenu.click();
+				addSubjectMergeFieldButtonMenu.click();
 			}			
 		}
 
