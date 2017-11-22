@@ -12,7 +12,7 @@ import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
 public class DonationsDetailsPage extends HomePage {
-	Table donationsTable = new TableImpl("//div[contains(@ng-if,'')]/descendant::table", "Transactions table");
+	Table donationsTable = new TableImpl("//H2[.='Transactions']/../descendant::table", "Transactions table");
 	Button refundLink = new ButtonImpl(donationsTable.getPath() + "/descendant::a[@Title='Refund']", "Refund");	
 	Panel mainPanel = new PanelImpl("//div[@class='mainContentWrapper']", "Main panel");
 	Label donationAmountLabel = new LabelImpl("//h3[contains(text(), 'donation')]/ancestor::div[contains(@class,'donation_card')]/descendant::h1", "Donation amount in top of page");
@@ -67,7 +67,7 @@ public class DonationsDetailsPage extends HomePage {
 	}
 	
 	public DonationsDetailsPage verifyNumberOfMonthlyRecurringInstallmentsInTheTable (int providedYear , int providedMonth) {	
-		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.waitElement(20);
 		donationsTable.scrollIntoView();
 		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
 		logger.info("Number of Found rows on the Table" + " " + listOFRows);
