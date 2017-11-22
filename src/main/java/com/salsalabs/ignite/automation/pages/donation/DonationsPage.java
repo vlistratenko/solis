@@ -61,7 +61,7 @@ public class DonationsPage extends HomePage{
 		donationsTable.clickInCell(
 				donationsTable.getRowsNumberByValue(widgetName), 
 				donationsTable.getColumnNumberByHeaderUsingGetAllHeadersMethod("Type"),
-				"");
+				"descendant::span[contains(@ng-class, 'Click')]");
 		return new DonationsDetailsPage();
 	}
 	
