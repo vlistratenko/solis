@@ -60,7 +60,7 @@ public class DonationsPage extends HomePage{
 		donationsTable.scrollIntoView();
 		donationsTable.clickInCell(
 				donationsTable.getRowsNumberByValue(widgetName), 
-				donationsTable.getColumnNumberByHeaderUsingGetAllHeadersMethod("Source"),
+				donationsTable.getColumnNumberByHeaderUsingGetAllHeadersMethod("Type"),
 				"descendant::span");
 		return new DonationsDetailsPage();
 	}
