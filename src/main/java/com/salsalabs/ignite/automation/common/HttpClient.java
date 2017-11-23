@@ -48,7 +48,7 @@ public class HttpClient {
 	String authToken = "";
 	String orgID = "";
 	String orgName = "";
-	String host = "hq.test.igniteaction.net";
+	String host = "";
 	CloseableHttpClient httpClient = null;
     HttpPost httpost = null;
     HttpGet httpget = null;
@@ -62,6 +62,11 @@ public class HttpClient {
 	
 	public HttpClient(String host) throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
 	  	this.host = host.replace("https://", "");
+	  	//getConnection();
+	}
+	
+	public HttpClient() throws NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+	  	this.host = SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl().replace("https://", "");
 	  	//getConnection();
 	}
 	
@@ -106,7 +111,7 @@ public class HttpClient {
 	 */
 	public String createSupporter(JSONObject supp) {
 		try {
-			sendPOSTRequest("https://" + host + "/api/person/supporter", supp.toString());
+			sendPOSTRequest(new Supporter().getCreateSupporterRequest(), supp.toString());
 	         for (String temp : JSONResponse) {
 	            	 try {
 						return jsonParser(temp, "payload.id").toString();
@@ -139,7 +144,7 @@ public class HttpClient {
 	public Map<Integer, Supporter> getSupporters(String source, Integer supAmount) throws JSONException {
         Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
 		try {
-			sendGETRequest("https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING" + source);
+			sendGETRequest(new Supporter().getSupportersRequest("", source));//"https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING" + source);
 	        Integer amountOfSupporters = 0;
 
 	        for (String temp : JSONResponse) {
@@ -170,7 +175,7 @@ public class HttpClient {
 	public int getNumberOfSupportersInOrg() throws JSONException {
 		Integer amountOfSupporters = 0;
 		try {
-			sendGETRequest("https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+			sendGETRequest(new Supporter().getSupportersRequest("", ""));//"https://" + host + "/api/search/supporters?criteria=&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
 	        
 
 	        for (String temp : JSONResponse) {
@@ -190,12 +195,7 @@ public class HttpClient {
 	public Map<String, String> getAllSupporterCustomFields(String supporterEmail){
 		Map<String, String> supporterCustomFields = new HashMap<>();
 		try {
-			sendGETRequest("https://" + host + "/api/search/supporters?criteria=" + supporterEmail + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
-			String temp = JSONResponse.get(0);
-			String id = jsonParser(temp, "payload.supporters.0.id").toString();
-			SeleneseTestCase.logger.info("Supporter ID: " + id);
-			sendGETRequest("https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
-			temp = JSONResponse.get(0);
+			String temp = getSupporterDetailsInJSON(supporterEmail);
 			try {
 				JSONArray customFields = (JSONArray) jsonParser(temp, "payload.customFields");
 				for(int i = 0; i < customFields.length(); i++) {
@@ -210,24 +210,71 @@ public class HttpClient {
 		}
 		return supporterCustomFields;
 	}
-
+	
+	public Map<String, String> getAllSupporterContactFields(String supporterEmail){
+		Map<String, String> supporterContactFields = new HashMap<>();
+		try {
+			String temp = getSupporterDetailsInJSON(supporterEmail);
+			try {
+				JSONArray contactFields = (JSONArray) jsonParser(temp, "payload.contacts");
+				for(int i = 0; i < contactFields.length(); i++) {
+					supporterContactFields.put(jsonParser(temp, "payload.contacts." + i + ".type").toString(),
+							jsonParser(temp, "payload.contacts." + i + ".value").toString());
+				}
+			} catch (JSONException e) {
+				logger.error("", e);
+			}
+		} catch (URISyntaxException | IOException | JSONException e) {
+			logger.error("", e);
+		}
+		return supporterContactFields;
+	}
+	
+	public Map<String, String> getAllSupporterAdressessFields(String supporterEmail){
+		Map<String, String> supporterAdressessFields = new HashMap<>();
+		try {
+			String temp = getSupporterDetailsInJSON(supporterEmail);
+			try {
+				JSONObject addressFields = (JSONObject) jsonParser(temp, "payload.addresses.0");
+				for(int i = 0; i < addressFields.length(); i++) {
+					supporterAdressessFields.put(addressFields.names().getString(i),
+							addressFields.getString(addressFields.names().getString(i)));
+				}
+			} catch (JSONException e) {
+				logger.error("", e);
+			}
+		} catch (URISyntaxException | IOException | JSONException e) {
+			logger.error("", e);
+		}
+		return supporterAdressessFields;
+	}
+	
 	public Supporter getSupporterByEmail(String email) throws JSONException {
 		Supporter sup = new Supporter();
 		try {
-			sendGETRequest("https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
-			String temp = JSONResponse.get(0);
-			String id = jsonParser(temp, "payload.supporters.0.id").toString();
-			SeleneseTestCase.logger.info("Supporter ID: " + id);
-			sendGETRequest("https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
-			temp = JSONResponse.get(0);
+			String temp = getSupporterDetailsInJSON(email);
+			//System.err.println(temp);
         	 try { 				
  				sup.firstName = jsonParser(temp, "payload.firstName").toString();
+ 				sup.allPersonalFields.put("firstName", sup.firstName );
+ 				
  				sup.lastorOrgName = jsonParser(temp, "payload.lastName").toString();
+ 				sup.allPersonalFields.put("lastName", sup.lastorOrgName );
+ 				
  				sup.prefix = jsonParser(temp, "payload.prefix").toString();
+ 				sup.allPersonalFields.put("prefix", sup.prefix );
+ 				
  				sup.middleName = jsonParser(temp, "payload.middleName").toString();
+ 				sup.allPersonalFields.put("middleName", sup.middleName );
+ 				
  				sup.suffix = jsonParser(temp, "payload.suffix").toString();
+ 				sup.allPersonalFields.put("suffix", sup.suffix );
+ 				
  				sup.language = jsonParser(temp, "payload.language").toString();
+ 				sup.allPersonalFields.put("language", sup.language );
+ 				
  				sup.birthDate = jsonParser(temp, "payload.birthDate").toString();
+ 				sup.allPersonalFields.put("language", sup.birthDate );
  				
  				JSONArray contacts = (JSONArray) jsonParser(temp, "payload.contacts");
  				sup.finalEMAIL  = jsonParser(temp, "payload.contacts." + findArrayElementNumberByValue(contacts, "MessagingEmail") + ".value").toString();
@@ -245,6 +292,7 @@ public class HttpClient {
  			    sup.country  = jsonParser(temp, "payload.addresses.0.country").toString();
  			    sup.zipCode  = jsonParser(temp, "payload.addresses.0.zip").toString();
  			    sup.allCustomFields = getAllSupporterCustomFields(sup.getFinalEMAIL());
+ 			    sup.allAdressFields = getAllSupporterAdressessFields(sup.getFinalEMAIL());
  			    
 			} catch (JSONException e) {
 				logger.error("", e);
@@ -472,6 +520,15 @@ public class HttpClient {
 			}
 		}
 		return -1;
+	}
+	
+	private String getSupporterDetailsInJSON(String email) throws ClientProtocolException, URISyntaxException, IOException, JSONException {
+		sendGETRequest(new Supporter().getSupportersRequest(email, ""));//"https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
+		String temp = JSONResponse.get(0);
+		String id = jsonParser(temp, "payload.supporters.0.id").toString();
+		SeleneseTestCase.logger.info("Supporter ID: " + id);
+		sendGETRequest(new Supporter().getSupporterRequest(id, true));//"https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
+		return JSONResponse.get(0);
 	}
 	
 	

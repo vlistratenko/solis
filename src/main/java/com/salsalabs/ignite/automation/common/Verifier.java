@@ -129,4 +129,27 @@ public class Verifier {
 			}
 		}
 	}
+	
+	public void verifyContainsOneOf(String main, String sub, String message, boolean fail) {
+		String[] options = sub.split(":");
+		message = message.replace(".", "_");
+		logger.debug("Checking that " + main + " contains " + sub);
+		
+		for (int i = 0; i < options.length; i++) {
+			try {
+				verifyContains(main, options[i], message, true);
+				break;
+			} catch (AssertionError e) {
+				if (fail && i==options.length-1) {
+					throw new AssertionFailedError(message + " - " + e.getMessage());
+				} else if (i==options.length-1) {
+					SeleneseTestCase.bug.add("Error " + message + ". Expected [" + main + "] does not contain [" + sub + "]");
+					logger.error("Verification error: " + message + " - " + e.getMessage());
+					CommonUtils.setParam("testResult", "fail");
+				}
+			}
+		}
+		
+
+	}
 }

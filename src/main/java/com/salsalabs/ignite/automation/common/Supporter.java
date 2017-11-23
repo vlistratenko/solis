@@ -47,6 +47,8 @@ public class Supporter {
 	public String dateOfBirth = "";
 	public String country = "";
 	public Map<String, String> allCustomFields = new HashMap<>();
+	public Map<String, String> allPersonalFields = new HashMap<>();
+	public Map<String, String> allAdressFields = new HashMap<>();
 	public String constituentNumber = "";
 	public String title = "";
 	public String firstName = "";
@@ -62,7 +64,8 @@ public class Supporter {
 	public String spouseFirstName = "";
 	public String spouseTitle = "";
 	public String source;
-
+	private String host = SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl().replace("https://", "");
+	
 	/* map for fields in the file */
 	private static Integer CONSTITUENTNUMBER = 0, TITLE = 1, FIRSTNAME = 2, LASTORORGNAME = 3, PETTYPE = 4, PETNAME = 5,
 			ADDRESSLINE1 = 6, ADDRESSLINE2 = 7, CITY = 8, STATE = 9, POSTALCODE = 10, SPOUSECONSTITUENTNUMBER = 11,
@@ -385,5 +388,17 @@ public class Supporter {
 		sup.finalEMAIL = sup.firstName + "." + sup.lastorOrgName + CommonUtils.getRandomNumericValueFixedLength(4)
 				+ SeleneseTestCase.emailClient.getEmailBox("");
 		return sup;
+	}
+	
+	protected String getSupportersRequest(String criteria, String source) {
+		return "https://" + host + "/api/search/supporters?criteria=" + criteria + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING" + source;
+	}
+	
+	protected String getCreateSupporterRequest() {
+		return "https://" + host + "/api/person/supporter";
+	}
+	
+	protected String getSupporterRequest(String supporterID, Boolean isWithCustomFiels) {
+		return "https://" + host + "/api/person/supporter/" + supporterID + "?includeCustomFields=" + isWithCustomFiels.toString();
 	}
 }

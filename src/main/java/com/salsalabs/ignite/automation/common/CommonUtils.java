@@ -109,6 +109,14 @@ public class CommonUtils {
 			return "0";
 		}
 	}
+	
+	public static String booleanToYesOrNo(boolean aValue) {
+		if (aValue) {
+			return "yes";
+		} else {
+			return "no";
+		}
+	}
 
 	public static boolean booleanTo1or0Reverce(String aValue) {
 		if (aValue.equals("1")) {
