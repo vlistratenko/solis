@@ -1,22 +1,21 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.google.sitebricks.client.Web;
-import com.salsalabs.ignite.automation.common.Browser;
-import com.salsalabs.ignite.automation.elements.*;
+import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Label;
+import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
-import com.salsalabs.ignite.automation.elements.impl.*;
+import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
+import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
@@ -25,6 +24,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
     TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
     Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
+    TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
 
     private static List<String> supporterFieldsNames = new ArrayList<>();
 

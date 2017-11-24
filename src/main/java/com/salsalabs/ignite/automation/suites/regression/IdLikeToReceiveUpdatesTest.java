@@ -10,7 +10,8 @@ import org.testng.annotations.Test;
 
 public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
 
-    private String activityName = RandomStringUtils.randomAlphanumeric(10);;
+    private String activityName = RandomStringUtils.randomAlphanumeric(10);
+    private String fieldLabel = RandomStringUtils.randomAlphanumeric(10);
 
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
@@ -21,10 +22,11 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 openSubscribeWidgetsPage().
                 openAddSubscribeWidgetPage().
                 fillFieldsWidgetStepOne(activityName, "desc").
-
-
-
-
+                selectLayoutStep("Hero").
+                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, false).
+                checkIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, false).
+                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, true).
+                publishForm();
 
     }
 }

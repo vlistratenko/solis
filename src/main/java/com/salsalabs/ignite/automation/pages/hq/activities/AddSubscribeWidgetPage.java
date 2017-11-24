@@ -327,4 +327,25 @@ public class AddSubscribeWidgetPage extends HomePage {
 		}
 	}
 
+
+	public AddSubscribeWidgetPage editIdLikeToReceiveUpdatesCheckBoxProperties(String newFieldLabel, boolean isRequired) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		modal.labelTextBox.type(newFieldLabel);
+		modal.requiredCheckbox.check(isRequired);
+		modal.saveButton.click();
+		return this;
+	}
+
+	public AddSubscribeWidgetPage checkIdLikeToReceiveUpdatesCheckBoxProperties(String fieldLabel, boolean isRequired) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		verifier.verifyEquals(modal.labelTextBox.getText(), fieldLabel, null, true);
+		verifier.verifyEquals(modal.requiredCheckbox.isChecked(), fieldLabel, null, true);
+		modal.saveButton.click();
+		return this;
+	}
+
 }

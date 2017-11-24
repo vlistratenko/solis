@@ -879,6 +879,9 @@ public abstract class ElementImpl implements Element {
 	}
 
 
+	public void doubleClick() {
+		new Actions(driver).moveToElement(driver.findElement(By.xpath(path))).doubleClick().build().perform();
+	}
 
 	
 	

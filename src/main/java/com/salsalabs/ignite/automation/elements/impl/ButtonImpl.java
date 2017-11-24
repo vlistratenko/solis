@@ -1,13 +1,10 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 
 public class ButtonImpl extends ElementImpl implements Button {
