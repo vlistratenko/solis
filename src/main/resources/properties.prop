@@ -1,8 +1,9 @@
 #AUTOMATICALLY GENERATED
-#Thu Oct 12 15:30:53 EEST 2017
-current.firstName=FirstName
+#Wed Nov 08 12:15:57 EET 2017
+current.firstName=0
 CM.firstName=0
-current.lastName=LastName
+prop=1
+current.lastName=0
 emailSubject=We need your help\!\!\! Blast from 10.05.2017 61152
 amountOfPublishedEmails=1
 planName=false
@@ -17,7 +18,7 @@ maxRetryCount=2
 current.Password=qwerty
 currentWindowHandle=CDwindow-c2c551c4-87bd-4812-b03b-d8ba097392ca
 emailFrom=info@salsalabs.com
-current.Login=0@testauto.igniteaction.net
+current.Login=olauta+spf1@salsalabs.com
 Admin.firstName=FirstName
 buildVersion=false
 CM.lastName=0
