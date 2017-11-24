@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -72,7 +73,7 @@ public class SeleneseTestCase {
 		if (USED_ENVIRONMENT.getServer().equals(LocationOfServer.LOCAL)) {
 			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());
 		} else {
-			startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
+			startTestOnDriver(bpath, USED_ENVIRONMENT.getBaseTestUrl());//startRemouteTestOnDriver("FF30", "0.16", "Win7x64-C1");
 		}
 	}
 	
@@ -237,7 +238,18 @@ public class SeleneseTestCase {
 	}
 
 	protected List<LogEntry> getJsConsoleErrors() {
-		if (driver instanceof FirefoxDriver) return driver.manage().logs().get(LogType.BROWSER).getAll();
-		throw new UnsupportedOperationException("JS console errors retrieval available for firefox driver only");
+		logger.info("Checking console errors");
+		if (driver instanceof ChromeDriver) {
+			List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).getAll();
+			if (!logs.isEmpty()) {
+				for (int i = 0; i < logs.size(); i++) {
+					logger.error("Console error: " + logs.get(i));
+				}
+			}else logger.info("Console is empty");
+			return logs;
+		}
+		else logger.error("JS console errors retrieval available for chrome driver only");
+		return null;
+		/*throw new UnsupportedOperationException("JS console errors retrieval available for firefox driver only");*/
 	}
 }

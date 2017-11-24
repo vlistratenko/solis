@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 
 import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.common.HttpClient;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DragableElement;
 import com.salsalabs.ignite.automation.elements.TextBox;
@@ -95,7 +96,7 @@ public class SocialMediaPages  extends ManagePage{
 	 public  SocialMediaPages verifySocialPagesInsideFollowElement(String login, String password, String facebook , String twitter, String instagram , String pinterest, String youTube, String linkedin, String tumbler) {
 		
 			try {
-		HttpClient httpClient = new HttpClient().login(login, password);
+		HttpClient httpClient = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password);
 		String  getFacebook = httpClient.getListOfSocialPages().get("facebook");
 		String  getTwitter = httpClient.getListOfSocialPages().get("twitter");
 		String  getInstagram = httpClient.getListOfSocialPages().get("instagram");

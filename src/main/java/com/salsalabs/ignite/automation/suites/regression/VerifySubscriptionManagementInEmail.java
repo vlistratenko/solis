@@ -22,12 +22,12 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
     public void sendEmailBlastTest(String emailFrom, String login, String password) throws InterruptedException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, JSONException, IOException, URISyntaxException {
         String messageTopic;
         String emailBlastName = CommonUtils.getRandomNumericValueFixedLength(10);
-        String emailAddress = CommonUtils.getRandomNumericValueFixedLength(10) + "@testauto.ignite.net";
+        String emailAddress = SeleneseTestCase.emailClient.getEmailBox(CommonUtils.getRandomNumericValueFixedLength(10));
         String emailSubject = emailBlastName;
         CommonUtils.setProperty(PropertyName.EMAIL_FROM, emailFrom);
         CommonUtils.setProperty(PropertyName.EMAIL_BLAST_NAME, emailBlastName);
         CommonUtils.setProperty(PropertyName.EMAIL_SUBJECT, emailSubject);
-        new HttpClient().login(login, password).createSupporter(new Supporter().getSupporterJSON(emailAddress));
+        new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password).createSupporter(new Supporter().getSupporterJSON(emailAddress));
         LoginPage loginPage = new LoginPage();
         loginPage.
                 doSuccessLogin(login, password).
@@ -55,7 +55,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
                 openAudiencePage().
                 openSupportersPage().
                 searchSupporter(emailAddress).
-                openSupporterDetailsPage().
+                openSupporterDetailsPageFirstRow().
                 verifySupporterSubscriptionTopics(messageTopic, emailAddress);
     }
 

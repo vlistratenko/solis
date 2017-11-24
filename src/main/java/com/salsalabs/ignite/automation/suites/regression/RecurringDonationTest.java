@@ -33,7 +33,9 @@ public class RecurringDonationTest extends SeleneseTestCase {
 						"Juneau", "99501", "AL")
 				.fillTheThirdStepOfTheDonationForm("4111111111111111", "123", "01", String.valueOf(year))
 				.clickDonationButtonNewForms();
-		lp.doSuccessLogin(login, passward).openDonationsPage().openDonation(widgenName)
+		lp.doSuccessLogin(login, passward).
+		openDonationsPage().
+		openDonation(widgenName)
 				.verifyNumberOfYearRecurringInstallmentsInTheTable(year);
 	}
 

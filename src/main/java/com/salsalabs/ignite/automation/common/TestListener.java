@@ -4,7 +4,6 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Properties;
-
 import org.testng.IAnnotationTransformer;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
@@ -14,7 +13,6 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.ITestAnnotation;
 
-import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 
 public class TestListener extends SeleneseTestCase implements ITestListener, IInvokedMethodListener, IAnnotationTransformer {
 	Properties props = new Properties();
@@ -22,7 +20,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 	boolean updateTC = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC, "false"));
 	String planName = CommonUtils.getProperty(PropertyName.PLAN_NAME, "false");
 	String buildName = CommonUtils.getProperty(PropertyName.BUILD_VERSION, "false");
-
+	
 	// Run when class ends
 	@Override
 	public void onFinish(ITestContext arg0) {
@@ -48,13 +46,14 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			steps = steps + " \n   " + (i + 1) + ". " + bug.get(i);
 		}
 		if (updateTC && result.getMethod().getDescription() != null) {
+			GoogleDriveClient gd = new GoogleDriveClient();
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
-			Reporter.log("Execution failed. " + ids[2]);
+			//Reporter.log("Execution failed. " + ids[2]);
 			try {
-				TestLink api = new TestLink(planName, buildName);
-				Integer internalID = new Integer(ids[0]), externalID = new Integer(ids[1]);
-				api.updateTestCaseResult(internalID, externalID, ExecutionStatus.FAILED, api.getLastExecutionId(externalID, internalID) + " - Execution failed. " + ids[2] + " \n Steps:" + steps);
-				api.uploadExecutionAttachment(f);
+				//updateTestLinkTC(ExecutionStatus.FAILED, ids[0], ids[1], f, " - Execution failed. " + ids[2] + " \n Steps:" + steps);
+				bug.add("Screenshot: " + f.getAbsolutePath());
+				bug.add(0, result.getThrowable().getMessage());
+				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.FAIL, gd.getSheetIdByTitle(ids[0]), bug);
 			} catch (NumberFormatException e) {
 				SeleneseTestCase.logger.error("", e);
 			} catch (Exception e) {
@@ -76,16 +75,10 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 
 		SeleneseTestCase.logger.debug("Test " + result.getName() + " is SKIPPED");
 		if (updateTC && result.getMethod().getDescription() != null) {
+			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
 			try {
-				String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
-				TestLink api = new TestLink(planName, buildName);
-				Integer internalID = new Integer(ids[0]), externalID = new Integer(ids[1]);
-
-				if (api.getLastExecutionResult(externalID, internalID).equals(ExecutionStatus.FAILED) && api.getLastExecutionNotes(externalID, internalID).contains(api.getLastExecutionId(externalID, internalID).toString())) {
-					return;
-				} else {
-					api.updateTestCaseResult(internalID, externalID, api.getLastExecutionResult(externalID, internalID), api.getLastExecutionId(externalID, internalID) + " - Was not run");
-				}
+				GoogleDriveClient gd = new GoogleDriveClient();
+				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.SKIPPED, gd.getSheetIdByTitle(ids[0]), null);
 
 			} catch (NumberFormatException e) {
 				SeleneseTestCase.logger.error("", e);
@@ -111,10 +104,14 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 
 		if (updateTC && result.getMethod().getDescription() != null) {
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
-			Reporter.log(ids[2].replace(" NOT", ""));
-			Integer internalID = new Integer(ids[0]), externalID = new Integer(ids[1]);
+			//Reporter.log(ids[1].replace(" NOT", ""));
+			
 			try {
-				new TestLink(planName, buildName).updateTestCaseResult(internalID, externalID, ExecutionStatus.PASSED, ids[2].replace(" NOT", ""));
+				//updateTestLinkTC(ExecutionStatus.PASSED, ids[0], ids[1], null, ids[2].replace(" NOT", ""));
+				GoogleDriveClient gd = new GoogleDriveClient();
+				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.PASS, gd.getSheetIdByTitle(ids[0]), null);
+
+				
 			} catch (NumberFormatException e) {
 				SeleneseTestCase.logger.error("", e);
 			} catch (NullPointerException e) {
@@ -141,5 +138,15 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/*private void updateTestLinkTC(ExecutionStatus st, String internalIdr, String externalIDr, File screenShot, String message) throws Exception {
+		TestLink api = new TestLink(planName, buildName);
+		Integer internalID = new Integer(internalIdr), externalID = new Integer(externalIDr);
+		api.updateTestCaseResult(internalID, externalID, st, api.getLastExecutionId(externalID, internalID) + message);
+		if (screenShot != null) {
+			api.uploadExecutionAttachment(screenShot);
+		}
+		
+	}
+*/
 }

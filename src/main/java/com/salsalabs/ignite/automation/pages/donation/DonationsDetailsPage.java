@@ -4,13 +4,16 @@ import java.time.LocalDate;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;
+import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
+import com.salsalabs.ignite.automation.elements.impl.TableImpl;
+import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
-public class DonationsDetailsPage extends DonationsPage {
-	Button refundLink = new ButtonImpl(donationsTable.getPath() + "/descendant::span[.='Refund']", "Refund");
-
+public class DonationsDetailsPage extends HomePage {
+	Table donationsTable = new TableImpl("//H2[.='Transactions']/../descendant::table", "Transactions table");
+	Button refundLink = new ButtonImpl(donationsTable.getPath() + "/descendant::a[@Title='Refund']", "Refund");	
 	Panel mainPanel = new PanelImpl("//div[@class='mainContentWrapper']", "Main panel");
 	Label donationAmountLabel = new LabelImpl("//h3[contains(text(), 'donation')]/ancestor::div[contains(@class,'donation_card')]/descendant::h1", "Donation amount in top of page");
 	Label donationTotalAmountLabel = new LabelImpl("//h3[contains(text(), 'total')]/ancestor::div[@class='donation_card']/descendant::h1", "Total donation amount in top of page");
@@ -51,19 +54,20 @@ public class DonationsDetailsPage extends DonationsPage {
 	}
 	
 	public DonationsDetailsPage verifyNumberOfYearRecurringInstallmentsInTheTable (int providedRandomYear) {	
-		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		//waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.waitElement(20);
 		donationsTable.scrollIntoView();
-		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
-		logger.info("Number of Found rows in the table" + " " + listOFRows);
+		String  listOfRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
+		logger.info("Number of Found rows in the table" + " " + listOfRows);
 		int calculateTheExpectedRowsInTheTable =  providedRandomYear- LocalDate.now().getYear();
 		String expectedValue = String.valueOf(calculateTheExpectedRowsInTheTable);
 		logger.info("Number of Expected  rows" + " "+ expectedValue);
-		verifier.verifyEquals(listOFRows, expectedValue , "Number of rows for recurring donations listed in the donations tables is incorrect" , true);
+		verifier.verifyEquals(listOfRows, expectedValue , "Number of rows for recurring donations listed in the donations tables is incorrect" , true);
 		return this;
 	}
 	
 	public DonationsDetailsPage verifyNumberOfMonthlyRecurringInstallmentsInTheTable (int providedYear , int providedMonth) {	
-		waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		donationsTable.waitElement(20);
 		donationsTable.scrollIntoView();
 		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
 		logger.info("Number of Found rows on the Table" + " " + listOFRows);

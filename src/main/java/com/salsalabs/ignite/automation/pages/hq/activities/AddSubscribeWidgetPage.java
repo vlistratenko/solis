@@ -96,7 +96,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage publishFromAutoresponders() {
-		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions();
+		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions(120);
         publishFromAutorespondersTab.click();
         try {
         	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
@@ -112,7 +112,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage goToAutorespondersTab() {
-		toAutoresponders.fluentWaitForElementPresenceIgnoringExceptions();
+		toAutoresponders.fluentWaitForElementPresenceIgnoringExceptions(60);
         toAutoresponders.click();
         return this;
     }
@@ -226,6 +226,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
 		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
+		lay.scrollIntoView();
 		lay.fluentWaitForElementPresenceIgnoringExceptions();
 		lay.click();
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
@@ -262,12 +263,7 @@ public class AddSubscribeWidgetPage extends HomePage {
     public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
         sleep(10);
         Button nextAutoresponder = new ButtonImpl("//button[@title='Next: Autoresponders']" , "Next Autoresponder Step");
-        waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
-        if(nextAutoresponder.isDisplayed()){
-            nextAutoresponder.click();
-        }else{
-            waitConditionBecomesTrue(nextAutoresponder.isDisplayed(),  5);
-        }
+        nextAutoresponder.waitElement(20);
         nextAutoresponder.click();
         sleep(10);
         return this;

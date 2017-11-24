@@ -77,16 +77,20 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void scrollIntoView() {
-		WebElement element = findElementByXpath(path);
+		scrollIntoView(path);
+	}
+	
+	public void scrollIntoView(String pathL) {
+		logger.info("Scroll element " + elementName + " into view");
+		WebElement element = findElementByXpath(pathL);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView();", element);
 	}
 	
-	
 
 	@Override
 	public void clickJS() {
-		logger.info("Click on " + elementName);
+		logger.info("Click by JS on " + elementName);
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -644,7 +648,7 @@ public abstract class ElementImpl implements Element {
 			if (SeleneseTestCase.isDebugMode) {
 				elem = findElementsByXpath(locator);
 			} else {
-				throw new ElementNotFoundException("Element was not found", "xpath", locator);
+				throw new ElementNotFoundException(elementName, "xpath", locator);
 			}
 		}
 
@@ -869,7 +873,7 @@ public abstract class ElementImpl implements Element {
 						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
 
 		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
-				"is present and clickable");
+				" is present and clickable");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}

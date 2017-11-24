@@ -45,7 +45,7 @@ public class ImportSupportersTest  extends SeleneseTestCase{
 	@Test(enabled = true, groups = {"importWithCustomFields"}, retryAnalyzer = RetryAnalyzer.class)
 	public void initImportWithCustomFieldsTest(String login, String passward) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, URISyntaxException, IOException, JSONException {
 		customFieldsPage = new CustomFieldsPage();
-		new HttpClient().
+		new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).
 		login(login, passward)
 	     .createCustomField(customFieldsPage.getTextBoxCustomFieldJson(customFiledType, customFieldTextName))
 	     .createCustomField(customFieldsPage.getSingleChoiceCustomFieldJson(customFiledType,customFieldSingleChoiceName))
@@ -92,7 +92,7 @@ public class ImportSupportersTest  extends SeleneseTestCase{
 	private SupportersAddPage openSupporterDetailsPage() {
 		new HomePage().
 		openAudiencePage();
-		new SupportersPage().openSupporterDetailsPage();
+		new SupportersPage().openSupporterDetailsPageFirstRow();
 		return new SupportersAddPage();
 	}
 	

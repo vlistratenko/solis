@@ -3,14 +3,10 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.google.sitebricks.client.Web;
 import com.salsalabs.ignite.automation.common.Browser;
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.CheckBox;
-import com.salsalabs.ignite.automation.elements.Table;
+import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TableImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,12 +14,17 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
-    Button saveButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[2]","Save Content button for field configuration");
-    Button cancelButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']/div[3]/a[1]","Cancel button of fields configuration modal window");
+    Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
+    Button cancelButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[1]","Cancel button of fields configuration modal window");
     CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
+    TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
+    Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
 
     private static List<String> supporterFieldsNames = new ArrayList<>();
 
@@ -31,15 +32,13 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         if(supporterFieldsNames.isEmpty()) supporterFieldsNames = getAllSupporterFieldsNames();
     }
 
-    public ArrayList<String> getAllSupporterFieldsNames(){
-        ArrayList<String> supporterFieldNames = new ArrayList<>();
+    public List<String> getAllSupporterFieldsNames(){
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-        Button addSupporterButton = new ButtonImpl("//*[@id='FieldEditModal-form:subscribe']//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Add supporter button");
-        addSupporterButton.fluentWaitForElementPresenceIgnoringExceptions();
+        Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+        supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
         List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
-        for (WebElement element : elements) {
-            supporterFieldNames.add(element.getText().trim());
-        } closeFieldConfigurationModalWindow();
+        List<String> supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+        closeFieldConfigurationModalWindow();
         return supporterFieldNames;
     }
 
@@ -73,22 +72,39 @@ public class FormFieldConfigurationModalWindow extends HomePage {
 
     public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
         List<String> supporterFieldNames = supporterFieldsNames;
-        for (String name : supporterFieldNames) {
+        supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
-            markFieldAsRequired().saveFieldConfiguration();
-        }
+            if(name.equalsIgnoreCase("designation")) {
+                addDesignationFieldOption("Option1");
+                markFieldAsRequired().
+                saveFieldConfiguration();
+            } else {
+                markFieldAsRequired().
+                saveFieldConfiguration();
+            }
+        } );
         return (T) new HomePage();
     }
 
     public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
         List<String> supporterFieldNames = supporterFieldsNames;
-        for (String name : supporterFieldNames) {
+        supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
-            saveFieldConfiguration();
-        }
+            logger.info(name + " was dropped in the layout");
+            if(name.equalsIgnoreCase("designation")) {
+                addDesignationFieldOption("Option1");
+                saveFieldConfiguration();
+            } else {
+                saveFieldConfiguration();
+            }
+        } );
         return (T) new HomePage();
+        }
 
+        public void addDesignationFieldOption(String optionValue){
+        designationFieldOptionTextField.type(optionValue);
+        designationFieldAddButton.click();
         }
     }
 

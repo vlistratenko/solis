@@ -63,7 +63,7 @@ public class SupporterSubscribeSignupFormTest extends SeleneseTestCase {
 		doSignupFormBySupporter();
 		subscribeWidget.verifySubscriptionIsSuccesses();
 		openSupportersPage();
-		supportersAddPage = supportersPage.openSupporterDetailsPage();
+		supportersAddPage = supportersPage.openSupporterDetailsPageFirstRow();
 		supportersAddPage.verifySupporterStatus("Subscribed");
 	}
 	
@@ -98,7 +98,7 @@ public class SupporterSubscribeSignupFormTest extends SeleneseTestCase {
 		subscribeWidget.verifySubscriptionIsSuccesses();
 		openSupportersPage();
 		supportersPage.verifySupporterOnTopOfTableFull(supporter);
-		supportersAddPage = supportersPage.openSupporterDetailsPage();
+		supportersAddPage = supportersPage.openSupporterDetailsPageFirstRow();
 		supportersAddPage.verifySupporterStatus("Subscribed");
 	}
 

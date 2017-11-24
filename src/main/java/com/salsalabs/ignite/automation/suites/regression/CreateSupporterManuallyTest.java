@@ -32,7 +32,7 @@ public class CreateSupporterManuallyTest  extends SeleneseTestCase{
 		supportersPage = supporterAddPage.
 		createNewSupporterWithCustomFields(login, passward, supporter , textBoxCfName , dateCfname , numberBoxCfName, sChoiceCfName, yesNoCfName);
 		supportersPage.verifySupporterOnTopOfTableFull(supporter).
-		openSupporterDetailsPage().verifySupporterData(supporter.getFinalEMAIL(),
+		openSupporterDetailsPageFirstRow().verifySupporterData(supporter.getFinalEMAIL(),
 				supporter.getFirstName(),
 				supporter.getLastName(),
 				supporter.getcPhone(),

@@ -2,6 +2,7 @@ package com.salsalabs.ignite.automation.pages.hq.supporters;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.HttpClient;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.impl.*;
@@ -265,7 +266,7 @@ public class SupportersAddPage extends HomePage {
 		if (textBoxCf.isNotExists() & dateCf.isNotExists() & numberCf.isNotExists() & singleChoiceCF.isNotExists()
 				& yesNoCf.isNotExists()) {
 			CustomFieldsPage customFieldsPage = new CustomFieldsPage();
-			new HttpClient().login(login, passward)
+			new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, passward)
 					.createCustomField(
 							customFieldsPage.getTextBoxCustomFieldJson(customFiledType, texBoxCustomFieldName))
 					.createCustomField(customFieldsPage.getSingleChoiceCustomFieldJson(customFiledType,

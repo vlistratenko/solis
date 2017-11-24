@@ -28,7 +28,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	@Test(enabled = true, priority = 6, groups = { "createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class)
 	public void createAndPublishPetitionTest(String login , String pass) {
 		doLoginAndOpenPetitionsPage(login , pass);
-		String widgetName = "PName_" + RandomStringUtils.randomAlphanumeric(10);
+		widgetName = "PName_" + RandomStringUtils.randomAlphanumeric(10);
 		widgetDescription = "PDesc_" + RandomStringUtils.randomAlphanumeric(10);
 		
 		addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription).
@@ -56,7 +56,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 		verifyNewSignature(sup, comment, true, true);
 		doLoginAndOpenSupportersPage(login , pass).
 		verifySupporterOnTopOfTableByEmail(sup).
-		openSupporterDetailsPage().
+		openSupporterDetailsPage(sup.finalEMAIL).
 		verifySupporterStatus("Subscribed");
 		
 	}
@@ -129,7 +129,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 	
 	@Parameters({ "login", "passward", "widget" , "widgenName"})
 	@Test(enabled = true, priority = 5, groups = {
-			"createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class)
+			"createAndPublishPetition", "rejectCommentsTest" }, retryAnalyzer = RetryAnalyzer.class)
 	public void rejectCommentsTest(String login, String pass , String widget, String widgenName) {
 		String comment = "Comment_" + RandomStringUtils.randomAlphanumeric(5);
 		Supporter sup = Supporter.generateSupporter();

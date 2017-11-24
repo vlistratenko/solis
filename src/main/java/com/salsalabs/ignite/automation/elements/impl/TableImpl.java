@@ -26,7 +26,9 @@ public class TableImpl extends ElementImpl implements Table {
 			tag = "/" + tag;
 		}
 		String pathEl = path + "/tbody/descendant::tr[" + row + "]/td[" + col + "]" + tag;
-		super.click(pathEl.replace("[0]", ""));
+		pathEl = pathEl.replace("[0]", "");
+		super.scrollIntoView(pathEl);
+		super.click(pathEl);
 	}
 
 	@Override
@@ -189,6 +191,10 @@ public class TableImpl extends ElementImpl implements Table {
 
 	public void clickOnCellByValue(String value) {
 		click(path + "/descendant::*[contains(text(), '" + value + "')]");
+	}
+	
+	public void scrollCellintoViewByValue(String value) {
+		scrollIntoView(path + "/descendant::*[contains(text(), '" + value + "')]");
 	}
 	
 }

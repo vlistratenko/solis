@@ -376,7 +376,7 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 	@Override
 	public List<Message> getEmailsByRecipient(String recipient) {
 		String[] rec = new String[] { recipient };
-		return getEmailsBySubjects(rec);
+		return getEmailsByRecipient(rec);
 	}
 
 	@Override

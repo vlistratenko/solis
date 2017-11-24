@@ -86,13 +86,28 @@ public class SupportersPage extends AudiencePage {
 		return new SupportersPage();
 	}
 
-	public SupportersAddPage openSupporterDetailsPage() {
+	public SupportersAddPage openSupporterDetailsPageFirstRow() {
 		
 		sleep(3);
 		if(supportersTable.isDisplayed()){
 			supportersTable.scrollIntoView();
 		}
-		new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]/div/span/span", "First Row").click();
+		ButtonImpl firstRow = new ButtonImpl(supportersTable.getPath() + "/tbody/tr[1]/td[2]", "First Row");
+		firstRow.waitElement(10);
+		firstRow.click();
+		sleep(2);
+		return new SupportersAddPage();
+	}
+	
+	public SupportersAddPage openSupporterDetailsPage(String supporterEmail) {
+		
+		sleep(3);
+		if(supportersTable.isDisplayed()){
+			supportersTable.scrollIntoView();
+		}
+		ButtonImpl firstRow = new ButtonImpl(supportersTable.getPath() + "/descendant::*[.='" + supporterEmail + "']", "Supporter with email " + supporterEmail);
+		firstRow.waitElement(10);
+		firstRow.click();
 		sleep(2);
 		return new SupportersAddPage();
 	}

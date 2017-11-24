@@ -1473,7 +1473,7 @@ public class SupporterQueryBuilderTest  extends SeleneseTestCase{
 	  private int getListOfAllSupportersIOrg(String userName, String pass){
 		 int numberOfSupportersInOrg = 0;
 		try {
-			numberOfSupportersInOrg = new HttpClient().login(userName, pass).getNumberOfSupportersInOrg();
+			numberOfSupportersInOrg = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(userName, pass).getNumberOfSupportersInOrg();
 		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | JSONException
 				| URISyntaxException | IOException e) {
 			e.printStackTrace();
