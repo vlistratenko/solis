@@ -1,14 +1,13 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.AddPetitionPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
-import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.*;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
+import com.salsalabs.ignite.automation.pages.hq.manage.PaymentGatewaysPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.JSONException;
 import org.testng.ITestContext;
@@ -22,17 +21,23 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
+@Test(groups = {"fundraisingFormFieldsValidation"})
 public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
 
         private AddDonationWidgetPage addDonationPage;
         private FormFieldConfigurationModalWindow formFieldConfigurationModal;
-        String widgetName;
-        String widgetDescription;
-        String supporterEmail;
+        private PaymentGatewaysPage paymentGatewaysPage;
+        private String widgetName;
+        private String widgetDescription;
+        private String supporterEmail;
+        private String gatewayName;
 
         @Parameters({"login","password"})
-     //   @BeforeGroups(groups = {"fundraisingFormFieldsValidation"})
+        @BeforeGroups(groups = {"fundraisingFormFieldsValidation"})
         public void generateCustomFieldsViaAPI(ITestContext context, String login, String password){
+            paymentGatewaysPage = new PaymentGatewaysPage();
+            gatewayName = "CardConnectPaymentGateway_" + RandomStringUtils.randomAlphanumeric(5);
+            CommonUtils.setProperty("gatewayName", gatewayName);
             logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
             CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                     getCustomFieldApiGenerator("supporterDateTimeCustomField", "FieldDescription").
@@ -111,6 +116,7 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
                     httpClient.createCustomField(activityYesNoCustomFieldConfig.createActivityCustomFieldViaApiJsonObject((CustomFieldsPage.CustomFieldType.YesNo),"FUNDRAISE"));
                     httpClient.createCustomField(activitySingleChoiceCustomFieldConfig.createActivityCustomFieldViaApiJsonObject((CustomFieldsPage.CustomFieldType.SingleChoice),"FUNDRAISE"));
                     httpClient.createCustomField(activityDateTimeCustomFieldConfig.createActivityCustomFieldViaApiJsonObject((CustomFieldsPage.CustomFieldType.DateTime),"FUNDRAISE"));
+                    httpClient.createGateway(paymentGatewaysPage.getCardConnectPaymentGatewayJSONObject(gatewayName));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -125,23 +131,6 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
             } catch (KeyManagementException e) {
                 e.printStackTrace();
             }
-        }
-
-        @Parameters({"login","password"})
-        @BeforeMethod(groups = {"fundraisingFormFieldsValidation"})
-        public void loginAndGoToSignupFormComposeTab(String login, String password){
-            widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
-            widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
-            supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-            addDonationPage = new LoginPage()
-                    .doSuccessLogin(login, password)
-                    .openActivitiesPage()
-                    .openFundraisingWidgetPage()
-                    .openAddDonationWidgetPage();
-            addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
-                    .selectLayoutStep("Blank");
-            addDonationPage.dropOneColumnRow();
-            addDonationPage.dropVEFormElement();
         }
 
         /**
@@ -159,37 +148,36 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
          */
 
         @Parameters({"login","password"})
-        @Test(enabled = true, groups = {"fundraisingFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+        @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
         public void testCreatePublishSubmitFundraisingFormSupporterNonRequiredFields(String login, String password){
-            formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-            formFieldConfigurationModal.dropAllSupporterFieldsOnForm();
+            widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
+            widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
+            supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+            addDonationPage = new LoginPage()
+                    .doSuccessLogin(login, password)
+                    .openActivitiesPage()
+                    .openFundraisingWidgetPage()
+                    .openAddDonationWidgetPage();
+            addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                    .selectLayoutStep("Blank");
+            addDonationPage.selectGatewayByName(CommonUtils.getProperty("gatewayName"));
+            addDonationPage.dropOneColumnRow();
+            addDonationPage.dropVEFormElement();
+            new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
             addDonationPage.goToAutorespondersTab();
             addDonationPage.publishFromAutoresponders();
             addDonationPage.openSubscribeWidget();
-            SubscribeWidget fundraisingForm1 = new SubscribeWidget();
-            fundraisingForm1.fillSubscribeWidgetAllSupporterFields(
-                    supporterEmail,
-                    "personFName",
-                    "personLName",
-                    "personCity",
-                    "20008",
-                    "UA-63",
-                    "addressLine1",
-                    "addressLine2",
-                    "Male",
-                    "777-777-7777",
-                    "personMName",
-                    "en-US",
-                    "suffixValue",
-                    "titleValue",
-                    "777-777-7777",
-                    "777-777-7777",
-                    "UA",
-                    "09/11/2017");
-            addDonationPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net", login, password);
+            DonationWidget fundraisingForm1 = new DonationWidget();
+            fundraisingForm1.fillDonationWidgetAllSupporterFields(
+                    "4111111111111111","123","11","2023","donationTest donationTest",supporterEmail,"FirstName","LastName",
+                    "City","91602","UA-63","address1","address2","Male","777-777-7777","MidName","en-US",
+                    "suffix","title","777-777-7777","777-777-7777","UA","09/11/2017","dedication","test@test.com",
+                    "Option1","5").
+                    clickOnSubmitFormButton();
+            addDonationPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(), login, password);
         }
 
-   /*     *//**
+        /**
          * <b>Create and submit Fundraising form with all custom non-required fields</b>
          * <p>
          * Steps:
@@ -201,40 +189,64 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
          * <li> Go to Autoresponders > Publish form > Go to form public URL
          * <li> Fill in all fields > Submit the form
          * <li> <font color="green"><b>Verify whether created supporter contains all fields values that have been specified when submitting the form</b></font>
-         *//*
+         */
 
         @Parameters({"login","password"})
-        @Test(enabled=true, groups = {"fundraisingFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-        public void testCreatePublishSubmitPetitionFormCustomNonRequiredFields(String login, String password){
+        @Test(enabled=true, retryAnalyzer = RetryAnalyzer.class)
+        public void testCreatePublishSubmitFundraisingFormCustomNonRequiredFields(String login, String password){
+            widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
+            widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
+            supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+            addDonationPage = new LoginPage()
+                    .doSuccessLogin(login, password)
+                    .openActivitiesPage()
+                    .openFundraisingWidgetPage()
+                    .openAddDonationWidgetPage();
+            addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                    .selectLayoutStep("Blank");
+            addDonationPage.selectGatewayByName(CommonUtils.getProperty("gatewayName"));
+            addDonationPage.dropOneColumnRow();
+            addDonationPage.dropVEFormElement();
             formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityTextBoxCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityNumberCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivitySingleChoiceCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityYesNoCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityDateTimeCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
-            addPetitionPage.goToAutorespondersTab();
-            addPetitionPage.publishFromAutoresponders();
-            addPetitionPage.openSubscribeWidget();
-            SubscribeWidget petitionForm2 = new SubscribeWidget();
-            petitionForm2.fillSubscribeWidgetAllCustomFields(
-                    supporterEmail,
-                    "personFName",
-                    "personLName",
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityTextBoxCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityNumberCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivitySingleChoiceCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityYesNoCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityDateTimeCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+            addDonationPage.goToAutorespondersTab();
+            addDonationPage.publishFromAutoresponders();
+            addDonationPage.openSubscribeWidget();
+            DonationWidget fundraisingForm2 = new DonationWidget();
+            fundraisingForm2.fillDonationWidgetAllCustomFields(
                     "supporterTextBoxCustomFieldValue",
                     "13",
                     "10/11/2017 01:30 am",
                     "activityTextBoxCustomFieldValue",
                     "13",
-                    "10/11/2017 01:30 am");
-            addPetitionPage.verifySubmittedCustomFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
+                    "10/11/2017 01:30 am",
+                    supporterEmail,
+                    "personFName",
+                    "personLName",
+                    "address1",
+                    "city",
+                    "20009",
+                    "NY",
+                    "10",
+                    "name onCard",
+                    "4111111111111111",
+                    "123",
+                    "11",
+                    "2023").
+                    clickOnSubmitFormButton();
+            addDonationPage.verifySubmittedCustomFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(),login,password);
         }
 
-        *//**
+        /**
          * <b>Create and submit Fundraising form with all supporter required fields</b>
          * <p>
          * Steps:
@@ -245,25 +257,35 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
          * <li> Go to Autoresponders > Publish form > Go to form public URL
          * <li> Click on Submit button
          * <li> <font color="green"><b>Verify whether validation messages appears and prompts to fill in required fields</b></font>
-         *//*
+         */
 
         @Parameters({"login","password"})
-        @Test(enabled=true, groups = {"fundraisingFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-        public void testCreatePublishSubmitPetitionFormRequiredEmptySupporterFields(){
-            formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-            addPetitionPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
-            addPetitionPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
-            addPetitionPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
-            formFieldConfigurationModal.dropAllSupporterFieldsOnFormAndMarkAsRequired();
-            addPetitionPage.goToAutorespondersTab();
-            addPetitionPage.publishFromAutoresponders();
-            addPetitionPage.openSubscribeWidget();
-            SubscribeWidget petitionForm3 = addPetitionPage.openSubscribeWidget();
-            petitionForm3.clickOnSubmitFormButton().
-                    verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
+        @Test(enabled=true, retryAnalyzer = RetryAnalyzer.class)
+        public void testCreatePublishSubmitFundraisingFormRequiredEmptySupporterFields(String login, String password){
+            widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
+            widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
+            supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+            addDonationPage = new LoginPage()
+                    .doSuccessLogin(login, password)
+                    .openActivitiesPage()
+                    .openFundraisingWidgetPage()
+                    .openAddDonationWidgetPage();
+            addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                    .selectLayoutStep("Blank");
+            addDonationPage.selectGatewayByName(CommonUtils.getProperty("gatewayName"));
+            addDonationPage.dropOneColumnRow();
+            addDonationPage.dropVEFormElement();
+            new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnFormAndMarkAsRequired();
+            addDonationPage.editVEField("Phone").markFieldAsRequired().saveFieldConfiguration();
+            addDonationPage.goToAutorespondersTab();
+            addDonationPage.publishFromAutoresponders();
+            addDonationPage.openSubscribeWidget();
+            DonationWidget fundraisingForm3 = new DonationWidget();
+            fundraisingForm3.clickOnSubmitFormButton();
+            fundraisingForm3.verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFieldsAndDonation();
         }
 
-        *//**
+        /**
          * <b>Create and submit Fundraising form with all custom required fields</b>
          * <p>
          * Steps:
@@ -275,28 +297,41 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
          * <li> Go to Autoresponders > Publish form > Go to form public URL
          * <li> Click on Submit button
          * <li> <font color="green"><b>Verify whether validation messages appears and prompts to fill in required fields</b></font>
-         *//*
+         */
 
         @Parameters({"login","password"})
-        @Test(enabled=true, groups = {"fundraisingFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-        public void testCreatePublishSubmitPetitionFormRequiredEmptyCustomFields(){
+        @Test(enabled=true, retryAnalyzer = RetryAnalyzer.class)
+        public void testCreatePublishSubmitFundraisingFormRequiredEmptyCustomFields(String login, String password){
+            widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
+            widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
+            supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+            addDonationPage = new LoginPage()
+                    .doSuccessLogin(login, password)
+                    .openActivitiesPage()
+                    .openFundraisingWidgetPage()
+                    .openAddDonationWidgetPage();
+            addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                    .selectLayoutStep("Blank");
+            addDonationPage.selectGatewayByName(CommonUtils.getProperty("gatewayName"));
+            addDonationPage.dropOneColumnRow();
+            addDonationPage.dropVEFormElement();
             formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivitySingleChoiceCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityYesNoCustomField").saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("fundraisingActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-            new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-            addPetitionPage.goToAutorespondersTab();
-            addPetitionPage.publishFromAutoresponders();
-            SubscribeWidget petitionForm4 = addPetitionPage.openSubscribeWidget();
-            petitionForm4.clickOnSubmitFormButton().
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivitySingleChoiceCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityYesNoCustomField").saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("fundraisingActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+            formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+            addDonationPage.goToAutorespondersTab();
+            addDonationPage.publishFromAutoresponders();
+            SubscribeWidget fundraisingForm4 = addDonationPage.openSubscribeWidget();
+            fundraisingForm4.clickOnSubmitFormButton().
                     verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
-        }*/
+        }
     }
 
 

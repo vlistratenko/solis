@@ -215,10 +215,7 @@ public class SubscribeWidget extends Browser{
 		activitySingleChoiceCustomField.click(); CommonUtils.setProperty("activitySingleChoiceCustomFieldValue", "value1");
 		supporterYesNoCustomField.click(); CommonUtils.setProperty("supporterYesNoCustomFieldValue", "True");
 		activityYesNoCustomField.click(); CommonUtils.setProperty("activityYesNoCustomFieldValue", "True");
-
 		sleep(3);
-		subscribeButton.scrollIntoView();
-		subscribeButton.click();
 		return this;
 	}
 
@@ -249,13 +246,9 @@ public class SubscribeWidget extends Browser{
 		genderSelectBox.selectByValue(gender); CommonUtils.setProperty("gender", "Male");
 		preferredLanguageSelectBox .selectByValue(language);
 		keepMeInformedCheckbox.check();
-
 		sleep(3);
-		subscribeButton.scrollIntoView();
-		subscribeButton.click();
 		return this;
 	}
-
 
 	public boolean isValidationMessageFieldRequiresValueDisplayed(String fieldName){
 		Label fieldLabel;
@@ -270,7 +263,6 @@ public class SubscribeWidget extends Browser{
 	public void verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields(){
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Country"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Home Phone"), "'This field requires a value' validation message is not displayed");

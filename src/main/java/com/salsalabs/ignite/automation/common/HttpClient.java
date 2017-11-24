@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 
+import static java.lang.Thread.sleep;
 
 
 public class HttpClient {
@@ -530,6 +531,45 @@ public class HttpClient {
 		sendGETRequest(new Supporter().getSupporterRequest(id, true));//"https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
 		return JSONResponse.get(0);
 	}
-	
+
+	public String createGateway(JSONObject supp) {
+		try {
+			sendPOSTRequest("https://" + host + "/api/organization/paymentConfiguration", supp.toString());
+			for (String temp : JSONResponse) {
+				try {
+					return jsonParser(temp, "payload.id").toString();
+				} catch (JSONException e) {
+					logger.error("", e);
+				}
+			}
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return "";
+	}
+
+	public void waitUntilSupporterExists(String email, int seconds) {
+		for(int i = 0; i <=seconds; i++) {
+			try {
+				sleep(1000);
+				if(isSupporterExists(email)) break;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public boolean isSupporterExists(String email) {
+		boolean isExists = true;
+		try {
+			Supporter supporter = getSupporterByEmail(email);
+			isExists = true;
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (RuntimeException e) {
+			logger.info("Supporter is not found with email " + email + " is not found.");
+			isExists = false;
+		} return isExists;
+	}
 	
 }

@@ -10,6 +10,8 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PaymentGatewaysPage extends ManagePage {
 	
@@ -62,6 +64,11 @@ public class PaymentGatewaysPage extends ManagePage {
 		this.closeWindow();
 		this.switchToWindow(primaryHandle);
 		return this;
+	}
+
+	public JSONObject getCardConnectPaymentGatewayJSONObject(String gatewayName) throws JSONException {
+		String j = "{\"header\":{},\"payload\":{\"name\":\"" + gatewayName  + "\",\"description\":\"gas\",\"paymentProcessor\":\"CARD_CONNECT\",\"accountProperties\":[{\"id\":\"MerchantId\",\"value\":\"496344295024\"},{\"id\":\"DBATitle\",\"value\":\"2d\"},{\"id\":\"CurrencyCode\",\"value\":\"USD\"},{\"id\":\"PaymentOptions\",\"value\":\"VISA,MAST,DISC,AMEX\"},{\"id\":\"AllowECheck\",\"value\":\"false\"}]}}";
+		return new JSONObject(j);
 	}
 	
 }

@@ -14,6 +14,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.apache.tools.ant.taskdefs.condition.Http;
 import org.json.JSONException;
 import org.openqa.selenium.TimeoutException;
 
@@ -270,7 +271,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public void verifySubmittedSupporterFieldsArePresentInSupporterDetails(String host, String login, String password) {
 		try {
-			Supporter sup = new HttpClient(host).login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
+			HttpClient client = new HttpClient(host).login(login,password);
+			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
+			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
 			verifier.verifyEquals(sup.getFinalEMAIL(), CommonUtils.getProperty("personEmail").toLowerCase());
 			verifier.verifyEquals(sup.getFirstName(), CommonUtils.getProperty("personFName"));
 			verifier.verifyEquals(sup.getLastName(), CommonUtils.getProperty("personLName"));
@@ -304,8 +307,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public void verifySubmittedCustomFieldsArePresentInSupporterDetails(String host, String login, String password) {
 				try {
-			Supporter sup = new HttpClient(host).login(login,password).getSupporterByEmail(CommonUtils.getProperty("personEmail"));
-
+			HttpClient client = new HttpClient(host).login(login,password);
+			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
+			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterTextBoxCustomField"), CommonUtils.getProperty("supporterTextBoxCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterNumberCustomField"), CommonUtils.getProperty("supporterNumberCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
