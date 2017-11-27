@@ -195,7 +195,7 @@ public class SupporterQueryBuilderTest  extends SeleneseTestCase{
 		//SupporterFieldsRule > firstName Tests
 	  @Parameters({"login", "Passward"})
 	    @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"SupporterFields"})
-	  public void supporterFirstNameContainsTest(String login, String passward){
+	  public void supporterFirstNameDoesNotContainsTest(String login, String passward){
 		  String numerOfExpectedRecordsInTable= String.valueOf(getListOfAllSupportersIOrg(login, passward));
 		  doLoginAndOpenSupporterQbPage(login, passward ).
 		  pickUpFirstLevelRuleOption(SupporterFieldsRule).
@@ -1003,7 +1003,7 @@ public class SupporterQueryBuilderTest  extends SeleneseTestCase{
 			  String numerOfExpectedRecordsInTable= String.valueOf(getListOfAllSupportersIOrg(login, passward));
 			  doLoginAndOpenSupporterQbPage(login, passward ).
 			  pickUpFirstLevelRuleOption(SupporterFieldsRule).
-			  pickUpNextLevelRuleOption(firstName, SupporterFieldsExtendedButtonLAbel).
+			  pickUpNextLevelRuleOption(addressLine, SupporterFieldsExtendedButtonLAbel).
 			  pickUpTheRuleOperator("is not blank").
 			  checkErrorMessage().
 			  checkShowResultButtonIsDisplayed().
@@ -1018,7 +1018,7 @@ public class SupporterQueryBuilderTest  extends SeleneseTestCase{
 		  public void supporterAddressLine1IsBlank(String login, String passward){
 			  doLoginAndOpenSupporterQbPage(login, passward ).
 			  pickUpFirstLevelRuleOption(SupporterFieldsRule).
-			  pickUpNextLevelRuleOption(firstName, SupporterFieldsExtendedButtonLAbel).
+			  pickUpNextLevelRuleOption(addressLine, SupporterFieldsExtendedButtonLAbel).
 			  pickUpTheRuleOperator("is blank").
 			  checkErrorMessage().
 			  checkShowResultButtonIsDisplayed().
