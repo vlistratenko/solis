@@ -205,6 +205,7 @@ public class SubscribeWidget extends Browser{
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
 		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
+		personCityField.type("Kharkov");
 		supporterTextBoxCustomField.type(supporterTextBoxCustomFieldValue); CommonUtils.setProperty("supporterTextBoxCustomFieldValue", supporterTextBoxCustomFieldValue);
 		supporterNumberCustomField.type(supporterNumberCustomFieldValue); CommonUtils.setProperty("supporterNumberCustomFieldValue", supporterNumberCustomFieldValue);
 		supporterDateTimeCustomField.type(supporterDateTimeCustomFieldValue); clickCalendarDoneButton(); CommonUtils.setProperty("supporterDateTimeCustomFieldValue", parseDateTimeValueToMatchHqResponse(supporterDateTimeCustomFieldValue));

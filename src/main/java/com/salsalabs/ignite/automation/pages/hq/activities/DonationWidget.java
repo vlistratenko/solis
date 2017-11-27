@@ -425,7 +425,6 @@ public class DonationWidget extends SubscribeWidget {
 	public void verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFieldsAndDonation(){
 		verifier.verifyTrue(missingDonationAmountMessage.isDisplayed(), "Validation message is not displayed despite donation amount is not specified");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Card Number"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Please notify the following person(s) that a donation has been made"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Security Code"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Expiration Month"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Expiration Year"), "'This field requires a value' validation message is not displayed");

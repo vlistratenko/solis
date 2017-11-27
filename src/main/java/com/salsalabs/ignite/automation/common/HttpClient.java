@@ -4,6 +4,7 @@ package com.salsalabs.ignite.automation.common;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -523,7 +524,7 @@ public class HttpClient {
 		return -1;
 	}
 	
-	private String getSupporterDetailsInJSON(String email) throws ClientProtocolException, URISyntaxException, IOException, JSONException {
+	private String getSupporterDetailsInJSON(String email) throws URISyntaxException, IOException, JSONException {
 		sendGETRequest(new Supporter().getSupportersRequest(email, ""));//"https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
 		String temp = JSONResponse.get(0);
 		String id = jsonParser(temp, "payload.supporters.0.id").toString();
@@ -562,14 +563,15 @@ public class HttpClient {
 	public boolean isSupporterExists(String email) {
 		boolean isExists = true;
 		try {
-			Supporter supporter = getSupporterByEmail(email);
-			isExists = true;
-		} catch (JSONException e) {
+			sendGETRequest(new Supporter().getSupportersRequest(email, ""));
+			String temp = JSONResponse.get(0);
+			String id = jsonParser(temp, "payload.supporters.0.id").toString();
+			if (id.isEmpty() || id=="") {
+				isExists = false;
+			logger.info("Supporter with email "+email+ " is not found.");}
+		} catch (URISyntaxException | IOException | JSONException e) {
 			e.printStackTrace();
-		} catch (RuntimeException e) {
-			logger.info("Supporter is not found with email " + email + " is not found.");
-			isExists = false;
-		} return isExists;
+		}
+		return isExists;
 	}
-	
 }

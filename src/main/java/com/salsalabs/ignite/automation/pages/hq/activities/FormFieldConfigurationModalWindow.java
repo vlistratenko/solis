@@ -13,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
     Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
 
-    private static List<String> supporterFieldNames  = new ArrayList<>();;
+    private static List<String> supporterFieldNames  = new ArrayList<>();
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
         Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of " + fieldName + " in form field configuration modal window");
@@ -62,8 +63,17 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         return this;
     }
 
+    public void initializeListWithAllSupporterFields(){
+        new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
+            Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+            supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
+            List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
+            this.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+            closeFieldConfigurationModalWindow();
+    }
+
     public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
-        List<String> supporterFieldNames = this.supporterFieldNames;
+        if(supporterFieldNames.isEmpty()) initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
@@ -80,7 +90,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
-        List<String> supporterFieldNames = this.supporterFieldNames;
+        if(supporterFieldNames.isEmpty()) initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
