@@ -21,7 +21,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	LoginPage loginPage;
 	
 	@Parameters({ "login", "password"})
-	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "notready_p2p.formFields.createFormWithAnonymous" }, description = "")
+	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.createFormWithAnonymous" }, description = "")
 	public void createp2pForm(String login, String pass) throws Exception {
 		loginPage = new LoginPage(true); 
 		String formName = "p2p form " + CommonUtils.getUnicName();

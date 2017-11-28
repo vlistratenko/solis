@@ -14,7 +14,7 @@
 		<parameter name="teamFormURL" value="https://testvco823.test.igniteaction.net/p2pform20171005184832/t/testeranonimusteam20171009113833/index.html"></parameter>
 		<groups>
 			<run>
-				<include name="notready_p2p.*" />
+				<include name="p2p.*" />
 			</run>
 		</groups>
 		<classes>
