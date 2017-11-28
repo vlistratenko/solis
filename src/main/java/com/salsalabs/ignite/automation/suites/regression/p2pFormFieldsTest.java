@@ -7,7 +7,6 @@ import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_EventPageTab;
 import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
@@ -23,16 +22,16 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	
 	@Parameters({ "login", "password"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "notready_p2p.formFields.createFormWithAnonymous" }, description = "")
-	public void createp2pForm(String login, String pass) {
+	public void createp2pForm(String login, String pass) throws Exception {
 		loginPage = new LoginPage(true); 
-		
+		String formName = "p2p form " + CommonUtils.getUnicName();
 		loginPage.
 		doSuccessLogin(login, pass).
 		//open("https://hq.test.igniteaction.net/#/activities/widgets/p2p/cf85b860-fc7c-4913-9608-3795c225d530?tab=compose").
 		openActivitiesPage().
 		openP2PPage().
 		openCreateNewp2pForm().
-		fillSetupStepAndGoNext("p2p form " + CommonUtils.getUnicName(),
+		fillSetupStepAndGoNext(formName,
 				"p2p form " + CommonUtils.getUnicName(),
 							CommonUtils.getTodayDateDependsOnBrowser(""),
 							"8:30am",
@@ -47,19 +46,51 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		clickContinueButton().
 		clickContinueButton().
 		clickNextButton().
-		selectLayoutAndClickNext("Blank").
+		selectLayoutAndClickNext("Basic").
 		openEventPageSubTab().
-			dropOneColumnRow().
+			/*dropOneColumnRow().
 			dropVETextElement().
+			dropVERegisterButtonElement().
+			dropVEDonateButtonElement().
 		openRegistrationSubTab().
 			dropOneColumnRow().
 			dropVETextElement().
+			dropVEREgistrationElement().*/
 		openCheckoutSubTab().
+			//dropOneColumnRow().
+			//dropVEFormElement().
+			dropFormField("Display my donation anonymously", false).
+		/*openConfirmationViewSubTab().
 			dropOneColumnRow().
+			dropVETextElement().
+			editVETextElement("Thank You!").*/
+		clickNextToEventPageButton().
+		/*openPersonalFundraisingPageSubTab().
+			dropOneColumnRow().
+			dropVETextElement().
+		openDonateSubTab().
+			dropOneColumnRow().
+			dropVEFormElement().
+			dropVETextElement().
+		openConfirmationViewSubTab().
+			dropOneColumnRow().
+			dropVETextElement().*/
+		clickNextToTeamTabButton().
+		openTeamFundraisingPageSubTab().
+			/*dropOneColumnRow().
+			dropVETextElement().
+		openDonateSubTab().
+			dropOneColumnRow().
+			dropVETextElement().
 			dropVEFormElement().
 		openConfirmationViewSubTab().
 			dropOneColumnRow().
-			dropVETextElement().clickNextButton();
+			dropVETextElement().*/
+		clickNextToAutorespondersTabButton().
+		clickPublishButton().
+		storeEventLink(formName);
+		
+		varifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
 	}
 	
 	/**

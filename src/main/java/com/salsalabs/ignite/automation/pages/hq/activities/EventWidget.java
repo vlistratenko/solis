@@ -11,8 +11,7 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
+
 
 public class EventWidget extends DonationWidget {
 	
@@ -22,7 +21,7 @@ public class EventWidget extends DonationWidget {
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
 	TextBox eventPersonLNameField = new TextBoxImpl("//input[contains(@id,'last_name')]", "Event attendees Last name", true);
 	TextBox eventPersonEmailField = new TextBoxImpl("//input[contains(@id,'email')]", "Event attendees Email", true);
-	Label eventSubsrIsSccessMessage = new LabelImpl("//h3[contains(.,'Thank You!')]", "Event is subscribed");
+	Label eventSubsrIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
 	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
@@ -173,6 +172,7 @@ public class EventWidget extends DonationWidget {
 	
 	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount) {
 		donorsList.changePath("amountToReplace", donationAmount);
+		donorsList.waitElementWithPageRefresh(5);
 		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
 		
 	}

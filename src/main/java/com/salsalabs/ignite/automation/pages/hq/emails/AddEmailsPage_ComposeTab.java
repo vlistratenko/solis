@@ -4,6 +4,7 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.TextBox;
+import com.salsalabs.ignite.automation.elements.VE2Elements.TextVEElement;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -12,7 +13,6 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	DropDown selectScheme = new DropDownImpl("//custom-select-scheme/div[@class='custom dropdown scheme']", "a", "Select Scheme");
 	ContentEditTextBoxImpl subjectField = new ContentEditTextBoxImpl("//iframe[contains(@title,'subjectCkEditor')]" ,"//*[@contenteditable='true']", "Subject", true);
-	ContentEditTextBoxImpl textElementContent = new ContentEditTextBoxImpl("//iframe[contains(@title,'ckeditor')]" ,"//*[@contenteditable='true']", "Email Template body", true);
 	Button addLinkButtonMenu = new ButtonImpl("//a[@title='Link']", "Add link on the menu");
 	Button addBodyMergeFieldButtonMenu = new ButtonImpl("//div[@id='textEditModal']/descendant::a[@title='Insert a merge field']", "Insert a body merge field");
 	Button addSubjectMergeFieldButtonMenu = new ButtonImpl("//div[@id='cke_subjectCkEditor']/descendant::a[@title='Insert a merge field']", "Insert a subject merge field");
@@ -59,7 +59,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		firstContentElement.clickJS();
 		firstEditBtn.click();
 		sleep(5);
-		//textElementContent.click();
+		//Text.Text.textElementContent.click();
 		switchDefaultContent();
 		addBodyMergeFieldButtonMenu.click();
 		mergeFildsList.waitElement(10);//sleep(5);
@@ -71,7 +71,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			defaultTextField.type(mergeFildsList.getCellValue(i, 1));
 			okButton.highlight();
 			okButton.click();
-			textElementContent.sendENTERKey();
+			TextVEElement.textElementContent.sendENTERKey();
 			if (i < fieldsCount) {
 				addBodyMergeFieldButtonMenu.click();
 			}			
@@ -133,8 +133,8 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			firstContentElement.highlight();
 			firstContentElement.click();
 			firstEditBtn.click();
-			textElementContent.type("Link: ");
-			switchDefaultContent();
+			TextVEElement.textElementContent.type("Link: ");
+			//switchDefaultContent();
 			addLinkButtonMenu.click();
 			sleep(5);
 			addExternalLink.click();

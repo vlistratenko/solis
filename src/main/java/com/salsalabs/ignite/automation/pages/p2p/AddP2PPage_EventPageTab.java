@@ -1,8 +1,9 @@
 package com.salsalabs.ignite.automation.pages.p2p;
 
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Checkout;
 import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Events;
-import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
+import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Registration;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 
 public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
@@ -13,26 +14,37 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	Button confirmationViewSubTab = new ButtonImpl("//a[.='Confirmation View']", "Confirmation View subtab ");
 	Button elementsButton = new ButtonImpl("//button[@title='Content Elements']", "VE Elements button");
 	Button clickNextToFundraiserPage = new ButtonImpl("//button[@id='btnGo-compose-composePersonal']", "Next: Fundraiser Page Template");
+	/*
+	Panel droppedRegisterElement = new PanelImpl("//div[@class='registration']", "Registration in the VE");
+	Panel droppedRegisterButtonElement = new PanelImpl("//a[.='Register']", "Register button in the VE");
+	Panel droppedDonateButtonElement = new PanelImpl("//a[contains(., 'Donate')]", "Donate button in the VE");*/
 	
 	public AddP2PPage_EventPageTab_EventPageSubTab openEventPageSubTab() {
 		eventPageSubTab.click();
+		eventVEPanel.waitElement(15);
 		return new AddP2PPage_EventPageTab_EventPageSubTab();
 	}
 	
 	public AddP2PPage_EventPageTab_RegistrationSubTab openRegistrationSubTab() {
 		registrationSubTab.click();
+		registrationVEPanel.waitElement(15); 
 		return new AddP2PPage_EventPageTab_RegistrationSubTab();
 	}
 	
 	public AddP2PPage_EventPageTab_CheckoutSubTab openCheckoutSubTab() {
 		checkoutSubTab.waitElement(10);
 		checkoutSubTab.click();
+		checkoutVEPanel.waitElement(15);
 		return new AddP2PPage_EventPageTab_CheckoutSubTab();
 	}
 	
-	public AddP2PPage_EventPageTab_ConfirmationViewSubTab openConfirmationViewSubTab() {
+	@SuppressWarnings("unchecked")
+	public T openConfirmationViewSubTab() {
+		confirmationViewSubTab.waitElement(15);
+		confirmationViewSubTab.scrollIntoView();
 		confirmationViewSubTab.click();
-		return new AddP2PPage_EventPageTab_ConfirmationViewSubTab();
+		confirmationVEPanel.waitElement(15);
+		return (T)this;
 	}
 	
 	public AddP2PPage_EventPageTab<T> openElementsPupUp() {
@@ -40,7 +52,8 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 		return this;
 	}
 	
-	public AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab clickNextButton() {
+	public AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab clickNextToEventPageButton() {
+		clickNextToFundraiserPage.waitElement(15);
 		clickNextToFundraiserPage.click();
 		return new AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab();
 	}
@@ -57,4 +70,39 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 		new P2PFormElements_Events().performDrop(P2PFormElements_Events.VE.TEXT);
 		return (T)this;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public T editVETextElement(String value){
+		textElement.enterText(value);
+		return (T)this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T dropVEFormElement(){
+		new P2PFormElements_Events().performDrop(P2PFormElements_Checkout.VE.FORM);
+		//droppedFormElement.waitElement(15);
+		return (T)this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T dropVERegisterButtonElement(){
+		new P2PFormElements_Events().performDrop(P2PFormElements_Events.VE.REGISTERBUTTON);
+		//droppedRegisterButtonElement.waitElement(15);
+		return (T)this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T dropVEREgistrationElement(){
+		new P2PFormElements_Events().performDrop(P2PFormElements_Registration.VE.REGISTRATION);
+		//droppedRegisterElement.waitElement(10);
+		return (T)this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public T dropVEDonateButtonElement(){
+		new P2PFormElements_Events().performDrop(P2PFormElements_Events.VE.DONATEBUTTON);
+		//droppedDonateButtonElement.waitElement(10);
+		return (T)this;
+	}
+	
 }

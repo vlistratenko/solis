@@ -10,7 +10,7 @@ public class PanelImpl extends ElementImpl implements Panel {
 
 	@Override
 	public Integer getElementsCount() {
-		return findElementsByXpath(path).size();
+		return findElementsByXpathWithOutWait(path).size();
 	}
 
 	public PanelImpl(String elementPath, String elementName, int number) {

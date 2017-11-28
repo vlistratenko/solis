@@ -9,6 +9,7 @@ public class AddP2PPage_RegistrationsTab_InformationCollectedTab extends AddP2PP
 	Button continueButton = new ButtonImpl("//a[contains(.,'Continue')]", "Continue button");
 	
 	public AddP2PPage_RegistrationsTab_OptionalPurchasesTab clickContinueButton() {		
+		gzFrame.waitElement(15);
 		switchToFrame(gzFrame.getPath());
 		breadCrumbsLink.waitElement(10);
 		continueButton.click();

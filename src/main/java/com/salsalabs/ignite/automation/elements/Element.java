@@ -18,6 +18,8 @@ public interface Element {
 	String getPath();
 
 	void changePath(String old, String newPath);
+	
+	void changePathAndElementName(String old, String newPath, String elName);
 
 	void scrollIntoView();
 	
@@ -37,6 +39,8 @@ public interface Element {
 
 	boolean waitElement();
 	
+	boolean waitElementWithPageRefresh(int amountOfRefreshes);
+	
 	boolean waitElement(int seconds);
 	
 	void waitElementWithFail(int seconds) throws Exception;
@@ -50,6 +54,8 @@ public interface Element {
 	String getAttribute(String attrName);
 
 	void moveAndClick();
+	
+	void dragAndDrop(Panel panel);
 
 	WebElement getLastElement();
 

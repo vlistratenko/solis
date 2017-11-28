@@ -14,9 +14,6 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -101,11 +98,7 @@ public class SupportersAddPage extends HomePage {
 		supporterTwitterField.type(supporter.getTwitter());
 		supporterLnField.type(supporter.getLinkedin());
 		saveButton.click();
-		for (int i = 0; i < 3; i++) {
-			if (waitConditionBecomesTrue(supporterTable.isDisplayed(), 5))
-				;
-			break;
-		}
+		supporterTable.waitElement(20);
 		return new SupportersPage();
 	}
 
@@ -317,11 +310,7 @@ public class SupportersAddPage extends HomePage {
 		}
 
 		saveButton.click();
-		for (int i = 0; i < 3; i++) {
-			if (waitConditionBecomesTrue(supporterTable.isDisplayed(), 5))
-				;
-			break;
-		}
+		supporterTable.waitElement(20);
 		return new SupportersPage();
 	}
 }

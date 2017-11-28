@@ -86,10 +86,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage publishForm() {
 		openPublishStepButton.click();
 		sleep(5);
-		for(int i = 0; i <3; i++){
+		nextResultButton.waitElement(30);
+		/*for(int i = 0; i <3; i++){
 			if(waitConditionBecomesTrue(nextResultButton.isDisplayed(), 5));
 			break;
-		}
+		}*/
 		
 		return this;
 	}

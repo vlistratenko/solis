@@ -1,47 +1,35 @@
 package com.salsalabs.ignite.automation.suites;
 
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
-import com.salsalabs.ignite.automation.common.Supporter;
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.segments.SegmentsAddPage;
-import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersAddPage;
-import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
+import com.salsalabs.ignite.automation.common.SeleneseTestCase_Debug;
+
+import java.util.List;
+
+import org.openqa.selenium.logging.LogEntry;
+import org.testng.annotations.Test;
+
 
 public class WNGTest extends SeleneseTestCase {
 	
-	private SupportersAddPage supporterAddPage;
-	private SupportersPage supportersPage;
-	private Supporter supporter;
-	
-	
-	@Test(enabled = true, groups = { "createSegment"}, retryAnalyzer = RetryAnalyzer.class)
-	public void createCustomSegmentTest(){
+	@Test(enabled = true, groups = { "createSegment"}, retryAnalyzer = RetryAnalyzer.class, description = "Syndication:1")
+	public void createCustomSegmentTest() throws Exception{
+		
+		List<LogEntry> list = getJsConsoleErrors();
+		System.err.println(list.size());
+		
+		//CommonUtils.getListOfFilesInFolder();
+		/*String[] processesToKill = {"chromedriver"};
+		String processName = CommonUtils.isProcessRunning("chromedriver");
+		if (!processName.equals("")) {
+			CommonUtils.killProcess(processName);
+		}*/
+		/*System.err.println("Test is done");
+		throw new ElementNotFoundException("Test locator", "xpath", "Test  v message");*/
 
-		LoginPage loginPage = new LoginPage();
-		loginPage.
-		doSuccessLogin("704.3e41c646@mailosaur.in",  "!QAZ2wsx");
-		
-		loginPage.open("https://hq.test.ignite.net/#/audience/supporters/query/f83c85dc-8cb3-4c00-9c6e-a78cc1f61a8a");
-		
-	
-		SegmentsAddPage segPage = new SegmentsAddPage();
-		String firstLevelItems[] = segPage.getListOfAvailableActivityTypeItems();
-		for (int i = 0; i < firstLevelItems.length; i++) {
-			System.err.println(firstLevelItems[i]);
-		}
 	}
 	
 	/*

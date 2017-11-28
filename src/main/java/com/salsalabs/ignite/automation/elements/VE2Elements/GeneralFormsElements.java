@@ -1,8 +1,12 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
+import com.salsalabs.ignite.automation.elements.Panel;
+import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
+
 public class GeneralFormsElements<T> {
 
     VEElements element = null;
+    private Panel generalElementPanel = new PanelImpl("//div[@class='content-render']", "Element panel");
     
     public enum veRows {
         ONECOLUMN
@@ -12,12 +16,22 @@ public class GeneralFormsElements<T> {
 
     public T performDrop(Enum<?> ve) {
         String value = ve.name();
+        int elementsCount = generalElementPanel.getElementsCount()+1;
         switch (value) {
-            case "TEXT": {element = new Text("//*[contains(text(),'Text')]", "Text element"); element.drop(); break;}
-            case "FORM_FIELD": {element = new FormField("//*[@class='icon-insert-template']//*[.='Form Field']", "Form Field element"); element.drop(); break;}
+            case "TEXT": {element = new TextVEElement("//*[contains(text(),'Text')]", "Text element"); element.drop(); break;}
+            case "FORM_FIELD": {FormField.formFieldElement.drop(); break;}
             case "ONECOLUMN": {element = new OneColumnRow("//*[contains(text(),'1-Column')]", "One column Row element"); element.drop(); break;}
             case "FORM": {element = new Form("//span[.='Form']", "Form element"); element.drop(); break;}
-        } return (T) this;
+            case "REGISTERBUTTON": {element = new ButtonVEElement("//span[.='Register Button']", "Register Button"); element.drop(); break;}
+            case "REGISTRATION": {element = new ButtonVEElement("//span[.='Registration']", "Registration"); element.drop(); break;}
+            case "DONATEBUTTON": {element = new ButtonVEElement("//span[.='Donate Button']", "Donate Button"); element.drop(); break;}
+            
+        } 
+        if (!value.contains("COLUMN") && !value.contains("FORM_FIELD")) {
+        	generalElementPanel.changePath("", generalElementPanel.getPath() + "[" + elementsCount + "]");
+            generalElementPanel.waitElement(10);
+		}
+        return (T) this;
     }
 
     public T performEdit(Enum<?> ve, String fieldName) {

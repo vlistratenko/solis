@@ -3,7 +3,7 @@
 	thread-count="1">
 
 	<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
-	<parameter name="USED_SERVER" value="LOCAL"></parameter>
+	<parameter name="USED_SERVER" value="REMOTE"></parameter>
 	<parameter name="login" value="823.3e41c646@mailosaur.in"></parameter>
 	<parameter name="password" value="!QAZ2wsx"></parameter>
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
@@ -14,7 +14,7 @@
 		<parameter name="teamFormURL" value="https://testvco823.test.igniteaction.net/p2pform20171005184832/t/testeranonimusteam20171009113833/index.html"></parameter>
 		<groups>
 			<run>
-				<include name="p2p.formFields.createFormWithAnonymous" />
+				<include name="notready_p2p.*" />
 			</run>
 		</groups>
 		<classes>

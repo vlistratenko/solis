@@ -18,6 +18,8 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
+import com.salsalabs.ignite.automation.elements.Panel;
+
 import org.openqa.selenium.support.ui.Wait;
 
 public abstract class ElementImpl implements Element {
@@ -120,6 +122,19 @@ public abstract class ElementImpl implements Element {
 	}
 	
 	@Override
+	public boolean waitElementWithPageRefresh(int amountOfRefreshes) {
+		for (int i = 0; i < amountOfRefreshes; i++) {
+			if (isElementPresent(path)) {
+				return true;
+			}else {
+				driver.navigate().refresh();
+				sleep(30);
+			}
+		}		
+		return false;
+	}
+	
+	@Override
 	public boolean waitElement(int seconds){
 		return waitObject(path, seconds * 1000);
 	}
@@ -136,6 +151,17 @@ public abstract class ElementImpl implements Element {
 			this.path = this.path.replace(old, newPath);
 		}
 		
+	}
+	
+	@Override
+	public void changePathAndElementName(String old, String newPath, String elName) {
+		if (old.equals("")) {
+			this.path = newPath;
+			this.elementName = elName;
+		}else{
+			this.path = this.path.replace(old, newPath);
+			this.elementName = this.elementName.replace(old, elName);
+		}
 	}
 
 	@Override
@@ -185,11 +211,24 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void moveAndClick() {
-		new Actions(driver).moveToElement(findElementByXpath(path)).perform();
+		getActionBuilder().moveToElement(findElementByXpath(path)).release().perform();
 		click();
 
 	}
+	
+	public void moveToElement() {
+		moveToElement(path);
+	}
 
+	@Override
+	public void dragAndDrop(Panel targetPanel) {
+		targetPanel.waitElement(15);
+		targetPanel.scrollIntoView();
+		waitElement(10);
+		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
+
+	}
+	
 	@Override
 	public void clickByNumber(Integer number) {
 		logger.info(elementName + " was clicked.");
@@ -281,7 +320,7 @@ public abstract class ElementImpl implements Element {
 
 	protected void moveToElement(String locator) {
 		logger.debug("Move to element < " + locator + " >.");
-		getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
+		getActionBuilder().moveToElement(findElementByXpath(locator)).release().perform();
 	}
 
 	protected void onClick(WebElement element) {
@@ -685,16 +724,20 @@ public abstract class ElementImpl implements Element {
 	@Override
 	public List<WebElement> findElementsByXpath(String xpath) {
 		setImplicity(30);
-		List<WebElement> l = findElementsByXpathWithOutWait(xpath);
+		logger.debug("Try to find elements " + xpath);
+		List<WebElement> elem = driver.findElements(By.xpath(xpath));
 		setImplicity(defaultTimeOut);
-		return l;
+		logger.debug(elem.size() + " elements were found");
+		return elem;
 
 	}
 
 	protected List<WebElement> findElementsByXpathWithOutWait(String xpath) {
 		xpath.replace("[0]", "");
 		logger.debug("Try to find elements " + xpath);
+		setImplicity(0);
 		List<WebElement> elem = driver.findElements(By.xpath(xpath));
+		setImplicity(defaultTimeOut);
 		logger.debug(elem.size() + " elements were found");
 
 		return elem;

@@ -52,7 +52,7 @@ public abstract class Browser {
 	public LoginPage logOut() {
 		deletecoockies();
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
-		sleep(5);
+		//sleep(5);
 		return new LoginPage();
 	}
 	
@@ -107,7 +107,7 @@ public abstract class Browser {
 
 	protected void deletecoockies() {
 		SeleneseTestCase.deletecoockies();
-		sleep(5);
+		sleep(2);
 	}
 
 	protected Set<Cookie> getCoockies() {
@@ -143,6 +143,7 @@ public abstract class Browser {
 
 	protected void switchToFrame(String xpath) {
 		driver.switchTo().frame(driver.findElement(By.xpath(xpath)));
+		sleep(2);
 	}
 
 	protected void switchDefaultContent() {

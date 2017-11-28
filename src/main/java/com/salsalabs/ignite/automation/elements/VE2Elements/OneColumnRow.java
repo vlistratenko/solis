@@ -1,7 +1,10 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
 public class OneColumnRow extends VEElements {
-    OneColumnRow(String ownPath, String name) {
+    
+	static String pathAfterDrop = "//div[@autotest-id='render-container-division-12']/descendant::div[contains(@class, 'ui-droppable')]";
+	
+	OneColumnRow(String ownPath, String name) {
         super(ownPath, name);
     }
 

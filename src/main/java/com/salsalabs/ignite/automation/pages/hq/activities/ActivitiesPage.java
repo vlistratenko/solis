@@ -18,7 +18,7 @@ public class ActivitiesPage extends HomePage {
 	Button allActivitiesTab = new ButtonImpl("//a[@autotest-id='ALL']", "All Activities");
 	Button signupFormsTab = new ButtonImpl("//a[@autotest-id='SUBSCRIBE']", "Sign-Up Forms");
 	Button petitionTab = new ButtonImpl("//a[@autotest-id='PETITION']", "Petitions");
-	Button p2pTab = new ButtonImpl("//a[@autotest-id='P2P_EVENT']", "Petitions");
+	Button p2pTab = new ButtonImpl("//a[@autotest-id='P2P_EVENT']", "p2p");
 	CheckBox selectFirstWidget = new CheckBoxImpl("//table[starts-with(@id,'JColResizer')]/tbody/tr[1]/td[1]/input", "Select First Row");
 	Button deleteButton = new ButtonImpl("//a[@ng-click='confirmDelete()']", "Delete Selected");
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']//button[2]", "Yes, delete already!");
@@ -52,6 +52,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public p2psPage openP2PPage() {
+		p2pTab.waitElement(10);
 		p2pTab.click();
 		return new p2psPage();
 	}

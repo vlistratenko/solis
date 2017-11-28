@@ -25,5 +25,6 @@ public class P2PFormElements_Checkout extends GeneralFormsElements<P2PFormElemen
         TEAMSEARCH,
         FUNDRAISERSEARCH,
         LEADERBOARD,
-        GOALTRACKER;}
+        GOALTRACKER,
+        FORM_FIELD;}
 }
