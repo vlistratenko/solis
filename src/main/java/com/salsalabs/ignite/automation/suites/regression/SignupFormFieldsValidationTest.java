@@ -31,13 +31,10 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
     @BeforeGroups(groups = {"signupFormFieldsValidation"})
     public void generateCustomFieldsViaAPI(ITestContext context, String login, String password){
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
+
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2000").
-                setDateFieldMaxDateApi("09/15/2030").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField supporterTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterTextBoxCustomField", "FieldDescription").
@@ -65,11 +62,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
 
         CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("signupActivityDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2017").
-                setDateFieldMaxDateApi("09/15/2018").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField activityNumberCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("signupActivityNumberCustomField", "FieldDescription").
@@ -224,7 +217,6 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
-
         SubscribeWidget signupForm2 = new SubscribeWidget();
         signupForm2.fillSubscribeWidgetAllCustomFields(
                 supporterEmail,
@@ -277,8 +269,7 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
         addSignupFormsPage.openSubscribeWidget();
-
-        SubscribeWidget signupForm3 = addSignupFormsPage.openSubscribeWidget();
+        SubscribeWidget signupForm3 = new SubscribeWidget();
         signupForm3.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
     }
@@ -324,8 +315,8 @@ public class SignupFormFieldsValidationTest extends SeleneseTestCase {
         formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addSignupFormsPage.goToAutorespondersTab();
         addSignupFormsPage.publishFromAutoresponders();
-
-        SubscribeWidget signupForm4 = addSignupFormsPage.openSubscribeWidget();
+        addSignupFormsPage.openSubscribeWidget();
+        SubscribeWidget signupForm4 = new SubscribeWidget();
         signupForm4.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
     }

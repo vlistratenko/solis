@@ -35,11 +35,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2000").
-                setDateFieldMaxDateApi("09/15/2030").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField supporterTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterTextBoxCustomField", "FieldDescription").
@@ -67,11 +63,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
         CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("petitionActivityDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2017").
-                setDateFieldMaxDateApi("09/15/2018").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField activityNumberCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("petitionActivityNumberCustomField", "FieldDescription").
@@ -276,7 +268,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
-        SubscribeWidget petitionForm3 = addPetitionPage.openSubscribeWidget();
+        SubscribeWidget petitionForm3 = new SubscribeWidget();
         petitionForm3.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
     }
@@ -323,7 +315,8 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
-        SubscribeWidget petitionForm4 = addPetitionPage.openSubscribeWidget();
+        addPetitionPage.openSubscribeWidget();
+        SubscribeWidget petitionForm4 = new SubscribeWidget();
         petitionForm4.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
     }

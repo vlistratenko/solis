@@ -41,11 +41,7 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
             logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
             CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                     getCustomFieldApiGenerator("supporterDateTimeCustomField", "FieldDescription").
-                    setControlType("DATETIME").
-                    setDateFieldMinDateApi("09/15/2000").
-                    setDateFieldMaxDateApi("09/15/2030").
-                    setDateFieldMinTimeApi("10:30pm").
-                    setDateFieldMaxTimeApi("11:30pm"));
+                    setControlType("DATETIME"));
 
             CustomFieldsPage.CustomField supporterTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                     getCustomFieldApiGenerator("supporterTextBoxCustomField", "FieldDescription").
@@ -73,11 +69,7 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
 
             CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                     getCustomFieldApiGenerator("fundraisingActivityDateTimeCustomField", "FieldDescription").
-                    setControlType("DATETIME").
-                    setDateFieldMinDateApi("09/15/2017").
-                    setDateFieldMaxDateApi("09/15/2018").
-                    setDateFieldMinTimeApi("10:30pm").
-                    setDateFieldMaxTimeApi("11:30pm"));
+                    setControlType("DATETIME"));
 
             CustomFieldsPage.CustomField activityNumberCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                     getCustomFieldApiGenerator("fundraisingActivityNumberCustomField", "FieldDescription").
@@ -328,7 +320,8 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
             formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
             addDonationPage.goToAutorespondersTab();
             addDonationPage.publishFromAutoresponders();
-            SubscribeWidget fundraisingForm4 = addDonationPage.openSubscribeWidget();
+            addDonationPage.openSubscribeWidget();
+            SubscribeWidget fundraisingForm4 = new SubscribeWidget();
             fundraisingForm4.clickOnSubmitFormButton().
                     verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
         }
