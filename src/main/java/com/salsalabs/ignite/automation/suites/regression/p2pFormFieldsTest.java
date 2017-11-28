@@ -150,7 +150,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		eventp2pWidgetPage.
 		findTeamViaSearchFieldAndClick(CommonUtils.getParam(PropertyName.LAST_TEAM_NAME)).
 		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);
-		
+		CommonUtils.checkAndFail("varifyAnonimusOptionOnExistedFormForTeamPage");
 	}	
 	
 	/**
@@ -190,7 +190,8 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 			eventFundraiserWidgetPage.open(formURL);
 		
 		eventFundraiserWidgetPage.
-		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);		
+		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);	
+		CommonUtils.checkAndFail("varifyAnonimusOptionOnExistedFormForTeamPage");
 	}
 	
 	/**
@@ -230,7 +231,9 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		eventTeamWidgetPage.open(formURL);
 		
 		eventTeamWidgetPage.
-		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);		
+		verifyNameForLastDonotByDonationAmount("Anonymous", donationAmount, donationAmount);	
+		
+		CommonUtils.checkAndFail("varifyAnonimusOptionOnExistedFormForTeamPage");
 	}
 	
 /*

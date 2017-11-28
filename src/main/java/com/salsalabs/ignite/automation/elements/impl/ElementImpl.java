@@ -128,7 +128,9 @@ public abstract class ElementImpl implements Element {
 				return true;
 			}else {
 				driver.navigate().refresh();
-				sleep(30);
+				if (waitElement()) {
+					return true;
+				}
 			}
 		}		
 		return false;
