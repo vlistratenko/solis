@@ -159,7 +159,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	 */
 	@Parameters({ "fundraiserFormURL"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.AnonymousForFundraiserPage" }, description = "")
-	public void varifyAnonimusOptionOnExistedFormForFundrPage(String formURL) {
+	public void verifyAnonimusOptionOnExistedFormForFundrPage(String formURL) {
 
 		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
 		loginPage = new LoginPage(true);
@@ -200,7 +200,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	 */
 	@Parameters({ "teamFormURL"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.AnonymousForTeamPage" }, description = "")
-	public void varifyAnonimusOptionOnExistedFormForTeamPage(String formURL) {
+	public void verifyAnonimusOptionOnExistedFormForTeamPage(String formURL) {
 
 		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
 		loginPage = new LoginPage(true);
