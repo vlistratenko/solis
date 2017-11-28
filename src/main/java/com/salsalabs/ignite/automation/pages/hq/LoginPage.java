@@ -45,6 +45,7 @@ public class LoginPage extends Browser{
 	public LoginPage(boolean doLogOut){
 		if (doLogOut) {
 			logOut();
+			deletecoockies();
 		}
 	}
 	

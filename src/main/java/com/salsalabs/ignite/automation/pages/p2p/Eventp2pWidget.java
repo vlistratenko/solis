@@ -102,6 +102,10 @@ public class Eventp2pWidget extends EventWidget {
 	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
 			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {		
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		if (!createFundraiserAccountButton.waitElement(5)) {
+			new ButtonImpl("//div[@class='checkout_logout']/a", "Fundraiser logout link").click();
+		}
+		createFundraiserAccountButton.waitElement();
 		createFundraiserAccountButton.click();
 		fundraiserFNameField.waitElement(5);
 		fundraiserFNameField.type(fundraiserFName);
