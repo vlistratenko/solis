@@ -107,7 +107,7 @@ public abstract class Browser {
 
 	protected void deletecoockies() {
 		SeleneseTestCase.deletecoockies();
-		sleep(2);
+		sleep(5);
 	}
 
 	protected Set<Cookie> getCoockies() {
