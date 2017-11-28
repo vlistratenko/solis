@@ -216,7 +216,7 @@ public class LoginPage extends Browser{
 	
 	private void openWidget(String string) {
 		String currentWindowHandle = super.openInNewWindow(string);		
-		//sleep(5);
+		sleep(5);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);	
 	}
 	

@@ -90,7 +90,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		clickPublishButton().
 		storeEventLink(formName);
 		
-		varifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
+		verifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	 */
 	@Parameters({ "formURL"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.Anonymous" }, description = "")
-	public void varifyAnonimusOptionOnExistedForm(String formURL) throws Exception {
+	public void verifyAnonimusOptionOnExistedForm(String formURL) throws Exception {
 
 		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
 		//CommonUtils.setParam("fundraiserName", "Tester.Anonimus20171006144447");
