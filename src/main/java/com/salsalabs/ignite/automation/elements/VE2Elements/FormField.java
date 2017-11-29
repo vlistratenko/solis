@@ -1,6 +1,6 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindowBasic;
+import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 
 public class FormField extends VEElements {
     
@@ -16,9 +16,9 @@ public class FormField extends VEElements {
     }
     
 
-    public FormFieldConfigurationModalWindowBasic dropToForm() {
+    public FormFieldConfigurationModalWindow dropToForm() {
     	dragAndDropElementOnElement(Form.droppedFormElement);
-    	return new FormFieldConfigurationModalWindowBasic();
+    	return new FormFieldConfigurationModalWindow();
     }
     
     @Override

@@ -28,7 +28,7 @@
 		<suite-file path="src/main/resources/xml-tests/regression/SignupFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/SocailMediaPagesTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/SubscriptionManagementTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/regression/SupporterQueryBuilderTest.xml" />	
+		<suite-file path="src/main/resources/xml-tests/regression/SupporterQBSupporterFieldsTest.xml" />	
 		<suite-file path="src/main/resources/xml-tests/regression/EmailDefaultsTest.xml" />
 	</suite-files>
 </suite>

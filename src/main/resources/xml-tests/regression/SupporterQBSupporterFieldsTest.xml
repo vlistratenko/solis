@@ -16,7 +16,7 @@
 		</groups>
 		<classes>
 			<class
-				name="com.salsalabs.ignite.automation.suites.regression.SupporterQueryBuilderTest" />
+				name="com.salsalabs.ignite.automation.suites.regression.SupporterQBSupporterFieldsTest" />
 		</classes>
 	</test>
 </suite>

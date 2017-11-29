@@ -4,6 +4,7 @@ package com.salsalabs.ignite.automation.common;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -39,6 +40,7 @@ import org.json.JSONObject;
 
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 
+import static java.lang.Thread.sleep;
 
 
 public class HttpClient {
@@ -522,7 +524,7 @@ public class HttpClient {
 		return -1;
 	}
 	
-	private String getSupporterDetailsInJSON(String email) throws ClientProtocolException, URISyntaxException, IOException, JSONException {
+	private String getSupporterDetailsInJSON(String email) throws URISyntaxException, IOException, JSONException {
 		sendGETRequest(new Supporter().getSupportersRequest(email, ""));//"https://" + host + "/api/search/supporters?criteria=" + email + "&listOffset=0&listResults=250&sortField=createdDate&sortOrder=DESCENDING");
 		String temp = JSONResponse.get(0);
 		String id = jsonParser(temp, "payload.supporters.0.id").toString();
@@ -530,6 +532,46 @@ public class HttpClient {
 		sendGETRequest(new Supporter().getSupporterRequest(id, true));//"https://" + host + "/api/person/supporter/" + id + "?includeCustomFields=true");
 		return JSONResponse.get(0);
 	}
-	
-	
+
+	public String createGateway(JSONObject supp) {
+		try {
+			sendPOSTRequest("https://" + host + "/api/organization/paymentConfiguration", supp.toString());
+			for (String temp : JSONResponse) {
+				try {
+					return jsonParser(temp, "payload.id").toString();
+				} catch (JSONException e) {
+					logger.error("", e);
+				}
+			}
+		} catch (URISyntaxException | IOException e) {
+			logger.error("", e);
+		}
+		return "";
+	}
+
+	public void waitUntilSupporterExists(String email, int seconds) {
+		for(int i = 0; i <=seconds; i++) {
+			try {
+				sleep(1000);
+				if(isSupporterExists(email)) break;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public boolean isSupporterExists(String email) {
+		boolean isExists = true;
+		try {
+			sendGETRequest(new Supporter().getSupportersRequest(email, ""));
+			String temp = JSONResponse.get(0);
+			String id = jsonParser(temp, "payload.supporters.0.id").toString();
+			if (id.isEmpty() || id=="") {
+				isExists = false;
+			logger.info("Supporter with email "+email+ " is not found.");}
+		} catch (URISyntaxException | IOException | JSONException e) {
+			e.printStackTrace();
+		}
+		return isExists;
+	}
 }

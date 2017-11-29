@@ -35,7 +35,6 @@ public class DonationWidget extends SubscribeWidget {
 			"Input for donation amount for one time donations");
 	TextBoxImpl donationAmountrecurringInput = new TextBoxImpl("//input[@name='customRecurringAmount']",
 			"Input for donation amount for recurring donations");
-
 	TextBoxImpl donationRecuringAmountInput = new TextBoxImpl("//input[@name='customRecurringAmount']",
 			"Input for recuring donation amount");
 	TextBoxImpl donationOneTimeAmountInput = new TextBoxImpl("//input[@name='customOneTime']",
@@ -49,8 +48,13 @@ public class DonationWidget extends SubscribeWidget {
 	Button donateNewFormButton = new ButtonImpl("//a[contains(text(), 'Donate')]", "Donate", true);
 	Button nextButton = new ButtonImpl("//a[contains(text(), 'Next')]", "Next Button");
 	Table checkoutSummaryTable = new TableImpl("//table[@class='sli-checkout-summary-table']", "CheckoutSummaryTable");
-
 	Label donationIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Donation is success");
+	TextBox pleaseNotifyField = new TextBoxImpl("//input[@name='field-donationsummary-notify']", "Please notify field");
+	TextBox dedicationFieldTextField = new TextBoxImpl("//input[@name='dedication']", "Dedication field text area");
+	Button dedicationFieldInHonorRadioButton = new ButtonImpl("//*[@type='radio'][@value='InHonorOf']", "Dedication field In Honor radio button");
+	SelectBoxImpl designationField = new SelectBoxImpl("//select[@name='designation']", "Designation list");
+	Label missingDonationAmountMessage = new LabelImpl("//*[@class='sli-field-error'][@data-fv-for='donationAmtToggle']","Error message for missing donation amount");
+
 	protected Boolean isEvent = false;
 
 	public DonationWidget() {
@@ -59,6 +63,50 @@ public class DonationWidget extends SubscribeWidget {
 
 	public DonationWidget(boolean clean) {
 		super(clean);
+	}
+
+	public DonationWidget fillDonationWidgetAllCustomFields (String supporterTextBoxCustomFieldValue, String supporterNumberCustomFieldValue, String supporterDateTimeCustomFieldValue, String activityTextBoxCustomFieldValue,
+															 String activityNumberCustomFieldValue, String activityDateTimeCustomFieldValue, String personEmail, String personFName, String personLName,
+															 String personAddressLine1, String personCity, String personZip, String state, String donationAmount, String nameOnCard,
+															 String cardNumber, String cvv, String expiryMonth, String expiryYear){
+		super.fillSubscribeWidgetAllCustomFields(personEmail, personFName, personLName,supporterTextBoxCustomFieldValue, supporterNumberCustomFieldValue,
+				supporterDateTimeCustomFieldValue, activityTextBoxCustomFieldValue, activityNumberCustomFieldValue,activityDateTimeCustomFieldValue);
+		this.fillCreditCardDetails(donationAmount, cardNumber, cvv, expiryMonth, expiryYear, nameOnCard);
+		personAddressLine1Field.type(personAddressLine1);
+		personCityField.type(personCity);
+		personZipField.type(personZip);
+		personStatesSelectBox.selectByValue(state);
+		return this;
+	}
+
+	public DonationWidget fillDonationWidgetAllSupporterFields(String cardNumber, String securityCode, String expirationMonth, String expirationYear,
+															   String nameOnCard, String personEmail, String personFName, String personLName, String personCity,
+															   String personZip, String state, String addressLine1, String addressLine2, String gender, String homePhone,
+															   String personMName, String language, String suffix, String title, String workPhone, String cellPhone,
+															   String country, String dateOfBirth, String dedication, String pleaseNotify, String designation, String amount){
+		this.fillDonationFormSpecificSupporterFields(designation, dedication, pleaseNotify);
+		super.fillSubscribeWidgetAllSupporterFields(personEmail, personFName, personLName, personCity, personZip, state, addressLine1, addressLine2, gender, homePhone,
+													personMName, language, suffix, title, workPhone, cellPhone, country, dateOfBirth);
+		this.fillCreditCardDetails(amount, cardNumber, securityCode, expirationMonth, expirationYear, nameOnCard);
+		return this;
+	}
+
+	public DonationWidget fillCreditCardDetails(String amount, String cardNumber, String securityCode, String expirationMonth, String expirationYear, String nameOnCard) {
+		donationAmountInput.type(amount);
+		nameOnCardField.type(nameOnCard);
+		cardNumberField.type(cardNumber);
+		cvvField.type(securityCode);
+		expiryMonthField.selectByLabel(expirationMonth);
+		expiryYearField.selectByLabel(expirationYear);
+		return this;
+	}
+
+	public DonationWidget fillDonationFormSpecificSupporterFields(String designation, String dedication, String pleaseNotify) {
+		designationField.selectByLabel(designation);
+		dedicationFieldInHonorRadioButton.click();
+		dedicationFieldTextField.type(dedication);
+		pleaseNotifyField.type(pleaseNotify);
+		return this;
 	}
 
 	@Override
@@ -372,5 +420,31 @@ public class DonationWidget extends SubscribeWidget {
 		closeWindow();
 		switchToWindow(CommonUtils.getProperty(PropertyName.CURRENT_WINDOW_HANDLE));
 		return new AddDonationWidgetPage();
+	}
+
+	public void verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFieldsAndDonation(){
+		verifier.verifyTrue(missingDonationAmountMessage.isDisplayed(), "Validation message is not displayed despite donation amount is not specified");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Card Number"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Security Code"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Expiration Month"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Expiration Year"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Name on Card"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Phone"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Middle Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Preferred Language"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Suffix"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Title"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Work Phone"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Email Address"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("First Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Last Name"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 1"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("City"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("State"), "'This field requires a value' validation message is not displayed");
+		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Zip Code"), "'This field requires a value' validation message is not displayed");
 	}
 }

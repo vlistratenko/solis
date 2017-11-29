@@ -3,9 +3,8 @@ package com.salsalabs.ignite.automation.pages.p2p;
 import com.salsalabs.ignite.automation.elements.DragableElement;
 import com.salsalabs.ignite.automation.elements.VE2Elements.Form;
 import com.salsalabs.ignite.automation.elements.VE2Elements.FormField;
-import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Checkout;
 import com.salsalabs.ignite.automation.elements.impl.DragableElementImp;
-import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindowBasic;
+
 
 public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPageTab<AddP2PPage_EventPageTab_CheckoutSubTab> {
 
