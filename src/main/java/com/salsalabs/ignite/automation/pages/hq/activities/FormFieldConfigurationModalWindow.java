@@ -73,7 +73,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
-        if(supporterFieldNames.isEmpty()) initializeListWithAllSupporterFields();
+        initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
@@ -90,7 +90,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
-        if(supporterFieldNames.isEmpty()) initializeListWithAllSupporterFields();
+        initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
