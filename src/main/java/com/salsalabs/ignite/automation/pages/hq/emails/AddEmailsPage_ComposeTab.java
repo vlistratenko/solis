@@ -76,7 +76,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 				addBodyMergeFieldButtonMenu.click();
 			}			
 		}
-		saveContent.waitElement(10);
+		saveContent.waitElement();
 		saveContent.click();
 		return this;
 	}

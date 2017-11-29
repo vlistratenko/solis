@@ -25,7 +25,7 @@ public class AddP2PPage extends HomePage{
 	public AddP2PPage selectLayout(String layout) {
 		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
 		Panel img = new PanelImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::img[contains(@alt, '" + layout + "')]", layout + " layout image");
-		img.waitElement(15);
+		img.waitElement();
 		lay.click();
 		return this;
 	}

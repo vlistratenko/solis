@@ -41,7 +41,7 @@ public class ImportDonationsPage extends HomePage {
 			String externalId, String ammount , boolean recurring) {
 		importListOfDonations.click();
 		if (!importName.isDisplayed()) {
-			importName.waitElement(30);
+			importName.waitElement();
 		}
 		importName.type(nameImport);
 		waitConditionBecomesTrue(browseTheFileButton.isDisplayed(), 5);
@@ -81,7 +81,7 @@ public class ImportDonationsPage extends HomePage {
 			}
 		iAmDone.click();
 		sleep(2);
-		importComplete.waitElement(20);		
+		importComplete.waitElement();		
 		return this;
 	}	
 	

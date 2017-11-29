@@ -21,29 +21,29 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	
 	public AddP2PPage_EventPageTab_EventPageSubTab openEventPageSubTab() {
 		eventPageSubTab.click();
-		eventVEPanel.waitElement(15);
+		eventVEPanel.waitElement();
 		return new AddP2PPage_EventPageTab_EventPageSubTab();
 	}
 	
 	public AddP2PPage_EventPageTab_RegistrationSubTab openRegistrationSubTab() {
 		registrationSubTab.click();
-		registrationVEPanel.waitElement(15); 
+		registrationVEPanel.waitElement(); 
 		return new AddP2PPage_EventPageTab_RegistrationSubTab();
 	}
 	
 	public AddP2PPage_EventPageTab_CheckoutSubTab openCheckoutSubTab() {
-		checkoutSubTab.waitElement(10);
+		checkoutSubTab.waitElement();
 		checkoutSubTab.click();
-		checkoutVEPanel.waitElement(15);
+		checkoutVEPanel.waitElement();
 		return new AddP2PPage_EventPageTab_CheckoutSubTab();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public T openConfirmationViewSubTab() {
-		confirmationViewSubTab.waitElement(15);
+		confirmationViewSubTab.waitElement();
 		confirmationViewSubTab.scrollIntoView();
 		confirmationViewSubTab.click();
-		confirmationVEPanel.waitElement(15);
+		confirmationVEPanel.waitElement();
 		return (T)this;
 	}
 	
@@ -53,7 +53,7 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	}
 	
 	public AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab clickNextToEventPageButton() {
-		clickNextToFundraiserPage.waitElement(15);
+		clickNextToFundraiserPage.waitElement();
 		clickNextToFundraiserPage.click();
 		return new AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab();
 	}

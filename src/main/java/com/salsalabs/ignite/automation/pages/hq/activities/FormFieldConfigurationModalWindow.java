@@ -108,7 +108,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         
     public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {
     	selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
-    	selectFieldButton.waitElement(15);
+    	selectFieldButton.waitElement();
     	selectFieldButton.click();
     	return this;
 	}

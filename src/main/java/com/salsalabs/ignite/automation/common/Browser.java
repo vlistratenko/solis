@@ -28,14 +28,14 @@ public abstract class Browser {
 	protected static WebDriver driver;
 	protected static Logger logger;
 	protected static Verifier verifier = new Verifier();
-	int cTimeOut;
+	protected int dTimeOut = 30;
 	String elementName;
 	Integer defaultTimeOut;
 
 	public Browser() {
 		driver = SeleneseTestCase.driver;
 		logger = SeleneseTestCase.logger;
-		cTimeOut = SeleneseTestCase.cTimeOut;
+		dTimeOut = SeleneseTestCase.cTimeOut;
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 	}
 

@@ -34,7 +34,7 @@ public class AssetsPage extends HomePage {
 	Button closeFallBackMessage = new ButtonImpl("//a[@class='close']", "Close Asset FallBackMessage");
 	
 	public AssetsPage clickAddAnAssetButton() {
-		addAnAsset.waitElement(15);
+		addAnAsset.waitElement();
 		addAnAsset.click();
 		return new AssetsPage();
 	}
@@ -59,7 +59,7 @@ public class AssetsPage extends HomePage {
 	public AssetsPage searchAndDeleteImage(String imageToDelete) {
 		assertSerachInput.type(imageToDelete);
 		assertSerachButton.click();
-		topPartOfEveryImages.waitElement(20);
+		topPartOfEveryImages.waitElement();
 		topPartOfEveryImages.moveAndClick();
 		waitConditionBecomesTrue(deleteButton.isDisplayed(), 4);
 		deleteButton.click();

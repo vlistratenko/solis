@@ -87,7 +87,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage publishForm() {
 		openPublishStepButton.click();
 		sleep(5);
-		nextResultButton.waitElement(30);
+		nextResultButton.waitElement();
 		/*for(int i = 0; i <3; i++){
 			if(waitConditionBecomesTrue(nextResultButton.isDisplayed(), 5));
 			break;
@@ -133,6 +133,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	
 	protected <T> T openWidget(Class<T> clazz) {
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
+		widgetLink.fluentWaitForElementPresenceIgnoringExceptions();
 		if (!widgetLink.isNotDisplayed()) {
 			CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
 		}		
@@ -264,7 +265,7 @@ public class AddSubscribeWidgetPage extends HomePage {
     public AddSubscribeWidgetPage proceedToTheNextAutoresponderStep() {
         sleep(10);
         Button nextAutoresponder = new ButtonImpl("//button[@title='Next: Autoresponders']" , "Next Autoresponder Step");
-        nextAutoresponder.waitElement(20);
+        nextAutoresponder.waitElement();
         nextAutoresponder.click();
         sleep(10);
         return this;

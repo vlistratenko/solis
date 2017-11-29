@@ -52,7 +52,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public p2psPage openP2PPage() {
-		p2pTab.waitElement(10);
+		p2pTab.waitElement();
 		p2pTab.click();
 		return new p2psPage();
 	}

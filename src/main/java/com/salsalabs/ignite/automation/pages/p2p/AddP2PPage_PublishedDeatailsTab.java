@@ -11,13 +11,13 @@ public class AddP2PPage_PublishedDeatailsTab extends AddP2PPage {
 	
 	public void clickOnEventLink(String eventName) {
 		p2pEventLink.changePath("formNameForReplacement", eventName.replaceAll(" ", ""));
-		p2pEventLink.waitElement(30);
+		p2pEventLink.waitElement();
 		p2pEventLink.click();
 	}
 	
 	public void storeEventLink(String eventName) {
 		p2pEventLink.changePath("formNameForReplacement", eventName.replaceAll(" ", ""));
-		p2pEventLink.waitElement(30);
+		p2pEventLink.waitElement();
 		CommonUtils.setParam(PropertyName.P2P_FORM_LINK, p2pEventLink.getAttribute("href"));
 	}
 }

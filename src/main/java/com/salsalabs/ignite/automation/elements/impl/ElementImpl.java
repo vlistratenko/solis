@@ -224,7 +224,7 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void dragAndDrop(Panel targetPanel) {
-		targetPanel.waitElement(15);
+		targetPanel.waitElement();
 		targetPanel.scrollIntoView();
 		waitElement(10);
 		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
@@ -310,7 +310,7 @@ public abstract class ElementImpl implements Element {
 	}
 
 	/**
-	 * @param cTimeOut
+	 * @param dTimeOut
 	 *            in seconds
 	 */
 

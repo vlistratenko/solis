@@ -12,24 +12,24 @@ public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> 
 	
 	@SuppressWarnings("unchecked")
 	public T openDonateSubTab() {
-		donateSubTab.waitElement(5);
+		donateSubTab.waitElement();
 		donateSubTab.scrollIntoView();
 		donateSubTab.click();
-		checkoutVEPanel.waitElement(15);
+		checkoutVEPanel.waitElement();
 		return (T)this;
 	}
 	
 	public AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab openPersonalFundraisingPageSubTab() {
-		personalFundraisingPageSubTab.waitElement(5);
+		personalFundraisingPageSubTab.waitElement();
 		if (!personalFundraisingPageSubTab.isNotExists()) {
 			personalFundraisingPageSubTab.click();
 		}
-		eventVEPanel.waitElement(15);
+		eventVEPanel.waitElement();
 		return new AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab();
 	}
 	
 	public AddP2PPage_TeamPageTab_TeamFundraisingSubTab clickNextToTeamTabButton() {
-		clickNextToTeamPage.waitElement(15);
+		clickNextToTeamPage.waitElement();
 		clickNextToTeamPage.click();
 		return new AddP2PPage_TeamPageTab_TeamFundraisingSubTab();
 	}

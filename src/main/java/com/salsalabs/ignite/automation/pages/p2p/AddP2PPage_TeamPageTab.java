@@ -12,7 +12,7 @@ public class AddP2PPage_TeamPageTab<T> extends AddP2PPage_FundraiserPageTab<T>  
 		if (!teamFundraisingPageSubTab.isNotExists()) {
 			teamFundraisingPageSubTab.click();
 		}
-		eventVEPanel.waitElement(15);
+		eventVEPanel.waitElement();
 		return new AddP2PPage_TeamPageTab_TeamFundraisingSubTab();
 	}
 	

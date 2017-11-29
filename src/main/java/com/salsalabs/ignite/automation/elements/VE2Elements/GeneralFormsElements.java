@@ -29,7 +29,7 @@ public class GeneralFormsElements<T> {
         } 
         if (!value.contains("COLUMN") && !value.contains("FORM_FIELD")) {
         	generalElementPanel.changePath("", generalElementPanel.getPath() + "[" + elementsCount + "]");
-            generalElementPanel.waitElement(10);
+            generalElementPanel.waitElement();
 		}
         return (T) this;
     }
