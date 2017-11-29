@@ -24,6 +24,7 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 	TextBox dateBefore = new TextBoxImpl("//input[@name='dateBefore']", "DateBefore Value");
 	TextBox dateAfter = new TextBoxImpl("//input[@name='dateAfter']", "DateAfter  Value");
 	TextBox calendar = new TextBoxImpl("//input[@type='text']", "Calendar Value");
+	public Button closeSelectBoxOption = new ButtonImpl("//multi-select[contains(@ng-if, 'MULTI')]//span[@class='close']", "Close select Box Option");
 	
 	public SupporterQueryBuilderPage createNewQuery() {
 		createNewQueryButton.click();
@@ -182,6 +183,18 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 		}
 		return this;
 	}
+	
+	public SupporterQueryBuilderPage checkThatShowResultBottonIsNotDisplayedIfSelectOptionIsCleared() {
+		closeSelectBoxOption.click();
+		sleep(1);
+		if(showResultsButton.isNotExists()){
+		logger.info("Show result Button is not displayed");
+		}else {
+			throw new AssertionError("Show Result Button Displays But should not, because The select box options  is erased");
+		}
+		return this;
+	}
+	
 	
 	public SupporterQueryBuilderPage checkThatShowResultBottonIsNotDisplayedIfSearchCalendarValueIsCleared(boolean twoOperators) {
 		if(twoOperators){
