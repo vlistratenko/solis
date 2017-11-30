@@ -31,13 +31,6 @@ public abstract class ElementImpl implements Element {
 	int defaultTimeOut;
 	boolean isRequeired = true;
 
-	static
-    {
-		driver = SeleneseTestCase.driver;
-		logger = SeleneseTestCase.logger;
-		logger.info("Driver is reinitialized in the ElementImpl class");
-    }
-	
 	public ElementImpl(String elementPath, String name) {
 		this.path = elementPath;
 		driver = SeleneseTestCase.driver;
@@ -233,7 +226,7 @@ public abstract class ElementImpl implements Element {
 	public void dragAndDrop(Panel targetPanel) {
 		targetPanel.waitElement();
 		targetPanel.scrollIntoView();
-		waitElement(10);
+		waitElement();
 		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
 
 	}

@@ -96,10 +96,10 @@ public abstract class Browser {
 		driver.navigate().refresh();
 		logger.info("Page is refreshed");
 	}
-
+/*
 	protected void close() {
 		SeleneseTestCase.close();
-	}
+	}*/
 
 	protected void closeWindow() {
 		SeleneseTestCase.closeWindow();

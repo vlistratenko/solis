@@ -14,10 +14,9 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import org.apache.tools.ant.taskdefs.condition.Http;
+import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
 import org.json.JSONException;
 import org.openqa.selenium.TimeoutException;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -226,11 +225,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
-		Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
-		lay.scrollIntoView();
-		lay.fluentWaitForElementPresenceIgnoringExceptions();
-		lay.click();
+	public AddSubscribeWidgetPage selectLayoutStep(String layout) {		
+		basicLayoutClass.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
 		sleep(10);
