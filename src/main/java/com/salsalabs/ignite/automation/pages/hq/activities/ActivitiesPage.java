@@ -97,6 +97,17 @@ public class ActivitiesPage extends HomePage {
 		return null;
 	}
 	
+	public <T> T openPublicFormFromTable(Class<T> clazz) {
+		activitiesTable.scrollIntoView();
+		new ButtonImpl(activitiesTable.getPath() + "/tbody/tr/td[@title='PUBLIC']/div/span/span", "Click First Found Public Form").click();
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			logger.error("", e);
+		}
+		return null;
+	}
+	
 	public AddSubscribeWidgetPage openSignupWidgetFromTable() {
 		return openFormFromTable(AddSubscribeWidgetPage.class);
 	}
@@ -107,6 +118,10 @@ public class ActivitiesPage extends HomePage {
 	
 	public AddPetitionPage openPetitionFromTable() {
 		return openFormFromTable(AddPetitionPage.class);
+	}
+	
+	public AddPetitionPage openPublishedPetitionFromTable() {
+		return openPublicFormFromTable(AddPetitionPage.class);
 	}
 	
 	// try to remove and click Yes on confirmation dialog
