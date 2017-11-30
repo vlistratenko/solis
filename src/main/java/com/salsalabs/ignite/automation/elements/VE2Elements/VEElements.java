@@ -123,6 +123,7 @@ public class VEElements extends ElementImpl {
     }
     
     private void openContentElementsPopup() {
+    	elementsVe.waitElement();
     	elementsVe.scrollIntoView();
         elementsVe.click();
         getLogger().info("Elements menu was clicked");

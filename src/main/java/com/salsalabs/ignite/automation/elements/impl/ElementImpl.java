@@ -24,13 +24,20 @@ import org.openqa.selenium.support.ui.Wait;
 
 public abstract class ElementImpl implements Element {
 	String path;
-	WebDriver driver;
-	Logger logger;
+	static WebDriver driver;// = SeleneseTestCase.driver;
+	static Logger logger;
 	int cTimeOut;
 	String elementName;
 	int defaultTimeOut;
 	boolean isRequeired = true;
 
+	static
+    {
+		driver = SeleneseTestCase.driver;
+		logger = SeleneseTestCase.logger;
+		logger.info("Driver is reinitialized in the ElementImpl class");
+    }
+	
 	public ElementImpl(String elementPath, String name) {
 		this.path = elementPath;
 		driver = SeleneseTestCase.driver;
