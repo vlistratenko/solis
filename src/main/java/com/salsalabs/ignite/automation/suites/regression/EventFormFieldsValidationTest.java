@@ -9,6 +9,8 @@ import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
+import com.salsalabs.ignite.automation.pages.hq.event.AddEventPageComposeTabCheckout;
+import com.salsalabs.ignite.automation.pages.hq.event.AddEventPageComposeTabRegistration;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomFieldsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.PaymentGatewaysPage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -27,14 +29,62 @@ import java.security.NoSuchAlgorithmException;
 @Test(groups = {"eventFormFieldsValidation"})
 public class EventFormFieldsValidationTest extends SeleneseTestCase {
 
-        private AddDonationWidgetPage addDonationPage;
-        private FormFieldConfigurationModalWindow formFieldConfigurationModal;
-        private PaymentGatewaysPage paymentGatewaysPage;
-        private String widgetName;
-        private String widgetDescription;
-        private String supporterEmail;
-        private String gatewayName;
+        @Parameters({"login","password"})
+        @Test(retryAnalyzer = RetryAnalyzer.class)
+        public void testCreatePublishSubmitEventFormRequiredEmptyCustomFields(String login, String password){
+                new LoginPage().doSuccessLogin(login, password)
+                        .openActivitiesPage()
+                        .openEventsPage()
+                        .clickCreateAnEventButton()
+                        .specifyEventReferenceName("EventForm_" + RandomStringUtils.randomAlphanumeric(5))
+                        .specifyEventPublicilyVisibleName("EventFormPublicName_" + RandomStringUtils.randomAlphanumeric(5))
+                        .clickNextButtonInSetupTab()
+                        .specifyTicketName("TicketName_" + RandomStringUtils.randomAlphanumeric(5))
+                        .clickSaveTicketInfoButton()
+                        .clickContinueButton()
+                        .clickNextButtonInTicketsTab()
+                        .selectLayout("Blank")
+                        .clickNextButtonInSelectLayoutTab()
+                        .dropOneColumnRow()
+                        .dropRegisterButton()
+                        .goToRegistrationWizardStep();
+                new AddEventPageComposeTabRegistration()
+                        .dropOneColumnRow()
+                        .dropRegistration()
+                        .goToCheckoutWizardStep();
+                new AddEventPageComposeTabCheckout()
+                        .dropOneColumnRow()
+                        .dropVEFormElement();
+                new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
+                new AddEventPageComposeTabCheckout()
+                        .clickNextButtonInComposeTab()
+                        .clickPublishOnAutorespondersTab();
 
-    }
+                        /*.openSubscribeWidgetsPage()
+                        .openAddSubscribeWidgetPage();
+                addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
+                addSignupFormsPage.selectLayoutStep("Blank");
+                addSignupFormsPage.dropOneColumnRow();
+                addSignupFormsPage.dropVEFormElement();
+                formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
+                formFieldConfigurationModal.dropFormFieldByName("signupActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("signupActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("signupActivitySingleChoiceCustomField").saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("signupActivityYesNoCustomField").saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("signupActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+                formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+                addSignupFormsPage.goToAutorespondersTab();
+                addSignupFormsPage.publishFromAutoresponders();
+                addSignupFormsPage.openSubscribeWidget();
+                SubscribeWidget signupForm4 = new SubscribeWidget();
+                signupForm4.clickOnSubmitFormButton().
+                        verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
+        }*/
+
+    }}
 
 
