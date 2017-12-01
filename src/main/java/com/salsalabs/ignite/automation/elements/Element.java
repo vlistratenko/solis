@@ -41,6 +41,8 @@ public interface Element {
 	
 	boolean waitElementWithPageRefresh(int amountOfRefreshes);
 	
+	boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes);
+	
 	boolean waitElement(int seconds);
 	
 	void waitElementWithFail(int seconds) throws Exception;
@@ -74,5 +76,7 @@ public interface Element {
 	void fluentWaitForElementPresenceIgnoringExceptions();
 
 	void fluentWaitForElementPresenceIgnoringExceptions(int waitingTime);
+
+	boolean waitForExists(Integer timeOut);
 
 }

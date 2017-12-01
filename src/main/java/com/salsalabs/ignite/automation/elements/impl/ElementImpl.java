@@ -137,6 +137,20 @@ public abstract class ElementImpl implements Element {
 	}
 	
 	@Override
+	public boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes) {
+		for (int i = 0; i < amountOfRefreshes; i++) {
+			
+			if (!isNotExists()) {
+				return true;
+			}else {
+				driver.navigate().refresh();
+				sleep(defaultTimeOut);
+			}
+		}		
+		return false;
+	}
+	
+	@Override
 	public boolean waitElement(int seconds){
 		return waitObject(path, seconds * 1000);
 	}
@@ -245,7 +259,7 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public boolean isNotExists() {
-		logger.info("Check that " + elementName + " is not exists.");
+		logger.info("Check that " + path + " is not exists.");
 		return isNotElementPresent(path);
 	}
 
@@ -260,6 +274,18 @@ public abstract class ElementImpl implements Element {
 	public boolean waitForNotExists(Integer timeOut) {
 		for (int i = 0; i < timeOut; i++) {
 			if (isNotExists()) {
+				break;
+			} else {
+				sleep(1);
+			}
+		}
+		return isNotExists();
+	}
+	
+	@Override
+	public boolean waitForExists(Integer timeOut) {
+		for (int i = 0; i < timeOut; i++) {
+			if (!isNotExists()) {
 				break;
 			} else {
 				sleep(1);
@@ -301,7 +327,7 @@ public abstract class ElementImpl implements Element {
 	 */
 	protected void sleep(int seconds) {
 		try {
-			logger.debug("Sleep on " + seconds + " seconds");
+			logger.info("Sleep on " + seconds + " seconds");
 			Thread.sleep(seconds * 1000);
 			logger.debug("Sleep on is over");
 		} catch (InterruptedException e) {

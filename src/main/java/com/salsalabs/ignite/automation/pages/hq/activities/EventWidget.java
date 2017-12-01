@@ -16,7 +16,7 @@ import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 public class EventWidget extends DonationWidget {
 	
 	Label donorsList = new LabelImpl(
-			"//div[contains(@class, 'sli-donor-list-results')]/descendant::div[.='$amountToReplace.00']/preceding-sibling::div[@class='sli-donor-name']",
+			"//div[contains(@class, 'sli-donor-list-results')]/descendant::div[.='$amountToReplace']/preceding-sibling::div[@class='sli-donor-name']",
 			"");
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
 	TextBox eventPersonLNameField = new TextBoxImpl("//input[contains(@id,'last_name')]", "Event attendees Last name", true);
@@ -172,8 +172,11 @@ public class EventWidget extends DonationWidget {
 	
 	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount) {
 		donorsList.changePath("amountToReplace", donationAmount);
-		donorsList.waitElementWithPageRefresh(5);
-		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
+		if (donorsList.isNotExists()) {
+			donorsList.waitElementIsExistWithPageRefresh(5);
+		}
+		String t = donorsList.getText();
+		verifier.verifyEquals(t, donorName, "Wrong donor name");
 		
 	}
 }

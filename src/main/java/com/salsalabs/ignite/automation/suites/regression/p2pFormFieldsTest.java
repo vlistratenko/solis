@@ -102,7 +102,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.Anonymous" }, description = "")
 	public void verifyAnonimusOptionOnExistedForm(String formURL) throws Exception {
 
-		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
+		String donationAmount = CommonUtils.getRandomValue(10000, 2);
 		//CommonUtils.setParam("fundraiserName", "Tester.Anonimus20171006144447");
 		loginPage = new LoginPage(true);
 		Eventp2pWidget eventp2pWidgetPage = loginPage.
@@ -161,7 +161,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.AnonymousForFundraiserPage" }, description = "")
 	public void verifyAnonimusOptionOnExistedFormForFundrPage(String formURL) {
 
-		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
+		String donationAmount = CommonUtils.getRandomValue(10000, 2);
 		loginPage = new LoginPage(true);
 		EventFundraiserWidgetPage eventFundraiserWidgetPage = loginPage.
 				openp2pEventFundraiserWidgetByLink(formURL);
@@ -202,7 +202,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.AnonymousForTeamPage" }, description = "")
 	public void verifyAnonimusOptionOnExistedFormForTeamPage(String formURL) {
 
-		String donationAmount = CommonUtils.getRandomNumericValueFixedLength(2);
+		String donationAmount = CommonUtils.getRandomValue(10000, 2);
 		loginPage = new LoginPage(true);
 		EventTeamWidgetPage eventTeamWidgetPage = loginPage.
 				openp2pEventTeamWidgetByLink(formURL);
@@ -210,7 +210,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 				openDonationPageOnFundraiserForm()
 				.fillFundraiserDonationForm(SeleneseTestCase.emailClient.getEmailBox("Anonimus" + CommonUtils.getRandomNumericValueFixedLength(4)),
 				"Tester",
-				"Anonimus",
+				"Anonimus + CommonUtils.getRandomNumericValueFixedLength(4)",
 				"10753 blix",
 				"North holliwood",
 				"91602",
