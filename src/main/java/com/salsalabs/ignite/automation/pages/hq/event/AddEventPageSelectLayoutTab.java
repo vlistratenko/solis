@@ -17,8 +17,8 @@ public class AddEventPageSelectLayoutTab extends HomePage {
 
     public AddEventPageSelectLayoutTab selectLayout(String layout) {
         Button lay = new ButtonImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::button[contains(@ng-click,'selectItem')]", layout + " layout");
-        lay.scrollIntoView();
         lay.fluentWaitForElementPresenceIgnoringExceptions();
+        lay.scrollIntoView();
         lay.click();
         return this;
     }
