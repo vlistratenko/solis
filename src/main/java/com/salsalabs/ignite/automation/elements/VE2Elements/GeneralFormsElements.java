@@ -17,6 +17,8 @@ public class GeneralFormsElements<T> {
             case "FORM_FIELD": {element = new FormField("//*[@class='icon-insert-template']//*[.='Form Field']", "Form Field element"); element.drop(); break;}
             case "ONECOLUMN": {element = new OneColumnRow("//*[contains(text(),'1-Column')]", "One column Row element"); element.drop(); break;}
             case "FORM": {element = new Form("//span[.='Form']", "Form element"); element.drop(); break;}
+            case "REGISTERBUTTON": {element = new RegisterButton("//*[@class='icon-clipboard icon-small']//span[.='Register Button']","Register Button element");element.drop(); break;}
+            case "REGISTRATION": {element = new Registration("//*[@class='icon-clipboard']//span[.='Registration']","Registration element");element.drop(); break;}
         } return (T) this;
     }
 
