@@ -26,7 +26,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 	public static final String supporterDateTime = "Supdatetime";
 	public static final String supporterSingleChoice = "Supsinglechoice";
 	
-	// custom fields - Text Box
+	  // custom fields - Text Box
 	  @Parameters({"login", "Passward"})
 	  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 	  public void customFieldTextBoxEqualsTest(String login, String passward){
@@ -44,9 +44,9 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 		  checkThatShowResultBottonIsNotDisplayedIfSearchValueIsCleared();
 	  }
 	
-	// custom fields - Text Box
+	  //custom fields - Text Box
 	  @Parameters({"login", "Passward"})
-	   @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
+	  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 	  public void customFieldTextBoxNotEqualsTest(String login, String passward){
 		  String numerOfExpectedRecordsInTable= String.valueOf(getListOfAllSupportersIOrg(login, passward));
 		  doLoginAndOpenSupporterQbPage(login, passward ).
@@ -61,7 +61,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 		  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 	  }
 	
-	// custom fields - Text Box
+	      // custom fields - Text Box
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldTextBoxContainsTest(String login, String passward){
@@ -76,10 +76,9 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkErrorMessage().
 			  checkSupporterEmailInTable(supporterExpectedEmail).
 			  checkNumberOfRecordsInTable("1");
-	
 		  }
 		  
-		// custom fields - Text Box
+		  //custom fields - Text Box
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldTextBoxDoesNotContainTest(String login, String passward){
@@ -96,7 +95,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 		  }
 		  
-		// custom fields - Text Box
+		  //custom fields - Text Box
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldTextBoxStartsWithTest(String login, String passward){
@@ -113,7 +112,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNumberOfRecordsInTable("1");
 		  }
 		  
-		// custom fields - Text Box
+		  //custom fields - Text Box
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void  customFieldTextBoxrIsBlank(String login, String passward){
@@ -128,7 +127,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNoResultsIsReturned();
 		  }
 		  
-		// custom fields - Text Box
+		 //custom fields - Text Box
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void  customFieldTextBoxrIsNotBlank(String login, String passward){
@@ -144,7 +143,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 		  }
 		  
-		// custom fields - Number
+		 //custom fields - Number
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldNumberEqualsTest(String login, String passward){
@@ -162,9 +161,9 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkThatShowResultBottonIsNotDisplayedIfSearchValueIsCleared();
 		  }
 		  
-		// custom fields - Number 
+		//custom fields - Number 
 		  @Parameters({"login", "Passward"})
-		   @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
+		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldNumberNotEqualsTest(String login, String passward){
 			  String numerOfExpectedRecordsInTable= String.valueOf(getListOfAllSupportersIOrg(login, passward));
 			  doLoginAndOpenSupporterQbPage(login, passward ).
@@ -451,7 +450,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 		  }
 		  
-			// custom fields - Single Choice
+		  //custom fields - Single Choice
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldSingleChoiceTest(String login, String passward){

@@ -177,7 +177,7 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 		enterValueInput.clear();
 		sleep(1);
 		if(showResultsButton.isNotExists()){
-		logger.info("Show result Button is not displayed");
+			logger.info("Show result Button is not displayed");
 		}else {
 			throw new AssertionError("Show Result Button Displays But should not, because the input field is erased");
 		}
@@ -188,7 +188,7 @@ public class SupporterQueryBuilderPage extends AudiencePage {
 		closeSelectBoxOption.click();
 		sleep(1);
 		if(showResultsButton.isNotExists()){
-		logger.info("Show result Button is not displayed");
+			logger.info("Show result Button is not displayed");
 		}else {
 			throw new AssertionError("Show Result Button Displays But should not, because The select box options  is erased");
 		}
