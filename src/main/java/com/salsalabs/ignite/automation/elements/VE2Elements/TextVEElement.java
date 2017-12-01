@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.impl.ContentEditTextBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 
@@ -17,8 +16,7 @@ public class TextVEElement extends VEElements {
     @Override
     public void drop() {
         dragAndDropElementOnLayoutWithFormElement();
-    }
-    
+    }    
 
     public void enterText(String text) {
     	droppedTextElement.moveToElement();
@@ -26,21 +24,6 @@ public class TextVEElement extends VEElements {
         textElementContent.type(text);
         super.save();
     }
-/*
-    @Override
-    public VEElements configure(VEElements el) {
-        return null;
-    }
-
-    @Override
-    public VEElements edit(VEElements el) {
-        return null;
-    }
-
-    @Override
-    public VEElements delete(VEElements el) {
-        return null;
-    }*/
     
     protected String getTextElementPath() {
 		return textElementContent.getPath(); 
