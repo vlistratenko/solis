@@ -23,19 +23,5 @@ public class SignupFormElements extends GeneralFormsElements<SignupFormElements>
         RSIDEBAR,
         HEADER,
         FOOTER;}
-    
-    
-
-
-/*    public SignupFormElements performDrop(VE el) {
-        super.drop(el);
-        return new SignupFormElements();
-    }
-
-    public SignupFormElements performEdit(VE el, String fieldLabel) {
-        super.edit(el, fieldLabel);
-        return new SignupFormElements();
-    }*/
-
 
 }

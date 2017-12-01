@@ -7,7 +7,7 @@ public class GeneralFormsElements<T> {
 
     VEElements element = null;
     private Panel generalElementPanel = new PanelImpl("//div[@class='content-render']", "Element panel");
-    
+
     public enum veRows {
         ONECOLUMN
     }
@@ -25,8 +25,8 @@ public class GeneralFormsElements<T> {
             case "REGISTERBUTTON": {element = new ButtonVEElement("//span[.='Register Button']", "Register Button"); element.drop(); break;}
             case "REGISTRATION": {element = new ButtonVEElement("//span[.='Registration']", "Registration"); element.drop(); break;}
             case "DONATEBUTTON": {element = new ButtonVEElement("//span[.='Donate Button']", "Donate Button"); element.drop(); break;}
-            
-        } 
+
+        }
         if (!value.contains("COLUMN") && !value.contains("FORM_FIELD")) {
         	generalElementPanel.changePath("", generalElementPanel.getPath() + "[" + elementsCount + "]");
             generalElementPanel.waitElement();
