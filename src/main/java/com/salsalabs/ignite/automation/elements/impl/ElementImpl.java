@@ -140,7 +140,7 @@ public abstract class ElementImpl implements Element {
 	public boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes) {
 		for (int i = 0; i < amountOfRefreshes; i++) {
 			
-			if (!isNotExists()) {
+			if (isExists()) {
 				return true;
 			}else {
 				driver.navigate().refresh();
@@ -261,6 +261,15 @@ public abstract class ElementImpl implements Element {
 	public boolean isNotExists() {
 		logger.info("Check that " + path + " is not exists.");
 		return isNotElementPresent(path);
+	}
+	
+	public boolean isExists() {
+		logger.info("Check that " + path + " is exists.");
+		Browser.implicityWait(1);
+		boolean is = findElementsByXpathWithOutWait(path).size() > 0;
+		logger.debug("isElementPresent returns " + is);
+		Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
+		return is;
 	}
 
 	@Override

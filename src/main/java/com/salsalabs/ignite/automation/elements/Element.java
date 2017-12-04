@@ -50,6 +50,7 @@ public interface Element {
 	String getName();
 
 	boolean isNotExists();
+	boolean isExists();
 
 	void clickByNumber(Integer number);
 
