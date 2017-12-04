@@ -15,18 +15,18 @@ public class FrameImpl extends ElementImpl implements Frame {
     }
 
     public void switchToFrame() {
-        logger.debug("Trying to switch to " + this.elementName);
-        getDriver().switchTo().frame(this.path);
+        logger.debug("Switching to " + this.elementName);
+        getDriver().switchTo().frame(findElementByXpath(this.getPath()));
     }
 
     public void switchToDefaultContent() {
-        logger.debug("Trying to switch to default content section");
+        logger.debug("Switching to default content section");
         getDriver().switchTo().defaultContent();
     }
 
     public void switchToFrame(int index) {
-        logger.debug("Trying to switch to frame with index = " + index);
-        driver.switchTo().frame(index);
+        logger.debug("Switching to frame with index = " + index);
+        getDriver().switchTo().frame(index);
     }
 
     public void swithToFrameWithFluentWait(int waitingTime){
@@ -38,8 +38,8 @@ public class FrameImpl extends ElementImpl implements Frame {
                     .withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
                             " was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
             logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
-                    " is present and clickable");
-            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(this.path));
+                    " is present and clickable AND switching to it then");
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(findElementByXpath(this.getPath())));
         }
     }
 
