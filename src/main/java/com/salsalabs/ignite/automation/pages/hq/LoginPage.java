@@ -54,7 +54,8 @@ public class LoginPage extends Browser{
 	
 	public HomePage doSuccessLogin(String userName, String password) {
 		open();
-		sleep(3);
+		waitUntilAngularIsComplete();
+		//sleep(3);
 		if(new HomePage().dashboardTab.isNotExists()) {
 			//logOut();
 			LoginField.type(userName);

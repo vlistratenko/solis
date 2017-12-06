@@ -1,9 +1,7 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.VE2Elements.EventFormElementsEventPage;
-import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
 public class AddEventPageComposeTabEventPage extends HomePage implements AddEventPageComposeTabPage{
 

@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;

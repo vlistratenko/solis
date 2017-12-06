@@ -8,9 +8,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.*;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.salsalabs.ignite.automation.common.Browser;
@@ -18,7 +16,6 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
-import org.openqa.selenium.support.ui.Wait;
 
 public abstract class ElementImpl implements Element {
 	String path;
@@ -871,15 +868,9 @@ public abstract class ElementImpl implements Element {
 				.ignoreAll(exceptionsList)
 				.withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
 						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
-
-		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
+		logger.debug("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
 				" is present and clickable");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
-
-
-
-	
-	
 }

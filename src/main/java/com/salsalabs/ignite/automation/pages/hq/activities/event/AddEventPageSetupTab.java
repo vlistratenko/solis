@@ -1,10 +1,11 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
 public class AddEventPageSetupTab extends HomePage {
 

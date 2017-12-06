@@ -57,7 +57,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 		widgetNameField.type(widgetName); 
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
-		sleep(5);
+		waitUntilAngularIsComplete();
+		//sleep(5);
 		return  this;		
 	}
 	
@@ -231,7 +232,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 		lay.click();
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
-		sleep(10);
+		waitUntilAngularIsComplete();
+		//sleep(10);
 	    return this;
 	}
 
@@ -242,6 +244,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage dropVEFormElement(){
 		new SignupFormElements().performDrop(SignupFormElements.VE.FORM);
+		waitUntilAngularIsComplete();
+		sleep(1);
 		return this;
 	}
 

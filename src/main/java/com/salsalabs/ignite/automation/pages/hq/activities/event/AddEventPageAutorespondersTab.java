@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
@@ -8,10 +8,10 @@ public class AddEventPageAutorespondersTab extends HomePage{
 
     Button publishThisEvent = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']","Publish This Event Button");
 
-    public AddEventPageAutorespondersTab clickPublishOnAutorespondersTab(){
+    public AddEventWidgetPage clickPublishOnAutorespondersTab(){
         publishThisEvent.fluentWaitForElementPresenceIgnoringExceptions();
         publishThisEvent.click();
-        return this;
+        return new AddEventWidgetPage();
     }
 
 }

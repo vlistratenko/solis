@@ -25,6 +25,8 @@ import java.util.Random;
 
 import org.apache.logging.log4j.Logger;
 import org.junit.ComparisonFailure;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 public class CommonUtils {
@@ -527,4 +529,9 @@ public class CommonUtils {
 	    }
 	}
 
+	public static ExpectedCondition<Boolean> angularHasFinishedProcessing() {
+		return webDriver -> Boolean.valueOf(((JavascriptExecutor) webDriver).executeScript("return (window.angular !== undefined)" +
+				" && (angular.element(document).injector() !== undefined)" +
+				" && (angular.element(document).injector().get('$http').pendingRequests.length === 0)").toString());
+	}
 }

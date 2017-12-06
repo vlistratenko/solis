@@ -1,6 +1,5 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
-import com.salsalabs.ignite.automation.elements.VE2Elements.EventFormElementsEventPage;
 import com.salsalabs.ignite.automation.elements.VE2Elements.EventFormElementsRegistration;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
@@ -15,6 +14,7 @@ public class AddEventPageComposeTabRegistration extends HomePage implements AddE
     }
 
     public AddEventPageComposeTabRegistration dropRegistration(){
+        sleep(2);
         new EventFormElementsRegistration().performDrop(EventFormElementsRegistration.VE.REGISTRATION);
         return this;
     }
