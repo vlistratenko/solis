@@ -9,6 +9,11 @@ public class AddEventPageComposeTabEventPage extends HomePage implements AddEven
         return AddEventPageComposeTabPage.super.dropOneColumnRow(this.getClass());
     }
 
+    public AddEventPageComposeTabEventPage dropDonateButton(){
+        new EventFormElementsEventPage().performDrop(EventFormElementsEventPage.VE.DONATEBUTTON);
+        return this;
+    }
+
     public AddEventPageComposeTabEventPage dropRegisterButton(){
         new EventFormElementsEventPage().performDrop(EventFormElementsEventPage.VE.REGISTERBUTTON);
         return this;
