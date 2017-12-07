@@ -3,6 +3,7 @@ package com.salsalabs.ignite.automation.suites.regression;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 import com.salsalabs.ignite.automation.pages.hq.activities.event.AddEventPageComposeTabCheckout;
 import com.salsalabs.ignite.automation.pages.hq.activities.event.AddEventPageComposeTabRegistration;
@@ -14,11 +15,12 @@ import org.testng.annotations.Test;
 @Test(groups = {"eventFormFieldsValidation"})
 public class EventFormFieldsValidationTest extends SeleneseTestCase {
 
-        String widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
+        String widgetName;
 
         @Parameters({"login","password"})
         @Test(retryAnalyzer = RetryAnalyzer.class)
-        public void testCreatePublishSubmitEventFormRequiredEmptyCustomFields(String login, String password){
+        public void testCreatePublishSubmitEventFormRequiredEmptySupporterFields(String login, String password){
+                widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
                 new LoginPage().doSuccessLogin(login, password)
                         .openActivitiesPage()
                         .openEventsPage()
@@ -33,6 +35,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
                         .selectLayout("Blank")
                         .clickNextButtonInSelectLayoutTab()
                         .dropOneColumnRow()
+                        .dropDonateButton()
                         .dropRegisterButton()
                         .goToRegistrationWizardStep();
                 new AddEventPageComposeTabRegistration()
@@ -42,37 +45,16 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
                 new AddEventPageComposeTabCheckout()
                         .dropOneColumnRow()
                         .dropVEFormElement();
-                //new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
+                new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
                 new AddEventPageComposeTabCheckout()
                         .clickNextButtonInComposeTab()
                         .clickPublishOnAutorespondersTab()
-                        .openDonationWidget(widgetName);
+                        .openEventWidget(widgetName);
 
-                        /*.openSubscribeWidgetsPage()
-                        .openAddSubscribeWidgetPage();
-                addSignupFormsPage.fillFieldsWidgetStepOne(widgetName, widgetDescription);
-                addSignupFormsPage.selectLayoutStep("Blank");
-                addSignupFormsPage.dropOneColumnRow();
-                addSignupFormsPage.dropVEFormElement();
-                formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-                formFieldConfigurationModal.dropFormFieldByName("signupActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("signupActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("signupActivitySingleChoiceCustomField").saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("signupActivityYesNoCustomField").saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("signupActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-                formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-                addSignupFormsPage.goToAutorespondersTab();
-                addSignupFormsPage.publishFromAutoresponders();
-                addSignupFormsPage.openSubscribeWidget();
-                SubscribeWidget signupForm4 = new SubscribeWidget();
-                signupForm4.clickOnSubmitFormButton().
-                        verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
-        }*/
-
-    }}
+                EventWidget eventForm = new EventWidget();
+                eventForm.openDonationPage().clickSubmitButton().
+                        verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
+    }
+}
 
 

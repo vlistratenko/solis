@@ -29,7 +29,7 @@ public class EventWidget extends DonationWidget {
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
 	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
 	Button submitButton = new ButtonImpl("//button[@type='submit']", "Submit", true);
-	Button submitButtonNew = new ButtonImpl("//a[.='Submit']", "Submit", true);
+	Button submitButtonNew = new ButtonImpl("//a[.='Submit']", "Submit button", true);
 	protected CheckBox displayDonationAnonymouslyOptionCheckBox = new CheckBoxImpl("//input[@name='anonymousDonation']", "Display my donation anonymously checkbox");
 	
 	public EventWidget() {

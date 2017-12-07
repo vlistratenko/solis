@@ -133,12 +133,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 	
 	protected <T> T openWidget(Class<T> clazz) {
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
-		if (!widgetLink.isNotDisplayed()) {
-			CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
-		}		
-		String link = CommonUtils.getProperty(linkProperty);
+		widgetLink.fluentWaitForElementPresenceIgnoringExceptions();
+		CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
 		currentWindowHandle = getWindowHandle();
-		this.openInNewWindow(link);
+		this.openInNewWindow(CommonUtils.getProperty(linkProperty));
 		sleep(7);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		try {
