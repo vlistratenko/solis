@@ -1,16 +1,15 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RecurringDonationTest extends SeleneseTestCase {
 
@@ -30,7 +29,7 @@ public class RecurringDonationTest extends SeleneseTestCase {
 		lp.openDonationWidgetByLink(widgetWithYearlyRecurringOption)
 				.fillTheFirstStepOfTheDonationForm(amount, true, false)
 				.fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress,
-						"Juneau", "99501", "AL")
+						"Juneau", "99501", "AL", true)
 				.fillTheThirdStepOfTheDonationForm("4111111111111111", "123", "01", String.valueOf(year))
 				.clickDonationButtonNewForms();
 		lp.doSuccessLogin(login, passward).
@@ -56,7 +55,7 @@ public class RecurringDonationTest extends SeleneseTestCase {
 		LoginPage lp = new LoginPage();
 		lp.openDonationWidgetByLink(widgetWithMonthlyRecurringOption)
 				.fillTheFirstStepOfTheDonationForm(amount, true, false)
-				.fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress,	"Juneau", "99501", "AL")
+				.fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress,	"Juneau", "99501", "AL", true)
 				.fillTheThirdStepOfTheDonationForm("4111111111111111", "123", currentMonthInISOFormat, String.valueOf(year))
 				.clickDonationButtonNewForms();
 		lp.doSuccessLogin(login, passward).

@@ -7,14 +7,9 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -138,6 +133,20 @@ public class SubscribeWidget extends Browser{
 		subscribeButton.click();
 		return this;
 		
+	}
+
+	public SubscribeWidget fillSubscribeWidgetMinimumFieldsSet(String personEmail, String personFName, String personLName, boolean subscriptionStatus) {
+		personEmailField.type(personEmail);
+		personFNameField.type(personFName);
+		personLNameField.type(personLName);
+		if (subscriptionStatus) {
+			keepMeInformedCheckbox.check();
+		} else {
+			keepMeInformedCheckbox.unCheck();
+		}
+		sleep(3);
+		subscribeButton.click();
+		return this;
 	}
 	
 	public SubscribeWidget fillSubscribeWidgetOldForms(String personEmail,
@@ -296,5 +305,4 @@ public class SubscribeWidget extends Browser{
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterTextBoxCustomField"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("supporterNumberCustomField"), "'This field requires a value' validation message is not displayed");
 	}
-
 }

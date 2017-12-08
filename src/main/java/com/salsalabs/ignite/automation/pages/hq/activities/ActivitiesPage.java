@@ -24,6 +24,7 @@ public class ActivitiesPage extends HomePage {
 	Button confirmDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']//button[2]", "Yes, delete already!");
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
+	Button targetedActionsTab = new ButtonImpl("//*[@href='/#/activities/widgets/targeted-actions']", "Targeted Actions tab");
 	
 	public ActivitiesPage verifyURL() {
 		verifier.verifyTrue(getLocation().contains("activities"), "Current URL is not contains Activities");
@@ -115,6 +116,12 @@ public class ActivitiesPage extends HomePage {
 		AddDonationWidgetPage addDonationPage = openDonationsWidgetFromTable();
  		sleep(5);
 		addDonationPage.removeWidget();
+	}
+
+	public TargetActionsPage openTargetedActionsPage() {
+		sleep(2);
+		targetedActionsTab.click();
+		return new TargetActionsPage();
 	}
 
 }

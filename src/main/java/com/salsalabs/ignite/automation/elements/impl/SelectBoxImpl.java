@@ -1,11 +1,10 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
-import java.util.List;
-
+import com.salsalabs.ignite.automation.elements.SelectBox;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.salsalabs.ignite.automation.elements.SelectBox;
+import java.util.List;
 
 public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 
@@ -66,7 +65,7 @@ public class SelectBoxImpl extends TextBoxImpl implements SelectBox {
 		return selected;
 	}
 	
-	protected String getSelectedLabel(String locator){		
+	public String getSelectedLabel(String locator){
 		logger.info("Get selected label from the " + elementName);
 		String selected = super.getSelectedLabel(path);
 		logger.info("label is " + selected);		

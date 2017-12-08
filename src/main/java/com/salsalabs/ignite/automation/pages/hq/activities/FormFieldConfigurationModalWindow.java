@@ -1,14 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.CheckBox;
-import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.TextBox;
+import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,6 +19,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
     Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
     TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
+    SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
 
     private static List<String> supporterFieldNames  = new ArrayList<>();;
 

@@ -2,16 +2,9 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.DragableElement;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.DragableElementImp;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.pages.hq.manage.SocialMediaPages;
-
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class AddPetitionPage extends AddSubscribeWidgetPage {
 
@@ -71,8 +64,18 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 		saveConfigBtn.click();
 		sleep(5);
 	}
-	
-	
+
+	public AddSubscribeWidgetPage checkIdLikeToReceiveUpdatesCheckBoxProperties(String fieldLabel, String defaultValue) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#FieldEditModal-form\\\\3a petition > div.appModalContent > div > div > div.element-config-container.vertical-scroll > div > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > input').value"),
+				fieldLabel);
+		verifier.verifyEquals(((SelectBoxImpl) modal.checkBoxDefaultValue).getSelectedLabel(modal.checkBoxDefaultValue.getPath()), defaultValue, "Check default value", true);
+		modal.saveButton.click();
+		return this;
+	}
 
 	
 

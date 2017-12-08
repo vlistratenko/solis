@@ -105,7 +105,7 @@ public class SupportersPage extends AudiencePage {
 		if(supportersTable.isDisplayed()){
 			supportersTable.scrollIntoView();
 		}
-		ButtonImpl firstRow = new ButtonImpl(supportersTable.getPath() + "/descendant::*[.='" + supporterEmail + "']", "Supporter with email " + supporterEmail);
+		ButtonImpl firstRow = new ButtonImpl(supportersTable.getPath() + "/descendant::*[.='" + supporterEmail.toLowerCase() + "']", "Supporter with email " + supporterEmail);
 		firstRow.waitElement(10);
 		firstRow.click();
 		sleep(2);
