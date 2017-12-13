@@ -19,12 +19,12 @@ import com.salsalabs.ignite.automation.pages.hq.supporters.SupporterQueryBuilder
 public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 	public static final String supporterExpectedEmail = "qb_sup.74580786@mailosaur.in";
 	public static final String customFieldsRule = "Custom Fields";
-	public static final String customFieldsExtendedButtonLAbel = "Suptextbox";
-	public static final String supporterTextBoxCustomField = "Suptextbox";
-	public static final String supporterNumberCustomField = "Supnumber";
+	public static final String customFieldsExtendedButtonLAbel = "SupTextBox";
+	public static final String supporterTextBoxCustomField = "SupTextBox";
+	public static final String supporterNumberCustomField = "SupNumber";
 	public static final String supporterYesNoCustomField = "Supyesno";
-	public static final String supporterDateTime = "Supdatetime";
-	public static final String supporterSingleChoice = "Supsinglechoice";
+	public static final String supporterDateTime = "SupDateTime";
+	public static final String supporterSingleChoice = "SupSingleChoice";
 	
 	  // custom fields - Text Box
 	  @Parameters({"login", "Passward"})
