@@ -20,14 +20,14 @@ public class AccountsPage extends HomePage{
 	Button inviteSearchBtn = new ButtonImpl("(//*[@autotest-id='btn_search_list'])[last()]", "Search invite btn");
 
 	public CreateInvitePage openInviteNewUserPage() {
-		inviteNewUserButton.waitElement(60);
+		inviteNewUserButton.waitElement(dTimeOut*2);
 		inviteNewUserButton.click();
 		return new CreateInvitePage();
 		
 	}
 
 	public AccountsPage verifyInvitationSent() {
-		inviteSearch.waitElement(60);
+		inviteSearch.waitElement(dTimeOut*2);
 		inviteSearch.type(CommonUtils.getProperty(PropertyName.CM_EMAIL));
 		inviteSearch.clickByENTERKey();
 		sleep(5);

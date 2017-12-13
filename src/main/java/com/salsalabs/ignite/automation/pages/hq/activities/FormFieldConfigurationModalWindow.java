@@ -1,7 +1,11 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.google.sitebricks.client.Web;
+import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
+import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
@@ -10,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
@@ -22,32 +27,37 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
 
     private static List<String> supporterFieldNames  = new ArrayList<>();;
+    Button selectFieldButton = new ButtonImpl("//*[contains(text(),'fieldNameForReplacement')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of fieldNameForReplacement in form field configuration modal window");
+
+    private static List<String> supporterFieldNames  = new ArrayList<>();
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
         Button addFieldButton = new ButtonImpl("//*[contains(text(),'" + fieldName + "')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of " + fieldName + " in form field configuration modal window");
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-        if(this.supporterFieldNames.isEmpty()) {
+        if(FormFieldConfigurationModalWindow.supporterFieldNames.isEmpty()) {
             Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
             supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
             List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
-            this.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+            FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
         }
         if(addFieldButton.isDisplayed()) addFieldButton.click();
         return this;
     }
 
     public FormFieldConfigurationModalWindow markFieldAsRequired(){
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(requiredCheckbox.isDisplayed()){
-            if(!requiredCheckbox.isChecked()) requiredCheckbox.check();}
+    	markFieldAsRequired(true);
         return this;
     }
 
-    public  <T extends HomePage> T saveFieldConfiguration(){
+    public FormFieldConfigurationModalWindow markFieldAsRequired(Boolean isRequired){
+        sleep(2);
+        if(requiredCheckbox.isDisplayed()){
+            requiredCheckbox.check(isRequired);}
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+	public  <T extends HomePage> T saveFieldConfiguration(){
         saveButton.click();
         return (T) new HomePage();
     }
@@ -57,8 +67,18 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         return this;
     }
 
-    public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
-        List<String> supporterFieldNames = this.supporterFieldNames;
+    public void initializeListWithAllSupporterFields(){
+        new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
+            Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+            supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
+            List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
+            FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+            closeFieldConfigurationModalWindow();
+    }
+
+    @SuppressWarnings("unchecked")
+	public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
+        initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
@@ -74,8 +94,9 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         return (T) new HomePage();
     }
 
-    public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
-        List<String> supporterFieldNames = this.supporterFieldNames;
+    @SuppressWarnings("unchecked")
+	public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
+        initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
@@ -87,12 +108,19 @@ public class FormFieldConfigurationModalWindow extends HomePage {
             }
         } );
         return (T) new HomePage();
-        }
+    }
 
-        public void addDesignationFieldOption(String optionValue){
+    public void addDesignationFieldOption(String optionValue){
         designationFieldOptionTextField.type(optionValue);
         designationFieldAddButton.click();
-        }
+    }
+
+    public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {
+    	selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
+    	selectFieldButton.waitElement();
+    	selectFieldButton.click();
+    	return this;
+	}
     }
 
 

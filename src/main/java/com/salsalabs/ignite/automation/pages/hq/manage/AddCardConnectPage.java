@@ -22,7 +22,7 @@ public class AddCardConnectPage extends HomePage{
 		nickName.type(name);
 		description.type(descr);
 		currency.selectByLabelJS(curr);
-		merchantId.type("111111111111111");
+		merchantId.type("496344295024");
 		doesBusinsessAs.type("AAAAAAA");
 		submitButton.click();
 		sleep(10);

@@ -93,7 +93,7 @@ public class Verifier {
 			if (fail) {
 				throw new AssertionFailedError(message + " - " + e.getMessage());
 			} else {
-				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]" + " <a href='file:///" + SeleneseTestCase.makeScreenshot(message).getAbsolutePath() + "'> Screenshot </a>");
+				SeleneseTestCase.bug.add("Error " + message + ". Expected [" + expected + "] but was [" + actual + "]" + " <a href='file:///" + SeleneseTestCase.makeScreenshot("FailAsertion_" + CommonUtils.getUnicName() ).getAbsolutePath() + "'> Screenshot </a>");
 				logger.error("Verification error: " + message + " - " + e.getMessage());
 				CommonUtils.setParam("testResult", "fail");
 			}

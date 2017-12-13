@@ -25,7 +25,7 @@ public class MessageTopicsPage extends ManagePage {
 		waitConditionBecomesTrue(messageTopicInput.isDisplayed(), 2);
 		sleep(3);
 		messageTopicInput.scrollIntoView();
-		if (messageTopicInput.waitElement(5)) {
+		if (messageTopicInput.waitElement()) {
 			messageTopicInput.type(topic);
 		}
 		addButton.click();

@@ -28,14 +28,14 @@ public abstract class Browser {
 	protected static WebDriver driver;
 	protected static Logger logger;
 	protected static Verifier verifier = new Verifier();
-	int cTimeOut;
+	protected int dTimeOut = 30;
 	String elementName;
 	Integer defaultTimeOut;
 
 	public Browser() {
 		driver = SeleneseTestCase.driver;
 		logger = SeleneseTestCase.logger;
-		cTimeOut = SeleneseTestCase.cTimeOut;
+		dTimeOut = SeleneseTestCase.cTimeOut;
 		defaultTimeOut = SeleneseTestCase.defaultTimeOut;
 	}
 
@@ -52,7 +52,7 @@ public abstract class Browser {
 	public LoginPage logOut() {
 		deletecoockies();
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
-		sleep(5);
+		//sleep(5);
 		return new LoginPage();
 	}
 	
@@ -96,10 +96,10 @@ public abstract class Browser {
 		driver.navigate().refresh();
 		logger.info("Page is refreshed");
 	}
-
+/*
 	protected void close() {
 		SeleneseTestCase.close();
-	}
+	}*/
 
 	protected void closeWindow() {
 		SeleneseTestCase.closeWindow();
@@ -107,7 +107,7 @@ public abstract class Browser {
 
 	protected void deletecoockies() {
 		SeleneseTestCase.deletecoockies();
-		sleep(5);
+		sleep(2);
 	}
 
 	protected Set<Cookie> getCoockies() {
@@ -143,6 +143,7 @@ public abstract class Browser {
 
 	protected void switchToFrame(String xpath) {
 		driver.switchTo().frame(driver.findElement(By.xpath(xpath)));
+		sleep(2);
 	}
 
 	protected void switchDefaultContent() {

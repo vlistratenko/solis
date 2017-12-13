@@ -1,9 +1,5 @@
 package com.salsalabs.ignite.automation.pages.hq.assets;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.Table;
@@ -38,13 +34,9 @@ public class AssetsPage extends HomePage {
 	Button closeFallBackMessage = new ButtonImpl("//a[@class='close']", "Close Asset FallBackMessage");
 	
 	public AssetsPage clickAddAnAssetButton() {
-		for (int i = 0; i < 3; i++) {
-			if (waitConditionBecomesTrue(addAnAsset.isDisplayed(), 5));
-			break;
-		}
+		addAnAsset.waitElement();
 		addAnAsset.click();
 		return new AssetsPage();
-
 	}
 
 	public AssetsPage clickUploadImageBigField() {
@@ -67,10 +59,7 @@ public class AssetsPage extends HomePage {
 	public AssetsPage searchAndDeleteImage(String imageToDelete) {
 		assertSerachInput.type(imageToDelete);
 		assertSerachButton.click();
-		for (int i = 0; i < 3; i++) {
-			if (waitConditionBecomesTrue(topPartOfEveryImages.isDisplayed(), 5));
-			break;
-		}
+		topPartOfEveryImages.waitElement();
 		topPartOfEveryImages.moveAndClick();
 		waitConditionBecomesTrue(deleteButton.isDisplayed(), 4);
 		deleteButton.click();

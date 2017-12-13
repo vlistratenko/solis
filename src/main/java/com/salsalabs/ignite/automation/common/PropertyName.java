@@ -50,4 +50,5 @@ public interface PropertyName {
 	String LAST_FUNDRAISER_NAME = "fundraiserName";
 	String LAST_TEAM_NAME = "teamName";
 	String SUPPORTER_EMAIL = "SupporterEmail";
+	String P2P_FORM_LINK = "LastCreatedP2PFormLink";
 }

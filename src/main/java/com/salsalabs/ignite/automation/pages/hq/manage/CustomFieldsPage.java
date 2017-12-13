@@ -439,8 +439,10 @@ public class CustomFieldsPage extends ManagePage {
 						"\",\"ghostText\":\"\",\"defaultValue\":" + this.defaultValueApi + ",\"valueLabels\":[{\"value\":true,\"label\":\"" +
 						this.yesNoFieldValueLabelsApi[0] + "\"},{\"value\":false,\"label\":\"" + this.yesNoFieldValueLabelsApi[1] + "\"}],\"activityType\":\"\",\"type\":\"PERSON\"}}"; break;
 				case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
+						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{},\"referenceName\":\"scf_" + this.name + "\"}}"; break;
+				/*case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
 						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{\"minDate\":\"" +
-						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;
+						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;*/
 				case ("singlechoice"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"TEXT\",\"controlType\":\"" + this.controlTypeApi +
 						"\",\"controlOrientation\":\"VERTICAL\",\"ghostText\":\"\",\"defaultValue\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\",\"valueLabels\":[{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[0] +
 						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\"},{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[1] + "\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[1] +
@@ -478,9 +480,11 @@ public class CustomFieldsPage extends ManagePage {
 						"\",\"ghostText\":\"\",\"defaultValue\":" + this.defaultValueApi +
 						",\"valueLabels\":[{\"value\":true,\"label\":\"" + this.yesNoFieldValueLabelsApi[0] + "\"},{\"value\":false,\"label\":\"" +
 						this.yesNoFieldValueLabelsApi[1] + "\"}],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\"}}"; break;
-				case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
+				case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi +"\",\"dataType\":\"DATE\",\"controlType\":\"" +
+						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{},\"referenceName\":\"sub_" + this.name + "\"}}"; break;
+				/*case ("datetime"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"DATE\",\"controlType\":\"" +
 						this.controlTypeApi + "\",\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{\"minDate\":\"" +
-						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;
+						this.minDateApi + "\",\"maxDate\":\"" + this.maxDateApi + "\",\"minTime\":\"" + this.minTimeApi + "\",\"maxTime\":\"" + this.maxTimeApi + "\"}}}"; break;*/
 				case ("singlechoice"): json = "{\"header\":{},\"payload\":{\"name\":\"" + this.name + "\",\"description\":\"" + this.descriptionApi + "\",\"dataType\":\"TEXT\",\"controlType\":\"" + this.controlTypeApi +
 						"\",\"controlOrientation\":\"VERTICAL\",\"ghostText\":\"\",\"defaultValue\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\",\"valueLabels\":[{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[0] +
 						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\"},{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[1] +

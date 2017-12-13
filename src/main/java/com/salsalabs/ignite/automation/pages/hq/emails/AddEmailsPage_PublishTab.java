@@ -22,9 +22,9 @@ public class AddEmailsPage_PublishTab extends AddEmailsPage{
 		if (splitsAmount > 1) {
 			TestPercentageList.selectByLabelJS(percentageOfTestGroup.toString() + "%");
 		}
-		SendNowButton.waitElement(10);
+		SendNowButton.waitElement();
 		SendNowButton.click();
-		confirmationMessage.waitElement(30);
+		confirmationMessage.waitElement();
 		return new AddEmailsPage_PublishTab();
 	}
 	

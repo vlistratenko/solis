@@ -10,7 +10,7 @@ public class AddP2PPage_RegistrationsTab_OptionalPurchasesTab extends AddP2PPage
 	
 	public AddP2PPage_RegistrationsTab clickContinueButton() {
 		switchToFrame(gzFrame.getPath());
-		breadCrumbsLink.waitElement(10);
+		breadCrumbsLink.waitElement();
 		continueButton.click();
 		switchDefaultContent();
 		return new AddP2PPage_RegistrationsTab();

@@ -21,8 +21,9 @@ public class AddP2PPage_RegistrationsTab_RegistrationInfoTab extends AddP2PPage_
 			boolean isFundraiser,
 			String ticketPrice,
 			String ticketDeductible) {
+		gzFrame.waitElement();
 		switchToFrame(gzFrame.getPath());
-		registrationNameField.waitElement(10);
+		registrationNameField.waitElement();
 		registrationNameField.type(registrationName);
 		isFundraiserRadioButton.select(isFundraiser);
 		ticketPriceField.type(ticketPrice);

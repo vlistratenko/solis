@@ -10,10 +10,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
-
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
@@ -44,10 +41,7 @@ public class ImportDonationsPage extends HomePage {
 			String externalId, String ammount , boolean recurring) {
 		importListOfDonations.click();
 		if (!importName.isDisplayed()) {
-			for (int i = 0; i < 3; i++) {
-				waitConditionBecomesTrue(importName.isDisplayed(), 3);
-				break;
-			}
+			importName.waitElement();
 		}
 		importName.type(nameImport);
 		waitConditionBecomesTrue(browseTheFileButton.isDisplayed(), 5);
@@ -87,13 +81,9 @@ public class ImportDonationsPage extends HomePage {
 			}
 		iAmDone.click();
 		sleep(2);
-		for (int i = 0; i < 3; i++) {
-			waitConditionBecomesTrue(importComplete.isDisplayed(), 5);
-				break;
-				}
-		
+		importComplete.waitElement();		
 		return this;
-			}	
+	}	
 	
 	public DonationsPage backToTransactionPage(){
 		openDonationsPage() ;

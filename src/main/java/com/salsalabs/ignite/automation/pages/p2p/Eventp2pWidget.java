@@ -84,7 +84,7 @@ public class Eventp2pWidget extends EventWidget {
 	
 	public Eventp2pWidget selectFundraiserCheckBox(Boolean isFundraiser) {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		isFundraiserCheckBox.waitElement(3);
+		isFundraiserCheckBox.waitElement();
 		isFundraiserCheckBox.check(isFundraiser);
 		sleep(3);
 		switchDefaultContent();
@@ -102,8 +102,12 @@ public class Eventp2pWidget extends EventWidget {
 	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
 			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {		
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		if (!createFundraiserAccountButton.waitElement(5)) {
+			new ButtonImpl("//div[@class='checkout_logout']/a", "Fundraiser logout link").click();
+		}
+		createFundraiserAccountButton.waitElement();
 		createFundraiserAccountButton.click();
-		fundraiserFNameField.waitElement(5);
+		fundraiserFNameField.waitElement();
 		fundraiserFNameField.type(fundraiserFName);
 		fundraiserLNameField.type(fundraiserLName);
 		fundraiserEmailField.type(fundraiserEmail);
@@ -244,7 +248,7 @@ public class Eventp2pWidget extends EventWidget {
 		searchFundriserField.type(fundraiserFLname);
 		searchFundriserButton.click();
 		fundraiserPageLink.changePath("textforreplasment", fundraiserFLname);
-		fundraiserPageLink.waitElement(10);
+		fundraiserPageLink.waitElement();
 		fundraiserPageLink.click();
 		return new EventFundraiserWidgetPage();
 	}
@@ -261,7 +265,7 @@ public class Eventp2pWidget extends EventWidget {
 		searchTeamField.type(teamName);
 		searchTeamButton.click();
 		teamPageLink.changePath("textforreplasment", teamName);
-		teamPageLink.waitElement(10);
+		teamPageLink.waitElement();
 		teamPageLink.click();
 		return new EventTeamWidgetPage();
 	}

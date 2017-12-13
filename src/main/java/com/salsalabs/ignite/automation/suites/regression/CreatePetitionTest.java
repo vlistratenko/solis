@@ -92,7 +92,7 @@ public class CreatePetitionTest extends SeleneseTestCase {
 			"createAndPublishPetition" }, retryAnalyzer = RetryAnalyzer.class, dependsOnMethods ="createAndPublishPetitionTest")
 	public void testPetitionVisibility() {
 		addPetitionPage.openActivitiesPage().openPetitionsPage();
-		addPetitionPage = activitiesPage.openPetitionFromTable();
+		addPetitionPage = activitiesPage.openPublishedPetitionFromTable();
 		addPetitionPage.makeWidgetPrivate();
 		addPetitionPage.verifyWidgetVisible(false);
 		activitiesPage = addPetitionPage.openActivitiesPage().openAllActivitiesTab();

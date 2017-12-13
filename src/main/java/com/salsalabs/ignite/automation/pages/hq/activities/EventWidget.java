@@ -11,18 +11,17 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
+
 
 public class EventWidget extends DonationWidget {
 	
 	Label donorsList = new LabelImpl(
-			"//div[contains(@class, 'sli-donor-list-results')]/descendant::div[.='$amountToReplace.00']/preceding-sibling::div[@class='sli-donor-name']",
+			"//div[contains(@class, 'sli-donor-list-results')]/descendant::div[.='$amountToReplace']/preceding-sibling::div[@class='sli-donor-name' and .='nameToReplace']",
 			"");
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
 	TextBox eventPersonLNameField = new TextBoxImpl("//input[contains(@id,'last_name')]", "Event attendees Last name", true);
 	TextBox eventPersonEmailField = new TextBoxImpl("//input[contains(@id,'email')]", "Event attendees Email", true);
-	Label eventSubsrIsSccessMessage = new LabelImpl("//h3[contains(.,'Thank You!')]", "Event is subscribed");
+	Label eventSubsrIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
 	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
@@ -173,7 +172,13 @@ public class EventWidget extends DonationWidget {
 	
 	public void verifyNameForLastDonotByDonationAmount(String donorName, String donationAmount) {
 		donorsList.changePath("amountToReplace", donationAmount);
-		verifier.verifyEquals(donorsList.getText(), donorName, "Wrong donor name");
-		
+		donorsList.changePath("nameToReplace", donorName);
+		if (!donorsList.isExists()) {
+			donorsList.waitElementIsExistWithPageRefresh(5);
+		}
+		verifier.verifyTrue(donorsList.isExists(),
+				"Element with donor name " + donorName + " was not found. Element path " +  donorsList.getPath());		
 	}
+	
+
 }

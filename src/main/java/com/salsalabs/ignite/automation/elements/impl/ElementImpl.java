@@ -18,12 +18,14 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Element;
+import com.salsalabs.ignite.automation.elements.Panel;
+
 import org.openqa.selenium.support.ui.Wait;
 
 public abstract class ElementImpl implements Element {
 	String path;
-	WebDriver driver;
-	Logger logger;
+	static WebDriver driver;// = SeleneseTestCase.driver;
+	static Logger logger;
 	int cTimeOut;
 	String elementName;
 	int defaultTimeOut;
@@ -120,6 +122,35 @@ public abstract class ElementImpl implements Element {
 	}
 	
 	@Override
+	public boolean waitElementWithPageRefresh(int amountOfRefreshes) {
+		for (int i = 0; i < amountOfRefreshes; i++) {
+			if (isElementPresent(path)) {
+				return true;
+			}else {
+				driver.navigate().refresh();
+				if (waitElement()) {
+					return true;
+				}
+			}
+		}		
+		return false;
+	}
+	
+	@Override
+	public boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes) {
+		for (int i = 0; i < amountOfRefreshes; i++) {
+			
+			if (isExists()) {
+				return true;
+			}else {
+				driver.navigate().refresh();
+				sleep(defaultTimeOut);
+			}
+		}		
+		return false;
+	}
+	
+	@Override
 	public boolean waitElement(int seconds){
 		return waitObject(path, seconds * 1000);
 	}
@@ -136,6 +167,17 @@ public abstract class ElementImpl implements Element {
 			this.path = this.path.replace(old, newPath);
 		}
 		
+	}
+	
+	@Override
+	public void changePathAndElementName(String old, String newPath, String elName) {
+		if (old.equals("")) {
+			this.path = newPath;
+			this.elementName = elName;
+		}else{
+			this.path = this.path.replace(old, newPath);
+			this.elementName = this.elementName.replace(old, elName);
+		}
 	}
 
 	@Override
@@ -185,11 +227,24 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void moveAndClick() {
-		new Actions(driver).moveToElement(findElementByXpath(path)).perform();
+		getActionBuilder().moveToElement(findElementByXpath(path)).release().perform();
 		click();
 
 	}
+	
+	public void moveToElement() {
+		moveToElement(path);
+	}
 
+	@Override
+	public void dragAndDrop(Panel targetPanel) {
+		targetPanel.waitElement();
+		targetPanel.scrollIntoView();
+		waitElement();
+		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
+
+	}
+	
 	@Override
 	public void clickByNumber(Integer number) {
 		logger.info(elementName + " was clicked.");
@@ -204,8 +259,17 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public boolean isNotExists() {
-		logger.info("Check that " + elementName + " is not exists.");
+		logger.info("Check that " + path + " is not exists.");
 		return isNotElementPresent(path);
+	}
+	
+	public boolean isExists() {
+		logger.info("Check that " + path + " is exists.");
+		Browser.implicityWait(1);
+		boolean is = findElementsByXpathWithOutWait(path).size() > 0;
+		logger.debug("isElementPresent returns " + is);
+		Browser.implicityWait(SeleneseTestCase.defaultTimeOut);
+		return is;
 	}
 
 	@Override
@@ -219,6 +283,18 @@ public abstract class ElementImpl implements Element {
 	public boolean waitForNotExists(Integer timeOut) {
 		for (int i = 0; i < timeOut; i++) {
 			if (isNotExists()) {
+				break;
+			} else {
+				sleep(1);
+			}
+		}
+		return isNotExists();
+	}
+	
+	@Override
+	public boolean waitForExists(Integer timeOut) {
+		for (int i = 0; i < timeOut; i++) {
+			if (!isNotExists()) {
 				break;
 			} else {
 				sleep(1);
@@ -260,7 +336,7 @@ public abstract class ElementImpl implements Element {
 	 */
 	protected void sleep(int seconds) {
 		try {
-			logger.debug("Sleep on " + seconds + " seconds");
+			logger.info("Sleep on " + seconds + " seconds");
 			Thread.sleep(seconds * 1000);
 			logger.debug("Sleep on is over");
 		} catch (InterruptedException e) {
@@ -269,7 +345,7 @@ public abstract class ElementImpl implements Element {
 	}
 
 	/**
-	 * @param cTimeOut
+	 * @param dTimeOut
 	 *            in seconds
 	 */
 
@@ -281,7 +357,7 @@ public abstract class ElementImpl implements Element {
 
 	protected void moveToElement(String locator) {
 		logger.debug("Move to element < " + locator + " >.");
-		getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
+		getActionBuilder().moveToElement(findElementByXpath(locator)).release().perform();
 	}
 
 	protected void onClick(WebElement element) {
@@ -685,16 +761,20 @@ public abstract class ElementImpl implements Element {
 	@Override
 	public List<WebElement> findElementsByXpath(String xpath) {
 		setImplicity(30);
-		List<WebElement> l = findElementsByXpathWithOutWait(xpath);
+		logger.debug("Try to find elements " + xpath);
+		List<WebElement> elem = driver.findElements(By.xpath(xpath));
 		setImplicity(defaultTimeOut);
-		return l;
+		logger.debug(elem.size() + " elements were found");
+		return elem;
 
 	}
 
 	protected List<WebElement> findElementsByXpathWithOutWait(String xpath) {
 		xpath.replace("[0]", "");
 		logger.debug("Try to find elements " + xpath);
+		setImplicity(0);
 		List<WebElement> elem = driver.findElements(By.xpath(xpath));
+		setImplicity(defaultTimeOut);
 		logger.debug(elem.size() + " elements were found");
 
 		return elem;

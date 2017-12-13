@@ -20,6 +20,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
+@Test(groups = {"petitionFormFieldsValidation"})
 public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
     private AddPetitionPage addPetitionPage;
@@ -34,11 +35,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         logger.info("Generating custom fields for " + context.getSuite().getName() + " suite");
         CustomFieldsPage.CustomField supporterDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2000").
-                setDateFieldMaxDateApi("09/15/2030").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField supporterTextBoxCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("supporterTextBoxCustomField", "FieldDescription").
@@ -66,11 +63,7 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
 
         CustomFieldsPage.CustomField activityDateTimeCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("petitionActivityDateTimeCustomField", "FieldDescription").
-                setControlType("DATETIME").
-                setDateFieldMinDateApi("09/15/2017").
-                setDateFieldMaxDateApi("09/15/2018").
-                setDateFieldMinTimeApi("10:30pm").
-                setDateFieldMaxTimeApi("11:30pm"));
+                setControlType("DATETIME"));
 
         CustomFieldsPage.CustomField activityNumberCustomFieldConfig = CustomFieldsPage.createCustomField(CustomFieldsPage.
                 getCustomFieldApiGenerator("petitionActivityNumberCustomField", "FieldDescription").
@@ -125,23 +118,6 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
         }
     }
 
-    @Parameters({"login","password"})
-    @BeforeMethod(groups = {"petitionFormFieldsValidation"})
-    public void loginAndGoToSignupFormComposeTab(String login, String password){
-        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
-        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-        addPetitionPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openPetitionsPage()
-                .openAddPetitionPage();
-        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
-                .selectLayoutStep("Blank");
-        addPetitionPage.dropOneColumnRow();
-        addPetitionPage.dropVEFormElement();
-    }
-
     /**
      * <b>Create and submit Petition form with all supporter non-required fields</b>
      * <p>
@@ -157,10 +133,21 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled = true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitPetitionFormSupporterNonRequiredFields(String login, String password){
-        formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        formFieldConfigurationModal.dropAllSupporterFieldsOnForm();
+        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addPetitionPage = new LoginPage()
+                .doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openPetitionsPage()
+                .openAddPetitionPage();
+        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                .selectLayoutStep("Blank");
+        addPetitionPage.dropOneColumnRow();
+        addPetitionPage.dropVEFormElement();
+        new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnForm();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
@@ -183,8 +170,9 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
                 "777-777-7777",
                 "777-777-7777",
                 "UA",
-                "09/11/2017");
-        addPetitionPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net", login, password);
+                "09/11/2017").
+                clickOnSubmitFormButton();
+        addPetitionPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(), login, password);
     }
 
     /**
@@ -202,19 +190,31 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitPetitionFormCustomNonRequiredFields(String login, String password){
+        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addPetitionPage = new LoginPage()
+                .doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openPetitionsPage()
+                .openAddPetitionPage();
+        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                .selectLayoutStep("Blank");
+        addPetitionPage.dropOneColumnRow();
+        addPetitionPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityTextBoxCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityNumberCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivitySingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityDateTimeCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityTextBoxCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityNumberCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivitySingleChoiceCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityYesNoCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityDateTimeCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
@@ -228,8 +228,9 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
                 "10/11/2017 01:30 am",
                 "activityTextBoxCustomFieldValue",
                 "13",
-                "10/11/2017 01:30 am");
-        addPetitionPage.verifySubmittedCustomFieldsArePresentInSupporterDetails("https://hq.test.igniteaction.net",login,password);
+                "10/11/2017 01:30 am").
+                clickOnSubmitFormButton();
+        addPetitionPage.verifySubmittedCustomFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(),login,password);
     }
 
     /**
@@ -246,17 +247,28 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitPetitionFormRequiredEmptySupporterFields(){
-        formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitPetitionFormRequiredEmptySupporterFields(String login, String password){
+        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addPetitionPage = new LoginPage()
+                .doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openPetitionsPage()
+                .openAddPetitionPage();
+        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                .selectLayoutStep("Blank");
+        addPetitionPage.dropOneColumnRow();
+        addPetitionPage.dropVEFormElement();
         addPetitionPage.editVEField("City").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.editVEField("State").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.editVEField("Zip Code").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropAllSupporterFieldsOnFormAndMarkAsRequired();
+        new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnFormAndMarkAsRequired();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
         addPetitionPage.openSubscribeWidget();
-        SubscribeWidget petitionForm3 = addPetitionPage.openSubscribeWidget();
+        SubscribeWidget petitionForm3 = new SubscribeWidget();
         petitionForm3.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields();
     }
@@ -276,22 +288,35 @@ public class PetitionFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login","password"})
-    @Test(enabled=true, groups = {"petitionFormFieldsValidation"}, retryAnalyzer = RetryAnalyzer.class)
-    public void testCreatePublishSubmitPetitionFormRequiredEmptyCustomFields(){
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void testCreatePublishSubmitPetitionFormRequiredEmptyCustomFields(String login, String password){
+        widgetName = "PetitionWidgetName_" + RandomStringUtils.randomAlphanumeric(5);
+        widgetDescription = "PetitionWidgetDescription_" + RandomStringUtils.randomAlphanumeric(10);
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
+        addPetitionPage = new LoginPage()
+                .doSuccessLogin(login, password)
+                .openActivitiesPage()
+                .openPetitionsPage()
+                .openAddPetitionPage();
+        addPetitionPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
+                .selectLayoutStep("Blank");
+        addPetitionPage.dropOneColumnRow();
+        addPetitionPage.dropVEFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivitySingleChoiceCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityYesNoCustomField").saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("petitionActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        new FormFieldConfigurationModalWindow().dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivitySingleChoiceCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityYesNoCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("petitionActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
         addPetitionPage.goToAutorespondersTab();
         addPetitionPage.publishFromAutoresponders();
-        SubscribeWidget petitionForm4 = addPetitionPage.openSubscribeWidget();
+        addPetitionPage.openSubscribeWidget();
+        SubscribeWidget petitionForm4 = new SubscribeWidget();
         petitionForm4.clickOnSubmitFormButton().
                 verifyValidationMessageFieldRequireValueDisplayedForEmptyCustomFields();
     }

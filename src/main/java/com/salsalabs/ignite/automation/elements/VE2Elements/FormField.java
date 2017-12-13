@@ -1,7 +1,12 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
+import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
+
 public class FormField extends VEElements {
-    public FormField(String elementPath, String name) {
+    
+	public static FormField formFieldElement = new FormField("//*[@class='icon-insert-template']//*[.='Form Field']", "Form Field element");
+	
+	public FormField(String elementPath, String name) {
         super(elementPath, name);
     }
 
@@ -9,7 +14,13 @@ public class FormField extends VEElements {
     public void drop() {
         dragAndDropElementOnLayoutWithFormElement();
     }
+    
 
+    public FormFieldConfigurationModalWindow dropToForm() {
+    	dragAndDropElementOnElement(Form.droppedFormElement);
+    	return new FormFieldConfigurationModalWindow();
+    }
+    
     @Override
     public void edit(String fieldName){
         super.edit(fieldName);

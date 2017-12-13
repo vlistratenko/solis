@@ -90,7 +90,7 @@ public class AddEmailsPage_ChooseAudienceTab extends AddEmailsPage{
 			
 		}
 		segmentItem.click();
-		calculateAudience.waitElement(10);
+		calculateAudience.waitElement();
 		if (calculateAudience.isVisible()) {
             calculateAudience.clickJS();
 			sleep(2);

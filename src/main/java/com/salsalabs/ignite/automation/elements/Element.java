@@ -19,6 +19,8 @@ public interface Element {
 
 	void changePath(String old, String newPath);
 
+	void changePathAndElementName(String old, String newPath, String elName);
+
 	void scrollIntoView();
 	
 	void scrollIntoViewAndDown();
@@ -37,6 +39,10 @@ public interface Element {
 
 	boolean waitElement();
 	
+	boolean waitElementWithPageRefresh(int amountOfRefreshes);
+
+	boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes);
+
 	boolean waitElement(int seconds);
 	
 	void waitElementWithFail(int seconds) throws Exception;
@@ -44,12 +50,15 @@ public interface Element {
 	String getName();
 
 	boolean isNotExists();
+	boolean isExists();
 
 	void clickByNumber(Integer number);
 
 	String getAttribute(String attrName);
 
 	void moveAndClick();
+
+	void dragAndDrop(Panel panel);
 
 	WebElement getLastElement();
 
@@ -68,6 +77,8 @@ public interface Element {
 	void fluentWaitForElementPresenceIgnoringExceptions();
 
 	void fluentWaitForElementPresenceIgnoringExceptions(int waitingTime);
+
+	boolean waitForExists(Integer timeOut);
 
     void doubleClick();
 }

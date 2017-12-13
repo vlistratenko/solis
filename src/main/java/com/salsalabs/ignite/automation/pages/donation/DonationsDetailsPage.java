@@ -55,7 +55,7 @@ public class DonationsDetailsPage extends HomePage {
 	
 	public DonationsDetailsPage verifyNumberOfYearRecurringInstallmentsInTheTable (int providedRandomYear) {	
 		//waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
-		donationsTable.waitElement(20);
+		donationsTable.waitElement();
 		donationsTable.scrollIntoView();
 		String  listOfRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
 		logger.info("Number of Found rows in the table" + " " + listOfRows);
@@ -67,15 +67,24 @@ public class DonationsDetailsPage extends HomePage {
 	}
 	
 	public DonationsDetailsPage verifyNumberOfMonthlyRecurringInstallmentsInTheTable (int providedYear , int providedMonth) {	
-		donationsTable.waitElement(20);
+		LocalDate initial = LocalDate.now();
+		int todayDate=initial.getDayOfMonth();
+		int lastDayOFmonth = initial.lengthOfMonth();
+		donationsTable.waitElement();
 		donationsTable.scrollIntoView();
 		String  listOFRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
 		logger.info("Number of Found rows on the Table" + " " + listOFRows);
 		int totalRecurringMonthInstallmentsInTheTable = 0;
+		int numberOfInstallmentsAfterCurrentYear =0;
 		if (LocalDate.now().getYear() < providedYear) {
 			int remainingMonthChargesCurrentYear = 12 - LocalDate.now().getMonth().getValue() + 1;
 			int numberOfYearsWithoutCurrentYear = providedYear - LocalDate.now().getYear();
-			int numberOfInstallmentsAfterCurrentYear = numberOfYearsWithoutCurrentYear * 12 - (12 - providedMonth);
+			if(todayDate==lastDayOFmonth){
+				 numberOfInstallmentsAfterCurrentYear = numberOfYearsWithoutCurrentYear * 12 - (12 - providedMonth)-1;
+			}else{
+				 numberOfInstallmentsAfterCurrentYear = numberOfYearsWithoutCurrentYear * 12 - (12 - providedMonth);
+			}
+			
 			totalRecurringMonthInstallmentsInTheTable = remainingMonthChargesCurrentYear
 					+ numberOfInstallmentsAfterCurrentYear;
 		} else {

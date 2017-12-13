@@ -1,16 +1,12 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.google.sitebricks.client.Web;
-import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.Element;
 import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.Table;
+import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.ElementImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.TableImpl;
+import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
@@ -19,7 +15,16 @@ import java.util.List;
 
 public class VEElements extends ElementImpl {
 
-    public VEElements(String elementPath, String name) {
+	Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elemenets Tab");
+	Panel rowTarget = new PanelImpl(OneColumnRow.pathAfterDrop, "Row to drop elements");
+    Panel emptyTarget = new PanelImpl("//*[@class='editorContentWrapper ui-droppable']", "Empty space to drop elements");
+	Button saveContent = new ButtonImpl("//a[contains(text(),'Save Content')]", "Save Content");
+	
+	public VEElements(String elementPath, String name) {
+        super(elementPath, name);
+    }
+    
+    public VEElements(String elementPath, String targetPanelPath, String name) {
         super(elementPath, name);
     }
 
@@ -44,54 +49,92 @@ public class VEElements extends ElementImpl {
     public void drop(){}
     public void edit(String fieldName){
         Button fieldEditIcon = new ButtonImpl("//label[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", fieldName + " edit icon");
+        fieldEditIcon.waitElement(10);
         fieldEditIcon.clickJS();
+    }
+    
+    public void openEditElementPopUp(String elementLabel){
+    	ButtonImpl fieldEditIcon = new ButtonImpl("//span[.='" + elementLabel + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit Text']", elementLabel + " edit icon");
+        fieldEditIcon.moveToElement();
+        fieldEditIcon.waitElement(10);
+        fieldEditIcon.clickJS();
+    }
+    
+    public void save(){
+    	saveContent.click();
     }
 
     public void dragAndDropElementOnLayoutWithFormElement() {
-        Actions action = new Actions(getDriver());
-        Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elemenets Tab");
-        elementsVe.scrollIntoView();
+        
+    	dragAndDropElementOnElement(rowTarget);
+    	
+    	//Actions action = new Actions(getDriver());
+        //Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elemenets Tab");
+        /*elementsVe.scrollIntoView();
         elementsVe.click();
-        getLogger().info("Elements menu was clicked");
-        WebElement source =  findElementByXpath(this.getElementPath());
-        WebElement target;
-        try {
-            target = findElementByXpath("(//div[@class='render-container-wrapper'])[2]");
+        getLogger().info("Elements menu was clicked");*/
+    	//openContentElementsPopup();
+        //WebElement source =  findElementByXpath(this.getElementPath());
+        //WebElement target;
+        //try {
+    	//dragAndDrop(rowTarget);
+        	/*target = findElementByXpath("(//div[@class='render-container-wrapper'])[2]");
             new ButtonImpl("(//div[@class='render-container-wrapper'])[2]", "Draggable area").scrollIntoView();
-            action.clickAndHold(source).moveToElement(target).release().perform();
-        } catch (StaleElementReferenceException | ElementNotFoundException e) {
+            action.clickAndHold(source).moveToElement(target).release().perform();*/
+       /* } catch (StaleElementReferenceException | ElementNotFoundException e) {
             new ButtonImpl("(//div[@class='content-render-wrapper'])[2]", "Draggable area").scrollIntoView();
             target = findElementByXpath("(//div[@class='content-render-wrapper'])[2]");
             action.clickAndHold(source).moveToElement(target).release().perform();
-        }
-        getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
+        }*/
+        //getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
+    }
+    
+    public void dragAndDropElementOnElement(Panel targetPanel) {
+    	openContentElementsPopup();
+    	dragAndDrop(targetPanel);
+        getLogger().info(getElementName() + " element was dropped into the " + targetPanel.getName());
     }
 
     //Use for Rows
     public void dragAndDropOnEmptyLayout() {
-        Actions action = new Actions(getDriver());
+        /*//Actions action = new Actions(getDriver());
         Button elementsVe = new ButtonImpl("//button[contains(@title,  'Sectional Elements')]", "Rows Tab");
         elementsVe.scrollIntoView();
         elementsVe.click();
-        getLogger().info("Rows menu was clicked");
-        WebElement source = findElementByXpath(getElementPath());
+        getLogger().info("Rows menu was clicked");*/
+    	openContentRowsPopup();
+        dragAndDrop(emptyTarget);
+        /*WebElement source = findElementByXpath(getElementPath());
         WebElement target = findElementByXpath("//*[@class='editorContentWrapper ui-droppable']");
-        action.clickAndHold(source).moveToElement(target).release().perform();
+        action.clickAndHold(source).moveToElement(target).release().perform();*/
         getLogger().info(getElementName() + " was dropped into the layout");
     }
 
     //Use for Form
     public void dragAndDropOnRow() {
-        Actions action = new Actions(getDriver());
-        Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elements Tab");
-        elementsVe.scrollIntoView();
-        elementsVe.click();
+        //Actions action = new Actions(getDriver());
+        openContentElementsPopup();
         getLogger().info("Elements menu was clicked");
-        WebElement source = findElementByXpath(getElementPath());
+        /*WebElement source = findElementByXpath(getElementPath());
         WebElement target = findElementByXpath("//*[@class='render-content ui-droppable']");
-        action.clickAndHold(source).moveToElement(target).release().perform();
+        action.clickAndHold(source).moveToElement(target).release().perform();*/
+        dragAndDrop(rowTarget);
         getLogger().info(getElementName() + " was dropped into the layout");
     }
+    
+    private void openContentElementsPopup() {
+    	elementsVe.waitElement();
+    	elementsVe.scrollIntoView();
+        elementsVe.click();
+        getLogger().info("Elements menu was clicked");
+	}
+    
+    private void openContentRowsPopup() {
+    	 Button elementsVe = new ButtonImpl("//button[contains(@title,  'Sectional Elements')]", "Rows Tab");
+         elementsVe.scrollIntoView();
+         elementsVe.click();
+         getLogger().info("Rows menu was clicked");
+	}
 
 
 }

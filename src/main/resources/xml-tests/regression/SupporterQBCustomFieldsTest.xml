@@ -11,12 +11,12 @@
 		<parameter name="Passward" value="Gnusmas_1"></parameter>
 		<groups>
 			<run>
-				<include name="SupporterFields" />
+				<include name="CustomFields" />
 			</run>
 		</groups>
 		<classes>
 			<class
-				name="com.salsalabs.ignite.automation.suites.regression.SupporterQueryBuilderTest" />
+				name="com.salsalabs.ignite.automation.suites.regression.SupporterQBCustomFieldsTest" />
 		</classes>
 	</test>
 </suite>

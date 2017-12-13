@@ -1,8 +1,8 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
-public class Text extends VEElements {
+public class ButtonVEElement extends VEElements {
 
-    Text(String path, String name) {
+    ButtonVEElement(String path, String name) {
         super(path, name);
     }
 
