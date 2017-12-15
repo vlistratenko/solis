@@ -22,7 +22,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 	public static final String customFieldsExtendedButtonLAbel = "SupTextBox";
 	public static final String supporterTextBoxCustomField = "SupTextBox";
 	public static final String supporterNumberCustomField = "SupNumber";
-	public static final String supporterYesNoCustomField = "Supyesno";
+	public static final String supporterYesNoCustomField = "SupYesNo";
 	public static final String supporterDateTime = "SupDateTime";
 	public static final String supporterSingleChoice = "SupSingleChoice";
 	
@@ -480,7 +480,6 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkShowResultButtonIsDisplayed().
 			  clickShowTheResults().
 			  checkErrorMessage().
-			  checkSupporterEmailInTable(supporterExpectedEmail).	
 			  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 		  }
 		  
