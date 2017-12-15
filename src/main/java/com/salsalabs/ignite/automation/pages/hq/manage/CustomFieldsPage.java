@@ -41,7 +41,7 @@ public class CustomFieldsPage extends ManagePage {
 	private TextBox fieldName = new TextBoxImpl("//*[@id='name']", "Field Name", true);
 	private Button toStep3Btn = new ButtonImpl("//button[@id='btnModalStep2']", "Continue to Step 3: Field Settings »",
 			true);
-	private TextBox descriptionTxtBox = new TextBoxImpl("//textarea[@name='']", "Description", true);
+	private TextBox descriptionTxtBox = new TextBoxImpl("//textarea[@ng-model='dataPacket.description']", "Description", true);
 	private Button createFieldBtn = new ButtonImpl("//*[@autotest-id='custom_field-create_field']", "Create Field! »",
 			true);
 	private TextBox cfValue = new TextBoxImpl("//input[contains(@placeholder,'Enter')]", "Text", true);
