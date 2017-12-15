@@ -59,7 +59,7 @@ public class SupportersAddPage extends HomePage {
 	Label supporterStatusRadio = new LabelImpl("//span[@class='subscription custom radio checked']/ancestor::label",
 			"Status");
 	Label supporterStatusLabel = new LabelImpl("//p[.='Unsubscribed']", "Status");
-	Button saveButton = new ButtonImpl("//button/descendant-or-self::*[text()='Save this Supporter!']", "Save button");
+	Button saveButton = new ButtonImpl("//button[@id='btnSave']", "Save button");
 	Label supporterSubscriptions = new LabelImpl("//a[text()='Subscription']", "Subscription tab");
 	Table supporterTable = new TableImpl("//table", "Supporter Table");
 	Button customFieldAccordion = new ButtonImpl("//h2[@ng-click='toggleAccordion(customFields)']",
