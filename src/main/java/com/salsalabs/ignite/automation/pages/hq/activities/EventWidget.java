@@ -23,7 +23,7 @@ public class EventWidget extends DonationWidget {
 	TextBox eventPersonEmailField = new TextBoxImpl("//input[contains(@id,'email')]", "Event attendees Email", true);
 	Label eventSubsrIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
-	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
+	Button registrationButton = new ButtonImpl("//*[contains(text(), 'Register')]", "Register", true);
 	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
 	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
@@ -53,7 +53,7 @@ public class EventWidget extends DonationWidget {
 	
 	public EventWidget openEventRegistrationPage() {
 		// TODO Auto-generated method stub
-		registrationButton.click();
+		registrationButton.clickJS();
 		return this;
 	}
 	

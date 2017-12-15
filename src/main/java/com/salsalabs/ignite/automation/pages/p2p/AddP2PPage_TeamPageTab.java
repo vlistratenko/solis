@@ -6,7 +6,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 public class AddP2PPage_TeamPageTab<T> extends AddP2PPage_FundraiserPageTab<T>  {
 	Button teamFundraisingPageSubTab = new ButtonImpl("//div[contains(@class, 'inactive')]/a[.='Team Fundraising Page']", "Team Fundraising Page");
 	Button clickNextToAutorespondersPage = new ButtonImpl("//button[@id='btnGo-composeTeam-autoresponders']", "Next: Team Page Template");
-	
+
 	public AddP2PPage_TeamPageTab_TeamFundraisingSubTab openTeamFundraisingPageSubTab() {
 		teamFundraisingPageSubTab.waitElement(5);
 		if (!teamFundraisingPageSubTab.isNotExists()) {
@@ -17,6 +17,8 @@ public class AddP2PPage_TeamPageTab<T> extends AddP2PPage_FundraiserPageTab<T>  
 	}
 	
 	public AddP2PPage_AutorespondersTab clickNextToAutorespondersTabButton() {
+		clickNextToAutorespondersPage.fluentWaitForElementPresenceIgnoringExceptions();
+		sleep(3);
 		clickNextToAutorespondersPage.click();
 		return new AddP2PPage_AutorespondersTab();
 	}

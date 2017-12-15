@@ -1,11 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.google.sitebricks.client.Web;
-import com.salsalabs.ignite.automation.common.Browser;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.VE2Elements.VEElements;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
@@ -18,15 +14,13 @@ import java.util.stream.Collectors;
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
-    Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
+    public Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
     Button cancelButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[1]","Cancel button of fields configuration modal window");
     CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
     TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
     Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
-    TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
-    SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
-
-    private static List<String> supporterFieldNames  = new ArrayList<>();;
+    public TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
+    public SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
     Button selectFieldButton = new ButtonImpl("//*[contains(text(),'fieldNameForReplacement')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of fieldNameForReplacement in form field configuration modal window");
 
     private static List<String> supporterFieldNames  = new ArrayList<>();

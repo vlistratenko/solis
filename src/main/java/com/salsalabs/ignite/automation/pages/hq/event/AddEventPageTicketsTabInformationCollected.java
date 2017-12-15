@@ -41,7 +41,11 @@ public class AddEventPageTicketsTabInformationCollected extends HomePage {
 
     public AddEventPageTicketsTabManageTickets clickContinueButton(){
         givezooksFrame.swithToFrameWithFluentWait(10);
-        continueButton.click();
+        //this click may not work occasionally due to Chrome WebDriver bug https://bugs.chromium.org/p/chromedriver/issues/detail?id=1224
+        try{continueButton.clickJS();
+        } catch (Exception e) {
+            continueButton.clickJS();
+        }
         switchDefaultContent();
         return new AddEventPageTicketsTabManageTickets();
     }

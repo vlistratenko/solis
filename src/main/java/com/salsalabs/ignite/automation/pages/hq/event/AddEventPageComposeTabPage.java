@@ -19,6 +19,7 @@ public interface AddEventPageComposeTabPage {
             "Gateways dropdown");
 
     default AddEventPageAutorespondersTab clickNextButtonInComposeTab(){
+        nextToAutorespondersButton.fluentWaitForElementPresenceIgnoringExceptions();
         nextToAutorespondersButton.click();
         return new AddEventPageAutorespondersTab();
     }

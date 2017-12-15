@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Thu Dec 07 12:34:57 EET 2017
+#Fri Dec 15 17:34:43 EET 2017
 current.firstName=0
 CM.firstName=0
 prop=1
@@ -16,13 +16,13 @@ Environment=TEST
 Admin.email=0@testauto.igniteaction.net
 updateTC=false
 Admin.orgName=automated_testing1
-maxRetryCount=2
 current.Password=qwerty
+maxRetryCount=2
 currentWindowHandle=CDwindow-74cf4e4b-dd5b-447d-aa6d-330a7da8ece4
 emailFrom=info@salsalabs.com
 current.Login=olauta+spf1@salsalabs.com
 Admin.firstName=FirstName
 buildVersion=false
 subscribeWidgetLink=https\://spf1.test.igniteaction.net/bwnr9tk5mg
-CM.lastName=0
 Admin.Password=11111111
+CM.lastName=0

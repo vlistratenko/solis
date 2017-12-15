@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 public class AddEventPageTicketsTabManageTickets extends HomePage {
 
     private Button createTicketButton = new ButtonImpl("//a[@class='button'][@href]","Create a ticket button");
-    private Button nextToLayoutsPageButton = new ButtonImpl("//a[@class='button'][@href]","Create a ticket button");
+    private Button nextToLayoutsPageButton = new ButtonImpl("//*[@id='btnGo-tickets-compose']","Create a ticket button");
 
     public AddEventPageTicketsTabNewTicket clickCreateTicketButton(){
         createTicketButton.fluentWaitForElementPresenceIgnoringExceptions();

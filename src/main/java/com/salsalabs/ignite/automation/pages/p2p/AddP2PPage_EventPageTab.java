@@ -54,6 +54,7 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	
 	public AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab clickNextToEventPageButton() {
 		clickNextToFundraiserPage.waitElement();
+		sleep(3);
 		clickNextToFundraiserPage.click();
 		return new AddP2PPage_FundraiserPageTab_PersonalFundraisingSubTab();
 	}
