@@ -8,7 +8,7 @@ public class RegisterButton extends VEElements {
 
     @Override
     public void drop() {
-        dragAndDropElementOnLayoutWithFormElement();
+        dragAndDropElementOnLayoutWithRowElement();
     }
 
 }

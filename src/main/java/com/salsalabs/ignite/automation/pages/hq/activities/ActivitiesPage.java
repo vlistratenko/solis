@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.event.EventsPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.event.EventsPage;
 import com.salsalabs.ignite.automation.pages.p2p.p2psPage;
 
 

@@ -8,9 +8,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.*;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.salsalabs.ignite.automation.common.Browser;
@@ -132,24 +130,24 @@ public abstract class ElementImpl implements Element {
 					return true;
 				}
 			}
-		}		
+		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes) {
 		for (int i = 0; i < amountOfRefreshes; i++) {
-			
+
 			if (isExists()) {
 				return true;
 			}else {
 				driver.navigate().refresh();
 				sleep(defaultTimeOut);
 			}
-		}		
+		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean waitElement(int seconds){
 		return waitObject(path, seconds * 1000);
@@ -168,7 +166,7 @@ public abstract class ElementImpl implements Element {
 		}
 		
 	}
-	
+
 	@Override
 	public void changePathAndElementName(String old, String newPath, String elName) {
 		if (old.equals("")) {
@@ -231,7 +229,7 @@ public abstract class ElementImpl implements Element {
 		click();
 
 	}
-	
+
 	public void moveToElement() {
 		moveToElement(path);
 	}
@@ -244,7 +242,7 @@ public abstract class ElementImpl implements Element {
 		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
 
 	}
-	
+
 	@Override
 	public void clickByNumber(Integer number) {
 		logger.info(elementName + " was clicked.");
@@ -262,7 +260,7 @@ public abstract class ElementImpl implements Element {
 		logger.info("Check that " + path + " is not exists.");
 		return isNotElementPresent(path);
 	}
-	
+
 	public boolean isExists() {
 		logger.info("Check that " + path + " is exists.");
 		Browser.implicityWait(1);
@@ -302,7 +300,7 @@ public abstract class ElementImpl implements Element {
 		}
 		return isNotExists();
 	}
-	
+
 	@Override
 	public boolean waitForNotVisible(Integer timeOut) {
 		for (int i = 0; i < timeOut; i++) {
@@ -951,15 +949,9 @@ public abstract class ElementImpl implements Element {
 				.ignoreAll(exceptionsList)
 				.withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
 						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
-
-		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
+		logger.debug("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
 				" is present and clickable");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
-
-
-
-	
-	
 }

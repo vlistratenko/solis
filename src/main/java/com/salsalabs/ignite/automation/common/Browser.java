@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -22,7 +21,6 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
 
 public abstract class Browser {
 	protected static WebDriver driver;
@@ -419,7 +417,16 @@ public abstract class Browser {
 	protected Alert switchToAlert() {
 		return driver.switchTo().alert();
 	}
-	
 
-
+	public void waitUntilAngularIsComplete(){
+        logger.info("Waiting until angular has finished processing");
+        long waitingTime = 10;
+        long pollingInterval = 500;
+        Wait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(waitingTime, TimeUnit.SECONDS)
+                .pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
+                .withMessage("Fluent wait failed to wait until angular has finished processing. Error occurred in "
+                        + Thread.currentThread().getStackTrace()[2].getMethodName());
+		wait.until(CommonUtils.angularHasFinishedProcessing());
+	}
 }

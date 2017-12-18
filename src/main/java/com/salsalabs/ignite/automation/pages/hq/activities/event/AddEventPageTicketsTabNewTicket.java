@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.pages.hq.event;
+package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Frame;
@@ -29,7 +29,7 @@ public class AddEventPageTicketsTabNewTicket extends HomePage {
 
     public AddEventPageTicketsTabInformationCollected clickSaveTicketInfoButton(){
         givezooksFrame.switchToFrame();
-        saveTicketButton.click();
+        saveTicketButton.clickJS();
         switchDefaultContent();
         return new AddEventPageTicketsTabInformationCollected();
     }

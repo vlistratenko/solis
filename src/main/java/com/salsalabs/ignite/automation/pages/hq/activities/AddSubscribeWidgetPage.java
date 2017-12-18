@@ -56,7 +56,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 		widgetNameField.type(widgetName); 
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
-		sleep(5);
+		waitUntilAngularIsComplete();
+		//sleep(5);
 		return  this;		
 	}
 	
@@ -133,12 +134,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected <T> T openWidget(Class<T> clazz) {
 		widgetLink = new ButtonImpl("//a[contains(text(), '" + widgetName.toLowerCase() + "')]", "Widget link");
 		widgetLink.fluentWaitForElementPresenceIgnoringExceptions();
-		if (!widgetLink.isNotDisplayed()) {
-			CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
-		}		
-		String link = CommonUtils.getProperty(linkProperty);
+		CommonUtils.setProperty(linkProperty, widgetLink.getAttribute("href"));
 		currentWindowHandle = getWindowHandle();
-		this.openInNewWindow(link);
+		this.openInNewWindow(CommonUtils.getProperty(linkProperty));
 		sleep(7);
 		CommonUtils.setProperty(PropertyName.CURRENT_WINDOW_HANDLE, currentWindowHandle);
 		try {
@@ -225,11 +223,12 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage selectLayoutStep(String layout) {		
+	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
 		basicLayoutClass.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
-		sleep(10);
+		waitUntilAngularIsComplete();
+		//sleep(10);
 	    return this;
 	}
 
@@ -240,6 +239,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage dropVEFormElement(){
 		new SignupFormElements().performDrop(SignupFormElements.VE.FORM);
+		waitUntilAngularIsComplete();
+		sleep(1);
 		return this;
 	}
 

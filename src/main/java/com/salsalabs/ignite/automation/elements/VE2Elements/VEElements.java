@@ -64,6 +64,7 @@ public class VEElements extends ElementImpl {
     	saveContent.click();
     }
 
+    //Use for Form VE element
     public void dragAndDropElementOnLayoutWithFormElement() {
         
     	dragAndDropElementOnElement(rowTarget);
@@ -135,6 +136,28 @@ public class VEElements extends ElementImpl {
          elementsVe.click();
          getLogger().info("Rows menu was clicked");
 	}
+
+    //Use for Register Button VE element
+    public void dragAndDropElementOnLayoutWithRowElement() {
+        Actions action = new Actions(getDriver());
+        Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elemenets Tab");
+        elementsVe.fluentWaitForElementPresenceIgnoringExceptions(5);
+        elementsVe.scrollIntoView();
+        elementsVe.click();
+        getLogger().info("Elements menu was clicked");
+        WebElement source =  findElementByXpath(this.getElementPath());
+        WebElement target;
+        try {
+            new ButtonImpl("//div[@class='render-container-wrapper']", "Draggable area").scrollIntoView();
+            target = findElementByXpath("//div[@class='render-container-wrapper']");
+            action.clickAndHold(source).moveToElement(target).release().perform();
+        } catch (StaleElementReferenceException | ElementNotFoundException e) {
+            new ButtonImpl("//div[@class='content-render-wrapper']", "Draggable area").scrollIntoView();
+            target = findElementByXpath("//div[@class='content-render-wrapper']");
+            action.clickAndHold(source).moveToElement(target).release().perform();
+        }
+        getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
+    }
 
 
 }
