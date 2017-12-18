@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.elements.VE2Elements;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;

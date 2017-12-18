@@ -430,7 +430,6 @@ public class DonationWidget extends SubscribeWidget {
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Expiration Year"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Name on Card"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Phone"), "'This field requires a value' validation message is not displayed");

@@ -263,7 +263,6 @@ public class SubscribeWidget extends Browser{
 
 	public void verifyValidationMessageFieldRequireValueDisplayedForEmptySupporterFields(){
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Address, line 2"), "'This field requires a value' validation message is not displayed");
-		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Confirmation Checkbox"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Date of Birth"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Gender"), "'This field requires a value' validation message is not displayed");
 		verifier.verifyTrue(isValidationMessageFieldRequiresValueDisplayed("Home Phone"), "'This field requires a value' validation message is not displayed");
