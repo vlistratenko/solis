@@ -226,7 +226,6 @@ public class SubscribeWidget extends Browser{
 																 String cellPhone, String country, String dateOfBirth) {
 
 		personEmailField.fluentWaitForElementPresenceIgnoringExceptions();
-		confirmationCheckbox.check();
 		personEmailField.type(personEmail); CommonUtils.setProperty("personEmail", personEmail);
 		personFNameField.type(personFName); CommonUtils.setProperty("personFName", personFName);
 		personLNameField.type(personLName); CommonUtils.setProperty("personLName", personLName);
@@ -241,7 +240,6 @@ public class SubscribeWidget extends Browser{
 		titleField.type(title); CommonUtils.setProperty("title", title);
 		workPhoneField.type(workPhone); CommonUtils.setProperty("workPhone", workPhone);
 		cellPhoneField.type(cellPhone); CommonUtils.setProperty("cellPhone", cellPhone);
-		//dateOfBirthField.type(dateOfBirth); clickCalendarDoneButton(); CommonUtils.setProperty("dateOfBirth", dateOfBirth);
 		dateOfBirthField.type(dateOfBirth); clickCalendarDoneButton(); CommonUtils.setProperty("dateOfBirth", parseDateTimeValueToMatchHqResponse(dateOfBirth));
 		personStatesSelectBox.selectByValue(state); CommonUtils.setProperty("state", "UA-63");
 		genderSelectBox.selectByValue(gender); CommonUtils.setProperty("gender", "Male");
