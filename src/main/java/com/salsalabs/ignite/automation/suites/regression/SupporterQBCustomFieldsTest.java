@@ -409,7 +409,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  pickUpFirstLevelRuleOption(customFieldsRule).
 			  pickUpNextLevelRuleOption(supporterDateTime, customFieldsExtendedButtonLAbel).
 			  pickUpTheRuleOperator("during this").
-			  pickUpDatePeriod("Day").
+			  pickUpDatePeriod("Day(s)").
 			  checkErrorMessage().
 			  checkShowResultButtonIsDisplayed().
 			  clickShowTheResults().
@@ -426,7 +426,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  pickUpFirstLevelRuleOption(customFieldsRule).
 			  pickUpNextLevelRuleOption(supporterDateTime, customFieldsExtendedButtonLAbel).
 			  pickUpTheRuleOperator("not during this").
-			  pickUpDatePeriod("Day").
+			  pickUpDatePeriod("Day(s)").
 			  checkErrorMessage().
 			  checkShowResultButtonIsDisplayed().
 			  clickShowTheResults().
