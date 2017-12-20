@@ -498,7 +498,7 @@ public class SupporterQBCustomFieldsTest extends SeleneseTestCase{
 			  checkNoResultsIsReturned();
 		  }
 		  
-			// custom fields - Single Choice
+			// custom fields - Single Choice1
 		  @Parameters({"login", "Passward"})
 		  @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"CustomFields"})
 		  public void customFieldSingleChoiceIsNotOneOFTest(String login, String passward){
