@@ -420,7 +420,7 @@ public abstract class Browser {
 
 	public void waitUntilAngularIsComplete(){
         logger.info("Waiting until angular has finished processing");
-        long waitingTime = 10;
+        long waitingTime = 20;
         long pollingInterval = 500;
         Wait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(waitingTime, TimeUnit.SECONDS)

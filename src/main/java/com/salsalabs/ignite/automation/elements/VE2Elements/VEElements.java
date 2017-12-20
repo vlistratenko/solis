@@ -152,7 +152,7 @@ public class VEElements extends ElementImpl {
             new ButtonImpl("//div[@class='render-container-wrapper']", "Draggable area").scrollIntoView();
             target = findElementByXpath("//div[@class='render-container-wrapper']");
             action.clickAndHold(source).moveToElement(target).release().perform();
-        } catch (StaleElementReferenceException | ElementNotFoundException e) {
+        } catch (StaleElementReferenceException | ElementNotFoundException | NoSuchElementException e) {
             new ButtonImpl("//div[@class='content-render-wrapper']", "Draggable area").scrollIntoView();
             target = findElementByXpath("//div[@class='content-render-wrapper']");
             action.clickAndHold(source).moveToElement(target).release().perform();
