@@ -30,8 +30,13 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 
 	private Button getChildItemByLabel(String label) {
 		logger.info("Get item with label " + label);
-		return new ButtonImpl(path + "/descendant::*[text()='" + label + "']", label + " item");
-
+		;
+		return new ButtonImpl(path + "/descendant::*[normalize-space()='" + label + "']", label + " item");
+	}
+	
+	private Button getChildItemByLabelUsingContainsMEthod(String label) {
+		logger.info("Get item with label " + label);
+		return new ButtonImpl(path + "/descendant::*[contains(text(),'" + label + "')]", label + " item");
 	}
 
 	@Override
@@ -45,6 +50,17 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		this.getChildItemByLabel(value).click();
 
 	}
+	@Override
+	public void selectByLabelJSUsingContains(String value) {
+		logger.info("Select value by label " + value + " in the " + elementName);
+		WebElement el = findElementByXpath(extendButtonPath);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", el);
+		//scrollIntoView();
+		click(extendButtonPath);
+		this.getChildItemByLabelUsingContainsMEthod(value).scrollIntoView();
+		this.getChildItemByLabelUsingContainsMEthod(value).click();
+	}
+	
 
 	@Override
 	public void selectByLabelJS(String value) {
@@ -71,4 +87,6 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 	public void waitForElementPresence() {		
 		super.waitObject(extendButtonPath, 30000);
 	}
+
+	
 }

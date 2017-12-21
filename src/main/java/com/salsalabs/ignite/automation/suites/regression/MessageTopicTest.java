@@ -13,7 +13,7 @@ import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
 public class MessageTopicTest extends SeleneseTestCase {
 	@Parameters("login")
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "settings.MessageTopic" }, description = "")
-	public void verifyMessageTopicCreationTest(String login) {
+	public void verifyMessageTopicCreationTest(String login) throws Exception {
 		String topic = "Topic" + RandomStringUtils.randomAlphanumeric(5);
 		LoginPage loginPage = new LoginPage();
 		loginPage.doSuccessLogin(login, "!QAZ2wsx").

@@ -34,12 +34,16 @@ public class MessageTopicsPage extends ManagePage {
 		return new MessageTopicsPage();
 	}
 
-	public MessageTopicsPage verifyAddedTopicInTheTable(String expectedTopic) {
-
+	public MessageTopicsPage verifyAddedTopicInTheTable(String expectedTopic) throws Exception {
 		List<WebElement> topics = listOfTopics.findElementsByXpath(listOfTopics.getPath());
-		String actualTopic = topics.get(topics.size() -1).getText();
-		verifier.verifyEquals(actualTopic, expectedTopic, "New added message topic  == Topic frpm the table");
-		return new MessageTopicsPage();
+		//topics.forEach(topic->topic.getText().equals(expectedTopic));
+		for(int i=0; i<topics.size(); i++){
+			if(topics.get(i).getText().equals(expectedTopic)){
+				logger.info("New added message topic "+ expectedTopic +"  == Topic from the table");
+				return new MessageTopicsPage();
+			}		
+		}
+		throw  new AssertionError("New Added Message topic was not found in the Message topic table ");
 	}
 	
 	public MessageTopicsPage deleteMessageTopic() {
