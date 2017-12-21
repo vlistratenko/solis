@@ -31,7 +31,7 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 	private Button getChildItemByLabel(String label) {
 		logger.info("Get item with label " + label);
 		;
-		return new ButtonImpl(path + "/descendant::*[normalize-space()='" + label + "']", label + " item");
+		return new ButtonImpl(path + "/descendant::*[normalize-space(text())='" + label + "']", label + " item");
 	}
 	
 	private Button getChildItemByLabelUsingContainsMEthod(String label) {
@@ -66,8 +66,8 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 	public void selectByLabelJS(String value) {
 		logger.info("Select value by label " + value + " in the " + elementName);
 		findElementByXpath(extendButtonPath);
-		clickByTABKey(extendButtonPath);
-		this.getChildItemByLabel(value).onClick();
+		clickJS(extendButtonPath);
+		this.getChildItemByLabel(value).clickJS();
 
 	}
 
