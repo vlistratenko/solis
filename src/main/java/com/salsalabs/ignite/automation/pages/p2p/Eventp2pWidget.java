@@ -84,7 +84,7 @@ public class Eventp2pWidget extends EventWidget {
 	
 	public Eventp2pWidget selectFundraiserCheckBox(Boolean isFundraiser) {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		isFundraiserCheckBox.waitElement();
+		isFundraiserCheckBox.waitElement(10);
 		isFundraiserCheckBox.check(isFundraiser);
 		sleep(3);
 		switchDefaultContent();

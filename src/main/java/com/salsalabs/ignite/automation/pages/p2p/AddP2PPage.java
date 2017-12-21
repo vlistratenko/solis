@@ -1,9 +1,7 @@
 package com.salsalabs.ignite.automation.pages.p2p;
 
-import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.VE2Elements.TextVEElement;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;

@@ -5,6 +5,7 @@ import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Chec
 import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Events;
 import com.salsalabs.ignite.automation.elements.VE2Elements.P2PFormElements_Registration;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage;
 
 public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 
@@ -103,6 +104,11 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 		new P2PFormElements_Events().performDrop(P2PFormElements_Events.VE.DONATEBUTTON);
 		//droppedDonateButtonElement.waitElement(10);
 		return (T)this;
+	}
+	
+	public T selectGatewayByName(String gatewayName) {
+		AddDonationWidgetPage.gatewaysList.selectByLabelJS(gatewayName);
+		return (T) this;
 	}
 	
 }

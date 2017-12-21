@@ -48,6 +48,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		clickNextButton().
 		selectLayoutAndClickNext("Basic").
 		openEventPageSubTab().
+			selectGatewayByName("For auto test Merchant").
 			/*dropOneColumnRow().
 			dropVETextElement().
 			dropVERegisterButtonElement().
@@ -65,6 +66,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 			dropVETextElement().
 			editVETextElement("Thank You!").*/
 		clickNextToEventPageButton().
+		selectGatewayByName("For auto test Merchant").
 		/*openPersonalFundraisingPageSubTab().
 			dropOneColumnRow().
 			dropVETextElement().
@@ -76,6 +78,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 			dropOneColumnRow().
 			dropVETextElement().*/
 		clickNextToTeamTabButton().
+		selectGatewayByName("For auto test Merchant").
 		openTeamFundraisingPageSubTab().
 			/*dropOneColumnRow().
 			dropVETextElement().

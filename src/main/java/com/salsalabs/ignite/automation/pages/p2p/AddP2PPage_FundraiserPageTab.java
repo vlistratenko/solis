@@ -2,6 +2,7 @@ package com.salsalabs.ignite.automation.pages.p2p;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage;
 
 
 public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> {
@@ -39,6 +40,5 @@ public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> 
 		confirmationViewSubTab.click();
 		return new AddP2PPage_FundraiserPageTab_ConfirmationViewSubTab();
 	}*/
-	
 	
 }

@@ -12,7 +12,7 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
 	Button btnPublish = new ButtonImpl("//button[@id='btnPublish']", "Publish This Form >>");
-	DropDown gatewaysList = new DropDownImpl(
+	public static DropDown gatewaysList = new DropDownImpl(
 			"//gateways-and-queues//*[@class='custom dropdown']",
 			"//gateways-and-queues//*[@class='custom dropdown']/a",
 			"Gateways dropdown");
