@@ -41,7 +41,7 @@ public class EventWidget extends DonationWidget {
 
 	public DonationWidget verifyEventSubscrIsSuccesses() throws Exception {
 		eventSubsrIsSccessMessage.waitElementWithFail(10);
-		verifier.verifyElementIsDisplayed(eventSubsrIsSccessMessage);
+		verifier.verifyElementIsDisplayed(true, eventSubsrIsSccessMessage);
 		return this;
 	}
 	
