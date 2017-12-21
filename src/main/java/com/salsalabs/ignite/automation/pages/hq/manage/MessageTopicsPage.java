@@ -36,7 +36,6 @@ public class MessageTopicsPage extends ManagePage {
 
 	public MessageTopicsPage verifyAddedTopicInTheTable(String expectedTopic) throws Exception {
 		List<WebElement> topics = listOfTopics.findElementsByXpath(listOfTopics.getPath());
-		//topics.forEach(topic->topic.getText().equals(expectedTopic));
 		for(int i=0; i<topics.size(); i++){
 			if(topics.get(i).getText().equals(expectedTopic)){
 				logger.info("New added message topic "+ expectedTopic +"  == Topic from the table");
