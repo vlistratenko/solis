@@ -213,7 +213,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 				openDonationPageOnFundraiserForm()
 				.fillFundraiserDonationForm(SeleneseTestCase.emailClient.getEmailBox("Anonimus" + CommonUtils.getRandomNumericValueFixedLength(4)),
 				"Tester",
-				"Anonimus + CommonUtils.getRandomNumericValueFixedLength(4)",
+				"Anonimus" + CommonUtils.getRandomNumericValueFixedLength(4),
 				"10753 blix",
 				"North holliwood",
 				"91602",
