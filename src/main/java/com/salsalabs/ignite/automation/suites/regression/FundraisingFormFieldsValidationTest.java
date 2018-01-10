@@ -163,8 +163,7 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
             fundraisingForm1.fillDonationWidgetAllSupporterFields(
                     "4111111111111111","123","11","2023","donationTest donationTest",supporterEmail,"FirstName","LastName",
                     "City","91602","UA-63","address1","address2","Male","777-777-7777","MidName","en-US",
-                    "suffix","title","777-777-7777","777-777-7777","UA","09/11/2017","dedication","test@test.com",
-                    "Option1","5").
+                    "suffix","title","777-777-7777","777-777-7777","UA","09/11/2017","5").
                     clickOnSubmitFormButton();
             addDonationPage.verifySubmittedSupporterFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(), login, password);
         }

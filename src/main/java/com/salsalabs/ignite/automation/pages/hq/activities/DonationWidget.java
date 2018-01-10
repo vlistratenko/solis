@@ -83,8 +83,7 @@ public class DonationWidget extends SubscribeWidget {
 															   String nameOnCard, String personEmail, String personFName, String personLName, String personCity,
 															   String personZip, String state, String addressLine1, String addressLine2, String gender, String homePhone,
 															   String personMName, String language, String suffix, String title, String workPhone, String cellPhone,
-															   String country, String dateOfBirth, String dedication, String pleaseNotify, String designation, String amount){
-		this.fillDonationFormSpecificSupporterFields(designation, dedication, pleaseNotify);
+															   String country, String dateOfBirth, String amount){
 		super.fillSubscribeWidgetAllSupporterFields(personEmail, personFName, personLName, personCity, personZip, state, addressLine1, addressLine2, gender, homePhone,
 													personMName, language, suffix, title, workPhone, cellPhone, country, dateOfBirth);
 		this.fillCreditCardDetails(amount, cardNumber, securityCode, expirationMonth, expirationYear, nameOnCard);
