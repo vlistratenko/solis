@@ -28,6 +28,7 @@ import java.net.URLEncoder;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import static com.salsalabs.ignite.automation.common.config.DriverType.determineEffectiveDriverType;
 
@@ -240,7 +241,7 @@ public class SeleneseTestCase {
 	protected List<LogEntry> getJsConsoleErrors() {
 		logger.info("Checking console errors");
 		if (driver instanceof ChromeDriver) {
-			List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).getAll();
+			List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).filter(Level.SEVERE);
 			if (!logs.isEmpty()) {
 				for (int i = 0; i < logs.size(); i++) {
 					logger.error("Console error: " + logs.get(i));

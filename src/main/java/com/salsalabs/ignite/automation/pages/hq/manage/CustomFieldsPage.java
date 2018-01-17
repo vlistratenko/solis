@@ -58,7 +58,7 @@ public class CustomFieldsPage extends ManagePage {
 	private Table customFieldsTable = new TableImpl("//table", "Custom Fields Table");
 	private Button backStep3Button = new ButtonImpl("//button[@autotest-id='btn_back_step3_custom_field_create']", "Back step 3 Button");
 	private Button cancelButton = new ButtonImpl("//button[contains(text() , 'Cancel')]", "Cancel Button");
-	Button closeModalWindowButton = new ButtonImpl("//a[@class='f-dropdown-close']", "Close Dialog Message BUtton");
+	Button closeModalWindowButton = new ButtonImpl("//a[@class='f-dropdown-close right']", "Close Dialog Message BUtton");
 	private Button customFieldButton;
 	private Button activityCustomFields = new ButtonImpl("//a[contains(text(), 'Activity Custom Fields')]",
 			"Create a Supporter Custom Field Button", true);
