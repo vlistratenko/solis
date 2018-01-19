@@ -164,10 +164,11 @@ public class MailosourEmailClient implements EmailClient<Email> {
 	@Override
 	public String getURLByDomain(String emailSubj, String domain) {
 		Email e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
-		Pattern pattern = Pattern.compile("https://" + domain + "(.*?)" + "confirm(.*?)\" ");
+		Pattern pattern = Pattern.compile("\"(http|https)://" + domain + "[a-zA-Z0-9_./%]*\"");
 		Matcher matcher = pattern.matcher(e.html.body);
-		if (matcher.find())
-			return matcher.group(0).replace("\" ", "");
+		if (matcher.find()) {
+			return matcher.group(0).replaceAll("\"", "");
+		}
 		return null;
 	}
 

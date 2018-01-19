@@ -262,11 +262,10 @@ public class SquirrelEmailClient extends Browser implements EmailClient<Message>
 	@Override
 	public String getURLByDomain(String emailSubj, String domain) {
 		Message e = waitForEmails(emailSubj, 1, 15).getEmailBySubject(emailSubj);
-		Pattern pattern = Pattern.compile("https://" + domain + "(.*?)" + "confirm(.*?)\" ");
-		Matcher matcher;
-		matcher = pattern.matcher(getContent(e));
+		Pattern pattern = Pattern.compile("\"(http|https)://" + domain + "[a-zA-Z0-9_./%]*\"");
+		Matcher matcher = pattern.matcher(getContent(e));
 		if (matcher.find()) {
-			return matcher.group(0).replace("\" ", "");
+			return matcher.group(0).replaceAll("\"", "");
 		}
 		return null;
 	}
