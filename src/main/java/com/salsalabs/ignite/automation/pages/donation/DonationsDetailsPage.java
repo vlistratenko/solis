@@ -1,6 +1,8 @@
 package com.salsalabs.ignite.automation.pages.donation;
 
 import java.time.LocalDate;
+import java.time.Month;
+
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;
@@ -55,12 +57,13 @@ public class DonationsDetailsPage extends HomePage {
 	
 	public DonationsDetailsPage verifyNumberOfYearRecurringInstallmentsInTheTable (int providedRandomYear) {	
 		//waitConditionBecomesTrue(donationsTable.isDisplayed(), 4);
+		String expectedValue;
 		donationsTable.waitElement();
 		donationsTable.scrollIntoView();
 		String  listOfRows = String.valueOf(donationsTable.findElementsByXpath("//*[.='Transaction Date']/ancestor::table/tbody/tr").size());
 		logger.info("Number of Found rows in the table" + " " + listOfRows);
-		int calculateTheExpectedRowsInTheTable =  providedRandomYear- LocalDate.now().getYear();
-		String expectedValue = String.valueOf(calculateTheExpectedRowsInTheTable);
+		int calculateTheExpectedRowsInTheTable =  providedRandomYear - LocalDate.now().getYear();
+		expectedValue = (LocalDate.now().getMonth().equals(Month.JANUARY)) ? String.valueOf(calculateTheExpectedRowsInTheTable + 1) : String.valueOf(calculateTheExpectedRowsInTheTable);
 		logger.info("Number of Expected  rows" + " "+ expectedValue);
 		verifier.verifyEquals(listOfRows, expectedValue , "Number of rows for recurring donations listed in the donations tables is incorrect" , true);
 		return this;
