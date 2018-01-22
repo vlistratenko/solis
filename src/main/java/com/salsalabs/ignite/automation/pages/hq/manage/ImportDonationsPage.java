@@ -25,7 +25,7 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 public class ImportDonationsPage extends HomePage {
 	Button importListOfDonations = new ButtonImpl("//button[contains(text(), 'List')]",
 			"Import List of Donations button");
-	Button browseTheFileButton = new ButtonImpl("//span[contains(text(), 'File')]/parent:: button",
+	Button browseTheFileButton = new ButtonImpl("//span[contains(text(), 'File')]/../parent::button",
 			"Browse The File Button");
 	TextBox importName = new TextBoxImpl("//input[@id='name']", "Import List of Donations button");
 	TextBox fileUpload = new TextBoxImpl("//input[@name='fileUpload']", "Input for file upload", false);
