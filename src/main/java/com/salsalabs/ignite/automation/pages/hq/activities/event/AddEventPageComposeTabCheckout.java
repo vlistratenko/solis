@@ -1,7 +1,9 @@
 package com.salsalabs.ignite.automation.pages.hq.activities.event;
 
 import com.salsalabs.ignite.automation.elements.VE2Elements.EventFormElementsCheckout;
+import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 
 public class AddEventPageComposeTabCheckout extends HomePage implements AddEventPageComposeTabPage {
 
@@ -10,6 +12,11 @@ public class AddEventPageComposeTabCheckout extends HomePage implements AddEvent
         waitUntilAngularIsComplete();
         sleep(1);
         return this;
+    }
+
+    public FormFieldConfigurationModalWindow editVEField(String fieldName){
+        new EventFormElementsCheckout().performEdit(EventFormElementsCheckout.VE.FORM_FIELD, fieldName);
+        return new FormFieldConfigurationModalWindow();
     }
 
     private AddEventPageComposeTabCheckout selectGatewayByName(String gatewayName) {

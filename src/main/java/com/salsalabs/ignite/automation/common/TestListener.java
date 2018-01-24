@@ -15,17 +15,12 @@ import org.testng.annotations.ITestAnnotation;
 
 
 public class TestListener extends SeleneseTestCase implements ITestListener, IInvokedMethodListener, IAnnotationTransformer {
-	Properties props = new Properties();
-	static String propFileName = "properties.prop";
+
 	boolean updateTC = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC, "false"));
-	String planName = CommonUtils.getProperty(PropertyName.PLAN_NAME, "false");
-	String buildName = CommonUtils.getProperty(PropertyName.BUILD_VERSION, "false");
-	
+
 	// Run when class ends
 	@Override
-	public void onFinish(ITestContext arg0) {
-
-	}
+	public void onFinish(ITestContext arg0) {}
 
 	// Run when class starts
 	@Override
@@ -46,14 +41,14 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			steps = steps + " \n   " + (i + 1) + ". " + bug.get(i);
 		}
 		if (updateTC && result.getMethod().getDescription() != null) {
-			GoogleDriveClient gd = new GoogleDriveClient();
-			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
+			/*GoogleDriveClient gd = new GoogleDriveClient();
+			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");*/
 			//Reporter.log("Execution failed. " + ids[2]);
 			try {
 				//updateTestLinkTC(ExecutionStatus.FAILED, ids[0], ids[1], f, " - Execution failed. " + ids[2] + " \n Steps:" + steps);
 				bug.add("Screenshot: " + f.getAbsolutePath());
 				bug.add(0, result.getThrowable().getMessage());
-				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.FAIL, gd.getSheetIdByTitle(ids[0]), bug);
+				/*gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.FAIL, gd.getSheetIdByTitle(ids[0]), bug);*/
 			} catch (NumberFormatException e) {
 				SeleneseTestCase.logger.error("", e);
 			} catch (Exception e) {
@@ -68,13 +63,14 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			Reporter.log(bug.get(i));
 		}
 		Reporter.log("<a href='file:///" + f.getAbsolutePath() + "'>Screenshot</a>");
+		if(updateTC) GoogleDriveClient.writeTCResult(result);
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
 
 		SeleneseTestCase.logger.debug("Test " + result.getName() + " is SKIPPED");
-		if (updateTC && result.getMethod().getDescription() != null) {
+/*		if (updateTC && result.getMethod().getDescription() != null) {
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
 			try {
 				GoogleDriveClient gd = new GoogleDriveClient();
@@ -85,7 +81,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			} catch (Exception e) {
 				SeleneseTestCase.logger.error("", e);
 			}
-		}
+		}*/
 
 	}
 
@@ -102,16 +98,16 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 
 		SeleneseTestCase.logger.info("Test " + result.getName() + " is SUCCESS");
 
-		if (updateTC && result.getMethod().getDescription() != null) {
+/*		if (updateTC && result.getMethod().getDescription() != null) {
 			String[] ids = CommonUtils.getArrayFromStringBySymbol(result.getMethod().getDescription(), ":");
 			//Reporter.log(ids[1].replace(" NOT", ""));
-			
+
 			try {
 				//updateTestLinkTC(ExecutionStatus.PASSED, ids[0], ids[1], null, ids[2].replace(" NOT", ""));
 				GoogleDriveClient gd = new GoogleDriveClient();
 				gd.updateTCStatus(gd.getRowNumberById(ids[1]), gd.map.STATUS_COLUMN, gd.map.PASS, gd.getSheetIdByTitle(ids[0]), null);
 
-				
+
 			} catch (NumberFormatException e) {
 				SeleneseTestCase.logger.error("", e);
 			} catch (NullPointerException e) {
@@ -119,8 +115,8 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			} catch (Exception e) {
 				SeleneseTestCase.logger.error("", e);
 			}
-		}
-
+		}*/
+		if(updateTC) GoogleDriveClient.writeTCResult(result);
 	}
 
 	@Override
@@ -138,7 +134,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	/*private void updateTestLinkTC(ExecutionStatus st, String internalIdr, String externalIDr, File screenShot, String message) throws Exception {
 		TestLink api = new TestLink(planName, buildName);
 		Integer internalID = new Integer(internalIdr), externalID = new Integer(externalIDr);
@@ -146,7 +142,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 		if (screenShot != null) {
 			api.uploadExecutionAttachment(screenShot);
 		}
-		
+
 	}
 */
 }

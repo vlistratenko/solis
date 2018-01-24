@@ -23,6 +23,7 @@ public class CheckMyAccountTest extends SeleneseTestCase {
     @Parameters({"login", "password"})
     @Test(priority = 0, enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"checkMyAccount"})
     public void updateMyProfileData(String login, String password) throws InterruptedException {
+        //Org name is MyAccountTest
         oldLogin = login;
         mailosaur.deleteAllEmails();
         MyAccountPage myAccountPage = new LoginPage().

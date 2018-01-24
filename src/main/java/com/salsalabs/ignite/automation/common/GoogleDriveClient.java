@@ -1,6 +1,5 @@
 package com.salsalabs.ignite.automation.common;
 
-
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -12,66 +11,53 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetRequest;
-import com.google.api.services.sheets.v4.model.CellData;
-import com.google.api.services.sheets.v4.model.ExtendedValue;
-import com.google.api.services.sheets.v4.model.GridCoordinate;
-import com.google.api.services.sheets.v4.model.Request;
-import com.google.api.services.sheets.v4.model.RowData;
-import com.google.api.services.sheets.v4.model.Sheet;
-import com.google.api.services.sheets.v4.model.Spreadsheet;
-import com.google.api.services.sheets.v4.model.UpdateCellsRequest;
-import com.google.api.services.sheets.v4.model.ValueRange;
-import com.salsalabs.ignite.automation.common.config.GoogleSpeadSheetsMapper;
+import com.google.api.services.sheets.v4.model.*;
+import com.salsalabs.ignite.automation.common.config.GoogleSpreadSheetsMapper;
+import org.apache.log4j.Logger;
+import org.testng.ITestResult;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
-public class GoogleDriveClient{
-	
+public class GoogleDriveClient {
+
+	private static final String EMAIL_BOX;
+	private static final String SPREAD_SHEET_ID;
 	private static HttpTransport transport;
     private static JacksonFactory jsonFactory;
     private static FileDataStoreFactory dataStoreFactory;
-    private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"), ".credentials/sheets.googleapis.com.json");
-    private static List<String> scopes = Arrays.asList(SheetsScopes.SPREADSHEETS);
-    static String spreadsheetId = "1uwtl1AVXhn5wEuc1gvrFOuW2NJwS1MrpNLuH5zX2eLE";
-    Sheets service;
-    GoogleSpeadSheetsMapper map = new GoogleSpeadSheetsMapper();
+    private static final java.io.File DATA_STORE_DIR;
+    private static List<String> scopes;
+    private static Sheets service;
+	private static Map<String, Map<String,String>> testsResults;
+    public GoogleSpreadSheetsMapper map = new GoogleSpreadSheetsMapper();
 
-    
-    
-    public GoogleDriveClient() {
+    static {
+		EMAIL_BOX = CommonUtils.getProperty(PropertyName.GOOGLE_ACCOUNT_EMAIL);
+		SPREAD_SHEET_ID = CommonUtils.getProperty(PropertyName.GOOGLE_SPREAD_SHEET_ID);
+    	scopes = Arrays.asList(SheetsScopes.SPREADSHEETS);
+		DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"), ".credentials/sheets.googleapis.com.json");
+		jsonFactory = JacksonFactory.getDefaultInstance();
+    	testsResults =  new HashMap();
     	try {
 			transport = GoogleNetHttpTransport.newTrustedTransport();
-		} catch (GeneralSecurityException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
 			dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        jsonFactory = JacksonFactory.getDefaultInstance();
-        try {
 			service = getSheetsService();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (GeneralSecurityException | IOException e) {
 			e.printStackTrace();
 		}
 	}
-    
-	public static Credential authorize() throws IOException {
+
+	private static Credential authorize() throws IOException {
 	    // Load client secrets.
 	    File cfile = new File(System.getProperty("user.dir") + "/client_secret.json");
-	    SeleneseTestCase.logger.info("Google drive Security file was found");
+	    if(!cfile.exists()) throw new FileNotFoundException("File /client_secret.json was not found"); SeleneseTestCase.logger.debug("Google drive Security file has been found found");
 	    GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(new FileInputStream(cfile)));
 	    // Build flow and trigger user authorization request.
 	    GoogleAuthorizationCodeFlow flow =
@@ -80,7 +66,7 @@ public class GoogleDriveClient{
 	                    .setDataStoreFactory(dataStoreFactory)
 	                    .setAccessType("offline")
 	                    .build();
-	    Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("vitalik.va@gmail.com");
+		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(EMAIL_BOX);
 	    return credential;
 	}
 
@@ -91,10 +77,73 @@ public class GoogleDriveClient{
 	            .build();
 	}
 
-	private void writeValue(int row, int col, String value, Integer sheetId) throws IOException {
+	public static void writeTCResult(ITestResult result) {
+		String status = (result.getStatus() == 1) ?  GoogleSpreadSheetsMapper.PASS : GoogleSpreadSheetsMapper.FAIL;
+		String cell = null, listName = null;
+		Method method = result.getMethod().getConstructorOrMethod().getMethod();
+		if(method.isAnnotationPresent(TestInfo.class)){
+			Annotation annotation = method.getAnnotation(TestInfo.class);
+			TestInfo testInfo = (TestInfo) annotation;
+			cell = testInfo.statusCell();
+			listName = testInfo.listName();
+		}
+		if ((!cell.isEmpty() && cell != null) || (!listName.isEmpty() && listName != null)) {
+			Map<String, String> mapWithColumnsAndStatuses = new HashMap<>();
+			if(testsResults.get(listName) != null) {
+				mapWithColumnsAndStatuses = testsResults.get(listName);
+				mapWithColumnsAndStatuses.put(cell, status);
+				testsResults.put(listName, mapWithColumnsAndStatuses);
+			} else {
+				mapWithColumnsAndStatuses.put(cell, status);
+				testsResults.put(listName, mapWithColumnsAndStatuses);
+			}
+		}
+	}
+
+	public static void updateTCStatusesInRegressionSheet(){
+    	SeleneseTestCase.logger.info("Updating Regression spread sheet with test results...");
+    	getTestsResults().entrySet().stream().forEach(entry -> {
+			Map<String, String> map = entry.getValue();
+			map.forEach((k,v) -> {
+				writeValueToRange(entry.getKey(),k,v);
+				writeValueToRange(entry.getKey(),getRightCellA1Notation(k),"Status set by autotest on "
+						+ "\n" + CommonUtils.getTodayDate() + " at " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")).toString());
+			});
+		});
+	}
+
+	private static void writeValueToRange(String sheetListName, String range, String value){
+		List<Object> listWithValue = new ArrayList<Object>(){{
+			add(value);
+		}};
+		List<List<Object>> listOfListsWithRangeOfValues = new ArrayList<List<Object>>(){{
+			add(listWithValue);
+		}};
+		String rangeToUpdate = sheetListName.concat("!").concat(range);
+    	ValueRange valueRange = new ValueRange().setValues(listOfListsWithRangeOfValues);
+		try {
+			service.spreadsheets().values().update(SPREAD_SHEET_ID, rangeToUpdate, valueRange).setValueInputOption("RAW").execute();
+			SeleneseTestCase.logger.debug(valueRange.getValues() + " text has been inserted in " +
+					range + " cell of " + sheetListName + " spread sheet list");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static String getRightCellA1Notation(String currentCellA1Notation){
+		return (String.valueOf((char)(currentCellA1Notation.charAt(0)+1))) +
+				Integer.parseInt(currentCellA1Notation.substring(1));
+	}
+
+	private static Map<String, Map<String, String>> getTestsResults(){
+		return testsResults;
+	}
+
+	/*private void writeValue(int row, int col, String value, Integer sheetId) throws IOException {
 	    
 		List<Request> requests = new ArrayList<>();
 	    List<CellData> values = new ArrayList<>();
+
 	    values.add(new CellData()
 	                .setUserEnteredValue(new ExtendedValue()
 	                        .setStringValue(value)));
@@ -110,10 +159,10 @@ public class GoogleDriveClient{
 
 	        BatchUpdateSpreadsheetRequest batchUpdateRequest = new BatchUpdateSpreadsheetRequest()
 	                .setRequests(requests);
-	        service.spreadsheets().batchUpdate(spreadsheetId, batchUpdateRequest)
+	        service.spreadsheets().batchUpdate(SPREAD_SHEET_ID, batchUpdateRequest)
 	                .execute();
 	    }
-	
+
 	public void updateTCStatus(int row, int col, String value, Integer sheetId, ArrayList<String> bug) throws IOException {
 		writeValue(row, col, value, sheetId);
 		writeValue(row, map.ISAUTOMATED_COLUMN, "YES", sheetId);
@@ -126,11 +175,11 @@ public class GoogleDriveClient{
 			
 			bug.toString().replace("[", "").replace("]", "").replace("\n,", "\n"), sheetId);
 		}
-		}
+		}*/
 	
 	public List<List<Object>> readValue(String range, int colN) throws IOException {
         ValueRange response = service.spreadsheets().values()
-            .get(spreadsheetId, range)
+            .get(SPREAD_SHEET_ID, range)
             .execute();
         List<List<Object>> values = response.getValues();
         if (values == null || values.size() == 0) {
@@ -140,7 +189,7 @@ public class GoogleDriveClient{
     }
 	
 	private List<Sheet> getListOfSheets() throws IOException {
-        Spreadsheet sp = service.spreadsheets().get(spreadsheetId).execute();
+        Spreadsheet sp = service.spreadsheets().get(SPREAD_SHEET_ID).execute();
         return sp.getSheets();
     }
 	

@@ -13,6 +13,7 @@ public class EventFormElementsCheckout extends GeneralFormsElements<EventFormEle
         FOLLOW,
         ORGINFO,
         FORM,
+        FORM_FIELD,
         HTML,
         MAP,
         LOCATION,

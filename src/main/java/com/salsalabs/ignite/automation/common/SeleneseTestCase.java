@@ -118,6 +118,7 @@ public class SeleneseTestCase {
 		emailClient.closeConnection();
 		driver.manage().deleteAllCookies();
 		close();
+		GoogleDriveClient.updateTCStatusesInRegressionSheet();
 	}
 
 	protected void beforeClass() {
