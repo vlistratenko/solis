@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Wed Jan 24 23:05:04 EET 2018
+#Wed Jan 24 23:50:20 EET 2018
 current.Password=\!QAZ2wsx
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
@@ -9,7 +9,7 @@ currentWindowHandle=CDwindow-(2260D321382836A6505E3A6EBBFB0CDD)
 personZip=20008
 CM.lastName=0
 activityTextBoxCustomFieldValue=activityTextBoxCustomFieldValue
-updateTC=true
+updateTC=false
 Admin.email=0@testauto.igniteaction.net
 supporterSingleChoiceCustomFieldValue=value1
 buildVersion=false

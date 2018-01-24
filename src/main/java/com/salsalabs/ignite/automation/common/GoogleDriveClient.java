@@ -101,7 +101,6 @@ public class GoogleDriveClient {
 	}
 
 	public static void updateTCStatusesInRegressionSheet(){
-    	SeleneseTestCase.logger.info("Updating Regression spread sheet with test results...");
     	getTestsResults().entrySet().stream().forEach(entry -> {
 			Map<String, String> map = entry.getValue();
 			map.forEach((k,v) -> {
@@ -123,7 +122,7 @@ public class GoogleDriveClient {
     	ValueRange valueRange = new ValueRange().setValues(listOfListsWithRangeOfValues);
 		try {
 			service.spreadsheets().values().update(SPREAD_SHEET_ID, rangeToUpdate, valueRange).setValueInputOption("RAW").execute();
-			SeleneseTestCase.logger.debug(valueRange.getValues() + " text has been inserted in " +
+			SeleneseTestCase.logger.info(valueRange.getValues() + " text has been inserted in " +
 					range + " cell of " + sheetListName + " spread sheet list");
 		} catch (IOException e) {
 			e.printStackTrace();
