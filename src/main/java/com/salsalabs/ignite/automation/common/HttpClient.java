@@ -99,10 +99,10 @@ public class HttpClient {
 			supporter.finalEMAIL = res.path("payload.supporters[" + i + "].contacts[0].value");
 			supporter.finalEMAIL = supporter.finalEMAIL.replace("ignite.net", "igniteaction.net");
 			supporter.firstName = res.path("payload.supporters[" + i + "].firstName");
-			supporter.lastorOrgName = res.path("payload.supporters." + i + ".lastName");
-			supporter.postalCode = res.path("payload.supporters." + i + ".addresses.0.zip");
-			supporter.city = res.path("payload.supporters." + i + ".addresses.0.city");
-			supporter.state = res.path("payload.supporters." + i + ".addresses.0.state");
+			supporter.lastorOrgName = res.path("payload.supporters[" + i + "].lastName");
+			supporter.postalCode = res.path("payload.supporters[" + i + "].addresses[0].zip");
+			supporter.city = res.path("payload.supporters[" + i + "].addresses[0].city");
+			supporter.state = res.path("payload.supporters[" + i + "].addresses[0].state");
 			data.put(i, supporter);
 		}
 		logger.info("Amount of supporters " + " " + data.size());
