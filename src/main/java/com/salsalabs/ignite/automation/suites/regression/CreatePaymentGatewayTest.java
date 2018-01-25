@@ -45,8 +45,8 @@ public class CreatePaymentGatewayTest extends SeleneseTestCase {
 	public void testCreateWePayPaymentGateway(String login, String password) throws MailosaurException {
 		mailosaur.deleteAllEmails();
 		String cmEmail = mailosaur.getEmailBox("gateway" + CommonUtils.getUnicName());
-		String firstName = "FirstName";
-		String lastName = "LastName";
+		String firstName = "firstName";
+		String lastName = "lastName";
 		String nickname = "nickname_" + CommonUtils.getUnicName();
 		doLoginAndOpenPaymentGatewayPage(login, password);
 		addWePayPage = paymentGatewayPage.openAddWePayPage();

@@ -1391,7 +1391,7 @@ public class SupporterQBSupporterFieldsTest  extends SeleneseTestCase{
 			  checkShowResultButtonIsDisplayed().
 			  clickShowTheResults().
 			  checkErrorMessage().
-			 checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
+			  checkNumberOfRecordsInTable(numerOfExpectedRecordsInTable);
 		  }
 		  
 			//SupporterFieldsRule > Country Tests
@@ -1460,6 +1460,7 @@ public class SupporterQBSupporterFieldsTest  extends SeleneseTestCase{
 			  checkNoResultsIsReturned();
 		  }
 		  
+		  
 		    
 	  private SupporterQueryBuilderPage doLoginAndOpenSupporterQbPage(String login , String passward){
 		  if(new SupporterQueryBuilderPage().newRuleButton.isNotExists()){
@@ -1472,12 +1473,7 @@ public class SupporterQBSupporterFieldsTest  extends SeleneseTestCase{
 	  
 	  private int getListOfAllSupportersIOrg(String userName, String pass){
 		 int numberOfSupportersInOrg = 0;
-		try {
 			numberOfSupportersInOrg = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(userName, pass).getNumberOfSupportersInOrg();
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | JSONException
-				| URISyntaxException | IOException e) {
-			e.printStackTrace();
-		}
 		 return numberOfSupportersInOrg; 
 	  }
 }

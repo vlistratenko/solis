@@ -95,8 +95,7 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
                     setTextFieldMaxLengthValue(200).
                     setTextFieldValidationValue("ANY_CHARACTER"));
 
-            try {
-                try {
+       
                     HttpClient httpClient = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password);
                     httpClient.createCustomField(supporterTextBoxCustomFieldConfig.createSupporterCustomFieldViaApiJsonObject(CustomFieldsPage.CustomFieldType.TextBox));
                     httpClient.createCustomField(supporterNumberCustomFieldConfig.createSupporterCustomFieldViaApiJsonObject(CustomFieldsPage.CustomFieldType.Number));
@@ -109,20 +108,8 @@ public class FundraisingFormFieldsValidationTest extends SeleneseTestCase {
                     httpClient.createCustomField(activitySingleChoiceCustomFieldConfig.createActivityCustomFieldViaApiJsonObject((CustomFieldsPage.CustomFieldType.SingleChoice),"FUNDRAISE"));
                     httpClient.createCustomField(activityDateTimeCustomFieldConfig.createActivityCustomFieldViaApiJsonObject((CustomFieldsPage.CustomFieldType.DateTime),"FUNDRAISE"));
                     httpClient.createGateway(paymentGatewaysPage.getCardConnectPaymentGatewayJSONObject(gatewayName));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (KeyStoreException e) {
-                e.printStackTrace();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            }
+  
+            
         }
 
         /**

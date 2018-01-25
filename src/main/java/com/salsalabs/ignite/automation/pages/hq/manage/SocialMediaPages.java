@@ -94,8 +94,6 @@ public class SocialMediaPages  extends ManagePage{
 		}
 	 
 	 public  SocialMediaPages verifySocialPagesInsideFollowElement(String login, String password, String facebook , String twitter, String instagram , String pinterest, String youTube, String linkedin, String tumbler) {
-		
-			try {
 		HttpClient httpClient = new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, password);
 		String  getFacebook = httpClient.getListOfSocialPages().get("facebook");
 		String  getTwitter = httpClient.getListOfSocialPages().get("twitter");
@@ -112,12 +110,6 @@ public class SocialMediaPages  extends ManagePage{
 		verifier.verifyEquals(getyouTube, youTube, "YouTube link is incorrect" , true);
 		verifier.verifyEquals(getLinkedin, linkedin, "Linkedin link is incorrect" , true);
 		verifier.verifyEquals(getLTumbler, tumbler, "tumbler link is incorrect" , true);
-			
-			} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | URISyntaxException
-					| IOException e) {
-				e.printStackTrace();
-			}
-		
 			return this;
 			}
 	 

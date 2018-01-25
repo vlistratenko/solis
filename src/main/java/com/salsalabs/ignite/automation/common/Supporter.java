@@ -286,7 +286,7 @@ public class Supporter {
 		return getAllCustomFields().get(customFieldName);
 	}
 
-	public JSONObject getSupporterJSON(String email) throws JSONException {
+	public String getSupporterJSON(String email)  {
 		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName
 				+ "\",\"lastName\":\"" + lastorOrgName
 				+ "\",\"language\":\"en-US\", \"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
@@ -296,10 +296,10 @@ public class Supporter {
 				+ "\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\""
 				+ addressLine1 + "\",\"line2\":\"" + addressLine2 + "\",\"city\":\"" + city + "\",\"state\":\"" + state
 				+ "\",\"zip\":\"" + zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
-		return new JSONObject(j);
+		return j;
 	}
 	
-	public JSONObject getSupporterJSONWithExternalId(String email, String externalSystemId) throws JSONException {
+	public String getSupporterJSONWithExternalId(String email, String externalSystemId)  {
 		String j = "{\"header\":{},\"payload\":{\"firstName\":\"" + firstName + "\",\"middleName\":\"" + middleName
 				+ "\",\"lastName\":\"" + lastorOrgName + "\",\"language\":\"en-US\",\"externalSystemId\":\""
 				+ externalSystemId + "\" , \"contacts\":[{\"type\":\"PhoneCell\",\"value\":\"" + cPhone
@@ -309,7 +309,7 @@ public class Supporter {
 				+ "\"},{\"type\":\"SocialGooglePlus\",\"value\":\"goo\"}],\"customFields\":[],\"addresses\":[{\"line1\":\""
 				+ addressLine1 + "\",\"line2\":\"" + addressLine2 + "\",\"city\":\"" + city + "\",\"state\":\"" + state
 				+ "\",\"zip\":\"" + zipCode + "\",\"addressType\":\"AddressHome\"}]}}";
-		return new JSONObject(j);
+		return j;
 	}
 
 	public static Map<Integer, Supporter> getSupportersFromFile() {

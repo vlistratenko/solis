@@ -155,37 +155,37 @@ public class CustomFieldsPage extends ManagePage {
 		return this;
 	}
 	
-	public JSONObject getTextBoxCustomFieldJson(String type, String cfName) throws JSONException{
+	public String getTextBoxCustomFieldJson(String type, String cfName) {
 		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"supporterCustomFieldds\",\"dataType\":\"TEXT\",\"controlType\":\"INPUT\","
 				+ "\"ghostText\":\"\",\"defaultValue\":\"\","
 				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{\"minValue\":0,\"maxValue\":256,\"textValidation\":\"ANY_CHARACTER\"}}}";
-		return new JSONObject(json);
+		return json;
 				
 	}
 	
-	public JSONObject getSingleChoiceCustomFieldJson(String type, String cfName) throws JSONException{
+	public String getSingleChoiceCustomFieldJson(String type, String cfName){
 		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"111\",\"dataType\":\"TEXT\",\"controlType\":\"RADIO\",\"controlOrientation\":\"VERTICAL\","
 				+ "\"ghostText\":\"\",\"defaultValue\":\"\",\"valueLabels\":[{\"value\":\"\",\"label\":\"No Selection\"},{\"value\":\"1choice\",\"label\":\"1choice\"},"
 				+ "{\"value\":\"2choice\",\"label\":\"2choice\"}],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
-		return new JSONObject(json);			
+		return json;			
 	}
 	
-	public JSONObject getDateCustomFieldJson(String type, String cfName) throws JSONException{
+	public String getDateCustomFieldJson(String type, String cfName) {
 		String json = " {\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"dateTime1\",\"dataType\":\"DATE\",\"controlType\":\"DATE\",\"ghostText\":\"\",\"defaultValue\":\"\","
 				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
-		return new JSONObject(json);			
+		return json;			
 	}
 	
-	public JSONObject getBoleanCustomFieldJson(String type, String cfName) throws JSONException{
+	public String getBoleanCustomFieldJson(String type, String cfName) {
 		String json = "{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"Description\",\"dataType\":\"BOOLEAN\",\"controlType\":\"RADIO\",\"controlOrientation\":\"HORIZONTAL\",\"ghostText\":\"\","
 				+ "\"defaultValue\":true,\"valueLabels\":[{\"value\":true,\"label\":\"True\"},{\"value\":false,\"label\":\"False\"}],\"activityType\":\"\",\"type\":\""+type+"\"}}";
-		return new JSONObject(json);			
+		return json;				
 	}
 	
-	public JSONObject getNumberCustomFieldJson(String type, String cfName) throws JSONException{
+	public String getNumberCustomFieldJson(String type, String cfName) {
 		String json = "	{\"header\":{},\"payload\":{\"name\":\""+cfName+"\",\"description\":\"Number111\",\"dataType\":\"NUMBER\",\"controlType\":\"INPUT\",\"ghostText\":\"numberGhostText\",\"defaultValue\":\"\","
 				+ "\"valueLabels\":[],\"activityType\":\"\",\"type\":\""+type+"\",\"validation\":{}}}";
-		return new JSONObject(json);			
+		return json;		
 	}
 	
 	
@@ -422,7 +422,7 @@ public class CustomFieldsPage extends ManagePage {
 		 * @see         CustomFieldType
 		 */
 
-		public JSONObject createSupporterCustomFieldViaApiJsonObject(CustomFieldType customFieldType) throws JSONException {
+		public String createSupporterCustomFieldViaApiJsonObject(CustomFieldType customFieldType) {
 			String type = customFieldType.name().toLowerCase();
 			String json = "";
 
@@ -449,7 +449,7 @@ public class CustomFieldsPage extends ManagePage {
 						"\"}],\"activityType\":\"\",\"type\":\"PERSON\",\"validation\":{}}}"; break;
 			}
 			System.out.println(json);
-			return new JSONObject(json);
+			return json;
 
 		}
 
@@ -462,7 +462,7 @@ public class CustomFieldsPage extends ManagePage {
 		 * @see         CustomFieldType
 		 */
 
-		public JSONObject createActivityCustomFieldViaApiJsonObject(CustomFieldType customFieldType, String activityType) throws JSONException {
+		public String createActivityCustomFieldViaApiJsonObject(CustomFieldType customFieldType, String activityType) {
 			String type = customFieldType.name().toLowerCase();
 			String json = "";
 
@@ -490,7 +490,8 @@ public class CustomFieldsPage extends ManagePage {
 						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[0] + "\"},{\"value\":\"" + this.singleChoiceFieldValueLabelsApi[1] +
 						"\",\"label\":\"" + this.singleChoiceFieldValueLabelsApi[1] + "\"}],\"activityType\":\"" + activityType + "\",\"type\":\"ACTIVITY\",\"validation\":{}}}"; break;
 			}
-			System.out.println(json); return new JSONObject(json);
+			System.out.println(json);
+			return json;
 
 		}
 

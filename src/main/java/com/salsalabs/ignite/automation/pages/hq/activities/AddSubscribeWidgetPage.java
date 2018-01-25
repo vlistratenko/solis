@@ -269,7 +269,6 @@ public class AddSubscribeWidgetPage extends HomePage {
     }
 
 	public void verifySubmittedSupporterFieldsArePresentInSupporterDetails(String host, String login, String password) {
-		try {
 			HttpClient client = new HttpClient(host).login(login,password);
 			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
 			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
@@ -289,23 +288,10 @@ public class AddSubscribeWidgetPage extends HomePage {
 			verifier.verifyEquals(sup.getPhoneCell(),CommonUtils.getProperty("cellPhone"));
 			verifier.verifyEquals(sup.getDateOfBirth(),CommonUtils.getProperty("dateOfBirth"));
 			verifier.verifyEquals(sup.getState(),CommonUtils.getProperty("state"));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (KeyStoreException e) {
-			e.printStackTrace();
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	public void verifySubmittedCustomFieldsArePresentInSupporterDetails(String host, String login, String password) {
-				try {
 			HttpClient client = new HttpClient(host).login(login,password);
 			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
 			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
@@ -314,19 +300,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterDateTimeCustomField"), CommonUtils.getProperty("supporterDateTimeCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (KeyStoreException e) {
-			e.printStackTrace();
-		} catch (KeyManagementException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 }
