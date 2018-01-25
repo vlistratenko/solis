@@ -66,9 +66,9 @@ public class PaymentGatewaysPage extends ManagePage {
 		return this;
 	}
 
-	public JSONObject getCardConnectPaymentGatewayJSONObject(String gatewayName) throws JSONException {
+	public String getCardConnectPaymentGatewayJSONObject(String gatewayName)  {
 		String j = "{\"header\":{},\"payload\":{\"name\":\"" + gatewayName  + "\",\"description\":\"gas\",\"paymentProcessor\":\"CARD_CONNECT\",\"accountProperties\":[{\"id\":\"MerchantId\",\"value\":\"496344295024\"},{\"id\":\"DBATitle\",\"value\":\"2d\"},{\"id\":\"CurrencyCode\",\"value\":\"USD\"},{\"id\":\"PaymentOptions\",\"value\":\"VISA,MAST,DISC,AMEX\"},{\"id\":\"AllowECheck\",\"value\":\"false\"}]}}";
-		return new JSONObject(j);
+		return j;
 	}
 	
 }
