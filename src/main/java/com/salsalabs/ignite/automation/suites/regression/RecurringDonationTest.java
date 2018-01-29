@@ -20,7 +20,7 @@ public class RecurringDonationTest extends SeleneseTestCase {
 			String widgenName) {
 
 		String amount = CommonUtils.getRandomValueFromTo(10, 200, 0);
-		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.in";
+		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.io";
 		String supporterFirstname = RandomStringUtils.randomAlphabetic(5) + "supporterFirstname";
 		String supporterLastname = RandomStringUtils.randomAlphabetic(5) + "supporterLastname";
 		String supporterAddress = RandomStringUtils.randomAlphabetic(5) + "supporterAddress";
@@ -44,7 +44,7 @@ public class RecurringDonationTest extends SeleneseTestCase {
 	public void verifyMonthlyRecurringDonationTest(String widgetWithMonthlyRecurringOption, String login,
 			String passward, String widgenName) {
 		String amount = CommonUtils.getRandomValueFromTo(10, 200, 0);
-		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.in";
+		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.io";
 		String supporterFirstname = RandomStringUtils.randomAlphabetic(5) + "supporterFirstname";
 		String supporterLastname = RandomStringUtils.randomAlphabetic(5) + "supporterLastname";
 		String supporterAddress = RandomStringUtils.randomAlphabetic(5) + "supporterAddress";
