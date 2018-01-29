@@ -69,7 +69,7 @@ public class HttpClient {
 
 	public Response sendGetrequest(String url) {
 		Response getResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().ifError()
+				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().everything()
 				.contentType(ContentType.JSON).extract().response();
 		return getResponse;
 	}
@@ -90,9 +90,7 @@ public class HttpClient {
 		Map<Integer, Supporter> data = new HashMap<Integer, Supporter>();
 		Response res = sendGetrequest(new Supporter().getSupportersRequest("", source));
 		logger.info("Getting  the list of supporters in the organization");
-
-		logger.info("Getting  the list of supporters in the organization");
-		int ammountofSupporters = res.path("payload.total");
+		int ammountofSupporters = res.path("payload.count");
 		System.out.println(ammountofSupporters);
 		for (int i = 0; i < ammountofSupporters; i++) {
 			Supporter supporter = new Supporter();
