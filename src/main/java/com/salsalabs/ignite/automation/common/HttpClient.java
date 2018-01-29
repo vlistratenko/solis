@@ -69,7 +69,7 @@ public class HttpClient {
 
 	public Response sendGetrequest(String url) {
 		Response getResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().everything()
+				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().ifError()
 				.contentType(ContentType.JSON).extract().response();
 		return getResponse;
 	}
