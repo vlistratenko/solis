@@ -318,13 +318,7 @@ public abstract class Browser {
 		for (int i = 0; i < amountOfEmails; i++) {
 			String mainWindowhandle = getWindowHandle();
 			String link = client.getLinkByText(emails.get(i), linkText);
-			try {
 				new CreateDEMOData().testDonateBySupporter(1, link, login, host);
-			} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | JSONException
-					| URISyntaxException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			this.switchToWindow(mainWindowhandle);
 		}
 	}

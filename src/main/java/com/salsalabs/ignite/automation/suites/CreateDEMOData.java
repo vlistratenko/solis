@@ -50,7 +50,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 	
 	@Parameters({"amount", "formURL", "login", "host"})
 	@Test(groups = {"makeDonationRandom"}, retryAnalyzer = RetryAnalyzer.class)
-	public void testDonateBySupporter(Integer amount, String formURL, String login, String host) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+	public void testDonateBySupporter(Integer amount, String formURL, String login, String host) {
 		
 		int amountOfDonations = CommonUtils.getRandomValueNumericFromTo(1,amount);	
 		logger.info("Amount of donations " + amountOfDonations);
@@ -215,7 +215,6 @@ public class CreateDEMOData extends SeleneseTestCase {
 		Map<String, List<?>> emails = loginPage.openEmails(1, openAmount);		
 		loginPage.clickLinkInEmail(emails, 1, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", clickAmount);		
 		loginPage.unsubscribeByEmail(emails, 1, unsubAmount);
-		
 		loginPage.clickLinkInEmailAndFillDonationForm(emails, emailSubject, "http://organizationforinternationalchange.uat.igniteaction.net/socialjusticeequality/index.html", conversionAmount, login, host);
 	}
 	

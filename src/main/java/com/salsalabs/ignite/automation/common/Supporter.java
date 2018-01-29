@@ -353,15 +353,12 @@ public class Supporter {
 	}
 
 	public Map<Integer, Supporter> getSupportersFromSystem(String host, String login, String pass,
-			Integer amountOfSupporters, String source) throws KeyManagementException, ClientProtocolException,
-			NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
+			Integer amountOfSupporters, String source) {
 		return new HttpClient(host).login(login, pass).getSupporters(source, amountOfSupporters);
 
 	}
 
-	public Supporter getSupporterFromSystemByEmail(String email, String host, String login, String pass)
-			throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException,
-			JSONException, URISyntaxException, IOException {
+	public Supporter getSupporterFromSystemByEmail(String email, String host, String login, String pass) {
 		return new HttpClient(host).login(login, pass).getSupporterByEmail(email);
 
 	}
