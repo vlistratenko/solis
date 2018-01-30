@@ -61,7 +61,7 @@ public class HttpClient {
 
 	public Response sendPostrequest(String jsonString, String endPoint) {
 		Response postResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).body(jsonString).log().ifValidationFails().when()
+				.relaxedHTTPSValidation().header("authToken", authToken).body(jsonString).log().body().when()
 				.contentType(ContentType.JSON).post(endPoint).then().log().body().extract().response();
 		return postResponse;
 
@@ -75,12 +75,12 @@ public class HttpClient {
 	}
 
 	public HttpClient createSupporter(String jsonString) {
-		sendPostrequest(jsonString, "/api/person/supporter");
+		sendPostrequest(jsonString,"https://" + host +  "/api/person/supporter");
 		logger.info("Supporter is created");
 		return this;
 	}
 
-	public HttpClient createCustomGFields(String customFieldObject) {
+	public HttpClient createCustomFields(String customFieldObject) {
 		sendPostrequest(customFieldObject, "https://" + host + "/api/customField");
 		logger.info("Custom File is created");
 		return this;
