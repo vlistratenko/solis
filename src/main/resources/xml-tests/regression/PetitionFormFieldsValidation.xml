@@ -7,7 +7,7 @@
     <parameter name="password" value="!QAZ2wsx"></parameter>
       <test verbose="2" name="Petition form fields validation test" annotations="JDK">
         <parameter name="USED_BROWSER" value="CHROME"></parameter>
-        <parameter name="login" value="2712.3e41c646@mailosaur.in"></parameter>
+        <parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
         <parameter name="password" value="!QAZ2wsx"></parameter>
     <groups>
             <run>
