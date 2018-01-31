@@ -125,7 +125,7 @@ public class ImportDonationsPage extends HomePage {
 
 	public static void prepareSupporterForDonationImport(String login, String passward, String externalId) {
 
-		supporter.setFinalEMAIL(CommonUtils.getUnicName() + ".74580786@mailosaur.in");
+		supporter.setFinalEMAIL(CommonUtils.getUnicName() + ".74580786@mailosaur.io");
 			new HttpClient(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl()).login(login, passward)
 					.createSupporter(supporter.getSupporterJSONWithExternalId(supporter.getFinalEMAIL(), externalId));
 
