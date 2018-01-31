@@ -131,12 +131,4 @@ public class ImportDonationsPage extends HomePage {
 
 	}
 
-	/*public static void main(String[] args) throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException,
-			ClientProtocolException, JSONException, URISyntaxException, IOException {
-		ImportDonationsPage test = new ImportDonationsPage();
-		test.generateDonationImportFile("qb.74580786@mailosaur.in", "Gnusmas_1", "23341133");
-		// test.prepareSupporter();
-
-	}*/
-
 }
