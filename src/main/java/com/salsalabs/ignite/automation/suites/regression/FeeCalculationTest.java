@@ -20,7 +20,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 	@Test(enabled = true,  retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
 	public void verifyFeeCaclucationDonationFormWepay(String widgetUrlwepayForm){
 		
-		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.in";
+		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.io";
 		String supporterFirstname = RandomStringUtils.randomAlphabetic(5) + "supporterFirstname";
 		String supporterLastname = RandomStringUtils.randomAlphabetic(5) + "supporterLastname";
 		String supporterAddress = RandomStringUtils.randomAlphabetic(5) + "supporterAddress";
@@ -44,7 +44,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "feeCalculation" }, description = "")
 	public void verifyFeeCaclucationDonationFormCardConnect(String widgetUrlCardConnectForm){
 		
-		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.in";
+		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.io";
 		String supporterFirstname = RandomStringUtils.randomAlphabetic(5) + "supporterFirstname";
 		String supporterLastname = RandomStringUtils.randomAlphabetic(5) + "supporterLastname";
 		String supporterAddress = RandomStringUtils.randomAlphabetic(5) + "supporterAddress";
@@ -68,7 +68,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 	@Parameters({"fundraisingFormUrlCardConnect" , "login" , "Passward" , "widgenName" })
 	public void transactionDetaisTest(String widgetUrlCardConnectForm, String login , String passward,  String widgetName){
 		
-		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.in";
+		String email = RandomStringUtils.randomAlphabetic(5) + ".74580786@mailosaur.io";
 		String supporterFirstname = RandomStringUtils.randomAlphabetic(3) + "Fname";
 		String supporterLastname = RandomStringUtils.randomAlphabetic(3) + "Lname";
 		String supporterAddress = RandomStringUtils.randomAlphabetic(5) + "Address";
@@ -89,10 +89,6 @@ public class FeeCalculationTest extends SeleneseTestCase {
 		openDonation(widgetName).
 		verifyDonationAmmountAndFee(expectedAmountWithFee, expectedFeeValueForAllCardTypesCardConnect);
 	
-		
-		
-		
-		
 	}
 	
 
