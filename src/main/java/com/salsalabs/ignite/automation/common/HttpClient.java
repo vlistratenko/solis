@@ -69,7 +69,7 @@ public class HttpClient {
 
 	public Response sendGetrequest(String url) {
 		Response getResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().ifError()
+				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().body()
 				.contentType(ContentType.JSON).extract().response();
 		return getResponse;
 	}
@@ -146,7 +146,6 @@ public class HttpClient {
 		for (int i = 0; i < customFields.size(); i++) {
 			supporterCustomFields.put(res.path("payload.customFields[" + i + "].fieldDefinition.name"),
 					res.path("payload.customFields[" + i + "].value"));
-
 		}
 		supporterCustomFields.forEach((k,v)->{
 			logger.info("Name " + k + " Value: " + v);
@@ -224,11 +223,11 @@ public class HttpClient {
  			    sup.addressLine2  = res.path("payload.addresses[0].line2");
  			    sup.city  = res.path("payload.addresses[0].city");	    
  			    sup.state  = res.path("payload.addresses[0].state");
- 			   sup.postalCode  = res.path("payload.addresses[0].postalCode");
+ 			   sup.postalCode  = res.path("payload.addresses[0].zip");
  			   sup.country  = res.path("payload.addresses[0].country");
  			   sup.zipCode  = res.path("payload.addresses[0].zip");
- 			    sup.allCustomFields = getAllSupporterCustomFields(sup.getFinalEMAIL());
- 			    sup.allAdressFields = getAllSupporterAdressessFields(sup.getFinalEMAIL());
+ 			   sup.allCustomFields = getAllSupporterCustomFields(sup.getFinalEMAIL());
+ 			   sup.allAdressFields = getAllSupporterAdressessFields(sup.getFinalEMAIL());
  			   return sup;
 
 	}

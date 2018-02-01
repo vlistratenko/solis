@@ -171,7 +171,7 @@ public class MessagingPage extends HomePage {
 			for (Map.Entry<String, String> entry : map.entrySet())
 			{
 				System.out.println(entry.getKey() + "/" + entry.getValue());
-				if (entry.getValue().isEmpty()) {
+				if (entry.getValue()==null) {
 					verifier.verifyContains(emailBody, entry.getKey(), "Default value for " + entry.getKey() + "  custom field was not found in the email body", false);
 				}else{
 					if (entry.getValue().equalsIgnoreCase("false") || entry.getValue().equalsIgnoreCase("true")){
@@ -185,7 +185,6 @@ public class MessagingPage extends HomePage {
 		return this;
 		
 	}
-	
 	public MessagingPage verifyMergeFieldsInTheEmailSubject(String[] listOfFields) throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException, KeyStoreException, JSONException, URISyntaxException, IOException {
 		String emailSubj = new LoginPage().getEmailSubjByRecipient(CommonUtils.getProperty(PropertyName.SUPPORTER_EMAIL));	
 		Supporter sup = new Supporter().
@@ -197,7 +196,7 @@ public class MessagingPage extends HomePage {
 		Map<String, String> map = sup.allCustomFields;
 		for (int i = 0; i < listOfFields.length; i++) {
 			if (map.containsKey(listOfFields[i])) {
-				if (map.get(listOfFields[i]).isEmpty()) {
+				if (map.get(listOfFields[i])==null) {
 					verifier.verifyContains(emailSubj, listOfFields[i], "Default value for " + listOfFields[i] + "  custom field was not found in the email subject", false);
 				}else{
 					if (map.get(listOfFields[i]).equalsIgnoreCase("false") || map.get(listOfFields[i]).equalsIgnoreCase("true")){
