@@ -25,6 +25,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static com.salsalabs.ignite.automation.common.SeleneseTestCase.logger;
+
 public class GoogleDriveClient {
 
 	private static final String EMAIL_BOX;
@@ -36,7 +38,9 @@ public class GoogleDriveClient {
     private static List<String> scopes;
     private static Sheets service;
 	private static Map<String, Map<String,String>> testsResults;
+	private static final boolean IS_GOOGLE_DRIVE_CLIENT_ENABLED;
     public GoogleSpreadSheetsMapper map = new GoogleSpreadSheetsMapper();
+
 
     static {
 		EMAIL_BOX = CommonUtils.getProperty(PropertyName.GOOGLE_ACCOUNT_EMAIL);
@@ -44,6 +48,7 @@ public class GoogleDriveClient {
     	scopes = Arrays.asList(SheetsScopes.SPREADSHEETS);
 		DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"), ".credentials/sheets.googleapis.com.json");
 		jsonFactory = JacksonFactory.getDefaultInstance();
+		IS_GOOGLE_DRIVE_CLIENT_ENABLED = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC,"false"));
     	testsResults =  new HashMap();
     	try {
 			transport = GoogleNetHttpTransport.newTrustedTransport();
@@ -78,37 +83,43 @@ public class GoogleDriveClient {
 	}
 
 	public static void writeTCResult(ITestResult result) {
-		String status = (result.getStatus() == 1) ?  GoogleSpreadSheetsMapper.PASS : GoogleSpreadSheetsMapper.FAIL;
-		String cell = null, listName = null;
-		Method method = result.getMethod().getConstructorOrMethod().getMethod();
-		if(method.isAnnotationPresent(TestInfo.class)){
-			Annotation annotation = method.getAnnotation(TestInfo.class);
-			TestInfo testInfo = (TestInfo) annotation;
-			cell = testInfo.statusCell();
-			listName = testInfo.listName();
-		}
-		if ((!cell.isEmpty() && cell != null) || (!listName.isEmpty() && listName != null)) {
-			Map<String, String> mapWithColumnsAndStatuses = new HashMap<>();
-			if(testsResults.get(listName) != null) {
-				mapWithColumnsAndStatuses = testsResults.get(listName);
-				mapWithColumnsAndStatuses.put(cell, status);
-				testsResults.put(listName, mapWithColumnsAndStatuses);
+		if (IS_GOOGLE_DRIVE_CLIENT_ENABLED) {
+			String status = (result.getStatus() == 1) ?  GoogleSpreadSheetsMapper.PASS : GoogleSpreadSheetsMapper.FAIL;
+			String cell = "", listName = "";
+			Method method = result.getMethod().getConstructorOrMethod().getMethod();
+			if(method.isAnnotationPresent(TestInfo.class)){
+				Annotation annotation = method.getAnnotation(TestInfo.class);
+				TestInfo testInfo = (TestInfo) annotation;
+				cell = testInfo.statusCell();
+				listName = testInfo.listName();
+			}
+			if (!cell.isEmpty() && !listName.isEmpty()) {
+				Map<String, String> mapWithColumnsAndStatuses = new HashMap<>();
+				if(testsResults.get(listName) != null) {
+					mapWithColumnsAndStatuses = testsResults.get(listName);
+					mapWithColumnsAndStatuses.put(cell, status);
+					testsResults.put(listName, mapWithColumnsAndStatuses);
+				} else {
+					mapWithColumnsAndStatuses.put(cell, status);
+					testsResults.put(listName, mapWithColumnsAndStatuses);
+				}
 			} else {
-				mapWithColumnsAndStatuses.put(cell, status);
-				testsResults.put(listName, mapWithColumnsAndStatuses);
+				logger.warn("@TestInfo annotation has not been populated correctly in " + method.getName() + " test method" );
 			}
 		}
 	}
 
 	public static void updateTCStatusesInRegressionSheet(){
-    	getTestsResults().entrySet().stream().forEach(entry -> {
-			Map<String, String> map = entry.getValue();
-			map.forEach((k,v) -> {
-				writeValueToRange(entry.getKey(),k,v);
-				writeValueToRange(entry.getKey(),getRightCellA1Notation(k),"Status set by autotest on "
-						+ "\n" + CommonUtils.getTodayDate() + " at " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")).toString());
+    	if (IS_GOOGLE_DRIVE_CLIENT_ENABLED) {
+			getTestsResults().entrySet().stream().forEach(entry -> {
+				Map<String, String> map = entry.getValue();
+				map.forEach((k,v) -> {
+					writeValueToRange(entry.getKey(),k,v);
+					writeValueToRange(entry.getKey(),getRightCellA1Notation(k),"Status set by autotest on "
+							+ "\n" + CommonUtils.getTodayDate() + " at " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")).toString());
+				});
 			});
-		});
+		}
 	}
 
 	private static void writeValueToRange(String sheetListName, String range, String value){

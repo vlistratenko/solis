@@ -1,15 +1,15 @@
 package com.salsalabs.ignite.automation.common;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.logging.log4j.Logger;
 
 import static java.lang.Thread.sleep;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
+
 import io.restassured.config.SSLConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -50,7 +50,7 @@ public class HttpClient {
 				.when().contentType(ContentType.JSON).post("https://" + host + "/api/auth/login.json").then().extract()
 				.response();
 		authToken = secondLoginEndpoint.path("header.authToken");
-		System.out.println(authToken);
+		logger.info(orgName + " org session authToken is " + authToken);
 		return this;
 	}
 
@@ -60,6 +60,7 @@ public class HttpClient {
 	}
 
 	public Response sendPostrequest(String jsonString, String endPoint) {
+		logger.info("Sending POST HTTP request to " + endPoint);
 		Response postResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
 				.relaxedHTTPSValidation().header("authToken", authToken).body(jsonString).log().body().when()
 				.contentType(ContentType.JSON).post(endPoint).then().log().body().extract().response();
@@ -68,6 +69,7 @@ public class HttpClient {
 	}
 
 	public Response sendGetrequest(String url) {
+		logger.info("Sending GET HTTP request to " + url);
 		Response getResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
 				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().body()
 				.contentType(ContentType.JSON).extract().response();
@@ -253,14 +255,14 @@ public class HttpClient {
 	}
 
 	public boolean isSupporterExists(String email) {
-		boolean isExists = true;
+		boolean isExists = false;
 		Response res = sendGetrequest(new Supporter().getSupportersRequest(email, ""));
-		String id = res.path("payload.supporters[0].id");
-		if (id.isEmpty() || id == "") {
-			isExists = false;
+		Optional<String> id = Optional.ofNullable(res.path("payload.supporters[0].id"));
+		if (id.isPresent()) {
+			isExists = true;
+		} else {
 			logger.info("Supporter with email " + email + " is not found.");
 		}
 		return isExists;
-
 	}
 }

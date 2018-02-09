@@ -26,7 +26,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
         private String supporterEmail;
 
         @Parameters({"login","password"})
-        @Test(enabled = false, retryAnalyzer = RetryAnalyzer.class)
+        @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
         public void testCreatePublishSubmitEventFormRequiredEmptySupporterFields(String login, String password){
                 widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
                 new LoginPage().doSuccessLogin(login, password)
@@ -66,8 +66,8 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
     }
 
         @Parameters({"login","password"})
-        @Test(enabled = false, retryAnalyzer = RetryAnalyzer.class)
-        public void testCreatePublishSubmitEventFormupporterNonRequiredFields(String login, String password){
+        @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
+        public void testCreatePublishSubmitEventFormSupporterNonRequiredFields(String login, String password){
                 widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
                 supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
                 new LoginPage().doSuccessLogin(login, password)
@@ -102,13 +102,16 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
 
                 EventWidget eventForm = new EventWidget();
                 eventForm.openDonationPage();
-                new DonationWidget().fillDonationWidgetAllSupporterFields(
+                eventForm.fillDonationWidgetAllSupporterFields(
                         "4111111111111111","123","11","2023","donationTest donationTest",supporterEmail,"FirstName","LastName",
                         "City","91602","UA-63","address1","address2","Male","777-777-7777","MidName","en-US",
                         "suffix","title","777-777-7777","777-777-7777","UA","09/11/2017","5");
                 eventForm.clickSubmitButton();
                 new AddSubscribeWidgetPage()
-                        .verifySubmittedSupporterFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(),login,password);
+                        .verifySubmittedSupporterFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(), login ,password);
        }
+
+
+
 
 }

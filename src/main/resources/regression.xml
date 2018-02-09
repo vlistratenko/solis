@@ -4,6 +4,7 @@
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<suite-files>
 		<suite-file path="src/main/resources/xml-tests/regression/PetitionFormFieldsValidation.xml" />
+		<suite-file path="src/main/resources/xml-tests/regression/EventFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/FundraisingFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/AssetImageTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/CreateActivityCustomFieldsTest.xml" />

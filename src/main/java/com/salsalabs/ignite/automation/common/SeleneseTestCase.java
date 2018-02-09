@@ -118,7 +118,6 @@ public class SeleneseTestCase {
 		emailClient.closeConnection();
 		driver.manage().deleteAllCookies();
 		close();
-		if (Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC, "false")))
 		GoogleDriveClient.updateTCStatusesInRegressionSheet();
 	}
 

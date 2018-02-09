@@ -270,7 +270,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public void verifySubmittedSupporterFieldsArePresentInSupporterDetails(String host, String login, String password) {
 			HttpClient client = new HttpClient(host).login(login,password);
-			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
+			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),60);
 			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
 			verifier.verifyEquals(sup.getFinalEMAIL(), CommonUtils.getProperty("personEmail").toLowerCase());
 			verifier.verifyEquals(sup.getFirstName(), CommonUtils.getProperty("personFName"));

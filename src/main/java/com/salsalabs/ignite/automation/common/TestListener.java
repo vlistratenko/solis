@@ -63,7 +63,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 			Reporter.log(bug.get(i));
 		}
 		Reporter.log("<a href='file:///" + f.getAbsolutePath() + "'>Screenshot</a>");
-		if(updateTC) GoogleDriveClient.writeTCResult(result);
+		GoogleDriveClient.writeTCResult(result);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class TestListener extends SeleneseTestCase implements ITestListener, IIn
 				SeleneseTestCase.logger.error("", e);
 			}
 		}*/
-		if(updateTC) GoogleDriveClient.writeTCResult(result);
+		GoogleDriveClient.writeTCResult(result);
 	}
 
 	@Override
