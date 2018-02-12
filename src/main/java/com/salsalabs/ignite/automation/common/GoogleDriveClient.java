@@ -13,34 +13,29 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.*;
 import com.salsalabs.ignite.automation.common.config.GoogleSpreadSheetsMapper;
-import org.apache.log4j.Logger;
 import org.testng.ITestResult;
-
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import static com.salsalabs.ignite.automation.common.SeleneseTestCase.logger;
 
 public class GoogleDriveClient {
 
 	private static final String EMAIL_BOX;
 	private static final String SPREAD_SHEET_ID;
+	private static final java.io.File DATA_STORE_DIR;
+	private static final boolean IS_GOOGLE_DRIVE_CLIENT_ENABLED;
 	private static HttpTransport transport;
     private static JacksonFactory jsonFactory;
     private static FileDataStoreFactory dataStoreFactory;
-    private static final java.io.File DATA_STORE_DIR;
     private static List<String> scopes;
     private static Sheets service;
 	private static Map<String, Map<String,String>> testsResults;
-	private static final boolean IS_GOOGLE_DRIVE_CLIENT_ENABLED;
     public GoogleSpreadSheetsMapper map = new GoogleSpreadSheetsMapper();
-
 
     static {
 		EMAIL_BOX = CommonUtils.getProperty(PropertyName.GOOGLE_ACCOUNT_EMAIL);
@@ -96,7 +91,7 @@ public class GoogleDriveClient {
 			if (!cell.isEmpty() && !listName.isEmpty()) {
 				Map<String, String> mapWithColumnsAndStatuses = new HashMap<>();
 				if(testsResults.get(listName) != null) {
-					mapWithColumnsAndStatuses = testsResults.get(listName);
+				   	mapWithColumnsAndStatuses = testsResults.get(listName);
 					mapWithColumnsAndStatuses.put(cell, status);
 					testsResults.put(listName, mapWithColumnsAndStatuses);
 				} else {

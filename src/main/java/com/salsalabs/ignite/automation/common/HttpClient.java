@@ -243,6 +243,7 @@ public class HttpClient {
 	}
 
 	public void waitUntilSupporterExists(String email, int seconds) {
+		logger.info("Waiting for " + seconds + " seconds for supporter with email " + email + " to appear in HQ");
 		for (int i = 0; i <= seconds; i++) {
 			try {
 				sleep(1000);
@@ -261,7 +262,7 @@ public class HttpClient {
 		if (id.isPresent()) {
 			isExists = true;
 		} else {
-			logger.info("Supporter with email " + email + " is not found.");
+			logger.debug("Supporter with email " + email + " is not found.");
 		}
 		return isExists;
 	}

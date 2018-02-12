@@ -288,19 +288,17 @@ public class AddSubscribeWidgetPage extends HomePage {
 			verifier.verifyEquals(sup.getPhoneCell(),CommonUtils.getProperty("cellPhone"));
 			verifier.verifyEquals(sup.getDateOfBirth(),CommonUtils.getProperty("dateOfBirth"));
 			verifier.verifyEquals(sup.getState(),CommonUtils.getProperty("state"));
-
 	}
 
 	public void verifySubmittedCustomFieldsArePresentInSupporterDetails(String host, String login, String password) {
 			HttpClient client = new HttpClient(host).login(login,password);
-			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),20);
+			client.waitUntilSupporterExists(CommonUtils.getProperty("personEmail"),60);
 			Supporter sup = client.getSupporterByEmail(CommonUtils.getProperty("personEmail"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterTextBoxCustomField"), CommonUtils.getProperty("supporterTextBoxCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterNumberCustomField"), CommonUtils.getProperty("supporterNumberCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterYesNoCustomField"), CommonUtils.getProperty("supporterYesNoCustomFieldValue").toLowerCase());
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterDateTimeCustomField"), CommonUtils.getProperty("supporterDateTimeCustomFieldValue"));
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
-		
 	}
 
 }
