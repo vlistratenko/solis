@@ -202,7 +202,7 @@ public class HttpClient {
  				sup.suffix =  res.path("payload.suffix");
  				sup.allPersonalFields.put("suffix", sup.suffix );
  				
- 				sup.suffix =  res.path("payload.language");
+ 				sup.language =  res.path("payload.language");
  				sup.allPersonalFields.put("language", sup.language );
  				
  				sup.birthDate =  res.path("payload.birthDate");
