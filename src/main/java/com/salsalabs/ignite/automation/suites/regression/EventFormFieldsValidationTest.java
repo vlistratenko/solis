@@ -111,7 +111,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login", "password"})
-    @Test(enabled = false, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitEventFormRequiredEmptySupporterFields(String login, String password) {
         widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
         EventWidget eventForm = new EventWidget();
@@ -225,7 +225,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login", "password"})
-    @Test(enabled = false, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitEventFormCustomNonRequiredFields(String login, String password) {
         widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
         supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4) + "@test.com";
@@ -311,7 +311,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
      */
 
     @Parameters({"login", "password"})
-    @Test(enabled = false, retryAnalyzer = RetryAnalyzer.class)
+    @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class)
     public void testCreatePublishSubmitEventFormCustomRequiredFields(String login, String password) {
         widgetName = "EventForm_" + RandomStringUtils.randomAlphanumeric(5);
         supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4) + "@test.com";
