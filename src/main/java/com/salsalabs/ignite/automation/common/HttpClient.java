@@ -62,8 +62,8 @@ public class HttpClient {
 	public Response sendPostrequest(String jsonString, String endPoint) {
 		logger.info("Sending POST HTTP request to " + endPoint);
 		Response postResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).body(jsonString).log().body().when()
-				.contentType(ContentType.JSON).post(endPoint).then().log().body().extract().response();
+				.relaxedHTTPSValidation().header("authToken", authToken).body(jsonString).log().ifValidationFails().when()
+				.contentType(ContentType.JSON).post(endPoint).then().log().ifError().extract().response();
 		return postResponse;
 
 	}
@@ -71,7 +71,7 @@ public class HttpClient {
 	public Response sendGetrequest(String url) {
 		logger.info("Sending GET HTTP request to " + url);
 		Response getResponse = given().config(config().sslConfig(new SSLConfig().allowAllHostnames()))
-				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().body()
+				.relaxedHTTPSValidation().header("authToken", authToken).when().get(url).then().log().ifError()
 				.contentType(ContentType.JSON).extract().response();
 		return getResponse;
 	}
@@ -151,7 +151,6 @@ public class HttpClient {
 		}
 		supporterCustomFields.forEach((k,v)->{
 			logger.info("Name " + k + " Value: " + v);
-			System.out.println();
 			
 		});
 		return supporterCustomFields;
@@ -169,7 +168,6 @@ public class HttpClient {
 		}
 		supporterContactFields.forEach((k,v)->{
 			logger.info("Name " + k + " Value: " + v);;
-			System.out.println();
 			
 		});		
 		return supporterContactFields;
@@ -181,7 +179,6 @@ public class HttpClient {
 		supporterAdressessFields = res.path("payload.addresses[0]");	
 		supporterAdressessFields.forEach((k,v)->{
 			logger.info("Name " + k + " Value: " + v);
-			System.out.println();
 			
 		});
 		return supporterAdressessFields;	
@@ -205,7 +202,7 @@ public class HttpClient {
  				sup.suffix =  res.path("payload.suffix");
  				sup.allPersonalFields.put("suffix", sup.suffix );
  				
- 				sup.suffix =  res.path("payload.language");
+ 				sup.language =  res.path("payload.language");
  				sup.allPersonalFields.put("language", sup.language );
  				
  				sup.birthDate =  res.path("payload.birthDate");
