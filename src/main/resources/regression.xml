@@ -32,5 +32,6 @@
 		<suite-file path="src/main/resources/xml-tests/regression/SupporterQBSupporterFieldsTest.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/SupporterQBCustomFieldsTest.xml" />	
 		<suite-file path="src/main/resources/xml-tests/regression/EmailDefaultsTest.xml" />
+		<suite-file path="src/main/resources/api.xml" />
 	</suite-files>
 </suite>
