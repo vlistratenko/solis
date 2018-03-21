@@ -91,9 +91,9 @@ public class ActivitesReadAndMetrics extends CommonTest {
         GetActivityByTypeRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_activity_by_type_fundraise_request.json"), GetActivityByTypeRequest.class);
         ResponseEntity<GetActivitesFromDateResponse> response =
                 restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), GetActivitesFromDateResponse.class);
-
+        
         GetActivitesFromDateResponse expectedResultObj = ((GetActivitesFromDateResponse) getExpectedResult("get_activity_by_type_fundraise_response.json"));
-        Assert.assertEquals(expectedResultObj.getPayload().getActivities(), response.getBody().getPayload().getActivities());
+        Assert.assertEquals(response.getBody().getPayload().getActivities(),expectedResultObj.getPayload().getActivities());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
 
@@ -165,7 +165,7 @@ public class ActivitesReadAndMetrics extends CommonTest {
                 restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), GetActivityByTypeTicketedEventResponse.class);
 
         GetActivityByTypeTicketedEventResponse expectedResultObj = ((GetActivityByTypeTicketedEventResponse) getExpectedResult("get_activity_by_type_ticketed_event_response.json"));
-        Assert.assertEquals(expectedResultObj.getPayload().getActivities(), response.getBody().getPayload().getActivities());
+        Assert.assertEquals(response.getBody().getPayload().getActivities(), expectedResultObj.getPayload().getActivities());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
 

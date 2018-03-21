@@ -48,7 +48,7 @@ public class GetSupporterByDate extends CommonTest {
         for (int i = 0; i <  expectedResultObj.getPayload().getSupporters().size(); i++) {
             Assert.assertEquals(expectedResultObj.getPayload().getSupporters().get(i), response.getBody().getPayload().getSupporters().get(i));
         }
-        Assert.assertEquals(expectedResultObj.getPayload().getSupporters(), response.getBody().getPayload().getSupporters());
+        Assert.assertEquals(response.getBody().getPayload().getSupporters(), expectedResultObj.getPayload().getSupporters());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
 
@@ -62,7 +62,7 @@ public class GetSupporterByDate extends CommonTest {
         SupporterByDateResponse expectedResultObj = (SupporterByDateResponse) getExpectedResult("get_supporters_within_date_range_response.json");
 
         for (int i = 0; i <  expectedResultObj.getPayload().getSupporters().size(); i++) {
-            Assert.assertEquals(expectedResultObj.getPayload().getSupporters().get(i), response.getBody().getPayload().getSupporters().get(i));
+            Assert.assertEquals(response.getBody().getPayload().getSupporters().get(i), expectedResultObj.getPayload().getSupporters().get(i));
         }
         Assert.assertEquals(expectedResultObj.getPayload().getSupporters(), response.getBody().getPayload().getSupporters());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");

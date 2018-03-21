@@ -10,6 +10,7 @@
     "offset": 0,
     "supporters":       [
       {
+		"readOnly": false,
         "supporterId": "72c208aa-c117-42e2-8785-596f3cc0a8ad",
         "firstName": "test1",
         "lastName": "sdf",
@@ -39,6 +40,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "a3f66ced-3e37-4a68-a3ca-c2596fc368ac",
         "firstName": "test1",
         "lastName": "sdf",
@@ -60,6 +62,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "60aa89c0-84e9-4264-9d50-5031ec313220",
         "firstName": "test1",
         "lastName": "sdf",
@@ -81,6 +84,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "b0beb85c-467e-49f6-8b80-459364652228",
         "title": "Mrs",
         "firstName": "test1",
@@ -117,6 +121,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "6bee2428-e622-4004-b9c9-26d4b56e99d2",
         "firstName": "4olga",
         "lastName": "4olga",
@@ -146,6 +151,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "4a25a0e0-2485-4892-b95e-c12b41e946d6",
         "createdDate": "2016-06-21T12:49:48.941Z",
         "lastModified": "2016-06-21T18:50:00.303Z",
@@ -163,6 +169,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "2dca1793-bc81-4a46-a4f4-d46015bee9d5",
         "createdDate": "2016-06-21T12:50:00.071Z",
         "lastModified": "2016-06-21T18:50:00.333Z",
@@ -176,6 +183,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "a9125fe2-9c33-44e6-a9e9-4a5fe9103841",
         "firstName": "test1",
         "lastName": "dfgf",

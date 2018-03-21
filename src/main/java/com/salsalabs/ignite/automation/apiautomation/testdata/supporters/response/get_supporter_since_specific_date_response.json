@@ -10,6 +10,7 @@
     "offset": 0,
     "supporters":       [
       {
+		"readOnly": false,
         "supporterId": "452bdfda-f1e7-4192-b4c9-4bc6408f31e7",
         "firstName": "test1",
         "lastName": "sdf",
@@ -36,6 +37,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "a6529def-ead0-4c88-a6be-9638facc6ce0",
         "createdDate": "2016-06-22T12:52:15.254Z",
         "lastModified": "2016-06-22T18:55:01.232Z",
@@ -49,6 +51,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "a71de04c-80e8-47fe-b111-d94389ed91be",
         "createdDate": "2016-06-22T12:52:30.037Z",
         "lastModified": "2016-06-22T18:55:01.254Z",
@@ -62,6 +65,7 @@
         "result": "FOUND"
       },
       {
+		"readOnly": false,
         "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
         "firstName": "Oleg",
         "lastName": "Lauta",

@@ -7,6 +7,7 @@
   },
   "payload":    {
     "supporters": [      {
+	"readOnly": false,
       "supporterId": "953b0d16-203f-4f99-a50c-7890e1e917ff",
       "title": "title",
       "firstName": "firstname",

@@ -15,7 +15,7 @@
       "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
       "activityDate": "2017-09-18T08:22:32.333Z",
       "activityType": "P2P_EVENT",
-      "lastModified": "2017-09-18T08:22:41.617Z",
+      "lastModified": "2018-02-16T19:39:55.374Z",
       "customFieldValues": [],
       "donationId": "214fed5a-9556-4127-921f-567687843072",
       "totalReceivedAmount": 10,
@@ -27,12 +27,13 @@
       "accountProvider": "visa",
       "paymentProcessorName": "mechant services gateway name",
       "wasImported": false,
-      "transactions": [         {
+      "wasAPIImported": false,
+	  "transactions": [         {
         "transactionId": "026997e6-97ef-4919-94ac-2094173d46d4",
         "reasonId": "e202f614-286d-470a-b515-1bbaf8ff3ccd",
         "type": "CHARGE",
         "reason": "EVENT_TICKET",
-        "date": "2017-09-18T08:22:38.110Z",
+        "date": "2017-09-18T08:22:29.311Z",
         "amount": 10,
         "deductibleAmount": 0,
         "feesPaid": 0,
@@ -51,16 +52,16 @@
         "attendees": [            {
           "attendeeId": "5943f2d7-1260-474d-98b3-7e1c31afbd0a",
           "firstName": "Oleg",
-          "type": "FUNDRAISER",
+          "type": "PURCHASER",
           "status": "REGISTERED",
           "lastName": "Lauta",
           "email": "olauta+si@salsalabs.com",
           "currentSupporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
           "isCurrentSupporter": true,
-          "lastModified": "2017-09-18T08:22:38.902Z",
+          "lastModified": "2018-02-16T19:39:55.372Z",
           "questions": []
         }],
-        "lastModified": "2017-09-18T08:22:38.841Z"
+        "lastModified": "2018-02-16T19:39:55.367Z"
       }],
       "donatedToFundraiser":          {
         "fundraiserId": "94960cdb-e0f3-441c-a1da-dd9c3a5b316e",
@@ -78,8 +79,7 @@
         "lastModified": "2017-09-18T08:22:36.447Z"
       },
       "createdFundraisers": [         {
-        "fundraiserId": "94960cdb-e0f3-441c-a1da-dd9c3a5b316e",
-        "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+        "fundraiserId": "94960cdb-e0f3-441c-a1da-dd9c3a5b316e",        "supporterId":"1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",											 
         "activityId": "da3dbe43-566b-4493-b1aa-ac2190e1e956",
         "type": "PERSONAL",
         "name": "page1",
@@ -89,10 +89,12 @@
         "donationCount": 0,
         "lastDonation": "2017-09-18T08:22:36.447Z",
         "relatedFundraisersCount": 0,
-        "fundraisingPageEnabled": false,
+        "fundraisingPageEnabled": false,				 
         "lastModified": "2017-09-18T08:22:36.447Z"
       }]
     }],
+														 
+														 
     "count": 1
   }
 }
