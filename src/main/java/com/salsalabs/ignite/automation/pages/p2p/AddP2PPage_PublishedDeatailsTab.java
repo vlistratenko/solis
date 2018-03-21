@@ -20,4 +20,10 @@ public class AddP2PPage_PublishedDeatailsTab extends AddP2PPage {
 		p2pEventLink.waitElement();
 		CommonUtils.setParam(PropertyName.P2P_FORM_LINK, p2pEventLink.getAttribute("href"));
 	}
+
+	public void openWidget(String eventName) {
+		clickOnEventLink(eventName);
+		String currentWindowHandle = getWindowHandle();
+		switchToPopupWindow(currentWindowHandle);
+	}
 }

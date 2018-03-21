@@ -55,7 +55,7 @@ public class HomePage extends Browser{
 	TextBox replyAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='replyAddress']", "Reply Address", true);
 	Button buyButton = new ButtonImpl("//a[contains(@ng-click,'goToBuyNow')]", "Buy");
 	Button dashboardButton = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard");
-	
+
 	public HomePage(int delay){
 		settingsTab.waitElement(delay);
 	}
@@ -211,5 +211,5 @@ public class HomePage extends Browser{
 		return new MyAccountPage();
 	}
 
-	
+
 }

@@ -7,14 +7,18 @@
   },
   "payload":    {
     "supporters": [      {
+<<<<<<< HEAD
 	"readOnly": false,
+=======
+      "readOnly": false,
+>>>>>>> refs/heads/api_automation_fix
       "supporterId": "953b0d16-203f-4f99-a50c-7890e1e917ff",
       "title": "title",
       "firstName": "firstname",
       "middleName": "middlename",
       "lastName": "lastname",
       "suffix": "suffix",
-      "dateOfBirth": "1768-05-27T04:00:00.000Z",
+      "dateOfBirth": "1991-05-27T04:00:00.000Z",
       "gender": "MALE",
       "createdDate": "2017-02-09T13:56:25.457Z",
       "lastModified": "2017-10-02T12:07:36.835Z",
@@ -85,7 +89,7 @@
           "type": "DATE"
         }
       ],
-      "result": "UPDATED"
+      "result": "ADDED"
     }],
     "count": 1
   }

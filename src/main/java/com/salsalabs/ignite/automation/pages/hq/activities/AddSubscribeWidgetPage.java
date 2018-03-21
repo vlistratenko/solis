@@ -1,27 +1,30 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.salsalabs.ignite.automation.common.HttpClient;
-import com.salsalabs.ignite.automation.common.Supporter;
-import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.HttpClient;
 import com.salsalabs.ignite.automation.common.PropertyName;
+import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
 import org.json.JSONException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
@@ -50,6 +53,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
 	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
+	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
+	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -97,6 +102,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
     public AddSubscribeWidgetPage publishFromAutoresponders() {
+		sleep(3);
 		publishFromAutorespondersTab.fluentWaitForElementPresenceIgnoringExceptions(120);
         publishFromAutorespondersTab.click();
         try {
@@ -301,4 +307,34 @@ public class AddSubscribeWidgetPage extends HomePage {
 			verifier.verifyEquals(sup.getCustomFieldValue("supporterSingleChoiceCustomField"), CommonUtils.getProperty("supporterSingleChoiceCustomFieldValue"));
 	}
 
+
+	public AddSubscribeWidgetPage editIdLikeToReceiveUpdatesCheckBoxProperties(String newFieldLabel, String defaultValue) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		modal.labelTextBox.type(newFieldLabel);
+		modal.checkBoxDefaultValue.selectByLabel(defaultValue);
+		modal.saveButton.click();
+		return this;
+	}
+
+	public AddSubscribeWidgetPage checkIdLikeToReceiveUpdatesCheckBoxProperties(String fieldLabel, String defaultValue) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#FieldEditModal-form\\\\3a subscribe > div.appModalContent > div > div > div.element-config-container.vertical-scroll > div > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > input').value"),
+				fieldLabel);
+		verifier.verifyEquals(((SelectBoxImpl) modal.checkBoxDefaultValue).getSelectedLabel(modal.checkBoxDefaultValue.getPath()), defaultValue, "Check default value", true);
+		modal.saveButton.click();
+		return this;
+	}
+
+
+	public AddSubscribeWidgetPage switchBetweenFormSteps(int stepNumber) {
+		Button step = new ButtonImpl(".//*[@ng-repeat='step in elementSteps']" + "[" + stepNumber + "]", "Form step");
+		step.scrollIntoView();
+		step.click();
+		return  this;
+	}
 }

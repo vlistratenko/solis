@@ -273,7 +273,7 @@ public class DonationWidget extends SubscribeWidget {
 	}
 
 	public DonationWidget fillTheSecondStepOfTheDonationForm(String personEmail, String personFName, String personLName,
-			String personAddressLine1, String personCity, String personZip, String state) {
+			String personAddressLine1, String personCity, String personZip, String state, boolean subscriptionStatus) {
 
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);
@@ -288,6 +288,11 @@ public class DonationWidget extends SubscribeWidget {
 			personCity = "New York";
 		}
 		personStatesSelectBox.selectByValue("AL");
+		if (subscriptionStatus) {
+			keepMeInformedCheckbox.check();
+		} else {
+			keepMeInformedCheckbox.unCheck();
+		}
 		nextButton.scrollIntoView();
 		nextButton.click();
 		return this;

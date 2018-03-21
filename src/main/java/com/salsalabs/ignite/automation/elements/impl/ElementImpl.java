@@ -954,4 +954,8 @@ public abstract class ElementImpl implements Element {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
+
+	public void doubleClick() {
+		new Actions(driver).moveToElement(driver.findElement(By.xpath(path))).doubleClick().build().perform();
+	}
 }

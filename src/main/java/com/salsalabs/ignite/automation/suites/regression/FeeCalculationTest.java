@@ -30,7 +30,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 		new LoginPage().
 		openDonationWidgetByLink(widgetUrlwepayForm).
 		fillTheFirstStepOfTheDonationForm(String.valueOf(randomDonationAmmount), isRecurring , true).
-		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL").
+		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL", true).
 		fillTheThirdStepOfTheDonationForm("4003830171874018" , "123" , "12" , "2020").
 		veriFyfeeCalculationForWepay("Visa" , randomDonationAmmount).
 		fillTheThirdStepOfTheDonationForm("5496198584584769" , "123" , "11" , "2021").
@@ -54,7 +54,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 		new LoginPage().
 		openDonationWidgetByLink(widgetUrlCardConnectForm).
 		fillTheFirstStepOfTheDonationForm(String.valueOf(randomDonationAmmount), isRecurring, true).
-		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL").
+		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL", true).
 		fillTheThirdStepOfTheDonationForm("4003830171874018" , "123" , "12" , "2020").
 		veriFyfeeCalculationForCardConnect("Visa", randomDonationAmmount).
 		fillTheThirdStepOfTheDonationForm("5496198584584769" , "123" , "11" , "2021").
@@ -80,7 +80,7 @@ public class FeeCalculationTest extends SeleneseTestCase {
 		LoginPage lp = new LoginPage();
 		lp.openDonationWidgetByLink(widgetUrlCardConnectForm).
 		fillTheFirstStepOfTheDonationForm(String.valueOf(randomDonationAmmount) , isRecurring, true).
-		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL").
+		fillTheSecondStepOfTheDonationForm(email, supporterFirstname, supporterLastname, supporterAddress, "Juneau", "99501" , "AL", true).
 		fillTheThirdStepOfTheDonationForm("5496198584584769" , "123" , "11" , "2021").
 		clickDonationButtonNewForms();
 		lp.doSuccessLogin( login , passward).

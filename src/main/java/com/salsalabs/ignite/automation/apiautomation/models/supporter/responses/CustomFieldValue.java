@@ -1,13 +1,9 @@
 package com.salsalabs.ignite.automation.apiautomation.models.supporter.responses;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -86,7 +82,7 @@ public class CustomFieldValue {
 
         CustomFieldValue that = (CustomFieldValue) o;
 
-        if (fieldId != null ? !fieldId.equals(that.fieldId) : that.fieldId != null) return false;
+        //if (fieldId != null ? !fieldId.equals(that.fieldId) : that.fieldId != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (value != null ? !value.equals(that.value) : that.value != null) return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;

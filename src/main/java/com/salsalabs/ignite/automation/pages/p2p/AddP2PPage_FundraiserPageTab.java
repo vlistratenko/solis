@@ -3,6 +3,8 @@ package com.salsalabs.ignite.automation.pages.p2p;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage;
+import com.salsalabs.ignite.automation.elements.impl.GeneralWebElement;
+
 
 
 public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> {
@@ -10,6 +12,7 @@ public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> 
 	Button donateSubTab = new ButtonImpl("//a[.='Donate']", "Donate Page subtab ");
 	Button personalFundraisingPageSubTab = new ButtonImpl("//div[contains(@class, 'inactive')]/a[.='Personal Fundraising Page']", "Personal Fundraising Page");
 	Button clickNextToTeamPage = new ButtonImpl("//button[@id='btnGo-composePersonal-composeTeam']", "Next: Team Page Template");
+	GeneralWebElement paymentGateways = new GeneralWebElement("//*[@title-text='Gateways Config']", "Paymen gateways");
 	
 	@SuppressWarnings("unchecked")
 	public T openDonateSubTab() {
@@ -31,6 +34,7 @@ public class AddP2PPage_FundraiserPageTab<T> extends AddP2PPage_EventPageTab<T> 
 	
 	public AddP2PPage_TeamPageTab_TeamFundraisingSubTab clickNextToTeamTabButton() {
 		clickNextToTeamPage.waitElement();
+		sleep(3);
 		clickNextToTeamPage.click();
 		return new AddP2PPage_TeamPageTab_TeamFundraisingSubTab();
 	}

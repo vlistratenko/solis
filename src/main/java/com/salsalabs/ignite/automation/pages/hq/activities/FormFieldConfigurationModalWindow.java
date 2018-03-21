@@ -6,6 +6,7 @@ import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +14,15 @@ import java.util.stream.Collectors;
 
 public class FormFieldConfigurationModalWindow extends HomePage {
 
-    Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
+    public Button saveButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[2]","Save Content button for field configuration");
     Button cancelButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]/div[3]/a[1]","Cancel button of fields configuration modal window");
     CheckBox requiredCheckbox = new CheckBoxImpl("//*[@class='appModalContent']//*[@type='checkbox'][@ng-model='fieldConfig.required']","Checkbox to mark fields as required");
     TextBox designationFieldOptionTextField = new TextBoxImpl("//*[contains(@id,'FieldEditModal-form')]//input[@placeholder='Add an option....']","Designation field option field");
     Button designationFieldAddButton = new ButtonImpl("//*[contains(@id,'FieldEditModal-form')]//button[@class='button postfix']","Designation button Add option button");
+    public TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
+    public SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
     Button selectFieldButton = new ButtonImpl("//*[contains(text(),'fieldNameForReplacement')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of fieldNameForReplacement in form field configuration modal window");
-    
+
     private static List<String> supporterFieldNames  = new ArrayList<>();
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
@@ -39,7 +42,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     	markFieldAsRequired(true);
         return this;
     }
-    
+
     public FormFieldConfigurationModalWindow markFieldAsRequired(Boolean isRequired){
         sleep(2);
         if(requiredCheckbox.isDisplayed()){
@@ -105,7 +108,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         designationFieldOptionTextField.type(optionValue);
         designationFieldAddButton.click();
     }
-        
+
     public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {
     	selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
     	selectFieldButton.waitElement();

@@ -1,22 +1,145 @@
 {
-  "id": "4e85d22a-a2a2-41a8-80a1-23dd3353d3b3",
-  "timestamp": "2017-10-04T10:39:17.487Z",
+  "id": "8f8a1824-19c0-4808-9f7a-34664dcb1825",
+  "timestamp": "2018-03-21T15:12:09.310Z",
   "header":    {
     "refId": "optionalId",
-    "processingTime": 196,
+    "processingTime": 232,
     "serverId": "test-hqapp2.ignite.net"
   },
   "payload":    {
-    "total": 1,
+    "total": 18,
     "offset": 0,
-    "segments": [      {
-      "segmentId": "273af500-265a-4255-8fb8-f03fb7d67370",
-      "name": "segment2",
-      "description": "segment11",
-      "totalMembers": 0,
-      "result": "FOUND",
-      "externalSystemId": "xxxxx2"
-    }],
-    "count": 1
+    "segments":       [
+      {
+        "segmentId": "0acbb1ec-2703-4bcd-b5a2-a11efcb2c887",
+        "name": "No Activity in the Last Year",
+        "totalMembers": 3,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "74dc54f7-810c-496f-b9b1-7a6e009d95c9",
+        "name": "High-level Donors",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "a0711b5d-cf11-465a-9771-95c4ddfa666c",
+        "name": "No Activity in 30 Days",
+        "totalMembers": 4,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "28c0bf60-e051-4bf7-9725-9b4c5b4af00d",
+        "name": "Source is a Fundraising Form",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "cbfc3b8c-419d-40b6-862a-17f760a6d969",
+        "name": "Has Signed a Petition",
+        "totalMembers": 3,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "6d56cf0f-7e29-4931-b963-d665489ed055",
+        "name": "Has Never Made a Donation",
+        "totalMembers": 5,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "4330d373-2e86-40fa-b6e7-04ade00fc077",
+        "name": "Social Subscribers",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "c8045ef1-ddb0-4a13-89f9-96ffea69a857",
+        "name": "Source is a Sign-up Form",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "365ef982-af8e-403c-a324-047a23311c4e",
+        "name": "Source is a Petition Form",
+        "totalMembers": 3,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "748fa213-195f-42b7-8934-70342ff37f73",
+        "name": "Has Made a Donation",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "273af500-265a-4255-8fb8-f03fb7d67370",
+        "name": "segment2",
+        "description": "segment11",
+        "totalMembers": 0,
+        "type": "INTEGRATED",
+        "result": "FOUND",
+        "externalSystemId": "xxxxx2"
+      },
+      {
+        "segmentId": "dbfdba43-6200-4459-b045-5aadd2892593",
+        "name": "Mid-level Donors",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "ef59ff5c-f896-45e1-a103-c4e8cfb4133b",
+        "name": "No Activity in 90 Days",
+        "totalMembers": 4,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "1e5a95c3-e214-4c66-a212-b55d839fbb83",
+        "name": "Donor Subscribers",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "0ea9be32-7eff-4705-a0a1-b77236feeed7",
+        "name": "Emerging Donors",
+        "totalMembers": 0,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "aeb08b73-847e-424b-a1bc-5ae722780349",
+        "name": "Has Never Signed a Petition",
+        "totalMembers": 2,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "452d7287-c200-438d-88aa-98bac34722ae",
+        "name": "Non Donor Subscribers",
+        "totalMembers": 2,
+        "type": "DEFAULT",
+        "result": "FOUND"
+      },
+      {
+        "segmentId": "e6ef7359-7cf2-4532-8e76-19b2cb576d3a",
+        "name": "custom",
+        "description": "",
+        "totalMembers": 0,
+        "type": "CUSTOM",
+        "result": "FOUND"
+      }
+    ],
+    "count": 18
   }
 }

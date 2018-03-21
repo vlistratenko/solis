@@ -7,10 +7,12 @@ import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.pages.hq.manage.CustomTargetsPage;
+import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
-	Button nextButton = new ButtonImpl("//button[@id='btnCompose2']", "Design My Widget button", true);
+	Button nextButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Design My Widget button", true);
 	Button btnPublish = new ButtonImpl("//button[@id='btnPublish']", "Publish This Form >>");
 	public static DropDown gatewaysList = new DropDownImpl(
 			"//gateways-and-queues//*[@class='custom dropdown']",
@@ -55,5 +57,18 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 	@Override
 	protected SubscribeWidget newWidget(boolean clean) {
 		return new DonationWidget(clean);
+	}
+
+	@Override
+	public AddSubscribeWidgetPage checkIdLikeToReceiveUpdatesCheckBoxProperties(String fieldLabel, String defaultValue) {
+		idLikeToReceiveUpdatesElement.scrollIntoView();
+		idLikeToReceiveUpdatesElement.doubleClick();
+		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
+		verifier.verifyEquals(
+				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#FieldEditModal-form\\\\3a fundraise > div.appModalContent > div > div > div.element-config-container.vertical-scroll > div > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div > div > div > div > input').value"),
+				fieldLabel);
+		verifier.verifyEquals(((SelectBoxImpl) modal.checkBoxDefaultValue).getSelectedLabel(modal.checkBoxDefaultValue.getPath()), defaultValue, "Check default value", true);
+		modal.saveButton.click();
+		return this;
 	}
 }

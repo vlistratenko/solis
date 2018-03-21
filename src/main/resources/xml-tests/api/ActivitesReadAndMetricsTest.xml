@@ -2,7 +2,7 @@
 <suite name="ApiTests" verbose="1">
     <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
     <parameter name="AUTH_TOKEN"
-               value="rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZEhC-JrLA0lEoHevmUhpbkuExlYD4E7x6JRwM1ibw8crkO0BYEnNVoU_wtODiJY8ig"></parameter>
+               value="rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q"></parameter>
     <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->
     <!--<parameter name="ENV" value="https://hq.salsalabs.org/"></parameter>-->
     <test name="Activites">
