@@ -178,7 +178,7 @@ public class ActivitesReadAndMetrics extends CommonTest {
         metricsBeforeExecution.getPayload().setActivityTicketedEvent(metricsBeforeExecution.getPayload().getActivityTicketedEvent() + 4);
         metricsBeforeExecution.getPayload().setActivityP2PEvent(metricsBeforeExecution.getPayload().getActivityP2PEvent() + 1);
         metricsBeforeExecution.getPayload().setActivitySubscribe(metricsBeforeExecution.getPayload().getActivitySubscribe() + 33);
-        metricsBeforeExecution.getPayload().setActivityFundraise(metricsBeforeExecution.getPayload().getActivityFundraise() + 17);
+        metricsBeforeExecution.getPayload().setActivityFundraise(metricsBeforeExecution.getPayload().getActivityFundraise() + 18);
         metricsBeforeExecution.getPayload().setActivityTargetedLetter(metricsBeforeExecution.getPayload().getActivityTargetedLetter() + 3);
         metricsBeforeExecution.getPayload().setActivityPetition(metricsBeforeExecution.getPayload().getActivityPetition() + 18);
         metricsBeforeExecution.getPayload().setActivitySubscriptionManagement(metricsBeforeExecution.getPayload().getActivitySubscriptionManagement() + 1);

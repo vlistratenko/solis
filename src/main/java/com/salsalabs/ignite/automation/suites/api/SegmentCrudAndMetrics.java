@@ -40,6 +40,8 @@ public class SegmentCrudAndMetrics extends CommonTest {
                 {{
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "create_segment_response.json", CreateSegmentResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_all_segments_response.json", QueryAllSegmentsResponse.class);
+                    put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_segment_by_id_response.json", QueryAllSegmentsResponse.class);
+                    put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_segment_by_ext_id_response.json", QueryAllSegmentsResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "assign_supporter_to_segment_response.json", AssignSupporterResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_assigned_supporter_response.json", QueryAssignedSupportersResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "delete_supporter_from_segment_response.json", QueryAssignedSupportersResponse.class);
@@ -91,7 +93,7 @@ public class SegmentCrudAndMetrics extends CommonTest {
         ResponseEntity<QueryAllSegmentsResponse> response =
                 restClient.exchange(env + Endpoints.SEARCH_SEGMENT, HttpMethod.POST, buildRequest(requestObj), QueryAllSegmentsResponse.class);
 
-        QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_all_segments_response.json"));
+        QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_segment_by_id_response.json"));
 
         Assert.assertEquals(expectedResultObj.getPayload().getSegments(), response.getBody().getPayload().getSegments());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
@@ -104,7 +106,7 @@ public class SegmentCrudAndMetrics extends CommonTest {
         ResponseEntity<QueryAllSegmentsResponse> response =
                 restClient.exchange(env + Endpoints.SEARCH_SEGMENT, HttpMethod.POST, buildRequest(requestObj), QueryAllSegmentsResponse.class);
 
-        QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_all_segments_response.json"));
+        QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_segment_by_ext_id_response.json"));
 
         Assert.assertEquals(expectedResultObj.getPayload().getSegments(), response.getBody().getPayload().getSegments());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");

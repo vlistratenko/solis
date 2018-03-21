@@ -1,12 +1,12 @@
 {
-  "id": "5cd338d6-6e56-497f-9cd6-fe8235f246db",
-  "timestamp": "2017-10-05T08:55:17.468Z",
+  "id": "ff25bc61-cc9e-49c7-b978-04b52d67cff5",
+  "timestamp": "2018-03-21T14:28:01.265Z",
   "header":    {
-    "processingTime": 2043,
-    "serverId": "test-hqapp1.ignite.net"
+    "processingTime": 365,
+    "serverId": "test-hqapp2.ignite.net"
   },
   "payload":    {
-    "total": 7,
+    "total": 8,
     "offset": 0,
     "activities":       [
       {
@@ -36,12 +36,13 @@
         "dedication": "in honor of value",
         "notify": "please notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions":             [
           {
             "transactionId": "01148048-a672-40db-8fc3-2a69d649299a",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T11:00:27.758Z",
+            "date": "2016-06-17T10:58:51.708Z",
             "amount": 20,
             "deductibleAmount": 20,
             "feesPaid": 0,
@@ -52,7 +53,7 @@
             "transactionId": "ff815246-94e6-4121-9c6f-d942653619e6",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.600Z",
+            "date": "2016-06-17T12:49:09.240Z",
             "amount": 20,
             "deductibleAmount": 20,
             "feesPaid": 0,
@@ -63,7 +64,7 @@
             "transactionId": "b61a753d-0460-4ad8-81ef-2c3a8da64192",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.635Z",
+            "date": "2016-06-17T12:49:17.064Z",
             "amount": 20,
             "deductibleAmount": 20,
             "feesPaid": 0,
@@ -74,7 +75,7 @@
             "transactionId": "fb5617e4-cf41-4c19-b813-105e76990fbf",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.663Z",
+            "date": "2016-06-17T12:49:24.228Z",
             "amount": 20,
             "deductibleAmount": 20,
             "feesPaid": 0,
@@ -85,7 +86,7 @@
             "transactionId": "47b8637f-29a7-45e1-82c5-de9cdf70498d",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.685Z",
+            "date": "2016-06-17T12:49:29.173Z",
             "amount": 20,
             "deductibleAmount": 20,
             "feesPaid": 0,
@@ -121,12 +122,13 @@
         "dedication": "in honor of value",
         "notify": "notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions":             [
           {
             "transactionId": "2c75d6c2-5ef8-4791-a39f-32ab513cb4e9",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:07:38.717Z",
+            "date": "2016-06-17T12:05:33.770Z",
             "amount": 100,
             "deductibleAmount": 100,
             "feesPaid": 0,
@@ -137,7 +139,7 @@
             "transactionId": "fa156443-6185-4172-ab34-5bdc3f16bab8",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.353Z",
+            "date": "2016-06-17T12:49:08.845Z",
             "amount": 100,
             "deductibleAmount": 100,
             "feesPaid": 0,
@@ -148,7 +150,7 @@
             "transactionId": "aae34d92-df1f-40b2-b201-3fad3380fcd8",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.385Z",
+            "date": "2016-06-17T12:49:16.737Z",
             "amount": 100,
             "deductibleAmount": 100,
             "feesPaid": 0,
@@ -159,7 +161,7 @@
             "transactionId": "60a8d1cf-5af0-47f2-8ec8-24a3bd02f096",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.410Z",
+            "date": "2016-06-17T12:49:24.518Z",
             "amount": 100,
             "deductibleAmount": 100,
             "feesPaid": 0,
@@ -170,7 +172,7 @@
             "transactionId": "4b45f9e7-6c0e-45fd-989f-8c2a633b321a",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.431Z",
+            "date": "2016-06-17T12:49:28.889Z",
             "amount": 100,
             "deductibleAmount": 100,
             "feesPaid": 0,
@@ -204,12 +206,13 @@
         "designation": "designation value 1",
         "notify": "notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions":             [
           {
             "transactionId": "747ad835-fca9-42d4-a51c-2ed86e0946f8",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:08:36.276Z",
+            "date": "2016-06-17T12:06:24.383Z",
             "amount": 25,
             "deductibleAmount": 25,
             "feesPaid": 0,
@@ -220,7 +223,7 @@
             "transactionId": "2bf2e22f-e0a2-4f7c-8409-fbafa1c51905",
             "type": "CANCEL",
             "reason": "DONATION",
-            "date": "2016-06-17T12:47:02.004Z",
+            "date": "2016-06-17T12:47:01.997Z",
             "deductibleAmount": 0,
             "feesPaid": 0,
             "gatewayTransactionId": "1466165184776"
@@ -254,13 +257,14 @@
         "dedication": "in memory of value",
         "notify": "please notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions":             [
           {
             "transactionId": "f33a162d-8586-40e4-a580-0deaf807aea9",
             "relatedTransactionId": "a6f3d3b0-d99e-4d67-87ff-ba58b7a04a9e",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T11:08:30.033Z",
+            "date": "2016-06-17T11:07:08.972Z",
             "amount": 10.5,
             "deductibleAmount": 10.5,
             "feesPaid": 0.5,
@@ -272,7 +276,7 @@
             "relatedTransactionId": "f33a162d-8586-40e4-a580-0deaf807aea9",
             "type": "REFUND",
             "reason": "DONATION",
-            "date": "2016-06-17T12:04:15.617Z",
+            "date": "2016-06-17T12:04:14.808Z",
             "amount": 10.5,
             "deductibleAmount": 0,
             "feesPaid": 0.5,
@@ -282,12 +286,35 @@
             "transactionId": "dfd681f3-37f5-430d-8097-1ab9dada0fc7",
             "type": "CANCEL",
             "reason": "DONATION",
-            "date": "2016-06-17T12:04:15.928Z",
+            "date": "2016-06-17T12:04:15.917Z",
             "deductibleAmount": 0,
             "feesPaid": 0.5,
             "gatewayTransactionId": "1466161629450"
           }
         ]
+      },
+      {
+        "activityId": "619705f4-c41a-4e9d-bf8d-ce146d93c48d",
+        "supporterId": "c8afd5dc-dafb-4e2b-9bd6-8e8b772d201b",
+        "activityDate": "2017-03-21T16:44:28.231Z",
+        "activityType": "FUNDRAISE",
+        "lastModified": "2018-03-20T11:12:37.213Z",
+        "customFieldValues": [],
+        "donationId": "e0448cff-970b-4aeb-927d-3e09f21da345",
+        "totalReceivedAmount": 13,
+        "oneTimeAmount": 13,
+        "donationType": "ONE_TIME",
+        "accountNumber": "",
+        "wasImported": true,
+        "wasAPIImported": true,
+        "transactions": [            {
+          "transactionId": "92cddcef-63ef-46cc-9096-f710828415bd",
+          "type": "CHARGE",
+          "reason": "DONATION",
+          "date": "2017-03-21T16:44:28.231Z",
+          "amount": 13,
+          "gatewayTransactionId": "1519145068231"
+        }]
       },
       {
         "activityId": "63875557-9416-41a0-9d78-af6c2639488d",
@@ -316,12 +343,13 @@
         "dedication": "in honor of value",
         "notify": "please notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions":             [
           {
             "transactionId": "9867a372-5248-4f22-8286-b0d2f3279fd8",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T11:04:29.255Z",
+            "date": "2016-06-17T11:02:20.110Z",
             "amount": 25.95,
             "deductibleAmount": 25.95,
             "feesPaid": 0.95,
@@ -332,7 +360,7 @@
             "transactionId": "6e9df4fb-808b-40a8-81e1-d38b653d8efa",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.040Z",
+            "date": "2016-06-17T12:49:07.399Z",
             "amount": 25.95,
             "deductibleAmount": 25.95,
             "feesPaid": 0.95,
@@ -343,7 +371,7 @@
             "transactionId": "47e3a393-d13e-45a6-8e82-350fc8622d7f",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.077Z",
+            "date": "2016-06-17T12:49:16.059Z",
             "amount": 25.95,
             "deductibleAmount": 25.95,
             "feesPaid": 0.95,
@@ -354,7 +382,7 @@
             "transactionId": "01f86b14-a8fe-42aa-86b3-f06fd8c64624",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.100Z",
+            "date": "2016-06-17T12:49:23.494Z",
             "amount": 25.95,
             "deductibleAmount": 25.95,
             "feesPaid": 0.95,
@@ -365,7 +393,7 @@
             "transactionId": "51116199-f89e-4a49-8d6e-3d7ddefeded5",
             "type": "CHARGE",
             "reason": "DONATION",
-            "date": "2016-06-17T12:50:50.123Z",
+            "date": "2016-06-17T12:49:29.535Z",
             "amount": 25.95,
             "deductibleAmount": 25.95,
             "feesPaid": 0.95,
@@ -387,11 +415,12 @@
         "oneTimeAmount": 13,
         "donationType": "ONE_TIME",
         "wasImported": true,
+        "wasAPIImported": false,
         "transactions": [            {
           "transactionId": "59a2b0a7-4218-448a-857b-afc53fddb075",
           "type": "CHARGE",
           "reason": "DONATION",
-          "date": "2016-06-17T11:04:05.752Z",
+          "date": "2016-06-16T04:00:00.000Z",
           "amount": 13,
           "gatewayTransactionId": "131313"
         }]
@@ -419,11 +448,12 @@
         "dedication": "in honor of value",
         "notify": "notify value",
         "wasImported": false,
+        "wasAPIImported": false,
         "transactions": [            {
           "transactionId": "c75f9f5f-83ad-4f9b-83c1-3bcd61289eb8",
           "type": "CHARGE",
           "reason": "DONATION",
-          "date": "2016-06-17T10:59:27.400Z",
+          "date": "2016-06-17T10:57:38.827Z",
           "amount": 20,
           "deductibleAmount": 20,
           "feesPaid": 0,
@@ -432,6 +462,6 @@
         }]
       }
     ],
-    "count": 7
+    "count": 8
   }
 }
