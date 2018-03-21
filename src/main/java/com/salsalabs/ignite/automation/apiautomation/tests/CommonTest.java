@@ -10,12 +10,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CommonTest {
@@ -33,7 +33,7 @@ public class CommonTest {
         logger.info("Executing: " + this.getClass().getSimpleName());
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("authToken", authToken);
+        headers.set("authToken", "rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q");
         restClient = new RestTemplate();
     }
 

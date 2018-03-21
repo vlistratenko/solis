@@ -184,7 +184,7 @@ public class SubscribeWidget extends Browser{
 
 	public SubscribeWidget clickOnSubmitFormButton(){
 		subscribeButton.scrollIntoView();
-		subscribeButton.click();
+		subscribeButton.clickJS();
 		return this;
 	}
 

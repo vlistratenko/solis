@@ -51,7 +51,7 @@
         "attendees": [            {
           "attendeeId": "5943f2d7-1260-474d-98b3-7e1c31afbd0a",
           "firstName": "Oleg",
-          "type": "FUNDRAISER",
+          "type": "PURCHASER",
           "status": "REGISTERED",
           "lastName": "Lauta",
           "email": "olauta+si@salsalabs.com",
