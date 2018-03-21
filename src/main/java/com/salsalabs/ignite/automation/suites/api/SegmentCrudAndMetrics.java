@@ -171,7 +171,7 @@ public class SegmentCrudAndMetrics extends CommonTest {
 
         metricsBeforeExecution.getPayload().setSegmentAdd(metricsBeforeExecution.getPayload().getSegmentAdd() + 1);
         metricsBeforeExecution.getPayload().setSegmentDelete(metricsBeforeExecution.getPayload().getSegmentDelete() + 1);
-        metricsBeforeExecution.getPayload().setSegmentRead(metricsBeforeExecution.getPayload().getSegmentRead() + 3);
+        metricsBeforeExecution.getPayload().setSegmentRead(metricsBeforeExecution.getPayload().getSegmentRead() + 20);
         metricsBeforeExecution.getPayload().setSegmentAssignmentRead(metricsBeforeExecution.getPayload().getSegmentAssignmentRead() + 1);
         metricsBeforeExecution.getPayload().setSegmentAssignmentAdd(metricsBeforeExecution.getPayload().getSegmentAssignmentAdd() + 1);
         metricsBeforeExecution.getPayload().setSegmentAssignmentDelete(metricsBeforeExecution.getPayload().getSegmentAssignmentDelete() + 1);
