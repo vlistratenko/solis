@@ -118,7 +118,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         checkSubscriptionStatus();
     }*/
 
-    @Parameters({ "login", "password"})
+   /* @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void eventForm(String login, String password) throws InterruptedException {
         generateTestData();
@@ -162,7 +162,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         getDriver().switchTo().window(hqHandle);
         wait(5000);
         checkSubscriptionStatus();
-    }
+    }*/
     /*
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
