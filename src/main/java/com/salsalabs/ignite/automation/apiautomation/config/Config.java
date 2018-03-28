@@ -1,7 +1,5 @@
 package com.salsalabs.ignite.automation.apiautomation.config;
 
-import org.testng.annotations.DataProvider;
-
 public class Config {
 
     public static String TEST_DATA_PATH_SUPPORTERS_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\supporters\\request\\";
@@ -13,18 +11,12 @@ public class Config {
     public static String TEST_DATA_PATH_ACTIVITIES_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\request\\";
     public static String TEST_DATA_PATH_ACTIVITIES_RESPONSES = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\response\\";
 
-    //devApi
+    // Developer API
     public static String TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
-    
-    
-    
-    
+
     public static class Endpoints {
         //Metrics
         public static final String METRICS = "/api/integration/ext/v1/metrics";
-        public static final String DEVAPIMETRICS = "/api/developer/ext/v1/callMetrics";
-        
-        
 
         //Supporters
         public static final String SEARCH_SUPPORTER = "api/integration/ext/v1/supporters/search";
@@ -38,13 +30,11 @@ public class Config {
 
         //Activities
         public static final String SEARCH_ACTIVITIES = "/api/integration/ext/v1/activities/search";
-        
-        
-        // dev api
+
+        // Developer API
         public static final String ACTIVITYCORESUMMARY = "/api/developer/ext/v1/activities/";
-       
-        
-        
-        
+        public static final String GET_LIST_OF_BLASTS = "/api/developer/ext/v1/blasts/";
+        public static final String GET_LIST_OF_SUBMISSIONS = "/api/developer/ext/v1/submissions/";
+        public static final String DEVAPIMETRICS = "/api/developer/ext/v1/callMetrics";
     }
 }
