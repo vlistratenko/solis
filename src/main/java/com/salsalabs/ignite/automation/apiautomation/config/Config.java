@@ -13,9 +13,18 @@ public class Config {
     public static String TEST_DATA_PATH_ACTIVITIES_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\request\\";
     public static String TEST_DATA_PATH_ACTIVITIES_RESPONSES = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\response\\";
 
+    //devApi
+    public static String TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
+    
+    
+    
+    
     public static class Endpoints {
         //Metrics
         public static final String METRICS = "/api/integration/ext/v1/metrics";
+        public static final String DEVAPIMETRICS = "/api/developer/ext/v1/callMetrics";
+        
+        
 
         //Supporters
         public static final String SEARCH_SUPPORTER = "api/integration/ext/v1/supporters/search";
@@ -29,5 +38,13 @@ public class Config {
 
         //Activities
         public static final String SEARCH_ACTIVITIES = "/api/integration/ext/v1/activities/search";
+        
+        
+        // dev api
+        public static final String ACTIVITYCORESUMMARY = "/api/developer/ext/v1/activities/";
+       
+        
+        
+        
     }
 }
