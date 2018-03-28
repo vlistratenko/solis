@@ -273,7 +273,7 @@ public class Payload {
 	@Override
 	public String toString() {
 		return "Payload [rateLimit=" + rateLimit + ", totalApiCalls=" + totalApiCalls
-				+ ", lastApiCallFailure=" + lastApiCallFailure + ", totalApiCallFailures=" + totalApiCallFailures
+				+ ", totalApiCallFailures=" + totalApiCallFailures
 				+ "activityFormTypeList=" + activityFormTypeList
 				+ ", activityFormList=" + activityFormList + ", activityFormMetadata=" + activityFormMetadata
 				+ ", activityFormSummary=" + activityFormSummary + ", blastList=" + blastList
