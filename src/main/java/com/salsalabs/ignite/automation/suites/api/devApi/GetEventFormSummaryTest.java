@@ -16,8 +16,7 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.config.Config.Endpoints;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.response.GetEventSummaryResponse;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseEvent.GetEventSummaryResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
 import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
 

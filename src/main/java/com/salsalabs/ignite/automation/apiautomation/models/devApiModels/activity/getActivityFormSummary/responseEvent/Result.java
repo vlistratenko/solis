@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.response;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseEvent;
 
 import java.util.HashMap;
 import java.util.List;
