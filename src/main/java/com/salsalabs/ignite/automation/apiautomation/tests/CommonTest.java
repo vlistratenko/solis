@@ -33,7 +33,7 @@ public class CommonTest {
         logger.info("Executing: " + this.getClass().getSimpleName());
         headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("authToken", "rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q");
+        headers.set("authToken", authToken);
         restClient = new RestTemplate();
     }
 
