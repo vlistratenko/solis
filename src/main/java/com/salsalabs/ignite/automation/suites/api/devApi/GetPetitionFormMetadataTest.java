@@ -45,7 +45,7 @@ public class GetPetitionFormMetadataTest extends CommonTest {
 
     @Parameters({"ENV" , "UUID"})
     @Test(priority = 1)
-    public void getSignupFormMetadata(String env, String uuid) throws IOException {
+    public void getPetitionFormMetadata(String env, String uuid) throws IOException {
         ResponseEntity<PetitionFormMetaData> response =
                 restClient.exchange(env + Config.Endpoints.ACTIVITYCORESUMMARY + uuid + "/metadata", HttpMethod.GET, buildRequest(null), PetitionFormMetaData.class);
         PetitionFormMetaData expectedResultObj = ((PetitionFormMetaData) getExpectedResult("get_petition_form_metadata.json"));

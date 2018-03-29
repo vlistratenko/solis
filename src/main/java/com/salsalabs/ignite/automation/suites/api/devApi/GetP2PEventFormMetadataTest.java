@@ -2,8 +2,8 @@ package com.salsalabs.ignite.automation.suites.api.devApi;
 
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform.SignupFormMetadata;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.targetedactionform.TargetedActionFormMetaData;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.p2peventform.P2PEventFormMetaData;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.ticketedeventform.TicketedEventFormMetaData;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
 import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
 import org.springframework.http.HttpMethod;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE;
 
-public class GetTargetedActionFormMetadataTest extends CommonTest {
+public class GetP2PEventFormMetadataTest extends CommonTest {
     private MetricsResponse metricsBeforeExecution;
 
     @BeforeTest
@@ -27,7 +27,7 @@ public class GetTargetedActionFormMetadataTest extends CommonTest {
         loadExpectedResultObj(
                 new HashMap<String, Class<? extends ExpectedResult>>()
                 {{
-                    put(TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE + "get_targeted_action_form_metadata.json", SignupFormMetadata.class);
+                    put(TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE + "get_p2p_event_form_metadata.json", P2PEventFormMetaData.class);
 
                 }}
         );
@@ -45,10 +45,10 @@ public class GetTargetedActionFormMetadataTest extends CommonTest {
 
     @Parameters({"ENV" , "UUID"})
     @Test(priority = 1)
-    public void getTargetedActionFormMetadata(String env, String uuid) throws IOException {
-        ResponseEntity<TargetedActionFormMetaData> response =
-                restClient.exchange(env + Config.Endpoints.ACTIVITYCORESUMMARY + uuid + "/metadata", HttpMethod.GET, buildRequest(null), TargetedActionFormMetaData.class);
-        TargetedActionFormMetaData expectedResultObj = ((TargetedActionFormMetaData) getExpectedResult("get_targeted_action_form_metadata.json"));
+    public void getP2PEventFormMetadata(String env, String uuid) throws IOException {
+        ResponseEntity<P2PEventFormMetaData> response =
+                restClient.exchange(env + Config.Endpoints.ACTIVITYCORESUMMARY + uuid + "/metadata", HttpMethod.GET, buildRequest(null), P2PEventFormMetaData.class);
+        P2PEventFormMetaData expectedResultObj = ((P2PEventFormMetaData) getExpectedResult("get_p2p_event_form_metadata.json"));
         Assert.assertEquals( response.getBody().getPayload(), expectedResultObj.getPayload());
         Assert.assertTrue(response.getStatusCode().equals(HttpStatus.OK));
     }

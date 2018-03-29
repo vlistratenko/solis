@@ -4,5 +4,12 @@
         <suite-file path="src/main/resources/xml-tests/api/GetSupporterByDate.xml" />
         <suite-file path="src/main/resources/xml-tests/api/SegmentCrudAndMetrics.xml" />
         <suite-file path="src/main/resources/xml-tests/api/SupporterCrudAndMetrics.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2PEventFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetFundraisingFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetPetitionFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetSignupFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetedActionFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTicketedEventFormMetadata.xml" />
+
     </suite-files>
 </suite>
