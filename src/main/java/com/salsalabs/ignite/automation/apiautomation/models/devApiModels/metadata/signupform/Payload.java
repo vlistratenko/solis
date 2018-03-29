@@ -1,5 +1,4 @@
-
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
 
 import java.util.HashMap;
 import java.util.List;
@@ -216,64 +215,24 @@ public class Payload {
 
     @Override
     public String toString() {
-        return "Payload{" +
-                "type='" + type + '\'' +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", publishDate='" + publishDate + '\'' +
-                ", modifiedDate='" + modifiedDate + '\'' +
-                ", status='" + status + '\'' +
-                ", visibility='" + visibility + '\'' +
-                ", pageUrl='" + pageUrl + '\'' +
-                ", widgetScript='" + widgetScript + '\'' +
-                ", googleAnalytics=" + googleAnalytics +
-                ", facebookPixel=" + facebookPixel +
-                ", formFields=" + formFields +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Payload payload = (Payload) o;
-
-        if (!type.equals(payload.type)) return false;
-        if (!id.equals(payload.id)) return false;
-        if (!name.equals(payload.name)) return false;
-        if (!description.equals(payload.description)) return false;
-        if (!createDate.equals(payload.createDate)) return false;
-        if (!publishDate.equals(payload.publishDate)) return false;
-        if (!modifiedDate.equals(payload.modifiedDate)) return false;
-        if (!status.equals(payload.status)) return false;
-        if (!visibility.equals(payload.visibility)) return false;
-        if (!pageUrl.equals(payload.pageUrl)) return false;
-        if (!googleAnalytics.equals(payload.googleAnalytics)) return false;
-        if (!facebookPixel.equals(payload.facebookPixel)) return false;
-        if (!formFields.equals(payload.formFields)) return false;
-        return additionalProperties.equals(payload.additionalProperties);
+        return new ToStringBuilder(this).append("type", type).append("id", id).append("name", name).append("description", description).append("createDate", createDate).append("publishDate", publishDate).append("modifiedDate", modifiedDate).append("status", status).append("visibility", visibility).append("pageUrl", pageUrl).append("widgetScript", widgetScript).append("googleAnalytics", googleAnalytics).append("facebookPixel", facebookPixel).append("formFields", formFields).append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        int result = type.hashCode();
-        result = 31 * result + id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + description.hashCode();
-        result = 31 * result + createDate.hashCode();
-        result = 31 * result + publishDate.hashCode();
-        result = 31 * result + modifiedDate.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + visibility.hashCode();
-        result = 31 * result + pageUrl.hashCode();
-        result = 31 * result + googleAnalytics.hashCode();
-        result = 31 * result + facebookPixel.hashCode();
-        result = 31 * result + formFields.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
+        return new HashCodeBuilder().append(googleAnalytics).append(visibility).append(status).append(pageUrl).append(type).append(modifiedDate).append(formFields).append(id).append(additionalProperties).append(facebookPixel).append(widgetScript).append(description).append(name).append(createDate).append(publishDate).toHashCode();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Payload) == false) {
+            return false;
+        }
+        Payload rhs = ((Payload) other);
+        return new EqualsBuilder().append(googleAnalytics, rhs.googleAnalytics).append(visibility, rhs.visibility).append(status, rhs.status).append(pageUrl, rhs.pageUrl).append(type, rhs.type).append(modifiedDate, rhs.modifiedDate).append(formFields, rhs.formFields).append(id, rhs.id).append(additionalProperties, rhs.additionalProperties).append(facebookPixel, rhs.facebookPixel).append(widgetScript, rhs.widgetScript).append(description, rhs.description).append(name, rhs.name).append(createDate, rhs.createDate).append(publishDate, rhs.publishDate).isEquals();
+    }
+
 }

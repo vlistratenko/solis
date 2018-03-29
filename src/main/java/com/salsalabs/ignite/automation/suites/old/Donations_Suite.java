@@ -1,3 +1,4 @@
+/*
 package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
@@ -67,7 +68,9 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.isNewsletter",
 		"donation.isEmail"})
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=50, groups = {"activities.createDonationForm"}, description = "",
-			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
+			dependsOnGroups={"settings.wepay"}*/
+/*, dataProvider = "donationData"*//*
+)
 	public void makeDonationTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
@@ -119,7 +122,9 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.personAddressLine2",		
 		"donation.personCity",
 		"donation.personZip"})
-	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"activities.refundDonation"}, description = "", dependsOnGroups={"activities.createDonationForm"}/*, dataProvider = "donationDataForRefund"*/)
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"activities.refundDonation"}, description = "", dependsOnGroups={"activities.createDonationForm"}*/
+/*, dataProvider = "donationDataForRefund"*//*
+)
 	public void refundDonation(String donationAmount,
 			String cardNumber,
 			String expiryMonth,
@@ -163,7 +168,9 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.isNewsletter",
 		"donation.isEmail"})
 	@Test(retryAnalyzer=RetryAnalyzer.class, priority=50, groups = {"activities.createRecuringDonationForm"}, description = "",
-			dependsOnGroups={"settings.wepay"}/*, dataProvider = "donationData"*/)
+			dependsOnGroups={"settings.wepay"}*/
+/*, dataProvider = "donationData"*//*
+)
 	public void makeDonationRecuringTest(String widgetName, String widgetDescription, String widgetLayoutName,
 			String personEmail,
 			String personFName,
@@ -215,7 +222,9 @@ public class Donations_Suite extends SeleneseTestCase{
 		"donation.personAddressLine2",		
 		"donation.personCity",
 		"donation.personZip"})
-	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"activities.refundRecuringDonation"}, description = "", dependsOnGroups={"activities.createRecuringDonationForm"}/*, dataProvider = "donationDataForRefund"*/)
+	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=60, groups = {"activities.refundRecuringDonation"}, description = "", dependsOnGroups={"activities.createRecuringDonationForm"}*/
+/*, dataProvider = "donationDataForRefund"*//*
+)
 	public void refundRecuringDonation(String donationAmount,
 			String cardNumber,
 			String expiryMonth,
@@ -241,3 +250,4 @@ public class Donations_Suite extends SeleneseTestCase{
 				recurringDonation);
 	}
 }
+*/

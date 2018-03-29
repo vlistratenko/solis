@@ -1,3 +1,4 @@
+/*
 package com.salsalabs.ignite.automation.suites.old;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ import com.salsalabs.ignite.automation.tests.old.EmailBlastTest;
 import com.salsalabs.ignite.automation.tests.old.SettingsTests;
 
 public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
+*/
 /*
 	@Test(retryAnalyzer=RetryAnalyzer.class, enabled = true, groups = {"createAdmin"}, description = "484:51:New org was NOT created")
 	@Parameters({"createOrg.domainType",
@@ -99,5 +101,7 @@ public class SubscribeAndUnsubscribe_Suite extends SeleneseTestCase{
 	@Test(retryAnalyzer=RetryAnalyzer.class,  priority=30, groups = {"activities.subscribeUnsubscribedSupporter"}, description = "", dependsOnMethods="unsubscribeSupporterTest")
 	public void subscribeUnsubscribedSupporter(){
 		new ActivitiesTests().subscribeSupporterTest(CommonUtils.getProperty(PropertyName.UNSUBSCRIBED_SUPPORTER));
-	}*/
+	}*//*
+
 }
+*/

@@ -1,8 +1,7 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -72,33 +71,24 @@ public class FormField {
 
     @Override
     public String toString() {
-        return "FormField{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", inboundParameterName='" + inboundParameterName + '\'' +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        FormField formField = (FormField) o;
-
-        if (!id.equals(formField.id)) return false;
-        if (!name.equals(formField.name)) return false;
-        if (!inboundParameterName.equals(formField.inboundParameterName)) return false;
-        return additionalProperties.equals(formField.additionalProperties);
+        return new ToStringBuilder(this).append("id", id).append("name", name).append("inboundParameterName", inboundParameterName).append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + inboundParameterName.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
+        return new HashCodeBuilder().append(id).append(additionalProperties).append(name).append(inboundParameterName).toHashCode();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof FormField) == false) {
+            return false;
+        }
+        FormField rhs = ((FormField) other);
+        return new EqualsBuilder().append(id, rhs.id).append(additionalProperties, rhs.additionalProperties).append(name, rhs.name).append(inboundParameterName, rhs.inboundParameterName).isEquals();
+    }
+
 }

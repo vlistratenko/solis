@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
         "header",
         "payload"
 })
-public class FundraisingFormMetaData extends ExpectedResult {
+public class SignupFormMetadata extends ExpectedResult {
 
     @JsonProperty("id")
     private String id;
@@ -85,30 +85,24 @@ public class FundraisingFormMetaData extends ExpectedResult {
 
     @Override
     public String toString() {
-        return "FundraisingFormMetaData{" +
-                "id='" + id + '\'' +
-                ", payload=" + payload +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        FundraisingFormMetaData that = (FundraisingFormMetaData) o;
-
-        if (!id.equals(that.id)) return false;
-        if (!payload.equals(that.payload)) return false;
-        return additionalProperties.equals(that.additionalProperties);
+        return new ToStringBuilder(this).append("id", id).append("timestamp", timestamp).append("header", header).append("payload", payload).append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + payload.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
+        return new HashCodeBuilder().append(timestamp).append(id).append(additionalProperties).append(payload).append(header).toHashCode();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof SignupFormMetadata) == false) {
+            return false;
+        }
+        SignupFormMetadata rhs = ((SignupFormMetadata) other);
+        return new EqualsBuilder().append(timestamp, rhs.timestamp).append(id, rhs.id).append(additionalProperties, rhs.additionalProperties).append(payload, rhs.payload).append(header, rhs.header).isEquals();
+    }
+
 }

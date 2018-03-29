@@ -1,3 +1,4 @@
+/*
 package com.salsalabs.ignite.automation.suites.old;
 
 import java.io.BufferedReader;
@@ -109,3 +110,4 @@ public class DataForJMetter extends SeleneseTestCase{
 	}
 	
 }
+*/

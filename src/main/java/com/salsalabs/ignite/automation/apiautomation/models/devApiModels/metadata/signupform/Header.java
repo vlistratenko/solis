@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,23 +58,24 @@ public class Header {
 
     @Override
     public String toString() {
-        return "Header{" +
-                "additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Header header = (Header) o;
-
-        return additionalProperties.equals(header.additionalProperties);
+        return new ToStringBuilder(this).append("processingTime", processingTime).append("serverId", serverId).append("additionalProperties", additionalProperties).toString();
     }
 
     @Override
     public int hashCode() {
-        return additionalProperties.hashCode();
+        return new HashCodeBuilder().append(additionalProperties).append(processingTime).append(serverId).toHashCode();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Header) == false) {
+            return false;
+        }
+        Header rhs = ((Header) other);
+        return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(processingTime, rhs.processingTime).append(serverId, rhs.serverId).isEquals();
+    }
+
 }

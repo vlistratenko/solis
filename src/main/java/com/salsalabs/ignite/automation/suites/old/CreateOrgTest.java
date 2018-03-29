@@ -1,3 +1,4 @@
+/*
 package com.salsalabs.ignite.automation.suites.old;
 
 import org.testng.annotations.Parameters;
@@ -34,3 +35,4 @@ public class CreateOrgTest extends SeleneseTestCase {
 		new LoginPage(true);
 	}
 }
+*/
