@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.petitionform;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -226,6 +223,7 @@ public class Payload {
                 ", status='" + status + '\'' +
                 ", visibility='" + visibility + '\'' +
                 ", pageUrl='" + pageUrl + '\'' +
+                ", widgetScript='" + widgetScript + '\'' +
                 ", googleAnalytics=" + googleAnalytics +
                 ", facebookPixel=" + facebookPixel +
                 ", formFields=" + formFields +
@@ -268,6 +266,7 @@ public class Payload {
         result = 31 * result + status.hashCode();
         result = 31 * result + visibility.hashCode();
         result = 31 * result + pageUrl.hashCode();
+        result = 31 * result + widgetScript.hashCode();
         result = 31 * result + googleAnalytics.hashCode();
         result = 31 * result + facebookPixel.hashCode();
         result = 31 * result + formFields.hashCode();

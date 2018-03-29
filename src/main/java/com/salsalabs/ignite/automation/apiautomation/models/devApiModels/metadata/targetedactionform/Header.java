@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.targetedactionform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -56,25 +53,4 @@ public class Header {
         this.additionalProperties.put(name, value);
     }
 
-    @Override
-    public String toString() {
-        return "Header{" +
-                "additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Header header = (Header) o;
-
-        return additionalProperties.equals(header.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        return additionalProperties.hashCode();
-    }
 }

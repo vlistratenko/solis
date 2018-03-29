@@ -2,7 +2,8 @@ package com.salsalabs.ignite.automation.suites.api.devApi;
 
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform.FundraisingFormMetaData;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.petitionform.PetitionFormMetaData;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform.SignupFormMetadata;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
 import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
 import org.springframework.http.HttpMethod;
@@ -12,11 +13,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 import java.io.IOException;
 import java.util.HashMap;
+
 import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE;
 
-public class GetFundraisingFormMetadataTest extends CommonTest {
+public class GetPetitionFormMetadataTest extends CommonTest {
     private MetricsResponse metricsBeforeExecution;
 
     @BeforeTest
@@ -24,7 +27,7 @@ public class GetFundraisingFormMetadataTest extends CommonTest {
         loadExpectedResultObj(
                 new HashMap<String, Class<? extends ExpectedResult>>()
                 {{
-                    put(TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE + "get_fundraising_form_metadata.json", FundraisingFormMetaData.class);
+                    put(TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE + "get_petition_form_metadata.json", PetitionFormMetaData.class);
 
                 }}
         );
@@ -42,10 +45,10 @@ public class GetFundraisingFormMetadataTest extends CommonTest {
 
     @Parameters({"ENV" , "UUID"})
     @Test(priority = 1)
-    public void getFundraisingFormMetadata(String env, String uuid) throws IOException {
-        ResponseEntity<FundraisingFormMetaData> response =
-                restClient.exchange(env + Config.Endpoints.ACTIVITYCORESUMMARY + uuid + "/metadata", HttpMethod.GET, buildRequest(null), FundraisingFormMetaData.class);
-        FundraisingFormMetaData expectedResultObj = ((FundraisingFormMetaData) getExpectedResult("get_fundraising_form_metadata.json"));
+    public void getSignupFormMetadata(String env, String uuid) throws IOException {
+        ResponseEntity<PetitionFormMetaData> response =
+                restClient.exchange(env + Config.Endpoints.ACTIVITYCORESUMMARY + uuid + "/metadata", HttpMethod.GET, buildRequest(null), PetitionFormMetaData.class);
+        PetitionFormMetaData expectedResultObj = ((PetitionFormMetaData) getExpectedResult("get_petition_form_metadata.json"));
         Assert.assertEquals( response.getBody().getPayload(), expectedResultObj.getPayload());
         Assert.assertTrue(response.getStatusCode().equals(HttpStatus.OK));
     }

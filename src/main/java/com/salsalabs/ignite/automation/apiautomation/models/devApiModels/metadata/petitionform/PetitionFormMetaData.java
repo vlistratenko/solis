@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.petitionform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,24 +8,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "id",
-        "name",
-        "inboundParameterName"
+        "timestamp",
+        "header",
+        "payload"
 })
-public class FormField {
+public class PetitionFormMetaData extends ExpectedResult{
 
     @JsonProperty("id")
     private String id;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("inboundParameterName")
-    private String inboundParameterName;
+    @JsonProperty("timestamp")
+    private String timestamp;
+    @JsonProperty("header")
+    private Header header;
+    @JsonProperty("payload")
+    private Payload payload;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -39,24 +40,34 @@ public class FormField {
         this.id = id;
     }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
+    @JsonProperty("timestamp")
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
+    @JsonProperty("timestamp")
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
-    @JsonProperty("inboundParameterName")
-    public String getInboundParameterName() {
-        return inboundParameterName;
+    @JsonProperty("header")
+    public Header getHeader() {
+        return header;
     }
 
-    @JsonProperty("inboundParameterName")
-    public void setInboundParameterName(String inboundParameterName) {
-        this.inboundParameterName = inboundParameterName;
+    @JsonProperty("header")
+    public void setHeader(Header header) {
+        this.header = header;
+    }
+
+    @JsonProperty("payload")
+    public Payload getPayload() {
+        return payload;
+    }
+
+    @JsonProperty("payload")
+    public void setPayload(Payload payload) {
+        this.payload = payload;
     }
 
     @JsonAnyGetter
@@ -71,10 +82,9 @@ public class FormField {
 
     @Override
     public String toString() {
-        return "FormField{" +
+        return "PetitionFormMetaData{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", inboundParameterName='" + inboundParameterName + '\'' +
+                ", payload=" + payload +
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
@@ -84,19 +94,17 @@ public class FormField {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FormField formField = (FormField) o;
+        PetitionFormMetaData that = (PetitionFormMetaData) o;
 
-        if (!id.equals(formField.id)) return false;
-        if (!name.equals(formField.name)) return false;
-        if (!inboundParameterName.equals(formField.inboundParameterName)) return false;
-        return additionalProperties.equals(formField.additionalProperties);
+        if (!id.equals(that.id)) return false;
+        if (!payload.equals(that.payload)) return false;
+        return additionalProperties.equals(that.additionalProperties);
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + inboundParameterName.hashCode();
+        result = 31 * result + payload.hashCode();
         result = 31 * result + additionalProperties.hashCode();
         return result;
     }

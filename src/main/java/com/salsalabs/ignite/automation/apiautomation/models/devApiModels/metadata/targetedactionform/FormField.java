@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.targetedactionform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -69,35 +66,4 @@ public class FormField {
         this.additionalProperties.put(name, value);
     }
 
-    @Override
-    public String toString() {
-        return "FormField{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", inboundParameterName='" + inboundParameterName + '\'' +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        FormField formField = (FormField) o;
-
-        if (!id.equals(formField.id)) return false;
-        if (!name.equals(formField.name)) return false;
-        if (!inboundParameterName.equals(formField.inboundParameterName)) return false;
-        return additionalProperties.equals(formField.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + inboundParameterName.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
-    }
 }

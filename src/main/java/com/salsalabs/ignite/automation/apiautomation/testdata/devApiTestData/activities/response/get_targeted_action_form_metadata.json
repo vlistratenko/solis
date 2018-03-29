@@ -1,0 +1,220 @@
+{
+   "id": "10ce3ed6-a0e7-4295-b5eb-730235a53743",
+   "timestamp": "2018-03-29T13:08:02.234Z",
+   "header": {
+      "processingTime": 407,
+      "serverId": "test-hqapp2.ignite.net"
+   },
+   "payload": {
+      "type": "TARGETED_LETTER",
+      "id": "8160d774-d31f-4a08-bd9d-82d2b14e5116",
+      "name": "TAClickToCallNO",
+      "description": "TAClickToCallNO",
+      "createDate": "2018-03-20T08:33:00.443Z",
+      "publishDate": "2018-03-20T08:40:59.279Z",
+      "modifiedDate": "2018-03-20T08:33:00.443Z",
+      "status": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "pageUrl": "https://devapi.test.igniteaction.net/taclicktocallno",
+      "widgetScript": "<div id=\"19ced62b-31b0-4303-bec0-4c650ca236bc\">\n    <script type=\"text/javascript\" src=\"https://default.test.igniteaction.net/api/widget/template/23676ea7-8bc1-4db4-b672-fa66e40e6e89/?tId=19ced62b-31b0-4303-bec0-4c650ca236bc\" ></script>\n</div>",
+      "googleAnalytics": false,
+      "facebookPixel": false,
+      "formFields": [
+         {
+            "id": "person.firstName",
+            "name": "First Name",
+            "inboundParameterName": "person-firstname"
+         },
+         {
+            "id": "person.lastName",
+            "name": "Last Name",
+            "inboundParameterName": "person-lastname"
+         },
+         {
+            "id": "contact.EMAIL",
+            "name": "Email Address",
+            "inboundParameterName": "contact-email"
+         },
+         {
+            "id": "address.line1",
+            "name": "Address, line 1",
+            "inboundParameterName": "address-line1"
+         },
+         {
+            "id": "person.CELL_PHONE",
+            "name": "Cell Phone",
+            "inboundParameterName": "person-cell_phone"
+         },
+         {
+            "id": "confirmationCB",
+            "name": "Confirmation Checkbox",
+            "inboundParameterName": "confirmationcb"
+         },
+         {
+            "id": "address.country",
+            "name": "Country",
+            "inboundParameterName": "address-country"
+         },
+         {
+            "id": "person.DOB",
+            "name": "Date of Birth",
+            "inboundParameterName": "person-dob"
+         },
+         {
+            "id": "address.city",
+            "name": "City",
+            "inboundParameterName": "address-city"
+         },
+         {
+            "id": "address.state",
+            "name": "State",
+            "inboundParameterName": "address-state"
+         },
+         {
+            "id": "address.zip",
+            "name": "Zip Code",
+            "inboundParameterName": "address-zip"
+         },
+         {
+            "id": "contactOptInCB",
+            "name": "I'd like to receive updates from this organization",
+            "inboundParameterName": "contactoptincb"
+         },
+         {
+            "id": "d88be446-867b-4ee2-a4fd-82c534c91783",
+            "name": "GemeralDateTime",
+            "inboundParameterName": "gen_gemeraldatetime"
+         },
+         {
+            "id": "person.Gender",
+            "name": "Gender",
+            "inboundParameterName": "person-gender"
+         },
+         {
+            "id": "fb54d346-a621-4178-a226-42113b2c1e27",
+            "name": "General TEXt BOX",
+            "inboundParameterName": "gen_general_text_box"
+         },
+         {
+            "id": "c74d9962-fa2c-4521-8c7d-836a311519a1",
+            "name": "GeneralSinglChoice",
+            "inboundParameterName": "gen_generalsinglchoice"
+         },
+         {
+            "id": "person.HOME_PHONE",
+            "name": "Home Phone",
+            "inboundParameterName": "person-home_phone"
+         },
+         {
+            "id": "person.middleName",
+            "name": "Middle Name",
+            "inboundParameterName": "person-middlename"
+         },
+         {
+            "id": "c279be36-e38f-40ea-9864-9bc577b30d33",
+            "name": "Number12",
+            "inboundParameterName": "scf_number12"
+         },
+         {
+            "id": "person.language",
+            "name": "Preferred Language",
+            "inboundParameterName": "person-language"
+         },
+         {
+            "id": "address.line2",
+            "name": "Address, line 2",
+            "inboundParameterName": "address-line2"
+         },
+         {
+            "id": "933e4c19-2876-4109-86b1-ca10e417047b",
+            "name": "DateTime",
+            "inboundParameterName": "scf_datetime"
+         },
+         {
+            "id": "aeb77b66-919f-47fe-a0cb-75c28a6a8c7a",
+            "name": "GeneralTextBOX",
+            "inboundParameterName": "gen_generaltextbox"
+         },
+         {
+            "id": "2acf3db5-a15a-45eb-a14c-81b44b701dcd",
+            "name": "GeneralYEsNo",
+            "inboundParameterName": "gen_generalyesno"
+         },
+         {
+            "id": "dc161ccc-3758-4fff-b856-50b874cb7d3a",
+            "name": "SignleChoice",
+            "inboundParameterName": "scf_signlechoice"
+         },
+         {
+            "id": "person.suffix",
+            "name": "Suffix",
+            "inboundParameterName": "person-suffix"
+         },
+         {
+            "id": "48c8cc6b-ac2f-46c1-a9be-1450d5ec549d",
+            "name": "TaActivityDateTime",
+            "inboundParameterName": "act_taactivitydatetime"
+         },
+         {
+            "id": "b21a9760-9c29-47bb-98b7-8de36bc93ec4",
+            "name": "TaActivityNumber",
+            "inboundParameterName": "act_taactivitynumber"
+         },
+         {
+            "id": "9c71dd8c-ab24-4faa-ba23-e6ebef499cdf",
+            "name": "TaActivitySingleChoice",
+            "inboundParameterName": "act_taactivitysinglechoice"
+         },
+         {
+            "id": "436f0b87-84b0-4979-a64d-4f06efd8873b",
+            "name": "TaActivityTextBox",
+            "inboundParameterName": "act_taactivitytextbox"
+         },
+         {
+            "id": "b0c13940-f2ce-40ec-93f2-f4b89d682d21",
+            "name": "TaActivityYEsNO",
+            "inboundParameterName": "act_taactivityyesno"
+         },
+         {
+            "id": "person.WORK_PHONE",
+            "name": "Work Phone",
+            "inboundParameterName": "person-work_phone"
+         },
+         {
+            "id": "9bba18ee-e02e-42b9-8566-5822eb6b401d",
+            "name": "textBox",
+            "inboundParameterName": "scf_textbox"
+         },
+         {
+            "id": "1946da90-7f36-46f2-84e8-ce0d8efcc18d",
+            "name": "yesNO",
+            "inboundParameterName": "scf_yesno"
+         }
+      ],
+      "includeClickToCall": false,
+      "targetSets": [
+         {
+            "name": "Target Set 1",
+            "description": "Target Set 1",
+            "email": {
+               "eligibleTargetsCount": 1,
+               "topic": "arts and humanities",
+               "subject": "subject this is",
+               "message": "This is Body",
+               "canModifyContentOption": true,
+               "allowComments": false
+            },
+            "twitter": {
+               "eligibleTargetsCount": 1,
+               "message": "Twitter message value"
+            },
+            "facebook": {
+               "eligibleTargetsCount": 1,
+               "message": "facebook message"
+            }
+         }
+      ],
+      "promotionalFacebookMessage": "Promotional Facebook Message value",
+      "promotionalTwitterMessage": "Promotional Twitter Message value"
+   }
+}

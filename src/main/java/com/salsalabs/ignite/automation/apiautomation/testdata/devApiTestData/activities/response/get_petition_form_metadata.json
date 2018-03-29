@@ -1,0 +1,225 @@
+{
+   "id": "2da2b3e0-3f3f-45bd-983a-0b4d72ef2c48",
+   "timestamp": "2018-03-29T12:54:33.296Z",
+   "header": {
+      "processingTime": 141,
+      "serverId": "test-hqapp2.ignite.net"
+   },
+   "payload": {
+      "type": "PETITION",
+      "id": "9e1ab77f-32e0-4a04-9971-d092ed50374b",
+      "name": "Petition With Custom Fields",
+      "description": "Petition With Custom Fields",
+      "createDate": "2018-03-20T08:14:01.585Z",
+      "publishDate": "2018-03-20T08:23:35.529Z",
+      "modifiedDate": "2018-03-20T08:14:01.585Z",
+      "status": "PUBLISHED",
+      "visibility": "PUBLIC",
+      "pageUrl": "https://devapi.test.igniteaction.net/petitionwithcustomfields",
+      "widgetScript": "<div id=\"22cfb20c-45ee-4992-b279-8304a7900841\">\n    <script type=\"text/javascript\" src=\"https://default.test.igniteaction.net/api/widget/template/1162d08d-ba7a-42be-9baa-780881bb6d1f/?tId=22cfb20c-45ee-4992-b279-8304a7900841\" ></script>\n</div>",
+      "googleAnalytics": false,
+      "facebookPixel": false,
+      "formFields": [
+         {
+            "id": "contact.EMAIL",
+            "name": "Email Address",
+            "inboundParameterName": "contact-email"
+         },
+         {
+            "id": "person.firstName",
+            "name": "First Name",
+            "inboundParameterName": "person-firstname"
+         },
+         {
+            "id": "person.lastName",
+            "name": "Last Name",
+            "inboundParameterName": "person-lastname"
+         },
+         {
+            "id": "address.city",
+            "name": "City",
+            "inboundParameterName": "address-city"
+         },
+         {
+            "id": "address.state",
+            "name": "State",
+            "inboundParameterName": "address-state"
+         },
+         {
+            "id": "address.zip",
+            "name": "Zip Code",
+            "inboundParameterName": "address-zip"
+         },
+         {
+            "id": "commentB",
+            "name": "Comment",
+            "inboundParameterName": "commentb"
+         },
+         {
+            "id": "address.line1",
+            "name": "Address, line 1",
+            "inboundParameterName": "address-line1"
+         },
+         {
+            "id": "address.line2",
+            "name": "Address, line 2",
+            "inboundParameterName": "address-line2"
+         },
+         {
+            "id": "person.CELL_PHONE",
+            "name": "Cell Phone",
+            "inboundParameterName": "person-cell_phone"
+         },
+         {
+            "id": "address.country",
+            "name": "Country",
+            "inboundParameterName": "address-country"
+         },
+         {
+            "id": "showSignatureCB",
+            "name": "Display my signature",
+            "inboundParameterName": "showsignaturecb"
+         },
+         {
+            "id": "showCommentCB",
+            "name": "Display my comment",
+            "inboundParameterName": "showcommentcb"
+         },
+         {
+            "id": "confirmationCB",
+            "name": "Confirmation Checkbox",
+            "inboundParameterName": "confirmationcb"
+         },
+         {
+            "id": "person.DOB",
+            "name": "Date of Birth",
+            "inboundParameterName": "person-dob"
+         },
+         {
+            "id": "contactOptInCB",
+            "name": "Please keep me informed of the organization's efforts",
+            "inboundParameterName": "contactoptincb"
+         },
+         {
+            "id": "fb54d346-a621-4178-a226-42113b2c1e27",
+            "name": "General TEXt BOX",
+            "inboundParameterName": "gen_general_text_box"
+         },
+         {
+            "id": "person.Gender",
+            "name": "Gender",
+            "inboundParameterName": "person-gender"
+         },
+         {
+            "id": "person.HOME_PHONE",
+            "name": "Home Phone",
+            "inboundParameterName": "person-home_phone"
+         },
+         {
+            "id": "c279be36-e38f-40ea-9864-9bc577b30d33",
+            "name": "Number12",
+            "inboundParameterName": "scf_number12"
+         },
+         {
+            "id": "78e9760d-6799-4957-8fbc-b715212ad341",
+            "name": "PetitionActivityDAteTime",
+            "inboundParameterName": "pet_petitionactivitydatetime"
+         },
+         {
+            "id": "aa7a1915-e65f-4dea-b39a-39262e3428be",
+            "name": "PetitionActivityDAteTime1",
+            "inboundParameterName": "pet_petitionactivitydatetime1"
+         },
+         {
+            "id": "dda02542-53ba-43a8-b599-368f113ebd01",
+            "name": "PetitionActivityJUSTDATE",
+            "inboundParameterName": "pet_petitionactivityjustdate"
+         },
+         {
+            "id": "7eae7a1a-6889-44d3-8d36-5c4f97906aa1",
+            "name": "PetitionActivityNumber",
+            "inboundParameterName": "pet_petitionactivitynumber"
+         },
+         {
+            "id": "d454a29b-3ed2-4a69-a847-9429c420c096",
+            "name": "PetitionActivitySingleChoice",
+            "inboundParameterName": "pet_petitionactivitysinglechoice"
+         },
+         {
+            "id": "933e4c19-2876-4109-86b1-ca10e417047b",
+            "name": "DateTime",
+            "inboundParameterName": "scf_datetime"
+         },
+         {
+            "id": "person.middleName",
+            "name": "Middle Name",
+            "inboundParameterName": "person-middlename"
+         },
+         {
+            "id": "124de776-6c43-4870-8c0f-0e261b507586",
+            "name": "PetitionActivityTExtBox",
+            "inboundParameterName": "pet_petitionactivitytextbox"
+         },
+         {
+            "id": "7e0c5b28-af6f-4f77-99c1-25352b7870a7",
+            "name": "PetitionActivityYESNO",
+            "inboundParameterName": "pet_petitionactivityyesno"
+         },
+         {
+            "id": "dc161ccc-3758-4fff-b856-50b874cb7d3a",
+            "name": "SignleChoice",
+            "inboundParameterName": "scf_signlechoice"
+         },
+         {
+            "id": "person.language",
+            "name": "Preferred Language",
+            "inboundParameterName": "person-language"
+         },
+         {
+            "id": "person.suffix",
+            "name": "Suffix",
+            "inboundParameterName": "person-suffix"
+         },
+         {
+            "id": "person.prefix",
+            "name": "Title",
+            "inboundParameterName": "person-prefix"
+         },
+         {
+            "id": "person.WORK_PHONE",
+            "name": "Work Phone",
+            "inboundParameterName": "person-work_phone"
+         },
+         {
+            "id": "9bba18ee-e02e-42b9-8566-5822eb6b401d",
+            "name": "textBox",
+            "inboundParameterName": "scf_textbox"
+         },
+         {
+            "id": "1946da90-7f36-46f2-84e8-ce0d8efcc18d",
+            "name": "yesNO",
+            "inboundParameterName": "scf_yesno"
+         },
+         {
+            "id": "d88be446-867b-4ee2-a4fd-82c534c91783",
+            "name": "GemeralDateTime",
+            "inboundParameterName": "gen_gemeraldatetime"
+         },
+         {
+            "id": "c74d9962-fa2c-4521-8c7d-836a311519a1",
+            "name": "GeneralSinglChoice",
+            "inboundParameterName": "gen_generalsinglchoice"
+         },
+         {
+            "id": "aeb77b66-919f-47fe-a0cb-75c28a6a8c7a",
+            "name": "GeneralTextBOX",
+            "inboundParameterName": "gen_generaltextbox"
+         },
+         {
+            "id": "2acf3db5-a15a-45eb-a14c-81b44b701dcd",
+            "name": "GeneralYEsNo",
+            "inboundParameterName": "gen_generalyesno"
+         }
+      ]
+   }
+}

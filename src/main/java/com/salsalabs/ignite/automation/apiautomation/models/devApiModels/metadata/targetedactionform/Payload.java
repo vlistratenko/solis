@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.targetedactionform;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -28,7 +25,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
         "widgetScript",
         "googleAnalytics",
         "facebookPixel",
-        "formFields"
+        "formFields",
+        "includeClickToCall",
+        "targetSets",
+        "promotionalFacebookMessage",
+        "promotionalTwitterMessage"
 })
 public class Payload {
 
@@ -60,6 +61,14 @@ public class Payload {
     private Boolean facebookPixel;
     @JsonProperty("formFields")
     private List<FormField> formFields = null;
+    @JsonProperty("includeClickToCall")
+    private Boolean includeClickToCall;
+    @JsonProperty("targetSets")
+    private List<TargetSet> targetSets = null;
+    @JsonProperty("promotionalFacebookMessage")
+    private String promotionalFacebookMessage;
+    @JsonProperty("promotionalTwitterMessage")
+    private String promotionalTwitterMessage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -203,6 +212,46 @@ public class Payload {
         this.formFields = formFields;
     }
 
+    @JsonProperty("includeClickToCall")
+    public Boolean getIncludeClickToCall() {
+        return includeClickToCall;
+    }
+
+    @JsonProperty("includeClickToCall")
+    public void setIncludeClickToCall(Boolean includeClickToCall) {
+        this.includeClickToCall = includeClickToCall;
+    }
+
+    @JsonProperty("targetSets")
+    public List<TargetSet> getTargetSets() {
+        return targetSets;
+    }
+
+    @JsonProperty("targetSets")
+    public void setTargetSets(List<TargetSet> targetSets) {
+        this.targetSets = targetSets;
+    }
+
+    @JsonProperty("promotionalFacebookMessage")
+    public String getPromotionalFacebookMessage() {
+        return promotionalFacebookMessage;
+    }
+
+    @JsonProperty("promotionalFacebookMessage")
+    public void setPromotionalFacebookMessage(String promotionalFacebookMessage) {
+        this.promotionalFacebookMessage = promotionalFacebookMessage;
+    }
+
+    @JsonProperty("promotionalTwitterMessage")
+    public String getPromotionalTwitterMessage() {
+        return promotionalTwitterMessage;
+    }
+
+    @JsonProperty("promotionalTwitterMessage")
+    public void setPromotionalTwitterMessage(String promotionalTwitterMessage) {
+        this.promotionalTwitterMessage = promotionalTwitterMessage;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -213,65 +262,4 @@ public class Payload {
         this.additionalProperties.put(name, value);
     }
 
-    @Override
-    public String toString() {
-        return "Payload{" +
-                "type='" + type + '\'' +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createDate='" + createDate + '\'' +
-                ", publishDate='" + publishDate + '\'' +
-                ", modifiedDate='" + modifiedDate + '\'' +
-                ", status='" + status + '\'' +
-                ", visibility='" + visibility + '\'' +
-                ", pageUrl='" + pageUrl + '\'' +
-                ", googleAnalytics=" + googleAnalytics +
-                ", facebookPixel=" + facebookPixel +
-                ", formFields=" + formFields +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Payload payload = (Payload) o;
-
-        if (!type.equals(payload.type)) return false;
-        if (!id.equals(payload.id)) return false;
-        if (!name.equals(payload.name)) return false;
-        if (!description.equals(payload.description)) return false;
-        if (!createDate.equals(payload.createDate)) return false;
-        if (!publishDate.equals(payload.publishDate)) return false;
-        if (!modifiedDate.equals(payload.modifiedDate)) return false;
-        if (!status.equals(payload.status)) return false;
-        if (!visibility.equals(payload.visibility)) return false;
-        if (!pageUrl.equals(payload.pageUrl)) return false;
-        if (!googleAnalytics.equals(payload.googleAnalytics)) return false;
-        if (!facebookPixel.equals(payload.facebookPixel)) return false;
-        if (!formFields.equals(payload.formFields)) return false;
-        return additionalProperties.equals(payload.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = type.hashCode();
-        result = 31 * result + id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + description.hashCode();
-        result = 31 * result + createDate.hashCode();
-        result = 31 * result + publishDate.hashCode();
-        result = 31 * result + modifiedDate.hashCode();
-        result = 31 * result + status.hashCode();
-        result = 31 * result + visibility.hashCode();
-        result = 31 * result + pageUrl.hashCode();
-        result = 31 * result + googleAnalytics.hashCode();
-        result = 31 * result + facebookPixel.hashCode();
-        result = 31 * result + formFields.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
-    }
 }

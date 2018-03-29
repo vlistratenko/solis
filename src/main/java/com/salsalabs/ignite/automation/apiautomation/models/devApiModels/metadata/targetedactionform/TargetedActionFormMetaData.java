@@ -1,4 +1,4 @@
-package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform;
+package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.targetedactionform;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -20,7 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
         "header",
         "payload"
 })
-public class SignupFormMetadata extends ExpectedResult {
+public class TargetedActionFormMetaData extends ExpectedResult{
 
     @JsonProperty("id")
     private String id;
@@ -83,32 +80,4 @@ public class SignupFormMetadata extends ExpectedResult {
         this.additionalProperties.put(name, value);
     }
 
-    @Override
-    public String toString() {
-        return "SignupFormMetadata{" +
-                "id='" + id + '\'' +
-                ", payload=" + payload +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SignupFormMetadata that = (SignupFormMetadata) o;
-
-        if (!id.equals(that.id)) return false;
-        if (!payload.equals(that.payload)) return false;
-        return additionalProperties.equals(that.additionalProperties);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + payload.hashCode();
-        result = 31 * result + additionalProperties.hashCode();
-        return result;
-    }
 }
