@@ -27,6 +27,9 @@ public class Config {
     public static String TEST_DATA_PATH_FUNDRAISING_FORM_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
     public static String TEST_DATA_PATH_FUNDRASER_METADATA_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
     public static String TEST_DATA_PATH_TEAM_METADATA_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
+    public static String TEST_DATA_PATH_ACTIVITY_LIST_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
+    
+    public static String TEST_DATA_BLAST_LIST_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\blasts\\response\\";
     
     
     public static class Endpoints {
@@ -52,6 +55,7 @@ public class Config {
         
         // dev api
         public static final String ACTIVITYCORESUMMARY = "/api/developer/ext/v1/activities/";
+        public static final String EMAILBLASTS = "/api/developer/ext/v1/blasts";
        
         
         
