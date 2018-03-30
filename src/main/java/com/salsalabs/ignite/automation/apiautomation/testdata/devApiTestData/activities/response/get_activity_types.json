@@ -1,0 +1,37 @@
+{  
+   "id":"cc23600b-8b41-41dd-95d0-209616ea966f",
+   "timestamp":"2018-03-30T11:56:57.450Z",
+   "header":{  
+      "processingTime":26,
+      "serverId":"test-hqapp1.ignite.net"
+   },
+   "payload":{  
+      "results":[  
+         {  
+            "code":"FUNDRAISE",
+            "name":"Fundraise"
+         },
+         {  
+            "code":"P2P_EVENT",
+            "name":"Peer 2 Peer Event"
+         },
+         {  
+            "code":"PETITION",
+            "name":"Petition"
+         },
+         {  
+            "code":"SUBSCRIBE",
+            "name":"Subscribe"
+         },
+         {  
+            "code":"TARGETED_LETTER",
+            "name":"Targeted Action"
+         },
+         {  
+            "code":"TICKETED_EVENT",
+            "name":"Ticketed Event"
+         }
+      ],
+      "count":6
+   }
+}

@@ -1,0 +1,33 @@
+{  
+   "id":"8d367759-2cec-41d7-b9a8-d7da8630e957",
+   "timestamp":"2018-03-30T11:19:11.576Z",
+   "header":{  
+      "processingTime":41,
+      "serverId":"test-hqapp1.ignite.net"
+   },
+   "payload":{  
+      "total":1,
+      "offset":0,
+      "results":[  
+         {  
+            "id":"6c5b1281-5b4e-42d3-bf50-7de26f148b66",
+            "name":"Email Blast Test",
+            "status":"COMPLETED",
+            "topic":"General",
+            "publishDate":"2018-02-08T09:26:31.629Z",
+            "scheduleDate":"2018-02-08T09:26:31.629Z",
+            "content":[  
+               {  
+                  "subject":"762686243",
+                  "pageTitle":"pAGE TITILE",
+                  "pageUrl":"https://devapi.test.igniteaction.net/emailblasttest",
+                  "webVersionEnabled":true,
+                  "webVersionRedirectUrl":"http://vk.com/asianporno",
+                  "webVersionRedirectDate":"2018-02-07T22:00:00.000Z"
+               }
+            ]
+         }
+      ],
+      "count":1
+   }
+}

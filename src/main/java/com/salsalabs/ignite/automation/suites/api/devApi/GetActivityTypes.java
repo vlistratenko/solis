@@ -1,6 +1,6 @@
 package com.salsalabs.ignite.automation.suites.api.devApi;
 
-import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE;
+import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_ACTIVITY_LIST_RESPONSE;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -16,19 +17,19 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.config.Config.Endpoints;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseEvent.GetEventSummaryResponse;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.activityTypes.response.ActivityTypesResponse;
+import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.blasts.getBlastList.response.GetBlastListResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
 import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
 
-public class GetEventFormSummaryTest extends CommonTest {
+public class GetActivityTypes  extends CommonTest{
 	private MetricsResponse metricsBeforeExecution;
 
 	@BeforeTest
 	public void getTestData() throws IOException {
 		loadExpectedResultObj(new HashMap<String, Class<? extends ExpectedResult>>() {
 			{
-				put(TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE + "get_event_summary.json",
-						GetEventSummaryResponse.class);
+				put(TEST_DATA_PATH_ACTIVITY_LIST_RESPONSE + "get_activity_types.json",	ActivityTypesResponse.class);
 
 			}
 		});
@@ -44,14 +45,13 @@ public class GetEventFormSummaryTest extends CommonTest {
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
 	}
 
-	@Parameters({ "ENV", "UUID" })
+	@Parameters({ "ENV"})
 	@Test(priority = 1)
-	public void getEventFormSummary(String env, String uuid) throws IOException {
-		ResponseEntity<GetEventSummaryResponse> response = restClient.exchange(
-				env + Endpoints.ACTIVITYCORESUMMARY + uuid + "/summary", HttpMethod.GET, buildRequest(null),
-				GetEventSummaryResponse.class);
-		GetEventSummaryResponse expectedResultObj = ((GetEventSummaryResponse) getExpectedResult(
-				"get_event_summary.json"));
+	public void getActivityTypes(String env) throws IOException {
+		ResponseEntity<ActivityTypesResponse> response = restClient.exchange(env + Endpoints.ACTIVITYCORESUMMARY+"types", HttpMethod.GET, buildRequest(null),
+				ActivityTypesResponse.class);
+		ActivityTypesResponse expectedResultObj = ((ActivityTypesResponse) getExpectedResult(
+				"get_activity_types.json"));
 		Assert.assertEquals(response.getBody().getPayload(), expectedResultObj.getPayload());
 		Assert.assertTrue(response.getStatusCode().equals(HttpStatus.OK));
 
@@ -63,11 +63,13 @@ public class GetEventFormSummaryTest extends CommonTest {
 		ResponseEntity<MetricsResponse> response = restClient.exchange(env + Endpoints.DEVAPIMETRICS, HttpMethod.GET,
 				buildRequest(null), MetricsResponse.class);
 		metricsBeforeExecution.getPayload()
-				.setActivityFormSummary(metricsBeforeExecution.getPayload().getActivityFormSummary() + 1);
+				.setActivityFormTypeList(metricsBeforeExecution.getPayload().getActivityFormTypeList() + 1);
 		metricsBeforeExecution.getPayload()
 				.setTotalApiCalls(metricsBeforeExecution.getPayload().getTotalApiCalls() + 1);
 
 		Assert.assertEquals(response.getBody().getPayload(), metricsBeforeExecution.getPayload());
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
 	}
+
+
 }
