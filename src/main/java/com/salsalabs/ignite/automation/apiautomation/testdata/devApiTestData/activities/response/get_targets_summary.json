@@ -1,0 +1,29 @@
+{  
+   "id":"3ec10e48-6f30-4662-9441-3554e014a612",
+   "timestamp":"2018-03-29T12:25:35.347Z",
+   "header":{  
+      "processingTime":89,
+      "serverId":"test-hqapp1.ignite.net"
+   },
+   "payload":{  
+      "total":1,
+      "offset":0,
+      "results":[  
+         {  
+            "targetTitle":"US Representative",
+            "targetName":"Rep. Brad James Sherman",
+            "targetSet":"Target Set 1",
+            "emailedLetters":1,
+            "phoneCalls":0,
+            "facebookPosts":1,
+            "twitterPosts":0,
+            "total":2,
+            "targetType":"Federal House",
+            "politicalParty":"Democratic Party",
+            "state":"California",
+            "districtName":"California District 30"
+         }
+      ],
+      "count":1
+   }
+}
