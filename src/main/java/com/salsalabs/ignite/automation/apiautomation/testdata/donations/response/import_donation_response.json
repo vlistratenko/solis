@@ -1,0 +1,271 @@
+{
+  "id": "0eeb1c21-f7ba-4b6c-ae35-d076b5184249",
+  "timestamp": "2018-03-22T12:32:26.108Z",
+  "header": {
+    "processingTime": 762,
+    "serverId": "test-hqapp1.ignite.net"
+  },
+  "payload": {
+    "donations": [
+      {
+        "activityId": "8f869e06-004d-4d28-b4fb-0e1a0ea411dd",
+        "accountType": "ECHECK",
+        "accountNumber": "12345678900",
+        "accountExpiration": "2028-02-20T16:44:28.231Z",
+        "accountProvider": "CHUSA Bank",
+        "dedicationType": "IN_HONOR_OF",
+        "dedication": "In memory of wounded warriors",
+        "notify": "nitifyField",
+        "type": "CHARGE",
+        "date": "2016-09-04T16:44:28.231Z",
+        "amount": 175,
+        "deductibleAmount": 1,
+        "designation": "designation field content",
+        "feesPaid": 1,
+        "gatewayTransactionId": "1230031220",
+        "gatewayAuthorizationCode": "chsuccess",
+        "supporter": {
+          "readOnly": false,
+          "supporterId": "e477e66f-201a-4116-870c-6245453bc86b",
+          "title": "Mr",
+          "firstName": "John",
+          "middleName": "James",
+          "lastName": "Smith",
+          "suffix": "Jr.",
+          "dateOfBirth": "1977-05-27T04:00:00.000Z",
+          "gender": "FEMALE",
+          "createdDate": "2018-03-22T12:32:25.519Z",
+          "lastModified": "2018-03-22T12:32:25.519Z",
+          "address": {
+            "addressLine1": "ch123 Main St",
+            "addressLine2": "chSuite 200",
+            "city": "chAnytown",
+            "state": "PA",
+            "postalCode": "20001",
+            "county": "CHNew York",
+            "country": "US"
+          },
+          "contacts": [
+            {
+              "type": "EMAIL",
+              "value": "email031220@mail.com",
+              "status": "OPT_IN"
+            }
+          ],
+          "customFieldValues": [
+            {
+              "fieldId": "1aa3ff18-87f2-4f2a-9210-f2047343ed70",
+              "name": "supporter schoice",
+              "value": "2"
+            },
+            {
+              "fieldId": "dcbcdc7d-b4a1-4d07-88ab-f26c28e3141e",
+              "name": "supporter datetime",
+              "value": "2028-02-20T16:44:28.231Z"
+            },
+            {
+              "fieldId": "893c8eca-7517-42f5-8745-e93cfc0fd757",
+              "name": "supporter yesno",
+              "value": "true"
+            },
+            {
+              "fieldId": "b8084ba8-4144-43b5-a996-dccf6f7a284f",
+              "name": "supporter number",
+              "value": "123123123"
+            },
+            {
+              "fieldId": "effddc1c-6da3-46e5-90e0-52e13f1d3bba",
+              "name": "supporter textbox",
+              "value": "Supporter Textbox"
+            }
+          ],
+          "result": "ADDED"
+        },
+        "activityFormName": "Spring Donation",
+        "result": "ADDED",
+        "customFieldValues": [
+          {
+            "fieldId": "87941fc5-1d7b-44ef-bb9d-e885afcc7e32",
+            "name": "fundraising number",
+            "value": "123321"
+          },
+          {
+            "fieldId": "163422d5-1ded-4cd3-b88a-7361224884b4",
+            "name": "fundraising schoice",
+            "value": "3"
+          },
+          {
+            "fieldId": "52789a3e-895e-4248-949a-6dc93ef902c2",
+            "name": "fundraising datetime",
+            "value": "2028-02-20T16:44:28.231Z"
+          },
+          {
+            "fieldId": "068a5005-a69c-4d4c-94ee-6d197d25d71e",
+            "name": "fundraising yesno",
+            "value": "false"
+          },
+          {
+            "fieldId": "ce0be886-1a6e-4168-81ec-c98c7e6dc863",
+            "name": "fundraising textbox",
+            "value": "Fundraising Textbox"
+          },
+          {
+            "fieldId": "11c357f7-2450-4644-a9da-a7d7743d78bf",
+            "name": "general number",
+            "value": "123321"
+          },
+          {
+            "fieldId": "924d0983-3f36-4bcd-bfa9-ab1c74114f37",
+            "name": "general schoice",
+            "value": "1"
+          },
+          {
+            "fieldId": "7e06bc61-1168-4206-8686-c77dd198273a",
+            "name": "general datetime",
+            "value": "2028-02-20T16:44:28.231Z"
+          },
+          {
+            "fieldId": "9789e3fc-c18c-45b7-a3e8-7c3ae2e2472b",
+            "name": "general yesno",
+            "value": "true"
+          },
+          {
+            "fieldId": "bb6192d5-05ba-4432-99b1-1a78a7f88d60",
+            "name": "general textbox",
+            "value": "General Textbox"
+          }
+        ]
+      },
+      {
+        "activityId": "6e104865-e9fd-444b-b046-b9d7095e9bdf",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "12345678900",
+        "accountExpiration": "2028-02-20T16:44:28.231Z",
+        "accountProvider": "CHUSA Bank",
+        "dedicationType": "IN_HONOR_OF",
+        "dedication": "CHIn memory of wounded warriors",
+        "notify": "CHnitifyField",
+        "type": "CHARGE",
+        "date": "2016-09-04T16:44:28.231Z",
+        "amount": 274,
+        "deductibleAmount": 1,
+        "feesPaid": 1,
+        "gatewayTransactionId": "1230031333",
+        "gatewayAuthorizationCode": "chsuccess",
+        "supporter": {
+          "readOnly": false,
+          "supporterId": "a54782f8-0ad0-4743-b74d-a1eae7c77f3f",
+          "title": "chMr",
+          "firstName": "chJohn",
+          "middleName": "chJames",
+          "lastName": "chSmith",
+          "suffix": "chJr.",
+          "dateOfBirth": "1977-05-27T04:00:00.000Z",
+          "gender": "FEMALE",
+          "createdDate": "2018-03-22T12:32:25.866Z",
+          "lastModified": "2018-03-22T12:32:25.866Z",
+          "address": {
+            "addressLine1": "ch123 Main St",
+            "addressLine2": "chSuite 200",
+            "city": "chAnytown",
+            "state": "PA",
+            "postalCode": "20001",
+            "county": "CHNew York",
+            "country": "US"
+          },
+          "contacts": [
+            {
+              "type": "EMAIL",
+              "value": "email031440@mail.com",
+              "status": "OPT_IN"
+            }
+          ],
+          "customFieldValues": [
+            {
+              "fieldId": "1aa3ff18-87f2-4f2a-9210-f2047343ed70",
+              "name": "supporter schoice",
+              "value": "2"
+            },
+            {
+              "fieldId": "dcbcdc7d-b4a1-4d07-88ab-f26c28e3141e",
+              "name": "supporter datetime",
+              "value": "2028-02-20T16:44:28.231Z"
+            },
+            {
+              "fieldId": "893c8eca-7517-42f5-8745-e93cfc0fd757",
+              "name": "supporter yesno",
+              "value": "true"
+            },
+            {
+              "fieldId": "b8084ba8-4144-43b5-a996-dccf6f7a284f",
+              "name": "supporter number",
+              "value": "123123123"
+            },
+            {
+              "fieldId": "effddc1c-6da3-46e5-90e0-52e13f1d3bba",
+              "name": "supporter textbox",
+              "value": "Supporter Textbox"
+            }
+          ],
+          "result": "ADDED"
+        },
+        "activityFormName": "fundraising",
+        "activityFormId": "fc7fd916-645b-4093-a544-6f1726fca9e7",
+        "result": "ADDED",
+        "customFieldValues": [
+          {
+            "fieldId": "87941fc5-1d7b-44ef-bb9d-e885afcc7e32",
+            "name": "fundraising number",
+            "value": "123321"
+          },
+          {
+            "fieldId": "163422d5-1ded-4cd3-b88a-7361224884b4",
+            "name": "fundraising schoice",
+            "value": "3"
+          },
+          {
+            "fieldId": "52789a3e-895e-4248-949a-6dc93ef902c2",
+            "name": "fundraising datetime",
+            "value": "2028-02-20T16:44:28.231Z"
+          },
+          {
+            "fieldId": "068a5005-a69c-4d4c-94ee-6d197d25d71e",
+            "name": "fundraising yesno",
+            "value": "false"
+          },
+          {
+            "fieldId": "ce0be886-1a6e-4168-81ec-c98c7e6dc863",
+            "name": "fundraising textbox",
+            "value": "Fundraising Textbox"
+          },
+          {
+            "fieldId": "11c357f7-2450-4644-a9da-a7d7743d78bf",
+            "name": "general number",
+            "value": "123321"
+          },
+          {
+            "fieldId": "924d0983-3f36-4bcd-bfa9-ab1c74114f37",
+            "name": "general schoice",
+            "value": "1"
+          },
+          {
+            "fieldId": "7e06bc61-1168-4206-8686-c77dd198273a",
+            "name": "general datetime",
+            "value": "2028-02-20T16:44:28.231Z"
+          },
+          {
+            "fieldId": "9789e3fc-c18c-45b7-a3e8-7c3ae2e2472b",
+            "name": "general yesno",
+            "value": "true"
+          },
+          {
+            "fieldId": "bb6192d5-05ba-4432-99b1-1a78a7f88d60",
+            "name": "general textbox",
+            "value": "General Textbox"
+          }
+        ]
+      }
+    ],
+    "count": 2
+  }
+}

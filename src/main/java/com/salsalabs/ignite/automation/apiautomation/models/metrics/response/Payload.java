@@ -1,13 +1,9 @@
 package com.salsalabs.ignite.automation.apiautomation.models.metrics.response;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -25,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "segmentAssignmentAdd",
         "segmentAssignmentUpdate",
         "segmentAssignmentDelete",
+        "offlineDonationAdd",
+        "offlineDonationUpdate",
         "activityTicketedEvent",
         "activityP2PEvent",
         "activitySubscribe",
@@ -67,6 +65,10 @@ public class Payload {
     private Integer segmentAssignmentUpdate;
     @JsonProperty("segmentAssignmentDelete")
     private Integer segmentAssignmentDelete;
+    @JsonProperty("offlineDonationAdd")
+    private Integer offlineDonationAdd;
+    @JsonProperty("offlineDonationUpdate")
+    private Integer offlineDonationUpdate;
     @JsonProperty("activityTicketedEvent")
     private Integer activityTicketedEvent;
     @JsonProperty("activityP2PEvent")
@@ -232,6 +234,26 @@ public class Payload {
         this.segmentAssignmentDelete = segmentAssignmentDelete;
     }
 
+    @JsonProperty("offlineDonationAdd")
+    public Integer getOfflineDonationAdd() {
+        return offlineDonationAdd;
+    }
+
+    @JsonProperty("offlineDonationAdd")
+    public void setOfflineDonationAdd(Integer offlineDonationAdd) {
+        this.offlineDonationAdd = offlineDonationAdd;
+    }
+
+    @JsonProperty("offlineDonationUpdate")
+    public Integer getOfflineDonationUpdate() {
+        return offlineDonationUpdate;
+    }
+
+    @JsonProperty("offlineDonationUpdate")
+    public void setOfflineDonationUpdate(Integer offlineDonationUpdate) {
+        this.offlineDonationUpdate = offlineDonationUpdate;
+    }
+
     @JsonProperty("activityTicketedEvent")
     public Integer getActivityTicketedEvent() {
         return activityTicketedEvent;
@@ -387,6 +409,10 @@ public class Payload {
             return false;
         if (getSegmentAssignmentDelete() != null ? !getSegmentAssignmentDelete().equals(payload.getSegmentAssignmentDelete()) : payload.getSegmentAssignmentDelete() != null)
             return false;
+        if (getOfflineDonationAdd() != null ? !getOfflineDonationAdd().equals(payload.getOfflineDonationAdd()) : payload.getOfflineDonationAdd() != null)
+            return false;
+        if (getOfflineDonationUpdate() != null ? !getOfflineDonationUpdate().equals(payload.getOfflineDonationUpdate()) : payload.getOfflineDonationUpdate() != null)
+            return false;
         if (getActivityTicketedEvent() != null ? !getActivityTicketedEvent().equals(payload.getActivityTicketedEvent()) : payload.getActivityTicketedEvent() != null)
             return false;
         if (getActivityP2PEvent() != null ? !getActivityP2PEvent().equals(payload.getActivityP2PEvent()) : payload.getActivityP2PEvent() != null)
@@ -401,13 +427,9 @@ public class Payload {
             return false;
         if (getActivitySubscriptionManagement() != null ? !getActivitySubscriptionManagement().equals(payload.getActivitySubscriptionManagement()) : payload.getActivitySubscriptionManagement() != null)
             return false;
-/*        if (getLastAPICall() != null ? !getLastAPICall().equals(payload.getLastAPICall()) : payload.getLastAPICall() != null)
-            return false;*/
-        if (getTotalAPICalls() != null ? !getTotalAPICalls().equals(payload.getTotalAPICalls()) : payload.getTotalAPICalls() != null)
-            return false;
         if (getTotalAPICallFailures() != null ? !getTotalAPICallFailures().equals(payload.getTotalAPICallFailures()) : payload.getTotalAPICallFailures() != null)
             return false;
-    /*    if (getCurrentRateLimit() != null ? !getCurrentRateLimit().equals(payload.getCurrentRateLimit()) : payload.getCurrentRateLimit() != null)
+      /*  if (getCurrentRateLimit() != null ? !getCurrentRateLimit().equals(payload.getCurrentRateLimit()) : payload.getCurrentRateLimit() != null)
             return false;*/
         return getAdditionalProperties() != null ? getAdditionalProperties().equals(payload.getAdditionalProperties()) : payload.getAdditionalProperties() == null;
 
@@ -429,6 +451,8 @@ public class Payload {
         result = 31 * result + (getSegmentAssignmentAdd() != null ? getSegmentAssignmentAdd().hashCode() : 0);
         result = 31 * result + (getSegmentAssignmentUpdate() != null ? getSegmentAssignmentUpdate().hashCode() : 0);
         result = 31 * result + (getSegmentAssignmentDelete() != null ? getSegmentAssignmentDelete().hashCode() : 0);
+        result = 31 * result + (getOfflineDonationAdd() != null ? getOfflineDonationAdd().hashCode() : 0);
+        result = 31 * result + (getOfflineDonationUpdate() != null ? getOfflineDonationUpdate().hashCode() : 0);
         result = 31 * result + (getActivityTicketedEvent() != null ? getActivityTicketedEvent().hashCode() : 0);
         result = 31 * result + (getActivityP2PEvent() != null ? getActivityP2PEvent().hashCode() : 0);
         result = 31 * result + (getActivitySubscribe() != null ? getActivitySubscribe().hashCode() : 0);
@@ -436,8 +460,6 @@ public class Payload {
         result = 31 * result + (getActivityTargetedLetter() != null ? getActivityTargetedLetter().hashCode() : 0);
         result = 31 * result + (getActivityPetition() != null ? getActivityPetition().hashCode() : 0);
         result = 31 * result + (getActivitySubscriptionManagement() != null ? getActivitySubscriptionManagement().hashCode() : 0);
-        result = 31 * result + (getLastAPICall() != null ? getLastAPICall().hashCode() : 0);
-        result = 31 * result + (getTotalAPICalls() != null ? getTotalAPICalls().hashCode() : 0);
         result = 31 * result + (getTotalAPICallFailures() != null ? getTotalAPICallFailures().hashCode() : 0);
         result = 31 * result + (getCurrentRateLimit() != null ? getCurrentRateLimit().hashCode() : 0);
         result = 31 * result + (getAdditionalProperties() != null ? getAdditionalProperties().hashCode() : 0);
@@ -461,6 +483,8 @@ public class Payload {
                 ", segmentAssignmentAdd=" + segmentAssignmentAdd +
                 ", segmentAssignmentUpdate=" + segmentAssignmentUpdate +
                 ", segmentAssignmentDelete=" + segmentAssignmentDelete +
+                ", offlineDonationAdd=" + offlineDonationAdd +
+                ", offlineDonationUpdate=" + offlineDonationUpdate +
                 ", activityTicketedEvent=" + activityTicketedEvent +
                 ", activityP2PEvent=" + activityP2PEvent +
                 ", activitySubscribe=" + activitySubscribe +

@@ -1,0 +1,220 @@
+{
+  "payload":{
+    "donations":[
+      {
+        "accountType":"ECHECK",
+        "accountNumber":"12345678900",
+        "accountExpiration":"2028-02-20T16:44:28.231Z",
+        "accountProvider":"CHUSA Bank",
+        "dedicationType":"IN_HONOR_OF",
+        "dedication":"In memory of wounded warriors",
+        "type":"CHARGE",
+        "date":"2016-09-04T16:44:28.231Z",
+        "amount":175.0,
+        "deductibleAmount":1.0,
+        "feesPaid":1.0,
+        "gatewayTransactionId":"123003122",
+        "gatewayAuthorizationCode":"chsuccess",
+        "activityFormName":"Spring Donation",
+        "notify":"nitifyField",
+        "designation":"designation field content",
+        "customFieldValues":[
+          {
+            "name":"fundraising number",
+            "value":"123321"
+          },
+          {
+            "name":"fundraising schoice",
+            "value":"3"
+          },
+          {
+            "name":"fundraising datetime",
+            "value":"2028-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"fundraising yesno",
+            "value":"false"
+          },
+          {
+            "name":"fundraising textbox",
+            "value":"Fundraising Textbox"
+          },
+          {
+            "name":"general number",
+            "value":"123321"
+          },
+          {
+            "name":"general schoice",
+            "value":"1"
+          },
+          {
+            "name":"general datetime",
+            "value":"2028-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"general yesno",
+            "value":"true"
+          },
+          {
+            "name":"general textbox",
+            "value":"General Textbox"
+          }
+        ],
+        "supporter":{
+          "title":"Mr",
+          "firstName":"John",
+          "middleName":"James",
+          "lastName":"Smith",
+          "suffix":"Jr.",
+          "dateOfBirth":"1977-05-27T04:00:00.000Z",
+          "gender":"FEMALE",
+          "address":{
+            "addressLine1":"ch123 Main St",
+            "addressLine2":"chSuite 200",
+            "city":"chAnytown",
+            "state":"PA",
+            "postalCode":"20001",
+            "county":"CHNew York",
+            "country":"US"
+          },
+          "contacts":[
+            {
+              "type":"EMAIL",
+              "value":"email03122@mail.com",
+              "status":"OPT_IN"
+            }
+          ],
+          "customFieldValues":[
+            {
+              "name":"supporter schoice",
+              "value":"2"
+            },
+            {
+              "name":"supporter datetime",
+              "value":"2028-02-20T16:44:28.231Z"
+            },
+            {
+              "name":"supporter yesno",
+              "value":"true"
+            },
+            {
+              "name":"supporter number",
+              "value":"123123123"
+            },
+            {
+              "name":"supporter textbox",
+              "value":"Supporter Textbox"
+            }
+          ]
+        }
+      },
+      {
+        "activityFormId":"fc7fd916-645b-4093-a544-6f1726fca9e7",
+        "accountType":"CREDIT_CARD",
+        "accountNumber":"12345678900",
+        "accountExpiration":"2028-02-20T16:44:28.231Z",
+        "accountProvider":"CHUSA Bank",
+        "dedicationType":"IN_HONOR_OF",
+        "dedication":"CHIn memory of wounded warriors",
+        "type":"CHARGE",
+        "date":"2016-09-04T16:44:28.231Z",
+        "amount":274.0,
+        "deductibleAmount":1.0,
+        "feesPaid":1.0,
+        "gatewayTransactionId":"1230031333",
+        "gatewayAuthorizationCode":"chsuccess",
+        "activityFormName":"chSpring Donation",
+        "notify":"CHnitifyField",
+        "customFieldValues":[
+          {
+            "name":"fundraising number",
+            "value":"123321"
+          },
+          {
+            "name":"fundraising schoice",
+            "value":"3"
+          },
+          {
+            "name":"fundraising datetime",
+            "value":"2028-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"fundraising yesno",
+            "value":"false"
+          },
+          {
+            "name":"fundraising textbox",
+            "value":"Fundraising Textbox"
+          },
+          {
+            "name":"general number",
+            "value":"123321"
+          },
+          {
+            "name":"general schoice",
+            "value":"1"
+          },
+          {
+            "name":"general datetime",
+            "value":"2028-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"general yesno",
+            "value":"true"
+          },
+          {
+            "name":"general textbox",
+            "value":"General Textbox"
+          }
+        ],
+        "supporter":{
+          "title":"chMr",
+          "firstName":"chJohn",
+          "middleName":"chJames",
+          "lastName":"chSmith",
+          "suffix":"chJr.",
+          "dateOfBirth":"1977-05-27T04:00:00.000Z",
+          "gender":"FEMALE",
+          "address":{
+            "addressLine1":"ch123 Main St",
+            "addressLine2":"chSuite 200",
+            "city":"chAnytown",
+            "state":"PA",
+            "postalCode":"20001",
+            "county":"CHNew York",
+            "country":"US"
+          },
+          "contacts":[
+            {
+              "type":"EMAIL",
+              "value":"email03144@mail.com",
+              "status":"OPT_IN"
+            }
+          ],
+          "customFieldValues":[
+            {
+              "name":"supporter schoice",
+              "value":"2"
+            },
+            {
+              "name":"supporter datetime",
+              "value":"2028-02-20T16:44:28.231Z"
+            },
+            {
+              "name":"supporter yesno",
+              "value":"true"
+            },
+            {
+              "name":"supporter number",
+              "value":"123123123"
+            },
+            {
+              "name":"supporter textbox",
+              "value":"Supporter Textbox"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,5 +1,7 @@
 package com.salsalabs.ignite.automation.apiautomation.config;
 
+import org.testng.annotations.DataProvider;
+
 public class Config {
 
     public static String TEST_DATA_PATH_SUPPORTERS_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\supporters\\request\\";
@@ -10,6 +12,9 @@ public class Config {
 
     public static String TEST_DATA_PATH_ACTIVITIES_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\request\\";
     public static String TEST_DATA_PATH_ACTIVITIES_RESPONSES = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\activities\\response\\";
+
+    public static String TEST_DATA_PATH_DONATIONS_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\donations\\request\\";
+    public static String TEST_DATA_PATH_DONATIONS_RESPONSES = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\donations\\response\\";
 
     // Developer API
     public static String TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
@@ -26,9 +31,9 @@ public class Config {
     public static String TEST_DATA_PATH_FUNDRASER_METADATA_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
     public static String TEST_DATA_PATH_TEAM_METADATA_SUMMARY_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
     public static String TEST_DATA_PATH_ACTIVITY_LIST_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\activities\\response\\";
-    
+
     public static String TEST_DATA_BLAST_LIST_RESPONSE = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\devApiTestData\\blasts\\response\\";
-    
+
     public static class Endpoints {
         //Metrics
         public static final String METRICS = "/api/integration/ext/v1/metrics";
@@ -45,6 +50,9 @@ public class Config {
 
         //Activities
         public static final String SEARCH_ACTIVITIES = "/api/integration/ext/v1/activities/search";
+
+        //Donations Import
+        public static final String DONATIONS_IMPORT = "/api/integration/ext/v1/offlineDonations";
 
         // Developer API
         public static final String ACTIVITYCORESUMMARY = "/api/developer/ext/v1/activities/";

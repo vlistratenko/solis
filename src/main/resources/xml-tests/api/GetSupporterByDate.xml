@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ApiTests" verbose="1">
+    <!--org api.druzey1a@mailosaur.in/qwerty-->
     <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
     <parameter name="AUTH_TOKEN"
                value="rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q"></parameter>

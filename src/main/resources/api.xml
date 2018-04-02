@@ -10,5 +10,6 @@
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetSignupFormMetadata.xml" />
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetedActionFormMetadata.xml" />
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTicketedEventFormMetadata.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/ImportDonationsTest.xml" />
     </suite-files>
 </suite>

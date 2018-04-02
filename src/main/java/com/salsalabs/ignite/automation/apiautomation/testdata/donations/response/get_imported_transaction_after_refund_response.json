@@ -1,0 +1,123 @@
+{
+  "id": "57852a23-9bac-4cf9-a4fe-2159f807bdca",
+  "timestamp": "2018-04-02T08:53:43.280Z",
+  "header": {
+    "processingTime": 92,
+    "serverId": "test-hqapp2.ignite.net"
+  },
+  "payload": {
+    "activities": [
+      {
+        "activityId": "07c39644-80d9-40d2-aed9-81838f2cd5b0",
+        "activityFormName": "CHSpring Donation",
+        "supporterId": "5f501718-a845-41b0-b65e-e77be2e89a44",
+        "activityDate": "2016-10-04T16:44:28.231Z",
+        "activityType": "FUNDRAISE",
+        "lastModified": "2018-04-02T08:15:58.166Z",
+        "customFieldValues": [
+          {
+            "fieldId": "9789e3fc-c18c-45b7-a3e8-7c3ae2e2472b",
+            "name": "general yesno",
+            "value": "false",
+            "type": "BOOLEAN"
+          },
+          {
+            "fieldId": "7e06bc61-1168-4206-8686-c77dd198273a",
+            "name": "general datetime",
+            "value": "2029-02-20T16:44:28.231Z",
+            "type": "DATE"
+          },
+          {
+            "fieldId": "bb6192d5-05ba-4432-99b1-1a78a7f88d60",
+            "name": "general textbox",
+            "value": "CHGeneral Textbox",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "068a5005-a69c-4d4c-94ee-6d197d25d71e",
+            "name": "fundraising yesno",
+            "value": "true",
+            "type": "BOOLEAN"
+          },
+          {
+            "fieldId": "87941fc5-1d7b-44ef-bb9d-e885afcc7e32",
+            "name": "fundraising number",
+            "value": "1233210",
+            "type": "NUMBER"
+          },
+          {
+            "fieldId": "11c357f7-2450-4644-a9da-a7d7743d78bf",
+            "name": "general number",
+            "value": "1233210",
+            "type": "NUMBER"
+          },
+          {
+            "fieldId": "ce0be886-1a6e-4168-81ec-c98c7e6dc863",
+            "name": "fundraising textbox",
+            "value": "CHFundraising Textbox",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "924d0983-3f36-4bcd-bfa9-ab1c74114f37",
+            "name": "general schoice",
+            "value": "2",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "163422d5-1ded-4cd3-b88a-7361224884b4",
+            "name": "fundraising schoice",
+            "value": "1",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "52789a3e-895e-4248-949a-6dc93ef902c2",
+            "name": "fundraising datetime",
+            "value": "2029-02-20T16:44:28.231Z",
+            "type": "DATE"
+          }
+        ],
+        "donationId": "e1b45bdc-f054-4c54-96d7-81e05997f2c0",
+        "totalReceivedAmount": 0,
+        "oneTimeAmount": 176,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "*******8999",
+        "accountExpiration": "2029-02-20T05:00:00.000Z",
+        "accountProvider": "zz1",
+        "designation": "CHdesignation field content",
+        "dedicationType": "IN_MEMORY_OF",
+        "dedication": "CHIn memory of wounded warriors",
+        "notify": "CHnitifyField",
+        "wasImported": true,
+        "wasAPIImported": true,
+        "transactions": [
+          {
+            "transactionId": "bbb6c57d-170d-4fca-a368-4d505e59245d",
+            "relatedTransactionId": "7772ddfd-03cb-4271-ab70-f6a451d2cfe9",
+            "type": "CHARGE",
+            "reason": "DONATION",
+            "date": "2016-10-04T16:44:28.231Z",
+            "amount": 176,
+            "deductibleAmount": 2,
+            "feesPaid": 2,
+            "gatewayTransactionId": "123003100",
+            "gatewayAuthorizationCode": "zz1"
+          },
+          {
+            "transactionId": "7772ddfd-03cb-4271-ab70-f6a451d2cfe9",
+            "relatedTransactionId": "bbb6c57d-170d-4fca-a368-4d505e59245d",
+            "type": "REFUND",
+            "reason": "DONATION",
+            "date": "2017-10-04T16:44:28.231Z",
+            "amount": 176,
+            "deductibleAmount": 2,
+            "feesPaid": 2,
+            "gatewayTransactionId": "123003100",
+            "gatewayAuthorizationCode": "xx"
+          }
+        ]
+      }
+    ],
+    "count": 1
+  }
+}

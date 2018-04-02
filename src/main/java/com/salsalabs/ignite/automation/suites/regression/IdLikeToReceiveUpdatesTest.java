@@ -1,15 +1,9 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
-import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
-import com.salsalabs.ignite.automation.pages.hq.event.AddEventPageAutorespondersTab;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
 import org.apache.commons.lang.RandomStringUtils;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
 

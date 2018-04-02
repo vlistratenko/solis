@@ -1,0 +1,110 @@
+{
+  "id": "7d824350-3990-4ba1-86a1-d2515de65be2",
+  "timestamp": "2018-03-30T14:00:53.796Z",
+  "header": {
+    "processingTime": 57,
+    "serverId": "test-hqapp2.ignite.net"
+  },
+  "payload": {
+    "activities": [
+      {
+        "activityId": "e21012a6-8bbe-4bc4-b0e0-59cf6b3cd7ef",
+        "activityFormName": "fundraising",
+        "activityFormId": "fc7fd916-645b-4093-a544-6f1726fca9e7",
+        "supporterId": "583e307c-c82e-4c6b-b68f-fdb7950be275",
+        "activityDate": "2016-09-04T16:44:28.231Z",
+        "activityType": "FUNDRAISE",
+        "lastModified": "2018-03-30T13:29:01.343Z",
+        "customFieldValues": [
+          {
+            "fieldId": "9789e3fc-c18c-45b7-a3e8-7c3ae2e2472b",
+            "name": "general yesno",
+            "value": "true",
+            "type": "BOOLEAN"
+          },
+          {
+            "fieldId": "7e06bc61-1168-4206-8686-c77dd198273a",
+            "name": "general datetime",
+            "value": "2028-02-20T16:44:28.231Z",
+            "type": "DATE"
+          },
+          {
+            "fieldId": "bb6192d5-05ba-4432-99b1-1a78a7f88d60",
+            "name": "general textbox",
+            "value": "General Textbox",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "068a5005-a69c-4d4c-94ee-6d197d25d71e",
+            "name": "fundraising yesno",
+            "value": "false",
+            "type": "BOOLEAN"
+          },
+          {
+            "fieldId": "87941fc5-1d7b-44ef-bb9d-e885afcc7e32",
+            "name": "fundraising number",
+            "value": "123321",
+            "type": "NUMBER"
+          },
+          {
+            "fieldId": "11c357f7-2450-4644-a9da-a7d7743d78bf",
+            "name": "general number",
+            "value": "123321",
+            "type": "NUMBER"
+          },
+          {
+            "fieldId": "ce0be886-1a6e-4168-81ec-c98c7e6dc863",
+            "name": "fundraising textbox",
+            "value": "Fundraising Textbox",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "924d0983-3f36-4bcd-bfa9-ab1c74114f37",
+            "name": "general schoice",
+            "value": "1",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "163422d5-1ded-4cd3-b88a-7361224884b4",
+            "name": "fundraising schoice",
+            "value": "3",
+            "type": "STRING"
+          },
+          {
+            "fieldId": "52789a3e-895e-4248-949a-6dc93ef902c2",
+            "name": "fundraising datetime",
+            "value": "2028-02-20T16:44:28.231Z",
+            "type": "DATE"
+          }
+        ],
+        "donationId": "c0f03a80-e6e5-4852-bf46-cbede9368b52",
+        "totalReceivedAmount": 274,
+        "oneTimeAmount": 274,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "*******8900",
+        "accountExpiration": "2028-02-20T05:00:00.000Z",
+        "accountProvider": "CHUSA Bank",
+        "dedicationType": "IN_HONOR_OF",
+        "dedication": "CHIn memory of wounded warriors",
+        "notify": "CHnitifyField",
+        "wasImported": true,
+        "wasAPIImported": true,
+        "transactions": [
+          {
+            "transactionId": "c393b9a0-dc80-4f83-a2c9-0d5fa7d3cc7e",
+            "type": "CHARGE",
+            "reason": "DONATION",
+            "date": "2016-09-04T16:44:28.231Z",
+            "amount": 274,
+            "deductibleAmount": 1,
+            "feesPaid": 1,
+            "gatewayTransactionId": "12300313332",
+            "gatewayAuthorizationCode": "chsuccess"
+          }
+        ]
+      }
+    ],
+    "count": 1
+  }
+}

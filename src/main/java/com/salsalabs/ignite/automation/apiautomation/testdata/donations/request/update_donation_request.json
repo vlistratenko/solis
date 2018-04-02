@@ -1,0 +1,114 @@
+{
+  "payload":{
+    "donations":[
+      {
+        "accountType":"CREDIT_CARD",
+        "accountNumber":"12345678999",
+        "accountExpiration":"2029-02-20T16:44:28.231Z",
+        "accountProvider":"zz1",
+        "dedicationType":"IN_MEMORY_OF",
+        "dedication":"CHIn memory of wounded warriors",
+        "type":"CHARGE",
+        "date":"2016-10-04T16:44:28.231Z",
+        "amount":176.0,
+        "deductibleAmount":2.0,
+        "feesPaid":2.0,
+        "gatewayTransactionId":"123003100",
+        "gatewayAuthorizationCode":"zz1",
+        "activityFormName":"CHSpring Donation",
+        "notify":"CHnitifyField",
+        "designation":"CHdesignation field content",
+        "customFieldValues":[
+          {
+            "name":"fundraising number",
+            "value":"1233210"
+          },
+          {
+            "name":"fundraising schoice",
+            "value":"1"
+          },
+          {
+            "name":"fundraising datetime",
+            "value":"2029-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"fundraising yesno",
+            "value":"true"
+          },
+          {
+            "name":"fundraising textbox",
+            "value":"CHFundraising Textbox"
+          },
+          {
+            "name":"general number",
+            "value":"1233210"
+          },
+          {
+            "name":"general schoice",
+            "value":"2"
+          },
+          {
+            "name":"general datetime",
+            "value":"2029-02-20T16:44:28.231Z"
+          },
+          {
+            "name":"general yesno",
+            "value":"false"
+          },
+          {
+            "name":"general textbox",
+            "value":"CHGeneral Textbox"
+          }
+        ],
+        "supporter":{
+          "title":"cMr",
+          "firstName":"cJohn",
+          "middleName":"cJames",
+          "lastName":"cSmith",
+          "suffix":"cJr.",
+          "dateOfBirth":"1970-05-27T04:00:00.000Z",
+          "gender":"MALE",
+          "address":{
+            "addressLine1":"zch123 Main St",
+            "addressLine2":"czhSuite 200",
+            "city":"zchAnytown",
+            "state":"NY",
+            "postalCode":"20002",
+            "county":"zCHNew York",
+            "country":"US"
+          },
+          "contacts":[
+            {
+              "type":"EMAIL",
+              "value":"email03122@mail.com",
+              "status":"OPT_OUT"
+            }
+          ],
+          "customFieldValues":[
+            {
+              "name":"supporter schoice",
+              "value":"1"
+            },
+            {
+              "name":"supporter datetime",
+              "value":"2029-02-20T16:44:28.231Z"
+            },
+            {
+              "name":"supporter yesno",
+              "value":"false"
+            },
+            {
+              "name":"supporter number",
+              "value":"123123000"
+            },
+            {
+              "name":"supporter textbox",
+              "value":"zSupporter Textbox"
+            }
+          ]
+        }
+
+      }
+    ]
+  }
+}

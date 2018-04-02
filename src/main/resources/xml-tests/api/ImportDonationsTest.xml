@@ -1,14 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ApiTests" verbose="1">
-    <!--org api.druzey1a@mailosaur.in/qwerty-->
+    <!--org olauta+api@salsalabs.com/qwerty-->
     <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
     <parameter name="AUTH_TOKEN"
-               value="rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q"></parameter>
+               value="mwBssdGVG0foqExX92G9uhRkFB25sOIw7xhPtN6lqpgtke5H0_Xi4Y_RoiLYBCat-VwIQTzLp2LA5-aMcGd0_bkSP1a6KFOp31KijOBTgIU"></parameter>
     <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->
     <!--<parameter name="ENV" value="https://hq.salsalabs.org/"></parameter>-->
-    <test name="Supporters">
+    <test name="Activites">
         <classes>
-            <class name="com.salsalabs.ignite.automation.suites.api.SupporterCrudAndMetrics"/>
+            <class name="com.salsalabs.ignite.automation.suites.api.ImportDonations"/>
         </classes>
     </test>
 </suite>
