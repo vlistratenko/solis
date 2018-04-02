@@ -1,276 +1,300 @@
-package com.salsalabs.ignite.automation.apiautomation.models.activity.getactivitybyid.response;
+package com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.old;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.response.p2p.Ticket;
+import com.fasterxml.jackson.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "activityId",
+        "activityFormName",
+        "activityFormId",
+        "supporterId",
+        "activityDate",
+        "activityType",
+        "lastModified",
+        "customFieldValues",
+        "donationId",
+        "totalReceivedAmount",
+        "oneTimeAmount",
+        "donationType",
+        "accountType",
+        "accountNumber",
+        "accountExpiration",
+        "accountProvider",
+        "paymentProcessorName",
+        "wasImported",
+        "transactions",
+        "letters",
+        "recurringAmount"
+})
 public class Activity {
 
-    @SerializedName("activityId")
-    @Expose
+    @JsonProperty("activityId")
     private String activityId;
-    @SerializedName("activityFormName")
-    @Expose
+    @JsonProperty("activityFormName")
     private String activityFormName;
-    @SerializedName("supporterId")
-    @Expose
-    private String supporterId;
-    @SerializedName("activityDate")
-    @Expose
-    private String activityDate;
-    @SerializedName("activityType")
-    @Expose
-    private String activityType;
-    @SerializedName("lastModified")
-    @Expose
-    private String lastModified;
-    @SerializedName("customFieldValues")
-    @Expose
-    private List<CustomFieldValue> customFieldValues = null;
-    @SerializedName("donationId")
-    @Expose
-    private String donationId;
-    @SerializedName("totalReceivedAmount")
-    @Expose
-    private Integer totalReceivedAmount;
-    @SerializedName("oneTimeAmount")
-    @Expose
-    private Integer oneTimeAmount;
-    @SerializedName("donationType")
-    @Expose
-    private String donationType;
-    @SerializedName("accountType")
-    @Expose
-    private String accountType;
-    @SerializedName("accountNumber")
-    @Expose
-    private String accountNumber;
-    @SerializedName("accountExpiration")
-    @Expose
-    private String accountExpiration;
-    @SerializedName("accountProvider")
-    @Expose
-    private String accountProvider;
-    @SerializedName("designation")
-    @Expose
-    private String designation;
-    @SerializedName("dedicationType")
-    @Expose
-    private String dedicationType;
-    @SerializedName("dedication")
-    @Expose
-    private String dedication;
-    @SerializedName("notify")
-    @Expose
-    private String notify;
-    @SerializedName("wasImported")
-    @Expose
-    private Boolean wasImported;
-    @SerializedName("wasAPIImported")
-    @Expose
-    private Boolean wasAPIImported;
-    @SerializedName("tickets")
-    @Expose
-    private List<Ticket> tickets = null;
-    @SerializedName("transactions")
-    @Expose
-    private List<Transaction> transactions = null;
-    @SerializedName("activityFormId")
-    @Expose
+    @JsonProperty("activityFormId")
     private String activityFormId;
+    @JsonProperty("supporterId")
+    private String supporterId;
+    @JsonProperty("activityDate")
+    private String activityDate;
+    @JsonProperty("activityType")
+    private String activityType;
+    @JsonProperty("lastModified")
+    private String lastModified;
+    @JsonProperty("customFieldValues")
+    private List<Object> customFieldValues = null;
+    @JsonProperty("donationId")
+    private String donationId;
+    @JsonProperty("totalReceivedAmount")
+    private Double totalReceivedAmount;
+    @JsonProperty("oneTimeAmount")
+    private Double oneTimeAmount;
+    @JsonProperty("donationType")
+    private String donationType;
+    @JsonProperty("accountType")
+    private String accountType;
+    @JsonProperty("accountNumber")
+    private String accountNumber;
+    @JsonProperty("accountExpiration")
+    private String accountExpiration;
+    @JsonProperty("accountProvider")
+    private String accountProvider;
+    @JsonProperty("paymentProcessorName")
+    private String paymentProcessorName;
+    @JsonProperty("wasImported")
+    private Boolean wasImported;
+    @JsonProperty("transactions")
+    private List<Transaction> transactions = null;
+    @JsonProperty("letters")
+    private List<Letter> letters = null;
+    @JsonProperty("recurringAmount")
+    private Integer recurringAmount;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    @JsonProperty("activityId")
     public String getActivityId() {
         return activityId;
     }
 
+    @JsonProperty("activityId")
     public void setActivityId(String activityId) {
         this.activityId = activityId;
     }
 
+    @JsonProperty("activityFormName")
     public String getActivityFormName() {
         return activityFormName;
     }
 
+    @JsonProperty("activityFormName")
     public void setActivityFormName(String activityFormName) {
         this.activityFormName = activityFormName;
     }
 
-    public String getSupporterId() {
-        return supporterId;
-    }
-
-    public void setSupporterId(String supporterId) {
-        this.supporterId = supporterId;
-    }
-
-    public String getActivityDate() {
-        return activityDate;
-    }
-
-    public void setActivityDate(String activityDate) {
-        this.activityDate = activityDate;
-    }
-
-    public String getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(String activityType) {
-        this.activityType = activityType;
-    }
-
-    public String getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(String lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public List<CustomFieldValue> getCustomFieldValues() {
-        return customFieldValues;
-    }
-
-    public void setCustomFieldValues(List<CustomFieldValue> customFieldValues) {
-        this.customFieldValues = customFieldValues;
-    }
-
-    public String getDonationId() {
-        return donationId;
-    }
-
-    public void setDonationId(String donationId) {
-        this.donationId = donationId;
-    }
-
-    public Integer getTotalReceivedAmount() {
-        return totalReceivedAmount;
-    }
-
-    public void setTotalReceivedAmount(Integer totalReceivedAmount) {
-        this.totalReceivedAmount = totalReceivedAmount;
-    }
-
-    public Integer getOneTimeAmount() {
-        return oneTimeAmount;
-    }
-
-    public void setOneTimeAmount(Integer oneTimeAmount) {
-        this.oneTimeAmount = oneTimeAmount;
-    }
-
-    public String getDonationType() {
-        return donationType;
-    }
-
-    public void setDonationType(String donationType) {
-        this.donationType = donationType;
-    }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getAccountExpiration() {
-        return accountExpiration;
-    }
-
-    public void setAccountExpiration(String accountExpiration) {
-        this.accountExpiration = accountExpiration;
-    }
-
-    public String getAccountProvider() {
-        return accountProvider;
-    }
-
-    public void setAccountProvider(String accountProvider) {
-        this.accountProvider = accountProvider;
-    }
-
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
-    public String getDedicationType() {
-        return dedicationType;
-    }
-
-    public void setDedicationType(String dedicationType) {
-        this.dedicationType = dedicationType;
-    }
-
-    public String getDedication() {
-        return dedication;
-    }
-
-    public void setDedication(String dedication) {
-        this.dedication = dedication;
-    }
-
-    public String getNotify() {
-        return notify;
-    }
-
-    public void setNotify(String notify) {
-        this.notify = notify;
-    }
-
-    public Boolean getWasImported() {
-        return wasImported;
-    }
-
-    public void setWasImported(Boolean wasImported) {
-        this.wasImported = wasImported;
-    }
-
-    public Boolean getWasAPIImported() {
-        return wasAPIImported;
-    }
-
-    public void setWasAPIImported(Boolean wasAPIImported) {
-        this.wasAPIImported = wasAPIImported;
-    }
-
-    public List<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
+    @JsonProperty("activityFormId")
     public String getActivityFormId() {
         return activityFormId;
     }
 
+    @JsonProperty("activityFormId")
     public void setActivityFormId(String activityFormId) {
         this.activityFormId = activityFormId;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    @JsonProperty("supporterId")
+    public String getSupporterId() {
+        return supporterId;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    @JsonProperty("supporterId")
+    public void setSupporterId(String supporterId) {
+        this.supporterId = supporterId;
+    }
+
+    @JsonProperty("activityDate")
+    public String getActivityDate() {
+        return activityDate;
+    }
+
+    @JsonProperty("activityDate")
+    public void setActivityDate(String activityDate) {
+        this.activityDate = activityDate;
+    }
+
+    @JsonProperty("activityType")
+    public String getActivityType() {
+        return activityType;
+    }
+
+    @JsonProperty("activityType")
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    @JsonProperty("lastModified")
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    @JsonProperty("lastModified")
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @JsonProperty("customFieldValues")
+    public List<Object> getCustomFieldValues() {
+        return customFieldValues;
+    }
+
+    @JsonProperty("customFieldValues")
+    public void setCustomFieldValues(List<Object> customFieldValues) {
+        this.customFieldValues = customFieldValues;
+    }
+
+    @JsonProperty("donationId")
+    public String getDonationId() {
+        return donationId;
+    }
+
+    @JsonProperty("donationId")
+    public void setDonationId(String donationId) {
+        this.donationId = donationId;
+    }
+
+    @JsonProperty("totalReceivedAmount")
+    public Double getTotalReceivedAmount() {
+        return totalReceivedAmount;
+    }
+
+    @JsonProperty("totalReceivedAmount")
+    public void setTotalReceivedAmount(Double totalReceivedAmount) {
+        this.totalReceivedAmount = totalReceivedAmount;
+    }
+
+    @JsonProperty("oneTimeAmount")
+    public Double getOneTimeAmount() {
+        return oneTimeAmount;
+    }
+
+    @JsonProperty("oneTimeAmount")
+    public void setOneTimeAmount(Double oneTimeAmount) {
+        this.oneTimeAmount = oneTimeAmount;
+    }
+
+    @JsonProperty("donationType")
+    public String getDonationType() {
+        return donationType;
+    }
+
+    @JsonProperty("donationType")
+    public void setDonationType(String donationType) {
+        this.donationType = donationType;
+    }
+
+    @JsonProperty("accountType")
+    public String getAccountType() {
+        return accountType;
+    }
+
+    @JsonProperty("accountType")
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    @JsonProperty("accountNumber")
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    @JsonProperty("accountNumber")
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    @JsonProperty("accountExpiration")
+    public String getAccountExpiration() {
+        return accountExpiration;
+    }
+
+    @JsonProperty("accountExpiration")
+    public void setAccountExpiration(String accountExpiration) {
+        this.accountExpiration = accountExpiration;
+    }
+
+    @JsonProperty("accountProvider")
+    public String getAccountProvider() {
+        return accountProvider;
+    }
+
+    @JsonProperty("accountProvider")
+    public void setAccountProvider(String accountProvider) {
+        this.accountProvider = accountProvider;
+    }
+
+    @JsonProperty("paymentProcessorName")
+    public String getPaymentProcessorName() {
+        return paymentProcessorName;
+    }
+
+    @JsonProperty("paymentProcessorName")
+    public void setPaymentProcessorName(String paymentProcessorName) {
+        this.paymentProcessorName = paymentProcessorName;
+    }
+
+    @JsonProperty("wasImported")
+    public Boolean getWasImported() {
+        return wasImported;
+    }
+
+    @JsonProperty("wasImported")
+    public void setWasImported(Boolean wasImported) {
+        this.wasImported = wasImported;
+    }
+
+    @JsonProperty("transactions")
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    @JsonProperty("transactions")
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    @JsonProperty("letters")
+    public List<Letter> getLetters() {
+        return letters;
+    }
+
+    @JsonProperty("letters")
+    public void setLetters(List<Letter> letters) {
+        this.letters = letters;
+    }
+
+    @JsonProperty("recurringAmount")
+    public Integer getRecurringAmount() {
+        return recurringAmount;
+    }
+
+    @JsonProperty("recurringAmount")
+    public void setRecurringAmount(Integer recurringAmount) {
+        this.recurringAmount = recurringAmount;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
     @Override
@@ -284,11 +308,19 @@ public class Activity {
             return false;
         if (getActivityFormName() != null ? !getActivityFormName().equals(activity.getActivityFormName()) : activity.getActivityFormName() != null)
             return false;
+        if (getActivityFormId() != null ? !getActivityFormId().equals(activity.getActivityFormId()) : activity.getActivityFormId() != null)
+            return false;
+        if (getSupporterId() != null ? !getSupporterId().equals(activity.getSupporterId()) : activity.getSupporterId() != null)
+            return false;
         if (getActivityDate() != null ? !getActivityDate().equals(activity.getActivityDate()) : activity.getActivityDate() != null)
             return false;
         if (getActivityType() != null ? !getActivityType().equals(activity.getActivityType()) : activity.getActivityType() != null)
             return false;
+        if (getLastModified() != null ? !getLastModified().equals(activity.getLastModified()) : activity.getLastModified() != null)
+            return false;
         if (getCustomFieldValues() != null ? !getCustomFieldValues().equals(activity.getCustomFieldValues()) : activity.getCustomFieldValues() != null)
+            return false;
+        if (getDonationId() != null ? !getDonationId().equals(activity.getDonationId()) : activity.getDonationId() != null)
             return false;
         if (getTotalReceivedAmount() != null ? !getTotalReceivedAmount().equals(activity.getTotalReceivedAmount()) : activity.getTotalReceivedAmount() != null)
             return false;
@@ -304,23 +336,17 @@ public class Activity {
             return false;
         if (getAccountProvider() != null ? !getAccountProvider().equals(activity.getAccountProvider()) : activity.getAccountProvider() != null)
             return false;
-        if (getDesignation() != null ? !getDesignation().equals(activity.getDesignation()) : activity.getDesignation() != null)
-            return false;
-        if (getDedicationType() != null ? !getDedicationType().equals(activity.getDedicationType()) : activity.getDedicationType() != null)
-            return false;
-        if (getDedication() != null ? !getDedication().equals(activity.getDedication()) : activity.getDedication() != null)
-            return false;
-        if (getNotify() != null ? !getNotify().equals(activity.getNotify()) : activity.getNotify() != null)
+        if (getPaymentProcessorName() != null ? !getPaymentProcessorName().equals(activity.getPaymentProcessorName()) : activity.getPaymentProcessorName() != null)
             return false;
         if (getWasImported() != null ? !getWasImported().equals(activity.getWasImported()) : activity.getWasImported() != null)
             return false;
-        if (getWasAPIImported() != null ? !getWasAPIImported().equals(activity.getWasAPIImported()) : activity.getWasAPIImported() != null)
-            return false;
-        if (getTickets() != null ? !getTickets().equals(activity.getTickets()) : activity.getTickets() != null)
-            return false;
         if (getTransactions() != null ? !getTransactions().equals(activity.getTransactions()) : activity.getTransactions() != null)
             return false;
-        return getActivityFormId() != null ? getActivityFormId().equals(activity.getActivityFormId()) : activity.getActivityFormId() == null;
+        if (getLetters() != null ? !getLetters().equals(activity.getLetters()) : activity.getLetters() != null)
+            return false;
+        if (getRecurringAmount() != null ? !getRecurringAmount().equals(activity.getRecurringAmount()) : activity.getRecurringAmount() != null)
+            return false;
+        return getAdditionalProperties() != null ? getAdditionalProperties().equals(activity.getAdditionalProperties()) : activity.getAdditionalProperties() == null;
 
     }
 
@@ -328,9 +354,13 @@ public class Activity {
     public int hashCode() {
         int result = getActivityId() != null ? getActivityId().hashCode() : 0;
         result = 31 * result + (getActivityFormName() != null ? getActivityFormName().hashCode() : 0);
+        result = 31 * result + (getActivityFormId() != null ? getActivityFormId().hashCode() : 0);
+        result = 31 * result + (getSupporterId() != null ? getSupporterId().hashCode() : 0);
         result = 31 * result + (getActivityDate() != null ? getActivityDate().hashCode() : 0);
         result = 31 * result + (getActivityType() != null ? getActivityType().hashCode() : 0);
+        result = 31 * result + (getLastModified() != null ? getLastModified().hashCode() : 0);
         result = 31 * result + (getCustomFieldValues() != null ? getCustomFieldValues().hashCode() : 0);
+        result = 31 * result + (getDonationId() != null ? getDonationId().hashCode() : 0);
         result = 31 * result + (getTotalReceivedAmount() != null ? getTotalReceivedAmount().hashCode() : 0);
         result = 31 * result + (getOneTimeAmount() != null ? getOneTimeAmount().hashCode() : 0);
         result = 31 * result + (getDonationType() != null ? getDonationType().hashCode() : 0);
@@ -338,15 +368,12 @@ public class Activity {
         result = 31 * result + (getAccountNumber() != null ? getAccountNumber().hashCode() : 0);
         result = 31 * result + (getAccountExpiration() != null ? getAccountExpiration().hashCode() : 0);
         result = 31 * result + (getAccountProvider() != null ? getAccountProvider().hashCode() : 0);
-        result = 31 * result + (getDesignation() != null ? getDesignation().hashCode() : 0);
-        result = 31 * result + (getDedicationType() != null ? getDedicationType().hashCode() : 0);
-        result = 31 * result + (getDedication() != null ? getDedication().hashCode() : 0);
-        result = 31 * result + (getNotify() != null ? getNotify().hashCode() : 0);
+        result = 31 * result + (getPaymentProcessorName() != null ? getPaymentProcessorName().hashCode() : 0);
         result = 31 * result + (getWasImported() != null ? getWasImported().hashCode() : 0);
-        result = 31 * result + (getWasAPIImported() != null ? getWasAPIImported().hashCode() : 0);
-        result = 31 * result + (getTickets() != null ? getTickets().hashCode() : 0);
         result = 31 * result + (getTransactions() != null ? getTransactions().hashCode() : 0);
-        result = 31 * result + (getActivityFormId() != null ? getActivityFormId().hashCode() : 0);
+        result = 31 * result + (getLetters() != null ? getLetters().hashCode() : 0);
+        result = 31 * result + (getRecurringAmount() != null ? getRecurringAmount().hashCode() : 0);
+        result = 31 * result + (getAdditionalProperties() != null ? getAdditionalProperties().hashCode() : 0);
         return result;
     }
 
@@ -355,6 +382,7 @@ public class Activity {
         return "Activity{" +
                 "activityId='" + activityId + '\'' +
                 ", activityFormName='" + activityFormName + '\'' +
+                ", activityFormId='" + activityFormId + '\'' +
                 ", supporterId='" + supporterId + '\'' +
                 ", activityDate='" + activityDate + '\'' +
                 ", activityType='" + activityType + '\'' +
@@ -368,16 +396,12 @@ public class Activity {
                 ", accountNumber='" + accountNumber + '\'' +
                 ", accountExpiration='" + accountExpiration + '\'' +
                 ", accountProvider='" + accountProvider + '\'' +
-                ", designation='" + designation + '\'' +
-                ", dedicationType='" + dedicationType + '\'' +
-                ", dedication='" + dedication + '\'' +
-                ", notify='" + notify + '\'' +
+                ", paymentProcessorName='" + paymentProcessorName + '\'' +
                 ", wasImported=" + wasImported +
-                ", wasAPIImported=" + wasAPIImported +
                 ", transactions=" + transactions +
-                ", activityFormId='" + activityFormId + '\'' +
+                ", letters=" + letters +
+                ", recurringAmount=" + recurringAmount +
+                ", additionalProperties=" + additionalProperties +
                 '}';
     }
-
-
 }

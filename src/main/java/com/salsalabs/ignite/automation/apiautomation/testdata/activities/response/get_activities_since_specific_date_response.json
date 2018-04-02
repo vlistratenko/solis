@@ -1,0 +1,292 @@
+{
+  "id": "7a467175-099b-43cf-857f-e4a5f1400387",
+  "timestamp": "2018-04-02T09:53:27.930Z",
+  "header": {
+    "processingTime": 288,
+    "serverId": "test-hqapp2.ignite.net"
+  },
+  "payload": {
+    "total": 6,
+    "offset": 0,
+    "activities": [
+      {
+        "activityId": "09e22b50-60fd-42be-9b79-08f45699a1bd",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "72c208aa-c117-42e2-8785-596f3cc0a8ad",
+        "activityDate": "2016-06-21T09:53:30.602Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.283Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "activityId": "1ab6beda-e911-4400-a203-58bc92efb05c",
+        "activityFormName": "p2p for api",
+        "activityFormId": "eea93aea-47bc-40db-b5e5-ccc4c7cb9cde",
+        "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+        "activityDate": "2017-09-18T08:22:32.333Z",
+        "activityType": "SUBSCRIBE",
+        "lastModified": "2017-09-18T08:22:37.271Z",
+        "customFieldValues": []
+      },
+      {
+        "activityId": "619705f4-c41a-4e9d-bf8d-ce146d93c48d",
+        "supporterId": "c8afd5dc-dafb-4e2b-9bd6-8e8b772d201b",
+        "activityDate": "2017-03-21T16:44:28.231Z",
+        "activityType": "FUNDRAISE",
+        "lastModified": "2018-03-20T11:12:37.213Z",
+        "customFieldValues": [],
+        "donationId": "e0448cff-970b-4aeb-927d-3e09f21da345",
+        "totalReceivedAmount": 13,
+        "oneTimeAmount": 13,
+        "donationType": "ONE_TIME",
+        "accountNumber": "",
+        "wasImported": true,
+        "wasAPIImported": true,
+        "transactions": [
+          {
+            "transactionId": "92cddcef-63ef-46cc-9096-f710828415bd",
+            "type": "CHARGE",
+            "reason": "DONATION",
+            "date": "2017-03-21T16:44:28.231Z",
+            "amount": 13,
+            "gatewayTransactionId": "1519145068231"
+          }
+        ]
+      },
+      {
+        "activityId": "6ddf8ca7-5308-4fee-b206-a8cdadb97a6a",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "b0beb85c-467e-49f6-8b80-459364652228",
+        "activityDate": "2016-06-21T09:52:26.445Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.267Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 2",
+            "subject": "subject 2",
+            "message": "brad james + adding a comment 2",
+            "additionalComment": "custom comment",
+            "targets": [
+              {
+                "targetId": "f403c527-4890-4bc2-baae-80a64c9b95b4",
+                "targetName": "Brad James Sherman",
+                "targetTitle": "California District 30",
+                "politicalParty": "Democratic Party",
+                "targetType": "Federal House",
+                "state": "California",
+                "districtId": "CA30",
+                "districtName": "California District 30",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          },
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "activityId": "abccf154-4301-418b-aae5-4f7861332237",
+        "activityFormName": "targeted letter form",
+        "activityFormId": "9a4412a0-dc9f-4607-9f49-5b509b38f996",
+        "supporterId": "6bee2428-e622-4004-b9c9-26d4b56e99d2",
+        "activityDate": "2016-06-21T09:52:56.376Z",
+        "activityType": "TARGETED_LETTER",
+        "lastModified": "2017-03-14T19:53:11.276Z",
+        "customFieldValues": [],
+        "letters": [
+          {
+            "name": "tl name 3",
+            "subject": "subject 3",
+            "message": "natalie broussard + change letter 3 changed custom text",
+            "targets": [
+              {
+                "targetId": "91bdd5bf-0bf7-4d1e-afec-2cebbce9d072",
+                "targetName": "Natalie Broussard",
+                "targetTitle": "Iberia Parish Council - Council Member",
+                "politicalParty": "Republican Party",
+                "targetType": "US County",
+                "state": "Louisiana",
+                "districtId": "22045",
+                "districtName": "District 10",
+                "role": "Legislative Member",
+                "department": "Legislature",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          },
+          {
+            "name": "tl name 1",
+            "subject": "subject 1",
+            "message": "custom target + no comment 1",
+            "targets": [
+              {
+                "targetId": "36b6b763-b535-45c6-8184-c07652f59079",
+                "targetName": "custom traget  custom traget",
+                "targetTitle": "custom traget",
+                "targetType": "Custom Target",
+                "state": "Arkansas",
+                "districtName": "20008",
+                "sentEmail": true,
+                "sentFacebook": false,
+                "sentTwitter": false,
+                "madeCall": false,
+                "callDurationSeconds": 0,
+                "callResult": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "activityId": "da3dbe43-566b-4493-b1aa-ac2190e1e956",
+        "activityFormName": "p2p for api",
+        "activityFormId": "eea93aea-47bc-40db-b5e5-ccc4c7cb9cde",
+        "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+        "activityDate": "2017-09-18T08:22:32.333Z",
+        "activityType": "P2P_EVENT",
+        "lastModified": "2018-02-16T19:39:55.374Z",
+        "customFieldValues": [],
+        "donationId": "214fed5a-9556-4127-921f-567687843072",
+        "totalReceivedAmount": 10,
+        "oneTimeAmount": 10,
+        "donationType": "ONE_TIME",
+        "accountType": "CREDIT_CARD",
+        "accountNumber": "************1111",
+        "accountExpiration": "2020-05-30T04:00:00.000Z",
+        "accountProvider": "visa",
+        "paymentProcessorName": "mechant services gateway name",
+        "wasImported": false,
+        "wasAPIImported": false,
+        "transactions": [
+          {
+            "transactionId": "026997e6-97ef-4919-94ac-2094173d46d4",
+            "reasonId": "e202f614-286d-470a-b515-1bbaf8ff3ccd",
+            "type": "CHARGE",
+            "reason": "EVENT_TICKET",
+            "date": "2017-09-18T08:22:29.311Z",
+            "amount": 10.0,
+            "deductibleAmount": 0.0,
+            "feesPaid": 0,
+            "gatewayTransactionId": "261266115753",
+            "gatewayAuthorizationCode": "PPS002"
+          }
+        ],
+        "activityResult": "TICKETS_ONLY",
+        "tickets": [
+          {
+            "ticketId": "e202f614-286d-470a-b515-1bbaf8ff3ccd",
+            "ticketName": "r1",
+            "transactionId": "026997e6-97ef-4919-94ac-2094173d46d4",
+            "ticketStatus": "VALID",
+            "ticketCost": 10.0,
+            "deductibleAmount": 0.0,
+            "questions": [],
+            "attendees": [
+              {
+                "attendeeId": "5943f2d7-1260-474d-98b3-7e1c31afbd0a",
+                "firstName": "Oleg",
+                "type": "PURCHASER",
+                "status": "REGISTERED",
+                "lastName": "Lauta",
+                "email": "olauta+si@salsalabs.com",
+                "currentSupporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+                "isCurrentSupporter": true,
+                "lastModified": "2018-02-16T19:39:55.372Z",
+                "questions": []
+              }
+            ],
+            "lastModified": "2018-02-16T19:39:55.367Z"
+          }
+        ],
+        "donatedToFundraiser": {
+          "fundraiserId": "94960cdb-e0f3-441c-a1da-dd9c3a5b316e",
+          "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+          "activityId": "da3dbe43-566b-4493-b1aa-ac2190e1e956",
+          "type": "PERSONAL",
+          "name": "page1",
+          "pageUrl": "https://ap.test.igniteaction.net/p2pforapi/p/page1",
+          "goal": 110.0,
+          "amountRaised": 0.0,
+          "donationCount": 0,
+          "lastDonation": "2017-09-18T08:22:36.447Z",
+          "relatedFundraisersCount": 0,
+          "fundraisingPageEnabled": false,
+          "lastModified": "2017-09-18T08:22:36.447Z"
+        },
+        "createdFundraisers": [
+          {
+            "fundraiserId": "94960cdb-e0f3-441c-a1da-dd9c3a5b316e",
+            "supporterId": "1a393abb-eb9a-47d6-b2e3-11ac3acf30ff",
+            "activityId": "da3dbe43-566b-4493-b1aa-ac2190e1e956",
+            "type": "PERSONAL",
+            "name": "page1",
+            "pageUrl": "https://ap.test.igniteaction.net/p2pforapi/p/page1",
+            "goal": 110.0,
+            "amountRaised": 0.0,
+            "donationCount": 0,
+            "lastDonation": "2017-09-18T08:22:36.447Z",
+            "relatedFundraisersCount": 0,
+            "fundraisingPageEnabled": false,
+            "lastModified": "2017-09-18T08:22:36.447Z"
+          }
+        ]
+      }
+    ],
+    "count": 6
+  }
+}

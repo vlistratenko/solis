@@ -1,83 +1,55 @@
+
 package com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response;
 
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-        "id",
-        "timestamp",
-        "header",
-        "payload"
-})
 public class GetActivitesFromDateResponse extends ExpectedResult {
 
-    @JsonProperty("id")
+    @SerializedName("id")
+    @Expose
     private String id;
-    @JsonProperty("timestamp")
+    @SerializedName("timestamp")
+    @Expose
     private String timestamp;
-    @JsonProperty("header")
+    @SerializedName("header")
+    @Expose
     private Header header;
-    @JsonProperty("payload")
+    @SerializedName("payload")
+    @Expose
     private Payload payload;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("id")
     public String getId() {
         return id;
     }
 
-    @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
     }
 
-    @JsonProperty("timestamp")
     public String getTimestamp() {
         return timestamp;
     }
 
-    @JsonProperty("timestamp")
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 
-    @JsonProperty("header")
     public Header getHeader() {
         return header;
     }
 
-    @JsonProperty("header")
     public void setHeader(Header header) {
         this.header = header;
     }
 
-    @JsonProperty("payload")
     public Payload getPayload() {
         return payload;
     }
 
-    @JsonProperty("payload")
     public void setPayload(Payload payload) {
         this.payload = payload;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
     @Override
@@ -87,12 +59,11 @@ public class GetActivitesFromDateResponse extends ExpectedResult {
 
         GetActivitesFromDateResponse that = (GetActivitesFromDateResponse) o;
 
-      /*  if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
         if (getTimestamp() != null ? !getTimestamp().equals(that.getTimestamp()) : that.getTimestamp() != null)
             return false;
-        if (getHeader() != null ? !getHeader().equals(that.getHeader()) : that.getHeader() != null) return false;*/
-        if (getPayload() != null ? !getPayload().equals(that.getPayload()) : that.getPayload() != null) return false;
-        return getAdditionalProperties() != null ? getAdditionalProperties().equals(that.getAdditionalProperties()) : that.getAdditionalProperties() == null;
+        if (getHeader() != null ? !getHeader().equals(that.getHeader()) : that.getHeader() != null) return false;
+        return getPayload() != null ? getPayload().equals(that.getPayload()) : that.getPayload() == null;
 
     }
 
@@ -102,7 +73,6 @@ public class GetActivitesFromDateResponse extends ExpectedResult {
         result = 31 * result + (getTimestamp() != null ? getTimestamp().hashCode() : 0);
         result = 31 * result + (getHeader() != null ? getHeader().hashCode() : 0);
         result = 31 * result + (getPayload() != null ? getPayload().hashCode() : 0);
-        result = 31 * result + (getAdditionalProperties() != null ? getAdditionalProperties().hashCode() : 0);
         return result;
     }
 
@@ -113,7 +83,6 @@ public class GetActivitesFromDateResponse extends ExpectedResult {
                 ", timestamp='" + timestamp + '\'' +
                 ", header=" + header +
                 ", payload=" + payload +
-                ", additionalProperties=" + additionalProperties +
                 '}';
     }
 }

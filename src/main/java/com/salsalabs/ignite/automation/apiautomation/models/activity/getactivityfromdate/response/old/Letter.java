@@ -1,67 +1,83 @@
+package com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.old;
 
-package com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "name",
+        "subject",
+        "message",
+        "targets"
+})
 public class Letter {
 
-    @SerializedName("name")
-    @Expose
+    @JsonProperty("name")
     private String name;
-    @SerializedName("subject")
-    @Expose
+    @JsonProperty("subject")
     private String subject;
-    @SerializedName("message")
-    @Expose
+    @JsonProperty("message")
     private String message;
-    @SerializedName("targets")
-    @Expose
+    @JsonProperty("targets")
     private List<Target> targets = null;
-    @SerializedName("additionalComment")
-    @Expose
-    private String additionalComment;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    @JsonProperty("name")
     public String getName() {
         return name;
     }
 
+    @JsonProperty("name")
     public void setName(String name) {
         this.name = name;
     }
 
+    @JsonProperty("subject")
     public String getSubject() {
         return subject;
     }
 
+    @JsonProperty("subject")
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    @JsonProperty("message")
     public String getMessage() {
         return message;
     }
 
+    @JsonProperty("message")
     public void setMessage(String message) {
         this.message = message;
     }
 
+    @JsonProperty("targets")
     public List<Target> getTargets() {
         return targets;
     }
 
+    @JsonProperty("targets")
     public void setTargets(List<Target> targets) {
         this.targets = targets;
     }
 
-    public String getAdditionalComment() {
-        return additionalComment;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    public void setAdditionalComment(String additionalComment) {
-        this.additionalComment = additionalComment;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
     @Override
@@ -78,7 +94,7 @@ public class Letter {
             return false;
         if (getTargets() != null ? !getTargets().equals(letter.getTargets()) : letter.getTargets() != null)
             return false;
-        return getAdditionalComment() != null ? getAdditionalComment().equals(letter.getAdditionalComment()) : letter.getAdditionalComment() == null;
+        return getAdditionalProperties() != null ? getAdditionalProperties().equals(letter.getAdditionalProperties()) : letter.getAdditionalProperties() == null;
 
     }
 
@@ -88,7 +104,7 @@ public class Letter {
         result = 31 * result + (getSubject() != null ? getSubject().hashCode() : 0);
         result = 31 * result + (getMessage() != null ? getMessage().hashCode() : 0);
         result = 31 * result + (getTargets() != null ? getTargets().hashCode() : 0);
-        result = 31 * result + (getAdditionalComment() != null ? getAdditionalComment().hashCode() : 0);
+        result = 31 * result + (getAdditionalProperties() != null ? getAdditionalProperties().hashCode() : 0);
         return result;
     }
 
@@ -99,7 +115,7 @@ public class Letter {
                 ", subject='" + subject + '\'' +
                 ", message='" + message + '\'' +
                 ", targets=" + targets +
-                ", additionalComment='" + additionalComment + '\'' +
+                ", additionalProperties=" + additionalProperties +
                 '}';
     }
 }

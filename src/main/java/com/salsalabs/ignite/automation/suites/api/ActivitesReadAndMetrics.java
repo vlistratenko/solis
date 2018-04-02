@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.request.GetActivitesDateRequest;
-import com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse;
+import com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.old.GetActivitesFromDateResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.activity.getwithinperiod.request.GetActivitesWithinDateRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.request.GetActivityByTypeRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.response.event.GetActivityByTypeTicketedEventResponse;
@@ -46,6 +46,7 @@ public class ActivitesReadAndMetrics extends CommonTest {
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activity_by_type_subscription_management_response.json", GetActivitesFromDateResponse.class);
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activity_by_type_targeted_letter_response.json", GetActivitesFromDateResponse.class);
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activity_by_type_ticketed_event_response.json", GetActivityByTypeTicketedEventResponse.class);
+                    put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activities_since_specific_date_response.json", com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
                 }}
         );
     }
@@ -64,23 +65,11 @@ public class ActivitesReadAndMetrics extends CommonTest {
     @Parameters({"ENV"})
     @Test(priority = 1)
     public void getAllActivities(String env) throws IOException {
-        GetActivitesDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_all_activities_from_date_request.json"), GetActivitesDateRequest.class);
+        GetActivitesDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_all_activities_request.json"), GetActivitesDateRequest.class);
         ResponseEntity<GetActivitesFromDateResponse> response =
                 restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), GetActivitesFromDateResponse.class);
 
         GetActivitesFromDateResponse expectedResultObj = ((GetActivitesFromDateResponse) getExpectedResult("get_all_activities_from_date_response.json"));
-        Assert.assertEquals(expectedResultObj.getPayload().getActivities(), response.getBody().getPayload().getActivities());
-        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
-    }
-
-    @Parameters({"ENV"})
-    @Test(priority = 1)
-    public void getActivitiesWithinDateRange(String env) throws IOException {
-        GetActivitesWithinDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_all_activities_within_date_range_request.json"), GetActivitesWithinDateRequest.class);
-        ResponseEntity<GetActivitesFromDateResponse> response =
-                restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), GetActivitesFromDateResponse.class);
-
-        GetActivitesFromDateResponse expectedResultObj = ((GetActivitesFromDateResponse) getExpectedResult("get_all_activities_within_date_range_response.json"));
         Assert.assertEquals(expectedResultObj.getPayload().getActivities(), response.getBody().getPayload().getActivities());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
@@ -170,16 +159,54 @@ public class ActivitesReadAndMetrics extends CommonTest {
     }
 
     @Parameters({"ENV"})
+    @Test(priority = 1)
+    public void getActivitiesWithinDateRange(String env) throws IOException {
+        GetActivitesWithinDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_all_activities_within_date_range_request.json"), GetActivitesWithinDateRequest.class);
+        ResponseEntity<GetActivitesFromDateResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), GetActivitesFromDateResponse.class);
+
+        GetActivitesFromDateResponse expectedResultObj = ((GetActivitesFromDateResponse) getExpectedResult("get_all_activities_within_date_range_response.json"));
+        Assert.assertEquals(expectedResultObj.getPayload().getActivities(), response.getBody().getPayload().getActivities());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
+    }
+
+
+    @Parameters({"ENV"})
+    @Test(priority = 1)
+    public void getActivitiesSinceSpecificDate(String env) throws IOException {
+        GetActivitesWithinDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_activities_since_specific_date_request.json"), GetActivitesWithinDateRequest.class);
+        ResponseEntity<com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
+
+        com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse expectedResultObj = ((com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse) getExpectedResult("get_activities_since_specific_date_response.json"));
+        Assert.assertEquals(response.getBody().getPayload().getActivities(), expectedResultObj.getPayload().getActivities());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
+    }
+
+    //TODO
+    /*@Parameters({"ENV"})
+    @Test(priority = 1)
+    public void getSpecificActivitiesSinceSpecificDate(String env) throws IOException {
+
+    }
+
+    @Parameters({"ENV"})
+    @Test(priority = 1)
+    public void getActivitiesById(String env) throws IOException {
+
+    }*/
+
+    @Parameters({"ENV"})
     @Test(priority = 2)
     public void getMetricsAfterExecution(String env) throws IOException {
         ResponseEntity<MetricsResponse> response =
                 restClient.exchange(env + Endpoints.METRICS, HttpMethod.GET, buildRequest(null), MetricsResponse.class);
 
         metricsBeforeExecution.getPayload().setActivityTicketedEvent(metricsBeforeExecution.getPayload().getActivityTicketedEvent() + 4);
-        metricsBeforeExecution.getPayload().setActivityP2PEvent(metricsBeforeExecution.getPayload().getActivityP2PEvent() + 1);
-        metricsBeforeExecution.getPayload().setActivitySubscribe(metricsBeforeExecution.getPayload().getActivitySubscribe() + 33);
-        metricsBeforeExecution.getPayload().setActivityFundraise(metricsBeforeExecution.getPayload().getActivityFundraise() + 18);
-        metricsBeforeExecution.getPayload().setActivityTargetedLetter(metricsBeforeExecution.getPayload().getActivityTargetedLetter() + 3);
+        metricsBeforeExecution.getPayload().setActivityP2PEvent(metricsBeforeExecution.getPayload().getActivityP2PEvent() + 2);
+        metricsBeforeExecution.getPayload().setActivitySubscribe(metricsBeforeExecution.getPayload().getActivitySubscribe() + 34);
+        metricsBeforeExecution.getPayload().setActivityFundraise(metricsBeforeExecution.getPayload().getActivityFundraise() + 19);
+        metricsBeforeExecution.getPayload().setActivityTargetedLetter(metricsBeforeExecution.getPayload().getActivityTargetedLetter() + 6);
         metricsBeforeExecution.getPayload().setActivityPetition(metricsBeforeExecution.getPayload().getActivityPetition() + 18);
         metricsBeforeExecution.getPayload().setActivitySubscriptionManagement(metricsBeforeExecution.getPayload().getActivitySubscriptionManagement() + 1);
         metricsBeforeExecution.getPayload().setTotalAPICalls(metricsBeforeExecution.getPayload().getTotalAPICalls() + 9);
