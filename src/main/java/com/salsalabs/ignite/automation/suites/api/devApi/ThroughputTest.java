@@ -37,7 +37,7 @@ public class ThroughputTest extends CommonTest {
 			System.out.println(e.getMessage());
 			rsultMessage = e.getMessage();
 		}
-		Assert.assertTrue(rsultMessage.equals("429 Too Many Requests"));
+		 Assert.assertTrue(rsultMessage.equals("429 Too Many Requests"));
 		logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
 	}
 }
