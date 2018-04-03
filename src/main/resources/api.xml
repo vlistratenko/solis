@@ -4,5 +4,22 @@
         <suite-file path="src/main/resources/xml-tests/api/GetSupporterByDate.xml" />
         <suite-file path="src/main/resources/xml-tests/api/SegmentCrudAndMetrics.xml" />
         <suite-file path="src/main/resources/xml-tests/api/SupporterCrudAndMetrics.xml" />
+        
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetActivityTypes.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetBlastListTest.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetEventAttendeesSummaryTest.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetEventFormSummaryTest.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetFundraisingFormSummaryTest.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFormSummary.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFundraiserSummaryTest.xml" />     
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pPurchasesSummaryTest.xml" />  
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pRegistrationsSummaryTest.xml"/>   
+        <suite-file path="src/main/resources/xml-tests/api/devApi/Getp2pTeamSummaryTest.xml"/> 
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetPetitionSummaryTest.xml"/>     
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetsSummaryTest.xml"/>  
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTaSummaryTest.xml"/> 
+        <suite-file path="src/main/resources/xml-tests/api/devApi/ThroughputTest.xml"/> 
+        <suite-file path="src/main/resources/xml-tests/api/devApi/WrondIDTest.xml"/> 
+         
     </suite-files>
 </suite>
