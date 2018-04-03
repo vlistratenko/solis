@@ -19,10 +19,12 @@
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetEventFormSummaryTest.xml" />
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetFundraisingFormSummaryTest.xml" />
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFormSummary.xml" />
-        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFundraiserSummaryTest.xml" />     
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFundraiserSummaryTest.xml" />   
+         <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pFundraiserMetadataAndSummary.xml" />   
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pPurchasesSummaryTest.xml" />  
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pRegistrationsSummaryTest.xml"/>   
         <suite-file path="src/main/resources/xml-tests/api/devApi/Getp2pTeamSummaryTest.xml"/> 
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2pTeamMetadataAndSummary.xml"/>  
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetPetitionSummaryTest.xml"/>     
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetsSummaryTest.xml"/>  
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTaSummaryTest.xml"/> 
