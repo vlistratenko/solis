@@ -69,7 +69,7 @@ public class SegmentCrudAndMetrics extends CommonTest {
                 restClient.exchange(env + Endpoints.CREATE_UPDATE_DELETE_SEGMENT, HttpMethod.PUT, buildRequest(requestObj), CreateSegmentResponse.class);
 
         CreateSegmentResponse expectedResultObj = ((CreateSegmentResponse) getExpectedResult("create_segment_response.json"));
-        Assert.assertEquals(expectedResultObj.getPayload().getSegments(), response.getBody().getPayload().getSegments());
+        Assert.assertEquals(response.getBody().getPayload().getSegments(), expectedResultObj.getPayload().getSegments());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
 
