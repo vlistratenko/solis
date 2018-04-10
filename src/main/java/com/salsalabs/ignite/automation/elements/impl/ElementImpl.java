@@ -929,7 +929,7 @@ public abstract class ElementImpl implements Element {
 				.withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
 						" was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
 
-		logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
+		logger.debug("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
 				"is present and clickable");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(this.path)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));

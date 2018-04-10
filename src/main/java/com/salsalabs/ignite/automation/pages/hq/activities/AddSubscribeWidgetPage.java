@@ -58,7 +58,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
-		widgetNameField.type(widgetName); 
+		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
 		openComposeStepButton.click();
 		waitUntilAngularIsComplete();
