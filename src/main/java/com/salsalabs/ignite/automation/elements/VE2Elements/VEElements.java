@@ -151,7 +151,7 @@ public class VEElements extends ElementImpl {
         Button elementsVe = new ButtonImpl("//button[contains(@title,  'Content Elements')]", "Elemenets Tab");
         elementsVe.fluentWaitForElementPresenceIgnoringExceptions(5);
         elementsVe.scrollIntoView();
-        elementsVe.click();
+        elementsVe.clickJS();
         getLogger().info("Elements menu was clicked");
         WebElement source =  findElementByXpath(this.getElementPath());
         WebElement target;

@@ -7,7 +7,7 @@ public class FundraisingWidgetPage extends ActivitiesPage {
 	Button createFundraisingWidgetButton = new ButtonImpl("//*[@autotest-id='btn_create_fundraising_form_forms_dashboard']", "Create a Fundraising Form");
 
 	public AddDonationWidgetPage openAddDonationWidgetPage() {
-		createFundraisingWidgetButton.click();
+		createFundraisingWidgetButton.clickJS();
 		return new AddDonationWidgetPage();
 	}
 }

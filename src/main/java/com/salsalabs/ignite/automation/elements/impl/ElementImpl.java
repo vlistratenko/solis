@@ -846,7 +846,7 @@ public abstract class ElementImpl implements Element {
 					}
 				} else {
 
-					logger.info("Waiting for element " + aIdLocator + ". " + (aTime / 1000 - i) + " seconds left.");
+					logger.debug("Waiting for element " + aIdLocator + ". " + (aTime / 1000 - i) + " seconds left.");
 
 					Thread.sleep(1000);
 					if (i == aTime / 1000 - 1) {

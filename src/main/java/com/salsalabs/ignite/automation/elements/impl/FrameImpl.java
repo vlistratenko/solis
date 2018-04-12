@@ -37,7 +37,7 @@ public class FrameImpl extends ElementImpl implements Frame {
                     .ignoring(NoSuchElementException.class)
                     .withMessage("Error occured in " + Thread.currentThread().getStackTrace()[2].getMethodName() + " method." +'\n' + this.elementName +
                             " was not found after " + waitingTime + " seconds of waiting with " + pollingInterval + " milliseconds polling interval");
-            logger.info("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
+            logger.debug("Waiting for " + waitingTime + " seconds with " + pollingInterval + " milliseconds polling interval until " + this.elementName +
                     " is present and clickable AND switching to it then");
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(findElementByXpath(this.getPath())));
         }
