@@ -4,11 +4,12 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.Table;
 import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
-import com.salsalabs.ignite.automation.elements.impl.TableImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AssetsPage extends HomePage {
 
@@ -25,10 +26,10 @@ public class AssetsPage extends HomePage {
 			"Search field");
 	Button startSearchButton = new ButtonImpl(
 			"//h1[.='Assets']/../../../descendant::*[@ng-click='filterListing(searchInput)']", "Start search button");
-	Button topPartOfEveryImages = new ButtonImpl(".//*[@class='thumbnailTop']", "Top part of every image");
+	Button topPartOfEveryImages = new ButtonImpl("//*[@class='thumbnailTop']", "Top part of every image");
 	TextBox assertSerachInput = new TextBoxImpl("//input[@placeholder='search...']", "Search field");
 	Button assertSerachButton = new ButtonImpl("//button[@autotest-id='btn_search_assets_dashboard']", "Assert search  button");
-	Button deleteButton = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Delete Button");
+	Button deleteButton = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor::button", "Delete Button");
 	Button confirmDeleteButton = new ButtonImpl("//span[contains(text(), 'Yes')]/ancestor:: button", "Confirm the Delete Button");
 	Button assetFallBackMessage = new ButtonImpl("//div[@class='feedback-message']", "Asset FallBackMessage");
 	Button closeFallBackMessage = new ButtonImpl("//a[@class='close']", "Close Asset FallBackMessage");
@@ -102,7 +103,24 @@ public class AssetsPage extends HomePage {
 				"Deleted image");
 		verifier.verifyElementIsNotDisplayed(true, image);
 		return this;
-
 	}
 
+	public AssetsPage searchAndDeleteAllImagesMatchingName(String imageNameContains) {
+		Button topPartOfEveryImageByName = new ButtonImpl("//*[@class='editable-text'][contains(text(),'" + imageNameContains
+				+ "')]//ancestor::*[@class='thumbnailItem']//*[@class='thumbnailTop']", "Top part of every image by name");
+		List<WebElement> imagesContainingSpecifiedName = topPartOfEveryImageByName.findElementsByXpath(topPartOfEveryImageByName.getPath());
+		for (WebElement el : imagesContainingSpecifiedName) {
+			assertSerachInput.fluentWaitForElementPresenceIgnoringExceptions();
+			assertSerachInput.type(imageNameContains);
+			assertSerachButton.click();
+			topPartOfEveryImageByName.fluentWaitForElementPresenceIgnoringExceptions();
+			topPartOfEveryImageByName.moveAndClick();
+			waitConditionBecomesTrue(deleteButton.isDisplayed(), 4);
+			deleteButton.clickJS();
+			waitConditionBecomesTrue(deleteButton.isDisplayed(), 4);
+			confirmDeleteButton.click();
+			sleep(2);
+		}
+		return this;
+	}
 }
