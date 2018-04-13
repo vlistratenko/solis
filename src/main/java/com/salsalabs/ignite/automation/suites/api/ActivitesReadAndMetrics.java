@@ -47,6 +47,8 @@ public class ActivitesReadAndMetrics extends CommonTest {
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activity_by_type_targeted_letter_response.json", GetActivitesFromDateResponse.class);
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activity_by_type_ticketed_event_response.json", GetActivityByTypeTicketedEventResponse.class);
                     put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_activities_since_specific_date_response.json", com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
+                    put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_specific_activities_since_specific_date_response.json", com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
+                    put(TEST_DATA_PATH_ACTIVITIES_RESPONSES + "get_specific_activities_by_id_response.json", com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
                 }}
         );
     }
@@ -183,18 +185,30 @@ public class ActivitesReadAndMetrics extends CommonTest {
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
 
-    //TODO
-    /*@Parameters({"ENV"})
+    @Parameters({"ENV"})
     @Test(priority = 1)
     public void getSpecificActivitiesSinceSpecificDate(String env) throws IOException {
+        GetActivitesWithinDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_specific_activities_since_specific_date_request.json"), GetActivitesWithinDateRequest.class);
+        ResponseEntity<com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
 
+        com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse expectedResultObj = ((com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse) getExpectedResult("get_specific_activities_since_specific_date_response.json"));
+        Assert.assertEquals(response.getBody().getPayload().getActivities(), expectedResultObj.getPayload().getActivities());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
     }
+
 
     @Parameters({"ENV"})
     @Test(priority = 1)
-    public void getActivitiesById(String env) throws IOException {
+    public void getSpecificActivitiesById(String env) throws IOException {
+        GetActivitesWithinDateRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_ACTIVITIES_REQUESTS + "get_specific_activities_by_id_request.json"), GetActivitesWithinDateRequest.class);
+        ResponseEntity<com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_ACTIVITIES, HttpMethod.POST, buildRequest(requestObj), com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse.class);
 
-    }*/
+        com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse expectedResultObj = ((com.salsalabs.ignite.automation.apiautomation.models.activity.getactivityfromdate.response.GetActivitesFromDateResponse) getExpectedResult("get_specific_activities_by_id_response.json"));
+        Assert.assertEquals(response.getBody().getPayload().getActivities(), expectedResultObj.getPayload().getActivities());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
+    }
 
     @Parameters({"ENV"})
     @Test(priority = 2)
@@ -203,13 +217,13 @@ public class ActivitesReadAndMetrics extends CommonTest {
                 restClient.exchange(env + Endpoints.METRICS, HttpMethod.GET, buildRequest(null), MetricsResponse.class);
 
         metricsBeforeExecution.getPayload().setActivityTicketedEvent(metricsBeforeExecution.getPayload().getActivityTicketedEvent() + 4);
-        metricsBeforeExecution.getPayload().setActivityP2PEvent(metricsBeforeExecution.getPayload().getActivityP2PEvent() + 2);
+        metricsBeforeExecution.getPayload().setActivityP2PEvent(metricsBeforeExecution.getPayload().getActivityP2PEvent() + 4);
         metricsBeforeExecution.getPayload().setActivitySubscribe(metricsBeforeExecution.getPayload().getActivitySubscribe() + 34);
         metricsBeforeExecution.getPayload().setActivityFundraise(metricsBeforeExecution.getPayload().getActivityFundraise() + 19);
         metricsBeforeExecution.getPayload().setActivityTargetedLetter(metricsBeforeExecution.getPayload().getActivityTargetedLetter() + 6);
         metricsBeforeExecution.getPayload().setActivityPetition(metricsBeforeExecution.getPayload().getActivityPetition() + 18);
         metricsBeforeExecution.getPayload().setActivitySubscriptionManagement(metricsBeforeExecution.getPayload().getActivitySubscriptionManagement() + 1);
-        metricsBeforeExecution.getPayload().setTotalAPICalls(metricsBeforeExecution.getPayload().getTotalAPICalls() + 9);
+        metricsBeforeExecution.getPayload().setTotalAPICalls(metricsBeforeExecution.getPayload().getTotalAPICalls() + 11);
 
         Assert.assertEquals(metricsBeforeExecution, response.getBody());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");

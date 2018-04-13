@@ -1,16 +1,11 @@
 package com.salsalabs.ignite.automation.apiautomation.models.segments.queryallsegment.request;
 
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.EqualsBuilder;
+import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -23,6 +18,8 @@ public class Payload {
     private Integer offset;
     @JsonProperty("count")
     private Integer count;
+    @JsonProperty("includeMemberCounts")
+    private String includeMemberCounts;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -66,16 +63,26 @@ public class Payload {
         return new HashCodeBuilder().append(count).append(additionalProperties).append(offset).toHashCode();
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Payload) == false) {
-            return false;
-        }
-        Payload rhs = ((Payload) other);
-        return new EqualsBuilder().append(count, rhs.count).append(additionalProperties, rhs.additionalProperties).append(offset, rhs.offset).isEquals();
+    public String getIncludeMemberCounts() {
+        return includeMemberCounts;
     }
 
+    public void setIncludeMemberCounts(String includeMemberCounts) {
+        this.includeMemberCounts = includeMemberCounts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Payload)) return false;
+
+        Payload payload = (Payload) o;
+
+        if (getOffset() != null ? !getOffset().equals(payload.getOffset()) : payload.getOffset() != null) return false;
+        if (getCount() != null ? !getCount().equals(payload.getCount()) : payload.getCount() != null) return false;
+        if (getIncludeMemberCounts() != null ? !getIncludeMemberCounts().equals(payload.getIncludeMemberCounts()) : payload.getIncludeMemberCounts() != null)
+            return false;
+        return getAdditionalProperties() != null ? getAdditionalProperties().equals(payload.getAdditionalProperties()) : payload.getAdditionalProperties() == null;
+
+    }
 }
