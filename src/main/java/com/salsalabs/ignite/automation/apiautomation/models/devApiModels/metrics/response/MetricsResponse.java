@@ -122,11 +122,4 @@ public class MetricsResponse {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-
 }

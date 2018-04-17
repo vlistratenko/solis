@@ -1,0 +1,116 @@
+{
+   "id": "8fcd69a8-72f0-4e29-bf9a-a33368d0eaee",
+   "timestamp": "2018-04-13T13:38:43.386Z",
+   "header": {
+      "processingTime": 114,
+      "serverId": "test-hqapp2.ignite.net"
+   },
+   "payload": {
+      "total": 1,
+      "offset": 0,
+      "results": [
+         {
+            "id": "2adb3ffc-0718-46b2-8ffd-7817fe763734",
+            "supporterId": "d2e42ec0-a471-461f-a219-8af4d019e8fe",
+            "activityDate": "2018-03-20T11:14:40.244Z",
+            "formName": "TAClickToCallNO",
+            "formId": "TAClickToCallNO",
+            "customFields": [
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2018-03-21T02:31:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityDateTime",
+                  "value": "2000-01-04T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityNumber",
+                  "value": "1323",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityYEsNO",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityTextBox",
+                  "value": "TaActivityTextBox",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "General TEXt BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivitySingleChoice",
+                  "value": "3",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-12T22:21:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "textBox vakue1",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "TARGETED_LETTER",
+            "modifiedDate": "2018-03-20T11:15:05.658Z"
+         }
+      ],
+      "count": 1
+   }
+}

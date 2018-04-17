@@ -1,5 +1,13 @@
 <suite name="ApiTests" parallel="false" thread-count="1">
     <suite-files>
+
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetSignupFormSubmission.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetPetitionFormSubmission.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetFundraisingFormSubmission.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTicketedEventFormSubmission.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetP2PEventFormSubmission.xml" />
+        <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetedActionFormSubmission.xml" />
+
         <suite-file path="src/main/resources/xml-tests/api/ActivitesReadAndMetricsTest.xml" />
         <suite-file path="src/main/resources/xml-tests/api/GetSupporterByDate.xml" />
         <suite-file path="src/main/resources/xml-tests/api/SegmentCrudAndMetrics.xml" />
