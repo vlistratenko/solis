@@ -47,7 +47,7 @@ public class GetBlastListTest extends CommonTest{
 
 	@Parameters({ "ENV" , "startDate", "endDate"})
 	@Test(priority = 1)
-	public void getEventAttendeeSummary(String env, String startDate , String endDate) throws IOException {
+	public void getBlastList(String env, String startDate , String endDate) throws IOException {
 		 UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(env + Endpoints.EMAILBLASTS).queryParam("startDate", startDate).queryParam("endDate", endDate);
 		 String uriBuilder = builder.build().encode().toUriString();
 		ResponseEntity<GetBlastListResponse> response = restClient.exchange(uriBuilder, HttpMethod.GET, buildRequest(null),
