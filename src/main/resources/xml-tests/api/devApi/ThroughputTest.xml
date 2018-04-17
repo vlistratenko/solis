@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="DevApiTests" verbose="1">
-    <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
+    <parameter name="ENV" value="https://hq.test.ignite.net/"></parameter>
     <parameter name="AUTH_TOKEN"
                value=" _kuxVAM28Aoc6RJY_sQQKaUcfrIPSrFxYd61UwAd0MbtepihSrfg6E33RuZ7qjv6CzrFg9r57jrFkVc9HhgDt9BzEjHjOoMokE9ESdnO0AA"></parameter>
     <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->

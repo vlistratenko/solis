@@ -11,13 +11,13 @@ import com.salsalabs.ignite.automation.apiautomation.models.segments.createsegme
 import com.salsalabs.ignite.automation.apiautomation.models.segments.createsegment.response.CreateSegmentResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.deletesegment.request.DeleteSegmentRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.deletesegment.response.DeleteSegmentResponse;
+import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallassignedsupporters.request.QueryAllAssignedSupportersRequest;
+import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallassignedsupporters.response.QueryAllAssignedSupportersResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallsegment.request.QueryAllSegmentsRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallsegment.response.QueryAllSegmentsResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryassignedsupporter.response.QueryAssignedSupportersResponse;
 import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -46,6 +46,8 @@ public class SegmentCrudAndMetrics extends CommonTest {
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_assigned_supporter_response.json", QueryAssignedSupportersResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "delete_supporter_from_segment_response.json", QueryAssignedSupportersResponse.class);
                     put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "delete_segment_response.json", DeleteSegmentResponse.class);
+                    put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_all_supporter_assigned_to_segment_response.json", QueryAllAssignedSupportersResponse.class);
+                    put(TEST_DATA_PATH_SEGMENTS_RESPONSES + "query_all_segments_without_supporters_count_response.json", QueryAllSegmentsResponse.class);
                 }}
         );
     }
@@ -81,6 +83,19 @@ public class SegmentCrudAndMetrics extends CommonTest {
                 restClient.exchange(env + Endpoints.SEARCH_SEGMENT, HttpMethod.POST, buildRequest(requestObj), QueryAllSegmentsResponse.class);
 
         QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_all_segments_response.json"));
+
+        Assert.assertEquals(expectedResultObj.getPayload().getSegments(), response.getBody().getPayload().getSegments());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
+    }
+
+    @Parameters({"ENV"})
+    @Test(priority = 2, groups = "a", dependsOnMethods={"getMetricsBeforeExecution" , "createSegment"})
+    public void queryAllSegmentsWithoutSupportersCount(String env) throws IOException {
+        QueryAllSegmentsRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_SEGMENTS_REQUESTS + "query_all_segments_without_supporters_count_request.json"), QueryAllSegmentsRequest.class);
+        ResponseEntity<QueryAllSegmentsResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_SEGMENT, HttpMethod.POST, buildRequest(requestObj), QueryAllSegmentsResponse.class);
+
+        QueryAllSegmentsResponse expectedResultObj = ((QueryAllSegmentsResponse) getExpectedResult("query_all_segments_without_supporters_count_response.json"));
 
         Assert.assertEquals(expectedResultObj.getPayload().getSegments(), response.getBody().getPayload().getSegments());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
@@ -164,18 +179,33 @@ public class SegmentCrudAndMetrics extends CommonTest {
     }
 
     @Parameters({"ENV"})
+    @Test(priority = 8, groups = "a", dependsOnMethods={"getMetricsBeforeExecution", "createSegment", "assignSupporterToSegment"})
+    public void getAllSupportersAssignedToSegment(String env) throws IOException {
+        QueryAllAssignedSupportersRequest requestObj = new ObjectMapper().readValue(new File(TEST_DATA_PATH_SEGMENTS_REQUESTS + "query_all_supporter_assigned_to_segment_request.json"), QueryAllAssignedSupportersRequest.class);
+        HttpHeaders headers = getHeaders();
+        headers.set("authToken", "4umCqL9TrmQ16YqxK-FMe6gMJNbziuByDfUH_8D3qhmDKRLKloEeTTJDjnWWjbQNa3ie-uQLm6bX9g8WPqY9ISmZoMbkZTIyYgivbBy_EmU");
+        ResponseEntity<QueryAllAssignedSupportersResponse> response =
+                restClient.exchange(env + Endpoints.SEARCH_SUPPORTERS_ASSIGNED_TO_SEGMENT, HttpMethod.POST, buildRequest(requestObj, headers), QueryAllAssignedSupportersResponse.class);
+        QueryAllAssignedSupportersResponse expectedResultObj = ((QueryAllAssignedSupportersResponse) getExpectedResult("query_all_supporter_assigned_to_segment_response.json"));
+        Assert.assertEquals(expectedResultObj.getPayload().getSupporters(), response.getBody().getPayload().getSupporters());
+        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");
+    }
+
+    @Parameters({"ENV"})
     @Test(priority = 9, dependsOnGroups = "a")
     public void getMetricsAfterExecution(String env) throws IOException {
+        HttpHeaders headers = getHeaders();
+        headers.set("authToken", "rCtN2nuDMaAycSnkrjqOBzrAZH8V-T3lZRUIjlIr2ZGSB8b_Y0NWf1klSRwNQtyWgRSadaTVcI1ugEXZRug8HiPx_oSZnnTAZvNqRoctZKG9zTqR3j-4kDkw1X6TUjgqqSeIPO7er_iJ-JLV__1_2Q");
         ResponseEntity<MetricsResponse> response =
-                restClient.exchange(env + Endpoints.METRICS, HttpMethod.GET, buildRequest(null), MetricsResponse.class);
+                restClient.exchange(env + Endpoints.METRICS, HttpMethod.GET, buildRequest(null, headers), MetricsResponse.class);
 
         metricsBeforeExecution.getPayload().setSegmentAdd(metricsBeforeExecution.getPayload().getSegmentAdd() + 1);
         metricsBeforeExecution.getPayload().setSegmentDelete(metricsBeforeExecution.getPayload().getSegmentDelete() + 1);
-        metricsBeforeExecution.getPayload().setSegmentRead(metricsBeforeExecution.getPayload().getSegmentRead() + 20);
+        metricsBeforeExecution.getPayload().setSegmentRead(metricsBeforeExecution.getPayload().getSegmentRead() + 38);
         metricsBeforeExecution.getPayload().setSegmentAssignmentRead(metricsBeforeExecution.getPayload().getSegmentAssignmentRead() + 1);
         metricsBeforeExecution.getPayload().setSegmentAssignmentAdd(metricsBeforeExecution.getPayload().getSegmentAssignmentAdd() + 1);
         metricsBeforeExecution.getPayload().setSegmentAssignmentDelete(metricsBeforeExecution.getPayload().getSegmentAssignmentDelete() + 1);
-        metricsBeforeExecution.getPayload().setTotalAPICalls(metricsBeforeExecution.getPayload().getTotalAPICalls() + 8);
+        metricsBeforeExecution.getPayload().setTotalAPICalls(metricsBeforeExecution.getPayload().getTotalAPICalls() + 9);
 
         Assert.assertEquals(metricsBeforeExecution, response.getBody());
         logger.info(Thread.currentThread().getStackTrace()[1].getMethodName() + " success");

@@ -1,0 +1,6 @@
+{
+  "header" :{"refId":"optionalId"},
+  "payload":{
+    "offset":0,"count":20, "includeMemberCounts":false
+  }
+}

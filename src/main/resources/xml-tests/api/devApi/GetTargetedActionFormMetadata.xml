@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="DeveloperAPISuite" verbose="1">
-    <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
+    <parameter name="ENV" value="https://hq.test.ignite.net/"></parameter>
      <parameter name="UUID" value="237d86df-2a3f-422e-bff7-1b1536641098"></parameter>
     <parameter name="AUTH_TOKEN"
                value="suKJP1QzogPihY85MGNsdmigYBWkvHB2gm7YjU9RRpbTrh7dZ7ByHmZ47ETyoqJI1Yujea5yIssdFeK7Gn6m10hGduvc56uT-w_nk0K7KaFY-fVJYaK2dWfxaCDbMIY16iJ2-N46U2sMoib0_RmEew"></parameter>

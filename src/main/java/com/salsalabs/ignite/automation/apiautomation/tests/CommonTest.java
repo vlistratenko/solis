@@ -51,6 +51,10 @@ public class CommonTest {
         return new HttpEntity(body, headers);
     }
 
+    protected HttpEntity buildRequest(CommonRequest body, HttpHeaders headers) {
+        return new HttpEntity(body, headers);
+    }
+
     protected ExpectedResult getExpectedResult(String jsonFileName) {
         for (Map.Entry<String, ExpectedResult> entry : expectedResult.entrySet()) {
             if (entry.getKey().equals(jsonFileName)) {
@@ -62,5 +66,13 @@ public class CommonTest {
 
     private String extractFileNameFromPath(String path) {
         return path.substring(path.lastIndexOf("\\") + 1, path.length());
+    }
+
+    public HttpHeaders getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(HttpHeaders headers) {
+        this.headers = headers;
     }
 }

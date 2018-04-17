@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ApiTests" verbose="1">
     <!--org olauta+api@salsalabs.com/qwerty-->
-    <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
+    <parameter name="ENV" value="https://hq.test.ignite.net/"></parameter>
     <parameter name="AUTH_TOKEN"
                value="mwBssdGVG0foqExX92G9uhRkFB25sOIw7xhPtN6lqpgtke5H0_Xi4Y_RoiLYBCat-VwIQTzLp2LA5-aMcGd0_bkSP1a6KFOp31KijOBTgIU"></parameter>
     <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->

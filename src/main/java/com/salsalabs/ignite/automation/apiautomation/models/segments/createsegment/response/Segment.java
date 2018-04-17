@@ -1,14 +1,9 @@
 package com.salsalabs.ignite.automation.apiautomation.models.segments.createsegment.response;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -66,7 +61,7 @@ public class Segment {
         this.description = description;
     }
 
-    @JsonProperty("totalMembers")
+   @JsonProperty("totalMembers")
     public Integer getTotalMembers() {
         return totalMembers;
     }
@@ -119,7 +114,7 @@ public class Segment {
         if (getDescription() != null ? !getDescription().equals(segment.getDescription()) : segment.getDescription() != null)
             return false;
         if (getTotalMembers() != null ? !getTotalMembers().equals(segment.getTotalMembers()) : segment.getTotalMembers() != null)
-            return false;
+            //return false;
         if (getResult() != null ? !getResult().equals(segment.getResult()) : segment.getResult() != null) return false;
         if (getExternalSystemId() != null ? !getExternalSystemId().equals(segment.getExternalSystemId()) : segment.getExternalSystemId() != null)
             return false;
