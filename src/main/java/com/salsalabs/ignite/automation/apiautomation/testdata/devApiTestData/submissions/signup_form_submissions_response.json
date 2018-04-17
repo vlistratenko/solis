@@ -1,0 +1,718 @@
+{
+   "id": "5ca87f91-1b12-4a72-b2ec-81f0ea9cc495",
+   "timestamp": "2018-04-13T13:09:35.562Z",
+   "header": {
+      "processingTime": 164,
+      "serverId": "test-hqapp2.ignite.net"
+   },
+   "payload": {
+      "total": 11,
+      "offset": 0,
+      "results": [
+         {
+            "id": "12d1b682-d976-4c79-859e-6bf73f3a9b3b",
+            "supporterId": "503fdde9-16cc-492a-9dc4-128e912a33f3",
+            "activityDate": "2018-03-20T11:34:27.208Z",
+            "formName": "eventWithCustomFields",
+            "formId": "eventWithCustomFields",
+            "customFields": [
+               {
+                  "name": "EventActivityDateTime",
+                  "value": "2000-01-19T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2000-03-15T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityTExtbox",
+                  "value": "textBOXEVENT",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivitySingleChoice",
+                  "value": "3",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "123123",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityYESNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityNumber",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "213123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 1",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "textBoxValue",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "213123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "3",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-20T11:34:31.202Z"
+         },
+         {
+            "id": "345afbec-bc9e-4a00-a506-82388c123cf1",
+            "supporterId": "e5fee8e5-3a18-4247-8497-9e391a013eec",
+            "activityDate": "2018-02-05T11:59:42.982Z",
+            "formName": "P2p test",
+            "formId": "P2p test",
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-02-05T11:59:48.113Z"
+         },
+         {
+            "id": "3ceaea67-c476-4c9b-98e5-be8352e85aca",
+            "supporterId": "d2e42ec0-a471-461f-a219-8af4d019e8fe",
+            "activityDate": "2018-03-20T11:14:40.244Z",
+            "formName": "TAClickToCallNO",
+            "formId": "TAClickToCallNO",
+            "customFields": [
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2018-03-21T02:31:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityDateTime",
+                  "value": "2000-01-04T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityNumber",
+                  "value": "1323",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityYEsNO",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivityTextBox",
+                  "value": "TaActivityTextBox",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "General TEXt BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "TaActivitySingleChoice",
+                  "value": "3",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-12T22:21:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "textBox vakue1",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-20T11:14:49.990Z"
+         },
+         {
+            "id": "41ad493d-2de6-44e1-a23c-8533ded01d9c",
+            "supporterId": "4db33966-f681-4862-ba67-a2321375d2cd",
+            "activityDate": "2018-02-05T16:20:56.678Z",
+            "formName": "Fundraiser",
+            "formId": "Fundraiser",
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-02-05T16:21:02.530Z"
+         },
+         {
+            "id": "4e8bf3a3-f27a-497e-8b33-0e7ff6b32822",
+            "supporterId": "2e8c5878-6ed1-4560-b825-341dea52a523",
+            "activityDate": "2018-03-20T10:58:21.029Z",
+            "formName": "Petition With Custom Fields",
+            "formId": "Petition With Custom Fields",
+            "customFields": [
+               {
+                  "name": "PetitionActivityTExtBox",
+                  "value": "PetitionActivityTExtBox    with",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityYESNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivitySingleChoice",
+                  "value": "12",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityDAteTime",
+                  "value": "2018-02-12T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityNumber",
+                  "value": "23123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "eneral TEXt BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityJUSTDATE",
+                  "value": "2018-03-20T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityDAteTime1",
+                  "value": "2018-02-05T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "345345",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-19T22:18:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "TextBox value",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-20T10:58:23.779Z"
+         },
+         {
+            "id": "5cd6ccde-b4c9-4374-9123-bb26ef50e144",
+            "supporterId": "cdd6a3f1-48fd-40c9-95e2-6a3491ebe313",
+            "activityDate": "2018-03-20T10:46:33.332Z",
+            "formName": "Fundraiser",
+            "formId": "Fundraiser",
+            "customFields": [
+               {
+                  "name": "FundraisesrYesNO",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "FundraiserSingleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "FundraiserTextBox",
+                  "value": "Fundraser TEXT BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "Fundraiser Number",
+                  "value": "213",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "General TEXt BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "Fundraiser DateTime",
+                  "value": "2018-03-06T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-21T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "textBox",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-20T10:46:36.197Z"
+         },
+         {
+            "id": "7aa75b9c-6f90-4547-a22d-16537238482e",
+            "supporterId": "f056d4c9-0508-4ea7-aa3d-da3068dbfb6a",
+            "activityDate": "2018-03-21T09:41:38.599Z",
+            "formName": "eventWithCustomFields",
+            "formId": "eventWithCustomFields",
+            "customFields": [
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2018-03-21T22:12:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityTExtbox",
+                  "value": "213123213",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivitySingleChoice",
+                  "value": "4",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "2132132",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityYESNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "EventActivityNumber",
+                  "value": "213123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-21T09:41:47.485Z"
+         },
+         {
+            "id": "9b39bbc0-bcc9-4d84-9cf8-eae3f5cf0a9f",
+            "supporterId": "eba86ce4-da04-4afe-b6a6-95b83f23e85a",
+            "activityDate": "2018-03-20T10:00:17.225Z",
+            "formName": "p2p with custom fields",
+            "formId": "p2p with custom fields",
+            "customFields": [
+               {
+                  "name": "p2p Activity DAte Time",
+                  "value": "2018-03-21T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2018-03-30T02:26:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2pTextBox",
+                  "value": "p2pTextBox text box",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "General TEXt BOX value",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity YES NO",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity TEXT BOX",
+                  "value": "2p Activity TEXT BOX value",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity Single Choice",
+                  "value": "single hoice 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity NUMBER",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-20T01:25:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "textBox supporter",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-20T10:00:22.567Z"
+         },
+         {
+            "id": "dff5f838-a983-4936-b2ac-24a1ac1288f0",
+            "supporterId": "be65937c-fe5d-40c9-a744-1537a99c61fc",
+            "activityDate": "2018-03-23T14:01:33.414Z",
+            "formName": "p2p with custom fields",
+            "formId": "p2p with custom fields",
+            "customFields": [
+               {
+                  "name": "p2p Activity DAte Time",
+                  "value": "2018-03-12T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GemeralDateTime",
+                  "value": "2018-03-12T22:12:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2pTextBox",
+                  "value": "p2p text box value",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "general TExt box",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity YES NO",
+                  "value": "false",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity TEXT BOX",
+                  "value": "p2p activity text vis",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity Single Choice",
+                  "value": "single hoice 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "p2p Activity NUMBER",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 1",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-23T05:26:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "text box",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-23T14:01:35.883Z"
+         },
+         {
+            "id": "e9e60a88-a211-4842-a46c-65740c1fff83",
+            "supporterId": "88bb6f07-90a4-4bc6-88e7-762525cb8b98",
+            "activityDate": "2018-03-09T08:22:00.590Z",
+            "formName": "SignUpFormData",
+            "formId": "SignUpFormData",
+            "customFields": [
+               {
+                  "name": "General TEXt BOX",
+                  "value": "genaral value",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               }
+            ],
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-09T08:22:05.021Z"
+         },
+         {
+            "id": "fe59f84f-8633-4f14-8a92-ddbedf49cad1",
+            "supporterId": "0d456fc0-182d-4b2e-b447-38827fa5dc69",
+            "activityDate": "2018-03-28T14:34:53.935Z",
+            "formName": "p2p with custom fields",
+            "formId": "p2p with custom fields",
+            "activityType": "SUBSCRIBE",
+            "modifiedDate": "2018-03-28T14:34:55.978Z"
+         }
+      ],
+      "count": 11
+   }
+}

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="DevApiTests" verbose="1">
+    <parameter name="ENV" value="https://hq.test.igniteaction.net/"></parameter>
+    <parameter name="AUTH_TOKEN"
+               value="suKJP1QzogPihY85MGNsdmigYBWkvHB2gm7YjU9RRpbTrh7dZ7ByHmZ47ETyoqJI1Yujea5yIssdFeK7Gn6m10hGduvc56uT-w_nk0K7KaFY-fVJYaK2dWfxaCDbMIY16iJ2-N46U2sMoib0_RmEew"></parameter>
+    <!--<parameter name="ENV" value="https://hq.uat.igniteaction.net/"></parameter>-->
+    <!--<parameter name="ENV" value="https://hq.salsalabs.org/"></parameter>-->
+    <test name="Get petition form submissions">
+        <classes>
+            <class name="com.salsalabs.ignite.automation.suites.api.devApi.GetPetitionFormSubmissionsTest"/>
+        </classes>
+    </test>
+</suite>

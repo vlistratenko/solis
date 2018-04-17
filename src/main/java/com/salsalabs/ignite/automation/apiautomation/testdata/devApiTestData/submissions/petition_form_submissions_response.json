@@ -1,0 +1,122 @@
+{
+   "id": "b3ee8730-9307-413c-a32d-56f94a79df36",
+   "timestamp": "2018-04-13T13:32:39.383Z",
+   "header": {
+      "processingTime": 131,
+      "serverId": "test-hqapp2.ignite.net"
+   },
+   "payload": {
+      "total": 1,
+      "offset": 0,
+      "results": [
+         {
+            "id": "5787f372-9d11-42d0-8d3f-f40c636d4b84",
+            "supporterId": "2e8c5878-6ed1-4560-b825-341dea52a523",
+            "activityDate": "2018-03-20T10:58:21.029Z",
+            "formName": "Petition With Custom Fields",
+            "formId": "Petition With Custom Fields",
+            "customFields": [
+               {
+                  "name": "PetitionActivityTExtBox",
+                  "value": "PetitionActivityTExtBox    with",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityYESNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivitySingleChoice",
+                  "value": "12",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityDAteTime",
+                  "value": "2018-02-12T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityNumber",
+                  "value": "23123",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "General TEXt BOX",
+                  "value": "eneral TEXt BOX",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralYEsNo",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityJUSTDATE",
+                  "value": "2018-03-20T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "PetitionActivityDAteTime1",
+                  "value": "2018-02-05T22:00:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralTextBOX",
+                  "value": "345345",
+                  "type": "NUMBER",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "GeneralSinglChoice",
+                  "value": "genraral 2",
+                  "type": "STRING",
+                  "customFieldType": "Activity"
+               },
+               {
+                  "name": "yesNO",
+                  "value": "true",
+                  "type": "BOOLEAN",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "DateTime",
+                  "value": "2018-03-19T22:18:00.000Z",
+                  "type": "DATE",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "textBox",
+                  "value": "TextBox value",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "Number12",
+                  "value": "123123",
+                  "type": "NUMBER",
+                  "customFieldType": "Supporter"
+               },
+               {
+                  "name": "SignleChoice",
+                  "value": "2",
+                  "type": "STRING",
+                  "customFieldType": "Supporter"
+               }
+            ],
+            "activityType": "PETITION",
+            "modifiedDate": "2018-03-20T10:58:24.319Z"
+         }
+      ],
+      "count": 1
+   }
+}
