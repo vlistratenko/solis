@@ -74,7 +74,7 @@ public class ManagePage  extends HomePage{
 	}
 
 	public EmailDefaultsPage switchToEmailDefaultsPagePage() {
-		switchToDropDown.selectByLabelJS("Email Defaults");
+		switchToDropDown.selectByLabelJS("Email & Form Defaults");
 		return new EmailDefaultsPage();
 	}
 
