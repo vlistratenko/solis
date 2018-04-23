@@ -11,7 +11,7 @@
       "name": "eventWithCustomFields",
       "description": "eventWithCustomFields",
       "createDate": "2018-03-20T08:44:00.090Z",
-      "publishDate": "2018-03-20T09:07:43.280Z",
+      "publishDate": "2018-04-23T14:46:20.976Z",
       "modifiedDate": "2018-03-20T08:44:00.090Z",
       "status": "PUBLISHED",
       "visibility": "PUBLIC",
@@ -255,7 +255,7 @@
       "tickets": [
          {
             "name": "Ticket NAme",
-            "price": "100"
+            "price": "100.00"
          }
       ]
    }
