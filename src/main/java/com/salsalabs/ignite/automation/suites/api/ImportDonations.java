@@ -29,8 +29,8 @@ import static com.salsalabs.ignite.automation.apiautomation.config.Config.*;
 public class ImportDonations extends CommonTest {
 
     private MetricsResponse metricsBeforeExecution;
-    private String email1 = EmailGenerator.getRandomEmail();
-    private String email2 = EmailGenerator.getRandomEmail();
+    private String email1;
+    private String email2;
     private String activityId1;
     private String activityId2;
 
@@ -47,6 +47,8 @@ public class ImportDonations extends CommonTest {
                     put(TEST_DATA_PATH_DONATIONS_RESPONSES + "get_imported_transaction_after_refund_response.json", GetActivityByIdResponse.class);
                 }}
         );
+        email1 = EmailGenerator.getRandomEmail();
+        email2 = EmailGenerator.getRandomEmail();
     }
 
 
