@@ -1,13 +1,9 @@
 package com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.ticketedeventform;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -19,7 +15,7 @@ public class Ticket {
     @JsonProperty("name")
     private String name;
     @JsonProperty("price")
-    private Integer price;
+    private String price;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -34,12 +30,12 @@ public class Ticket {
     }
 
     @JsonProperty("price")
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
     @JsonProperty("price")
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

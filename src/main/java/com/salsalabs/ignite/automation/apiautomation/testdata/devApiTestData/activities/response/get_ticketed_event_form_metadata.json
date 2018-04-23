@@ -255,7 +255,7 @@
       "tickets": [
          {
             "name": "Ticket NAme",
-            "price": 100
+            "price": "100"
          }
       ]
    }
