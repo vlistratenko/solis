@@ -41,6 +41,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 							true).
 		fillRegistrationStepAndGoNext("p2p registration " + CommonUtils.getUnicName(),
 				true,
+				true,
 				"10",
 				"5").
 		clickContinueButton().
@@ -93,6 +94,8 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		clickPublishButton().
 		storeEventLink(formName);
 		
+		//CommonUtils.setParam(PropertyName.P2P_FORM_LINK, "https://testvco823.test.igniteaction.net/p2pform20180424133712/index.html");
+		
 		verifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
 	}
 	
@@ -112,7 +115,8 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 				openp2pEventWidgetByLink(formURL);
 				eventp2pWidgetPage.
 		openp2pEventRegistrationPage().
-		selectFundraiserCheckBox(true).
+		addRegistrationToCart().
+		selectRegistrationType().
 		clickNextButtonOnRegistrationTypesPage().
 		fillFundraiserSignInForm("Tester",
 				"Anonimus",

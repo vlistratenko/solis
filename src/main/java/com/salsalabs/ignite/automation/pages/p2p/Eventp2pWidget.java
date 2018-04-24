@@ -5,6 +5,7 @@ import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Element;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.SelectBox;
 import com.salsalabs.ignite.automation.elements.Tabs;
@@ -25,23 +26,23 @@ public class Eventp2pWidget extends EventWidget {
 	Label eventSubsrIsSccessMessage = new LabelImpl("//h3[.='Thank You!']", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
-	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
+	Button nextButton = new ButtonImpl("//a[contains(., 'Next')]", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
-	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
+	Button checkoutButton = new ButtonImpl("//a[contains(text(), 'Checkout')]", "Checkout", true);
 	
 	CheckBox isFundraiserCheckBox = new CheckBoxImpl("//input[@id='yes_register_fundraiser']", "Yes, I want to register as a fundraiser ");
-	Button createFundraiserAccountButton = new ButtonImpl("//a[.='Create an Account']", "Create an Account");
-	TextBox fundraiserFNameField = new TextBoxImpl("//input[@id='user_first_name']", "Fundraiser First Name", true);
-	TextBox fundraiserLNameField = new TextBoxImpl("//input[@id='user_last_name']", "Fundraiser Last Name", true);
-	TextBox fundraiserEmailField = new TextBoxImpl("//input[@id='user_email']", "Fundraiser Email", true);
+	Button createFundraiserAccountButton = new ButtonImpl("//a[contains(., 'Create an Account')]", "Create an Account");
+	TextBox fundraiserFNameField = new TextBoxImpl("//input[contains(@id, 'first_name')]", "Fundraiser First Name", true);
+	TextBox fundraiserLNameField = new TextBoxImpl("//input[contains(@id, 'last_name')]", "Fundraiser Last Name", true);
+	TextBox fundraiserEmailField = new TextBoxImpl("//input[contains(@id, 'email')]", "Fundraiser Email", true);
 	TextBox fundraiserPasswordField = new TextBoxImpl("//input[@id='user_password']", "Fundraiser Password", true);
 	TextBox fundraiserPasswordConfirmationField = new TextBoxImpl("//input[@id='user_password_confirmation']", "Fundraiser Password confirmation", true);
-	Button submitFundraiserRegistration = new ButtonImpl("//a[.='Next']", "Submit fundraiser registration", true);
-	TextBox fundraiserPageNameField = new TextBoxImpl("//input[@id='fundraiser_stub_name']", "Fundraiser page name", true);
-	TextBox fundraiserGoalField = new TextBoxImpl("//input[@id='fundraiser_stub_goal_amount']", "Fundraiser goal", true);
+	Button submitFundraiserRegistration = new ButtonImpl("//a[contains(., 'Next')]", "Submit fundraiser registration", true);
+	TextBox fundraiserPageNameField = new TextBoxImpl("//input[contains(@id,'user_fundraiser_stubs_attributes_0_name')]", "Fundraiser page name", true);
+	TextBox fundraiserGoalField = new TextBoxImpl("//input[@id='user_fundraiser_stubs_attributes_0_goal_amount']", "Fundraiser goal", true);
 	Button withTeam = new ButtonImpl("//input[@id='yes_join_team']", "With team");
 	Button withoutTeam = new ButtonImpl("//input[@id='no_join_team']", "With team");
-	TextBox teamName = new TextBoxImpl("//input[@id='fundraiser_stub_team_name']", "Team goal");
+	TextBox teamName = new TextBoxImpl("//input[@id='team_name']", "Team name");
 	Button fundraiserPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Fundraiser link ");
 	Button teamPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Team link ");
 	
@@ -51,6 +52,8 @@ public class Eventp2pWidget extends EventWidget {
 	TextBox searchTeamButton= new TextBoxImpl("//label[.='Find a Team']/following::span[.='Search']", "Search a Team button");
 	
 	Tabs leaderboardTab = new TabsImpl("//div[@ignite-p2p-leaderboard='ignite-p2p-leaderboard']", "Leaderboard tabs element");
+	
+	Button addToCartButton = new ButtonImpl("//a[contains(.,'Add to Cart')]", "Add to cart");
 	
 	public Eventp2pWidget() {
 		super();
@@ -82,12 +85,24 @@ public class Eventp2pWidget extends EventWidget {
 		return this;
 	}
 	
-	public Eventp2pWidget selectFundraiserCheckBox(Boolean isFundraiser) {
+	/*public Eventp2pWidget selectFundraiserCheckBox(Boolean isFundraiser) {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		isFundraiserCheckBox.waitElement(10);
 		isFundraiserCheckBox.check(isFundraiser);
 		sleep(3);
 		switchDefaultContent();
+		return this;
+	}*/
+	
+	public Eventp2pWidget addRegistrationToCart() {
+		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		addToCartButton.waitElement();
+		addToCartButton.click();
+		switchDefaultContent();
+		return this;
+	}
+	
+	public Eventp2pWidget selectRegistrationType() {
 		return this;
 	}
 	
@@ -102,18 +117,22 @@ public class Eventp2pWidget extends EventWidget {
 	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
 			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {		
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		if (!createFundraiserAccountButton.waitElement(5)) {
-			new ButtonImpl("//div[@class='checkout_logout']/a", "Fundraiser logout link").click();
-		}
-		createFundraiserAccountButton.waitElement();
-		createFundraiserAccountButton.click();
+		//createFundraiserAccountButton.waitElement();
+		
 		fundraiserFNameField.waitElement();
 		fundraiserFNameField.type(fundraiserFName);
 		fundraiserLNameField.type(fundraiserLName);
 		fundraiserEmailField.type(fundraiserEmail);
-		fundraiserPasswordField.type(fundraiserPassword);
-		fundraiserPasswordConfirmationField.type(fundraiserPasswordConfirmation);
 		submitFundraiserRegistration.click();
+		
+		
+		if (createFundraiserAccountButton.waitElement(5)) {
+			//new ButtonImpl("//div[@class='checkout_logout']/a", "Fundraiser logout link").click();
+			createFundraiserAccountButton.click();
+			fundraiserPasswordField.waitElement();
+			fundraiserPasswordField.type(fundraiserPassword);
+			fundraiserPasswordConfirmationField.type(fundraiserPasswordConfirmation);			
+		}
 		CommonUtils.setParam("fundraiserName", fundraiserFName + "." + fundraiserLName + CommonUtils.getUnicName());
 		fundraiserPageNameField.type(CommonUtils.getParam(PropertyName.LAST_FUNDRAISER_NAME));
 		fundraiserGoalField.type("1000");
@@ -125,6 +144,7 @@ public class Eventp2pWidget extends EventWidget {
 			withoutTeam.click();
 		}
 		sleep(3);
+		submitFundraiserRegistration.click();
 		switchDefaultContent();
 		return this;
 	}

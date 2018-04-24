@@ -344,8 +344,8 @@ public class CreateDEMOData extends SeleneseTestCase {
 				if (isWithTickets) {
 					eventp2pWidgetPage.
 					openp2pEventRegistrationPage().
-					selectFundraiserCheckBox(isFundraiser).
-					selectQtyOfAttendee().
+					//selectFundraiserCheckBox(isFundraiser).
+					//selectQtyOfAttendee().
 					clickNextButtonOnRegistrationTypesPage().
 					fillp2pEventRegistrationForm(SeleneseTestCase.emailClient.getEmailBox(fname + "." + lname + CommonUtils.getRandomNumericValueFixedLength(4)),
 							fname,
@@ -383,7 +383,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				if (!isWithTickets) {
 					eventp2pWidgetPage.
 					openp2pEventRegistrationPage().
-					selectFundraiserCheckBox(isFundraiser).
+					//selectFundraiserCheckBox(isFundraiser).
 					clickNextButtonOnRegistrationTypesPage().
 					fillFundraiserSignInForm(fname,
 							lname,
@@ -394,7 +394,7 @@ public class CreateDEMOData extends SeleneseTestCase {
 				}else{
 					eventp2pWidgetPage.
 					openp2pEventRegistrationPage().
-					selectFundraiserCheckBox(isFundraiser).
+					//selectFundraiserCheckBox(isFundraiser).
 					selectQtyOfAttendee().
 					clickNextButtonOnRegistrationTypesPage().
 					fillFundraiserSignInForm(fname,
