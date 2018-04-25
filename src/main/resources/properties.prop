@@ -1,9 +1,9 @@
 #AUTOMATICALLY GENERATED
-#Wed Jan 24 23:50:20 EET 2018
+#Wed Apr 25 15:14:17 EEST 2018
 current.Password=\!QAZ2wsx
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
-googleSpreadSheetId=1-zu6i1-8xTYYANXk6ams7wBrp24eVQ56sLsgvBxZZMo
+googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
 planName=false
 currentWindowHandle=CDwindow-(2260D321382836A6505E3A6EBBFB0CDD)
 personZip=20008
@@ -19,7 +19,7 @@ homePhone=777-777-7777
 activityDateTimeCustomFieldValue=10/11/2017 01\:30 am
 activityNumberCustomFieldValue=13
 Admin.orgName=automated_testing1
-googleAccountEmail=listratenko@insart.com
+googleAccountEmail=vlistratenko@salsalabs.com
 maxRetryCount=2
 personFName=personFName
 supporterTextBoxCustomFieldValue=supporterTextBoxCustomFieldValue
@@ -43,7 +43,7 @@ addressLine2=addressLine2
 personCity=personCity
 addressLine1=addressLine1
 gender=Male
-current.Login=2712.3e41c646@mailosaur.in
+current.Login=2712.3e41c646@mailosaur.io
 Admin.emailBase=0
 Admin.lastName=LastName
 Admin.firstName=FirstName
