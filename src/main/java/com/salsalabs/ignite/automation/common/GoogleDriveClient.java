@@ -46,9 +46,11 @@ public class GoogleDriveClient {
 		IS_GOOGLE_DRIVE_CLIENT_ENABLED = Boolean.valueOf(CommonUtils.getProperty(PropertyName.UPDATE_TC,"false"));
     	testsResults =  new HashMap();
     	try {
-			transport = GoogleNetHttpTransport.newTrustedTransport();
-			dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
-			service = getSheetsService();
+    		if (IS_GOOGLE_DRIVE_CLIENT_ENABLED) {
+    			transport = GoogleNetHttpTransport.newTrustedTransport();
+    			dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
+    			service = getSheetsService();
+    		}
 		} catch (GeneralSecurityException | IOException e) {
 			e.printStackTrace();
 		}
