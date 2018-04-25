@@ -3,6 +3,7 @@ package com.salsalabs.ignite.automation.suites.regression;
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
+import com.salsalabs.ignite.automation.common.TestInfo;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.MyProfilePage;
@@ -19,6 +20,7 @@ public class CheckMyProfileTest extends SeleneseTestCase {
     private String email = RandomStringUtils.randomAlphanumeric(10) + "@example.com";
     private String phone = CommonUtils.getRandomNumericValueFixedLength(10);
 
+    @TestInfo(statusCell = "G1", listName = "Fundraising")
     @Parameters({"login", "password"})
     @Test(priority = 0, enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"checkMyProfile"})
     public void updateMyProfileData(String login, String password) {

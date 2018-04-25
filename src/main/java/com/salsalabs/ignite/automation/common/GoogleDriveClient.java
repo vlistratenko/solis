@@ -5,6 +5,7 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleOAuthConstants;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -68,6 +69,7 @@ public class GoogleDriveClient {
 	                    .setDataStoreFactory(dataStoreFactory)
 	                    .setAccessType("offline")
 	                    .build();
+	    flow.newAuthorizationUrl().setRedirectUri(GoogleOAuthConstants.AUTHORIZATION_SERVER_URL).build();
 		Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(EMAIL_BOX);
 	    return credential;
 	}

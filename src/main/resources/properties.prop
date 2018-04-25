@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Wed Apr 25 15:14:17 EEST 2018
+#Wed Apr 25 18:13:01 EEST 2018
 current.Password=\!QAZ2wsx
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
@@ -19,7 +19,7 @@ homePhone=777-777-7777
 activityDateTimeCustomFieldValue=10/11/2017 01\:30 am
 activityNumberCustomFieldValue=13
 Admin.orgName=automated_testing1
-googleAccountEmail=vlistratenko@salsalabs.com
+googleAccountEmail=listratenko@insart.com
 maxRetryCount=2
 personFName=personFName
 supporterTextBoxCustomFieldValue=supporterTextBoxCustomFieldValue
@@ -34,19 +34,19 @@ personEmail=autosupporterVe21@test.com
 country=UA
 gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
-suffix=suffixValue
-dateOfBirth=2017-09-10T00\:00\:00.000Z
-subscribeWidgetLink=https\://testvco2712.test.igniteaction.net/subscribewidgetname_z67tb
 Environment=TEST
+subscribeWidgetLink=https\://testvco2712.test.igniteaction.net/subscribewidgetname_z67tb
+dateOfBirth=2017-09-10T00\:00\:00.000Z
+suffix=suffixValue
 workPhone=777-777-7777
-addressLine2=addressLine2
 personCity=personCity
+addressLine2=addressLine2
 addressLine1=addressLine1
 gender=Male
 current.Login=2712.3e41c646@mailosaur.io
 Admin.emailBase=0
-Admin.lastName=LastName
 Admin.firstName=FirstName
-state=UA-63
-activityYesNoCustomFieldValue=True
+Admin.lastName=LastName
 CM.firstName=0
+activityYesNoCustomFieldValue=True
+state=UA-63
