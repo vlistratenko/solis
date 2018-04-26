@@ -1,15 +1,16 @@
 #AUTOMATICALLY GENERATED
-#Wed Apr 25 18:13:01 EEST 2018
+#Thu Apr 26 00:15:29 EEST 2018
 current.Password=\!QAZ2wsx
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
 googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
 planName=false
 currentWindowHandle=CDwindow-(2260D321382836A6505E3A6EBBFB0CDD)
+test=
 personZip=20008
 CM.lastName=0
 activityTextBoxCustomFieldValue=activityTextBoxCustomFieldValue
-updateTC=true
+updateTC=false
 Admin.email=0@testauto.igniteaction.net
 supporterSingleChoiceCustomFieldValue=value1
 buildVersion=false
@@ -50,4 +51,3 @@ Admin.lastName=LastName
 CM.firstName=0
 activityYesNoCustomFieldValue=True
 state=UA-63
-test
