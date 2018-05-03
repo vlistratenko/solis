@@ -67,7 +67,7 @@ public abstract class Browser {
 	
 	public void open(String url) {
 		url = url.replaceFirst("hq.uat.igniteaction.net", "hq.uat.ignite.net");
-		logger.info("Try to open URL - " + url);
+		logger.info("Trying to open URL - " + url);
 		SeleneseTestCase.bug.add("Open " + url);
 		driver.navigate().to(url);
 		driver.manage().window().maximize();
@@ -90,7 +90,7 @@ public abstract class Browser {
 	}
 
 	protected void refresh() {
-		logger.info("Try to refresh the page");
+		logger.info("Trying to refresh the page");
 		driver.navigate().refresh();
 		logger.info("Page is refreshed");
 	}
@@ -192,7 +192,7 @@ public abstract class Browser {
 
 	protected void sleep(int seconds) {
 		try {
-			logger.info("Wait for " + seconds + " seconds");
+			logger.info("Waiting for " + seconds + " seconds...");
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
 			logger.error("", e);

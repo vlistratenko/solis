@@ -160,17 +160,17 @@ public class SeleneseTestCase {
 	}
 
 	public static void deletecoockies() {
-		logger.info("Try to delete coockies");
+		logger.info("Trying to delete coockies");
 		driver.manage().deleteAllCookies();
 	}
 
 	public static Set<Cookie> getCoockies() {
-		logger.info("Try to get coockies");
+		logger.info("Trying to get coockies");
 		return driver.manage().getCookies();
 	}
 
 	public static void close() {
-		logger.info("Try to close selenium");
+		logger.info("Trying to close selenium");
 		driver.quit();
 	}
 

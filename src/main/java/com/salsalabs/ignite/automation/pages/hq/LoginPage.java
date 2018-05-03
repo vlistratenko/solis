@@ -16,7 +16,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.TLWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.TargetedActionPublicForm;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
 import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
@@ -211,9 +211,9 @@ public class LoginPage extends Browser{
 		return new PetitionWidget();
 	}
 	
-	public TLWidget openTLWidgetByLink(String string) {
+	public TargetedActionPublicForm openTLWidgetByLink(String string) {
 		openWidget(string);	
-		return new TLWidget();
+		return new TargetedActionPublicForm();
 	}
 	
 	private void openWidget(String string) {

@@ -37,8 +37,8 @@ public class TextBoxImpl extends ElementImpl implements TextBox {
 
 	@Override
 	public void type(String value) {
-		logger.info("Type " + value + " in to the " + elementName);
-		SeleneseTestCase.bug.add("Type " + value + " in to the " + elementName);
+		logger.info("Type " + "\"" + value + "\"" + " into the " + elementName);
+		SeleneseTestCase.bug.add("Type " + value + " into the " + elementName);
 		super.type(path, value);
 	}
 

@@ -13,8 +13,8 @@ public class TargetActionsPage extends SubscribeWidget {
     Button skipTwitterPost = new ButtonImpl("//a[contains(text(), 'Skip Tweeting')]", "Create Targeted Action");
 
     public AddTargetedActionPage openAddTargetedActionPage() {
-        createActionDropDown.click();
-        createTargetedActionButton.click();
+        createActionDropDown.clickJS();
+        createTargetedActionButton.clickJS();
         return new AddTargetedActionPage();
     }
 

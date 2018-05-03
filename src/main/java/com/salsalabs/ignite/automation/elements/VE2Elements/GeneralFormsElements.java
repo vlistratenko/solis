@@ -25,7 +25,8 @@ public class GeneralFormsElements<T> {
             case "REGISTERBUTTON": {element = new RegisterButton("//*[@class='icon-icon-button']//*[.='Register Button']","Register Button element");element.drop(); break;}
             case "REGISTRATION": {element = new Registration("//*[@class='icon-clipboard']//span[.='Registration']","Registration element");element.drop(); break;}
             case "DONATEBUTTON": {element = new DonateButton("//span[.='Donate Button']", "Donate Button"); element.drop(); break;}
-
+            case "MULTISTEPFORM": {element = new MultiStepForm("//span[.='Multi-step Form']", "Multi-step Form element"); element.drop(); break;}
+            case "TARGETEDMESSAGES": {element = new TargetedMessages("//span[.='Targeted Messages']", "Targeted Messages form element"); element.drop(); break;}
         }
         if (!value.contains("COLUMN") && !value.contains("FORM_FIELD")) {
         	generalElementPanel.changePath("", generalElementPanel.getPath() + "[" + elementsCount + "]");

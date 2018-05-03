@@ -90,7 +90,7 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public void clickJS() {
-		logger.info("Click by JS on " + elementName);
+		logger.info("Click with JS on " + elementName);
 		WebElement element = findElementByXpath(path);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
@@ -197,13 +197,13 @@ public abstract class ElementImpl implements Element {
 
 	@Override
 	public boolean isEnabled() {
-		logger.info("Check is the " + elementName + " enabled");
+		logger.info("Check if " + elementName + " is enabled");
 		return isEnabled(path);
 	}
 
 	@Override
 	public boolean isDisplayed() {
-		logger.info("Check is the " + elementName + " displayed");
+		logger.info("Check if " + elementName + " is displayed");
 		return isDisplayed(path);
 	}
 
