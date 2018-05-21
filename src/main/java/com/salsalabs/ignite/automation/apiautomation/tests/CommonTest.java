@@ -3,12 +3,17 @@ package com.salsalabs.ignite.automation.apiautomation.tests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.requests.CommonRequest;
+import com.salsalabs.ignite.automation.common.JSONCompareUtil;
+
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,6 +21,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
+import com.google.gson.*;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
@@ -85,6 +91,28 @@ public class CommonTest {
     public void setHeaders(HttpHeaders headers) {
         this.headers = headers;
     }
+    
+    public void assertJSON(Object expected, Object actual/*, String message*/) throws JSONException{
+    	try {
+    		String exp = new Gson().toJson(expected);
+    		String act = new Gson().toJson(actual);
+    		String[] ignoredNodes = {"rateLimit",
+    				"lastApiCall",
+    				"totalApiCalls",
+    				"currentRateLimit",
+    				"header.processingTime",
+    				"payload.currentRateLimit",
+    				"payload.lastAPICall",
+    				"payload.totalAPICalls",
+    				"timestamp"
+    				};
+    		JSONCompareUtil.jsonXAssertEqualsIgnoreNodes("Response Match : ", exp, act, ignoredNodes, JSONCompareMode.NON_EXTENSIBLE);//, new DynamicValueTokenComparator(JSONCompareMode.NON_EXTENSIBLE)
+		} catch (AssertionError e) {
+			logger.error("Expected:" + expected);
+			logger.error("Actual:" + actual);
+			throw new JSONException(e.getMessage());
+		}
+    }
 
     public RestTemplate restTemplate()
             throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
@@ -107,5 +135,7 @@ public class CommonTest {
         RestTemplate restTemplate = new RestTemplate(requestFactory);
         return restTemplate;
     }
+    
+    
 
 }
