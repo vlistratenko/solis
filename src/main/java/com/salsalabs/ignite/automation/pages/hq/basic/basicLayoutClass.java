@@ -13,7 +13,7 @@ public class basicLayoutClass extends Browser {
 		Panel img = new PanelImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::img[contains(@alt, '" + layout + "')]", layout + " layout image");
 		img.fluentWaitForElementPresenceIgnoringExceptions();
 		img.scrollIntoView();
-		img.click();
+		lay.click();
 	}
 	
 	public static Button getlayoutButton(String layout) {
