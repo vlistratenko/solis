@@ -4,6 +4,7 @@ package com.salsalabs.ignite.automation.pages.hq.emails;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.TextBox;
+import com.salsalabs.ignite.automation.elements.VE2Elements.ButtonVEElement;
 import com.salsalabs.ignite.automation.elements.VE2Elements.TextVEElement;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
@@ -25,12 +26,13 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	Button addSplitButton = new ButtonImpl("//a[.='+']", "Add split");
 	Button SplitTab = new ButtonImpl("//form[@id='emailblastform']/descendant::a[contains(text(),'Split')]", "Split tab");
 	Button composeButton = new ButtonImpl("//button[@id='btnCompose']", "Next: Compose Your Email");
-	LabelImpl firstContentElement = new LabelImpl("(//div[contains(@class,'content-render-wrapper')])[1]", "Element");
+	LabelImpl firstTextElement = new LabelImpl("(//div[contains(@class,'content-render-wrapper')])[3]", "Element");
 	Button firstEditBtn = new ButtonImpl("(//span[@button-content-edit-text])[1]", "Edit");
 	TextBox inputLinkField = new TextBoxImpl("//input[@class='cke_dialog_ui_input_text']", "Input Link");
 	Button addLinkButton = new ButtonImpl("//a[contains(@class,'cke_dialog_ui_button_ok')]", "Add link on the popup");
 	Button addExternalLink = new ButtonImpl("//a[.='An External Page']", "An External Page");
 	Button saveContent = new ButtonImpl("//a[contains(text(),'Save Content')]", "Save Content");
+	//Button buttonFormElement = new ButtonImpl("//div[contains(@class,'content-render')]/descendant::a[contains(@class,'button')]", "Button form element");
 	
 	TableImpl mergeFildsList = new TableImpl("//div[@role='dialog' and not(contains(@style,'display: none'))]/descendant::table[@id='fieldResults']", "List with merge fields");
 	Button okButton = new ButtonImpl("//div[.='Insert a merge field']/ancestor::table/descendant::td [contains(@id, 'cke_dialog_footer')]/descendant::a[@title='OK']/span", "Save merge field");
@@ -49,16 +51,17 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 			//selectScheme.selectByLabel("Arial, Helvetica, sans-serif");
 			subjectField.type(subj);
 			emailFromField.type(emailFrom);
-		}		
+		}
+		setLinkInTheButton("Web version of this email");
 		PublishButton.click();
 		return new AddEmailsPage_PublishTab();
 	}
 	
 	public AddEmailsPage_ComposeTab AddAllMergeFieldsIntoBody() {
-		firstContentElement.scrollIntoViewAndDown();
-		firstContentElement.moveToElement();//scrollIntoView();
-		firstContentElement.highlight();
-		firstContentElement.clickJS();
+		firstTextElement.scrollIntoViewAndDown();
+		firstTextElement.moveToElement();//scrollIntoView();
+		firstTextElement.highlight();
+		firstTextElement.clickJS();
 		firstEditBtn.click();
 		sleep(5);
 		//Text.Text.textElementContent.click();
@@ -128,10 +131,10 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	
 	public AddEmailsPage_ComposeTab addLink(String link) {
 		if (!link.equalsIgnoreCase("")){
-			firstContentElement.scrollIntoViewAndDown();
-			firstContentElement.moveToElement();//scrollIntoView();
-			firstContentElement.highlight();
-			firstContentElement.click();
+			firstTextElement.scrollIntoViewAndDown();
+			firstTextElement.moveToElement();//scrollIntoView();
+			firstTextElement.highlight();
+			firstTextElement.click();
 			firstEditBtn.click();
 			TextVEElement.textElementContent.type("Link: ");
 			//switchDefaultContent();
@@ -164,5 +167,13 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 		verifier.verifyEquals(
 				(String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#emailblastform > div:nth-child(4) > div > div:nth-child(3) > div:nth-child(7) > div > div:nth-child(2) > div > validation-message > div > span > input').value"),
 				replyEmailAddress);
+	}
+	
+	private void setLinkInTheButton(String linkName) {
+		/*buttonFormElement.waitElement();
+		buttonFormElement.scrollIntoView();
+		buttonFormElement.doubleClick();*/
+		ButtonVEElement calltoActionButton = new ButtonVEElement("//div[contains(@class,'content-render')]/descendant::a[contains(@class,'button')]", "Call to Action button");
+		calltoActionButton.setLink(linkName);
 	}
 }

@@ -55,7 +55,7 @@ public class VEElements extends ElementImpl {
     }
     
     public void openEditElementPopUp(String elementLabel){
-    	ButtonImpl fieldEditIcon = new ButtonImpl("//span[.='" + elementLabel + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit Text']", elementLabel + " edit icon");
+    	ButtonImpl fieldEditIcon = new ButtonImpl("//span[.='" + elementLabel + "']/ancestor::*[@class='content-render-wrapper']//*[contains(@title,'Edit')]", elementLabel + " edit icon");
         fieldEditIcon.moveToElement();
         fieldEditIcon.waitElement(10);
         fieldEditIcon.clickJS();
