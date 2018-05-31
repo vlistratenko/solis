@@ -19,7 +19,7 @@ public class VerifySubscriptionManagementInEmail extends SeleneseTestCase {
 
     @Parameters({ "sendEmail.from", "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "email.verifySubscriptionManagement" }, description = "")
-    public void sendEmailBlastTest(String emailFrom, String login, String password) throws InterruptedException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, JSONException, IOException, URISyntaxException {
+    public void verifySubscriptionManagementInEmailTest(String emailFrom, String login, String password) throws InterruptedException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, JSONException, IOException, URISyntaxException {
         String messageTopic;
         String emailBlastName = CommonUtils.getRandomNumericValueFixedLength(10);
         String emailAddress = SeleneseTestCase.emailClient.getEmailBox(CommonUtils.getRandomNumericValueFixedLength(10));
