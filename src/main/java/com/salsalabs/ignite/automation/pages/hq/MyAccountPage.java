@@ -64,10 +64,14 @@ public class MyAccountPage extends HomePage {
     }
 
     public MyAccountPage verifyAccountUpdatedEmail(EmailClient<?> emailClient) {
+        return verifyAccountUpdatedEmail(emailClient, true);
+    }
+    
+    public MyAccountPage verifyAccountUpdatedEmail(EmailClient<?> emailClient, boolean isFailed) {
         Integer amounOfEmails = 0;
         sleep(8);
         amounOfEmails = emailClient.waitForEmails("Your account has been modified.", 1, 10).getEmailsBySubject("Your account has been modified.").size();
-        verifier.verifyEquals(amounOfEmails, 3, "Wrong amount of emails", true);
+        verifier.verifyEquals(amounOfEmails, 3, "Wrong amount of emails", isFailed);
         return this;
     }
 
