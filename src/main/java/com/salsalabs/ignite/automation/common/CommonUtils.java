@@ -1,33 +1,17 @@
 package com.salsalabs.ignite.automation.common;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
-
 import org.apache.logging.log4j.Logger;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
+
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class CommonUtils {
 
@@ -517,12 +501,12 @@ public class CommonUtils {
 	}
 	
 	public static void getListOfFilesInFolder() {
-		File folder = new File("d:/workspace/IgniteTestAutomation/src/main/resources/xml-tests/regression/");
+		File folder = new File("d:/workspace/IgniteTestAutomation/src/main/resources/xml-core/regression/");
 		File[] listOfFiles = folder.listFiles();
 
 	    for (int i = 0; i < listOfFiles.length; i++) {
 	      if (listOfFiles[i].isFile()) {
-	        System.out.println("<suite-file path=\"src/main/resources/xml-tests/regression/" + listOfFiles[i].getName() + "\" />");
+	        System.out.println("<suite-file path=\"src/main/resources/xml-core/regression/" + listOfFiles[i].getName() + "\" />");
 	      } else if (listOfFiles[i].isDirectory()) {
 	        System.out.println("Directory " + listOfFiles[i].getName());
 	      }

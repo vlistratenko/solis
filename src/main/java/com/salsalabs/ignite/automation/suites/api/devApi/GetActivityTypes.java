@@ -8,7 +8,6 @@ import java.util.HashMap;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.util.UriComponentsBuilder;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -18,9 +17,8 @@ import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.config.Config.Endpoints;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.activityTypes.response.ActivityTypesResponse;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.blasts.getBlastList.response.GetBlastListResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 
 public class GetActivityTypes  extends CommonTest{
 	private MetricsResponse metricsBeforeExecution;

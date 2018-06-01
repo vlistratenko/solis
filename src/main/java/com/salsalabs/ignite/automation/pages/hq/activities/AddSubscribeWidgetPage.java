@@ -8,22 +8,19 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.impl.*;
+import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
+import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
-import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
-import org.json.JSONException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
@@ -43,7 +40,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
 	protected Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	protected Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
-	protected Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
+	public Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
 	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
@@ -60,9 +57,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
+		sleep(5);
 		openComposeStepButton.click();
 		waitUntilAngularIsComplete();
-		//sleep(5);
 		return  this;		
 	}
 	
@@ -222,10 +219,16 @@ public class AddSubscribeWidgetPage extends HomePage {
 	
 	public AddSubscribeWidgetPage previewForm(){
 		previewButton.click();
-		sleep(5);
+		sleep(15);
 		switchToFrame("//iframe[@id='previewPaneIframe']");
 		newWidget(false).verifyWidgetElementsVisible(true);
 		switchDefaultContent();
+		return this;
+	}
+
+	public AddSubscribeWidgetPage preview(){
+		previewButton.click();
+		sleep(10);
 		return this;
 	}
 
@@ -336,5 +339,17 @@ public class AddSubscribeWidgetPage extends HomePage {
 		step.scrollIntoView();
 		step.click();
 		return  this;
+	}
+
+	public AddSubscribeWidgetPage checkIfDesignationFieldExistsOnForm(String... values) {
+		List<WebElement> field = driver.findElements(By.xpath(".//*[@name='designation']/option"));
+		for (int i = 0; i >= field.size(); i++) {
+			verifier.verifyEquals(field.get(i).getText(), values[i]);
+		}
+		return  this;
+	}
+
+	public void goToResultPage() {
+		nextResultButton.click();
 	}
 }

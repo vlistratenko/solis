@@ -3,13 +3,10 @@ package com.salsalabs.ignite.automation.suites.api.devApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform.FundraisingFormMetaData;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.submissions.petitionform.Request.PetitionFormSubmissionsRequest;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.submissions.petitionform.Response.PetitionFormsSubmissions;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.submissions.targetedactionform.Request.TargetedActionFormSubmissionsRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.submissions.targetedactionform.Response.TargetedActionFormsSubmissions;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_EVENT_FORm_SUMMARY_RESPONSE;
 import static com.salsalabs.ignite.automation.apiautomation.config.Config.TEST_DATA_PATH_SUBMISSIONS;
 
 public class GetTargetedActionFormSubmissionsTest extends CommonTest {

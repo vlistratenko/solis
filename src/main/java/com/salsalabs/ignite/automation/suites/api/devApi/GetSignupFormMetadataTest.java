@@ -2,10 +2,9 @@ package com.salsalabs.ignite.automation.suites.api.devApi;
 
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.fundraisingform.FundraisingFormMetaData;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metadata.signupform.SignupFormMetadata;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.apiautomation.models.supporter.requests.C
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.requests.GetSupporterRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.responses.Supporter;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.responses.SupporterRecordResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

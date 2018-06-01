@@ -17,9 +17,8 @@ import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.config.Config.Endpoints;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseFundraiserMetadataAndSummary.GetFundraiserMetadataAndSummary;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseFundraisers.GetP2pFundraiserSummaryResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 
 public class GetP2pFundraiserMetadataAndSummary extends CommonTest {
 

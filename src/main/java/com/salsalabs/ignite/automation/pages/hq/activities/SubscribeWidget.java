@@ -135,6 +135,31 @@ public class SubscribeWidget extends Browser{
 		
 	}
 
+	public SubscribeWidget fillSubscribeWidget(String personEmail,
+											   String personFName,
+											   String personLName,
+											   String personCity,
+											   String personZip,
+											   String state,
+											   String addressLine1) {
+		personEmailField.type(personEmail);
+		personFNameField.type(personFName);
+		personLNameField.type(personLName);
+		personCityField.type(personCity);
+		personZipField.type(personZip);
+		addressLine1Field.type(addressLine1);
+
+		if (state.equals("")) {
+			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
+		}else{
+			personStatesSelectBox.selectByValue(state);
+		}
+		sleep(3);
+		subscribeButton.click();
+		return this;
+
+	}
+
 	public SubscribeWidget fillSubscribeWidgetMinimumFieldsSet(String personEmail, String personFName, String personLName, boolean subscriptionStatus) {
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);

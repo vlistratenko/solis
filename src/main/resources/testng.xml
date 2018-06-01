@@ -10,20 +10,20 @@
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/SendTLDEMO.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/submitEventDEMO.xml" />
 		<suite-file path="src/main/resources/xml-tests/completed-suites/DEMO/submitp2pEventDEMO.xml" />
-		<!-- suite-file path="src/main/resources/xml-tests/completed-suites/BuyLicenseTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/EmailBlastSendTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/InviteNewCMTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateDonationFormHostedPageTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSupporterManuallyTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSignupFormTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/SupporterSubscribeSignupFormTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateCustomFieldTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/ImportSupportersTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreatePetitionTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreatePaymentGatewayTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/EmailBlastKPITest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSocialPostTest.xml" />
-		<suite-file path="src/main/resources/xml-tests/completed-suites/CreateSegmentTEst.xml" />
-		<suite-file path="src/test/resources/xml-tests/completed-suites/CreateCustomTarget.xml" /> -->
+		<!-- suite-file path="src/main/resources/xml-core/completed-suites/BuyLicenseTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/EmailBlastSendTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/InviteNewCMTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateDonationFormHostedPageTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateSupporterManuallyTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateSignupFormTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/SupporterSubscribeSignupFormTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateCustomFieldTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/ImportSupportersTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreatePetitionTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreatePaymentGatewayTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/EmailBlastKPITest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateSocialPostTest.xml" />
+		<suite-file path="src/main/resources/xml-core/completed-suites/CreateSegmentTEst.xml" />
+		<suite-file path="src/test/resources/xml-core/completed-suites/CreateCustomTarget.xml" /> -->
 	</suite-files>
 </suite>

@@ -37,7 +37,7 @@
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTargetsSummaryTest.xml"/>  
         <suite-file path="src/main/resources/xml-tests/api/devApi/GetTaSummaryTest.xml"/> 
         <suite-file path="src/main/resources/xml-tests/api/devApi/ThroughputTest.xml"/> 
-        <suite-file path="src/main/resources/xml-tests/api/devApi/WrondIDTest.xml"/> 
+        <suite-file path="src/main/resources/xml-tests/api/devApi/WrongIdTest.xml"/>
          
     </suite-files>
 </suite>

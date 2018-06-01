@@ -16,7 +16,7 @@ import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallass
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallsegment.request.QueryAllSegmentsRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryallsegment.response.QueryAllSegmentsResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.segments.queryassignedsupporter.response.QueryAssignedSupportersResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.*;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;

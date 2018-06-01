@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.apiautomation.models.activity.getactivity
 import com.salsalabs.ignite.automation.apiautomation.models.donations.request.ImportDonationRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.donations.response.ImportDonationResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import com.salsalabs.ignite.automation.apiautomation.utils.EmailGenerator;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;

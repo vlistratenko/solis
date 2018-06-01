@@ -1,4 +1,4 @@
 package com.salsalabs.ignite.automation.apiautomation.models;
 
-public class ExpectedResult {
+public abstract class ExpectedResult {
 }

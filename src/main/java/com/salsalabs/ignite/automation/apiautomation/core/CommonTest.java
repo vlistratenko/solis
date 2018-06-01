@@ -1,10 +1,10 @@
-package com.salsalabs.ignite.automation.apiautomation.tests;
+package com.salsalabs.ignite.automation.apiautomation.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.requests.CommonRequest;
 import com.salsalabs.ignite.automation.common.JSONCompareUtil;
-
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -12,16 +12,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-import com.google.gson.*;
 
 import javax.net.ssl.SSLContext;
 import java.io.File;
@@ -30,6 +28,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -128,11 +127,12 @@ public class CommonTest {
                 .setSSLSocketFactory(csf)
                 .build();
 
-        HttpComponentsClientHttpRequestFactory requestFactory =
-                new HttpComponentsClientHttpRequestFactory();
+        BufferingClientHttpRequestFactory requestFactory =
+                new BufferingClientHttpRequestFactory(new SelfSignedCertificateClientHttpRequestFactory());
 
-        requestFactory.setHttpClient(httpClient);
+        //requestFactory.setHttpClient(httpClient);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
+        restTemplate.setInterceptors(Collections.singletonList(new RequestResponseLoggingInterceptor(logger)));
         return restTemplate;
     }
     

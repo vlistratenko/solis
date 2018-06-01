@@ -10,7 +10,7 @@ import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.re
 import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.response.event.GetActivityByTypeTicketedEventResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.getactivitybytype.response.p2p.GetActivityByTypeP2PResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

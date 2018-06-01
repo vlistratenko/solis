@@ -9,7 +9,7 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 
-//old  not working assets tests, need to be removed
+//old  not working assets core, need to be removed
 public class AddAssetImageTest extends SeleneseTestCase {
 	
 	/*@Parameters({"imageToUpload"})

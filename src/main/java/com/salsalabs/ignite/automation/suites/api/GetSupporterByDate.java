@@ -5,7 +5,7 @@ import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.requests.bydate.SupporterByDateRequest;
 import com.salsalabs.ignite.automation.apiautomation.models.supporter.responses.bydate.SupporterByDateResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.testng.Assert;

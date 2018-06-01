@@ -16,10 +16,9 @@ import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.apiautomation.config.Config;
 import com.salsalabs.ignite.automation.apiautomation.config.Config.Endpoints;
 import com.salsalabs.ignite.automation.apiautomation.models.ExpectedResult;
-import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseEvent.GetEventSummaryResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.activity.getActivityFormSummary.responseFundraiserForms.GetFundraiserFormSummaryResponse;
 import com.salsalabs.ignite.automation.apiautomation.models.devApiModels.metrics.response.MetricsResponse;
-import com.salsalabs.ignite.automation.apiautomation.tests.CommonTest;
+import com.salsalabs.ignite.automation.apiautomation.core.CommonTest;
 
 public class GetFundraisingFormSummaryTest  extends CommonTest{
  private MetricsResponse metricsBeforeExecution;

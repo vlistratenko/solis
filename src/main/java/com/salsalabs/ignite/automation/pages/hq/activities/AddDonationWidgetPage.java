@@ -1,12 +1,10 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
-import com.salsalabs.ignite.automation.pages.hq.manage.CustomTargetsPage;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -14,6 +12,8 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	Button nextButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Design My Widget button", true);
 	Button btnPublish = new ButtonImpl("//button[@id='btnPublish']", "Publish This Form >>");
+	Button downloadResultsAsCsv = new ButtonImpl("//button[contains(text(), 'Download')]", "Download results as csv");
+
 	public static DropDown gatewaysList = new DropDownImpl(
 			"//gateways-and-queues//*[@class='custom dropdown']",
 			"//gateways-and-queues//*[@class='custom dropdown']/a",
@@ -70,5 +70,11 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 		verifier.verifyEquals(((SelectBoxImpl) modal.checkBoxDefaultValue).getSelectedLabel(modal.checkBoxDefaultValue.getPath()), defaultValue, "Check default value", true);
 		modal.saveButton.click();
 		return this;
+	}
+
+	public void verifyDesignationInCsv() {
+		sleep(60);
+		downloadResultsAsCsv.clickJS();
+		sleep(10);
 	}
 }
