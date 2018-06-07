@@ -55,6 +55,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
+	protected PanelImpl stickyTopBar = new PanelImpl(".//*[@class='toolbar sticky']", "Top bar");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -337,6 +338,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage editIdLikeToReceiveUpdatesCheckBoxProperties(String newFieldLabel, String defaultValue) {
 		idLikeToReceiveUpdatesElement.scrollIntoView();
+		hideTopBar();
 		idLikeToReceiveUpdatesElement.doubleClick();
 		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
 		modal.labelTextBox.type(newFieldLabel);
@@ -361,7 +363,12 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage switchBetweenFormSteps(int stepNumber) {
 		Button step = new ButtonImpl(".//*[@ng-repeat='step in elementSteps']" + "[" + stepNumber + "]", "Form step");
 		step.scrollIntoView();
-		step.click();
-		return  this;
+		step.clickJS();
+		return this;
+	}
+
+	public AddSubscribeWidgetPage hideTopBar() {
+		stickyTopBar.removeElementFromDom();
+		return this;
 	}
 }

@@ -81,4 +81,6 @@ public interface Element {
 	boolean waitForExists(Integer timeOut);
 
     void doubleClick();
+
+	void removeElementFromDom();
 }

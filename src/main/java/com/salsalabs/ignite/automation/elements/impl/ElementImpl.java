@@ -963,6 +963,11 @@ public abstract class ElementImpl implements Element {
 		new Actions(driver).moveToElement(driver.findElement(By.xpath(path))).doubleClick().build().perform();
 	}
 
-	
+	public void removeElementFromDom() {
+		logger.info("Removing element " + elementName);
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].remove();", element);
+	}
 	
 }

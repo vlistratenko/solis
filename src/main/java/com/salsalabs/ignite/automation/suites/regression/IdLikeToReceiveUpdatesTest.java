@@ -4,10 +4,9 @@ import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.*;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
-import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_PublishedDeatailsTab;
-import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -18,10 +17,10 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
     private String fieldLabel;
     private String email;
     private String hqHandle;
-
+    /*
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
-    public void signupForm(String login, String password) throws InterruptedException {
+    public void checkSignupForm(String login, String password) throws InterruptedException {
         generateTestData();
         AddSubscribeWidgetPage addSubscribeWidgetPage = new LoginPage().
                 doSuccessLogin(login, password).
@@ -42,6 +41,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         checkSubscriptionStatus();
     }
 
+    */
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void fundraisingForm(String login, String password) throws InterruptedException {
@@ -52,7 +52,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 openFundraisingWidgetPage().
                 openAddDonationWidgetPage().
                 createForm(activityName,"desc").
-                selectLayoutStep("Hero").
+                selectLayoutStep("Suggested").
                 switchBetweenFormSteps(2).
                 editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
                 checkIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
@@ -69,7 +69,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         getDriver().switchTo().window(hqHandle);
         checkSubscriptionStatus();
     }
-
+    /*
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void petitionForm(String login, String password) throws InterruptedException {
@@ -218,7 +218,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         checkSubscriptionStatus();
     }
 
-
+       */
 
     private void checkSubscriptionStatus() {
         new HomePage().openAudiencePage();
