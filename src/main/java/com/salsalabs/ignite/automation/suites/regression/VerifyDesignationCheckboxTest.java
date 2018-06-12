@@ -44,6 +44,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         configurationModalWindow.saveFieldConfiguration();
         String currentWindow = getDriver().getWindowHandle();
         addDonationPage.preview();
+        //
         //open preview and check designation
         Set<String> windows = getDriver().getWindowHandles();
         for (String handle : windows) {
