@@ -27,6 +27,7 @@ public class GeneralFormsElements<T> {
             case "DONATEBUTTON": {element = new DonateButton("//span[.='Donate Button']", "Donate Button"); element.drop(); break;}
             case "MULTISTEPFORM": {element = new MultiStepForm("//span[.='Multi-step Form']", "Multi-step Form element"); element.drop(); break;}
             case "TARGETEDMESSAGES": {element = new TargetedMessages("//span[.='Targeted Messages']", "Targeted Messages form element"); element.drop(); break;}
+            case "SIGNATURES": {element = new Signatures("//span[.='Signatures']", "Signatures element"); element.drop(); break;}
         }
         if (!value.contains("COLUMN") && !value.contains("FORM_FIELD")) {
         	generalElementPanel.changePath("", generalElementPanel.getPath() + "[" + elementsCount + "]");
@@ -39,7 +40,15 @@ public class GeneralFormsElements<T> {
         String value = ve.name();
         switch (value) {
             case "FORM_FIELD": {element = new FormField("//label[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", "Form Field element"); element.edit(fieldName); break;}
-        } return (T)this;    }
+        } return (T)this;
+    }
+
+    public T performEdit(Enum<?> ve) {
+        String value = ve.name();
+        switch (value) {
+            case "SIGNATURES": {element = new Signatures("//*[.='Signatures']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", "Signatures element"); element.edit("Signatures"); break;}
+        } return (T)this;
+    }
 
     public T performDelete(Enum<?> ve, String fieldName) {
         String value = ve.name();

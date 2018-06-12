@@ -48,10 +48,18 @@ public class VEElements extends ElementImpl {
     }
 
     public void drop(){}
+
     public void edit(String fieldName){
-        Button fieldEditIcon = new ButtonImpl("//label[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", fieldName + " edit icon");
-        fieldEditIcon.waitElement(10);
-        fieldEditIcon.clickJS();
+        if(fieldName.equals("Signatures")) {
+            Button signatures = new ButtonImpl("//*[@class=\"element-overlay-message\"]", "Signatures element body");
+            signatures.fluentWaitForElementPresenceIgnoringExceptions(7);
+            signatures.scrollIntoView();
+            signatures.doubleClick();
+        } else {
+            Button fieldEditIcon = new ButtonImpl("//*[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", fieldName + " edit icon");
+            fieldEditIcon.waitElement(7);
+            fieldEditIcon.click();
+        }
     }
     
     public void openEditElementPopUp(String elementLabel){
@@ -164,8 +172,6 @@ public class VEElements extends ElementImpl {
             target = findElementByXpath("//div[@class='content-render-wrapper']");
             action.clickAndHold(source).moveToElement(target).release().perform();
         }
-        getLogger().info(getElementName() + " element was dropped into the top of the Visual Editor");
+        getLogger().info(getElementName() + " element was dropped on the layout");
     }
-
-
 }

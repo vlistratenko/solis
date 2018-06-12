@@ -35,7 +35,7 @@ public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPage
 		FormField.formFieldElement.dropToForm().
 			selectFieldType(fieldName).
 			markFieldAsRequired(isRequired).
-			saveFieldConfiguration();		
+                saveFormFieldConfiguration();
 		return this;
 	}
 

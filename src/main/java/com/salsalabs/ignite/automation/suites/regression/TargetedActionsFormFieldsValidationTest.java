@@ -233,16 +233,16 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityNumberCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivitySingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityTextBoxCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityNumberCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivitySingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityDateTimeCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFormFieldConfiguration();
         targetedActionPage.goToActionPageWizardStep()
                 .dropOneColumnRow();
         targetedActionPage.dropTargetedMessagesFormElement()
@@ -299,16 +299,16 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();
         formFieldConfigurationModal = new FormFieldConfigurationModalWindow();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivitySingleChoiceCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityYesNoCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityTextBoxCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityNumberCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivitySingleChoiceCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityYesNoCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("targetedActionActivityDateTimeCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFormFieldConfiguration();
         targetedActionPage.goToActionPageWizardStep()
                 .dropOneColumnRow();
         targetedActionPage.dropTargetedMessagesFormElement()

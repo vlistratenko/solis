@@ -13,7 +13,7 @@ import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
+import com.salsalabs.ignite.automation.pages.hq.basic.Layouts;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
@@ -25,6 +25,7 @@ import java.util.List;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
+
 	protected String widgetName;
 	protected String currentWindowHandle;
 	protected TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
@@ -47,17 +48,21 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
 	protected Button saveButtonInAutoresponders = new ButtonImpl("//*[@id='btnSave-autoresponders']", "Save button in Autoresponders page");
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
-	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
-	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
+	//protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
+	protected Button toAutoresponders = new ButtonImpl("//*[@class='saveBarBtn primary']", "Next to Autoresponders button");
+	//protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
+	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@class='saveBarBtn primary']", "Publish button");
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
+	protected Button formComposeTab = new ButtonImpl("//a[text() = 'Compose']", "Form compose Tab");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
-		sleep(5);
+		//sleep(5);
+		openComposeStepButton.fluentWaitForElementPresenceIgnoringExceptions();
 		openComposeStepButton.click();
 		waitUntilAngularIsComplete();
 		return  this;		
@@ -232,8 +237,16 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
+	public AddSubscribeWidgetPage selectLayoutStep(Layouts.LayoutName layout) {
+		Layouts.selectLayout(layout);
+		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
+		composeButton.click();
+		waitUntilAngularIsComplete();
+		return this;
+	}
+
 	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
-		basicLayoutClass.selectLayout(layout);
+		Layouts.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
 		waitUntilAngularIsComplete();
@@ -351,5 +364,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public void goToResultPage() {
 		nextResultButton.click();
+	}
+
+	public AddSubscribeWidgetPage openFormComposeTab(){
+		formComposeTab.fluentWaitForElementPresenceIgnoringExceptions();
+		formComposeTab.click();
+		return this;
 	}
 }

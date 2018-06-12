@@ -82,6 +82,4 @@ public class PetitionsPage extends ActivitiesPage {
 		rejectCommentsTab.click();
 		return this;
 	}
-
-
 }

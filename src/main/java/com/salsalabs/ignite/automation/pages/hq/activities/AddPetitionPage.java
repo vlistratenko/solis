@@ -2,12 +2,14 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.VE2Elements.PetitionFormElements;
+import com.salsalabs.ignite.automation.elements.VE2Elements.Signatures;
+import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class AddPetitionPage extends AddSubscribeWidgetPage {
-
 
 	private Button publishImmediately = new ButtonImpl("//label[@for='publish-comment-immediately']",
 			"Publish Immediately");
@@ -48,10 +50,9 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 		return openWidget(PetitionWidget.class);
 	}
 	
-	public PetitionWidget openPetitionWidget(String formUrl) {
-		this.widgetName = formUrl;
+	public PetitionWidget openPetitionWidget(String widgetName) {
+		this.widgetName = widgetName;
 		return this.openPetitionWidget();
-		
 	}
 
 	public void  configPetition(){
@@ -77,8 +78,16 @@ public class AddPetitionPage extends AddSubscribeWidgetPage {
 		return this;
 	}
 
-	
+	public AddPetitionPage dropVESignaturesElement(){
+		new PetitionFormElements().performDrop(PetitionFormElements.VE.SIGNATURES);
+		waitUntilAngularIsComplete();
+		sleep(1);
+		return this;
+	}
 
-	
-
+	public AddPetitionPage editSignaturesField(){
+		new PetitionFormElements().performEdit(PetitionFormElements.VE.SIGNATURES);
+		return this;
+	}
 }
+

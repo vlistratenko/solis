@@ -6,6 +6,8 @@ import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.donation.DonationsPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.ActivitiesPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddPetitionPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.MessagingPage;
 import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
@@ -14,7 +16,7 @@ import com.salsalabs.ignite.automation.pages.zendesk.ZendeskSubmitRequestPage;
 
 import java.util.Set;
 
-public class HomePage extends Browser{
+public class HomePage extends Browser {
 	
 	public Panel feedBackDialogPanel = new PanelImpl("//feedback-dialog/div[contains(@class, 'feedback alert-box')]", "Feedback dialog");
 	public Button closeFeedbackDialog = new ButtonImpl(feedBackDialogPanel.getPath() + "/descendant::a[@class='close']", "Close feedback dialog");
@@ -211,5 +213,21 @@ public class HomePage extends Browser{
 		return new MyAccountPage();
 	}
 
+
+
+	private <T extends AddSubscribeWidgetPage> T openFormByFullUrl(String fullFormUrl, Class<T> clazz){
+		open(fullFormUrl);
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public AddPetitionPage openPetitionFormByFullUrl(String formUrl){
+		openFormByFullUrl(formUrl, AddPetitionPage.class);
+		return new AddPetitionPage();
+	}
 
 }

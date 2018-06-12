@@ -6,8 +6,7 @@ import com.salsalabs.ignite.automation.elements.List;
 
 
 public class ListImpl extends ElementImpl implements List {
-	
-	
+
 	public ListImpl(String elementPath, String elementName) {
 		super(elementPath, elementName);
 	}
@@ -15,7 +14,6 @@ public class ListImpl extends ElementImpl implements List {
 	private Button getChildItemByLabel(String label) {
 		logger.debug("Get item with label " + label);
 		return new ButtonImpl(path + "/descendant::*[text()='" + label + "']", label + " item");
-
 	}
 
 	@Override

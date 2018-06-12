@@ -3,6 +3,7 @@
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<suite-files>
+		<suite-file path="src/main/resources/xml-tests/regression/PetitionSignaturesElementVerification.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/TargetedActionFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/PetitionFormFieldsValidation.xml" />
 		<suite-file path="src/main/resources/xml-tests/regression/EventFormFieldsValidation.xml" />

@@ -4,7 +4,7 @@ import com.salsalabs.ignite.automation.elements.Panel;
 import com.salsalabs.ignite.automation.elements.VE2Elements.TextVEElement;
 import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
-import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
+import com.salsalabs.ignite.automation.pages.hq.basic.Layouts;
 
 
 public class AddP2PPage extends HomePage{
@@ -22,7 +22,7 @@ public class AddP2PPage extends HomePage{
 	 * @return
 	 */
 	public AddP2PPage selectLayout(String layout) {
-		basicLayoutClass.selectLayout(layout);
+		Layouts.selectLayout(layout);
 		return this;
 	}
 }

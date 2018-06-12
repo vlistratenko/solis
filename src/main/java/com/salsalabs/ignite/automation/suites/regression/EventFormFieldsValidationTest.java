@@ -139,7 +139,7 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
                 .goToCheckoutWizardStep();
         composeTab.dropOneColumnRow()
                 .dropVEFormElement();
-        composeTab.editVEField("Phone").markFieldAsRequired().saveFieldConfiguration();
+        composeTab.editVEField("Phone").markFieldAsRequired().saveFormFieldConfiguration();
         new FormFieldConfigurationModalWindow().dropAllSupporterFieldsOnFormAndMarkAsRequired();
         new AddEventPageComposeTabCheckout()
                 .clickNextButtonInComposeTab()
@@ -255,16 +255,16 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
         new AddEventPageComposeTabCheckout()
                 .dropOneColumnRow()
                 .dropVEFormElement();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityNumberCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivitySingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityDateTimeCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityTextBoxCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityNumberCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivitySingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityDateTimeCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").saveFormFieldConfiguration();
         new AddEventPageComposeTabCheckout()
                 .clickNextButtonInComposeTab()
                 .clickPublishOnAutorespondersTab()
@@ -341,16 +341,16 @@ public class EventFormFieldsValidationTest extends SeleneseTestCase {
         new AddEventPageComposeTabCheckout()
                 .dropOneColumnRow()
                 .dropVEFormElement();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivitySingleChoiceCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityYesNoCustomField").saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("eventActivityDateTimeCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFieldConfiguration();
-        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityTextBoxCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityNumberCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterSingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterDateTimeCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivitySingleChoiceCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityYesNoCustomField").saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("eventActivityDateTimeCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterTextBoxCustomField").markFieldAsRequired().saveFormFieldConfiguration();
+        formFieldConfigurationModal.dropFormFieldByName("supporterNumberCustomField").markFieldAsRequired().saveFormFieldConfiguration();
         new AddEventPageComposeTabCheckout()
                 .clickNextButtonInComposeTab()
                 .clickPublishOnAutorespondersTab()

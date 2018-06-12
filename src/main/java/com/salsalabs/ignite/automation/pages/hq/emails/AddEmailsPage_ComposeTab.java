@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.ButtonVEElement;
 import com.salsalabs.ignite.automation.elements.VE2Elements.TextVEElement;
 import com.salsalabs.ignite.automation.elements.impl.*;
-import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
+import com.salsalabs.ignite.automation.pages.hq.basic.Layouts;
 
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -123,7 +123,7 @@ public class AddEmailsPage_ComposeTab extends AddEmailsPage{
 	 * @return
 	 */
 	public AddEmailsPage_ComposeTab selectLayout(String layout) {
-		basicLayoutClass.selectLayout(layout);
+		Layouts.selectLayout(layout);
 		composeButton.click();
 		sleep(10);
 		return this;

@@ -3,15 +3,18 @@ package com.salsalabs.ignite.automation.pages.hq.activities;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.Table;
+import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
+import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.activities.event.EventsPage;
 import com.salsalabs.ignite.automation.pages.p2p.p2psPage;
 
 
 public class ActivitiesPage extends HomePage {
+
 	String linkToThePage = "https://hq.uat.ignite.net/#/activities";
 	Button emailBlastsLink = new ButtonImpl("//a[.='Manage Emails']", "Email blast"); 
 	Button fundraisingWidgetLink = new ButtonImpl("//a[@autotest-id='FUNDRAISE']", "Fundraising Widget");
@@ -27,7 +30,10 @@ public class ActivitiesPage extends HomePage {
 	Button rejectDeletionBtn = new ButtonImpl("//*[@id='formConfigModal']/div[2]/button[1]", "Nevermind, leave it be!");
 	Table activitiesTable = new TableImpl("//table[contains(@id,'JColResizer')]", "Activities Table");
 	Button targetedActionsTab = new ButtonImpl("//*[@href='/#/activities/widgets/targeted-actions']", "Targeted Actions tab");
-	
+	TextBox searchField = new TextBoxImpl("//input[@class='list-search-input ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength']", "Search field in Activities page");
+	Button magnifierButton = new ButtonImpl("//*[@class='icn-button fixed-spinner icn-magrin']", "Search button");
+
+
 	public ActivitiesPage verifyURL() {
 		verifier.verifyTrue(getLocation().contains("activities"), "Current URL is not contains Activities");
 		return this;
@@ -109,7 +115,9 @@ public class ActivitiesPage extends HomePage {
 	
 	public <T> T openPublicFormFromTable(Class<T> clazz) {
 		activitiesTable.scrollIntoView();
-		new ButtonImpl(activitiesTable.getPath() + "/tbody/tr/td[@title='PUBLIC']/div/span/span", "Click First Found Public Form").click();
+		Button but = new ButtonImpl(activitiesTable.getPath() + "/tbody/tr/td[@title='PUBLIC']/div/span/span", "Click First Found Public Form");
+		but.fluentWaitForElementPresenceIgnoringExceptions();
+		but.clickJS();
 		try {
 			return clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -148,4 +156,16 @@ public class ActivitiesPage extends HomePage {
 		return new TargetActionsPage();
 	}
 
+	public <T extends AddSubscribeWidgetPage> T searchFormByNameAndClick(String formName, Class<T> clazz) {
+		searchField.type(formName);
+		sleep(3);
+		magnifierButton.clickByENTERKey();
+		new ButtonImpl("//*[@ng-if='!field.trustAsHtml'][text()='" + formName + "']", "Row with found form").click();
+		try {
+			return clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

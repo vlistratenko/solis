@@ -329,7 +329,7 @@ public abstract class ElementImpl implements Element {
 	}
 
 	/**
-	 * @param cTimeOut
+	 * @param seconds
 	 *            in miliseconds
 	 */
 	protected void sleep(int seconds) {
@@ -341,11 +341,6 @@ public abstract class ElementImpl implements Element {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * @param dTimeOut
-	 *            in seconds
-	 */
 
 	protected void clickACtion(String locator) {
 		logger.debug("Click on < " + locator + " >.");
@@ -729,7 +724,7 @@ public abstract class ElementImpl implements Element {
 		if (elem.size() == 1) {
 			return driver.findElement(By.xpath(locator));
 		} else {
-			logger.info("More then one element were found. Elements: " + elem.size() + " Path:" + locator);
+			logger.debug("More than one element were found. Elements: " + elem.size() + " Path:" + locator);
 			for (int i = 0; i < elem.size(); i++) {
 				if (elem.get(i).isDisplayed()) {
 					if (driver instanceof JavascriptExecutor) {

@@ -118,6 +118,7 @@ public class SubscribeWidget extends Browser{
 			String personCity,
 			String personZip,
 			String state) {
+		String stateValue="";
 		personEmailField.type(personEmail);
 		personFNameField.type(personFName);
 		personLNameField.type(personLName);
@@ -128,11 +129,17 @@ public class SubscribeWidget extends Browser{
 			personStatesSelectBox.selectByIndex(Integer.parseInt(CommonUtils.getRandomValueFromTo(1, 50, 0)));
 		}else{
 			personStatesSelectBox.selectByValue(state);
+			stateValue = personStatesSelectBox.getSelectedLabel(personStatesSelectBox.getPath());
+
 		}
 		sleep(3);
 		subscribeButton.click();
+		CommonUtils.setProperty("supporterEmailAddressValue", personEmail);
+		CommonUtils.setProperty("supporterFirstFieldNameValue", personFName);
+		CommonUtils.setProperty("supporterLastNameFieldValue", personLName);
+		CommonUtils.setProperty("supporterCityFieldValue", personCity);
+		CommonUtils.setProperty("supporterStateFieldValue", stateValue);
 		return this;
-		
 	}
 
 	public SubscribeWidget fillSubscribeWidget(String personEmail,

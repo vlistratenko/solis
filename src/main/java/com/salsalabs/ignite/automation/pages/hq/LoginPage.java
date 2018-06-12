@@ -12,17 +12,13 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
 import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
-import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.PetitionWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.SubscribeWidget;
-import com.salsalabs.ignite.automation.pages.hq.activities.TargetedActionPublicForm;
+import com.salsalabs.ignite.automation.pages.hq.activities.*;
 import com.salsalabs.ignite.automation.pages.hq.manage.UnsubscribePage;
 import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 
-public class LoginPage extends Browser{
+public class LoginPage extends Browser {
 
 	Button		LoginButton = new ButtonImpl("//descendant-or-self::button", "Login button");
 	TextBox 	LoginField = new TextBoxImpl("//input[@name='email']", "Login field");
@@ -39,8 +35,7 @@ public class LoginPage extends Browser{
 	TextBox		securityQuestion = new TextBoxImpl("//p/following-sibling::input", "Security question text field");
 	Button		confirmSendingResetPassword = new ButtonImpl("//*[@id='loginResetPasswordForm']//button[1]", "Let's go! button");
 	
-	public LoginPage(){
-	}
+	public LoginPage(){}
 	
 	public LoginPage(boolean doLogOut){
 		if (doLogOut) {
@@ -225,5 +220,6 @@ public class LoginPage extends Browser{
 	public void open(String url) {
 		super.open(url);
 	}
+
 	
 }

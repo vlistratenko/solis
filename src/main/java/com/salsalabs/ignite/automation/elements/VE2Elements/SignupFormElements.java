@@ -22,6 +22,6 @@ public class SignupFormElements extends GeneralFormsElements<SignupFormElements>
         LSIDEBAR,
         RSIDEBAR,
         HEADER,
-        FOOTER;}
+        FOOTER}
 
 }
