@@ -2,9 +2,9 @@ package com.salsalabs.ignite.automation.pages.hq.event;
 
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-public class AddEventPageTicketsTabManageTickets extends HomePage {
+public class AddEventPageTicketsTabManageTickets extends AddSubscribeWidgetPage {
 
     private Button createTicketButton = new ButtonImpl("//a[@class='button'][@href]","Create a ticket button");
     private Button nextToLayoutsPageButton = new ButtonImpl("//*[@id='btnGo-tickets-compose']","Create a ticket button");
@@ -16,7 +16,8 @@ public class AddEventPageTicketsTabManageTickets extends HomePage {
     }
 
     public AddEventPageSelectLayoutTab clickNextButtonInTicketsTab(){
-        nextToLayoutsPageButton.click();
+        nextToLayoutsPageButton.clickJS();
+        nextToLayoutsPageButton.clickJS();
         return new AddEventPageSelectLayoutTab();
     }
 

@@ -35,8 +35,8 @@ public class AddTargetedActionPage extends AddSubscribeWidgetPage {
     protected TextBox messageBody = new TextBoxImpl(".//*[contains(@name, 'bodyMessage-')]", "Message body");
     protected Button saveButtonMessageModal = new ButtonImpl(".//*[contains(text(), 'Save Content')]", "Save message");
     protected Button openSelectTargetStepButton = new ButtonImpl("//button[@id='btnGo-setup-targets']", "Select targets");
-    protected Button openSocialPromotionStepButton = new ButtonImpl("//button[@id='btnGo-targets-messages']", "Social promotion");
-    protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnGo-messages-compose']", "Compose step");
+    protected Button openSocialPromotionStepButton = new ButtonImpl("//button[@id='btnGo-targets-compose']", "Social promotion");
+    protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnCompose']", "Compose step");
 
     @Override
     public AddTargetedActionPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
@@ -77,7 +77,7 @@ public class AddTargetedActionPage extends AddSubscribeWidgetPage {
     public AddTargetedActionPage goToComposeFormTargetsPage() {
         openSocialPromotionStepButton.click();
         sleep(3);
-        openComposeStepButton.click();
+        //openComposeStepButton.click();
         return this;
     }
 

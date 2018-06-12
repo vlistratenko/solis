@@ -131,6 +131,7 @@ public class SubscribeWidget extends Browser{
 		}
 		sleep(3);
 		subscribeButton.click();
+		sleep(3);
 		return this;
 		
 	}
@@ -185,6 +186,7 @@ public class SubscribeWidget extends Browser{
 	public SubscribeWidget clickOnSubmitFormButton(){
 		subscribeButton.scrollIntoView();
 		subscribeButton.click();
+		sleep(3);
 		return this;
 	}
 

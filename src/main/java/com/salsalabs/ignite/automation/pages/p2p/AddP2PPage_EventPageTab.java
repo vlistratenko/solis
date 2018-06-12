@@ -32,9 +32,9 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	}
 	
 	public AddP2PPage_EventPageTab_CheckoutSubTab openCheckoutSubTab() {
-		checkoutSubTab.waitElement();
+		checkoutSubTab.fluentWaitForElementPresenceIgnoringExceptions();
 		checkoutSubTab.click();
-		checkoutVEPanel.waitElement();
+		checkoutVEPanel.fluentWaitForElementPresenceIgnoringExceptions();
 		return new AddP2PPage_EventPageTab_CheckoutSubTab();
 	}
 	

@@ -159,6 +159,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public SubscribeWidget openSubscribeWidget() {
 		return openWidget(SubscribeWidget.class);
 	}
+
+	public SubscribeWidget openSubscribeWidget(String widgetName) {
+		this.widgetName = widgetName;
+		return openWidget(SubscribeWidget.class);
+	}
 	
 	public AddSubscribeWidgetPage verifyWidgetVisible(boolean visibleForCm, boolean visibleForSupporter) {
 		String link = CommonUtils.getProperty(linkProperty);
@@ -338,7 +343,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public AddSubscribeWidgetPage editIdLikeToReceiveUpdatesCheckBoxProperties(String newFieldLabel, String defaultValue) {
 		idLikeToReceiveUpdatesElement.scrollIntoView();
-		hideTopBar();
 		idLikeToReceiveUpdatesElement.doubleClick();
 		FormFieldConfigurationModalWindow modal = new FormFieldConfigurationModalWindow();
 		modal.labelTextBox.type(newFieldLabel);
@@ -364,6 +368,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 		Button step = new ButtonImpl(".//*[@ng-repeat='step in elementSteps']" + "[" + stepNumber + "]", "Form step");
 		step.scrollIntoView();
 		step.clickJS();
+		hideTopBar();
 		return this;
 	}
 

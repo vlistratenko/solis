@@ -63,7 +63,7 @@ public class HomePage extends Browser{
 	public HomePage(){
 		
 	}
-	
+
 	public HomePage verifyUserNameDisplayed() {
 		verifier.verifyElementIsDisplayed(userlabel);
 		return this;

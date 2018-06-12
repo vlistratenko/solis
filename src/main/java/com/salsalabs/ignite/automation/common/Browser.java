@@ -419,7 +419,5 @@ public abstract class Browser {
 	protected Alert switchToAlert() {
 		return driver.switchTo().alert();
 	}
-	
-
 
 }

@@ -4,9 +4,9 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Frame;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.FrameImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-public class AddEventPageTicketsTabInformationCollected extends HomePage {
+public class AddEventPageTicketsTabInformationCollected extends AddSubscribeWidgetPage {
 
     private Button askFirstAndLastNameQuestionToggle = new ButtonImpl("//*[@id='question_listing']//*[@for='ask_name']","Ask First and Last name question toggle");
     private Button askEmailAddressQuestionToggle = new ButtonImpl("//*[@id='question_listing']//*[@for='ask_email']","Ask Email Address question toggle");

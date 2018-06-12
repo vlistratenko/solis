@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Fri Dec 15 17:34:43 EET 2017
+#Tue Jun 12 12:15:01 EEST 2018
 current.firstName=0
 CM.firstName=0
 prop=1
@@ -7,9 +7,9 @@ current.lastName=0
 emailSubject=We need your help\!\!\! Blast from 10.05.2017 61152
 amountOfPublishedEmails=1
 planName=false
-petitionWidgetLink=https\://spf1.test.igniteaction.net/emqghlyqct
+petitionWidgetLink=https\://cart.test.igniteaction.net/odux0uesuw
 emailBlastName=We need your help\!\!\! Blast from 10.05.2017 61152
-donationWidgetLink=https\://spf1.test.igniteaction.net/9sv8tp4fik
+donationWidgetLink=https\://cart.test.igniteaction.net/vnbovwvzjh
 Admin.lastName=LastName
 Admin.emailBase=0
 Environment=TEST
@@ -18,11 +18,11 @@ updateTC=false
 Admin.orgName=automated_testing1
 current.Password=qwerty
 maxRetryCount=2
-currentWindowHandle=CDwindow-74cf4e4b-dd5b-447d-aa6d-330a7da8ece4
+currentWindowHandle=CDwindow-B7073B19DC17ECDCD29F610189B302EB
 emailFrom=info@salsalabs.com
-current.Login=olauta+spf1@salsalabs.com
+current.Login=olauta+cart@salsalabs.com
 Admin.firstName=FirstName
 buildVersion=false
-subscribeWidgetLink=https\://spf1.test.igniteaction.net/bwnr9tk5mg
+subscribeWidgetLink=https\://cart.test.igniteaction.net/xirbral8wq
 Admin.Password=11111111
 CM.lastName=0

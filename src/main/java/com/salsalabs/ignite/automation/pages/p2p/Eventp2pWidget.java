@@ -3,18 +3,8 @@ package com.salsalabs.ignite.automation.pages.p2p;
 
 import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.CheckBox;
-import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.SelectBox;
-import com.salsalabs.ignite.automation.elements.Tabs;
-import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TabsImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.*;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 
@@ -25,9 +15,10 @@ public class Eventp2pWidget extends EventWidget {
 	Label eventSubsrIsSccessMessage = new LabelImpl("//h3[.='Thank You!']", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//a[.='Register']", "Register", true);
-	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
+	Button addToCartButton = new ButtonImpl("//*[contains(text(),'Add to Cart')]", "Add to Cart", true);
+	Button nextButton = new ButtonImpl("//*[contains(text(),'Next')]", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
-	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
+	Button checkoutButton = new ButtonImpl("//*[contains(text(), 'Checkout')]", "Checkout", true);
 	
 	CheckBox isFundraiserCheckBox = new CheckBoxImpl("//input[@id='yes_register_fundraiser']", "Yes, I want to register as a fundraiser ");
 	Button createFundraiserAccountButton = new ButtonImpl("//a[.='Create an Account']", "Create an Account");
@@ -51,6 +42,7 @@ public class Eventp2pWidget extends EventWidget {
 	TextBox searchTeamButton= new TextBoxImpl("//label[.='Find a Team']/following::span[.='Search']", "Search a Team button");
 	
 	Tabs leaderboardTab = new TabsImpl("//div[@ignite-p2p-leaderboard='ignite-p2p-leaderboard']", "Leaderboard tabs element");
+	Table checkoutSummaryTable = new TableImpl("//table[@class='sli-checkout-summary-table']", "CheckoutSummaryTable");
 	
 	public Eventp2pWidget() {
 		super();
@@ -93,8 +85,9 @@ public class Eventp2pWidget extends EventWidget {
 	
 	public Eventp2pWidget clickNextButtonOnRegistrationTypesPage () {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		nextButton.click();
+		addToCartButton.click();
 		sleep(3);
+		nextButton.click();
 		switchDefaultContent();
 		return this;
 	}
@@ -164,9 +157,12 @@ public class Eventp2pWidget extends EventWidget {
 	
 	public Eventp2pWidget clickCheckOutButton(){
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		checkoutButton.click();
-		sleep(3);
+		nextButton.click();
 		switchDefaultContent();
+		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		checkoutButton.click();
+		switchDefaultContent();
+		checkoutSummaryTable.fluentWaitForElementPresenceIgnoringExceptions();
 		return this;
 	}
 	
