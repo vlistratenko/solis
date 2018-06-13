@@ -6,7 +6,7 @@ import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddDonationWidgetPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -19,33 +19,31 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
     private String widgetName;
     private String widgetDescription;
-    private String supporterEmail;;
+    private String supporterEmail;
 
     @Parameters({"login", "password"})
     @Test(priority = 0, enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"payments"})
-    public void checkDesignationForNewFundraising(String login, String password) throws InterruptedException {
+    public void checkDesignationForFundraising(String login, String password) throws InterruptedException {
         widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
         widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4)+"@test.com";
-        addDonationPage = new LoginPage()
-                .doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openFundraisingWidgetPage()
-                .openAddDonationWidgetPage();
+        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4) + "@test.com";
+        addDonationPage = new LoginPage().
+                doSuccessLogin(login, password).
+                openActivitiesPage().
+                openFundraisingWidgetPage().
+                openAddDonationWidgetPage();
         addDonationPage.fillFieldsWidgetStepOne(widgetName, widgetDescription)
                 .selectLayoutStep("Blank");
         addDonationPage.dropOneColumnRow();
         addDonationPage.dropVEFormElement();
-        FormFieldConfigurationModalWindow configurationModalWindow =
-                new FormFieldConfigurationModalWindow().dropFormFieldByName("Designation");
-        configurationModalWindow.addDesignationFieldOption("1");
-        configurationModalWindow.addDesignationFieldOption("2");
-        configurationModalWindow.addDesignationFieldOption("3");
-        configurationModalWindow.saveFieldConfiguration();
+        new FormFieldConfigurationModalWindow().
+                dropFormFieldByName("Designation").
+                addDesignationFieldOption("1").
+                addDesignationFieldOption("2").
+                addDesignationFieldOption("3").
+                saveFieldConfiguration();
         String currentWindow = getDriver().getWindowHandle();
-        addDonationPage.preview();
-        //
-        //open preview and check designation
+        addDonationPage.preview();//open preview and check designation
         Set<String> windows = getDriver().getWindowHandles();
         for (String handle : windows) {
             if (!handle.equals(currentWindow)) getDriver().switchTo().window(handle);
@@ -56,20 +54,17 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         addDonationPage.goToAutorespondersTab();
         addDonationPage.publishFromAutoresponders();
         addDonationPage.openSubscribeWidget();
-        //check if designation field exists of published form
         addDonationPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
         DonationWidget fundraisingForm1 = new DonationWidget();
-        //fundraisingForm1.fillDonationForm(supporterEmail, supporterEmail, supporterEmail, supporterEmail, supporterEmail, supporterEmail, "20009", "PA", false, "10", "card holder", "4111111111111111", "123", "05", "2025")
-        fundraisingForm1.fillCreditCardDetails("10", "4111111111111111","123","11","2023","card holder");
-        fundraisingForm1.fillSubscribeWidget(supporterEmail, supporterEmail, supporterEmail, supporterEmail,"20009", "WA", supporterEmail).clickOnSubmitFormButton();
+        fundraisingForm1.fillCreditCardDetails("10", "4111111111111111", "123", "11", "2023", "card holder");
+        fundraisingForm1.fillSubscribeWidget(supporterEmail, supporterEmail, supporterEmail, supporterEmail, "20009", "WA", supporterEmail).clickOnSubmitFormButton();
         getDriver().switchTo().window(currentWindow);
         addDonationPage.goToResultPage();
         addDonationPage.verifyDesignationInCsv();
 
-
     }
 
-    @Parameters({"login", "password"})
+    /*@Parameters({"login", "password"})
     @Test(priority = 0, enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"payments"})
     public void checkDesignationForExistingFundraising(String login, String password) throws InterruptedException {
 
@@ -96,5 +91,5 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
     @Parameters({"login", "password"})
     @Test(priority = 0, enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = {"payments"})
     public void checkDesignationForExistingP2P(String login, String password) throws InterruptedException {
-    }
+    }*/
 }

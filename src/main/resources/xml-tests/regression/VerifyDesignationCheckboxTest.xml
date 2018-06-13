@@ -6,6 +6,9 @@
     <test verbose="2" name="Verify Designation checkbox for payments." annotations="JDK">
         <parameter name="login" value="olauta+cart@salsalabs.com"></parameter>
         <parameter name="password" value="qwerty"></parameter>
+        <parameter name="existingFundraisingForm" value="qwerty"></parameter>
+        <parameter name="existingEventForm" value="qwerty"></parameter>
+        <parameter name="existingP2pForm" value="qwerty"></parameter>
         <groups>
             <run>
                 <include name="payments" />

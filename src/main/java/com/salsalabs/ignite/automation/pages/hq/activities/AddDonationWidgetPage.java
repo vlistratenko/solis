@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.DropDown;
@@ -7,6 +8,10 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.DropDownImpl;
 import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import org.openqa.selenium.JavascriptExecutor;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
@@ -74,7 +79,22 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	public void verifyDesignationInCsv() {
 		sleep(60);
+		refresh();
+		downloadResultsAsCsv.fluentWaitForElementPresenceIgnoringExceptions();
+		downloadResultsAsCsv.scrollIntoView();
 		downloadResultsAsCsv.clickJS();
 		sleep(10);
+		File[] files = CommonUtils.getListOfFilesInFolder(System.getProperty("user.dir") + "\\downloads");
+		List<String[]> csvData = null;
+		try {
+			csvData = CommonUtils.readDataFromCSV(files[0].getAbsolutePath());
+		} catch (IOException e) {
+			logger.error("Unable to read downloaded file. Reason: " + e.getMessage());
+
+		}
+		files[0].delete();
+		logger.info("Checking designation field in exported CSV");
+		List<String> designationContent = CommonUtils.getCsvColumnDataByName(csvData, "Designation");
+		verifier.verifyEquals(designationContent.get(0), "1");
 	}
 }

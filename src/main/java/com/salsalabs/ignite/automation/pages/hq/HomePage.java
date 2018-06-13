@@ -210,6 +210,4 @@ public class HomePage extends Browser{
 		orgLabelDropDown.selectByLabel("My account");
 		return new MyAccountPage();
 	}
-
-
 }

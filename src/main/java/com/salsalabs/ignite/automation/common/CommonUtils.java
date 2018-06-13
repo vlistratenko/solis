@@ -499,23 +499,38 @@ public class CommonUtils {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public static void getListOfFilesInFolder() {
-		File folder = new File("d:/workspace/IgniteTestAutomation/src/main/resources/xml-core/regression/");
-		File[] listOfFiles = folder.listFiles();
 
-	    for (int i = 0; i < listOfFiles.length; i++) {
-	      if (listOfFiles[i].isFile()) {
-	        System.out.println("<suite-file path=\"src/main/resources/xml-core/regression/" + listOfFiles[i].getName() + "\" />");
-	      } else if (listOfFiles[i].isDirectory()) {
-	        System.out.println("Directory " + listOfFiles[i].getName());
-	      }
-	    }
+	public static List<String[]> readDataFromCSV(String filePath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+		String line;
+		String cvsSplitBy = ",";
+		List<String[]> lines = new ArrayList<String[]>();
+		while ((line = br.readLine()) != null) {
+			lines.add(line.split(cvsSplitBy));
+		}
+		return lines;
+	}
+	
+	public static File[] getListOfFilesInFolder(String path) {
+		return new File(path).listFiles();
 	}
 
 	public static ExpectedCondition<Boolean> angularHasFinishedProcessing() {
 		return webDriver -> Boolean.valueOf(((JavascriptExecutor) webDriver).executeScript("return (window.angular !== undefined)" +
 				" && (angular.element(document).injector() !== undefined)" +
 				" && (angular.element(document).injector().get('$http').pendingRequests.length === 0)").toString());
+	}
+
+	public static List<String> getCsvColumnDataByName(List<String[]> data, String name){
+		List<String> result = new ArrayList<String>();
+		int index = 0;
+		String[] header = data.get(0);
+		for (int i = 0; i >= header.length; i++){
+			if (header[i].equals(name)) index = i;
+		}
+		for (String[] row : data) {
+			result.add(row[index]);
+		}
+		return result;
 	}
 }
