@@ -120,7 +120,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     	return this;
 	}
 
-    public FormFieldConfigurationModalWindow setCustomizeTheDisplayOfTheSupporterNameOptionTo(Signatures.CustomizedSupporterNameOptions option) {
+    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterNameOptionTo(Signatures.CustomizedSupporterNameOptions option) {
         String label = "";
         switch (option) {
             case FIRST_NAME_LAST_NAME: label = "First Name Last Name"; break;
@@ -132,7 +132,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         return new FormFieldConfigurationModalWindow();
     }
 
-    public FormFieldConfigurationModalWindow setCustomizeTheDisplayOfTheSupporterLocationOptionTo(Signatures.CustomizedSupporterLocationOptions option) {
+    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterLocationOptionTo(Signatures.CustomizedSupporterLocationOptions option) {
         String label = "";
         switch (option) {
             case DO_NOT_DISPLAY: label = "Do Not Display"; break;

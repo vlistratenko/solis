@@ -29,7 +29,7 @@ public class PetitionSignaturesElementTest extends SeleneseTestCase {
     @Test(priority = 1, groups = {"new_data"}, retryAnalyzer = RetryAnalyzer.class)
     public void createAndPublishPetitionFormWithSignaturesElement (ITestContext context){
 
-        petitionForm = new PetitionWidget();
+        petitionForm = new PetitionWidget(); //FIXME: re-write form creation via API when it is implemented
         login = context.getSuite().getParameter("login");
         password = context.getSuite().getParameter("password");
         existingFormUrl = context.getSuite().getParameter("existingFormUrl");
@@ -84,8 +84,8 @@ public class PetitionSignaturesElementTest extends SeleneseTestCase {
                 openFormComposeTab();
         addPetitionPage.editSignaturesField();
         new FormFieldConfigurationModalWindow().
-                setCustomizeTheDisplayOfTheSupporterNameOptionTo(nameFormat).
-                setCustomizeTheDisplayOfTheSupporterLocationOptionTo(addressFormat).
+                selectCustomizeTheDisplayOfTheSupporterNameOptionTo(nameFormat).
+                selectCustomizeTheDisplayOfTheSupporterLocationOptionTo(addressFormat).
                 saveSignatureElementConfigurationModal();
         addPetitionPage.
                 goToAutorespondersTab().
@@ -103,8 +103,8 @@ public class PetitionSignaturesElementTest extends SeleneseTestCase {
                 openFormComposeTab();
         addPetitionPage.editSignaturesField();
         new FormFieldConfigurationModalWindow().
-                setCustomizeTheDisplayOfTheSupporterNameOptionTo(nameFormat).
-                setCustomizeTheDisplayOfTheSupporterLocationOptionTo(addressFormat).
+                selectCustomizeTheDisplayOfTheSupporterNameOptionTo(nameFormat).
+                selectCustomizeTheDisplayOfTheSupporterLocationOptionTo(addressFormat).
                 saveSignatureElementConfigurationModal();
         addPetitionPage.
                 goToAutorespondersTab().

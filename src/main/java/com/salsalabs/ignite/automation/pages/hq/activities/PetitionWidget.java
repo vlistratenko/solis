@@ -26,6 +26,7 @@ public class PetitionWidget extends SubscribeWidget {
 	CheckBox displaySignatureCheckBox = new CheckBoxImpl("//input[@name='field-showSignature']", "Display My Signature");
 	CheckBox displayCommentCheckBox = new CheckBoxImpl("//input[@name='field-showComment']", "Display My Comment");
 	Label signatureBlock = new LabelImpl("//*[contains(@id, 'sig-container')]", "Signature Block");
+	Label firstAndLastNameLabel = new LabelImpl("//*[@class='sli-signature'][1]//*[@class='sli-signature-name']", "Fist&Last name label");
 
 
 	public PetitionWidget() {
@@ -137,13 +138,11 @@ public class PetitionWidget extends SubscribeWidget {
 	}
 
 	public String getLastSignatureFirstName() {
-		Label firstName = new LabelImpl("//*[@class='sli-signature'][1]//*[@class='sli-signature-name']", "Fist&Last name label");
-		return firstName.getText().split(" ")[1];
+		return firstAndLastNameLabel.getText().split(" ")[1];
 	}
 
 	public String getLastSignatureLastName() {
-		Label firstName = new LabelImpl("//*[@class='sli-signature'][1]//*[@class='sli-signature-name']", "Fist&Last name label");
-		return firstName.getText().split(" ")[2];
+		return firstAndLastNameLabel.getText().split(" ")[2];
 	}
 
 	public String getLastSignatureCity() {
@@ -183,29 +182,37 @@ public class PetitionWidget extends SubscribeWidget {
 		switch (nameFormat){
 			case FIRST_NAME_LAST_NAME:
 				Assert.assertEquals(CommonUtils.getProperty("supporterFirstFieldNameValue"), getLastSignatureFirstName());
-				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue"), getLastSignatureLastName()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue"), getLastSignatureLastName());
+				break;
 			case FIRST_NAME_LAST_INITIAL:
 				Assert.assertEquals(CommonUtils.getProperty("supporterFirstFieldNameValue"), getLastSignatureFirstName());
-				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue").substring(0,1), getLastSignatureLastName()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue").substring(0,1), getLastSignatureLastName());
+				break;
 			case FIRST_INITIAL_LAST_INITIAL:
 				Assert.assertEquals(CommonUtils.getProperty("supporterFirstFieldNameValue").substring(0,1), getLastSignatureFirstName());
-				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue").substring(0,1), getLastSignatureLastName()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue").substring(0,1), getLastSignatureLastName());
+				break;
 			case FIRST_INITIAL_LAST_NAME:
 				Assert.assertEquals(CommonUtils.getProperty("supporterFirstFieldNameValue").substring(0,1), getLastSignatureFirstName());
-				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue"), getLastSignatureLastName()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterLastNameFieldValue"), getLastSignatureLastName());
+				break;
 		}
 
 		switch (addressFormat) {
 			case CITY_ONLY:
-				Assert.assertEquals(CommonUtils.getProperty("supporterCityFieldValue").toUpperCase(), getLastSignatureCity()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterCityFieldValue").toUpperCase(), getLastSignatureCity());
+				break;
 			case STATE_ONLY:
-				Assert.assertEquals(CommonUtils.getProperty("supporterStateFieldValue").toUpperCase(), getLastSignatureState()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterStateFieldValue").toUpperCase(), getLastSignatureState());
+				break;
 			case DO_NOT_DISPLAY:
 				Assert.assertEquals("", getLastSignatureCity());
-				Assert.assertEquals("", getLastSignatureState()); break;
+				Assert.assertEquals("", getLastSignatureState());
+				break;
 			case CITY_STATE:
 				Assert.assertEquals(CommonUtils.getProperty("supporterCityFieldValue").toUpperCase(), getLastSignatureCity());
-				Assert.assertEquals(CommonUtils.getProperty("supporterStateFieldValue").toUpperCase(), getLastSignatureState()); break;
+				Assert.assertEquals(CommonUtils.getProperty("supporterStateFieldValue").toUpperCase(), getLastSignatureState());
+				break;
 		}
 	}
 }
