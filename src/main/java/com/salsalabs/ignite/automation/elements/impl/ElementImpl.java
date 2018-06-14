@@ -342,9 +342,8 @@ public abstract class ElementImpl implements Element {
 		}
 	}
 
-	protected void clickACtion(String locator) {
+	protected void clickAction(String locator) {
 		logger.debug("Click on < " + locator + " >.");
-		// getActionBuilder().moveToElement(findElementByXpath(locator)).perform();
 		getActionBuilder().click(findElementByXpath(locator)).perform();
 	}
 

@@ -61,7 +61,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 		this.widgetName = widgetName;
 		widgetNameField.type(widgetName);
 		widgetDescriptionField.type(widgetDescription);
-		//sleep(5);
 		openComposeStepButton.fluentWaitForElementPresenceIgnoringExceptions();
 		openComposeStepButton.click();
 		waitUntilAngularIsComplete();
@@ -250,7 +249,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
 		composeButton.click();
 		waitUntilAngularIsComplete();
-		//sleep(10);
 	    return this;
 	}
 

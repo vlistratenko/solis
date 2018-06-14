@@ -50,7 +50,6 @@ public abstract class Browser {
 	public LoginPage logOut() {
 		deletecoockies();
 		open(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl() + "/#/logout");
-		//sleep(5);
 		return new LoginPage();
 	}
 	

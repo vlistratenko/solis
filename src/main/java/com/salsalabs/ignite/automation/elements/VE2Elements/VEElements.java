@@ -50,7 +50,7 @@ public class VEElements extends ElementImpl {
     public void drop(){}
 
     public void edit(String fieldName){
-        if(fieldName.equals("Signatures")) {
+        if("Signatures".equals(fieldName)) {
             Button signatures = new ButtonImpl("//*[@class=\"element-overlay-message\"]", "Signatures element body");
             signatures.fluentWaitForElementPresenceIgnoringExceptions(7);
             signatures.scrollIntoView();
