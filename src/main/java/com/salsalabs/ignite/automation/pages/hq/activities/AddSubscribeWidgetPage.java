@@ -357,8 +357,9 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return  this;
 	}
 
-	public void goToResultPage() {
+	public AddSubscribeWidgetPage goToResultPage() {
 		nextResultButton.click();
+		return this;
 	}
 
 	public void verifyDesignationFieldInCsv() {

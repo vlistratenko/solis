@@ -12,21 +12,17 @@ import org.testng.annotations.Test;
 
 import java.util.Set;
 
-import static com.salsalabs.ignite.automation.suites.regression.SupporterQBSupporterFieldsTest.email;
-
 @Test
 public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
     private String widgetName;
-    private String widgetDescription;
-    private String supporterEmail;
+    private String email;
     private String hqHandle;
 
     @BeforeMethod(alwaysRun = true)
     public void generateData(){
-        widgetName = "FundraisingFormtName_" + RandomStringUtils.randomAlphanumeric(5);
-        widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
-        supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4) + "@test.com";
+        widgetName = RandomStringUtils.randomAlphanumeric(10);
+        email = widgetName + "@test.com";
     }
     /*
     @Parameters({"login", "password"})
@@ -123,7 +119,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                         "2022"
                 ).clickSubmitButton();
         getDriver().switchTo().window(hqHandle);
-        widgetPage.verifyDesignationFieldInCsv();
+        widgetPage.goToResultPage().verifyDesignationFieldInCsv();
     }
 
     /*
