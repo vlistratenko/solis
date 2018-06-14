@@ -1,11 +1,11 @@
 #AUTOMATICALLY GENERATED
-#Wed Jun 13 14:08:47 EEST 2018
+#Thu Jun 14 13:47:29 EEST 2018
 current.Password=qwerty
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
 googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
 planName=false
-currentWindowHandle=CDwindow-5F49FB48441567CB204BB64373EDD71B
+currentWindowHandle=CDwindow-8FD8FA89B98B98E54911CB20EA85EE4A
 test=
 personZip=20008
 CM.lastName=0
@@ -37,7 +37,7 @@ gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
 suffix=suffixValue
 dateOfBirth=2017-09-10T00\:00\:00.000Z
-subscribeWidgetLink=https\://testvco2712.test.igniteaction.net/subscribewidgetname_z67tb
+subscribeWidgetLink=https\://cart.test.igniteaction.net/fundraisingformtname_pp6hr
 Environment=TEST
 workPhone=777-777-7777
 addressLine2=addressLine2

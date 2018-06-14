@@ -21,6 +21,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -52,6 +54,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
+	protected Button downloadResultsAsCsv = new ButtonImpl("//button[contains(text(), 'Download')]", "Download results as csv");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -151,6 +154,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 	
 	public SubscribeWidget openSubscribeWidget() {
+		return openWidget(SubscribeWidget.class);
+	}
+
+	public SubscribeWidget openSubscribeWidget(String widgetName) {
+		this.widgetName = widgetName;
 		return openWidget(SubscribeWidget.class);
 	}
 	
@@ -351,5 +359,26 @@ public class AddSubscribeWidgetPage extends HomePage {
 
 	public void goToResultPage() {
 		nextResultButton.click();
+	}
+
+	public void verifyDesignationFieldInCsv() {
+		sleep(60); //wait until donation reaches HQ
+		refresh();
+		downloadResultsAsCsv.fluentWaitForElementPresenceIgnoringExceptions();
+		downloadResultsAsCsv.scrollIntoView();
+		downloadResultsAsCsv.clickJS();
+		sleep(10); //wait until download starts
+		File[] files = CommonUtils.getListOfFilesInFolder(System.getProperty("user.dir") + "\\downloads");
+		List<String[]> csvData = null;
+		try {
+			csvData = CommonUtils.readDataFromCSV(files[0].getAbsolutePath());
+		} catch (IOException e) {
+			logger.error("Unable to read downloaded file. Reason: " + e.getMessage());
+
+		}
+		files[0].delete();
+		logger.info("Checking designation field in exported CSV");
+		List<String> designationContent = CommonUtils.getCsvColumnDataByName(csvData, "Designation");
+		verifier.verifyEquals(designationContent.get(0), "1");
 	}
 }

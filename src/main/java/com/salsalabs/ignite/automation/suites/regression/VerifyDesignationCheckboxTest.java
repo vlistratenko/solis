@@ -2,9 +2,9 @@ package com.salsalabs.ignite.automation.suites.regression;
 
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.*;
-import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_PublishedDeatailsTab;
-import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -16,8 +16,6 @@ import static com.salsalabs.ignite.automation.suites.regression.SupporterQBSuppo
 
 @Test
 public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
-
-    private AddDonationWidgetPage addDonationPage;
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
     private String widgetName;
     private String widgetDescription;
@@ -30,11 +28,11 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         widgetDescription = "FundraisingFormDescription_" + RandomStringUtils.randomAlphanumeric(10);
         supporterEmail = "autosupporter" + RandomStringUtils.randomAlphanumeric(4) + "@test.com";
     }
-
+    /*
     @Parameters({"login", "password"})
     @Test(groups = {"fundraising"})
     public void checkDesignationForFundraising(String login, String password) throws InterruptedException {
-        addDonationPage = new LoginPage().
+        AddDonationWidgetPage addDonationPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
                 openFundraisingWidgetPage().
@@ -67,29 +65,45 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         fundraisingForm1.fillSubscribeWidget(supporterEmail, supporterEmail, supporterEmail, supporterEmail, "20009", "WA", supporterEmail).clickOnSubmitFormButton();
         getDriver().switchTo().window(currentWindow);
         addDonationPage.goToResultPage();
-        addDonationPage.verifyDesignationInCsv();
+        addDonationPage.verifyDesignationFieldInCsv();
     }
+    */
 
     @Parameters({"login", "password"})
     @Test(groups = {"events"})
     public void checkDesignationForEvent(String login, String password){
-        AddSubscribeWidgetPage addWidgetPage = new LoginPage().doSuccessLogin(login, password)
-                .openActivitiesPage()
-                .openEventsPage()
-                .clickCreateAnEventButton()
-                .specifyEventReferenceName(widgetName)
-                .specifyEventPublicilyVisibleName(widgetName)
-                .clickNextButtonInSetupTab()
-                .specifyTicketName(widgetName)
-                .clickSaveTicketInfoButton()
-                .clickContinueButton()
-                .clickNextButtonInTicketsTab()
-                .selectLayout("Basic")
-                .clickNextButtonInSelectLayoutTab()
-                .clickNextButtonInComposeTab()
-                .clickPublishOnAutorespondersTab();
+        new LoginPage().doSuccessLogin(login, password).
+                openActivitiesPage().
+                openEventsPage().
+                clickCreateAnEventButton().
+                specifyEventReferenceName(widgetName).
+                specifyEventPublicilyVisibleName(widgetName).
+                clickNextButtonInSetupTab().
+                specifyTicketName(widgetName).
+                clickSaveTicketInfoButton().
+                clickContinueButton().
+                clickNextButtonInTicketsTab().
+                selectLayout("Basic").
+                clickNextButtonInSelectLayoutTab().
+                openCheckoutSubTab();
+        new FormFieldConfigurationModalWindow().
+                dropFormFieldByName("Designation").
+                addDesignationFieldOption("1").
+                addDesignationFieldOption("2").
+                addDesignationFieldOption("3").
+                saveFieldConfiguration();
+        String currentWindow = getDriver().getWindowHandle();
+        AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().preview();
+        Set<String> windows = getDriver().getWindowHandles();
+        for (String handle : windows) {
+            if (!handle.equals(currentWindow)) getDriver().switchTo().window(handle);
+        }
+        getDriver().switchTo().frame("previewIframe");
+        widgetPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
+        getDriver().switchTo().window(currentWindow);
+        widgetPage.goToAutorespondersTab().publishFromAutoresponders();
         hqHandle = driver.getWindowHandle();
-        addWidgetPage.openSubscribeWidget(widgetName);
+        widgetPage.openSubscribeWidget(widgetName);
         new EventWidget()
                 .openEventRegistrationPage()
                 .fillEventRegistrationForm(email, widgetName, widgetName)
@@ -109,13 +123,14 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                         "2022"
                 ).clickSubmitButton();
         getDriver().switchTo().window(hqHandle);
+        widgetPage.verifyDesignationFieldInCsv();
     }
 
-
+    /*
     @Parameters({"login", "password"})
     @Test(groups = {"events"})
     public void checkDesignationForP2P(String login, String password){
-        AddP2PPage_PublishedDeatailsTab publishedDeatailsTab = new LoginPage().
+        new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
                 openP2PPage().
@@ -132,22 +147,35 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 fillRegistrationStepAndGoNext(
                         widgetName,
                         true,
+                        false,
                         "10",
                         "5").
                 clickContinueButton().
                 clickContinueButton().
                 clickNextButton().
-                selectLayoutAndClickNext("Basic").
-                openCheckoutSubTab().
-                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
-                checkIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
-                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "True (Checked)").
-                clickNextToEventPageButton().
-                clickNextToTeamTabButton().
-                clickNextToAutorespondersTabButton().
-                clickPublishButton();
+                selectLayoutAndClickNext("Blank").
+                openCheckoutSubTab();
+        AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().
+                dropOneColumnRow().
+                dropVEFormElement();
+        new FormFieldConfigurationModalWindow().
+                dropFormFieldByName("Designation").
+                addDesignationFieldOption("1").
+                addDesignationFieldOption("2").
+                addDesignationFieldOption("3").
+                saveFieldConfiguration();
+        String currentWindow = getDriver().getWindowHandle();
+        widgetPage.preview();
+        Set<String> windows = getDriver().getWindowHandles();
+        for (String handle : windows) {
+            if (!handle.equals(currentWindow)) getDriver().switchTo().window(handle);
+        }
+        getDriver().switchTo().frame("previewIframe");
+        widgetPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
+        getDriver().switchTo().window(currentWindow);
+        widgetPage.goToAutorespondersTab().publishFromAutoresponders();
         hqHandle = driver.getWindowHandle();
-        publishedDeatailsTab.openWidget(widgetName.toLowerCase());
+        widgetPage.openSubscribeWidget(widgetName);
         new Eventp2pWidget().openp2pEventRegistrationPage().clickNextButtonOnRegistrationTypesPage().
                 fillp2pEventRegistrationForm(email, widgetName, widgetName).
                 clickCheckOutButton().
@@ -170,6 +198,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                         true).
                 clickOnSubmitFormButton();
         getDriver().switchTo().window(hqHandle);
-    }
+        widgetPage.verifyDesignationFieldInCsv();
+    }*/
 
 }
