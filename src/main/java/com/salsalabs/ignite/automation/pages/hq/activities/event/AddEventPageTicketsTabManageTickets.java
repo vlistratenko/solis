@@ -17,6 +17,7 @@ public class AddEventPageTicketsTabManageTickets extends HomePage {
 
     public AddEventPageSelectLayoutTab clickNextButtonInTicketsTab(){
         nextToLayoutsPageButton.click();
+        nextToLayoutsPageButton.click();
         return new AddEventPageSelectLayoutTab();
     }
 

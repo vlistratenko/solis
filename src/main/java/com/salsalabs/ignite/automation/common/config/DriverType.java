@@ -18,6 +18,8 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.logging.Level;
 
 import static com.salsalabs.ignite.automation.common.config.DriverBinaryMapper.configureBinary;
@@ -54,8 +56,18 @@ public enum DriverType implements DriverSetup {
         }
 
         public WebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-        	ChromeOptions options = new ChromeOptions();
-        	options.addArguments("--start-maximized");
+
+            Map<String, Object> chromePreferences = new Hashtable<String, Object>();
+		/* Below two chrome preference settings will disable popup dialog when download file.*/
+            chromePreferences.put("profile.default_content_settings.popups", 0);
+            chromePreferences.put("download.prompt_for_download", "false");
+
+		/* Set file save to directory. */
+            chromePreferences.put("download.default_directory", System.getProperty("user.dir") + "\\downloads");
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            options.setExperimentalOption("prefs", chromePreferences);
         	return new ChromeDriver(options);
         }
 

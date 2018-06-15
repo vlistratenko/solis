@@ -499,23 +499,63 @@ public class CommonUtils {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public static void getListOfFilesInFolder() {
-		File folder = new File("d:/workspace/IgniteTestAutomation/src/main/resources/xml-core/regression/");
-		File[] listOfFiles = folder.listFiles();
 
-	    for (int i = 0; i < listOfFiles.length; i++) {
-	      if (listOfFiles[i].isFile()) {
-	        System.out.println("<suite-file path=\"src/main/resources/xml-core/regression/" + listOfFiles[i].getName() + "\" />");
-	      } else if (listOfFiles[i].isDirectory()) {
-	        System.out.println("Directory " + listOfFiles[i].getName());
-	      }
-	    }
+	public static List<String[]> readDataFromCsv(String filePath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+		String line;
+		String cvsSplitBy = ",";
+		List<String[]> lines = new ArrayList<String[]>();
+		while ((line = br.readLine()) != null) {
+			lines.add(line.split(cvsSplitBy));
+		}
+		return lines;
+	}
+
+	public static File[] getListOfFilesInFolder(String path) {
+		return new File(path).listFiles();
 	}
 
 	public static ExpectedCondition<Boolean> angularHasFinishedProcessing() {
 		return webDriver -> Boolean.valueOf(((JavascriptExecutor) webDriver).executeScript("return (window.angular !== undefined)" +
 				" && (angular.element(document).injector() !== undefined)" +
 				" && (angular.element(document).injector().get('$http').pendingRequests.length === 0)").toString());
+	}
+
+	public static List<String> getFieldValueFromCsvForSpecificSupporterByFieldName(String path, String supporterEmail, String fieldName){
+		BufferedReader br = null;
+		List<String> result = new ArrayList<>();
+
+		List<String[]> csvData = new ArrayList<>();
+		try {
+			br = new BufferedReader(new FileReader(path));
+			String line;
+			while((line = br.readLine()) != null) {
+				csvData.add(line.split(","));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {br.close();} catch (IOException e) {e.printStackTrace();}
+			new File(path).delete();
+		}
+		int resultColumnIndex = 0;
+		String[] header = csvData.get(0);
+		for (int i = 0; i <= header.length; i++) {
+			if (header[i].equals(fieldName)) {
+				resultColumnIndex = i;
+				break;
+			}
+		}
+		int emailColumnIndex = 0;
+		for (int i = 0; i <= header.length; i++) {
+			if (header[i].equals(TransactionsExportFields.EMAIL)) {
+				emailColumnIndex = i;
+				break;
+			}
+		}
+		for (int i = 1; i < csvData.size(); i++) {
+			if (csvData.get(i)[emailColumnIndex].equals(supporterEmail.toLowerCase())) result.add(csvData.get(i)[resultColumnIndex]);
+		}
+		return result;
 	}
 }

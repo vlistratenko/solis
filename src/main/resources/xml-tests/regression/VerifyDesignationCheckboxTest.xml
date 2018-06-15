@@ -8,7 +8,8 @@
         <parameter name="password" value="qwerty"></parameter>
         <groups>
             <run>
-                <include name="payments" />
+                <include name="events" />
+                <include name="fundraising" />
             </run>
         </groups>
         <classes>

@@ -12,7 +12,6 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 
 	Button nextButton = new ButtonImpl("//button[@id='btnGo-setup-compose']", "Design My Widget button", true);
 	Button btnPublish = new ButtonImpl("//button[@id='btnPublish']", "Publish This Form >>");
-	Button downloadResultsAsCsv = new ButtonImpl("//button[contains(text(), 'Download')]", "Download results as csv");
 
 	public static DropDown gatewaysList = new DropDownImpl(
 			"//gateways-and-queues//*[@class='custom dropdown']",
@@ -70,11 +69,5 @@ public class AddDonationWidgetPage extends AddSubscribeWidgetPage {
 		verifier.verifyEquals(((SelectBoxImpl) modal.checkBoxDefaultValue).getSelectedLabel(modal.checkBoxDefaultValue.getPath()), defaultValue, "Check default value", true);
 		modal.saveButton.click();
 		return this;
-	}
-
-	public void verifyDesignationInCsv() {
-		sleep(60);
-		downloadResultsAsCsv.clickJS();
-		sleep(10);
 	}
 }

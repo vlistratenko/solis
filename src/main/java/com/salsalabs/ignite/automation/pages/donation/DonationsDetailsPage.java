@@ -1,8 +1,5 @@
 package com.salsalabs.ignite.automation.pages.donation;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.Panel;
@@ -13,8 +10,11 @@ import com.salsalabs.ignite.automation.elements.impl.PanelImpl;
 import com.salsalabs.ignite.automation.elements.impl.TableImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 public class DonationsDetailsPage extends HomePage {
-	Table donationsTable = new TableImpl("//H2[.='Transactions']/../descendant::table", "Transactions table");
+	Table donationsTable = new TableImpl("//H2[.='TransactionsPage']/../descendant::table", "TransactionsPage table");
 	Button refundLink = new ButtonImpl(donationsTable.getPath() + "/descendant::a[@Title='Refund']", "Refund");	
 	Panel mainPanel = new PanelImpl("//div[@class='mainContentWrapper']", "Main panel");
 	Label donationAmountLabel = new LabelImpl("//h3[contains(text(), 'donation')]/ancestor::div[contains(@class,'donation_card')]/descendant::h1", "Donation amount in top of page");

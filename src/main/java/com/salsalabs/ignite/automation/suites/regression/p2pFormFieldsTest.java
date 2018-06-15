@@ -1,15 +1,13 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.p2p.EventFundraiserWidgetPage;
 import com.salsalabs.ignite.automation.pages.p2p.EventTeamWidgetPage;
-import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 
 /**
@@ -96,7 +94,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		
 		//CommonUtils.setParam(PropertyName.P2P_FORM_LINK, "https://testvco823.test.igniteaction.net/p2pform20180424133712/index.html");
 		
-		verifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
+		//verifyAnonimusOptionOnExistedForm(CommonUtils.getParam(PropertyName.P2P_FORM_LINK));
 	}
 	
 	/**
@@ -104,7 +102,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 	 * formURL = p2p form URL
 	 * @throws Exception 
 	 */
-	@Parameters({ "formURL"})
+	/*@Parameters({ "formURL"})
 	@Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "p2p.formFields.Anonymous" }, description = "")
 	public void verifyAnonimusOptionOnExistedForm(String formURL) throws Exception {
 
@@ -159,7 +157,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 		verifyNameForLastDonorByDonationAmount("Anonymous", donationAmount, donationAmount);
 		CommonUtils.checkAndFail("varifyAnonimusOptionOnExistedFormForTeamPage");
 	}	
-	
+	*/
 	/**
 	 * This test requires p2p fundraiser form with "Display my donation anonymously" option
 	 * formURL = p2p form URL
