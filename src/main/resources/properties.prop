@@ -1,11 +1,11 @@
 #AUTOMATICALLY GENERATED
-#Thu Jun 14 13:57:12 EEST 2018
+#Fri Jun 15 12:29:43 EEST 2018
 current.Password=qwerty
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
 googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
 planName=false
-currentWindowHandle=CDwindow-2BD42112CD877D96F15B647360B5FF51
+currentWindowHandle=CDwindow-A168F5693F42C0CF9EA7F74C534AB8A0
 test=
 personZip=20008
 CM.lastName=0
@@ -29,25 +29,25 @@ personMName=personMName
 title=titleValue
 Admin.Password=11111111
 activitySingleChoiceCustomFieldValue=value1
-donationWidgetLink=https\://cart.test.igniteaction.net/fundraisingformtname_ue3rg
+donationWidgetLink=https\://cart.test.igniteaction.net/u4zfd2trgi
 supporterYesNoCustomFieldValue=True
 personEmail=autosupporterVe21@test.com
 country=UA
 gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
-Environment=TEST
-subscribeWidgetLink=https\://cart.test.igniteaction.net/gjcb58cidy
-dateOfBirth=2017-09-10T00\:00\:00.000Z
 suffix=suffixValue
+dateOfBirth=2017-09-10T00\:00\:00.000Z
+subscribeWidgetLink=https\://cart.test.igniteaction.net/82wkvblckr
+Environment=TEST
 workPhone=777-777-7777
-personCity=personCity
 addressLine2=addressLine2
+personCity=personCity
 addressLine1=addressLine1
 gender=Male
 current.Login=olauta+cart@salsalabs.com
 Admin.emailBase=0
-Admin.firstName=FirstName
 Admin.lastName=LastName
-CM.firstName=0
-activityYesNoCustomFieldValue=True
+Admin.firstName=FirstName
 state=UA-63
+activityYesNoCustomFieldValue=True
+CM.firstName=0

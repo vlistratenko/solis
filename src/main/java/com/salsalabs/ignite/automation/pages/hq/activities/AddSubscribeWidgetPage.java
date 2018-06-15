@@ -1,17 +1,12 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.HttpClient;
-import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.common.Supporter;
+import com.salsalabs.ignite.automation.common.*;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -22,8 +17,10 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
+import static com.salsalabs.ignite.automation.common.SeleneseTestCase.getDriver;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
@@ -55,6 +52,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
 	protected Button downloadResultsAsCsv = new ButtonImpl("//button[contains(text(), 'Download')]", "Download results as csv");
+	protected Label urlLabel = new LabelImpl(".//label[text()='URL']", "URL label");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -107,8 +105,9 @@ public class AddSubscribeWidgetPage extends HomePage {
         publishFromAutorespondersTab.click();
         try {
         	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
+			closeFeedbackWindowButton.clickJS();
 		} catch (TimeoutException e) {}
-		closeFeedbackWindowButton.clickJS();
+		urlLabel.fluentWaitForElementPresenceIgnoringExceptions();
         return this;
     }
 
@@ -240,6 +239,17 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
+	public AddSubscribeWidgetPage preview(String currentWindowHandle){
+		previewButton.click();
+		sleep(10);
+		Set<String> windows = getDriver().getWindowHandles();
+		for (String handle : windows) {
+			if (!handle.equals(currentWindowHandle)) getDriver().switchTo().window(handle);
+		}
+		switchToFrame("//iframe[@id='previewIframe']");
+		return this;
+	}
+
 	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
 		basicLayoutClass.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
@@ -362,24 +372,11 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public void verifyDesignationFieldInCsv() {
-		sleep(60); //wait until donation reaches HQ
-		refresh();
-		downloadResultsAsCsv.fluentWaitForElementPresenceIgnoringExceptions();
-		downloadResultsAsCsv.scrollIntoView();
-		downloadResultsAsCsv.clickJS();
-		sleep(10); //wait until download starts
+	public void verifyDesignationFieldInCsv(String email) {
 		File[] files = CommonUtils.getListOfFilesInFolder(System.getProperty("user.dir") + "\\downloads");
-		List<String[]> csvData = null;
-		try {
-			csvData = CommonUtils.readDataFromCSV(files[0].getAbsolutePath());
-		} catch (IOException e) {
-			logger.error("Unable to read downloaded file. Reason: " + e.getMessage());
-
-		}
+		List<String> designationValue = CommonUtils.getFieldValueFromCsvForSpecificSupporterByFieldName(files[0].getAbsolutePath(), email, TransactionsExportFields.DESIGNATION);
 		files[0].delete();
 		logger.info("Checking designation field in exported CSV");
-		List<String> designationContent = CommonUtils.getCsvColumnDataByName(csvData, "Designation");
-		verifier.verifyEquals(designationContent.get(0), "1");
+		verifier.verifyEquals(designationValue.get(0), "1");
 	}
 }

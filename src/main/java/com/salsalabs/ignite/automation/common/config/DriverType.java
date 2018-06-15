@@ -63,7 +63,7 @@ public enum DriverType implements DriverSetup {
             chromePreferences.put("download.prompt_for_download", "false");
 
 		/* Set file save to directory. */
-            chromePreferences.put("download.default_directory", "C:\\selenium_downloads");
+            chromePreferences.put("download.default_directory", System.getProperty("user.dir") + "\\downloads");
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");

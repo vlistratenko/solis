@@ -155,7 +155,7 @@ public class EventWidget extends DonationWidget {
 	public EventWidget clickSubmitButton() {
 		submitButtonNew.clickJS();
 		eventSubsrIsSccessMessage.fluentWaitForElementPresenceIgnoringExceptions();
-		sleep(5);
+		sleep(20); //wait until supporter reaches HQ after submission
 		return this;
 	}
 
