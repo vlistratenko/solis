@@ -86,14 +86,16 @@ public class Eventp2pWidget extends EventWidget {
 	public Eventp2pWidget clickNextButtonOnRegistrationTypesPage () {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		addToCartButton.click();
-		sleep(3);
+		switchDefaultContent();
+		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		nextButton.fluentWaitForElementPresenceIgnoringExceptions();
 		nextButton.click();
 		switchDefaultContent();
 		return this;
 	}
 	
 	public Eventp2pWidget fillFundraiserSignInForm (String fundraiserFName, String fundraiserLName, String fundraiserEmail,
-			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {		
+			String fundraiserPassword, String fundraiserPasswordConfirmation, boolean isWithTeam) {
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		if (!createFundraiserAccountButton.waitElement(5)) {
 			new ButtonImpl("//div[@class='checkout_logout']/a", "Fundraiser logout link").click();
@@ -144,8 +146,6 @@ public class Eventp2pWidget extends EventWidget {
 	
 	public Eventp2pWidget fillp2pEventRegistrationForm(String personEmail, String personFName, String personLName){
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		/*ticketsQtySelectBox.selectByLabel("1");
-		nextButton.click();*/
 		sleep(3);
 		eventPersonEmailField.type(personEmail);
 		eventPersonFNameField.type(personFName);

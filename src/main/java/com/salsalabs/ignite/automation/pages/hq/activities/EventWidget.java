@@ -16,9 +16,7 @@ public class EventWidget extends DonationWidget {
 	Label eventSubsrIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//*[contains(text(), 'Register')]", "Register", true);
-	Button nextButton = new ButtonImpl("//a[contains(text(), 'Next')]", "Next", true);
-	//Deprecated IG-13504
-	//SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
+	Button nextButton = new ButtonImpl(".//*[@id='new_transaction']//a", "Next", true);
 	Button checkoutButton = new ButtonImpl("//a[contains(text(), 'Checkout')]", "Checkout", true);
 	Button submitButton = new ButtonImpl("//button[@type='submit']", "Submit", true);
 	Button submitButtonNew = new ButtonImpl("//a[.='Submit']", "Submit", true);
@@ -52,10 +50,6 @@ public class EventWidget extends DonationWidget {
 	}
 	
 	public EventWidget fillEventRegistrationForm(String personEmail, String personFName, String personLName){
-		//Deprecated IG-13504
-		/*ticketsQtySelectBox.selectByLabel("1");
-		nextButton.click();
-		sleep(3);*/
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
 		eventPersonEmailField.type(personEmail);
 		eventPersonFNameField.type(personFName);

@@ -13,7 +13,7 @@ public class TargetActionsPage extends SubscribeWidget {
     Button skipSendingEmail = new ButtonImpl("//a[contains(text(), 'Skip Sending Email')]", "Create Targeted Action");
     Button skipFacebookPost = new ButtonImpl("//a[contains(text(), 'Skip Facebook')]", "Create Targeted Action");
     Button skipTwitterPost = new ButtonImpl("//a[contains(text(), 'Skip Tweeting')]", "Create Targeted Action");
-    DropDown title = new DropDownImpl(".//select[contains(@data-fv-field, 'TITLE')]", "Title dropdown");
+    DropDown title = new DropDownImpl(".//div[@data-ignite-container-type='elementStep']//select[contains(@data-fv-field, 'TITLE')]", "Title dropdown");
 
     public AddTargetedActionPage openAddTargetedActionPage() {
         createActionDropDown.click();
@@ -43,7 +43,7 @@ public class TargetActionsPage extends SubscribeWidget {
         }else{
             personStatesSelectBox.selectByValue(state);
         }
-        if (title.isExists()) title.selectByLabel("Mr.");
+        if (title.isExists()) title.pickFirstValueInList();
         sleep(3);
         subscribeButton.click();
         sleep(1);
