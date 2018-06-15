@@ -1,11 +1,11 @@
 #AUTOMATICALLY GENERATED
-#Fri Jun 15 14:50:13 EEST 2018
+#Fri Jun 15 14:59:32 EEST 2018
 current.Password=qwerty
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
 googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
 planName=false
-currentWindowHandle=CDwindow-DB070F367D6FA0749B1E829D9F1E4954
+currentWindowHandle=CDwindow-02D95A2892831AF0736AC846F4602D3C
 test=
 personZip=20008
 CM.lastName=0
@@ -35,19 +35,19 @@ personEmail=autosupporterVe21@test.com
 country=UA
 gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
-Environment=TEST
-subscribeWidgetLink=https\://cart.test.igniteaction.net/uigwp5b1ea
-dateOfBirth=2017-09-10T00\:00\:00.000Z
 suffix=suffixValue
+dateOfBirth=2017-09-10T00\:00\:00.000Z
+subscribeWidgetLink=https\://cart.test.igniteaction.net/frszzjqmxm
+Environment=TEST
 workPhone=777-777-7777
-personCity=personCity
 addressLine2=addressLine2
+personCity=personCity
 addressLine1=addressLine1
 gender=Male
 current.Login=olauta+cart@salsalabs.com
 Admin.emailBase=0
-Admin.firstName=FirstName
 Admin.lastName=LastName
-CM.firstName=0
-activityYesNoCustomFieldValue=True
+Admin.firstName=FirstName
 state=UA-63
+activityYesNoCustomFieldValue=True
+CM.firstName=0

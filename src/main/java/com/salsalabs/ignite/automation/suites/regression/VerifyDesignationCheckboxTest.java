@@ -4,6 +4,8 @@ import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
+import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_EventPageTab_CheckoutSubTab;
 import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
@@ -14,7 +16,6 @@ import org.testng.annotations.Test;
 
 @Test
 public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
-    private FormFieldConfigurationModalWindow formFieldConfigurationModal;
     private String widgetName;
     private String email;
     private String hqHandle;
@@ -24,7 +25,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         widgetName = RandomStringUtils.randomAlphanumeric(10);
         email = widgetName + "@test.com";
     }
-    /*
+
     @Parameters({"login", "password"})
     @Test(groups = {"fundraising"})
     public void checkDesignationForFundraising(String login, String password) throws InterruptedException {
@@ -63,8 +64,8 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 downloadExportResults();
         widgetPage.verifyDesignationFieldInCsv(email);
     }
-    */
-    /*
+
+
     @Parameters({"login", "password"})
     @Test(groups = {"events"})
     public void checkDesignationForEvent(String login, String password){
@@ -123,7 +124,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 downloadExportResults();
         widgetPage.verifyDesignationFieldInCsv(email);
     }
-    */
+
 
     @Parameters({"login", "password"})
     @Test(groups = {"events"})
@@ -144,7 +145,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                         false).
                 fillRegistrationStepAndGoNext(
                         widgetName,
-                        true,
+                        false,
                         false,
                         "10",
                         "5").
