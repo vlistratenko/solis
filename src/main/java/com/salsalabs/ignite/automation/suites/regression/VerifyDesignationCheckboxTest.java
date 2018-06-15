@@ -5,6 +5,7 @@ import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
+import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_EventPageTab_CheckoutSubTab;
 import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.BeforeMethod;
@@ -127,7 +128,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
     @Parameters({"login", "password"})
     @Test(groups = {"events"})
     public void checkDesignationForP2P(String login, String password){
-        new LoginPage().
+        AddP2PPage_EventPageTab_CheckoutSubTab p2pCheckout = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
                 openP2PPage().
@@ -150,22 +151,24 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 clickContinueButton().
                 clickContinueButton().
                 clickNextButton().
-                selectLayoutAndClickNext("Blank").
+                selectLayoutAndClickNext("Basic").
                 openCheckoutSubTab();
-        AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().
-                dropOneColumnRow().
-                dropVEFormElement();
         new FormFieldConfigurationModalWindow().
                 dropFormFieldByName("Designation").
                 addDesignationFieldOption("1").
                 addDesignationFieldOption("2").
                 addDesignationFieldOption("3").
                 saveFieldConfiguration();
-        String currentWindow = getDriver().getWindowHandle();
-        widgetPage.preview(hqHandle);
-        widgetPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
-        getDriver().switchTo().window(currentWindow);
-        widgetPage.goToAutorespondersTab().publishFromAutoresponders();
+        hqHandle = getDriver().getWindowHandle();
+        AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().
+                preview(hqHandle).
+                checkIfDesignationFieldExistsOnForm("1", "2", "3");
+        getDriver().switchTo().window(hqHandle);
+        p2pCheckout.
+                clickNextToEventPageButton().
+                clickNextToTeamTabButton().
+                clickNextToAutorespondersTabButton().
+                clickPublishButton();
         hqHandle = driver.getWindowHandle();
         widgetPage.openSubscribeWidget(widgetName);
         new Eventp2pWidget().openp2pEventRegistrationPage().clickNextButtonOnRegistrationTypesPage().
