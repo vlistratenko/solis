@@ -11,8 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.Set;
-
 @Test
 public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
     private FormFieldConfigurationModalWindow formFieldConfigurationModal;
@@ -164,12 +162,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 addDesignationFieldOption("3").
                 saveFieldConfiguration();
         String currentWindow = getDriver().getWindowHandle();
-        widgetPage.preview();
-        Set<String> windows = getDriver().getWindowHandles();
-        for (String handle : windows) {
-            if (!handle.equals(currentWindow)) getDriver().switchTo().window(handle);
-        }
-        getDriver().switchTo().frame("previewIframe");
+        widgetPage.preview(hqHandle);
         widgetPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
         getDriver().switchTo().window(currentWindow);
         widgetPage.goToAutorespondersTab().publishFromAutoresponders();
