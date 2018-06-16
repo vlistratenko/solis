@@ -18,6 +18,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.logging.Level;
@@ -63,7 +64,7 @@ public enum DriverType implements DriverSetup {
             chromePreferences.put("download.prompt_for_download", "false");
 
 		/* Set file save to directory. */
-            chromePreferences.put("download.default_directory", System.getProperty("user.dir") + "\\downloads");
+            chromePreferences.put("download.default_directory", Paths.get(System.getProperty("user.dir"), "downloads"));
 
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");

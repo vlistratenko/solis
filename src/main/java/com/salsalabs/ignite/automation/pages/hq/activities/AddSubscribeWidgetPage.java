@@ -17,6 +17,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -373,7 +374,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	}
 
 	public void verifyDesignationFieldInCsv(String email) {
-		File[] files = CommonUtils.getListOfFilesInFolder(System.getProperty("user.dir") + "\\downloads");
+		File[] files = CommonUtils.getListOfFilesInFolder(Paths.get(System.getProperty("user.dir"), "downloads").toString());
 		List<String> designationValue = CommonUtils.getFieldValueFromCsvForSpecificSupporterByFieldName(files[0].getAbsolutePath(), email, TransactionsExportFields.DESIGNATION);
 		files[0].delete();
 		logger.info("Checking designation field in exported CSV");

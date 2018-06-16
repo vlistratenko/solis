@@ -500,13 +500,23 @@ public class CommonUtils {
 
 	}
 
-	public static List<String[]> readDataFromCsv(String filePath) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(filePath));
+	public static List<String[]> readDataFromCsv(String filePath) {
+		BufferedReader br = null;
 		String line;
 		String cvsSplitBy = ",";
 		List<String[]> lines = new ArrayList<String[]>();
-		while ((line = br.readLine()) != null) {
-			lines.add(line.split(cvsSplitBy));
+		try {
+			br = new BufferedReader(new FileReader(filePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				while ((line = br.readLine()) != null) {
+					lines.add(line.split(cvsSplitBy));
+				}
+				br.close();
+			} catch (IOException e) {e.printStackTrace();}
+			new File(filePath).delete();
 		}
 		return lines;
 	}
@@ -522,22 +532,9 @@ public class CommonUtils {
 	}
 
 	public static List<String> getFieldValueFromCsvForSpecificSupporterByFieldName(String path, String supporterEmail, String fieldName){
-		BufferedReader br = null;
 		List<String> result = new ArrayList<>();
+		List<String[]> csvData = readDataFromCsv(path);
 
-		List<String[]> csvData = new ArrayList<>();
-		try {
-			br = new BufferedReader(new FileReader(path));
-			String line;
-			while((line = br.readLine()) != null) {
-				csvData.add(line.split(","));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {br.close();} catch (IOException e) {e.printStackTrace();}
-			new File(path).delete();
-		}
 		int resultColumnIndex = 0;
 		String[] header = csvData.get(0);
 		for (int i = 0; i <= header.length; i++) {
