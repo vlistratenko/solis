@@ -501,22 +501,15 @@ public class CommonUtils {
 	}
 
 	public static List<String[]> readDataFromCsv(String filePath) {
-		BufferedReader br = null;
 		String line;
 		String cvsSplitBy = ",";
 		List<String[]> lines = new ArrayList<String[]>();
-		try {
-			br = new BufferedReader(new FileReader(filePath));
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+			while ((line = br.readLine()) != null) {
+				lines.add(line.split(cvsSplitBy));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				while ((line = br.readLine()) != null) {
-					lines.add(line.split(cvsSplitBy));
-				}
-				br.close();
-			} catch (IOException e) {e.printStackTrace();}
-			new File(filePath).delete();
 		}
 		return lines;
 	}

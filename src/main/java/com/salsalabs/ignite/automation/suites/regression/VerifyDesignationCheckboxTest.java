@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.LoginPage;
@@ -10,9 +11,13 @@ import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfiguratio
 import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_EventPageTab_CheckoutSubTab;
 import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 import org.apache.commons.lang.RandomStringUtils;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.nio.file.Paths;
 
 @Test
 public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
@@ -204,4 +209,11 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
         widgetPage.verifyDesignationFieldInCsv(email);
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void cleanDownloadsFolder(){
+       File[] files = CommonUtils.getListOfFilesInFolder(Paths.get(System.getProperty("user.dir"), "downloads").toString());
+       for (File f : files) {
+           f.delete();
+       }
+    }
 }

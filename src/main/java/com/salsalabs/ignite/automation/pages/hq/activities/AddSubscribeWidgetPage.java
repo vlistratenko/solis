@@ -376,7 +376,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public void verifyDesignationFieldInCsv(String email) {
 		File[] files = CommonUtils.getListOfFilesInFolder(Paths.get(System.getProperty("user.dir"), "downloads").toString());
 		List<String> designationValue = CommonUtils.getFieldValueFromCsvForSpecificSupporterByFieldName(files[0].getAbsolutePath(), email, TransactionsExportFields.DESIGNATION);
-		files[0].delete();
 		logger.info("Checking designation field in exported CSV");
 		verifier.verifyEquals(designationValue.get(0), "1");
 	}
