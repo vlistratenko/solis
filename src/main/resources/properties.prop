@@ -1,5 +1,5 @@
 #AUTOMATICALLY GENERATED
-#Wed May 02 19:01:49 EEST 2018
+#Mon Jun 18 10:51:14 EEST 2018
 current.Password=qwerty
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
@@ -35,19 +35,19 @@ personEmail=autosupporterVe21@test.com
 country=UA
 gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
-suffix=suffixValue
-dateOfBirth=2017-09-10T00\:00\:00.000Z
-subscribeWidgetLink=https\://testvco2712.test.igniteaction.net/subscribewidgetname_z67tb
 Environment=TEST
+subscribeWidgetLink=https\://testvco2712.test.igniteaction.net/subscribewidgetname_z67tb
+dateOfBirth=2017-09-10T00\:00\:00.000Z
+suffix=suffixValue
 workPhone=777-777-7777
-addressLine2=addressLine2
 personCity=personCity
+addressLine2=addressLine2
 addressLine1=addressLine1
 gender=Male
 current.Login=olauta+cart@salsalabs.com
 Admin.emailBase=0
-Admin.lastName=LastName
 Admin.firstName=FirstName
-state=UA-63
-activityYesNoCustomFieldValue=True
+Admin.lastName=LastName
 CM.firstName=0
+activityYesNoCustomFieldValue=True
+state=UA-63

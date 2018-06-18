@@ -1,5 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.supporters;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
+import com.salsalabs.ignite.automation.common.HttpClient;
+import com.salsalabs.ignite.automation.common.PropertyName;
 import com.salsalabs.ignite.automation.common.Supporter;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.Label;
@@ -111,5 +114,12 @@ public class SupportersPage extends AudiencePage {
 		sleep(2);
 		return new SupportersAddPage();
 	}
-	
+
+	public SupportersPage waitSupporterAfterFormSubmission(String email, int seconds){
+		String login = CommonUtils.getProperty(PropertyName.CURRENT_LOGIN);
+		String password = CommonUtils.getProperty(PropertyName.CURRENT_PASSWORD);
+		new HttpClient().login(login, password).waitUntilSupporterExists(email, seconds);
+		refresh();
+		return this;
+	}
 }
