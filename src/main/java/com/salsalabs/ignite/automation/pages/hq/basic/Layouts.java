@@ -34,6 +34,7 @@ public class Layouts extends Browser {
 		Panel img = new PanelImpl("//strong[.='" + layout + "']/ancestor::div[contains(@class,'layout_item')]/descendant::img[contains(@alt, '" + layout + "')]", layout + " layout image");
 		img.fluentWaitForElementPresenceIgnoringExceptions();
 		img.scrollIntoView();
+		lay.fluentWaitForElementPresenceIgnoringExceptions();
 		lay.click();
 	}
 

@@ -41,7 +41,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 addDesignationFieldOption("1").
                 addDesignationFieldOption("2").
                 addDesignationFieldOption("3").
-                saveFieldConfiguration();
+                saveFormFieldConfiguration();
         hqHandle = getDriver().getWindowHandle();
         widgetPage.
                 preview(hqHandle).
@@ -88,7 +88,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 addDesignationFieldOption("1").
                 addDesignationFieldOption("2").
                 addDesignationFieldOption("3").
-                saveFieldConfiguration();
+                saveFormFieldConfiguration();
         hqHandle = getDriver().getWindowHandle();
         AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().preview(hqHandle);
         widgetPage.checkIfDesignationFieldExistsOnForm("1", "2", "3");
@@ -159,7 +159,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                 addDesignationFieldOption("1").
                 addDesignationFieldOption("2").
                 addDesignationFieldOption("3").
-                saveFieldConfiguration();
+                saveFormFieldConfiguration();
         hqHandle = getDriver().getWindowHandle();
         AddSubscribeWidgetPage widgetPage = new AddSubscribeWidgetPage().
                 preview(hqHandle).

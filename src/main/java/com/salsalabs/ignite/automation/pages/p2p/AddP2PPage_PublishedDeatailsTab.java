@@ -7,7 +7,7 @@ import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 
 public class AddP2PPage_PublishedDeatailsTab extends AddP2PPage {
 
-	private Button p2pEventLink = new ButtonImpl("//a[contains(@href, 'formNameForReplacement')]", "p2p link was clicked");
+	private Button p2pEventLink = new ButtonImpl("//a[contains(@href, 'formNameForReplacement')]", "p2p link");
 	
 	public void clickOnEventLink(String eventName) {
 		p2pEventLink.changePath("formNameForReplacement", eventName.replaceAll(" ", ""));
@@ -23,6 +23,7 @@ public class AddP2PPage_PublishedDeatailsTab extends AddP2PPage {
 
 	public void openWidget(String eventName) {
 		clickOnEventLink(eventName);
+		storeEventLink(eventName);
 		String currentWindowHandle = getWindowHandle();
 		switchToPopupWindow(currentWindowHandle);
 	}

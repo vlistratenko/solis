@@ -157,7 +157,7 @@ public class ActivitiesPage extends HomePage {
 		return new TargetActionsPage();
 	}
 
-	public <T extends AddSubscribeWidgetPage> T searchFormByNameAndClick(String formName, Class<T> clazz) {
+	public <T extends HomePage> T searchFormByNameAndClick(String formName, Class<T> clazz) {
 		searchField.type(formName);
 		sleep(3);
 		magnifierButton.clickByENTERKey();

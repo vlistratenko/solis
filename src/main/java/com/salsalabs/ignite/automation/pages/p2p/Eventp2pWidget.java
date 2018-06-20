@@ -7,6 +7,7 @@ import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.activities.DonationWidget;
 import com.salsalabs.ignite.automation.pages.hq.activities.EventWidget;
+import org.testng.Assert;
 
 public class Eventp2pWidget extends EventWidget {
 	TextBox eventPersonFNameField = new TextBoxImpl("//input[contains(@id,'first_name')]", "Event attendees First name", true);
@@ -19,7 +20,7 @@ public class Eventp2pWidget extends EventWidget {
 	Button nextButton = new ButtonImpl("//*[contains(text(),'Next')]", "Next", true);
 	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
 	Button checkoutButton = new ButtonImpl("//*[contains(text(), 'Checkout')]", "Checkout", true);
-
+	Button doThisLaterButton = new ButtonImpl("//*[.='Do This Later »']","Do This Later button");
 	CheckBox isFundraiserCheckBox = new CheckBoxImpl("//input[@id='yes_register_fundraiser']", "Yes, I want to register as a fundraiser ");
 	Button createFundraiserAccountButton = new ButtonImpl("//a[.='Create an Account']", "Create an Account");
 	TextBox fundraiserFNameField = new TextBoxImpl("//input[@id='user_first_name']", "Fundraiser First Name", true);
@@ -35,14 +36,16 @@ public class Eventp2pWidget extends EventWidget {
 	TextBox teamName = new TextBoxImpl("//input[@id='fundraiser_stub_team_name']", "Team goal");
 	Button fundraiserPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Fundraiser link ");
 	Button teamPageLink = new ButtonImpl("//a[contains(.,'textforreplasment')]", "Team link ");
-
+	Button nextButtonInRegistrationDetailsStep = new ButtonImpl("//*[.='Registration Details']/ancestor::body//*[.='Next »'][contains(@onclick,'submit')]", "Next button in Registration Details step");
 	TextBox searchFundriserField = new TextBoxImpl("//label[.='Find a Fundraiser']/following::input", "Find a Fundraiser field");
 	TextBox searchFundriserButton = new TextBoxImpl("//label[.='Find a Fundraiser']/following::span[.='Search']", "Search a Fundraiser button");
 	TextBox searchTeamField = new TextBoxImpl("//label[.='Find a Team']/following::input", "Find a Team field");
 	TextBox searchTeamButton= new TextBoxImpl("//label[.='Find a Team']/following::span[.='Search']", "Search a Team button");
-
 	Tabs leaderboardTab = new TabsImpl("//div[@ignite-p2p-leaderboard='ignite-p2p-leaderboard']", "Leaderboard tabs element");
 	Table checkoutSummaryTable = new TableImpl("//table[@class='sli-checkout-summary-table']", "CheckoutSummaryTable");
+	Frame frameInRegistrationDetailsStep = new FrameImpl("//iframe[contains(@id, '_ticketFrame')]", "Frame in Registration Details step");
+	Frame frameInFundraiserDetailsStep = new FrameImpl("//iframe[@id='tdr_mFAZf']", "Frame in Fundraiser Details step");
+	Label iWouldLikeToMakeADonationCheckboxLabel = new LabelImpl("//*[@class='sli-optionalDonation sli-element']","");
 
 	public Eventp2pWidget() {
 		super();
@@ -100,16 +103,9 @@ public class Eventp2pWidget extends EventWidget {
 		}
 		createFundraiserAccountButton.waitElement();
 		createFundraiserAccountButton.click();
-		fundraiserFNameField.waitElement();
-		fundraiserFNameField.type(fundraiserFName);
-		fundraiserLNameField.type(fundraiserLName);
-		fundraiserEmailField.type(fundraiserEmail);
+		fundraiserPasswordField.fluentWaitForElementPresenceIgnoringExceptions();
 		fundraiserPasswordField.type(fundraiserPassword);
 		fundraiserPasswordConfirmationField.type(fundraiserPasswordConfirmation);
-		submitFundraiserRegistration.click();
-		CommonUtils.setParam("fundraiserName", fundraiserFName + "." + fundraiserLName + CommonUtils.getUnicName());
-		fundraiserPageNameField.type(CommonUtils.getParam(PropertyName.LAST_FUNDRAISER_NAME));
-		fundraiserGoalField.type("1000");
 		if (isWithTeam) {
 			withTeam.click();
 			CommonUtils.setParam("teamName", fundraiserFName + "." + fundraiserLName + "Team." + CommonUtils.getUnicName());
@@ -163,6 +159,15 @@ public class Eventp2pWidget extends EventWidget {
 		checkoutButton.click();
 		switchDefaultContent();
 		checkoutSummaryTable.fluentWaitForElementPresenceIgnoringExceptions();
+		return this;
+	}
+
+	public Eventp2pWidget clickOnGoToCheckoutButton(){
+		sleep(2);
+		frameInRegistrationDetailsStep.swithToFrameWithFluentWait(10);
+		checkoutButton.fluentWaitForElementPresenceIgnoringExceptions();
+		checkoutButton.click();
+		switchDefaultContent();
 		return this;
 	}
 	
@@ -266,5 +271,42 @@ public class Eventp2pWidget extends EventWidget {
 		return new EventTeamWidgetPage();
 	}
 
+	public Eventp2pWidget clickDoThisLaterButton(){
+		sleep(2);
+		frameInRegistrationDetailsStep.swithToFrameWithFluentWait(10);
+		doThisLaterButton.fluentWaitForElementPresenceIgnoringExceptions();
+		doThisLaterButton.click();
+		switchDefaultContent();
+		return this;
+	}
 
+	public Eventp2pWidget clickNextButtonOnRegistrationDetailsStep(){
+		sleep(2);
+		frameInRegistrationDetailsStep.swithToFrameWithFluentWait(10);
+		nextButtonInRegistrationDetailsStep.fluentWaitForElementPresenceIgnoringExceptions();
+		nextButtonInRegistrationDetailsStep.click();
+		switchDefaultContent();
+		return this;
+	}
+
+	public String getIWouldLikeToMakeADonationCheckboxLabelActualText(){
+		iWouldLikeToMakeADonationCheckboxLabel.fluentWaitForElementPresenceIgnoringExceptions();
+		return iWouldLikeToMakeADonationCheckboxLabel.getText();
+	}
+
+	public void verifyDefaultGeneralIWouldLikeToMakeADonationCheckboxLabel(){
+		Assert.assertEquals(getIWouldLikeToMakeADonationCheckboxLabelActualText(), "I would like to make a donation");
+	}
+
+	public void verifyDefaultFundraiserIWouldLikeToMakeADonationCheckboxLabel(){
+		Assert.assertEquals(getIWouldLikeToMakeADonationCheckboxLabelActualText(), "I would like to kick off my fundraising efforts with my own contribution");
+	}
+
+	public void verifyNewGeneralIWouldLikeToMakeADonationCheckboxLabel(){
+		Assert.assertEquals(getIWouldLikeToMakeADonationCheckboxLabelActualText(), CommonUtils.getProperty("IWouldLikeToMakeADonationCheckboxGeneralLabel"));
+	}
+
+	public void verifyNewFundraiserIWouldLikeToMakeADonationCheckboxLabel(){
+		Assert.assertEquals(getIWouldLikeToMakeADonationCheckboxLabelActualText(), CommonUtils.getProperty("IWouldLikeToMakeADonationCheckboxFundraiserLabel"));
+	}
 }

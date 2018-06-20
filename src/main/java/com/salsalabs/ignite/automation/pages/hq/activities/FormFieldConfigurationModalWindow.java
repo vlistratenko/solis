@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.Signatures;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
@@ -26,6 +27,8 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     DropDown petitionSignatureCustomizedSupporterNameOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.signatureFields']", "Petition signature element customized supporter name list");
     DropDown petitionSignatureCustomizedSupporterLocationOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.locationFields']","Petition signature element customized supporter location list");
     Button saveSignaturesConfigurationButton = new ButtonImpl("//*[@id='htmlEditModal']//*[@class=\"small button primary\"]", "Save Signatures element configuration modal button");
+    TextBox iWouldLikeToMakeADonationGeneralCheckboxLabelTextField = new TextBoxImpl("//*[@ng-model='fieldConfig.labelText']", "I would like to make a donation general checkbox label text field");
+    TextBox iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField = new TextBoxImpl("//*[@ng-model='fieldConfig.labelTextFundraiser']", "I would like to make a donation fundraisers checkbox label text field");
 
     private static List<String> supporterFieldNames  = new ArrayList<>();
 
@@ -148,5 +151,19 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     public  <T extends HomePage> T saveSignatureElementConfigurationModal(){
         saveSignaturesConfigurationButton.click();
         return (T) new HomePage();
+    }
+
+    public FormFieldConfigurationModalWindow setIWouldLikeToMakeADonationCheckboxGeneralLabel(String label) {
+        iWouldLikeToMakeADonationGeneralCheckboxLabelTextField.fluentWaitForElementPresenceIgnoringExceptions();
+        iWouldLikeToMakeADonationGeneralCheckboxLabelTextField.type(label);
+        CommonUtils.setProperty("IWouldLikeToMakeADonationCheckboxGeneralLabel", label);
+        return this;
+    }
+
+    public FormFieldConfigurationModalWindow setIWouldLikeToMakeADonationCheckboxFundraisersLabel(String label) {
+        iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField.fluentWaitForElementPresenceIgnoringExceptions();
+        iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField.type(label);
+        CommonUtils.setProperty("IWouldLikeToMakeADonationCheckboxFundraiserLabel", label);
+        return this;
     }
 }

@@ -191,7 +191,7 @@ public abstract class Browser {
 
 	protected void sleep(int seconds) {
 		try {
-			logger.info("Waiting for " + seconds + " seconds...");
+			logger.debug("Waiting for " + seconds + " seconds...");
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
 			logger.error("", e);

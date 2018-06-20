@@ -12,6 +12,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.MessagingPage;
 import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
 import com.salsalabs.ignite.automation.pages.hq.transactions.TransactionsPage;
+import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskPage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskSubmitRequestPage;
 
@@ -220,7 +221,7 @@ public class HomePage extends Browser {
 	}
 
 
-	private <T extends AddSubscribeWidgetPage> T openFormByFullUrl(String fullFormUrl, Class<T> clazz){
+	private <T extends HomePage> T openFormByFullUrl(String fullFormUrl, Class<T> clazz){
 		open(fullFormUrl);
 		try {
 			return clazz.newInstance();
@@ -233,6 +234,11 @@ public class HomePage extends Browser {
 	public AddPetitionPage openPetitionFormByFullUrl(String formUrl){
 		openFormByFullUrl(formUrl, AddPetitionPage.class);
 		return new AddPetitionPage();
+	}
+
+	public AddP2PPage openP2PFormByFullUrl(String formUrl){
+		openFormByFullUrl(formUrl, AddP2PPage.class);
+		return new AddP2PPage();
 	}
 
 }
