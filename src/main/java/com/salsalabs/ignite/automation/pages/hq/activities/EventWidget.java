@@ -1,16 +1,8 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
 
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.CheckBox;
-import com.salsalabs.ignite.automation.elements.Label;
-import com.salsalabs.ignite.automation.elements.SelectBox;
-import com.salsalabs.ignite.automation.elements.TextBox;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.LabelImpl;
-import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.*;
+import com.salsalabs.ignite.automation.elements.impl.*;
 
 
 public class EventWidget extends DonationWidget {
@@ -24,12 +16,12 @@ public class EventWidget extends DonationWidget {
 	Label eventSubsrIsSccessMessage = new LabelImpl("//*[contains(.,'Thank You!')]", "Event is subscribed");
 	Button donateOnlyButton = new ButtonImpl("//a[contains(text(),'Like to Donate')]", "Donate only", true);
 	Button registrationButton = new ButtonImpl("//*[contains(text(), 'Register')]", "Register", true);
-	Button nextButton = new ButtonImpl("//a[.='Next']", "Next", true);
-	SelectBox ticketsQtySelectBox = new SelectBoxImpl("//select[@name='ticket_qty']", "Tickets qty");
-	Button checkoutButton = new ButtonImpl("//button[contains(text(), 'Checkout')]", "Checkout", true);
+	Button nextButton = new ButtonImpl(".//*[@id='new_transaction']//a", "Next", true);
+	Button checkoutButton = new ButtonImpl("//a[contains(text(), 'Checkout')]", "Checkout", true);
 	Button submitButton = new ButtonImpl("//button[@type='submit']", "Submit", true);
 	Button submitButtonNew = new ButtonImpl("//a[.='Submit']", "Submit button", true);
 	protected CheckBox displayDonationAnonymouslyOptionCheckBox = new CheckBoxImpl("//input[@name='anonymousDonation']", "Display my donation anonymously checkbox");
+	Table itemsTable = new TableImpl(".//*[@ignite-ticket-summary='ignite-ticket-summary']", "Checkout table");
 	
 	public EventWidget() {
 		super();
@@ -59,15 +51,15 @@ public class EventWidget extends DonationWidget {
 	
 	public EventWidget fillEventRegistrationForm(String personEmail, String personFName, String personLName){
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		ticketsQtySelectBox.selectByLabel("1");
-		nextButton.click();
-		sleep(3);
 		eventPersonEmailField.type(personEmail);
 		eventPersonFNameField.type(personFName);
 		eventPersonLNameField.type(personLName);
-		checkoutButton.click();
-		sleep(3);
+		nextButton.click();
 		switchDefaultContent();
+		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
+		checkoutButton.click();
+		switchDefaultContent();
+		checkoutSummaryTable.fluentWaitForElementPresenceIgnoringExceptions();
 		return this;
 	}
 	
@@ -162,6 +154,8 @@ public class EventWidget extends DonationWidget {
 	 */
 	public EventWidget clickSubmitButton() {
 		submitButtonNew.clickJS();
+		eventSubsrIsSccessMessage.fluentWaitForElementPresenceIgnoringExceptions();
+		sleep(5);
 		return this;
 	}
 	

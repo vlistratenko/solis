@@ -8,8 +8,9 @@ import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.activities.FormFieldConfigurationModalWindow;
 import org.openqa.selenium.JavascriptExecutor;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-public class AddEventPageComposeTabEventPage extends HomePage implements AddEventPageComposeTabPage {
+public class AddEventPageComposeTabEventPage extends AddSubscribeWidgetPage implements AddEventPageComposeTabPage{
 
     protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 

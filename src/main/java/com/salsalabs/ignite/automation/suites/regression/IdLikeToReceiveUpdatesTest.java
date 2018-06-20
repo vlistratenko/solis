@@ -1,9 +1,17 @@
 package com.salsalabs.ignite.automation.suites.regression;
 
+import com.salsalabs.ignite.automation.common.RetryAnalyzer;
 import com.salsalabs.ignite.automation.common.SeleneseTestCase;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.LoginPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.*;
 import com.salsalabs.ignite.automation.pages.hq.supporters.SupportersPage;
+import com.salsalabs.ignite.automation.pages.p2p.AddP2PPage_PublishedDeatailsTab;
+import com.salsalabs.ignite.automation.pages.p2p.Eventp2pWidget;
 import org.apache.commons.lang.RandomStringUtils;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
 
@@ -12,11 +20,16 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
     private String email;
     private String hqHandle;
 
-    /*
+    @BeforeMethod(alwaysRun = true)
+    private void generateTestData() {
+        activityName = RandomStringUtils.randomAlphanumeric(10);
+        fieldLabel = RandomStringUtils.randomAlphanumeric(10);
+        email = RandomStringUtils.randomAlphanumeric(5) + "@test.com";
+    }
+
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
-    public void signupForm(String login, String password) throws InterruptedException {
-        generateTestData();
+    public void checkSignupForm(String login, String password) throws InterruptedException {
         AddSubscribeWidgetPage addSubscribeWidgetPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
@@ -36,17 +49,17 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         checkSubscriptionStatus();
     }
 
+
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void fundraisingForm(String login, String password) throws InterruptedException {
-        generateTestData();
         AddSubscribeWidgetPage addSubscribeWidgetPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
                 openFundraisingWidgetPage().
                 openAddDonationWidgetPage().
                 createForm(activityName,"desc").
-                selectLayoutStep("Hero").
+                selectLayoutStep("Suggested").
                 switchBetweenFormSteps(2).
                 editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
                 checkIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
@@ -67,7 +80,6 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void petitionForm(String login, String password) throws InterruptedException {
-        generateTestData();
         AddSubscribeWidgetPage addSubscribeWidgetPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
@@ -90,7 +102,6 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void targetedActionForm(String login, String password) throws InterruptedException {
-        generateTestData();
         AddSubscribeWidgetPage addSubscribeWidgetPage = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
@@ -107,16 +118,16 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 publishFromAutoresponders();
         hqHandle = driver.getWindowHandle();
         addSubscribeWidgetPage.openSubscribeWidget();
-        new TargetActionsPage().fillAndSubmitWidget(email, activityName, activityName, activityName, "91602", "NY", "10753 blix");
+        new TargetActionsPage().fillAndSubmitWidget(email, activityName, activityName, activityName, "91602", "NY", "10753 blix", false, false, false);
         getDriver().switchTo().window(hqHandle);
         checkSubscriptionStatus();
-    }*/
+    }
 
-   /* @Parameters({ "login", "password"})
+
+    @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void eventForm(String login, String password) throws InterruptedException {
-        generateTestData();
-        AddEventPageAutorespondersTab addEventPageAutorespondersTab = new LoginPage().doSuccessLogin(login, password)
+        AddSubscribeWidgetPage addWidgetPage = new LoginPage().doSuccessLogin(login, password)
                 .openActivitiesPage()
                 .openEventsPage()
                 .clickCreateAnEventButton()
@@ -128,13 +139,11 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 .clickContinueButton()
                 .clickNextButtonInTicketsTab()
                 .selectLayout("Basic")
-                .clickNextButtonInSelectLayoutTab().
-                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
-                checkIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "False (Unchecked)").
-                editIdLikeToReceiveUpdatesCheckBoxProperties(fieldLabel, "True (Checked)").
-                clickNextButtonInComposeTab().
-                clickPublishOnAutorespondersTab();
-        hqHandle = addEventPageAutorespondersTab.openWidget(activityName);
+                .clickNextButtonInSelectLayoutTab()
+                .clickNextButtonInComposeTab()
+                .clickPublishOnAutorespondersTab();
+        hqHandle = driver.getWindowHandle();
+        addWidgetPage.openSubscribeWidget(activityName);
         new EventWidget()
                 .openEventRegistrationPage()
                 .fillEventRegistrationForm(email, activityName, activityName)
@@ -152,16 +161,15 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                         "123",
                         "12",
                         "2022"
-                );
+                ).clickSubmitButton();
         getDriver().switchTo().window(hqHandle);
-        wait(5000);
         checkSubscriptionStatus();
-    }*/
-    /*
+    }
+
+
     @Parameters({ "login", "password"})
     @Test(enabled = true, retryAnalyzer = RetryAnalyzer.class, groups = { "activities.UpdatesSubscription" })
     public void p2pForm(String login, String password) throws InterruptedException {
-        generateTestData();
         AddP2PPage_PublishedDeatailsTab publishedDeatailsTab = new LoginPage().
                 doSuccessLogin(login, password).
                 openActivitiesPage().
@@ -196,7 +204,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
         hqHandle = driver.getWindowHandle();
         publishedDeatailsTab.openWidget(activityName.toLowerCase());
         new Eventp2pWidget().openp2pEventRegistrationPage().clickNextButtonOnRegistrationTypesPage().
-                fillFundraiserSignInForm(activityName, activityName, email, "qwerty", "qwerty", false).
+                fillp2pEventRegistrationForm(email, activityName, activityName).
                 clickCheckOutButton().
                 fillp2pEventDonationForm(
                         email,
@@ -218,7 +226,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 clickOnSubmitFormButton();
         getDriver().switchTo().window(hqHandle);
         checkSubscriptionStatus();
-    }*/
+    }
 
     private void checkSubscriptionStatus() {
         new HomePage().openAudiencePage();
@@ -226,11 +234,5 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 openSupporterDetailsPage(email).
                 goToSubscriptionTab().
                 verifySupporterStatus("Subscribed");
-    }
-
-    private void generateTestData() {
-        activityName = RandomStringUtils.randomAlphanumeric(10);
-        fieldLabel = RandomStringUtils.randomAlphanumeric(10);
-        email = RandomStringUtils.randomAlphanumeric(5) + "@test.com";
     }
 }

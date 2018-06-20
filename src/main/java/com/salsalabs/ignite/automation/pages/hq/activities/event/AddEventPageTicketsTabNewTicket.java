@@ -6,9 +6,9 @@ import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.FrameImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-public class AddEventPageTicketsTabNewTicket extends HomePage {
+public class AddEventPageTicketsTabNewTicket extends AddSubscribeWidgetPage {
 
     private TextBox ticketName = new TextBoxImpl("//*[@id='ticket_name']","'Ticket name' text field");
     private TextBox attendeesPerTicket = new TextBoxImpl("//*[@id='ticket_attendees']","'Attendees per Ticket' text field");

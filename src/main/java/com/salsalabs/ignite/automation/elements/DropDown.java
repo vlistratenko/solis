@@ -7,4 +7,6 @@ public interface DropDown extends Element, List {
 	void selectByLabelJSUsingContains(String value);
 	
 	void selectByID(String id);
+
+	void pickFirstValueInList();
 }

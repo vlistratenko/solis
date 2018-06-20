@@ -3,8 +3,9 @@ package com.salsalabs.ignite.automation.pages.hq.activities.event;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
+import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
 
-public class AddEventPageSelectLayoutTab extends HomePage {
+public class AddEventPageSelectLayoutTab extends AddSubscribeWidgetPage {
 
     private Button nextToComposeTabButton = new ButtonImpl("//*[@id='btnCompose']","Next:Compose button");
 

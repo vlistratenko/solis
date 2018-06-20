@@ -4,7 +4,7 @@
     <parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
     <parameter name="USED_BROWSER" value="CHROME"></parameter>
     <test verbose="2" name="Activities: Verify 'I'd like to receive updates from this organization' checkbox." annotations="JDK">
-        <parameter name="login" value="olauta+spf1@salsalabs.com"></parameter>
+        <parameter name="login" value="olauta+cart@salsalabs.com"></parameter>
         <parameter name="password" value="qwerty"></parameter>
         <groups>
             <run>

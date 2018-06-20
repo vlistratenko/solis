@@ -1,11 +1,12 @@
 package com.salsalabs.ignite.automation.elements.impl;
 
+import com.salsalabs.ignite.automation.elements.Button;
+import com.salsalabs.ignite.automation.elements.DropDown;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
-import com.salsalabs.ignite.automation.elements.Button;
-import com.salsalabs.ignite.automation.elements.DropDown;
+import java.util.List;
 
 public class DropDownImpl extends ElementImpl implements DropDown {
 
@@ -33,7 +34,7 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		;
 		return new ButtonImpl(path + "/descendant::*[normalize-space(text())='" + label + "']", label + " item");
 	}
-	
+
 	private Button getChildItemByLabelUsingContainsMEthod(String label) {
 		logger.info("Get item with label " + label);
 		return new ButtonImpl(path + "/descendant::*[contains(text(),'" + label + "')]", label + " item");
@@ -60,7 +61,7 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		this.getChildItemByLabelUsingContainsMEthod(value).scrollIntoView();
 		this.getChildItemByLabelUsingContainsMEthod(value).click();
 	}
-	
+
 
 	@Override
 	public void selectByLabelJS(String value) {
@@ -88,5 +89,17 @@ public class DropDownImpl extends ElementImpl implements DropDown {
 		super.waitObject(extendButtonPath, 30000);
 	}
 
-	
+	@Override
+	public void pickFirstValueInList() {
+		WebElement targetElement = findElementByXpath(getElementPath());
+		List<WebElement> elements = findElementsByXpath(getElementPath() + "/option");
+		for (WebElement element : elements) {
+			if (!element.getAttribute("value").equals("")) {
+				selectByLabel(element.getText());
+				break;
+			}
+		}
+	}
+
+
 }

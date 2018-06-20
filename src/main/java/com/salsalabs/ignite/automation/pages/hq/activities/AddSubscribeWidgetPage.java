@@ -8,24 +8,27 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
-import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
-import com.salsalabs.ignite.automation.elements.impl.CheckBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.SelectBoxImpl;
-import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
+import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.basic.Layouts;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import com.salsalabs.ignite.automation.pages.hq.basic.basicLayoutClass;
+import org.json.JSONException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
-
 	protected String widgetName;
 	protected String currentWindowHandle;
 	protected TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
@@ -41,21 +44,20 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button layoutButton = new ButtonImpl("//*[.='layoutName']", "Layout label");
 	protected Button toPageSettingsBtn = new ButtonImpl("//button[@id='btnCompose3']", "Next: Page Settings");
 	protected Button settingsButton = new ButtonImpl("//a[@class='account-info-drop saveBarBtn']", "Settings Button");
-	public Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
+	protected Button previewButton = new ButtonImpl("//button[@title='Preview Output']", "Preview Button");
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
 	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
 	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
 	protected Button saveButtonInAutoresponders = new ButtonImpl("//*[@id='btnSave-autoresponders']", "Save button in Autoresponders page");
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
-	//protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
-	protected Button toAutoresponders = new ButtonImpl("//*[@class='saveBarBtn primary']", "Next to Autoresponders button");
-	//protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
-	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@class='saveBarBtn primary']", "Publish button");
+	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
+	protected Button publishFromAutorespondersTab = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']", "Publish button");
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
 	protected Button formComposeTab = new ButtonImpl("//a[text() = 'Compose']", "Form compose Tab");
+	protected PanelImpl stickyTopBar = new PanelImpl(".//*[@class='toolbar sticky']", "Top bar");
 
 	public AddSubscribeWidgetPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
 		this.widgetName = widgetName;
@@ -157,7 +159,12 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public SubscribeWidget openSubscribeWidget() {
 		return openWidget(SubscribeWidget.class);
 	}
-	
+
+	public SubscribeWidget openSubscribeWidget(String widgetName) {
+		this.widgetName = widgetName;
+		return openWidget(SubscribeWidget.class);
+	}
+
 	public AddSubscribeWidgetPage verifyWidgetVisible(boolean visibleForCm, boolean visibleForSupporter) {
 		String link = CommonUtils.getProperty(linkProperty);
 		String primaryHandle = this.getWindowHandle();
@@ -348,8 +355,14 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage switchBetweenFormSteps(int stepNumber) {
 		Button step = new ButtonImpl(".//*[@ng-repeat='step in elementSteps']" + "[" + stepNumber + "]", "Form step");
 		step.scrollIntoView();
-		step.click();
-		return  this;
+		step.clickJS();
+		hideTopBar();
+		return this;
+	}
+
+	public AddSubscribeWidgetPage hideTopBar() {
+		stickyTopBar.removeElementFromDom();
+		return this;
 	}
 
 	public AddSubscribeWidgetPage checkIfDesignationFieldExistsOnForm(String... values) {

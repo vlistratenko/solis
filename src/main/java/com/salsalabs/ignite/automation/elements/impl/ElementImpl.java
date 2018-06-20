@@ -137,7 +137,7 @@ public abstract class ElementImpl implements Element {
 	@Override
 	public boolean waitElementIsExistWithPageRefresh(int amountOfRefreshes) {
 		for (int i = 0; i < amountOfRefreshes; i++) {
-
+			
 			if (isExists()) {
 				return true;
 			}else {
@@ -166,7 +166,7 @@ public abstract class ElementImpl implements Element {
 		}
 		
 	}
-
+	
 	@Override
 	public void changePathAndElementName(String old, String newPath, String elName) {
 		if (old.equals("")) {
@@ -229,7 +229,7 @@ public abstract class ElementImpl implements Element {
 		click();
 
 	}
-
+	
 	public void moveToElement() {
 		moveToElement(path);
 	}
@@ -242,7 +242,7 @@ public abstract class ElementImpl implements Element {
 		getActionBuilder().clickAndHold(findElementByXpath(path)).moveToElement(findElementByXpath(targetPanel.getPath())).release().perform();
 
 	}
-
+	
 	@Override
 	public void clickByNumber(Integer number) {
 		logger.info(elementName + " was clicked.");
@@ -260,7 +260,7 @@ public abstract class ElementImpl implements Element {
 		logger.info("Check that " + path + " is not exists.");
 		return isNotElementPresent(path);
 	}
-
+	
 	public boolean isExists() {
 		logger.info("Check that " + path + " is exists.");
 		Browser.implicityWait(1);
@@ -300,7 +300,7 @@ public abstract class ElementImpl implements Element {
 		}
 		return isNotExists();
 	}
-
+	
 	@Override
 	public boolean waitForNotVisible(Integer timeOut) {
 		for (int i = 0; i < timeOut; i++) {
@@ -949,7 +949,16 @@ public abstract class ElementImpl implements Element {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(this.path)));
 	}
 
+
 	public void doubleClick() {
 		new Actions(driver).moveToElement(driver.findElement(By.xpath(path))).doubleClick().build().perform();
 	}
+
+	public void removeElementFromDom() {
+		logger.info("Removing element " + elementName);
+		WebElement element = findElementByXpath(path);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].remove();", element);
+	}
+	
 }
