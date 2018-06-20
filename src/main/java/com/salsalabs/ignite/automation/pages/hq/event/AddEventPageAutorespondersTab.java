@@ -12,6 +12,7 @@ public class AddEventPageAutorespondersTab extends AddSubscribeWidgetPage{
     Button publishThisEvent = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']","Publish This Event Button");
     Button nextToAutorespondersButton = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']","Next:Autoresponders button");
     Label urlLabel = new LabelImpl(".//label[text()='URL']/following-sibling::label", "URL label");
+    Button nextToAutorespondersButton = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']","Next:Autoresponders button");
 
     public AddEventPageAutorespondersTab clickPublishOnAutorespondersTab(){
         publishThisEvent.fluentWaitForElementPresenceIgnoringExceptions();
@@ -20,13 +21,10 @@ public class AddEventPageAutorespondersTab extends AddSubscribeWidgetPage{
         return this;
     }
 
-    public String openWidget(String activityName) {
+    public void openWidget(String activityName) {
         GeneralWebElement link = new GeneralWebElement(".//a[contains(text(), '" + activityName.toLowerCase() + "') and not(contains(text(), 'register'))]", "Activity link");
-        String handle = driver.getWindowHandle();
         link.fluentWaitForElementPresenceIgnoringExceptions();
         link.click();
-        switchToPopupWindow(handle);
-        return handle;
     }
 
     public AddEventPageAutorespondersTab clickNextButtonInComposeTab(){

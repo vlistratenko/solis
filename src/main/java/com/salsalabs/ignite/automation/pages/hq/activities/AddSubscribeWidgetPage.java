@@ -1,11 +1,9 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
-import com.salsalabs.ignite.automation.common.CommonUtils;
-import com.salsalabs.ignite.automation.common.HttpClient;
-import com.salsalabs.ignite.automation.common.PropertyName;
-import com.salsalabs.ignite.automation.common.Supporter;
+import com.salsalabs.ignite.automation.common.*;
 import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.CheckBox;
+import com.salsalabs.ignite.automation.elements.Label;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.impl.*;
@@ -25,7 +23,12 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
+
+import static com.salsalabs.ignite.automation.common.SeleneseTestCase.getDriver;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
@@ -48,7 +51,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button makePrivateButton = new ButtonImpl("//a[contains(@processing-text, 'Unpublishing...')]", "Unpublishing");
 	protected Button deleteBtn = new ButtonImpl("//*[contains(text(), 'Delete')]", "Delete widget");
 	protected Button confirmDeletionBtn = new ButtonImpl("//span[contains(text(), 'Delete')]/ancestor:: button", "Yes, delete already!");
-	protected Button nextResultButton = new ButtonImpl("//button[contains(@title, 'Results')]", "Yes, delete already!");
+	protected Button nextResultButton = new ButtonImpl("//button[@id='btnGo-publish-autoresponders']", "Results");
 	protected Button saveButtonInAutoresponders = new ButtonImpl("//*[@id='btnSave-autoresponders']", "Save button in Autoresponders page");
 	protected String linkProperty = PropertyName.SUBSCRIBE_WIDGET_LINK;
 	protected Button toAutoresponders = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']", "Next to Autoresponders button");
@@ -56,6 +59,8 @@ public class AddSubscribeWidgetPage extends HomePage {
 	protected Button closeFeedbackWindowButton = new ButtonImpl("//feedback-dialog//a", "Close feedback window button");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	protected List<WebElement> formSteps = driver.findElements(By.xpath(".//*[.='Step']/following-sibling::*"));
+	protected Button downloadResultsAsCsv = new ButtonImpl("//button[contains(text(), 'Download')]", "Download results as csv");
+	protected Label urlLabel = new LabelImpl(".//label[text()='URL']", "URL label");
 	protected Button formComposeTab = new ButtonImpl("//a[text() = 'Compose']", "Form compose Tab");
 	protected PanelImpl stickyTopBar = new PanelImpl(".//*[@class='toolbar sticky']", "Top bar");
 
@@ -110,8 +115,9 @@ public class AddSubscribeWidgetPage extends HomePage {
         publishFromAutorespondersTab.click();
         try {
         	closeFeedbackWindowButton.fluentWaitForElementPresenceIgnoringExceptions();
+			closeFeedbackWindowButton.clickJS();
 		} catch (TimeoutException e) {}
-		closeFeedbackWindowButton.clickJS();
+		urlLabel.fluentWaitForElementPresenceIgnoringExceptions();
         return this;
     }
 
@@ -240,6 +246,17 @@ public class AddSubscribeWidgetPage extends HomePage {
 	public AddSubscribeWidgetPage preview(){
 		previewButton.click();
 		sleep(10);
+		return this;
+	}
+
+	public AddSubscribeWidgetPage preview(String currentWindowHandle){
+		previewButton.click();
+		sleep(10);
+		Set<String> windows = getDriver().getWindowHandles();
+		for (String handle : windows) {
+			if (!handle.equals(currentWindowHandle)) getDriver().switchTo().window(handle);
+		}
+		switchToFrame("//iframe[@id='previewIframe']");
 		return this;
 	}
 
@@ -373,8 +390,16 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return  this;
 	}
 
-	public void goToResultPage() {
+	public AddSubscribeWidgetPage goToResultPage() {
 		nextResultButton.click();
+		return this;
+	}
+
+	public void verifyDesignationFieldInCsv(String email) {
+		File[] files = CommonUtils.getListOfFilesInFolder(Paths.get(System.getProperty("user.dir"), "downloads").toString());
+		List<String> designationValue = CommonUtils.getFieldValueFromCsvForSpecificSupporterByFieldName(files[0].getAbsolutePath(), email, TransactionsExportFields.DESIGNATION);
+		logger.info("Checking designation field in exported CSV");
+		verifier.verifyEquals(designationValue.get(0), "1");
 	}
 
 	public AddSubscribeWidgetPage openFormComposeTab(){

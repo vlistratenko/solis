@@ -108,9 +108,10 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         return (T) new HomePage();
     }
 
-    public void addDesignationFieldOption(String optionValue){
+    public FormFieldConfigurationModalWindow addDesignationFieldOption(String optionValue){
         designationFieldOptionTextField.type(optionValue);
         designationFieldAddButton.click();
+        return this;
     }
 
     public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {

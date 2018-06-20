@@ -45,6 +45,7 @@ public class ActivitiesPage extends HomePage {
 	}
 	
 	public FundraisingWidgetPage openFundraisingWidgetPage() {
+		fundraisingWidgetLink.fluentWaitForElementPresenceIgnoringExceptions();
 		fundraisingWidgetLink.click();
 		return new FundraisingWidgetPage();
 	}

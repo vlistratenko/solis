@@ -11,6 +11,7 @@ import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPag
 import com.salsalabs.ignite.automation.pages.hq.activities.MessagingPage;
 import com.salsalabs.ignite.automation.pages.hq.assets.AssetsPage;
 import com.salsalabs.ignite.automation.pages.hq.manage.ManagePage;
+import com.salsalabs.ignite.automation.pages.hq.transactions.TransactionsPage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskPage;
 import com.salsalabs.ignite.automation.pages.zendesk.ZendeskSubmitRequestPage;
 
@@ -57,6 +58,7 @@ public class HomePage extends Browser {
 	TextBox replyAddressConfigNewOrgPage = new TextBoxImpl("//input[@name='replyAddress']", "Reply Address", true);
 	Button buyButton = new ButtonImpl("//a[contains(@ng-click,'goToBuyNow')]", "Buy");
 	Button dashboardButton = new ButtonImpl("//a[@href='/#/dashboard']", "Dashboard");
+	Button transactionsButton = new ButtonImpl("//a[@ng-href='/#/insight/donations']", "Transactions");
 
 	public HomePage(int delay){
 		settingsTab.waitElement(delay);
@@ -65,7 +67,7 @@ public class HomePage extends Browser {
 	public HomePage(){
 		
 	}
-
+	
 	public HomePage verifyUserNameDisplayed() {
 		verifier.verifyElementIsDisplayed(userlabel);
 		return this;
@@ -212,6 +214,10 @@ public class HomePage extends Browser {
 		return new MyAccountPage();
 	}
 
+	public TransactionsPage openTransactionsView(){
+		transactionsButton.click();
+		return new TransactionsPage();
+	}
 
 
 	private <T extends AddSubscribeWidgetPage> T openFormByFullUrl(String fullFormUrl, Class<T> clazz){
