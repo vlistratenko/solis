@@ -1,7 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
 import com.salsalabs.ignite.automation.elements.*;
-import com.salsalabs.ignite.automation.elements.VE2Elements.Signatures;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
@@ -23,9 +22,6 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     public TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
     public SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
     Button selectFieldButton = new ButtonImpl("//*[contains(text(),'fieldNameForReplacement')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of fieldNameForReplacement in form field configuration modal window");
-    DropDown petitionSignatureCustomizedSupporterNameOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.signatureFields']", "Petition signature element customized supporter name list");
-    DropDown petitionSignatureCustomizedSupporterLocationOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.locationFields']","Petition signature element customized supporter location list");
-    Button saveSignaturesConfigurationButton = new ButtonImpl("//*[@id='htmlEditModal']//*[@class=\"small button primary\"]", "Save Signatures element configuration modal button");
 
     private static List<String> supporterFieldNames  = new ArrayList<>();
 
@@ -43,7 +39,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow markFieldAsRequired(){
-    	markFieldAsRequired(true);
+        markFieldAsRequired(true);
         return this;
     }
 
@@ -55,7 +51,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     @SuppressWarnings("unchecked")
-	public  <T extends HomePage> T saveFormFieldConfiguration(){
+    public  <T extends HomePage> T saveFieldConfiguration(){
         saveButton.click();
         return (T) new HomePage();
     }
@@ -67,15 +63,15 @@ public class FormFieldConfigurationModalWindow extends HomePage {
 
     public void initializeListWithAllSupporterFields(){
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-            Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
-            supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
-            List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
-            FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
-            closeFieldConfigurationModalWindow();
+        Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+        supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
+        List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
+        FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+        closeFieldConfigurationModalWindow();
     }
 
     @SuppressWarnings("unchecked")
-	public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
+    public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
         initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
@@ -83,26 +79,26 @@ public class FormFieldConfigurationModalWindow extends HomePage {
             if(name.equalsIgnoreCase("designation")) {
                 addDesignationFieldOption("Option1");
                 markFieldAsRequired().
-                        saveFormFieldConfiguration();
+                        saveFieldConfiguration();
             } else {
                 markFieldAsRequired().
-                        saveFormFieldConfiguration();
+                        saveFieldConfiguration();
             }
         } );
         return (T) new HomePage();
     }
 
     @SuppressWarnings("unchecked")
-	public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
+    public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
         initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
             logger.info(name + " was dropped in the layout");
             if(name.equalsIgnoreCase("designation")) {
                 addDesignationFieldOption("Option1");
-                saveFormFieldConfiguration();
+                saveFieldConfiguration();
             } else {
-                saveFormFieldConfiguration();
+                saveFieldConfiguration();
             }
         } );
         return (T) new HomePage();
@@ -115,38 +111,12 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {
-    	selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
-    	selectFieldButton.waitElement();
-    	selectFieldButton.click();
-    	return this;
-	}
-
-    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterNameOptionTo(Signatures.CustomizedSupporterNameOptions option) {
-        String label = "";
-        switch (option) {
-            case FIRST_NAME_LAST_NAME: label = "First Name Last Name"; break;
-            case FIRST_INITIAL_LAST_INITIAL: label = "First Initial Last Initial"; break;
-            case FIRST_NAME_LAST_INITIAL: label = "First Name Last Initial"; break;
-            case FIRST_INITIAL_LAST_NAME: label = "First Initial Last Name"; break;
-        }
-        petitionSignatureCustomizedSupporterNameOptionsList.selectByLabel(label);
-        return new FormFieldConfigurationModalWindow();
-    }
-
-    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterLocationOptionTo(Signatures.CustomizedSupporterLocationOptions option) {
-        String label = "";
-        switch (option) {
-            case DO_NOT_DISPLAY: label = "Do Not Display"; break;
-            case STATE_ONLY: label = "State Only"; break;
-            case CITY_STATE: label = "City, State"; break;
-            case CITY_ONLY: label = "City Only"; break;
-        }
-        petitionSignatureCustomizedSupporterLocationOptionsList.selectByLabel(label);
-        return new FormFieldConfigurationModalWindow();
-    }
-
-    public  <T extends HomePage> T saveSignatureElementConfigurationModal(){
-        saveSignaturesConfigurationButton.click();
-        return (T) new HomePage();
+        selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
+        selectFieldButton.waitElement();
+        selectFieldButton.click();
+        return this;
     }
 }
+
+
+
