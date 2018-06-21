@@ -51,7 +51,6 @@ public class EventWidget extends DonationWidget {
 	
 	public EventWidget fillEventRegistrationForm(String personEmail, String personFName, String personLName){
 		switchToFrame("//iframe[contains(@id, '_ticketFrame')]");
-		ticketsQtySelectBox.selectByLabel("1");
 		nextButton.click();
 		sleep(3);
 		eventPersonEmailField.type(personEmail);
