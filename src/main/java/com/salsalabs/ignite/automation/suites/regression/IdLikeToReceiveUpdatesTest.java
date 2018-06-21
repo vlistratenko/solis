@@ -187,6 +187,7 @@ public class IdLikeToReceiveUpdatesTest extends SeleneseTestCase {
                 fillRegistrationStepAndGoNext(
                         activityName,
                         true,
+                        false,
                         "10",
                         "5").
                 clickContinueButton().

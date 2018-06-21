@@ -39,6 +39,7 @@ public class p2pFormFieldsTest extends SeleneseTestCase{
 							true).
 		fillRegistrationStepAndGoNext("p2p registration " + CommonUtils.getUnicName(),
 				true,
+				false,
 				"10",
 				"5").
 		clickContinueButton().

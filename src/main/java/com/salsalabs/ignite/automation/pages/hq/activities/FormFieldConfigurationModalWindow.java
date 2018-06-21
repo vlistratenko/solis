@@ -1,6 +1,7 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
 import com.salsalabs.ignite.automation.elements.*;
+import com.salsalabs.ignite.automation.elements.VE2Elements.Signatures;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
 import com.salsalabs.ignite.automation.elements.impl.*;
 import com.salsalabs.ignite.automation.pages.hq.HomePage;
@@ -22,7 +23,9 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     public TextBox labelTextBox = new TextBoxImpl("//*[@class='appModalContent']//*[@ng-model='fieldConfig.labelText']","Field label");
     public SelectBox checkBoxDefaultValue = new SelectBoxImpl(".//*[text()='Default Value']/following-sibling::*","Default value");
     Button selectFieldButton = new ButtonImpl("//*[contains(text(),'fieldNameForReplacement')]/following-sibling::*//*[@ng-click='selectField(item)']","Add field button of fieldNameForReplacement in form field configuration modal window");
-
+    DropDown petitionSignatureCustomizedSupporterNameOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.signatureFields']", "Petition signature element customized supporter name list");
+    DropDown petitionSignatureCustomizedSupporterLocationOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.locationFields']","Petition signature element customized supporter location list");
+    Button saveSignaturesConfigurationButton = new ButtonImpl("//*[@id='htmlEditModal']//*[@class=\"small button primary\"]", "Save Signatures element configuration modal button");
     private static List<String> supporterFieldNames  = new ArrayList<>();
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
@@ -115,6 +118,35 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         selectFieldButton.waitElement();
         selectFieldButton.click();
         return this;
+    }
+
+    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterNameOptionTo(Signatures.CustomizedSupporterNameOptions option) {
+        String label = "";
+        switch (option) {
+            case FIRST_NAME_LAST_NAME: label = "First Name Last Name"; break;
+            case FIRST_INITIAL_LAST_INITIAL: label = "First Initial Last Initial"; break;
+            case FIRST_NAME_LAST_INITIAL: label = "First Name Last Initial"; break;
+            case FIRST_INITIAL_LAST_NAME: label = "First Initial Last Name"; break;
+        }
+        petitionSignatureCustomizedSupporterNameOptionsList.selectByLabel(label);
+        return new FormFieldConfigurationModalWindow();
+    }
+
+    public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterLocationOptionTo(Signatures.CustomizedSupporterLocationOptions option) {
+        String label = "";
+        switch (option) {
+            case DO_NOT_DISPLAY: label = "Do Not Display"; break;
+            case STATE_ONLY: label = "State Only"; break;
+            case CITY_STATE: label = "City, State"; break;
+            case CITY_ONLY: label = "City Only"; break;
+        }
+        petitionSignatureCustomizedSupporterLocationOptionsList.selectByLabel(label);
+        return new FormFieldConfigurationModalWindow();
+    }
+
+    public  <T extends HomePage> T saveSignatureElementConfigurationModal(){
+        saveSignaturesConfigurationButton.click();
+        return (T) new HomePage();
     }
 }
 
