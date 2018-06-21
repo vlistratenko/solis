@@ -51,7 +51,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     @SuppressWarnings("unchecked")
-    public  <T extends HomePage> T saveFieldConfiguration(){
+    public  <T extends HomePage> T saveFormFieldConfiguration(){
         saveButton.click();
         return (T) new HomePage();
     }
@@ -79,10 +79,10 @@ public class FormFieldConfigurationModalWindow extends HomePage {
             if(name.equalsIgnoreCase("designation")) {
                 addDesignationFieldOption("Option1");
                 markFieldAsRequired().
-                        saveFieldConfiguration();
+                        saveFormFieldConfiguration();
             } else {
                 markFieldAsRequired().
-                        saveFieldConfiguration();
+                        saveFormFieldConfiguration();
             }
         } );
         return (T) new HomePage();
@@ -96,9 +96,9 @@ public class FormFieldConfigurationModalWindow extends HomePage {
             logger.info(name + " was dropped in the layout");
             if(name.equalsIgnoreCase("designation")) {
                 addDesignationFieldOption("Option1");
-                saveFieldConfiguration();
+                saveFormFieldConfiguration();
             } else {
-                saveFieldConfiguration();
+                saveFormFieldConfiguration();
             }
         } );
         return (T) new HomePage();

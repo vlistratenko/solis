@@ -13,7 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 
 public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPageTab<AddP2PPage_EventPageTab_CheckoutSubTab> {
 
-	
+
 	DragableElement formFieldElement = new DragableElementImp("//div[@type='formField']", "Form field element ");
 	protected Button idLikeToReceiveUpdatesElement = new ButtonImpl("//*[@name='contactOptInCB']/parent::*", "Edit element");
 	
@@ -29,12 +29,12 @@ public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPage
 		new P2PFormElements_Checkout().performDrop(P2PFormElements_Checkout.VE.FORM);
 		return this;
 	}*/
-	
+
 	public AddP2PPage_EventPageTab_CheckoutSubTab dropFormField(String fieldName, Boolean isRequired){
 		Form.droppedFormElement.waitElement();
 		FormField.formFieldElement.dropToForm().
-			selectFieldType(fieldName).
-			markFieldAsRequired(isRequired).
+				selectFieldType(fieldName).
+				markFieldAsRequired(isRequired).
                 saveFormFieldConfiguration();
 		return this;
 	}
