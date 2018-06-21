@@ -1,7 +1,5 @@
 package com.salsalabs.ignite.automation.apiautomation.config;
 
-import org.testng.annotations.DataProvider;
-
 public class Config {
 
     public static String TEST_DATA_PATH_SUPPORTERS_REQUESTS = System.getProperty("user.dir") + "\\src\\main\\java\\com\\salsalabs\\ignite\\automation\\apiautomation\\testdata\\supporters\\request\\";

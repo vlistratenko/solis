@@ -4,9 +4,8 @@ import com.salsalabs.ignite.automation.elements.Button;
 import com.salsalabs.ignite.automation.elements.TextBox;
 import com.salsalabs.ignite.automation.elements.impl.ButtonImpl;
 import com.salsalabs.ignite.automation.elements.impl.TextBoxImpl;
-import com.salsalabs.ignite.automation.pages.hq.HomePage;
 import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
-import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPage;
+import com.salsalabs.ignite.automation.pages.hq.activities.event.AddEventPageTicketsTabNewTicket;
 
 public class AddEventPageSetupTab extends AddSubscribeWidgetPage {
 

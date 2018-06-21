@@ -39,8 +39,6 @@ public class AddTargetedActionPage extends AddSubscribeWidgetPage {
     protected TextBox messageBody = new TextBoxImpl(".//*[contains(@name, 'bodyMessage-')]", "Message body");
     protected Button saveButtonMessageModal = new ButtonImpl(".//*[contains(text(), 'Save Content')]", "Save message");
     protected Button openSelectTargetStepButton = new ButtonImpl("//button[@id='btnGo-setup-targets']", "Select targets");
-    protected Button openSocialPromotionStepButton = new ButtonImpl("//button[@id='btnGo-targets-messages']", "Social promotion");
-    protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnGo-messages-compose']", "Compose step");
     protected TextBox publicTargetSetDescription = new TextBoxImpl("//*[@id='targetsetdescription-0']", "Public Target Set Description text field");
     protected Button actionPageWizardStep = new ButtonImpl("//*[@id='activityForm']//*[@ng-click][.='Action page']","Action page wizard step button");
     protected Button openSocialPromotionStepButton = new ButtonImpl("//button[@id='btnGo-targets-compose']", "Social promotion");

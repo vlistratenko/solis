@@ -10,7 +10,6 @@ import com.salsalabs.ignite.automation.pages.hq.activities.AddSubscribeWidgetPag
 public class AddEventPageAutorespondersTab extends AddSubscribeWidgetPage{
 
     Button publishThisEvent = new ButtonImpl("//*[@id='btnGo-autoresponders-publish']","Publish This Event Button");
-    Button nextToAutorespondersButton = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']","Next:Autoresponders button");
     Label urlLabel = new LabelImpl(".//label[text()='URL']/following-sibling::label", "URL label");
     Button nextToAutorespondersButton = new ButtonImpl("//*[@id='btnGo-compose-autoresponders']","Next:Autoresponders button");
 
