@@ -16,10 +16,9 @@ public class AddP2PPage_RegistrationsTab_RegistrationInfoTab extends AddP2PPage_
 	TextBox ticketPriceField = new TextBoxImpl("//input[@id='ticket_price']", "Ticket price field");
 	TextBox ticketDeductibleAmountField = new TextBoxImpl("//input[@id='ticket_deductible_amount']", "Ticket deductible amount field");
 	Button saveTicketButton = new ButtonImpl("//input[@value='Save']", "Save ticket button");
-	
+
 	public AddP2PPage_RegistrationsTab_InformationCollectedTab fillRegistrationStepAndGoNext(
 			String registrationName,
-			boolean isFundraiserOption,
 			boolean isFundraiser,
 			String ticketPrice,
 			String ticketDeductible) {
@@ -27,8 +26,6 @@ public class AddP2PPage_RegistrationsTab_RegistrationInfoTab extends AddP2PPage_
 		switchToFrame(gzFrame.getPath());
 		registrationNameField.waitElement();
 		registrationNameField.type(registrationName);
-		isFundraiserOptionRadioButton.select(isFundraiserOption);
-		isFundraiserRadioButton.waitElement();
 		isFundraiserRadioButton.select(isFundraiser);
 		ticketPriceField.type(ticketPrice);
 		ticketDeductibleAmountField.type(ticketDeductible);
