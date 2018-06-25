@@ -1,6 +1,6 @@
 #AUTOMATICALLY GENERATED
-#Fri Jun 15 14:59:32 EEST 2018
-current.Password=qwerty
+#Mon Jun 25 16:55:53 EEST 2018
+current.Password=\!QAZ2wsx
 supporterDateTimeCustomFieldValue=2017-10-10T22\:30\:00.000Z
 cellPhone=777-777-7777
 googleSpreadSheetId=1o9NolKLjlKvWtpr-Q3IakGLSMFtpjxd8YxHtEbYiEiE
@@ -13,6 +13,7 @@ activityTextBoxCustomFieldValue=activityTextBoxCustomFieldValue
 updateTC=false
 Admin.email=0@testauto.igniteaction.net
 supporterSingleChoiceCustomFieldValue=value1
+IWouldLikeToMakeADonationCheckboxGeneralLabel=GeneralX0Xe
 buildVersion=false
 current.firstName=0
 current.lastName=0
@@ -21,10 +22,12 @@ activityDateTimeCustomFieldValue=10/11/2017 01\:30 am
 activityNumberCustomFieldValue=13
 Admin.orgName=automated_testing1
 googleAccountEmail=listratenko@insart.com
+IWouldLikeToMakeADonationCheckboxFundraiserLabel=Fundraisertp1E
 maxRetryCount=2
 personFName=personFName
 supporterTextBoxCustomFieldValue=supporterTextBoxCustomFieldValue
 supporterNumberCustomFieldValue=13
+LastCreatedP2PFormHQLink=https\://hq.test.igniteaction.net/\#/activities/widgets/p2p/1eca663a-3866-421b-8efb-5f95cc36e0ee?tab\=composeTeam
 personMName=personMName
 title=titleValue
 Admin.Password=11111111
@@ -35,19 +38,19 @@ personEmail=autosupporterVe21@test.com
 country=UA
 gatewayName=CardConnectPaymentGateway_VFJL2
 personLName=personLName
-suffix=suffixValue
-dateOfBirth=2017-09-10T00\:00\:00.000Z
-subscribeWidgetLink=https\://cart.test.igniteaction.net/frszzjqmxm
 Environment=TEST
+subscribeWidgetLink=https\://cart.test.igniteaction.net/frszzjqmxm
+dateOfBirth=2017-09-10T00\:00\:00.000Z
+suffix=suffixValue
 workPhone=777-777-7777
-addressLine2=addressLine2
 personCity=personCity
+addressLine2=addressLine2
 addressLine1=addressLine1
 gender=Male
-current.Login=olauta+cart@salsalabs.com
+current.Login=2712.3e41c646@mailosaur.io
 Admin.emailBase=0
-Admin.lastName=LastName
 Admin.firstName=FirstName
-state=UA-63
-activityYesNoCustomFieldValue=True
+Admin.lastName=LastName
 CM.firstName=0
+activityYesNoCustomFieldValue=True
+state=UA-63
