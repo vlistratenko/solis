@@ -46,6 +46,7 @@ public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPage
 
 	public FormFieldConfigurationModalWindow editVEField(String fieldName){
 		new P2PFormElements_Checkout().performEdit(P2PFormElements_Checkout.VE.FORM_FIELD, fieldName);
+		waitUntilAngularIsComplete();
 		return new FormFieldConfigurationModalWindow();
 	}
 
@@ -72,12 +73,14 @@ public class AddP2PPage_EventPageTab_CheckoutSubTab extends AddP2PPage_EventPage
 	}
 
 	public AddP2PPage_PublishedDeatailsTab clickOnRepublishButton(){
+		waitUntilAngularIsComplete();
 		republishButton.fluentWaitForElementPresenceIgnoringExceptions();
 		republishButton.click();
 		return new AddP2PPage_PublishedDeatailsTab();
 	}
 
 	public AddP2PPage_EventPageTab_CheckoutSubTab clickOnSaveButton(){
+		waitUntilAngularIsComplete();
 		saveButton.fluentWaitForElementPresenceIgnoringExceptions();
 		saveButton.click();
 		return this;

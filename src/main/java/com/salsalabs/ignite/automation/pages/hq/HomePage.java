@@ -238,6 +238,7 @@ public class HomePage extends Browser {
 
 	public AddP2PPage openP2PFormByFullUrl(String formUrl){
 		openFormByFullUrl(formUrl, AddP2PPage.class);
+		waitUntilAngularIsComplete();
 		return new AddP2PPage();
 	}
 

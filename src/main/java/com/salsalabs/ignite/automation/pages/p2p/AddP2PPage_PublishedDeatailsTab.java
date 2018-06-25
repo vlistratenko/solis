@@ -27,4 +27,12 @@ public class AddP2PPage_PublishedDeatailsTab extends AddP2PPage {
 		String currentWindowHandle = getWindowHandle();
 		switchToPopupWindow(currentWindowHandle);
 	}
+
+	public void openWidgetAndWait(String eventName, int waitTimeInSeconds) {
+		clickOnEventLink(eventName);
+		storeEventLink(eventName);
+		String currentWindowHandle = getWindowHandle();
+		switchToPopupWindow(currentWindowHandle);
+		sleep(waitTimeInSeconds);
+	}
 }

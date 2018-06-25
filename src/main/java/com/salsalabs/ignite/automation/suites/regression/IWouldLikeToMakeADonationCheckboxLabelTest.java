@@ -72,8 +72,6 @@ public class IWouldLikeToMakeADonationCheckboxLabelTest extends SeleneseTestCase
                 clickOnGoToCheckoutButton().
                 verifyDefaultGeneralIWouldLikeToMakeADonationCheckboxLabel();
 
-        //driver.get("https://testvco2712.test.igniteaction.net/p2pform20180618171737/index.html");
-
         new Eventp2pWidget().
                 openp2pEventRegistrationPage().
                 clickNextButtonOnRegistrationTypesPage().
@@ -96,20 +94,16 @@ public class IWouldLikeToMakeADonationCheckboxLabelTest extends SeleneseTestCase
 
         AddP2PPage_EventPageTab_CheckoutSubTab page = new LoginPage().
                 doSuccessLogin(login, pass).
-                openP2PFormByFullUrl("https://hq.test.igniteaction.net/#/activities/widgets/p2p/4ecbda51-0883-4aaf-b6d7-7b083fa7fa44?tab=compose").
-                //openP2PFormByFullUrl(CommonUtils.getProperty(PropertyName.P2P_FORM_HQ_LINK)).
+                openP2PFormByFullUrl(CommonUtils.getProperty(PropertyName.P2P_FORM_HQ_LINK)).
                 openP2PFormEventPageTab().
                 openCheckoutSubTab();
         page.editVEField(" I would like to make a donation ").
                 setIWouldLikeToMakeADonationCheckboxGeneralLabel("General" + RandomStringUtils.randomAlphanumeric(4)).
                 setIWouldLikeToMakeADonationCheckboxFundraisersLabel("Fundraiser" + RandomStringUtils.randomAlphanumeric(4)).
                 saveFormFieldConfiguration();
-        page.clickNextToEventPageButton().
-                clickNextToTeamTabButton().
+        page.clickOnSaveButton().
                 clickOnRepublishButton().
-                openWidget("p2p form 20180619173832");
-                //openWidget(formName);
-                       //openWidget("p2p form 20180619130546");
+                openWidgetAndWait(formName, 50);
 
         new Eventp2pWidget().
                 openp2pEventRegistrationPage().
@@ -119,8 +113,6 @@ public class IWouldLikeToMakeADonationCheckboxLabelTest extends SeleneseTestCase
                 clickDoThisLaterButton().
                 clickOnGoToCheckoutButton().
                 verifyNewGeneralIWouldLikeToMakeADonationCheckboxLabel();
-
-//        driver.get("https://testvco2712.test.igniteaction.net/p2pform20180618171737/index.html");
 
         new Eventp2pWidget().
                 openp2pEventRegistrationPage().
