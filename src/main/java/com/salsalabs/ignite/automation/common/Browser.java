@@ -191,8 +191,8 @@ public abstract class Browser {
 
 	protected void sleep(int seconds) {
 		try {
-			logger.info("Waiting for " + seconds + " seconds...");
-			Thread.sleep(seconds * 1000);
+			logger.debug("Waiting for " + seconds + " seconds...");
+			TimeUnit.SECONDS.sleep(seconds);
 		} catch (InterruptedException e) {
 			logger.error("", e);
 		}
@@ -420,6 +420,18 @@ public abstract class Browser {
                 .pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
                 .withMessage("Fluent wait failed to wait until angular has finished processing. Error occurred in "
                         + Thread.currentThread().getStackTrace()[2].getMethodName());
+		wait.until(CommonUtils.angularHasFinishedProcessing());
+	}
+
+	public void waitUntilAngularIsComplete(int waitingTimeInSeconds){
+		logger.debug("Waiting until angular has finished processing");
+		long waitingTime = waitingTimeInSeconds;
+		long pollingInterval = 500;
+		Wait<WebDriver> wait = new FluentWait<>(driver)
+				.withTimeout(waitingTime, TimeUnit.SECONDS)
+				.pollingEvery(pollingInterval, TimeUnit.MILLISECONDS)
+				.withMessage("Fluent wait failed to wait until angular has finished processing. Error occurred in "
+						+ Thread.currentThread().getStackTrace()[2].getMethodName());
 		wait.until(CommonUtils.angularHasFinishedProcessing());
 	}
 }

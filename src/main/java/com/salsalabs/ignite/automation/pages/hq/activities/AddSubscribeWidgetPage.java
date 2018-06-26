@@ -25,7 +25,8 @@ import static com.salsalabs.ignite.automation.common.SeleneseTestCase.getDriver;
 
 
 public class AddSubscribeWidgetPage extends HomePage {
-	protected String widgetName;
+
+    protected String widgetName;
 	protected String currentWindowHandle;
 	protected TextBox widgetNameField = new TextBoxImpl("//input[@name='name']", "Widget name");
 	protected TextBox widgetDescriptionField = new TextBoxImpl("//textarea[@name='description']", "Widget Description");
@@ -163,7 +164,7 @@ public class AddSubscribeWidgetPage extends HomePage {
 		this.widgetName = widgetName;
 		return openWidget(SubscribeWidget.class);
 	}
-
+	
 	public AddSubscribeWidgetPage verifyWidgetVisible(boolean visibleForCm, boolean visibleForSupporter) {
 		String link = CommonUtils.getProperty(linkProperty);
 		String primaryHandle = this.getWindowHandle();
@@ -236,23 +237,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage preview(){
-		previewButton.click();
-		sleep(10);
-		return this;
-	}
-
-	public AddSubscribeWidgetPage preview(String currentWindowHandle){
-		previewButton.click();
-		sleep(10);
-		Set<String> windows = getDriver().getWindowHandles();
-		for (String handle : windows) {
-			if (!handle.equals(currentWindowHandle)) getDriver().switchTo().window(handle);
-		}
-		switchToFrame("//iframe[@id='previewIframe']");
-		return this;
-	}
-
 	public AddSubscribeWidgetPage selectLayoutStep(Layouts.LayoutName layout) {
 		Layouts.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
@@ -260,6 +244,17 @@ public class AddSubscribeWidgetPage extends HomePage {
 		waitUntilAngularIsComplete();
 		return this;
 	}
+
+    public AddSubscribeWidgetPage preview(String currentWindowHandle){
+        previewButton.click();
+        sleep(10);
+        Set<String> windows = getDriver().getWindowHandles();
+        for (String handle : windows) {
+            if (!handle.equals(currentWindowHandle)) getDriver().switchTo().window(handle);
+        }
+        switchToFrame("//iframe[@id='previewIframe']");
+        return this;
+    }
 
 	public AddSubscribeWidgetPage selectLayoutStep(String layout) {
 		Layouts.selectLayout(layout);

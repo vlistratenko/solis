@@ -51,6 +51,7 @@ public interface PropertyName {
 	String LAST_TEAM_NAME = "teamName";
 	String SUPPORTER_EMAIL = "SupporterEmail";
 	String P2P_FORM_LINK = "LastCreatedP2PFormLink";
+	String P2P_FORM_HQ_LINK = "LastCreatedP2PFormHQLink";
 	String GOOGLE_ACCOUNT_EMAIL = "googleAccountEmail";
 	String GOOGLE_SPREAD_SHEET_ID = "googleSpreadSheetId";
 }

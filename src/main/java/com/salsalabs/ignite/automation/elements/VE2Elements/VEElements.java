@@ -57,8 +57,8 @@ public class VEElements extends ElementImpl {
             signatures.doubleClick();
         } else {
             Button fieldEditIcon = new ButtonImpl("//*[.='" + fieldName + "']/ancestor::*[@class='content-render-wrapper']//*[@title='Edit']", fieldName + " edit icon");
-            fieldEditIcon.waitElement(7);
-            fieldEditIcon.click();
+            fieldEditIcon.waitElement(5);
+            fieldEditIcon.clickJS();
         }
     }
     

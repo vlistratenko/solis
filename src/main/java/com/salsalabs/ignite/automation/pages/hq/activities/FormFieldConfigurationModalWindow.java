@@ -1,5 +1,6 @@
 package com.salsalabs.ignite.automation.pages.hq.activities;
 
+import com.salsalabs.ignite.automation.common.CommonUtils;
 import com.salsalabs.ignite.automation.elements.*;
 import com.salsalabs.ignite.automation.elements.VE2Elements.Signatures;
 import com.salsalabs.ignite.automation.elements.VE2Elements.SignupFormElements;
@@ -26,6 +27,9 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     DropDown petitionSignatureCustomizedSupporterNameOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.signatureFields']", "Petition signature element customized supporter name list");
     DropDown petitionSignatureCustomizedSupporterLocationOptionsList = new DropDownImpl("//*[@ng-model = 'elementConfig.locationFields']","Petition signature element customized supporter location list");
     Button saveSignaturesConfigurationButton = new ButtonImpl("//*[@id='htmlEditModal']//*[@class=\"small button primary\"]", "Save Signatures element configuration modal button");
+    TextBox iWouldLikeToMakeADonationGeneralCheckboxLabelTextField = new TextBoxImpl("//*[@ng-model='fieldConfig.labelText']", "I would like to make a donation general checkbox label text field");
+    TextBox iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField = new TextBoxImpl("//*[@ng-model='fieldConfig.labelTextFundraiser']", "I would like to make a donation fundraisers checkbox label text field");
+
     private static List<String> supporterFieldNames  = new ArrayList<>();
 
     public FormFieldConfigurationModalWindow dropFormFieldByName(String fieldName){
@@ -42,7 +46,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow markFieldAsRequired(){
-        markFieldAsRequired(true);
+    	markFieldAsRequired(true);
         return this;
     }
 
@@ -54,7 +58,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     @SuppressWarnings("unchecked")
-    public  <T extends HomePage> T saveFormFieldConfiguration(){
+	public  <T extends HomePage> T saveFormFieldConfiguration(){
         saveButton.click();
         return (T) new HomePage();
     }
@@ -66,15 +70,15 @@ public class FormFieldConfigurationModalWindow extends HomePage {
 
     public void initializeListWithAllSupporterFields(){
         new SignupFormElements().performDrop(SignupFormElements.VE.FORM_FIELD);
-        Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
-        supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
-        List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
-        FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
-        closeFieldConfigurationModalWindow();
+            Label supporterNameLabel = new LabelImpl("//*[contains(@id,'FieldEditModal-form')]//tbody//*[.='Supporter ']//ancestor::tr//td[1]","Supporter name label");
+            supporterNameLabel.fluentWaitForElementPresenceIgnoringExceptions();
+            List<WebElement> elements = driver.findElements(By.xpath("//*[not(@class='unselectable')][td[3][span[.='Supporter ']]]//td[1]"));
+            FormFieldConfigurationModalWindow.supporterFieldNames = elements.stream().map(WebElement::getText).collect(Collectors.toList());
+            closeFieldConfigurationModalWindow();
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
+	public <T extends HomePage> T dropAllSupporterFieldsOnFormAndMarkAsRequired() {
         initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
@@ -92,7 +96,7 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
+	public <T extends HomePage> T dropAllSupporterFieldsOnForm(){
         initializeListWithAllSupporterFields();
         supporterFieldNames.stream().forEach(name -> {
             dropFormFieldByName(name);
@@ -114,11 +118,11 @@ public class FormFieldConfigurationModalWindow extends HomePage {
     }
 
     public FormFieldConfigurationModalWindow selectFieldType(String fieldName) {
-        selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
-        selectFieldButton.waitElement();
-        selectFieldButton.click();
-        return this;
-    }
+    	selectFieldButton.changePathAndElementName("fieldNameForReplacement", fieldName, fieldName);
+    	selectFieldButton.waitElement();
+    	selectFieldButton.click();
+    	return this;
+	}
 
     public FormFieldConfigurationModalWindow selectCustomizeTheDisplayOfTheSupporterNameOptionTo(Signatures.CustomizedSupporterNameOptions option) {
         String label = "";
@@ -148,7 +152,18 @@ public class FormFieldConfigurationModalWindow extends HomePage {
         saveSignaturesConfigurationButton.click();
         return (T) new HomePage();
     }
+
+    public FormFieldConfigurationModalWindow setIWouldLikeToMakeADonationCheckboxGeneralLabel(String label) {
+        iWouldLikeToMakeADonationGeneralCheckboxLabelTextField.fluentWaitForElementPresenceIgnoringExceptions();
+        iWouldLikeToMakeADonationGeneralCheckboxLabelTextField.type(label);
+        CommonUtils.setProperty("IWouldLikeToMakeADonationCheckboxGeneralLabel", label);
+        return this;
+    }
+
+    public FormFieldConfigurationModalWindow setIWouldLikeToMakeADonationCheckboxFundraisersLabel(String label) {
+        iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField.fluentWaitForElementPresenceIgnoringExceptions();
+        iWouldLikeToMakeADonationFundraisersCheckboxLabelTextField.type(label);
+        CommonUtils.setProperty("IWouldLikeToMakeADonationCheckboxFundraiserLabel", label);
+        return this;
+    }
 }
-
-
-

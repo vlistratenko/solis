@@ -33,6 +33,7 @@ public class AddP2PPage_EventPageTab<T> extends AddP2PPage {
 	}
 	
 	public AddP2PPage_EventPageTab_CheckoutSubTab openCheckoutSubTab() {
+		waitUntilAngularIsComplete();
 		checkoutSubTab.fluentWaitForElementPresenceIgnoringExceptions();
 		checkoutSubTab.click();
 		checkoutVEPanel.fluentWaitForElementPresenceIgnoringExceptions();
