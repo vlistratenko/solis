@@ -192,7 +192,7 @@ public abstract class Browser {
 	protected void sleep(int seconds) {
 		try {
 			logger.debug("Waiting for " + seconds + " seconds...");
-			Thread.sleep(seconds * 1000);
+			TimeUnit.SECONDS.sleep(seconds);
 		} catch (InterruptedException e) {
 			logger.error("", e);
 		}

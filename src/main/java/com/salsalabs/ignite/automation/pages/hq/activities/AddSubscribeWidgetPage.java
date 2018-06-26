@@ -237,12 +237,6 @@ public class AddSubscribeWidgetPage extends HomePage {
 		return this;
 	}
 
-	public AddSubscribeWidgetPage preview(){
-		previewButton.click();
-		sleep(10);
-		return this;
-	}
-
 	public AddSubscribeWidgetPage selectLayoutStep(Layouts.LayoutName layout) {
 		Layouts.selectLayout(layout);
 		composeButton.fluentWaitForElementPresenceIgnoringExceptions();
