@@ -118,7 +118,7 @@ public class VerifyDesignationCheckboxTest extends SeleneseTestCase {
                         "123",
                         "12",
                         "2022"
-                ).clickSubmitButton();
+                ).clickSubmitButtonAndWaitUntilConfirmationScreenOpened();
         getDriver().switchTo().window(hqHandle);
         new HomePage().
                 openTransactionsView().
