@@ -121,8 +121,7 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .fillFieldsWidgetStepOne(widgetName,"TADescription")
                 .pickTargetAndEnableChannel("brad james", AddTargetedActionPage.Channel.EMAIL)
                 .editMessage(1)
-                .clickOnNextButtonInTargetsTab()
-                .clickOnNextButtonInSocialPromotionTab();
+                .clickOnNextButtonInTargetsTab();
         targetedActionPage.selectLayoutStep("Blank")
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();
@@ -182,8 +181,7 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .fillFieldsWidgetStepOne(widgetName,"TADescription")
                 .pickTargetAndEnableChannel("brad james", AddTargetedActionPage.Channel.EMAIL)
                 .editMessage(1)
-                .clickOnNextButtonInTargetsTab()
-                .clickOnNextButtonInSocialPromotionTab();
+                .clickOnNextButtonInTargetsTab();
         targetedActionPage.selectLayoutStep("Blank")
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();
@@ -227,8 +225,7 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .fillFieldsWidgetStepOne(widgetName,"TADescription")
                 .pickTargetAndEnableChannel("brad james", AddTargetedActionPage.Channel.EMAIL)
                 .editMessage(1)
-                .clickOnNextButtonInTargetsTab()
-                .clickOnNextButtonInSocialPromotionTab();
+                .clickOnNextButtonInTargetsTab();
         targetedActionPage.selectLayoutStep("Blank")
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();
@@ -260,9 +257,9 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 "activityTextBoxCustomFieldValue",
                 "13",
                 "10/11/2017 01:30 am",
-                "10753 blix",
+                "3814 Melancon Road",
                 "CA",
-                "91602").
+                "70518").
                 clickOnSubmitFormButton();
         targetedActionPage.verifySubmittedCustomFieldsArePresentInSupporterDetails(SeleneseTestCase.USED_ENVIRONMENT.getBaseTestUrl(), login, password);
     }
@@ -293,8 +290,7 @@ public class TargetedActionsFormFieldsValidationTest extends SeleneseTestCase {
                 .fillFieldsWidgetStepOne(widgetName,"TADescription")
                 .pickTargetAndEnableChannel("brad james", AddTargetedActionPage.Channel.EMAIL)
                 .editMessage(1)
-                .clickOnNextButtonInTargetsTab()
-                .clickOnNextButtonInSocialPromotionTab();
+                .clickOnNextButtonInTargetsTab();
         targetedActionPage.selectLayoutStep("Blank")
                 .dropOneColumnRow();
         targetedActionPage.dropMultiStepFormElement();

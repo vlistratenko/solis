@@ -42,7 +42,6 @@ public class AddTargetedActionPage extends AddSubscribeWidgetPage {
     protected TextBox publicTargetSetDescription = new TextBoxImpl("//*[@id='targetsetdescription-0']", "Public Target Set Description text field");
     protected Button actionPageWizardStep = new ButtonImpl("//*[@id='activityForm']//*[@ng-click][.='Action page']","Action page wizard step button");
     protected Button openSocialPromotionStepButton = new ButtonImpl("//button[@id='btnGo-targets-compose']", "Social promotion");
-    protected Button openComposeStepButton = new ButtonImpl("//button[@id='btnCompose']", "Compose step");
 
     @Override
     public AddTargetedActionPage fillFieldsWidgetStepOne(String widgetName, String widgetDescription) {
@@ -134,13 +133,6 @@ public class AddTargetedActionPage extends AddSubscribeWidgetPage {
     public AddTargetedActionPage clickOnNextButtonInTargetsTab() {
         openSocialPromotionStepButton.fluentWaitForElementPresenceIgnoringExceptions();
         openSocialPromotionStepButton.click();
-        return this;
-    }
-
-    public AddTargetedActionPage clickOnNextButtonInSocialPromotionTab() {
-        waitUntilAngularIsComplete();
-        openComposeStepButton.fluentWaitForElementPresenceIgnoringExceptions();
-        openComposeStepButton.click();
         return this;
     }
 
