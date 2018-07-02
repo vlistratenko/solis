@@ -33,7 +33,7 @@ public class CustomTargetsTest extends SeleneseTestCase {
     @Test(enabled = true, priority = 1, groups = {"createAndDeleteCustomTarget"}, retryAnalyzer = RetryAnalyzer.class)
     public void createCustomTarget(String login) {
         LoginPage lp = new LoginPage();
-        CustomTargetsPage ct = new CustomTargetsPage();
+        CustomTargetsPage ct;
         ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
@@ -46,7 +46,6 @@ public class CustomTargetsTest extends SeleneseTestCase {
                 .specifyCity("City")
                 .selectState("California")
                 .specifyZipCode("20008")
-                .specifyFacebookAccount("/fb")
                 .specifyTwitterAccount("/tw")
                 .clickOnCreateCustomTargetButton()
                 .showAllCustomTargets();
@@ -73,7 +72,7 @@ public class CustomTargetsTest extends SeleneseTestCase {
     @Test(enabled = true, priority = 2, groups = {"createAndDeleteCustomTarget"}, dependsOnMethods = {"createCustomTarget"}, retryAnalyzer = RetryAnalyzer.class)
     public void editCustomTarget(String login) {
         LoginPage lp = new LoginPage();
-        CustomTargetsPage ct = new CustomTargetsPage();
+        CustomTargetsPage ct;
         ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
@@ -87,7 +86,6 @@ public class CustomTargetsTest extends SeleneseTestCase {
                 .specifyCity("CityNew")
                 .selectState("Arizona")
                 .specifyZipCode("20009")
-                .specifyFacebookAccount("/fbNew")
                 .specifyTwitterAccount("/twNew")
                 .clickOnSaveCustomTargetButton()
                 .showAllCustomTargets()
@@ -99,7 +97,6 @@ public class CustomTargetsTest extends SeleneseTestCase {
         Assert.assertEquals(CommonUtils.getProperty("customTargetEmailAddress").equals(ct.getEmailAddressFieldValue()), true, "Email address field value is other than the one which was specify during form editing");
         Assert.assertEquals(CommonUtils.getProperty("customTargetCity").equals(ct.getCityFieldValue()), true, "City field value is other than the one which was specify during form editing");
         Assert.assertEquals(CommonUtils.getProperty("customTargetZip").equals(ct.getZipCodeFieldValue()), true, "ZIP field value is other than the one which was specify during form editing");
-        Assert.assertEquals(CommonUtils.getProperty("customTargetFbAccount").equals(ct.getFacebookAccountFieldValue()), true, "FB account field value is other than the one which was specify during form editing");
         Assert.assertEquals(CommonUtils.getProperty("customTargetTwitterAccount").equals(ct.getTwitterAccountFieldValue()), true, "Twitter field value is other than the one which was specify during form editing");
     }
     
@@ -120,7 +117,7 @@ public class CustomTargetsTest extends SeleneseTestCase {
     @Test(enabled = true, priority = 3, groups = {"createAndDeleteCustomTarget"}, dependsOnMethods = {"editCustomTarget"}, retryAnalyzer = RetryAnalyzer.class )
     public void deleteCustomTarget(String login) {
         LoginPage lp = new LoginPage();
-        CustomTargetsPage ct = new CustomTargetsPage();
+        CustomTargetsPage ct;
         ct = lp.doSuccessLogin(login, "!QAZ2wsx")
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
