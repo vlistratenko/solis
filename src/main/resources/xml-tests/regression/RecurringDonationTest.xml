@@ -8,7 +8,7 @@
 	<test verbose="2" name="Recurring Donations Test" annotations="JDK">
 		<parameter name="USED_BROWSER" value="CHROME"></parameter>
 		<parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
-		<parameter name="Passward" value="!QAZ2wsx"></parameter>
+		<parameter name="Passward" value="qwerty"></parameter>
 		<parameter name="fundraisingFormYearlyRecurring" value="https://testvco2712.test.igniteaction.net/recurringyearlycopy1/index.html"></parameter>
 		<parameter name="fundraisingFormMonthlyRecurring" value="https://testvco2712.test.igniteaction.net/monthlyrecurring/index.html"></parameter>
 		<parameter name="widgetNameYearly" value="RecurringYearlyCardConnectForm"></parameter>

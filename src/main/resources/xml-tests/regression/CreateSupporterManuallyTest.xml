@@ -9,8 +9,8 @@
 
 	<test verbose="2" name="Create Supporter Manually "
 		annotations="JDK">
-		<parameter name="login" value="autoTest.74580786@mailosaur.in"></parameter>
-		<parameter name="Passward" value="!QAZ2wsx"></parameter>
+		<parameter name="login" value="olauta+autotestorgqa@salsalabs.com"></parameter>
+		<parameter name="Passward" value="qwerty"></parameter>
 		<parameter name="textBoxCfName" value="txtCfAuto"></parameter>
 		<parameter name="sChoiceCfName" value="schoiceCfAuto"></parameter>
 		<parameter name="numberBoxCfName" value="numberCfAuto"></parameter>

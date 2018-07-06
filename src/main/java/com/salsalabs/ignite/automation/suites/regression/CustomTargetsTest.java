@@ -28,13 +28,13 @@ public class CustomTargetsTest extends SeleneseTestCase {
      * <li> Select to display 250 items per page
      * <li> <font color="green"><b>Verify whether custom target is present in the table</b></font>
      */
-	
-	@Parameters("login")
+
+    @Parameters({"login", "password"})
     @Test(enabled = true, priority = 1, groups = {"createAndDeleteCustomTarget"}, retryAnalyzer = RetryAnalyzer.class)
-    public void createCustomTarget(String login) {
+    public void createCustomTarget(String login, String password) {
         LoginPage lp = new LoginPage();
         CustomTargetsPage ct;
-        ct = lp.doSuccessLogin(login, "!QAZ2wsx")
+        ct = lp.doSuccessLogin(login, password)
                 .openSettingsPage()
                 .switchToCustomTargetsPage()
                 .clickAddCustomTargetButton()

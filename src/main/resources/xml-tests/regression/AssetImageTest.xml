@@ -9,7 +9,7 @@
 		annotations="JDK">
 		<parameter name="USED_BROWSER" value="CHROME"></parameter>
 		<parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
-		<parameter name="Passward" value="!QAZ2wsx"></parameter>
+		<parameter name="Passward" value="qwerty"></parameter>
 		<parameter name="imageToUpload" value="image.jpg"></parameter>
 		<groups>
 			<run>

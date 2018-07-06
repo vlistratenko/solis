@@ -80,7 +80,7 @@ public class VerifyMergeFieldsInTheEmail extends SeleneseTestCase {
 		String[] supporterFieldsForVerificationInSubj = {"Title", "Zip Code", "City", "supporterDateTimeCustomField", "supporterSingleChoiceCustomField", "supporterTextBoxCustomField"};	
 		LoginPage loginPage = new LoginPage();
 		loginPage.
-		doSuccessLogin(login, "!QAZ2wsx").
+		doSuccessLogin(login, "qwerty").
 		openMessagingPage().
 		openEmailBlastsPage().
 		openAddEmailPage().

@@ -16,7 +16,7 @@ public class MessageTopicTest extends SeleneseTestCase {
 	public void verifyMessageTopicCreationTest(String login) throws Exception {
 		String topic = "Topic" + RandomStringUtils.randomAlphanumeric(5);
 		LoginPage loginPage = new LoginPage();
-		loginPage.doSuccessLogin(login, "!QAZ2wsx").
+		loginPage.doSuccessLogin(login, "qwerty").
 		openSettingsPage().
 		switchToMessageTopicsPage().
 		addCustomTopic(topic).

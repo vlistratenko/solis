@@ -4,7 +4,7 @@
     <parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
     <parameter name="USED_SERVER" value="REMOTE"></parameter>
     <parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
-    <parameter name="password" value="!QAZ2wsx"></parameter>
+    <parameter name="password" value="qwerty"></parameter>
     <parameter name="existingFormUrl" value="https://hq.test.igniteaction.net/#/activities/widgets/petition/d6773ad1-c74c-4a13-883a-23d9850fbd02"></parameter>
     <parameter name="existingFormName" value="PetitionSignaturesElementTest"></parameter>
       <test verbose="2" name="Petition signatures element verification test" annotations="JDK">

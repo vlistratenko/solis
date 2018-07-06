@@ -4,8 +4,8 @@
 		<parameter name="USED_ENVIRONMENT" value="TEST"></parameter>
 	<parameter name="USED_BROWSER" value="CHROME"></parameter>
 	<parameter name="USED_SERVER" value="LOCAL"></parameter>
-	<parameter name="login" value="autoTest.74580786@mailosaur.in"></parameter>
-	<parameter name="passward" value="!QAZ2wsx"></parameter>
+	<parameter name="login" value="olauta+autotestorgqa@salsalabs.com"></parameter>
+	<parameter name="passward" value="qwerty"></parameter>
 	<parameter name="widget" value="https://autotestorgqa.test.igniteaction.net/petitionautotest/index.html"></parameter>
 	<parameter name="widgenName" value="PetitionAutotest"></parameter>
 	<parameter name="widgetforCommentsURl" value="https://autotestorgqa.test.igniteaction.net/petitionautomationtest/index.html"></parameter>

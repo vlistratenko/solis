@@ -9,7 +9,7 @@
 	<test verbose="2" name="Social Media Pages Test" annotations="JDK">
 		<parameter name="USED_BROWSER" value="CHROME"></parameter>
 			<parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
-			<parameter name="Passward" value="!QAZ2wsx"></parameter>
+			<parameter name="Passward" value="qwerty"></parameter>
 			<parameter name="facebookAccount" value="https://www.facebook.com/profile.php?id=100014040091246"></parameter>
 			<parameter name="twitterAccount" value="https://twitter.com/KirilGolovin"></parameter>
 			<parameter name="instagramAccount" value="https://www.instagram.com/phuket_guide/"></parameter>
