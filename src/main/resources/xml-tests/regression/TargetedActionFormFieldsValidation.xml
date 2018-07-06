@@ -7,11 +7,11 @@
         <parameter name="USED_BROWSER" value="CHROME"></parameter>
         <parameter name="login" value="2712.3e41c646@mailosaur.io"></parameter>
         <parameter name="password" value="qwerty"></parameter>
-<!--    <groups>
+        <groups>
             <run>
                 <include name="targetedActionFormFieldsValidation" />
             </run>
-        </groups>-->
+        </groups>
         <classes>  
             <class name="com.salsalabs.ignite.automation.suites.regression.TargetedActionsFormFieldsValidationTest" />
         </classes>
